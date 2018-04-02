@@ -1,4 +1,3 @@
 User-Agent: *
 Disallow: 
 Disallow: /drafts/
-Sitemap: https://colehaus.github.io/ColEx/sitemap.xml

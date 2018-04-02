@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Collectively Exhaustive</title>
+    <link href="https://colehaus.github.io/ColEx/atom.xml" rel="self" />
+    <link href="https://colehaus.github.io/ColEx" />
+    <id>https://colehaus.github.io/ColEx/atom.xml</id>
+    <author>
+        <name>Cole Haus</name>
+        <email>colehaus@cryptolab.net</email>
+    </author>
+    <updated>2018-03-31T00:00:00Z</updated>
+    <entry>
+    <title>A lazy approach to AI safety</title>
+    <link href="https://colehaus.github.io/ColEx/posts/lazy-ai-safety/" />
+    <id>https://colehaus.github.io/ColEx/posts/lazy-ai-safety/</id>
+    <published>2018-03-31T00:00:00Z</published>
+    <updated>2018-03-31T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>According to most ethical theories, the actions of any AI agent we create have moral import. To accommodate this reality, we guide the agent with a utility function and (implicitly or explicitly) an ethical framework.</p>
+<p>One of the key problems of AI safety is that we are uncertain about which ethical theory to encode in the agent because we (philosophers, humans, society) are ourselves unsure of the correct ethical theory. How can we expect our agent to act in accordance with our values when we don’t even know what our values are?</p>
+<p>I propose that we wave the white flag of surrender in the battle to find final, certain answers to the hard problems of ethics. Instead, we should reify our uncertainty and our search procedures in agents we build.</p>
+<p><!--more--></p>
+<h1 id="surrender">Surrender</h1>
+<p>Our prior should be that “solving” ethics is hard: Many smart people have worked on it for centuries. We can also take a step back and allude to more <a href="https://plato.stanford.edu/entries/skepticism/">fundamental limitations to knowledge</a> which suggest a definitive solution to ethics isn’t around the corner.</p>
+<p>There is a certain simplicity to the empirical domain. We can see it, taste it, feel it. And yet, the possibility of certain, empirical knowledge has faced strong skepticism from philosophers for centuries (dating at least to <a href="https://plato.stanford.edu/entries/induction-problem/">David Hume</a>). Do we simplify the problem of induction by moving to the abstracted domain of ethics? I think not.</p>
+<p>If induction is out, what about deduction? Again, there are <a href="https://plato.stanford.edu/entries/goedel-incompleteness/">limits</a>.</p>
+<p>Obviously, this section is brief and handwavey. We’ve sidestepped big, intricate arguments about the nature of ethics and moral epistemology. But I hope it primes your intuition enough that you’re willing to provisionally accept that uncertainty is a major feature of ethics now and in the future.</p>
+<h1 id="moral-uncertainty">Moral uncertainty</h1>
+<p>Once we accept this uncertainty, we must choose how to respond. If we don’t reflect on the idea of moral uncertainty, our approach is likely to approximate <a href="http://johanegustafsson.net/papers/in-defence-of-my-favourite-theory.pdf">“my favorite theory”</a>. In this approach, we weigh the options, find whichever ethical theory fares best, and discard the rest. That is, if, after analysis, we think the categorical imperative is 20% likely to be true and utilitarianism is 80% likely to be true, we act as utilitarians.</p>
+<p>A compelling alternative is to <a href="http://www.overcomingbias.com/2009/01/moral-uncertainty-towards-a-solution.html">retain our uncertainty and evaluate actions against a weighted parliament of ethical theories</a>. In our 80-20 scenario above, any action is evaluated against both theories. If utilitarianism is indifferent between actions A and B while the categorical imperative heavily favors A over B, we do A (even though we are “mostly” utilitarian!).</p>
+<h1 id="moral-uncertainty-in-machines">Moral uncertainty in machines</h1>
+<p>The impression I have (admittedly, mostly from afar) is that AI safety has mostly (implicitly) revolved around the “my favorite theory” approach. That is, people have been approaching the issue as deciding which single ethical theory they will encode in an agent. I think the parliamentary model is a significant improvement.</p>
+<p>When encoding the parliamentary model in machines, there’s good reason to avoid simply transferring our own intuitions and perspectives into the machine. Instead, the parliament’s initial distribution should probably be set by a <a href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution">maximum entropy distribution</a>. Of course, we can’t leave it there. That would throw away valuable information about the truth of the moral world (i.e. what evidence do we have bearing on the relative likelihood of each moral theory to be correct). An abhorrence for discarding information is precisely what motivated us to choose the parliamentary approach in the first place.</p>
+<p>Instead, we will allow and expect our agent to perform <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayesian updates</a> to reweight the moral parliament. That is, in addition to any actions it can take in the world, the agent also always has the option of performing ethical investigation. This supposes that we have a provisional answer to the question of <a href="https://plato.stanford.edu/entries/moral-epistemology/">moral epistemology</a> and thus a well-founded way to perform these updates. We’ll bracket the question of how exactly this can be done while noting that moral epistemology is at least a different hard problem to solve than the problem which AI safety typically confronts.</p>
+<h1 id="arbitrating-between-actions-and-ethical-investigation">Arbitrating between actions and ethical investigation</h1>
+<p>Now that the agent has an additional action that it must always consider (ethical investigation), we must decide how to value this action so that it can be compared against more standard actions in the world by the agent’s utility function. The approach I propose here is to use <a href="https://en.wikipedia.org/wiki/Value_of_information">value of information calculations</a>.</p>
+<p>Finally, we really begin to see the benefits of this approach. When an agent finds itself doing trivial actions of no moral import, it can remain fairly disinterested in ethics. Broad approximations of ethical truth suffice. On the other hand though, all the moral paradoxes that we humans confront are now moral paradoxes for our agent as well. When it is faced with truly difficult moral decisions, rather than blithely running ahead, our agent will be prompted to pause and refine its ethical views.</p>
+<h1 id="future-work">Future work</h1>
+<p>We already alluded to the fact that this approach requires some serious thinking about moral epistemology.</p>
+<p>Furthermore, the bootstrapping process (which theories do we initially include?) is very important and demands further examination.</p>]]></summary>
+</entry>
+<entry>
+    <title>The scarcity of cooperatives</title>
+    <link href="https://colehaus.github.io/ColEx/posts/cooperatives/" />
+    <id>https://colehaus.github.io/ColEx/posts/cooperatives/</id>
+    <published>2015-04-05T00:00:00Z</published>
+    <updated>2015-04-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
+<p>The <a href="#cooperatives-map" id="predominate" class="arg-map">predominance of capital-managed firms (CMF) over worker cooperatives (WC)</a> remains an open question in economics. Early explanations relied on a hypothesized comparative inefficiency of cooperatives. Subsequent empirical study has shown that <a href="#cooperatives-map" id="efficient" class="arg-map">cooperatives are at least as efficient as capital-managed firms</a> <span class="citation" data-cites="doucouliagos95">(Doucouliagos 1995)</span> <span class="citation" data-cites="estrin87">(Estrin, Jones, and Svejnar 1987)</span> <span class="citation" data-cites="craig95">(Craig et al. 1995)</span> <span class="citation" data-cites="levine90">(Levine 1990)</span>.</p>
+<p>A profusion of hypotheses has since arisen. <span class="citation" data-cites="dow99">(Dow and Putterman 1999)</span> offers a good summary (though the term must be used loosely for a 126-page paper). One that I have not seen presented is: <a href="#cooperatives-map" id="hypothesis" class="arg-map">capital-managed firms predominate because capitalists have a greater incentive to expand than worker-owners in worker cooperatives</a>. Roughly, for each market segment a capitalist expands into, their income increases by capital’s share of the new segment’s profit. For each market segment a cooperative expands into, the expanders receive no direct remuneration (supposing that the new market segment is also a cooperative). Any new profit goes to worker-owners in the new segment.</p>
+<p><!--more--></p>
+<h1 id="cellular-automaton">Cellular automaton</h1>
+<p>We can make this hypothesis more tangible by representing it as a <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automaton</a>. <span class="noted"><a href="#cooperatives-map" id="automaton-link" class="arg-map">In this automaton</a></span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>, <a href="#cooperatives-map" id="segment" class="arg-map">each cell represents a market segment requiring a fixed quantity of labor and capital</a>. Adjacent cells represent similar market segments.</p>
+<div id="automaton">
+
+</div>
+<h2 id="initial-conditions">Initial conditions</h2>
+<p>In the beginning, the market is filled with <a href="#cooperatives-map" id="empty" class="arg-map">empty market segments which have a random cost</a> (represented in the automaton by the opacity of the <span class="empty">red cell interiors</span>) for a firm to expand into.</p>
+<h2 id="step">Step</h2>
+<h3 id="occupied-market-segments">Occupied market segments</h3>
+<p>In each step, an existing firm may go bankrupt (or exit the market segment in some other way) with fixed probability <span class="math inline">\(B = 0.1\)</span>. If a firm goes bankrupt, its market segment becomes empty once again.</p>
+<p>If it does not go bankrupt, <a href="#cooperatives-map" id="accum" class="arg-map">the profits generated during that step are distributed</a>. For worker cooperatives, all profits accrue to the worker-owners within the cooperative. For capital-managed segments, labor’s share of income (estimated at 70% <span class="citation" data-cites="karabarbounis13">(Karabarbounis and Neiman 2013)</span> <span class="citation" data-cites="gomme04">(Gomme and Rupert 2004)</span>) accrues to the segment’s workers and capital’s share of income accrues to the capitalists of the segment’s firm.</p>
+<p>The accumulated income of workers in a capital-managed segment is represented in the automaton by opacity of the <span class="capital">purple cell interior</span>. The accumulated income of the capitalists (of a given firm) is represented by the opacity of the <span class="capital">purple cell border</span> enclosing all segments owned by the firm. The accumulated income of worker-owners in a worker cooperative is represented in the automaton by the opacity of the <span class="labor">green cell interior</span>. Worker cooperatives sharing an ancestor (e.g. cooperative B and C were both founded by cooperative A) are enclosed by a single border.</p>
+<h3 id="empty-market-segments">Empty market segments</h3>
+<p>In each step, an empty market segment may be occupied by <a href="#cooperatives-map" id="firm" class="arg-map">a newly formed firm</a> with chance <span class="math inline">\(N = 0.001\)</span>.</p>
+<p>Also, in each step, <a href="#cooperatives-map" id="expand" class="arg-map">an empty market segment may be subject to expansion</a> from <a href="https://en.wikipedia.org/wiki/Von_Neumann_neighborhood">adjacent firms</a>. Each adjacent firm has a 20% chance of attempting expansion (representing market conditions, firm conditions, &amp;c.). The cost of expansion into the market segment must be less than the accumulated income of the expander and less than the projected value of the segment. In the event of multiple firms competing to expand into a single segment, the firm with the greatest valuation for the segment succeeds.</p>
+<p>Valuations are determined thus:</p>
+<dl>
+<dt>Capital-managed firm</dt>
+<dd>The total value a capital-management firm can expect to extract from a segment takes the form <span class="math inline">\(KP + KP(1 - B)(1 - D) + KP(1 - B)^2(1 - D)^2 + \ldots\)</span> where <span class="math inline">\(K\)</span> is capital’s share of income, <span class="math inline">\(P\)</span> is the per-step profit, <span class="math inline">\(B\)</span> is the bankruptcy rate, and <span class="math inline">\(D\)</span> is the firm’s <a href="https://en.wikipedia.org/wiki/Present_value">discount rate</a> (ranging uniformly from <span class="math inline">\(0\)</span> to <span class="math inline">\(0.2\)</span>). Using the formula for <a href="https://en.wikipedia.org/wiki/Geometric_series#Formula">geometric series</a>, we can write this as <span class="math inline">\(\frac{KP}{1 - (1 - B)(1 - D)}\)</span>.
+</dd>
+<dt>Worker cooperative</dt>
+<dd>Similarly, the total value a worker cooperative can expect to extract from a segment takes the form <span class="math inline">\(\frac{AS}{1 - (1 - B)(1 - D)}\)</span>. <span class="math inline">\(S = GP - LP\)</span>, where <span class="math inline">\(G\)</span> is the productivity advantage of worker cooperatives (set to 1.1 in the automaton) and <span class="math inline">\(L\)</span> is labor’s share of income, represents the comparative benefit for worker-owners in a worker cooperative over being laborers in a capital-managed firm. <a href="#cooperatives-map" id="altruism" class="arg-map"><span class="math inline">\(A\)</span> (“altruism”) represents the extent to which the expanding worker cooperative cares about these potential gains.</a>
+</dd>
+</dl>
+<p>A quick consequence of this model is that worker cooperatives and capital-managed firms will value expansions equally (assuming equal discount and bankruptcy rates) when</p>
+<p><img src="https://colehaus.github.io/ColEx/images/latex/3172975049388821268.png" title="\begin{align}
+\frac{AS}{1 - (1 - B)(1 - D)} &amp;= \frac{KP}{1 - (1 - B)(1 - D)} \\
+AS &amp;= KP \\
+A(GP - LP) &amp;= KP \\
+AP(G - L) &amp;= KP \\
+A(G - L) &amp;= K \\
+A &amp;= \frac{K}{G - L} \\
+A &amp;= \frac{K}{K - 1 + G} \\
+\end{align}" /></p>
+<h1 id="future-work">Future work</h1>
+<ul>
+<li>Allow manual specification of automaton initial state</li>
+<li>Increase fidelity of model</li>
+<li>Permit tweaking of other parameters</li>
+<li>Provide analysis in terms of <a href="https://en.wikipedia.org/wiki/Evolutionarily_stable_strategy">evolutionarily stable strategy</a></li>
+<li>Survey of how cooperatives decide to expand</li>
+<li>Empirical examination of rate of worker cooperative formation and altruism (charitable giving, diversity <span class="citation" data-cites="putnam07">(Putnam 2007)</span>, &amp;c.)</li>
+<li>Empirical examination of rate of worker cooperative formation and labor’s share of income</li>
+</ul>
+<hr />
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    Elm.embed(Elm.Automaton, document.querySelector('#automaton'));
+});
+</script>
+<div id="refs" class="references">
+<div id="ref-craig95">
+<p>Craig, Ben, John Pencavel, Henry Farber, and Alan Krueger. 1995. “Participation and Productivity: A Comparison of Worker Cooperatives and Conventional Firms in the Plywood Industry.” <em>Brookings Papers on Economic Activity. Microeconomics</em>.</p>
+</div>
+<div id="ref-doucouliagos95">
+<p>Doucouliagos, Chris. 1995. “Worker Participation and Productivity in Labor-Managed and Participatory Capitalist Firms: A Meta-Analysis.” <em>Industrial &amp; Labor Relations Review</em>. <a href="http://library.uniteddiversity.coop/Money_and_Economics/Cooperatives/Worker_Participation_and_Productivity-Meta_Analysis.pdf" class="uri uri">http://library.uniteddiversity.coop/Money_and_Economics/Cooperatives/Worker_Participation_and_Productivity-Meta_Analysis.pdf</a>.</p>
+</div>
+<div id="ref-dow99">
+<p>Dow, Gregory K, and Louis Putterman. 1999. “Why Capital (Usually) Hires Labor: An Assessment of Proposed Explanations,“.” <em>Employees and Corporate Governance</em>. <a href="http://www.econ.brown.edu/1996/pdfs/96-21.pdf" class="uri uri">http://www.econ.brown.edu/1996/pdfs/96-21.pdf</a>.</p>
+</div>
+<div id="ref-estrin87">
+<p>Estrin, Saul, Derek C Jones, and Jan Svejnar. 1987. “The Productivity Effects of Worker Participation: Producer Cooperatives in Western Economies.” <em>Journal of Comparative Economics</em>.</p>
+</div>
+<div id="ref-gomme04">
+<p>Gomme, Paul, and Peter Rupert. 2004. “Measuring Labor’s Share of Income.” <em>FRB of Cleveland Policy Discussion Paper</em>. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.405.7400&amp;rep=rep1&amp;type=pdf" class="uri uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.405.7400&amp;rep=rep1&amp;type=pdf</a>.</p>
+</div>
+<div id="ref-karabarbounis13">
+<p>Karabarbounis, Loukas, and Brent Neiman. 2013. <em>The Global Decline of the Labor Share</em>. National Bureau of Economic Research.</p>
+</div>
+<div id="ref-levine90">
+<p>Levine, David I. 1990. “Participation, Productivity, and the Firm’s Environment.” <em>California Management Review</em>.</p>
+</div>
+<div id="ref-putnam07">
+<p>Putnam, Robert D. 2007. “E Pluribus Unum: Diversity and Community in the Twenty-First Century the 2006 Johan Skytte Prize Lecture.” <em>Scandinavian Political Studies</em>. <a href="http://www.aimlessgromar.com/wp-content/uploads/2013/12/j-1467-9477-2007-00176-x.pdf" class="uri uri">http://www.aimlessgromar.com/wp-content/uploads/2013/12/j-1467-9477-2007-00176-x.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Sorry, <a href="http://elm-lang.org/">Elm</a>, Firefox, and this program don’t seem to mix well.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>Graph of contents</title>
+    <link href="https://colehaus.github.io/ColEx/posts/graph-of-contents/" />
+    <id>https://colehaus.github.io/ColEx/posts/graph-of-contents/</id>
+    <published>2015-03-28T00:00:00Z</published>
+    <updated>2015-03-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>A <a href="https://en.wikipedia.org/wiki/Table_of_contents">table of contents</a> can provide a useful overview of a document’s content. However, because of its <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)">limited form</a>, some information about the structure of the document must be omitted.</p>
+<p>If, instead, we use a <a href="https://en.wikipedia.org/wiki/Directed_graph">graph</a> of contents, we can convey additional information about the relationships between sections. In effect, we combine the table of contents with an <a href="https://en.wikipedia.org/wiki/Argument_map">argument map</a>.</p>
+<p><!--more--></p>
+<p>For example:</p>
+<p><a href="#graph-contents-map" id="major" class="arg-map">All men are mortal</a></p>
+<p><a href="#graph-contents-map" id="minor" class="arg-map">Socrates is a man</a></p>
+<p><a href="#graph-contents-map" id="conclusion" class="arg-map">Therefore, Socrates is mortal</a></p>
+<p>Clicking on a dotted link brings up the graph. The label for the current section (as identified by the link used to bring up the graph) is bolded in the graph. Clicking a label in the graph hides the graph and scrolls to that section in the document. Clicking the background just hides the graph.</p>
+<p>You can reorganize the graph by dragging a node to fix it into a position. For example, if you were skipping around in a large document, you could track which sections you’d read by dragging their nodes to the right margin. Double-clicking releases a node that’s been fixed in place.</p>
+<p>This technique can be found <em>in vivo</em> in <a href="../bibliometric/">the post on biblometrics</a>.</p>]]></summary>
+</entry>
+<entry>
+    <title>Toward an alternative bibliometric</title>
+    <link href="https://colehaus.github.io/ColEx/posts/bibliometric/" />
+    <id>https://colehaus.github.io/ColEx/posts/bibliometric/</id>
+    <published>2015-03-10T00:00:00Z</published>
+    <updated>2015-03-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="impact-factor">Impact factor</h1>
+<p>There are a variety of citation-based <a href="https://en.wikipedia.org/wiki/Bibliometrics">bibliometrics</a>. The current <a href="#bibliometric-map" id="impact" class="arg-map">dominant metric</a> is <a href="https://en.wikipedia.org/wiki/Impact_factor">impact factor</a>. It is highly influential, factoring into decisions on promotion, hiring, tenure, grants and departmental funding <span class="citation" data-cites="plos06">(Editors 2006)</span> <span class="citation" data-cites="agrawal05">(Agrawal 2005)</span> <span class="citation" data-cites="moustafa14">(Moustafa 2014)</span>. Editors <a href="#bibliometric-map" id="review" class="arg-map">preferentially publish review articles</a>, and <a href="#bibliometric-map" id="self-cite" class="arg-map">push authors to</a><a href="https://en.wikipedia.org/wiki/Coercive_citation">self-cite</a></a> in pursuit of increased impact factor <span class="citation" data-cites="plos06">(Editors 2006)</span> <span class="citation" data-cites="agrawal05">(Agrawal 2005)</span> <span class="citation" data-cites="wilhite12">(Wilhite and Fong 2012)</span>. It may be responsible for editorial <a href="#bibliometric-map" id="replication" class="arg-map">bias against replications</a> <span class="citation" data-cites="neuliep90">(Neuliep and Crandall 1990)</span> <span class="citation" data-cites="brembs13">(Brembs, Button, and Munafò 2013)</span>. Consequently, academics take impact factor into account throughout the planning, execution and reporting of a study <span class="citation" data-cites="plos06">(Editors 2006)</span>.</p>
+<p>This is <a href="https://en.wikipedia.org/wiki/Campbell's_law">Campbell’s law</a> in action. Because average citation count isn’t what we actually value, when it becomes the metric by which decisions are made, it distorts academic research. In the rest of this post, I propose a bibliometric that measures the <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy reduction</a> of the <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">research graph</a>.</p>
+<p><!--more--></p>
+<h1 id="entropy-header">Entropy</h1>
+<p>Claude Shannon <a href="#bibliometric-map" id="entropy" class="arg-map">codified entropy</a> as <span class="math inline">\(H(X) = -\sum\limits_{i} P(x_i) \log_2 P(x_i)\)</span> where <span class="math inline">\(x_i\)</span> are the possible values of a discrete random variable <span class="math inline">\(X\)</span> <span class="citation" data-cites="shannon48">(Shannon 1948)</span><span class="citation" data-cites="cover12">(Cover and Thomas 2012)</span>. For example, the entropy of a 6-sided die is <img src="https://colehaus.github.io/ColEx/images/latex/906174370527848253.png" title="\begin{align}
+  H(D) &amp;= - P(⚀) \log_2 P(⚀) - P(⚁) \log_2 P(⚁) - P(⚂) \log_2 P(⚂) \\
+       &amp; - P(⚃) \log_2 P(⚃) - P(⚄) \log_2 P(⚄) - P(⚅) \log_2 P(⚅) \\
+       &amp;= -\left(6 \left(\frac{1}{6} \log_2 \frac{1}{6}\right)\right) \\
+       &amp;= \log_2 6
+\end{align}" />.</p>
+<p>If we next learn that the die is weighted and can only roll even numbers, this changes the entropy (our uncertainty).</p>
+<p><img src="https://colehaus.github.io/ColEx/images/latex/-6310274088524152858.png" title="\begin{align}
+H(D|\epsilon) &amp;= - P(⚁) \log_2 P(⚁) -
+                   P(⚃) \log_2 P(⚃) -
+                   P(⚅) \log_2 P(⚅) \\
+     &amp;= - \left(3 \left(\frac{1}{3} \log_2 \frac{1}{3}\right)\right) \\
+     &amp;= \log_2 3
+\end{align}" /></p>
+<p><span class="noted">So the reduction in uncertainty is <span class="math inline">\(H(D) - H(D|\epsilon) = \log_2 6 - \log_2 3 = 1\)</span>.</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a></p>
+<h1 id="example">Example</h1>
+<p>We can use these definitions to calculate the information provided by a research paper and assign an Infometric®™ score. We’ll start with a fairly classic example about cigarette smoking.</p>
+<h2 id="first-study">First study</h2>
+<p>Suppose <a href="#bibliometric-map" id="single" class="arg-map">we do a study</a> on whether, in the normal course of smoking, cigarette smoke is inhaled into the lungs (we’ll call this proposition <span class="math inline">\(A\)</span>). Prior to the study we use the (extremely) uninformative prior <span class="math inline">\(\cond{P}{A=t}{} = 0.5\)</span>. After the study (which we’ll call <span class="math inline">\(\alpha\)</span>) we perform a <a href="https://en.wikipedia.org/wiki/Bayes'_theorem">Bayesian update</a> and find that <span class="math inline">\(\cond{P}{A=t}{\alpha} = 0.8\)</span>. So our study has provided</p>
+<p><img src="https://colehaus.github.io/ColEx/images/latex/5273260164788045100.png" title="\begin{align}
+H(A) - \cond{H}{A}{\alpha} &amp;= -P(A=t)\log_2P(A=t) - P(A=f)\log_2P(A=f) \\
+  &amp;+ \cond{P}{A=t}{\alpha}\log_2\cond{P}{A=t}{\alpha} \\
+  &amp;+ \cond{P}{A=f}{\alpha}\log_2\cond{P}{A=f}{\alpha} \\
+  &amp;= -0.5\log_20.5 \\
+  &amp;- 0.5\log_20.5 \\
+  &amp;+ 0.8\log_20.8 \\
+  &amp;+ 0.2\log_20.2 \\
+  &amp;\approx 0.278
+\end{align}" /></p>
+<p>bits of entropy reduction. Thus its score at the moment is <span class="math inline">\(0.278\)</span>. So far, so good?</p>
+<h2 id="second-study">Second study</h2>
+<p>Now, we wish to study whether smoking causes chronic bronchitis. Suppose the study we design pipes smoke directly into the lungs of experimental subjects. The validity of our conclusion (Smoking does (not) cause chronic bronchitis.) now depends on the truth of the claim that cigarette smoke is inhaled into the lungs. So this new study is dependent on the prior study and will cite it.</p>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/bibliometric/bronchitis-pre.svg" alt="We are using uninformative priors. ¶ (In this and subsequent graphs, we follow the conventions of ¶ Bayesian networks (i.e. a cited paper is the parent rather than the child—the arrow runs from rather than to the cited paper) rather than the conventions of citation graphs.)" width="300" height="300" /><figcaption>We are using uninformative priors. ¶ (In this and subsequent graphs, we follow the conventions of ¶ <a href="https://en.wikipedia.org/wiki/Bayesian_network">Bayesian networks</a> (i.e. a cited paper is the parent rather than the child—the arrow runs from rather than to the cited paper) rather than the conventions of <a href="https://en.wikipedia.org/wiki/Citation_graph">citation graphs</a>.)</figcaption>
+</figure>
+<p>Now we carry out our study. It provides evidence that cigarette smoking does lead to bronchitis (conditional on the supposition that cigarette smoke is inhaled into the lungs). So we update our <span class="math inline">\(\cond{P}{B=t}{\beta}\)</span>. The entropy reduction from this study, considered in isolation, is <span class="math inline">\(H(A,B) - \cond{H}{A,B}{\beta} \approx 0.266\)</span>.</p>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/bibliometric/bronchitis-post.svg" alt="We have integrated data from the second study." width="300" height="300" /><figcaption>We have integrated data from the second study.</figcaption>
+</figure>
+<p>But what if we don’t consider it in isolation? First, we look for the total entropy reduction from both studies and find <span class="math inline">\(H(A,B) - \cond{H}{A,B}{\alpha,\beta} \approx 0.703\)</span>. <span class="noted">Note that this is not simply the sum of the isolated reductions.</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a></p>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/bibliometric/bronchitis-both.svg" alt="We have integrated data from both studies now." width="300" height="300" /><figcaption>We have integrated data from both studies now.</figcaption>
+</figure>
+<p>How do we apportion this gain into Infometric®™ scores then? We can decompose the aggregate gain into a sum like</p>
+<p><img src="https://colehaus.github.io/ColEx/images/latex/1681010744790707563.png" title="\begin{align}
+H(A,B) - \cond{H}{A,B}{\alpha,\beta} &amp;=
+    \cond{H}{A,B}{\beta} - \cond{H}{A,B}{\alpha,\beta} \\
+  &amp;+ H(A,B) - \cond{H}{A,B}{\beta}
+\end{align}" /></p>
+<p>where <span class="math inline">\(\cond{H}{A,B}{\beta} - \cond{H}{A,B}{\alpha,\beta} \approx 0.437\)</span> represents <span class="math inline">\(\alpha\)</span>’s score and <span class="math inline">\(H(A,B) - \cond{H}{A,B}{\beta} \approx 0.266\)</span> represents <span class="math inline">\(\beta\)</span>’s score.</p>
+<p>(the general form is <span class="math inline">\(H(S_1,S_2,\cdots,S_n) - \cond{H}{S_1,S_2,\cdots,S_n}{\sigma_1,\sigma_2,\cdots,\sigma_n} = \sum\limits_{i=1}^n I(\sigma_i))\)</span> where <span class="math inline">\(I(\sigma_i) = \cond{H}{S_1,S_2,\cdots,S_i}{\sigma_{i+1},\sigma_{i+2},\cdots,\sigma_n} - \cond{H}{S_1,S_2,\cdots,S_i}{\sigma_i,\sigma_{i+1},\sigma_{i+2},\cdots,\sigma_n}\)</span></p>
+<p>We can see that <span class="math inline">\(\beta\)</span> citing <span class="math inline">\(\alpha\)</span> has increased <span class="math inline">\(\alpha\)</span>’s score (<span class="math inline">\(\alpha\)</span> now reduces our uncertainty not only about <span class="math inline">\(A\)</span>, but also about <span class="math inline">\(B\)</span>), a “citation bonus”. Or, if you prefer, you can think of it as <span class="math inline">\(\alpha\)</span> capturing the externalities it generates in <span class="math inline">\(B\)</span>.</p>
+<h2 id="fourth-study">Fourth study</h2>
+<p>We’ll now jump to <a href="#bibliometric-map" id="four" class="arg-map">a fourth study</a> so we can examine a fuller set of interactions (i.e. multiples studies citing one study, one study citing multiple studies).</p>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/bibliometric/four.svg" width="500" height="500" />
+</figure>
+<p>The decomposition</p>
+<p><img src="https://colehaus.github.io/ColEx/images/latex/-4051225597349968610.png" title="\begin{align}
+H(A,B,C,D) - \cond{H}{A,B,C,D}{\alpha,\beta,\kappa,\delta} &amp;=
+    \cond{H}{A,B,C,D}{\beta,\kappa,\delta} -
+    \cond{H}{A,B,C,D}{\alpha,\beta,\kappa,\delta} \\
+  &amp;+ \cond{H}{A,B,C,D}{\kappa,\delta} -
+    \cond{H}{A,B,C,D}{\beta,\kappa,\delta} \\
+  &amp;+ \cond{H}{A,B,C,D}{\delta} - \cond{H}{A,B,C,D}{\kappa,\delta} \\
+  &amp;+ H(A,B,C,D) - \cond{H}{A,B,C,D}{\delta} \\
+\end{align}" /> leads to scores of <span class="math inline">\(I(\alpha) = 0.547\)</span>, <span class="math inline">\(I(\beta) = 0.387\)</span>, <span class="math inline">\(I(\kappa) = 0.123\)</span>, and <span class="math inline">\(I(\delta) = 0.434\)</span>.</p>
+<h1 id="demo">Demo</h1>
+<p>You can try it out below. Maybe look for:</p>
+<ul>
+<li>Two studies that, when considered in isolation, have the same score but have different scores when placed in the network context</li>
+<li>A citation that doesn’t give any “citation bonus”</li>
+<li>Two networks with the same topology but different scores</li>
+</ul>
+<form class="net">
+<textarea>
+<p>—- | A P —- | t 0.8 | f 0.2 —- A | B P —- t | t 0.9 | f 0.1 f | t 0.5 | f 0.5 —- A | C P —- t | t 0.7 | f 0.3 f | t 0.6 | f 0.4 —- B C | D P —- t t | t 0.99 | f 0.01 t f | t 0.9 | f 0.1 f t | t 0.8 | f 0.2 f f | t 0.55 | f 0.45</p>
+</textarea>
+<button type="button">
+<p>Calculate scores</p>
+</button>
+<output>
+</output>
+</form>
+<h1 id="discussion">Discussion</h1>
+<h2 id="desirable-properties">Desirable properties</h2>
+<dl>
+<dt><a href="#bibliometric-map" id="design" class="arg-map">Score depends on study design</a></dt>
+<dd>Tends to encourage <a href="https://en.wikipedia.org/wiki/Bayesian_experimental_design">Bayesian optimal designs</a>
+</dd>
+<dt><a href="#bibliometric-map" id="aggregates" class="arg-map">Aggregates sensibly</a></dt>
+<dd>The impact factor is often used in inappropriate circumstances <span class="citation" data-cites="plos06">(Editors 2006)</span> <span class="citation" data-cites="agrawal05">(Agrawal 2005)</span> <span class="citation" data-cites="moustafa14">(Moustafa 2014)</span>. That is, the warning that impact factor is a metric for journals, not authors or departments, is seldom heeded. The proposed metric can used in such cases trivially. For example, if an author has published studies <span class="math inline">\(\eta\)</span> and <span class="math inline">\(\theta\)</span>, their score is simply <span class="math inline">\(I(\eta) + I(\theta)\)</span>, the total reduction in entropy they contribute.
+</dd>
+<dt><a href="#bibliometric-map" id="repli-beni" class="arg-map">Handles replications appropriately</a></dt>
+<dd>Impact factor tends to undervalue replications <span class="citation" data-cites="neuliep90">(Neuliep and Crandall 1990)</span> <span class="citation" data-cites="brembs13">(Brembs, Button, and Munafò 2013)</span>. With a simple extension of the proposed metric, if <span class="math inline">\(\iota\)</span> is a replication of <span class="math inline">\(\eta\)</span> about proposition <span class="math inline">\(E\)</span> it shares the “citation bonus” in proportion to how much it increases our certainty in <span class="math inline">\(E\)</span>.
+</dd>
+<dt><a href="#bibliometric-map" id="gradated" class="arg-map">Gradated citations</a></dt>
+<dd><p>With impact factor, a citation to study <span class="math inline">\(\alpha\)</span> essential to the validity of study <span class="math inline">\(\gamma\)</span> is given the same weight as a citation to study <span class="math inline">\(\beta\)</span> providing some minor context for <span class="math inline">\(\gamma\)</span>. With the proposed metric, if <span class="math inline">\(\gamma\)</span> only depends minorly on <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\gamma\)</span> will only boost <span class="math inline">\(\beta\)</span>’s score minorly. This should counteract the inflated value of review articles.</p>
+<p>Additionally, being cited by an “important paper” (one that provides great certainty or occupies an important position in the research network) provides a larger boost than being cited by a peripheral paper.</p>
+</dd>
+</dl>
+<h2 id="undesirable-properties">Undesirable properties</h2>
+<dl>
+<dt><a href="#bibliometric-map" id="incentive" class="arg-map">Not</a><a href="https://en.wikipedia.org/wiki/Incentive_compatibility">incentive compatible</a></a></dt>
+<dd><p>For example, if study <span class="math inline">\(\beta\)</span> depends on study <span class="math inline">\(\alpha\)</span> it will receive a better score by hiding that dependence and marginalizing. <span class="math inline">\(\beta\)</span> receives a higher score when presented as</p>
+<pre><code> ----
+ | A P
+ ----
+ | t 0.8
+ | f 0.2
+
+ ----
+ | B P
+ ----
+ | t 0.82
+ | f 0.18</code></pre>
+<p>than when presented as</p>
+<pre><code> ----
+ | A P
+ ----
+ | t 0.8
+ | f 0.2
+
+ ----
+ A | B P
+ ----
+ t | t 0.9
+   | f 0.1
+ f | t 0.5
+   | f 0.5</code></pre>
+<p>. However, impact factor also theoretically discourages citation ( e.g. boosting the impact factor of someone that might compete against you come hiring time). This problem does not seem to be devastating <span class="citation" data-cites="liu93">(Liu 1993)</span>.</p>
+</dd>
+<dt><a href="#bibliometric-map" id="complicated" class="arg-map">Complicated</a></dt>
+<dd>The proposed metric is more calculationally complicated than impact factor. (Though the actual impact factor calculation procedure is more complicated than one would suppose.)
+</dd>
+<dt><a href="#bibliometric-map" id="dependence" class="arg-map">Requires assessment of degree of dependence</a></dt>
+<dd>The “degree of dependence” (e.g. <span class="math inline">\(\cond{P}{B}{A=t}\)</span> vs. <span class="math inline">\(\cond{P}{B}{A=f}\)</span>) occupies an important role in the procedure. It’s not obvious to me how this should be determined other than by discussion between authors, editors and reviewers.
+</dd>
+</dl>
+<h1 id="future-work">Future work</h1>
+<ul>
+<li>Improve interface of demonstration</li>
+<li><a href="https://en.wikipedia.org/wiki/Kullback–Leibler_divergence">KL divergence</a> and <a href="https://en.wikipedia.org/wiki/Shapley_value">Shapley value</a> approach</li>
+<li>Extend to replications and multi-proposition studies</li>
+<li>Extend to richer outcome spaces (i.e. not just studies about a single discrete value)</li>
+<li>Compare with impact factor on real corpus</li>
+<li>Compare with expert evalution on real corpus</li>
+</ul>
+<hr />
+<div id="refs" class="references">
+<div id="ref-agrawal05">
+<p>Agrawal, Anurag A. 2005. “Corruption of Journal Impact Factors.” <em>TRENDS in Ecology and Evolution</em>.</p>
+</div>
+<div id="ref-brembs13">
+<p>Brembs, Björn, Katherine Button, and Marcus Munafò. 2013. “Deep Impact: Unintended Consequences of Journal Rank.” <em>Frontiers in Human Neuroscience</em>.</p>
+</div>
+<div id="ref-cover12">
+<p>Cover, Thomas M, and Joy A Thomas. 2012. <em>Elements of Information Theory</em>. John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-plos06">
+<p>Editors, The PLoS Medicine. 2006. “The Impact Factor Game.” <em>PLoS Med</em>. <a href="http://www.plosmedicine.org/article/info:doi/10.1371/journal.pmed.0030291" class="uri uri">http://www.plosmedicine.org/article/info:doi/10.1371/journal.pmed.0030291</a>.</p>
+</div>
+<div id="ref-liu93">
+<p>Liu, Mengxiong. 1993. “Progress in Documentation the Complexities of Citation Practice: A Review of Citation Studies.” <em>Journal of Documentation</em>.</p>
+</div>
+<div id="ref-moustafa14">
+<p>Moustafa, Khaled. 2014. “The Disaster of the Impact Factor.” <em>Science and Engineering Ethics</em>.</p>
+</div>
+<div id="ref-neuliep90">
+<p>Neuliep, James W, and Rick Crandall. 1990. “Editorial Bias Against Replication Research.” <em>Journal of Social Behavior &amp; Personality</em>.</p>
+</div>
+<div id="ref-shannon48">
+<p>Shannon, Claude Elwood. 1948. “A Mathematical Theory of Communication.” <em>Bell Systems Technical Journal</em>.</p>
+</div>
+<div id="ref-wilhite12">
+<p>Wilhite, Allen W, and Eric A Fong. 2012. “Coercive Citation in Academic Publishing.” <em>Science</em>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>The intuition behind this result is something like our uncertainty is halved (1 bit) because one half of the fair die states are no longer possible.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>This accords with the intuition that value of two facts considered together is not simply the sum of their separate values (e.g. learning that Fido is small is largely redundant once you’ve learned that Fido is a Chihuahua).<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>On casual futurism</title>
+    <link href="https://colehaus.github.io/ColEx/posts/futurism/" />
+    <id>https://colehaus.github.io/ColEx/posts/futurism/</id>
+    <published>2015-02-17T00:00:00Z</published>
+    <updated>2015-02-17T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<blockquote>
+The human race, to which so many of my readers belong, has been playing at children’s games from the beginning…. And one of the games to which it is most attached is called “Keep to-morrow dark,” …. The players listen very carefully and respectfully to all that the clever men have to say about what is to happen in the next generation. The players then wait until all the clever men are dead, and bury them nicely. They then go and do something else. That is all. For a race of simple tastes, however, it is great fun. <span class="citation" data-cites="chesterton04">(Chesterton 1904)</span>
+</blockquote>
+<div class="conversation">
+<p>“How likely are we to have <a href="https://theinfosphere.org/Holophonor">holophonors</a> by 3002?”</p>
+<p>“Pretty likely. They’re pretty much <a href="#futurism-map" id="naive" class="arg-map">just better oboes, right? 80% chance?</a>”</p>
+<p>“<a href="#futurism-map" id="overconfident" class="arg-map">Keep in mind the</a><a href="https://en.wikipedia.org/wiki/Overconfidence_effect">overconfidence bias</a>.</a>”</p>
+<p>“Alright, 70% chance.”</p>
+<p>“Also, note that people are pretty bad at predictions. A study by George Wise found that <span class="noted"><a href="#futurism-map" id="mediocre" class="arg-map">out of 1556 naive medium-term predictions made publicly by Americans between 1890 and 1940, just under 40% had been fulfilled or were in progress by 1976</a></span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> <span class="citation" data-cites="wise76">(Wise 1976)</span>.”</p>
+<p>“Fine. Then I won’t just make a reflexive prediction. I’ll give the matter serious thought… Well, <a href="#futurism-map" id="single" class="arg-map">people in the future will probably be really into opera and the arts because shiny, metal robots will do all the real work. So they’ll be sitting on their hover chairs in their spandex togas. And they’ll want to listen to something—but see something at the same time—just like laser light shows. But lasers will be pretty blasé in the future (what with the ubiquitous laser pocket knifes, laser watches, and laser pointers). So holophonors will be the perfect thing. So, I guess a 90% chance of holophonors?</a>”</p>
+<p>“Ah ha ha. You fell right into my trap! Your casual futurism betrays you! Just by imagining that scenario, you think it’s more likely.”</p>
+<!--more-->
+<p>“Says who?”</p>
+<p>“John Carroll, that’s who. He asked some college students to imagine themselves on election day for the <a href="https://en.wikipedia.org/wiki/United_States_presidential_election,_1976">1976 U.S. presidential election</a> <span class="citation" data-cites="carroll78">(Carroll 1978)</span>. <a href="#futurism-map" id="moreLikely" class="arg-map">Some were told to imagine Carter winning. They were significantly more certain that Carter would win than those that didn’t imagine anything.</a>”</p>
+<p>“Well, maybe it was a persuasively coherent reverie. My holophonor scenario was pretty airtight. That doesn’t sound so bad to be convinced by an exceptionally plausible scenarios…. Wait, what happened with those told to imagine Ford winning?”</p>
+<p>“I think you can guess. They became more certain that Ford would win. He got pretty similar results when he asked students to predict the success of the University of Pittsburgh’s football team after having some of the students imagine a good season and some imagine a bad season. Carroll concluded, ‘The objective fact that some events are imaginary, hypothetical, inferred rather than observed … is poorly coded or not properly used. Thus, the act of posing a problem or asking a question could itself change the beliefs of subjects.’”</p>
+<p>“It could be worse. I could believe in something absurd—like a future with no holophonors. Out of all possible scenarios, I described the most plausible.”</p>
+<p>“Nope. <a href="#futurism-map" id="optimistic" class="arg-map">People’s default, ‘realistic’ predictions are pretty much just their most optimistic predictions <span class="citation" data-cites="buehler94">(Buehler, Griffin, and Ross 1994)</span> <span class="citation" data-cites="newby00">(Newby-Clark et al. 2000)</span>.</a>”</p>
+<p>“But how common is this problem? It seems like you just tricked me into a vivid visualization.”</p>
+<p>“Not so much. Constructing details and filling in gaps is an almost inevitable part of any serious prediction effort <span class="citation" data-cites="griffin90">(Griffin, Dunning, and Ross 1990)</span>.”</p>
+<p>“Alright, you smug snake. I give up. I can’t just reflexively shout out a number and trying to think about the prediction in detail only makes matters worse. What should I do then? How do I see into the future?”</p>
+<p>“To be honest, I’m not sure. Since naive methods seem to fare so dismally, we should probably use some sort of system. Unfortunately, there’s not a lot of empirical evidence on effective forecasting techniques.”</p>
+<p>“Presumably we want to minimize all these biases, right?”</p>
+<p>“Yeah. There a lot of techniques to choose from though <span class="citation" data-cites="tag04">(Group 2004)</span>. Since we’re just a couple of schlemiels, we can’t really call up a panel of experts for the <a href="https://en.wikipedia.org/wiki/Delphi_method">Delphi method</a>. And for a lot of the mathematical models, ‘even the relevant variables are not known, let alone the linkages between the variables.’ <span class="citation" data-cites="martino03">(Martino 2003)</span> If we feel we must forecast, the best general-purpose technique might be <a href="https://en.wikipedia.org/wiki/Scenario_planning">scenario planning</a>.”</p>
+<p>“I thought you just got done scolding me for scenarios!”</p>
+<p>“I did. But the distinguishing feature of scenario planning (a term of art) is a semi-rigorized approach to <a href="#futurism-map" id="multiple" class="arg-map">generating fundamentally divergent, coherent narratives of the future.</a> Proponents suggest the consideration of multiple scenarios is salubrious.”</p>
+<p>“Are they right?”</p>
+<p>“Maybe. As I lamented already, evidence is sparse. And a lot of that evidence relies on self-report about the decision process. ‘Since [decision] outcome is often difficult to evaluate the … process perspective has become the major stream of research on decision quality.’ <span class="citation" data-cites="meissner13">(Meissner and Wulf 2013)</span>”</p>
+<p>“That sounds problematic, since your major contention is the dominating role of bias.”</p>
+<p>“Exactly. But the outcome evidence that exists does seem to suggest that scenario planning is a bit better than naive methods. Whether it’s actually satisfactory…”</p>
+<p>“Good news first. What’s the evidence in favor of scenario planning?”</p>
+<p>“The most direct evidence of outcome efficacy comes from three researchers at the University of Surrey <span class="citation" data-cites="phelps01">(Phelps, Chan, and Kapsalis 2001)</span>. They performed an observational study of information technology companies in the UK. After sampling, they looked at 50 companies using scenario planning and 50 that didn’t. <a href="#futurism-map" id="outcomes" class="arg-map">The companies using scenario planning showed significantly greater growth in profits and return on capital employed,</a> though they did not show significantly greater growth in clients. They did a similar study with 22 water companies. Here, there was no significant relationship between scenario planning and the performance variables.”</p>
+<p>“Hm. What’s the other ‘favorable’ evidence?”</p>
+<p>“In a <a href="https://en.wikipedia.org/wiki/Repeated_measures_design">repeated measures study</a>, researchers found that <a href="#futurism-map" id="widened" class="arg-map">scenario planning widened 50% and 90% confidence intervals on personally important strategic measures</a> by 56% and 44% respectively <span class="citation" data-cites="schoemaker93">(Schoemaker 1993)</span>. However, they also found that <a href="#futurism-map" id="narrowed" class="arg-map">when asked to construct extreme scenarios (judged as implausible), ranges actually contracted.</a>”</p>
+<p>“So whether scenario planning increases or decreases confidence intervals depends on which scenarios are constructed.”</p>
+<p>“Yep. In an experimental study of graduate management students planning for a case company, <a href="#futurism-map" id="framing" class="arg-map">students who went through a full scenario planning process showed no evidence of the</a><a href="https://en.wikipedia.org/wiki/Framing_effect_(psychology)">framing bias</a></a> <span class="citation" data-cites="meissner13">(Meissner and Wulf 2013)</span>. Students that went through only the initial part of the scenario process, but didn’t actually generate scenarios, still showed susceptibility to the framing bias. However, students that used <a href="#futurism-map" id="other" class="arg-map">traditional strategic planning tools</a> (like <a href="https://en.wikipedia.org/wiki/SWOT_analysis">SWOT</a> and <a href="https://en.wikipedia.org/wiki/Porter_five_forces_analysis">Porter’s five forces</a>) were also effectively debiased. Other researchers even suggest that directions akin to ‘think harder’ are sufficient to defeat the framing bias <span class="citation" data-cites="wright02">(Wright and Goodwin 2002)</span>.”</p>
+<p>“What else?”</p>
+<p>“That’s pretty much all I could muster in favor of scenario planning. Of pretty fundamental concern for scenario planning is evidence that generating multiple scenarios doesn’t alter point predictions. Researchers did a study in which they asked university students to estimate when they’d complete school assignments and then followed-up to determine the actual completion times <span class="citation" data-cites="newby00">(Newby-Clark et al. 2000)</span>. Through a variety of experimental permutations, they concluded that, ‘<a href="#futurism-map" id="pessimistic" class="arg-map">Participants’ final task completion time estimates were not affected when they generated pessimistic scenarios … in combination with more optimistic scenarios.</a> … [R]egardless of plausibility, predictors did not attend to pessimistic scenarios.’ Similar results were found by Paul Schoemaker <span class="citation" data-cites="schoemaker92">(Schoemaker and Heijden 1992)</span>.”</p>
+<p>“Any more?”</p>
+<p>“Yes. A quasi-experimental study of managers found that <a href="#futurism-map" id="rational" class="arg-map">scenario planning decreased rational decision-making and increased intuitive decision-making</a> as measured by the General Decision-Making Style Survey <span class="citation" data-cites="chermack08">(Chermack and Nimon 2008)</span>.”</p>
+<p>“That sounds like it could be conducive to biases.”</p>
+<p>“Yeah. Ronald Bradfield offers a pretty harsh indictment of scenario planning <span class="citation" data-cites="bradfield08">(Bradfield 2008)</span>. He observed five groups of five or six postgraduate students developing scenarios for a designated organization. He observed that, for each group, their starting point determined which factors were subsequently explored in scenarios and this starting point was essentially determined by events highly publicized in the media like avian influenza and stem cell research. When countervailing evidence was introduced or alternate developments were suggested, the groups generally discarded them, returning to a ‘common … midpoint of events that were expected to occur’. Bradfield concluded that ‘there was no evidence of the so-called out of the box thinking in the scenarios and there were no strategic insights as to how the future might evolve in new and unprecedented ways’.”</p>
+<p>“Is that everything?”</p>
+<p>“That’s pretty much all the useful information I could find.”</p>
+<p>“So where does that leave us?”</p>
+<p>“I’m not totally sure. Schoemaker concluded that, ‘Scenarios thus exploit one set of biases (such as the conjunction fallacy and intransitivities of beliefs) to overcome another set, namely overconfidence, anchoring and availability biases.’ <span class="citation" data-cites="schoemaker93">(Schoemaker 1993)</span>. Ultimately, scenario planning may be one of the less bad prediction methods.”</p>
+</div>
+<hr />
+<div id="refs" class="references">
+<div id="ref-balzer92">
+<p>Balzer, William K, Lorne M Sulsky, Leslie B Hammer, and Kenneth E Sumner. 1992. “Task Information, Cognitive Information, or Functional Validity Information: Which Components of Cognitive Feedback Affect Performance?” <em>Organizational Behavior and Human Decision Processes</em>.</p>
+</div>
+<div id="ref-bradfield08">
+<p>Bradfield, Ronald M. 2008. “Cognitive Barriers in the Scenario Development Process.” <em>Advances in Developing Human Resources</em>. <a href="http://www.researchgate.net/publication/249631408_Cognitive_Barriers_in_the_Scenario_Development_Process" class="uri uri">http://www.researchgate.net/publication/249631408_Cognitive_Barriers_in_the_Scenario_Development_Process</a>.</p>
+</div>
+<div id="ref-buehler94">
+<p>Buehler, Roger, Dale Griffin, and Michael Ross. 1994. “Exploring the” Planning Fallacy“: Why People Underestimate Their Task Completion Times.” <em>Journal of Personality and Social Psychology</em>. <a href="http://homepages.se.edu/cvonbergen/files/2013/01/Exploring-the-Planning-Fallacy_Why-People-Underestimate-Their-Task-Completion-Times.pdf" class="uri uri">http://homepages.se.edu/cvonbergen/files/2013/01/Exploring-the-Planning-Fallacy_Why-People-Underestimate-Their-Task-Completion-Times.pdf</a>.</p>
+</div>
+<div id="ref-carroll78">
+<p>Carroll, John S. 1978. “The Effect of Imagining an Event on Expectations for the Event: An Interpretation in Terms of the Availability Heuristic.” <em>Journal of Experimental Social Psychology</em>.</p>
+</div>
+<div id="ref-chermack08">
+<p>Chermack, Thomas J, and Kim Nimon. 2008. “The Effects of Scenario Planning on Participant Decision-Making Style.” <em>Human Resource Development Quarterly</em>. <a href="http://www.thomaschermack.com/Thomas_Chermack_-_Scenario_Planning/Research_files/Chermack(2008)EffectsofSPonDM.pdf" class="uri uri">http://www.thomaschermack.com/Thomas_Chermack_-_Scenario_Planning/Research_files/Chermack(2008)EffectsofSPonDM.pdf</a>.</p>
+</div>
+<div id="ref-chesterton04">
+<p>Chesterton, G. K. 1904. <em>The Napoleon of Notting Hill</em>. The Bodley Head. <a href="http://www.gutenberg.org/ebooks/20058" class="uri uri">http://www.gutenberg.org/ebooks/20058</a>.</p>
+</div>
+<div id="ref-griffin90">
+<p>Griffin, Dale W, David Dunning, and Lee Ross. 1990. “The Role of Construal Processes in Overconfident Predictions About the Self and Others.” <em>Journal of Personality and Social Psychology</em>. <a href="http://psych.colorado.edu/~vanboven/teaching/p7536_heurbias/p7536_readings/griffen_dunning_ross_1990.pdf" class="uri uri">http://psych.colorado.edu/~vanboven/teaching/p7536_heurbias/p7536_readings/griffen_dunning_ross_1990.pdf</a>.</p>
+</div>
+<div id="ref-tag04">
+<p>Group, Technology Futures Analysis Methods Working. 2004. “Technology Futures Analysis: Toward Integration of the Field and New Methods.” <em>Technological Forecasting and Social Change</em>. <a href="https://noppa.aalto.fi/noppa/kurssi/phys-c1380/luennot/PHYS-C1380_technology_futures_analysis.pdf" class="uri uri">https://noppa.aalto.fi/noppa/kurssi/phys-c1380/luennot/PHYS-C1380_technology_futures_analysis.pdf</a>.</p>
+</div>
+<div id="ref-martino03">
+<p>Martino, Joseph P. 2003. “A Review of Selected Recent Advances in Technological Forecasting.” <em>Technological Forecasting and Social Change</em>.</p>
+</div>
+<div id="ref-meissner13">
+<p>Meissner, Philip, and Torsten Wulf. 2013. “Cognitive Benefits of Scenario Planning: Its Impact on Biases and Decision Quality.” <em>Technological Forecasting and Social Change</em>.</p>
+</div>
+<div id="ref-newby00">
+<p>Newby-Clark, Ian R, Michael Ross, Roger Buehler, Derek J Koehler, and Dale Griffin. 2000. “People Focus on Optimistic Scenarios and Disregard Pessimistic Scenarios While Predicting Task Completion Times.” <em>Journal of Experimental Psychology: Applied</em>.</p>
+</div>
+<div id="ref-phelps01">
+<p>Phelps, R, C Chan, and SC Kapsalis. 2001. “Does Scenario Planning Affect Performance? Two Exploratory Studies.” <em>Journal of Business Research</em>.</p>
+</div>
+<div id="ref-schmitt76">
+<p>Schmitt, Neal, Bryan W Coyle, and Larry King. 1976. “Feedback and Task Predictability as Determinants of Performance in Multiple Cue Probability Learning Tasks.” <em>Organizational Behavior and Human Performance</em>.</p>
+</div>
+<div id="ref-schoemaker93">
+<p>Schoemaker, Paul JH. 1993. “Multiple Scenario Development: Its Conceptual and Behavioral Foundation.” <em>Strategic Management Journal</em>.</p>
+</div>
+<div id="ref-schoemaker92">
+<p>Schoemaker, Paul JH, and Cornelius AJM van der Heijden. 1992. “Integrating Scenarios into Strategic Planning at Royal Dutch/Shell.” <em>Strategy &amp; Leadership</em>.</p>
+</div>
+<div id="ref-wise76">
+<p>Wise, George. 1976. “The Accuracy of Technological Forecasts, 1890-1940.” <em>Futures</em>.</p>
+</div>
+<div id="ref-wright02">
+<p>Wright, George, and Paul Goodwin. 2002. “Eliminating a Framing Bias by Using Simple Instructions to ’Think Harder’ and Respondents with Managerial Experience: Comment on ‘Breaking the Frame’.” <em>Strategic Management Journal</em>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>I expected to find that one of the major difficulties in making forecasts is the limited opportunity for confirmation or rejection, due to the timespans involved. I was quite surprised to find that, at least for some experimental tasks, this sort of feedback makes predictions worse <span class="citation" data-cites="balzer92">(Balzer et al. 1992)</span> <span class="citation" data-cites="schmitt76">(Schmitt, Coyle, and King 1976)</span>.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>Choose your own exposition</title>
+    <link href="https://colehaus.github.io/ColEx/posts/choose/" />
+    <id>https://colehaus.github.io/ColEx/posts/choose/</id>
+    <published>2015-02-01T00:00:00Z</published>
+    <updated>2015-02-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<menu id="state" type="popup">
+<p><menuitem label="A Theory of Justice" type="radio" checked="checked"></menuitem> <menuitem label="Anarchy, State and Utopia" type="radio"></menuitem></p>
+</menu>
+<h1 id="ordering">Ordering</h1>
+<p>When teaching something, is it best to start with concrete and move to the abstract? Or is it best to emphasize the abstract and introduce concrete applications later? Research on this topic is ambivalent <span class="citation" data-cites="flores09">(Flores 2009)</span> <span class="citation" data-cites="debock11">(De Bock et al. 2011)</span> <span class="citation" data-cites="kaminski08">(Kaminski, Sloutsky, and Heckler 2008)</span> <span class="citation" data-cites="peterson88">(Peterson, Mercer, and O’Shea 1988)</span>. It’s conceivable that the superior approach depends on the student. With one-on-one in-person instruction, this sort of adaptation is possible. With traditional, static text, it’s not. On the web (with computers generally), it is.</p>
+<p><!--more--></p>
+<p>For example (Click one of the arrows on the side to swap the order.):</p>
+<p>For each <a href="https://en.wikipedia.org/wiki/Natural_number">natural number</a>, addition with <span class="math inline">\(0\)</span> produces the same number. For each natural number, multiplication with <span class="math inline">\(1\)</span> produces the same number.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Monoid">monoid</a> is an algebraic structure with a single associative binary operation and an identity element.</p>
+<h1 id="alternatives">Alternatives</h1>
+<p>Now suppose that we wish to make some argument which holds, as a premise, that the state is just and necessary. Because it is not the core of our argument, any argument which convinces the reader to accept that premise suffices. Instead of presenting many arguments equally in the text and implicitly asking the reader to choose, we can make that choice explicit.</p>
+<p>For example (Click the highlighted region to bring up a menu. Click one of the options in the menu to activate that choice.):</p>
+<div class="switch" type="menu" data-menu="state">
+<div class="open">
+<p>The state is a “framework … needed to simplify the application of the two principles of justice”:</p>
+<blockquote>
+First: each person is to have an equal right to the most extensive scheme of equal basic liberties compatible with a similar scheme of liberties for others. Second: social and economic inequalities are to be arranged so that they are both (a) reasonably expected to be to everyone’s advantage, and (b) attached to positions and offices open to all. <span class="citation" data-cites="rawls09">(Rawls 2009)</span>
+</blockquote>
+<p>(these principles justified by the <a href="http://plato.stanford.edu/entries/original-position/">original position</a>.)</p>
+</div>
+</div>
+<p>This technique can be found <em>in vivo</em> in <a href="../quorum/">the post on quorum</a> (which also demonstrates synchronized choice i.e. changing what needs to be changed in subsequent sections to congrue with early choices).</p>
+<h1 id="sidenote">Sidenote</h1>
+<p>This site also uses <span class="noted">sidenotes.</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> By highlighting the noted text, we can provide a little extra clarity about the referent of the note.</p>
+<h1 id="commonality">Commonality</h1>
+<p>The common element here is that these tools allow for more dialogic text. Instead of fixing one canonical version of the text, we can now, in a limited way, respond to the reader’s preferences.</p>
+<p>An alternate view is that these tools allow us to express the structure of our argument with greater fidelity. Traditional text enforces linearity. Structural aspects must be described within the text itself, mixing levels (i.e. we have text which provides the content of our argument interspersed with text which describes the structure of our argument). A standard grammar here could increase both parsimony and efficacy. Viewing the structure of an argument as a <a href="https://en.wikipedia.org/wiki/Directed_graph">directed graph</a> permits a visualization of the tools described above:</p>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/choose/and.svg" alt="A graph in which each of B, C, and D are necessary to establish E. (In the language of (Kelley 1988), an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text." /><figcaption>A graph in which each of B, C, and D are necessary to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text.</figcaption>
+</figure>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/choose/or.svg" alt="A graph in which any of B, C, or D suffices to establish E. (In the language of (Kelley 1988), a disjunct argument.) Any one of them may be presented in the text." /><figcaption>A graph in which any of B, C, or D suffices to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, a disjunct argument.) Any one of them may be presented in the text.</figcaption>
+</figure>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/choose/sidenote.svg" id="sidenote-img" />
+</figure>
+<h1 id="future-work">Future work</h1>
+<ul>
+<li>Extend the grammar</li>
+<li>Make writing with these tools more friendly</li>
+<li>Learn and predict readers’ preferences (e.g. If a reader tends to prefer to start with the concrete explanation, default to that order.)</li>
+<li>Usability and usefulness investigation (i.e. After familiarization, do readers actually benefit from these tools?)</li>
+</ul>
+<hr />
+<div id="refs" class="references">
+<div id="ref-debock11">
+<p>De Bock, Dirk, Johan Deprez, Wim Van Dooren, Michel Roelens, and Lieven Verschaffel. 2011. “Abstract or Concrete Examples in Learning Mathematics? A Replication and Elaboration of Kaminski, Sloutsky, and Heckler’s Study.” <em>Journal for Research in Mathematics Education</em>.</p>
+</div>
+<div id="ref-flores09">
+<p>Flores, Margaret M. 2009. “Using the Concrete–Representational–Abstract Sequence to Teach Subtraction with Regrouping to Students at Risk for Failure.” <em>Remedial and Special Education</em>.</p>
+</div>
+<div id="ref-kaminski08">
+<p>Kaminski, Jennifer A., Vladimir M. Sloutsky, and Andrew F. Heckler. 2008. “The Advantage of Abstract Examples in Learning Math.” <em>Science</em>.</p>
+</div>
+<div id="ref-kelley88">
+<p>Kelley, David. 1988. <em>The Art of Reasoning</em>. Norton New York.</p>
+</div>
+<div id="ref-nozick74">
+<p>Nozick, Robert. 1974. <em>Anarchy, State, and Utopia</em>. Basic books.</p>
+</div>
+<div id="ref-peterson88">
+<p>Peterson, Susan K, Cecil D Mercer, and Lawrence O’Shea. 1988. “Teaching Learning Disabled Students Place Value Using the Concrete to Abstract Sequence.” <em>Learning Disabilities Research</em>.</p>
+</div>
+<div id="ref-rawls09">
+<p>Rawls, John. 2009. <em>A Theory of Justice</em>. Harvard university press.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>They look like this.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>A quorum alternative</title>
+    <link href="https://colehaus.github.io/ColEx/posts/quorum/" />
+    <id>https://colehaus.github.io/ColEx/posts/quorum/</id>
+    <published>2015-01-28T00:00:00Z</published>
+    <updated>2015-01-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<menu id="sample-size" type="popup">
+<p><menuitem label="Many votes" type="radio" checked="checked"></menuitem> <menuitem label="Few votes" type="radio"></menuitem></p>
+</menu>
+<menu id="stat-type" type="popup">
+<p><menuitem label="Bayesian" type="radio" checked="checked"></menuitem> <menuitem label="Frequentist" type="radio"></menuitem></p>
+</menu>
+<h1 id="motivating-examples">Motivating examples</h1>
+<ol>
+<li><div id="example1">
+<p>Pie Club is voting on which pie will be featured at their first August meeting. <span class="noted">After tallying the votes, <a href="https://en.wikipedia.org/wiki/Buko_pie">buko pie</a> receives a mean score of <span class="math inline">\(0.69\)</span> and <a href="https://en.wikipedia.org/wiki/Fish_pie">fish pie</a> receives a mean score of <span class="math inline">\(0.18\)</span>.</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a></p>
+Before the decision is finalized, however, an observant member notices that the meeting is <a href="#quorum-map" id="restrictive" class="arg-map">two members short of the 25 required for quorum</a>. Because Pie Club is scrupulously democratic, the vote is annulled. Some members grumble their doubt that the landslide will reverse with two more votes.
+</div></li>
+<li><span id="example2">Pie Club is voting on which pie will take home the title “Pie of the Decade”. Will it be <a href="https://en.wikipedia.org/wiki/Lemon_meringue_pie">lemon meringue pie</a> or <a href="https://en.wikipedia.org/wiki/Tarta_de_Santiago">Tarta de Santiago</a>? The results are in—quorum checked in advance this time—and they are… <span class="math inline">\(0.49\)</span> for meringue and <span class="math inline">\(0.48\)</span> for Tarta. While meringue’s devotees celebrate, Tarta’s die-hards feel something has gone wrong. <a href="#quorum-map" id="permissive" class="arg-map">Can such a close result really give them confidence</a> that meringue is the preference of the whole club, including the 12 members who couldn’t make it to meeting? If just one of them had attended and cast a vote favoring Tarta, wouldn’t that have swung the outcome?</span></li>
+</ol>
+<p><!--more--></p>
+<h1 id="quorum">Quorum</h1>
+<blockquote>
+<a href="#quorum-map" id="quorum-def" class="arg-map">The minimum number of members who must be present at the meetings</a> of a deliberative assembly for business to be validly transacted is the <em>quorum</em> of the assembly. The requirement of a quorum is a protection against totally unrepresentative action in the name of the body by an unduly small number of persons. <span class="citation" data-cites="ronr">(Robert, Honemann, and Balch 2011)</span>
+</blockquote>
+<p>So quorum is a proxy for representativeness. But as the examples demonstrate, it’s, at best, a loose proxy. Sometimes (as in the <a href="#example1">first example</a>) quorum is too demanding—it forbids a decision when the votes endorse one. On other occasions (as in the <a href="#example2">second example</a>), quorum is too lax—it declares representativeness when there can be no certainty of it.</p>
+<p>Is there an alternative then? How do we determine if a vote is representative? Statistics!</p>
+<h1 id="statistics">Statistics</h1>
+<div class="switch" type="menu" data-menu="stat-type">
+<div class="open">
+<h2 id="bayesian">Bayesian</h2>
+</div>
+</div>
+<p>For each pair of alternatives, we’d like to find which of these three is true:</p>
+<ul>
+<li><span class="math inline">\(\mu_2 \gg \mu_1\)</span></li>
+<li><span class="math inline">\(\mu_1 \gg \mu_2\)</span></li>
+<li><span class="math inline">\(\mu_2 \approx \mu_1\)</span></li>
+</ul>
+<p>where <span class="math inline">\(x \gg y\)</span> means something like “We are justified in believing that <span class="math inline">\(x &gt; y\)</span>.” and <span class="math inline">\(x \approx y\)</span> means something like “We aren’t justified in believing that <span class="math inline">\(x &gt; y\)</span> or that <span class="math inline">\(y &gt; x\)</span>.”. The first two correspond to quorum and the third corresponds to a failure of quorum.</p>
+<p>To establish <span class="math inline">\(\mu_2 \gg \mu_1\)</span>, we construct a lower <span class="inline switch" type="menu" data-menu="stat-type"><span class="open">credible bound (a one-sided <a href="https://en.wikipedia.org/wiki/Credible_interval">credible interval</a>)</span></span> on <span class="math inline">\(\mu_2 - \mu_1\)</span> base on our votes. The lower bound delimits the region where <span class="math inline">\(\mu_2 - \mu_1\)</span> is largest. If the delimited region includes <span class="math inline">\(0\)</span>, we must reject <span class="math inline">\(\mu_2 \gg \mu_1\)</span> (i.e. if the region most favorable to <span class="math inline">\(\mu_2\)</span> still doesn’t exclude <span class="math inline">\(0\)</span>, we aren’t justified in believing <span class="math inline">\(\mu_2 &gt; \mu_1\)</span> (at the chosen <span class="inline switch" type="menu" data-menu="stat-type"><span class="open">credibility</span></span> level)).</p>
+<p>The approach for <span class="math inline">\(\mu_1 \gg \mu_2\)</span> is similar (simply swap in an upper bound or <span class="math inline">\(\mu_1 - \mu_2\)</span>).</p>
+<p>If we reject <span class="math inline">\(\mu_2 \gg \mu_1\)</span> and <span class="math inline">\(\mu_1 \gg \mu_2\)</span>, we must accept <span class="math inline">\(\mu_2 \approx \mu_1\)</span> and declare a failure of quorum.</p>
+<p>For example, we’d like to <a href="#quorum-map" id="bayes" class="arg-map">determine if the <span class="inline switch" type="menu" data-menu="stat-type"><span class="open">credible</span></span> bounds support the conclusion</a> that buko pie really is preferred to fish pie. If Pie Club bylaws specified a <span class="math inline">\(95\%\)</span> <span class="inline switch" type="menu" data-menu="stat-type"><span class="open">credible</span></span> bound and the lower bound for <span class="math inline">\(\mu_{buko} - \mu_{fish}\)</span> stretched to <span class="math inline">\(0.359\)</span> while the upper bound stretched to <span class="math inline">\(0.58\)</span>, we’d declare that quorum had been reached in favor of buko pie. (We reject <span class="math inline">\(\mu_{fish} \gg \mu_{buko}\)</span> because it’s bounded region includes <span class="math inline">\(0\)</span>. We can’t reject <span class="math inline">\(\mu_{buko} \gg \mu_{fish}\)</span> because it’s bounded region excludes <span class="math inline">\(0\)</span>.) Alternately, if the lower bound stretched to <span class="math inline">\(-0.1\)</span> and the upper bound stretched to <span class="math inline">\(0.58\)</span>, we’d declare a failure of quorum.</p>
+<div class="switch" type="menu" data-menu="stat-type">
+<div class="open">
+<p>How do we construct these credible bounds? We derive them from the <a href="https://en.wikipedia.org/wiki/Posterior_probability">posterior probability distribution</a> created using Bayesian parameter estimation <span class="citation" data-cites="kruschke13">(Kruschke 2013)</span>. To construct this posterior, we start by specifying <span class="noted">a model for the distribution of paired differences</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. Because the difference can only take on values in the interval <span class="math inline">\(\left(-1, 1\right)\)</span>, the (<a href="https://en.wikipedia.org/wiki/Location-scale_family">transformed</a> from <span class="math inline">\((0, 1)\)</span> to <span class="math inline">\((-1, 1)\)</span>) <span class="noted"><a href="https://en.wikipedia.org/wiki/Beta_distribution">beta distribution</a> is a sensible choice</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>. To get a sense of the beta distribution, you can look at the calculator <a href="http://keisan.casio.com/has10/SpecExec.cgi?id=system/2006/1180573226">here</a>.</p>
+<p>Now that we have a model of differences, we must choose <a href="https://en.wikipedia.org/wiki/Prior_probability">prior probability distributions</a> for its parameters. Note that <span class="math inline">\(\alpha = \beta = 1\)</span> collapses the beta distribution to the uniform distribution. Because the uniform distribution is the <a href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution">maximum entropy distribution</a> on a supported interval, we should choose prior distributions of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> with means of <span class="math inline">\(1\)</span> <span class="citation" data-cites="sivia06">(Sivia and Skilling 2006)</span>. The maximum entropy distribution with mean <span class="math inline">\(1\)</span> supported on <span class="math inline">\(\left(0, \infty\right)\)</span> is the exponential distribution with <span class="math inline">\(\lambda = 1\)</span>. So the prior on each of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> is <span class="math inline">\(Exp(1)\)</span>. All of this is diagrammatically represented in the accompanying figure.</p>
+<figure>
+<img src="https://colehaus.github.io/ColEx/images/quorum/distro.png" alt="We model the vote differences with a beta distribution. That beta distribution’s parameters have priors of \(Exp(1)\)." /><figcaption>We model the vote differences with a beta distribution. That beta distribution’s parameters have priors of <span class="math inline">\(Exp(1)\)</span>.</figcaption>
+</figure>
+<p>Now that we have our data and prior probability distributions, <a href="https://en.wikipedia.org/wiki/Bayes'_theorem">Bayes’ theorem</a> allows us to reallocate probability mass to form the posterior probability distributions. We generate numerical estimates of the posterior probability distributions using adaptive Metropolis-within-Gibbs <span class="citation" data-cites="roberts09">(Roberts and Rosenthal 2009)</span> <span class="citation" data-cites="sumsar-best">(Bååth 2012)</span>. These posteriors on the parameters of beta allow us to straightforwardly calculate the posterior on the mean of the difference using the formula for the mean of a beta distribution.</p>
+</div>
+</div>
+<p><span class="noted">You can try it out below</span><a href="#fn5" id="fnref5" class="footnote-ref"><sup>5</sup></a>. Maybe look for:</p>
+<ul>
+<li>A scenario in which the quorum status (achieved or failed) depends on the credibility level chosen (e.g. <span class="math inline">\(95\%\)</span> or <span class="math inline">\(99\%\)</span>)</li>
+<li>Two scenarios in which each alternative retains its mean score, but the quorum status changes</li>
+<li>Two scenarios in which the number of voters remains the same, but the quorum status changes</li>
+</ul>
+<p><em>On the full site, there's an interactive widget here.</em></p>
+<h1 id="problems">Problems</h1>
+<p>We’ve tacitly <a href="#quorum-map" id="random" class="arg-map">assumed that our actual voters are a random sample</a> of the population of potential voters. This is false (Though one could make it true through adoption of appropriate <a href="https://en.wikipedia.org/wiki/Sortition">voting procedures</a>). <a href="https://en.wikipedia.org/wiki/Self-selection_bias">Self-selection bias</a>, whether due to differential interest, availability, transportation, &amp;c., means that the sample is non-representative. However, the problem of non-random samples also applies to traditional quorum’s assurances of representativeness.</p>
+<p>The procedure also accepts the claim of <span class="citation" data-cites="ronr">(Robert, Honemann, and Balch 2011)</span> that the purpose of quorum is to ensure representativeness. In consequence, the procedure takes votes as exogenous and characterizes only the resulting information. But one could support quorum for its deliberative, community-building, or even obstructive effects.</p>
+<p>Also, <a href="#quorum-map" id="complicated" class="arg-map">isn’t all this math a bit forbidding?</a></p>
+<div class="switch" type="menu" data-menu="stat-type">
+<div class="open">
+<p>The conclusions have a rather intuitive interpretation in terms of likelihood, maybe even more intuitive than the traditional quorum interpretation (“We ensure that our decisions are representative by requiring 25% of our members to attend.”). But getting to the conclusions requires a computer and uncommon math.</p>
+</div>
+</div>
+<p>So this procedure is less accessible than traditional quorum. How much less depends on the relative importances placed on accessible conclusions and accessible process.</p>
+<p>Because this calculation is less accessible and will likely be performed by one or a few individuals, it’s import to establish a clear and strict procedure. We should not permit, for example, the choice of modeling distribution after exploratory data analysis. The more degrees of freedom we give the analyst, the more power we give them to influence results <span class="citation" data-cites="simmons11">(Simmons, Nelson, and Simonsohn 2011)</span>.</p>
+<p>Finally, this procedure <a href="#quorum-map" id="post-hoc" class="arg-map">admits only post-hoc declarations of quorum</a>. With the traditional procedure, we can just take attendance at a meeting and determine the quorum status for every referendum therein. With the new procedure, after tallying the votes on an issue, we have to run the quorum calculation to retroactively determine quorum if we achieved quorum.</p>
+<h1 id="extended-procedures">Extended procedures</h1>
+<div class="switch" type="menu" data-menu="stat-type">
+<div class="open">
+<h2 id="non-parametric">Non-parametric</h2>
+<p>As mentioned, the procedure specified above assumes that the paired differences are amenable to modelling by a beta distribution. This leads to overconfident inferences <span class="citation" data-cites="hoeting99">(Hoeting et al. 1999)</span>. The assumption can be relaxed through the use of Bayesian <a href="https://en.wikipedia.org/wiki/Nonparametric_statistics">non-parametric</a> methods <span class="citation" data-cites="walker99">(Walker et al. 1999)</span>. The idea is to use a model with an infinite number of parameters and marginalize out surplus dimensions on our finite data.</p>
+<h2 id="tying">Tying</h2>
+<p>We can also modify the procedure to permit tying. Under standing voting procedures, scores of <span class="math inline">\(0.490\)</span> to <span class="math inline">\(0.488\)</span> produce an identical outcome ( i.e. victory for the first option) to scores of <span class="math inline">\(0.82\)</span> to <span class="math inline">\(0.12\)</span>. However, if those values are accurate estimates of the population scores (i.e. the uncertainty is small), one could argue that the former scenario suggests a compromise or synthesis position.</p>
+<p>By defining “regions of practical equivalence”, parameter estimation allows the possibility of a tie <span class="citation" data-cites="kruschke13">(Kruschke 2013)</span>. For example, Pie Club could decide that a difference of mean scores smaller than 0.01 counts as a tie. If the credible interval on the difference of means is contained entirely in this region, we don’t have a failure of quorum (uncertainy about which option is preferred), but certainty that neither option is substantially preferred.</p>
+<h2 id="multiple-alternatives">Multiple alternatives</h2>
+<p>For simplicity, we looked at referenda with only two alternatives. We can extend the procedure to referenda with more alternatives. The most straightforward method would be to apply the procedure described above pairwise. The credibility level would need to adjusted by something like the <a href="https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction">Šidák correction</a> to deal with the <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem">problem of multiple comparisons</a>. A better solution would be to perform a Bayesian <a href="https://en.wikipedia.org/wiki/Analysis_of_variance">ANOVA</a> analogue with follow-up tests <span class="citation" data-cites="wetzels12">(Wetzels, Grasman, and Wagenmakers 2012)</span>.</p>
+</div>
+</div>
+<h2 id="non-ordinal-outcomes">Non-ordinal outcomes</h2>
+<p>The procedure described above applies to ordinal outcomes. That is, we were looking for the alternative with a score higher than all others. If we are trying to assess outcomes on <a href="https://en.wikipedia.org/wiki/Level_of_measurement">a ratio or interval scale</a>, we’d have to use a different procedure.</p>
+<p>The appropriate modification depends on the issue at hand. In cases where caution is required, an organization could dispense with quorum and simply use the conservative bound. In other circumstances, an organization could place limits on the maximum size of the interval.</p>
+<p>For example, suppose Pie Club put the size of its budget for the next year to a vote. If it were feeling fiscally responsible, it could simply sets its budget to the <span class="math inline">\(95\%\)</span> lower bound on the mean vote. An alternative would be to declare a failure of quorum if the vote didn’t produce a <span class="math inline">\(95\%\)</span> interval smaller than <span class="math inline">\(\mu \pm 10\%\)</span>.</p>
+<h1 id="future-work">Future work</h1>
+<ul>
+<li>Social welfare analysis versus traditional quorum <span class="citation" data-cites="bordley83">(Bordley 1983)</span></li>
+<li>Human trials</li>
+</ul>
+<hr />
+<div id="refs" class="references">
+<div id="ref-sumsar-best">
+<p>Bååth, Rasmus. 2012. “Bayesian Estimation Supersedes the T-Test (Best) - Online.” <a href="http://sumsar.net/best_online/" class="uri uri">http://sumsar.net/best_online/</a>.</p>
+</div>
+<div id="ref-bordley83">
+<p>Bordley, Robert F. 1983. “A Pragmatic Method for Evaluating Election Schemes Through Simulation.” <em>American Political Science Review</em>.</p>
+</div>
+<div id="ref-goodman08">
+<p>Goodman, Steven. 2008. “A Dirty Dozen: Twelve P-Value Misconceptions.” <em>Seminars in Hematology</em>.</p>
+</div>
+<div id="ref-hoeting99">
+<p>Hoeting, Jennifer A., David Madigan, Adrian E. Raftery, and Chris T. Volinsky. 1999. “Bayesian Model Averaging: A Tutorial.” <em>Statistical Science</em>. <a href="http://projecteuclid.org/download/pdf_1/euclid.ss/1009212519" class="uri uri">http://projecteuclid.org/download/pdf_1/euclid.ss/1009212519</a>.</p>
+</div>
+<div id="ref-kruschke13">
+<p>Kruschke, John K. 2013. “Bayesian Estimation Supersedes the T Test.” <em>Journal of Experimental Psychology: General</em>. <a href="http://www.indiana.edu/~kruschke/articles/Kruschke2013JEPG.pdf" class="uri uri">http://www.indiana.edu/~kruschke/articles/Kruschke2013JEPG.pdf</a>.</p>
+</div>
+<div id="ref-ronr">
+<p>Robert, Henry M. III, Daniel H. Honemann, and Thomas J. Balch. 2011. <em>Robert’s Rules of Order Newly Revised</em>. 11th ed. Da Capo Press.</p>
+</div>
+<div id="ref-roberts09">
+<p>Roberts, Gareth O, and Jeffrey S Rosenthal. 2009. “Examples of Adaptive Mcmc.” <em>Journal of Computational and Graphical Statistics</em>. <a href="http://www.utstat.toronto.edu/wordpress/WSFiles/technicalreports/0610.pdf" class="uri uri">http://www.utstat.toronto.edu/wordpress/WSFiles/technicalreports/0610.pdf</a>.</p>
+</div>
+<div id="ref-simmons11">
+<p>Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. “False-Positive Psychology Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.” <em>Psychological Science</em>. <a href="http://www.haas.berkeley.edu/groups/online_marketing/facultyCV/papers/nelson_false-positive.pdf" class="uri uri">http://www.haas.berkeley.edu/groups/online_marketing/facultyCV/papers/nelson_false-positive.pdf</a>.</p>
+</div>
+<div id="ref-sivia06">
+<p>Sivia, Devinderjit, and John Skilling. 2006. <em>Data Analysis: A Bayesian Tutorial</em>. Oxford University Press.</p>
+</div>
+<div id="ref-walker99">
+<p>Walker, Stephen G, Paul Damien, Purushottam W Laud, and Adrian FM Smith. 1999. “Bayesian Nonparametric Inference for Random Distributions and Related Functions.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em>. <a href="http://deepblue.lib.umich.edu/bitstream/handle/2027.42/73242/1467-9868.00190.pdf" class="uri uri">http://deepblue.lib.umich.edu/bitstream/handle/2027.42/73242/1467-9868.00190.pdf</a>.</p>
+</div>
+<div id="ref-wetzels12">
+<p>Wetzels, Ruud, Raoul PPP Grasman, and Eric-Jan Wagenmakers. 2012. “A Default Bayesian Hypothesis Test for Anova Designs.” <em>The American Statistician</em>. <a href="http://www.ejwagenmakers.com/2012/WetzelsEtAl2012AmStat.pdf" class="uri uri">http://www.ejwagenmakers.com/2012/WetzelsEtAl2012AmStat.pdf</a>.</p>
+</div>
+<div id="ref-wilcoxon45">
+<p>Wilcoxon, Frank. 1945. “Individual Comparisons by Ranking Methods.” <em>Biometrics Bulletin</em>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Throughout this post, I’ll be working with continuous <a href="https://en.wikipedia.org/wiki/Range_voting">range voting</a>:</p>
+<dl>
+<dt>Polling rule</dt>
+<dd>That is, each voter scores each option on a range from 0 to 1 (exclusive).
+</dd>
+<dt>Aggregation rule</dt>
+<dd>The individual scores are then averaged to arrive at an overall score.
+</dd>
+<dt>Decision rule</dt>
+<dd>The option with the highest mean is the winner.
+</dd>
+</dl>
+<p>The techniques described here could be extended to many alternate procedures.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>When using paired samples (here, we’d like to pair each person’s vote on buko pie to their vote on fish pie), we can transform two samples into a single sample of their differences. We can then use our single sample techniques on <span class="math inline">\(d_i = buko_i - fish_i\)</span> where <span class="math inline">\(y_i\)</span> is the <span class="math inline">\(i\)</span>th person’s vote on proposal <span class="math inline">\(y\)</span>.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>This entails the false assumption that our paired differences follow a beta distribution. Later, we’ll discuss possibilities for remedying this. For the moment, the beta distribution gives passable results, for its simplicity.<a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn4">
+<p>When using paired samples (here, we’d like to pair each person’s vote on buko pie to their vote on fish pie), we can transform two samples into a single sample of their differences. We can then use our single sample techniques on <span class="math inline">\(d_i = buko_i - fish_i\)</span> where <span class="math inline">\(y_i\)</span> is the <span class="math inline">\(i\)</span>th person’s vote on proposal <span class="math inline">\(y\)</span>.<a href="#fnref4" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn5">
+<p>For visual clarity, the plots below show only the bound which “crosses <span class="math inline">\(0\)</span> the least”. If and only if this bounded region includes <span class="math inline">\(0\)</span>, quorum has failed.<a href="#fnref5" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>About</title>
+    <link href="https://colehaus.github.io/ColEx/posts/about/" />
+    <id>https://colehaus.github.io/ColEx/posts/about/</id>
+    <published>2015-01-18T00:00:00Z</published>
+    <updated>2015-01-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>This is a single-author, half-heartedly pseudonymous (the pseudonym being Cole) blog.</p>
+<p><!--more--></p>
+<p>You can contact me at <a href="mailto:colehaus@cryptolab.net">colehaus@cryptolab.net</a>. <span class="noted">If you have any comments, please message me and I’ll try to incorporate and attribute them.</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> If I’ve referenced a resource that you can’t access, but would like to, please message me.</p>
+<p>You can find the source for this blog at <a href="https://github.com/colehaus/ColEx">GitHub</a>. Where possible, code is licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a>. Text is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>I recognize that this is a bothersome approach. Unfortunately, I don’t like any of the commenting systems that I know of. I hope to figure something out eventually.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+
+</feed>

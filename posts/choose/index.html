@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Choose your own exposition—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML"></script>
+
+    
+  <link rel="stylesheet" type="text/css" href="../../css/choose.css" />
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Choose your own exposition</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/meta/">meta</a></li>
+    
+      <li><a href="../../tag/text/">text</a></li>
+    
+      <li><a href="../../tag/structure/">structure</a></li>
+    
+</ul></nav>
+
+  <span class="date">Published on <time datetime="2015-02-01">February  1, 2015</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>We can use interactivity to augment traditional text. In particular, we allow for choice of ordering and between alternatives.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>Abstruse</summary><p>Replaces something widely understood with something unfamiliar---for dubious benefit</p></details></li>
+      
+    </ul></aside>
+  
+
+  <menu id="state" type="popup">
+<menuitem label="A Theory of Justice" type="radio" checked="checked"></menuitem> <menuitem label="Anarchy, State and Utopia" type="radio"></menuitem>
+</menu>
+<h3 id="ordering">Ordering</h3>
+<p>When teaching something, is it best to start with concrete and move to the abstract? Or is it best to emphasize the abstract and introduce concrete applications later? Research on this topic is ambivalent <span class="citation" data-cites="flores09">(Flores 2009)</span> <span class="citation" data-cites="debock11">(De Bock et al. 2011)</span> <span class="citation" data-cites="kaminski08">(Kaminski, Sloutsky, and Heckler 2008)</span> <span class="citation" data-cites="peterson88">(Peterson, Mercer, and O’Shea 1988)</span>. It’s conceivable that the superior approach depends on the student. With one-on-one in-person instruction, this sort of adaptation is possible. With traditional, static text, it’s not. On the web (with computers generally), it is.</p>
+<!--more-->
+<p>For example (Click one of the arrows on the side to swap the order.):</p>
+<p class="swap monoid">
+For each <a href="https://en.wikipedia.org/wiki/Natural_number">natural number</a>, addition with <span class="math inline">\(0\)</span> produces the same number. For each natural number, multiplication with <span class="math inline">\(1\)</span> produces the same number.
+</p>
+<p class="swap monoid">
+A <a href="https://en.wikipedia.org/wiki/Monoid">monoid</a> is an algebraic structure with a single associative binary operation and an identity element.
+</p>
+<h3 id="alternatives">Alternatives</h3>
+<p>Now suppose that we wish to make some argument which holds, as a premise, that the state is just and necessary. Because it is not the core of our argument, any argument which convinces the reader to accept that premise suffices. Instead of presenting many arguments equally in the text and implicitly asking the reader to choose, we can make that choice explicit.</p>
+<p>For example (Click the highlighted region to bring up a menu. Click one of the options in the menu to activate that choice.):</p>
+<div class="switch" type="menu" data-menu="state">
+<div class="open">
+<p>The state is a “framework … needed to simplify the application of the two principles of justice”:</p>
+<blockquote>
+First: each person is to have an equal right to the most extensive scheme of equal basic liberties compatible with a similar scheme of liberties for others. Second: social and economic inequalities are to be arranged so that they are both (a) reasonably expected to be to everyone’s advantage, and (b) attached to positions and offices open to all. <span class="citation" data-cites="rawls09">(Rawls 2009)</span>
+</blockquote>
+<p>(these principles justified by the <a href="http://plato.stanford.edu/entries/original-position/">original position</a>.)</p>
+</div>
+<div>
+<blockquote>
+In a state of nature, … [g]roups of individuals may form mutual-protection associations: all will answer the call of any member for defense or for the enforcement of his rights. … [I]nconvenciences attend such simple mutual-protection associations …. Some people will be hired to perform protective functions, and some entrepreneurs will go into the business of selling protective services. <span class="citation" data-cites="nozick74">(Nozick 1974)</span>
+</blockquote>
+<p>Nozick then goes on to suggest that these protective agencies would form virtual monopolies, approximating a state.</p>
+</div>
+</div>
+<p>This technique can be found <em>in vivo</em> in <a href="../quorum/">the post on quorum</a> (which also demonstrates synchronized choice i.e. changing what needs to be changed in subsequent sections to congrue with early choices).</p>
+<h3 id="sidenote">Sidenote</h3>
+<p>This site also uses <span class="noted">sidenotes.</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> By highlighting the noted text, we can provide a little extra clarity about the referent of the note.</p>
+<h3 id="commonality">Commonality</h3>
+<p>The common element here is that these tools allow for more dialogic text. Instead of fixing one canonical version of the text, we can now, in a limited way, respond to the reader’s preferences.</p>
+<p>An alternate view is that these tools allow us to express the structure of our argument with greater fidelity. Traditional text enforces linearity. Structural aspects must be described within the text itself, mixing levels (i.e. we have text which provides the content of our argument interspersed with text which describes the structure of our argument). A standard grammar here could increase both parsimony and efficacy. Viewing the structure of an argument as a <a href="https://en.wikipedia.org/wiki/Directed_graph">directed graph</a> permits a visualization of the tools described above:</p>
+<figure>
+<img src="../../images/choose/and.svg" alt="A graph in which each of B, C, and D are necessary to establish E. (In the language of (Kelley 1988), an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text." /><figcaption>A graph in which each of B, C, and D are necessary to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text.</figcaption>
+</figure>
+<figure>
+<img src="../../images/choose/or.svg" alt="A graph in which any of B, C, or D suffices to establish E. (In the language of (Kelley 1988), a disjunct argument.) Any one of them may be presented in the text." /><figcaption>A graph in which any of B, C, or D suffices to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, a disjunct argument.) Any one of them may be presented in the text.</figcaption>
+</figure>
+<figure>
+<img id="sidenote-img" src="../../images/choose/sidenote.svg" alt="Sidenote graph">
+</figure>
+<h3 id="future-work">Future work</h3>
+<ul>
+<li>Extend the grammar</li>
+<li>Make writing with these tools more friendly</li>
+<li>Learn and predict readers’ preferences (e.g. If a reader tends to prefer to start with the concrete explanation, default to that order.)</li>
+<li>Usability and usefulness investigation (i.e. After familiarization, do readers actually benefit from these tools?)</li>
+</ul>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-debock11">
+<p>De Bock, Dirk, Johan Deprez, Wim Van Dooren, Michel Roelens, and Lieven Verschaffel. 2011. “Abstract or Concrete Examples in Learning Mathematics? A Replication and Elaboration of Kaminski, Sloutsky, and Heckler’s Study.” <em>Journal for Research in Mathematics Education</em>.</p>
+</div>
+<div id="ref-flores09">
+<p>Flores, Margaret M. 2009. “Using the Concrete–Representational–Abstract Sequence to Teach Subtraction with Regrouping to Students at Risk for Failure.” <em>Remedial and Special Education</em>.</p>
+</div>
+<div id="ref-kaminski08">
+<p>Kaminski, Jennifer A., Vladimir M. Sloutsky, and Andrew F. Heckler. 2008. “The Advantage of Abstract Examples in Learning Math.” <em>Science</em>.</p>
+</div>
+<div id="ref-kelley88">
+<p>Kelley, David. 1988. <em>The Art of Reasoning</em>. Norton New York.</p>
+</div>
+<div id="ref-nozick74">
+<p>Nozick, Robert. 1974. <em>Anarchy, State, and Utopia</em>. Basic books.</p>
+</div>
+<div id="ref-peterson88">
+<p>Peterson, Susan K, Cecil D Mercer, and Lawrence O’Shea. 1988. “Teaching Learning Disabled Students Place Value Using the Concrete to Abstract Sequence.” <em>Learning Disabilities Research</em>.</p>
+</div>
+<div id="ref-rawls09">
+<p>Rawls, John. 2009. <em>A Theory of Justice</em>. Harvard university press.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>They look like this.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>
