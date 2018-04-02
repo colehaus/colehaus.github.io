@@ -1,231 +1,231 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/atom.xml</loc>
+        <loc>https://col-ex.org/atom.xml</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tags/index.html</loc>
+        <loc>https://col-ex.org/tags/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/index.html</loc>
+        <loc>https://col-ex.org/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/index.html</loc>
+        <loc>https://col-ex.org/posts/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/lazy-ai-safety/index.html</loc>
+        <loc>https://col-ex.org/posts/lazy-ai-safety/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/cooperatives/index.html</loc>
+        <loc>https://col-ex.org/posts/cooperatives/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/graph-of-contents/index.html</loc>
+        <loc>https://col-ex.org/posts/graph-of-contents/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/bibliometric/index.html</loc>
+        <loc>https://col-ex.org/posts/bibliometric/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/futurism/index.html</loc>
+        <loc>https://col-ex.org/posts/futurism/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/choose/index.html</loc>
+        <loc>https://col-ex.org/posts/choose/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/quorum/index.html</loc>
+        <loc>https://col-ex.org/posts/quorum/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/posts/about/index.html</loc>
+        <loc>https://col-ex.org/posts/about/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/automaton/index.html</loc>
+        <loc>https://col-ex.org/tag/automaton/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/bayes/index.html</loc>
+        <loc>https://col-ex.org/tag/bayes/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/bias/index.html</loc>
+        <loc>https://col-ex.org/tag/bias/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/bibliometrics/index.html</loc>
+        <loc>https://col-ex.org/tag/bibliometrics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/biographical/index.html</loc>
+        <loc>https://col-ex.org/tag/biographical/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/cooperatives/index.html</loc>
+        <loc>https://col-ex.org/tag/cooperatives/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/economics/index.html</loc>
+        <loc>https://col-ex.org/tag/economics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/frequentist/index.html</loc>
+        <loc>https://col-ex.org/tag/frequentist/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/future/index.html</loc>
+        <loc>https://col-ex.org/tag/future/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/information-theory/index.html</loc>
+        <loc>https://col-ex.org/tag/information-theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/machine%20ethics/index.html</loc>
+        <loc>https://col-ex.org/tag/machine%20ethics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/meta/index.html</loc>
+        <loc>https://col-ex.org/tag/meta/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/moral%20uncertainty/index.html</loc>
+        <loc>https://col-ex.org/tag/moral%20uncertainty/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/publishing/index.html</loc>
+        <loc>https://col-ex.org/tag/publishing/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/review/index.html</loc>
+        <loc>https://col-ex.org/tag/review/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/science/index.html</loc>
+        <loc>https://col-ex.org/tag/science/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/statistics/index.html</loc>
+        <loc>https://col-ex.org/tag/statistics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/structure/index.html</loc>
+        <loc>https://col-ex.org/tag/structure/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/text/index.html</loc>
+        <loc>https://col-ex.org/tag/text/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/tag/voting/index.html</loc>
+        <loc>https://col-ex.org/tag/voting/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://colehaus.github.io/ColEx/page/1/index.html</loc>
+        <loc>https://col-ex.org/page/1/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

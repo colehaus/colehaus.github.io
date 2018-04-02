@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Collectively Exhaustive</title>
-    <link href="https://colehaus.github.io/ColEx/atom.xml" rel="self" />
-    <link href="https://colehaus.github.io/ColEx" />
-    <id>https://colehaus.github.io/ColEx/atom.xml</id>
+    <link href="https://col-ex.org/atom.xml" rel="self" />
+    <link href="https://col-ex.org" />
+    <id>https://col-ex.org/atom.xml</id>
     <author>
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
@@ -11,37 +11,59 @@
     <updated>2018-03-31T00:00:00Z</updated>
     <entry>
     <title>A lazy approach to AI safety</title>
-    <link href="https://colehaus.github.io/ColEx/posts/lazy-ai-safety/" />
-    <id>https://colehaus.github.io/ColEx/posts/lazy-ai-safety/</id>
+    <link href="https://col-ex.org/posts/lazy-ai-safety/" />
+    <id>https://col-ex.org/posts/lazy-ai-safety/</id>
     <published>2018-03-31T00:00:00Z</published>
     <updated>2018-03-31T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>According to most ethical theories, the actions of any AI agent we create have moral import. To accommodate this reality, we guide the agent with a utility function and (implicitly or explicitly) an ethical framework.</p>
-<p>One of the key problems of AI safety is that we are uncertain about which ethical theory to encode in the agent because we (philosophers, humans, society) are ourselves unsure of the correct ethical theory. How can we expect our agent to act in accordance with our values when we don’t even know what our values are?</p>
+<p>One of the key problems of AI alignment is that we are uncertain about which ethical theory to encode in the agent because we (philosophers, humans, society) are ourselves unsure of the correct ethical theory. How can we expect our agent to act in accordance with our values when we don’t even know what our values are?</p>
 <p>I propose that we wave the white flag of surrender in the battle to find final, certain answers to the hard problems of ethics. Instead, we should reify our uncertainty and our search procedures in agents we build.</p>
 <p><!--more--></p>
-<h1 id="surrender">Surrender</h1>
+<h1 id="ethical-surrender">Ethical surrender</h1>
 <p>Our prior should be that “solving” ethics is hard: Many smart people have worked on it for centuries. We can also take a step back and allude to more <a href="https://plato.stanford.edu/entries/skepticism/">fundamental limitations to knowledge</a> which suggest a definitive solution to ethics isn’t around the corner.</p>
 <p>There is a certain simplicity to the empirical domain. We can see it, taste it, feel it. And yet, the possibility of certain, empirical knowledge has faced strong skepticism from philosophers for centuries (dating at least to <a href="https://plato.stanford.edu/entries/induction-problem/">David Hume</a>). Do we simplify the problem of induction by moving to the abstracted domain of ethics? I think not.</p>
 <p>If induction is out, what about deduction? Again, there are <a href="https://plato.stanford.edu/entries/goedel-incompleteness/">limits</a>.</p>
 <p>Obviously, this section is brief and handwavey. We’ve sidestepped big, intricate arguments about the nature of ethics and moral epistemology. But I hope it primes your intuition enough that you’re willing to provisionally accept that uncertainty is a major feature of ethics now and in the future.</p>
 <h1 id="moral-uncertainty">Moral uncertainty</h1>
 <p>Once we accept this uncertainty, we must choose how to respond. If we don’t reflect on the idea of moral uncertainty, our approach is likely to approximate <a href="http://johanegustafsson.net/papers/in-defence-of-my-favourite-theory.pdf">“my favorite theory”</a>. In this approach, we weigh the options, find whichever ethical theory fares best, and discard the rest. That is, if, after analysis, we think the categorical imperative is 20% likely to be true and utilitarianism is 80% likely to be true, we act as utilitarians.</p>
-<p>A compelling alternative is to <a href="http://www.overcomingbias.com/2009/01/moral-uncertainty-towards-a-solution.html">retain our uncertainty and evaluate actions against a weighted parliament of ethical theories</a>. In our 80-20 scenario above, any action is evaluated against both theories. If utilitarianism is indifferent between actions A and B while the categorical imperative heavily favors A over B, we do A (even though we are “mostly” utilitarian!).</p>
-<h1 id="moral-uncertainty-in-machines">Moral uncertainty in machines</h1>
-<p>The impression I have (admittedly, mostly from afar) is that AI safety has mostly (implicitly) revolved around the “my favorite theory” approach. That is, people have been approaching the issue as deciding which single ethical theory they will encode in an agent. I think the parliamentary model is a significant improvement.</p>
-<p>When encoding the parliamentary model in machines, there’s good reason to avoid simply transferring our own intuitions and perspectives into the machine. Instead, the parliament’s initial distribution should probably be set by a <a href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution">maximum entropy distribution</a>. Of course, we can’t leave it there. That would throw away valuable information about the truth of the moral world (i.e. what evidence do we have bearing on the relative likelihood of each moral theory to be correct). An abhorrence for discarding information is precisely what motivated us to choose the parliamentary approach in the first place.</p>
-<p>Instead, we will allow and expect our agent to perform <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayesian updates</a> to reweight the moral parliament. That is, in addition to any actions it can take in the world, the agent also always has the option of performing ethical investigation. This supposes that we have a provisional answer to the question of <a href="https://plato.stanford.edu/entries/moral-epistemology/">moral epistemology</a> and thus a well-founded way to perform these updates. We’ll bracket the question of how exactly this can be done while noting that moral epistemology is at least a different hard problem to solve than the problem which AI safety typically confronts.</p>
-<h1 id="arbitrating-between-actions-and-ethical-investigation">Arbitrating between actions and ethical investigation</h1>
-<p>Now that the agent has an additional action that it must always consider (ethical investigation), we must decide how to value this action so that it can be compared against more standard actions in the world by the agent’s utility function. The approach I propose here is to use <a href="https://en.wikipedia.org/wiki/Value_of_information">value of information calculations</a>.</p>
-<p>Finally, we really begin to see the benefits of this approach. When an agent finds itself doing trivial actions of no moral import, it can remain fairly disinterested in ethics. Broad approximations of ethical truth suffice. On the other hand though, all the moral paradoxes that we humans confront are now moral paradoxes for our agent as well. When it is faced with truly difficult moral decisions, rather than blithely running ahead, our agent will be prompted to pause and refine its ethical views.</p>
-<h1 id="future-work">Future work</h1>
-<p>We already alluded to the fact that this approach requires some serious thinking about moral epistemology.</p>
-<p>Furthermore, the bootstrapping process (which theories do we initially include?) is very important and demands further examination.</p>]]></summary>
+<p>A compelling alternative is to <a href="http://www.overcomingbias.com/2009/01/moral-uncertainty-towards-a-solution.html">retain our uncertainty and evaluate actions against a weighted parliament of ethical theories</a>. In our 80-20 scenario above, any action is evaluated against both theories. If utilitarianism marginally prefers action B to A while the categorical imperative heavily favors A over B, we do A (even though we are “mostly” utilitarian!).</p>
+<h2 id="moral-uncertainty-in-machines">Moral uncertainty in machines</h2>
+<p>The impression I have (admittedly, mostly from afar) is that AI alignment has mostly (implicitly) revolved around the “my favorite theory” approach. That is, people have been approaching the issue as deciding which single ethical theory they will encode in an agent. Until they’re certain they’ve decided upon the “one true theory” of ethics, all powerful agents are the stuff of nightmares. I think the parliamentary model improves on this situation.</p>
+<p>When encoding the parliamentary model in machines, <span class="noted">there’s good reason to avoid simply transferring our own intuitions and perspectives into the machine</span>.<a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> Instead, the parliament’s initial distribution should probably be set by a <span class="noted"><a href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution">maximum entropy distribution</a></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a> (i.e. each ethical theory starts with equal likelihood). Of course, we can’t leave it there. That would throw away valuable information about the fact of the matter (i.e. what evidence do we have bearing on the relative likelihood of each moral theory to be correct). An abhorrence for discarding information (that is, we objected to “forgetting” our uncertainty and acting as though we’re certain of our favored theory) is precisely what motivated us to choose the parliamentary approach in the first place.</p>
+<p>Instead, we will allow and expect our agent to perform <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayesian updates</a> to reweight the moral parliament. That is, in addition to any actions it can take in the world (e.g. an autonomous car turning left, a paperclip factory agent reconfiguring its supply chain. For lack of familiarity with a better term, we’ll call actions-in-the-world “interventions” henceforth), the agent also always has the option of performing ethical investigation (e.g. ). This supposes that we have a workable answer to the questions of <a href="https://plato.stanford.edu/entries/moral-epistemology/">moral epistemology</a> and thus a well-founded way to perform these updates. We’ll bracket the question of how exactly this can be done while noting that moral epistemology is at least a different hard problem to solve than the problem which AI alignment typically confronts.</p>
+<h3 id="necessity-of-agent-embedding">Necessity of agent embedding</h3>
+<p>The above sounds like a generic algorithm for ethical investigation. Why embed it in an agent rather than asking it to run “to completion” and using the result, or creating a <a href="https://www.lesswrong.com/posts/6SGqkCgHuNr7d4yJm/thoughts-on-the-singularity-institute-si">tool AI</a>? Under most plausible moral epistemes, I suspect running “to completion” would be <span class="noted">computationally intractable</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>. On the subject of tool AIs, I’ll leave it to <a href="https://www.gwern.net/Tool-AI">Why tool AIs want to be agent AIs</a> and note that foundational ethical investigation seems like a bad place to skimp on capability.</p>
+<h1 id="arbitrating-between-interventions-and-investigations">Arbitrating between interventions and investigations</h1>
+<p>How should ethical investigation be valued in the agent’s utility function? We must answer this question before our agent can make appropriate trade-offs between intervention and ethical investigation. Once we see the ethical investigation as an information-gathering task, the solution falls out naturally. We should use <a href="https://en.wikipedia.org/wiki/Value_of_information">value of information calculations</a> to value ethical investigation.</p>
+<p>Briefly, <span class="noted">value of information</span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a> is a well-founded way of quantifying our intuition that uncertainty has a cost. When our actions result in uncertain outcomes, we muddle through as best we can. But information that reduces the uncertainty associated with an action has a tangible value. It may actually cause us to change our actions and obtain better outcomes. If a decision maker would pay up to $X for this information, then we say it has a value of $X.</p>
+<p>So we’d expect our agent to perform ethical investigation only insofar as the information produced by that investigation might affect interventions under consideration (Hence the “lazy” in our title. In particular, we’re appealing to the concept of <a href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a>—values (both computational and ethical) ought to be computed only on an as needed basis instead of eagerly and preemptively.) and where the value of that information is greater than any currently available intervention.</p>
+<h1 id="claimed-benefits">Claimed benefits</h1>
+<h2 id="ai-arms-race">AI arms race</h2>
+<p>In an <a href="https://www.fhi.ox.ac.uk/wp-content/uploads/Racing-to-the-precipice-a-model-of-artificial-intelligence-development.pdf">AI arms race</a>, the naive approach to alignment (First, solve ethics. Then, develop AGI.) puts the most scrupulous developers at a disadvantage. Because the costs of scrupulosity are so high, we expect most developers to end up in the “unscrupulous” category. The lazy approach may offer a significant advantage here. Because the approach is conceptually straightforward, implementation could be relatively manageable. As such, asking all agent creators to include it is a more plausible request than demanding the cessation of all agent development. Furthermore, when an agent finds itself doing trivial actions of no moral import, it can remain fairly disinterested in ethics. Broad approximations of ethical truth suffice. This means agent creators working in certain fields can be fairly confident that the run time costs (e.g. agent performance overhead, constraints on agent actions, agent predictability) are minimal. Again, this makes ethical consideration cheaper.</p>
+<h2 id="ambiguity-alignment">Ambiguity alignment</h2>
+<p>All the moral conundrums that we humans confront are now moral conundrums for our agent as well. When it is faced with truly difficult and important moral decisions, rather than blithely running ahead, our agent will be prompted to pause and refine its ethical views. We can even imagine moral epistemes in which human intuition is a vital input so our agent would actively seek human advice precisely when we are most afraid of the interventions of alien intelligence.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>I hope to explore and explain this more later in its own post. <!-- TODO --><a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>Beyond just determining the weights of theories, which theories we include at all is crucially important. If omit the “one true theory” of ethics (thereby implicitly assigning it a credence of 0), tragedy looms. More on this in a later post. <!-- TODO --><a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>This demands further defense in some future post. <!-- TODO --><a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn4">
+<p>Again, more to come on this. <!-- TODO --><a href="#fnref4" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
 </entry>
 <entry>
     <title>The scarcity of cooperatives</title>
-    <link href="https://colehaus.github.io/ColEx/posts/cooperatives/" />
-    <id>https://colehaus.github.io/ColEx/posts/cooperatives/</id>
+    <link href="https://col-ex.org/posts/cooperatives/" />
+    <id>https://col-ex.org/posts/cooperatives/</id>
     <published>2015-04-05T00:00:00Z</published>
     <updated>2015-04-05T00:00:00Z</updated>
     <summary type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
@@ -73,7 +95,7 @@
 </dd>
 </dl>
 <p>A quick consequence of this model is that worker cooperatives and capital-managed firms will value expansions equally (assuming equal discount and bankruptcy rates) when</p>
-<p><img src="https://colehaus.github.io/ColEx/images/latex/3172975049388821268.png" title="\begin{align}
+<p><img src="https://www.col-ex.org/images/latex/3172975049388821268.png" title="\begin{align}
 \frac{AS}{1 - (1 - B)(1 - D)} &amp;= \frac{KP}{1 - (1 - B)(1 - D)} \\
 AS &amp;= KP \\
 A(GP - LP) &amp;= KP \\
@@ -135,8 +157,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </entry>
 <entry>
     <title>Graph of contents</title>
-    <link href="https://colehaus.github.io/ColEx/posts/graph-of-contents/" />
-    <id>https://colehaus.github.io/ColEx/posts/graph-of-contents/</id>
+    <link href="https://col-ex.org/posts/graph-of-contents/" />
+    <id>https://col-ex.org/posts/graph-of-contents/</id>
     <published>2015-03-28T00:00:00Z</published>
     <updated>2015-03-28T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>A <a href="https://en.wikipedia.org/wiki/Table_of_contents">table of contents</a> can provide a useful overview of a document’s content. However, because of its <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)">limited form</a>, some information about the structure of the document must be omitted.</p>
@@ -152,8 +174,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </entry>
 <entry>
     <title>Toward an alternative bibliometric</title>
-    <link href="https://colehaus.github.io/ColEx/posts/bibliometric/" />
-    <id>https://colehaus.github.io/ColEx/posts/bibliometric/</id>
+    <link href="https://col-ex.org/posts/bibliometric/" />
+    <id>https://col-ex.org/posts/bibliometric/</id>
     <published>2015-03-10T00:00:00Z</published>
     <updated>2015-03-10T00:00:00Z</updated>
     <summary type="html"><![CDATA[<h1 id="impact-factor">Impact factor</h1>
@@ -161,14 +183,14 @@ document.addEventListener("DOMContentLoaded", function() {
 <p>This is <a href="https://en.wikipedia.org/wiki/Campbell's_law">Campbell’s law</a> in action. Because average citation count isn’t what we actually value, when it becomes the metric by which decisions are made, it distorts academic research. In the rest of this post, I propose a bibliometric that measures the <a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">entropy reduction</a> of the <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">research graph</a>.</p>
 <p><!--more--></p>
 <h1 id="entropy-header">Entropy</h1>
-<p>Claude Shannon <a href="#bibliometric-map" id="entropy" class="arg-map">codified entropy</a> as <span class="math inline">\(H(X) = -\sum\limits_{i} P(x_i) \log_2 P(x_i)\)</span> where <span class="math inline">\(x_i\)</span> are the possible values of a discrete random variable <span class="math inline">\(X\)</span> <span class="citation" data-cites="shannon48">(Shannon 1948)</span><span class="citation" data-cites="cover12">(Cover and Thomas 2012)</span>. For example, the entropy of a 6-sided die is <img src="https://colehaus.github.io/ColEx/images/latex/906174370527848253.png" title="\begin{align}
+<p>Claude Shannon <a href="#bibliometric-map" id="entropy" class="arg-map">codified entropy</a> as <span class="math inline">\(H(X) = -\sum\limits_{i} P(x_i) \log_2 P(x_i)\)</span> where <span class="math inline">\(x_i\)</span> are the possible values of a discrete random variable <span class="math inline">\(X\)</span> <span class="citation" data-cites="shannon48">(Shannon 1948)</span><span class="citation" data-cites="cover12">(Cover and Thomas 2012)</span>. For example, the entropy of a 6-sided die is <img src="https://www.col-ex.org/images/latex/906174370527848253.png" title="\begin{align}
   H(D) &amp;= - P(⚀) \log_2 P(⚀) - P(⚁) \log_2 P(⚁) - P(⚂) \log_2 P(⚂) \\
        &amp; - P(⚃) \log_2 P(⚃) - P(⚄) \log_2 P(⚄) - P(⚅) \log_2 P(⚅) \\
        &amp;= -\left(6 \left(\frac{1}{6} \log_2 \frac{1}{6}\right)\right) \\
        &amp;= \log_2 6
 \end{align}" />.</p>
 <p>If we next learn that the die is weighted and can only roll even numbers, this changes the entropy (our uncertainty).</p>
-<p><img src="https://colehaus.github.io/ColEx/images/latex/-6310274088524152858.png" title="\begin{align}
+<p><img src="https://www.col-ex.org/images/latex/-6310274088524152858.png" title="\begin{align}
 H(D|\epsilon) &amp;= - P(⚁) \log_2 P(⚁) -
                    P(⚃) \log_2 P(⚃) -
                    P(⚅) \log_2 P(⚅) \\
@@ -180,7 +202,7 @@ H(D|\epsilon) &amp;= - P(⚁) \log_2 P(⚁) -
 <p>We can use these definitions to calculate the information provided by a research paper and assign an Infometric®™ score. We’ll start with a fairly classic example about cigarette smoking.</p>
 <h2 id="first-study">First study</h2>
 <p>Suppose <a href="#bibliometric-map" id="single" class="arg-map">we do a study</a> on whether, in the normal course of smoking, cigarette smoke is inhaled into the lungs (we’ll call this proposition <span class="math inline">\(A\)</span>). Prior to the study we use the (extremely) uninformative prior <span class="math inline">\(\cond{P}{A=t}{} = 0.5\)</span>. After the study (which we’ll call <span class="math inline">\(\alpha\)</span>) we perform a <a href="https://en.wikipedia.org/wiki/Bayes'_theorem">Bayesian update</a> and find that <span class="math inline">\(\cond{P}{A=t}{\alpha} = 0.8\)</span>. So our study has provided</p>
-<p><img src="https://colehaus.github.io/ColEx/images/latex/5273260164788045100.png" title="\begin{align}
+<p><img src="https://www.col-ex.org/images/latex/5273260164788045100.png" title="\begin{align}
 H(A) - \cond{H}{A}{\alpha} &amp;= -P(A=t)\log_2P(A=t) - P(A=f)\log_2P(A=f) \\
   &amp;+ \cond{P}{A=t}{\alpha}\log_2\cond{P}{A=t}{\alpha} \\
   &amp;+ \cond{P}{A=f}{\alpha}\log_2\cond{P}{A=f}{\alpha} \\
@@ -194,18 +216,18 @@ H(A) - \cond{H}{A}{\alpha} &amp;= -P(A=t)\log_2P(A=t) - P(A=f)\log_2P(A=f) \\
 <h2 id="second-study">Second study</h2>
 <p>Now, we wish to study whether smoking causes chronic bronchitis. Suppose the study we design pipes smoke directly into the lungs of experimental subjects. The validity of our conclusion (Smoking does (not) cause chronic bronchitis.) now depends on the truth of the claim that cigarette smoke is inhaled into the lungs. So this new study is dependent on the prior study and will cite it.</p>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/bibliometric/bronchitis-pre.svg" alt="We are using uninformative priors. ¶ (In this and subsequent graphs, we follow the conventions of ¶ Bayesian networks (i.e. a cited paper is the parent rather than the child—the arrow runs from rather than to the cited paper) rather than the conventions of citation graphs.)" width="300" height="300" /><figcaption>We are using uninformative priors. ¶ (In this and subsequent graphs, we follow the conventions of ¶ <a href="https://en.wikipedia.org/wiki/Bayesian_network">Bayesian networks</a> (i.e. a cited paper is the parent rather than the child—the arrow runs from rather than to the cited paper) rather than the conventions of <a href="https://en.wikipedia.org/wiki/Citation_graph">citation graphs</a>.)</figcaption>
+<img src="https://www.col-ex.org/images/bibliometric/bronchitis-pre.svg" alt="We are using uninformative priors. ¶ (In this and subsequent graphs, we follow the conventions of ¶ Bayesian networks (i.e. a cited paper is the parent rather than the child—the arrow runs from rather than to the cited paper) rather than the conventions of citation graphs.)" width="300" height="300" /><figcaption>We are using uninformative priors. ¶ (In this and subsequent graphs, we follow the conventions of ¶ <a href="https://en.wikipedia.org/wiki/Bayesian_network">Bayesian networks</a> (i.e. a cited paper is the parent rather than the child—the arrow runs from rather than to the cited paper) rather than the conventions of <a href="https://en.wikipedia.org/wiki/Citation_graph">citation graphs</a>.)</figcaption>
 </figure>
 <p>Now we carry out our study. It provides evidence that cigarette smoking does lead to bronchitis (conditional on the supposition that cigarette smoke is inhaled into the lungs). So we update our <span class="math inline">\(\cond{P}{B=t}{\beta}\)</span>. The entropy reduction from this study, considered in isolation, is <span class="math inline">\(H(A,B) - \cond{H}{A,B}{\beta} \approx 0.266\)</span>.</p>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/bibliometric/bronchitis-post.svg" alt="We have integrated data from the second study." width="300" height="300" /><figcaption>We have integrated data from the second study.</figcaption>
+<img src="https://www.col-ex.org/images/bibliometric/bronchitis-post.svg" alt="We have integrated data from the second study." width="300" height="300" /><figcaption>We have integrated data from the second study.</figcaption>
 </figure>
 <p>But what if we don’t consider it in isolation? First, we look for the total entropy reduction from both studies and find <span class="math inline">\(H(A,B) - \cond{H}{A,B}{\alpha,\beta} \approx 0.703\)</span>. <span class="noted">Note that this is not simply the sum of the isolated reductions.</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a></p>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/bibliometric/bronchitis-both.svg" alt="We have integrated data from both studies now." width="300" height="300" /><figcaption>We have integrated data from both studies now.</figcaption>
+<img src="https://www.col-ex.org/images/bibliometric/bronchitis-both.svg" alt="We have integrated data from both studies now." width="300" height="300" /><figcaption>We have integrated data from both studies now.</figcaption>
 </figure>
 <p>How do we apportion this gain into Infometric®™ scores then? We can decompose the aggregate gain into a sum like</p>
-<p><img src="https://colehaus.github.io/ColEx/images/latex/1681010744790707563.png" title="\begin{align}
+<p><img src="https://www.col-ex.org/images/latex/1681010744790707563.png" title="\begin{align}
 H(A,B) - \cond{H}{A,B}{\alpha,\beta} &amp;=
     \cond{H}{A,B}{\beta} - \cond{H}{A,B}{\alpha,\beta} \\
   &amp;+ H(A,B) - \cond{H}{A,B}{\beta}
@@ -216,10 +238,10 @@ H(A,B) - \cond{H}{A,B}{\alpha,\beta} &amp;=
 <h2 id="fourth-study">Fourth study</h2>
 <p>We’ll now jump to <a href="#bibliometric-map" id="four" class="arg-map">a fourth study</a> so we can examine a fuller set of interactions (i.e. multiples studies citing one study, one study citing multiple studies).</p>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/bibliometric/four.svg" width="500" height="500" />
+<img src="https://www.col-ex.org/images/bibliometric/four.svg" width="500" height="500" />
 </figure>
 <p>The decomposition</p>
-<p><img src="https://colehaus.github.io/ColEx/images/latex/-4051225597349968610.png" title="\begin{align}
+<p><img src="https://www.col-ex.org/images/latex/-4051225597349968610.png" title="\begin{align}
 H(A,B,C,D) - \cond{H}{A,B,C,D}{\alpha,\beta,\kappa,\delta} &amp;=
     \cond{H}{A,B,C,D}{\beta,\kappa,\delta} -
     \cond{H}{A,B,C,D}{\alpha,\beta,\kappa,\delta} \\
@@ -353,8 +375,8 @@ H(A,B,C,D) - \cond{H}{A,B,C,D}{\alpha,\beta,\kappa,\delta} &amp;=
 </entry>
 <entry>
     <title>On casual futurism</title>
-    <link href="https://colehaus.github.io/ColEx/posts/futurism/" />
-    <id>https://colehaus.github.io/ColEx/posts/futurism/</id>
+    <link href="https://col-ex.org/posts/futurism/" />
+    <id>https://col-ex.org/posts/futurism/</id>
     <published>2015-02-17T00:00:00Z</published>
     <updated>2015-02-17T00:00:00Z</updated>
     <summary type="html"><![CDATA[<blockquote>
@@ -469,8 +491,8 @@ The human race, to which so many of my readers belong, has been playing at child
 </entry>
 <entry>
     <title>Choose your own exposition</title>
-    <link href="https://colehaus.github.io/ColEx/posts/choose/" />
-    <id>https://colehaus.github.io/ColEx/posts/choose/</id>
+    <link href="https://col-ex.org/posts/choose/" />
+    <id>https://col-ex.org/posts/choose/</id>
     <published>2015-02-01T00:00:00Z</published>
     <updated>2015-02-01T00:00:00Z</updated>
     <summary type="html"><![CDATA[<menu id="state" type="popup">
@@ -501,13 +523,13 @@ First: each person is to have an equal right to the most extensive scheme of equ
 <p>The common element here is that these tools allow for more dialogic text. Instead of fixing one canonical version of the text, we can now, in a limited way, respond to the reader’s preferences.</p>
 <p>An alternate view is that these tools allow us to express the structure of our argument with greater fidelity. Traditional text enforces linearity. Structural aspects must be described within the text itself, mixing levels (i.e. we have text which provides the content of our argument interspersed with text which describes the structure of our argument). A standard grammar here could increase both parsimony and efficacy. Viewing the structure of an argument as a <a href="https://en.wikipedia.org/wiki/Directed_graph">directed graph</a> permits a visualization of the tools described above:</p>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/choose/and.svg" alt="A graph in which each of B, C, and D are necessary to establish E. (In the language of (Kelley 1988), an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text." /><figcaption>A graph in which each of B, C, and D are necessary to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text.</figcaption>
+<img src="https://www.col-ex.org/images/choose/and.svg" alt="A graph in which each of B, C, and D are necessary to establish E. (In the language of (Kelley 1988), an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text." /><figcaption>A graph in which each of B, C, and D are necessary to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, an additive argument.) However, they have no dependence relation amongst themselves so may be reordered freely in the text.</figcaption>
 </figure>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/choose/or.svg" alt="A graph in which any of B, C, or D suffices to establish E. (In the language of (Kelley 1988), a disjunct argument.) Any one of them may be presented in the text." /><figcaption>A graph in which any of B, C, or D suffices to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, a disjunct argument.) Any one of them may be presented in the text.</figcaption>
+<img src="https://www.col-ex.org/images/choose/or.svg" alt="A graph in which any of B, C, or D suffices to establish E. (In the language of (Kelley 1988), a disjunct argument.) Any one of them may be presented in the text." /><figcaption>A graph in which any of B, C, or D suffices to establish E. (In the language of <span class="citation" data-cites="kelley88">(Kelley 1988)</span>, a disjunct argument.) Any one of them may be presented in the text.</figcaption>
 </figure>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/choose/sidenote.svg" id="sidenote-img" />
+<img src="https://www.col-ex.org/images/choose/sidenote.svg" id="sidenote-img" />
 </figure>
 <h1 id="future-work">Future work</h1>
 <ul>
@@ -551,8 +573,8 @@ First: each person is to have an equal right to the most extensive scheme of equ
 </entry>
 <entry>
     <title>A quorum alternative</title>
-    <link href="https://colehaus.github.io/ColEx/posts/quorum/" />
-    <id>https://colehaus.github.io/ColEx/posts/quorum/</id>
+    <link href="https://col-ex.org/posts/quorum/" />
+    <id>https://col-ex.org/posts/quorum/</id>
     <published>2015-01-28T00:00:00Z</published>
     <updated>2015-01-28T00:00:00Z</updated>
     <summary type="html"><![CDATA[<menu id="sample-size" type="popup">
@@ -598,7 +620,7 @@ Before the decision is finalized, however, an observant member notices that the 
 <p>How do we construct these credible bounds? We derive them from the <a href="https://en.wikipedia.org/wiki/Posterior_probability">posterior probability distribution</a> created using Bayesian parameter estimation <span class="citation" data-cites="kruschke13">(Kruschke 2013)</span>. To construct this posterior, we start by specifying <span class="noted">a model for the distribution of paired differences</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. Because the difference can only take on values in the interval <span class="math inline">\(\left(-1, 1\right)\)</span>, the (<a href="https://en.wikipedia.org/wiki/Location-scale_family">transformed</a> from <span class="math inline">\((0, 1)\)</span> to <span class="math inline">\((-1, 1)\)</span>) <span class="noted"><a href="https://en.wikipedia.org/wiki/Beta_distribution">beta distribution</a> is a sensible choice</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>. To get a sense of the beta distribution, you can look at the calculator <a href="http://keisan.casio.com/has10/SpecExec.cgi?id=system/2006/1180573226">here</a>.</p>
 <p>Now that we have a model of differences, we must choose <a href="https://en.wikipedia.org/wiki/Prior_probability">prior probability distributions</a> for its parameters. Note that <span class="math inline">\(\alpha = \beta = 1\)</span> collapses the beta distribution to the uniform distribution. Because the uniform distribution is the <a href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution">maximum entropy distribution</a> on a supported interval, we should choose prior distributions of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> with means of <span class="math inline">\(1\)</span> <span class="citation" data-cites="sivia06">(Sivia and Skilling 2006)</span>. The maximum entropy distribution with mean <span class="math inline">\(1\)</span> supported on <span class="math inline">\(\left(0, \infty\right)\)</span> is the exponential distribution with <span class="math inline">\(\lambda = 1\)</span>. So the prior on each of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> is <span class="math inline">\(Exp(1)\)</span>. All of this is diagrammatically represented in the accompanying figure.</p>
 <figure>
-<img src="https://colehaus.github.io/ColEx/images/quorum/distro.png" alt="We model the vote differences with a beta distribution. That beta distribution’s parameters have priors of \(Exp(1)\)." /><figcaption>We model the vote differences with a beta distribution. That beta distribution’s parameters have priors of <span class="math inline">\(Exp(1)\)</span>.</figcaption>
+<img src="https://www.col-ex.org/images/quorum/distro.png" alt="We model the vote differences with a beta distribution. That beta distribution’s parameters have priors of \(Exp(1)\)." /><figcaption>We model the vote differences with a beta distribution. That beta distribution’s parameters have priors of <span class="math inline">\(Exp(1)\)</span>.</figcaption>
 </figure>
 <p>Now that we have our data and prior probability distributions, <a href="https://en.wikipedia.org/wiki/Bayes'_theorem">Bayes’ theorem</a> allows us to reallocate probability mass to form the posterior probability distributions. We generate numerical estimates of the posterior probability distributions using adaptive Metropolis-within-Gibbs <span class="citation" data-cites="roberts09">(Roberts and Rosenthal 2009)</span> <span class="citation" data-cites="sumsar-best">(Bååth 2012)</span>. These posteriors on the parameters of beta allow us to straightforwardly calculate the posterior on the mean of the difference using the formula for the mean of a beta distribution.</p>
 </div>
@@ -717,14 +739,14 @@ Before the decision is finalized, however, an observant member notices that the 
 </entry>
 <entry>
     <title>About</title>
-    <link href="https://colehaus.github.io/ColEx/posts/about/" />
-    <id>https://colehaus.github.io/ColEx/posts/about/</id>
+    <link href="https://col-ex.org/posts/about/" />
+    <id>https://col-ex.org/posts/about/</id>
     <published>2015-01-18T00:00:00Z</published>
     <updated>2015-01-18T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>This is a single-author, half-heartedly pseudonymous (the pseudonym being Cole) blog.</p>
 <p><!--more--></p>
 <p>You can contact me at <a href="mailto:colehaus@cryptolab.net">colehaus@cryptolab.net</a>. <span class="noted">If you have any comments, please message me and I’ll try to incorporate and attribute them.</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> If I’ve referenced a resource that you can’t access, but would like to, please message me.</p>
-<p>You can find the source for this blog at <a href="https://github.com/colehaus/ColEx">GitHub</a>. Where possible, code is licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a>. Text is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<p>You can find the source for this blog at <a href="https://github.com/colehaus/colex">GitHub</a>. Where possible, code is licensed under the <a href="https://www.gnu.org/licenses/agpl-3.0.html">AGPLv3</a>. Text is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 <section class="footnotes">
 <hr />
 <ol>
