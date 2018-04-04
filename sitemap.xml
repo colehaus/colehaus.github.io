@@ -29,6 +29,13 @@
     </url>
 
     <url>
+        <loc>https://col-ex.org/posts/assorted-links-i/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://col-ex.org/posts/lazy-ai-safety/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -149,6 +156,13 @@
 
     <url>
         <loc>https://col-ex.org/tag/information-theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://col-ex.org/tag/links/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
