@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Innocuous and invidious majoritarian tyrannies—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Innocuous and invidious majoritarian tyrannies</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+</ul></nav>
+
+  <span class="date">Published on <time datetime="2018-04-10">April 10, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>‘Tyranny of the majority’ is a powerful invocation when discussing trade-offs and policy. Using that power well demands careful attention to the meaning of the phrase. There are, in fact, a couple different kinds of majoritarian tyrannies. Invidious tyrannies occur when the majority’s whims overrule the minority’s vital interests to detriment of society as a whole. Innocuous tyrannies occur when the majority’s whims overrule the minority to the benefit of society.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>Gratuitous math</summary><p>I resort to mathematical notation where it's probably not strictly required.</p></details></li>
+      
+        <li><details><summary>Obvious</summary><p>The idea that not all majoritarian tyrannies are bad certainly isn't groundbreaking.</p></details></li>
+      
+        <li><details><summary>Spherical cow</summary><p>Extremely reductive model</p></details></li>
+      
+    </ul></aside>
+  
+
+  <div class="macros">
+<p><span class="math display">\[
+\newcommand{\norm}[1]{\lvert #1 \rvert}
+\]</span></p>
+</div>
+<blockquote class="epigraph">
+Democracy is two wolves and a lamb voting on what to eat for lunch.
+</blockquote>
+<p>It seems that, <span class="noted">in common use</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, the term ‘tyranny of the majority’ conflates two importantly distinct concepts.</p>
+<!--more-->
+<h3 id="invidious">Invidious</h3>
+<p>The first sense in which one can mean tyranny of the majority is the one highlighted in the epigraph. In this form, some passing whim of the majority overrules and outweighs the critical interest of the minority. The wolves’ purely gustatory (pretending that wolves aren’t obligate carnivores) interest in the lamb trumps the lamb’s literally vital interest in living. Real world examples in this category include: <span class="noted"><a href="https://en.wikipedia.org/wiki/Jim_Crow_laws">Jim Crow laws</a></span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>; <a href="https://en.wikipedia.org/wiki/Same-sex_marriage">marriage for same-sex couples</a>; often <a href="https://en.wikipedia.org/wiki/NIMBY">Nimbyism</a>.</p>
+<h3 id="a-shift-in-perspective">A shift in perspective</h3>
+<p>Tyranny of the majority is often framed as a majority violating the political and moral rights of the minority. Once we permit ourselves the ontological spookiness that is ‘rights’, it seems only fair to allow ourselves <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a> and <a href="https://en.wikipedia.org/wiki/Social_choice_theory#Interpersonal_utility_comparison">interpersonal utility comparison</a>. With these tools, we can reframe and make precise the tyranny of the majority described above.</p>
+<p>Invidious tyranny of the majority occurs when the weak preferences of many outweigh the strong preferences of the few such that <span class="noted">the actual outcome doesn’t maximize utility/satisfaction of preferences</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>For example, the lamb gets -10 utils from being eaten. Each wolf gets 2 utils from eating the lamb. The aggregate net utility of eating the lamb is -6, but their are two votes for and only 1 against. On the other hand, if the wolves were fanatical gourmands that each got 15 utils from eating the lamb, <span class="noted">we wouldn’t call their feast a tyranny of the majority</span><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
+<p>In symbols,</p>
+<p><span class="math display">\[
+d_{v} = \text{argmax}_{d \in D} \sum_{\theta \in \Theta} v(\theta, d) \\
+d_{u} = \text{argmax}_{d \in D} \sum_{\theta \in \Theta} u(\theta, d)
+\]</span></p>
+<p>where <span class="math inline">\(D\)</span> is the set of all possible outcomes/policies, <span class="math inline">\(\Theta\)</span> is the set of all voters, <span class="math inline">\(v(\theta, d)\)</span> is either <span class="noted"><span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span></span><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> based on whether <span class="math inline">\(\theta\)</span> votes for <span class="math inline">\(d\)</span>, and <span class="math inline">\(u(\theta, d)\)</span> is between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> based on how much utility <span class="math inline">\(\theta\)</span> gets from <span class="math inline">\(d\)</span>. Tyranny of the majority occurs when <span class="math inline">\(d_{v}\)</span> and <span class="math inline">\(d_{u}\)</span> disagree even for honest voters (i.e. those that don’t try to pursue any strategy but just vote their preferences in the most naive way possible).</p>
+<h3 id="innocuous">Innocuous</h3>
+<p>From this perspective, it becomes clearer what in innocuous majoritarian tyranny is. It’s when individuals in the majority care about the outcome less than the minority, but honoring the majority’s preferences still maximizes aggregate utility. (Presumably/hopefully, no one cries “tyranny” when the majority both has more numbers <em>and</em> cares more.)</p>
+<p>If you have 10 wolves, each of whom get 2 utils from eating the original lamb, the aggregate utility of eating the lamb is 10 (<span class="math inline">\(10 * 2 - 10 = 10\)</span>) versus 0 for abstaining. Thus, eating maximizes overall utility despite the fact that individual preference of each wolf is weaker than the lamb’s.</p>
+<p>In symbols, an innocuous tyranny is when <span class="math inline">\(d_{v} = d_{u}\)</span>, but <span class="math inline">\(\sum_{\theta \in \Theta_{M}} \frac{u(\theta, d_{v})}{\norm{\Theta_{M}}} &lt; \sum_{\theta \in \Theta_{m}} \frac{u(\theta, d')}{\norm{\Theta_{m}}}\)</span> where <span class="math inline">\(\Theta_{M}\)</span> is the set of voters in the majority, <span class="math inline">\(\Theta_{m}\)</span> is the set of voters in the minority, and <span class="math inline">\(d'\)</span> is the minority’s preferred outcome.</p>
+<p>Obviously, calling this situation innocuous is tendentious and I’m not about run out and slaughter lambs based on this logic. The logic outlined here ignores classic objects to utilitarianism like the ‘separateness of persons’. But I think utilitarians at least would be on board with majority rule in ‘innocuous’ scenario whereas I think zero (?) theories of the good would support the invidious tyranny of the majority.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>To summarize, we call it a ‘tyranny of the majority’ when the minority has stronger preferences than the majority which aren’t honored. This tyranny is invidious if allowing the majority to overrule the minority doesn’t maximize aggregate utility. It’s innocuous if allowing the majority to overrule the minority does maximize aggregate utility (i.e. the majority is big enough).</p>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-chin2008">
+<p>Chin, Gabriel J, and Randy Wagner. 2008. “The Tyranny of the Minority: Jim Crow and the Counter-Majoritarian Difficulty.” <em>Harv. CR-CLL Rev.</em> 43. HeinOnline: 65. <a href="http://www.law.harvard.edu/students/orgs/crcl/vol43_1/65-126.pdf" class="uri">http://www.law.harvard.edu/students/orgs/crcl/vol43_1/65-126.pdf</a>.</p>
+</div>
+<div id="ref-detocqueville">
+<p>De Tocqueville, Alexis. 1835. <em>Democracy in America</em>. <a href="https://www.gutenberg.org/files/815/815-h/815-h.htm" class="uri">https://www.gutenberg.org/files/815/815-h/815-h.htm</a>.</p>
+</div>
+<div id="ref-mill1869">
+<p>Mill, John Stuart. 1869. <em>On Liberty</em>. Longmans, Green, Reader, Dyer. <a href="https://www.gutenberg.org/files/34901/34901-h/34901-h.htm" class="uri">https://www.gutenberg.org/files/34901/34901-h/34901-h.htm</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>A brief scan of <span class="citation" data-cites="mill1869">(Mill 1869)</span> and <span class="citation" data-cites="detocqueville">(De Tocqueville 1835)</span> seems to confirm that they don’t plainly emphasize the distinction which follows.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Maybe. <span class="citation" data-cites="chin2008">(Chin and Wagner 2008)</span> points out that African Americans were an absolute majority in several southern states. It was only via extralegal means that they were disenfranchised.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Mechanism design calls this property (your decision rule always chooses the outcome that maximizes utility) <em><dfn>efficiency</dfn></em>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>At least in this framework where we throw out the concept of rights and instead look only to preferences and utility. Of course, some would reject this framework and say that the violation of the lamb’s rights means that this scenario still constitutes a majoritarian tyranny.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>In a typical “one person, one vote” setup. We could easily generalize this to other voting systems.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>

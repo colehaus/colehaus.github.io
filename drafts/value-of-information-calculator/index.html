@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Tagged biographical—ColEx</title>
+    <title>Value of information calculator—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -34,72 +34,100 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    </head>
+    
+  <link rel="stylesheet" type="text/css" href="../../css/value-of-information-calculator.css" />
+
+</head>
 <body>
 <div id="underlay">
-<main>
-  <h2>Tagged biographical</h2>
-  <dl class="posts">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Value of information calculator</h2>
   
-    <dt><a href="../../posts/about/">About</a></dt>
-    <dd><nav class="tags"><ul>
+  <div class="metadata">
+  <nav class="tags"><ul>
     
-      <li><a href="../../tag/meta/">meta</a></li>
+      <li><a href="../../tag/value%20of%20information/">value of information</a></li>
     
-      <li><a href="../../tag/biographical/">biographical</a></li>
+      <li><a href="../../tag/decision%20theory/">decision theory</a></li>
     
 </ul></nav>
-</dd>
-    <dd class="date"><time datetime="January 18, 2015">January 18, 2015</time></dd>
+
+  <span class="date">Published on <time datetime="2018-04-14">April 14, 2018</time>.</span>
   
-</dl>
+  </div>
+  
+  
 
-</main>
+  
 
-<header>
-  <h1>Collectively Exhaustive</h1><span>A weblog</span>
-  <hr />
-</header>
+  <h3 id="input">Input</h3>
+<form id="voi">
+<textarea class="voi-tree" id="voi-text">
+- outcome:
+    finding: coin is double heads
+    choices:
+    - choice: bet heads
+      results:
+      - outcome: {label: heads, value: 1}
+        prob: 1
+      - outcome: {label: tails, value: 0}
+        prob: 0
+    - choice: bet tails
+      results:
+      - outcome: {label: heads, value: 0}
+        prob: 1
+      - outcome: {label: tails, value: 1}
+        prob: 0
+  prob: 0.5
+- outcome:
+    finding: coin is double tails
+    choices:
+    - choice: bet heads
+      results:
+      - outcome: {label: heads, value: 1}
+        prob: 0
+      - outcome: {label: tails, value: 0}
+        prob: 1
+    - choice: bet tails
+      results:
+      - outcome: {label: heads, value: 0}
+        prob: 0
+      - outcome: {label: tails, value: 1}
+        prob: 1
+  prob: 0.5
+</textarea>
+</form>
+<h3 id="results">Results</h3>
+<output form="voi" for="voi-text">
+<div id="voi-error">
 
-<div class="main-menu top">
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
+</div>
+<div id="result-numbers">
+<p><span class="label">Expected value with information</span><span id="expected-value"></span><br /> <span class="label">Expected value without information</span><span id="forgotten-expected-value"></span><br /> <span class="label">Expected value of information</span><span id="voi-result"></span><br /></p>
+</div>
+<figure>
+<figcaption>
+Scenario without information
+</figcaption>
+<pre class="voi-tree" id="forgotten"></pre>
+</figure>
+</output>
+</article></main>
 
-  <hr />
 </div>
 
-<div class="main-menu bottom">
-  <hr />
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
 
-</div>
 
-</div>
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+<script defer type="text/javascript" src="../../js/value-of-information-calculator.js"></script>
+
 
   </body>
 </html>

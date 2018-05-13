@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Tagged biographical—ColEx</title>
+    <title>Build your own Von Neumann–Morgenstern utility function—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -34,72 +34,74 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    </head>
+    
+  <link rel="stylesheet" type="text/css" href="../../css/construct-vnm-utility-function.css" />
+
+</head>
 <body>
 <div id="underlay">
-<main>
-  <h2>Tagged biographical</h2>
-  <dl class="posts">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Build your own Von Neumann–Morgenstern utility function</h2>
   
-    <dt><a href="../../posts/about/">About</a></dt>
-    <dd><nav class="tags"><ul>
+  <div class="metadata">
+  <nav class="tags"><ul>
     
-      <li><a href="../../tag/meta/">meta</a></li>
+      <li><a href="../../tag/decision%20theory/">decision theory</a></li>
     
-      <li><a href="../../tag/biographical/">biographical</a></li>
+      <li><a href="../../tag/economics/">economics</a></li>
     
 </ul></nav>
-</dd>
-    <dd class="date"><time datetime="January 18, 2015">January 18, 2015</time></dd>
+
+  <span class="date">Published on <time datetime="2018-04-20">April 20, 2018</time>.</span>
   
-</dl>
+  </div>
+  
+  
 
-</main>
+  
 
-<header>
-  <h1>Collectively Exhaustive</h1><span>A weblog</span>
-  <hr />
-</header>
-
-<div class="main-menu top">
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
-
-  <hr />
+  <form>
+<p>
+Which things would you like to make a utility function out of?
+</p>
+<textarea id="goods">
+Apple
+Banana
+Carrot
+</textarea>
+<p>
+Which do you prefer?
+</p>
+<div class="scenario">
+<p>Receive <span id="first-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Banana</span> lottery ticket(s)</span><br /><br />or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Carrot</span> lottery ticket(s)</span><br /><br /> <span id="indifferent" class="lottery">Indifferent</span></p>
 </div>
+</form>
+<output>
+<figure id="function-visualization">
+<figcaption>
+Estimated value of goods relative to favorite good
+</figcaption>
+<div id="function-chart">
 
-<div class="main-menu bottom">
-  <hr />
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
+</div>
+</figure>
+</output>
+</article></main>
 
 </div>
 
-</div>
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+<script defer type="text/javascript" src="../../js/construct-vnm-utility-function.js"></script>
+
 
   </body>
 </html>

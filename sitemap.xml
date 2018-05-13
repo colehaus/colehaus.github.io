@@ -29,6 +29,20 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/assorted-links-ii/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/innocuous-invidious-majoritarian-tyrannies/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/assorted-links-i/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -240,6 +254,20 @@
 
     <url>
         <loc>https://www.col-ex.org/page/1/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/2/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/3/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

@@ -1,0 +1,1 @@
+.voi-tree{line-height:1;font-family:monospace;font-size:smaller;width:100%}figure{border-radius:4px;background-color:#b5bbe6;margin-top:1ex;margin-bottom:1ex;padding:1ex}pre.voi-tree{font-size:smaller;overflow-y:hidden}textarea.voi-tree{height:60vh}.label::after{content:": "}#voi-error::before{content:"Errors: "}#voi-error{border-radius:4px;padding:1ex;background-color:#e6abd0}
