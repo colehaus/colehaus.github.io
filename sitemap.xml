@@ -29,6 +29,41 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/how-do-we-read/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/utilitarian-egalitarianism/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/utilitarian-egalitarianism-notebook/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/notebooks/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/meta-monday/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/assorted-links-ii/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -36,7 +71,21 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/pareto-examples/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/innocuous-invidious-majoritarian-tyrannies/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/self-flagellation-friday/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -169,6 +218,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/inequality/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/information-theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -190,7 +246,28 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/mechanism%20design/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/meta%20monday/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/meta/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/metrics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -204,7 +281,21 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/notebook/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/publishing/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/reading/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -219,6 +310,27 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/science/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/self-flagellation%20friday/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/social%20choice/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/social%20welfare/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -268,6 +380,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/3/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/4/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

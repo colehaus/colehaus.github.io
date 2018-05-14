@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Most of us read with our eyes <em>and</em> our brains—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Most of us read with our eyes <em>and</em> our brains</h2>
+  
+    <h3 id="article-subtitle">Regurgitating "So Much to Read, So Little Time: How Do We Read, and Can Speed Reading Help?"</h3>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/meta%20monday/">meta monday</a></li>
+    
+      <li><a href="../../tag/reading/">reading</a></li>
+    
+</ul></nav>
+
+  <span class="date">Published on <time datetime="2018-04-23">April 23, 2018</time>.</span>
+  
+  </div>
+  
+  
+
+  
+
+  <p>I spend a lot of time reading. But I’m not actually reading very quickly. The typical educated adult reads at about 200 to 400 <abbr title="words per minute">wpm</abbr> (for context, a speaking rate of 150 to 160 <abbr title="words per minute">wpm</abbr> is comfortable). Given that, it seems <em>possible</em> that a better understanding of reading could help me spend that time better. So I read <span class="citation" data-cites="rayner2016">(Rayner et al. 2016)</span>. Spoiler: It didn’t transform the way I read (and reaffirmed that speed reading is rather less than advocates claim), but it was definitely interesting. The regurgitation that follows focuses more on the article’s description of the ‘how’ of reading and less on the debunking of speed reading.</p>
+<p><a href="#summary" class="no-home">Summary</a></p>
+<h3 id="speech-writing">Speech &gt; writing</h3>
+<p>Speech is prior to writing. Spoken language is thought to have originated around 100,000 years ago; written language 5,000 years ago. All human societies have spoken language; not so for writing. No natural language is purely written. Children learn to speak and interpret language without explicit instruction; not so for reading. Thus, we reach the claim that reading and writing is an “optional accessory that must be painstakingly bolted on” <span class="citation" data-cites="mcguinness1997">(McGuinness 1997)</span>.</p>
+<p>After this bolting is complete, many of our reading processes are still mediated by our more fundamental spoken language processes—even during silent reading:</p>
+<ul>
+<li><p>For example, when researches asked silent readers to rapidly decide whether words belonged to a category, homophones produced incorrect “yes”es 19% of the time (whether “meet” belongs in the category food) compared to the base rate for orthographically similar words of 3% (<span class="noted">whether “melt” belongs in the category food</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>). The implication here is that we have difficulty translating directly from visual input to units of meaning and this visual-meaning connection is often mediated by the auditory representation.</p></li>
+<li><p>In a different study, researchers asked readers to repeat an irrelevant word or phrase aloud while reading in an effort to impede any <a href="https://en.wikipedia.org/wiki/Subvocalization">subvocalization</a>. These readers performed worse on a subsequent test of comprehension than those asked to repeat a sequence of finger taps.</p></li>
+</ul>
+<p>So our brains aren’t great at reading. But neither are our eyes.</p>
+<!--more-->
+<h3 id="our-eyes-are-terrible-and-wonderful">Our eyes are terrible and wonderful</h3>
+<h4 id="acuity">Acuity</h4>
+<p>Our visual field is divided into three concentric circles. Most central is the <a href="https://en.wikipedia.org/wiki/Fovea_centralis">fovea</a> which extends from the absolute center to the circle 1° of visual angle away from it; this is about the size of your thumb held at arm’s length. The next circle is the <a href="https://en.wikipedia.org/wiki/Parafovea">parafovea</a> which extends from 1° to 5° from the center of vision. The periphery encompasses anything beyond this.</p>
+<figure>
+<img src="../../images/how-do-we-read/fovea.jpg" alt="Zones of the visual field" /><figcaption>Zones of the visual field</figcaption>
+</figure>
+<p>When a word is presented so briefly that readers have no time to move their eyes, accuracy is high when the word is centered in the fovea. But accuracy drops off rapidly till it’s no better than chance at around 3° from the center of vision.</p>
+<p>Part of the story here is that <a href="https://en.wikipedia.org/wiki/Cone_cell">cones</a> (the detail-oriented, bright light photoreceptors) are concentrated in the fovea while <a href="https://en.wikipedia.org/wiki/Rod_cell">rods</a> (sensitive primarily to brightness and motion in dim light) increase in concentration with distance from the fovea. Yet more interesting, inputs from rods are pooled before being relayed to the brain. That is, if half the rods in a group are fully lit and half are in total darkness, the brain will receive a signal indicating middling illumination. Cones, in contrast, would signal a light/dark boundary here because each has an unmediated connection to the brain.</p>
+<h4 id="movement">Movement</h4>
+<p>Because our region of focus is so limited, readers must necessarily move the focus of their eyes along text via <a href="https://en.wikipedia.org/wiki/Saccade">saccades</a> (short, ballistic movements of both eyes)</p>
+<figure>
+<embed src="../../images/how-do-we-read/saccade.webm" /><figcaption>Saccades</figcaption>
+</figure>
+<p>Each saccade lasts roughly 20 to 35 ms and spans (in English) about 7 letters.</p>
+<p>“Return sweeps” (long saccades moving your eye to the beginning of the next line) are often imperfect but are quickly corrected with a follow-up saccade.</p>
+<h4 id="fixation">Fixation</h4>
+<p>Between saccades, the eyes are fairly stable. These stable periods are called fixations and last about 250 ms. However, studies have found that reading behavior and comprehension is unaffected when each word disappears 60ms after the beginning of fixation (that is, our eyes continue to stare at now blank space). The remaining portion of the 250ms appears to be devoted to some essential higher-level processing which most occur before we can proceed to the next word.</p>
+<p>For many words, adult readers <span class="noted">recognize all the letters simultaneously</span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. This is limited by visual acuity as we discussed above—the word identification span is only about 7 characters to the right of the fixation point. Thus, long words require at least a saccade and multiple fixations.</p>
+<h3 id="from-squiggles-to-meaning">From squiggles to meaning</h3>
+<p><span class="noted">Words are the basic unit of meaning in language</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. So they are the first step in building from raw visual input to real communication. In fact, studies indicate that word-identification ability is the best determinant of reading speed (though skilled readers also have shorter fixations, longer saccades and fewer <span class="noted">regressions</span><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>)</p>
+<p>In turn, the best determinant of word-identification ability is <span class="noted">the frequency with which the reader has seen the word</span><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Common words like ‘house’ are more quickly recognized than uncommon words like ‘abode’. This word-frequency effect has been measured in lexical decision tasks (Is the string of characters a word or not?), naming tasks (Read a word aloud as quickly as possible), and categorization tasks (Does the given word belong in a semantic category?).</p>
+<p>Some words (<a href="https://en.wikipedia.org/wiki/Homograph">homographs</a>) <span class="noted">can’t possibly be assigned a unique meaning without context. Sentence context helps disambiguate these words.</span><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> Interestingly, contexts that make the next word very predictable often lead to the word being skipped entirely (i.e. the saccade moves over the word entirely and it receives no fixation). This happens about 30% of the time.</p>
+<p>(This all begins to sound very <a href="https://en.wikipedia.org/wiki/Bayesian_inference">Bayesian</a>.)</p>
+<p>Readers slow down a bit at the end of sentences and phrases. So there is some yet higher-level processing that occurs even after words have been been translated into units of meaning.</p>
+<h3 id="speed-reading">Speed reading</h3>
+<p>Much of the technology (e.g. Spritz) and teaching around speed reading supposes that the problem is just about getting your eyes through the words as fast as possible. This isn’t accurate. The limiting factors for reading speed seem to be primarily cognitive.</p>
+<p>Rapid serial visual presentation (RSVP) precludes regressing to previous words, but this is a normal and healthy part of reading. Preventing it impairs comprehension. Additionally, having a preview of words to come (impossible in the RSVP setup) in the parafovea somewhat increases reading speed. All you get in exchange for these losses is the omission of saccades. But saccades aren’t wasted time, relevant cognition can continue while the eyes are in transit.</p>
+<p>Speed reading advocates often suggest eliminating subvocalization. As discussed earlier, this is extremely difficult given the primacy of spoken language and impairs comprehension.</p>
+<p>They also often advocate for “taking in” larger chunks of text—whole lines, paragraphs or even pages of text at once. As the discussion of the visual acuity highlights this is impossible.</p>
+<h3 id="reading-better">Reading better</h3>
+<p>As mentioned earlier, more exposure to a word makes its subsequent recognition faster. Thus more reading will improve the all-important speed of word identification. More reading will also improve your predictions of upcoming words and improve your ability to synthesize and extrapolate from missing information (The authors suggest that this is part of what’s happening in speed readers. Intelligent people that spend a lot of time reading are good at filling in the gaps to compensate for their low comprehension at the purely linguistic level.)</p>
+<p>The authors also highlight that skimming is sometimes appropriate and merited. When this is the case, skimmers should pay special attention to headings, paragraph structure and key words. Paying equal attention to all content is a poor use of limited time.</p>
+<p>If you find the modesty of these suggestions discouraging, I quite understand. But, the authors conclude that, as in so many things, there ain’t no such thing as a free lunch. There’s a fairly inescapable trade-off between speed and accuracy in reading.</p>
+<h3 id="summary">Summary</h3>
+<p>Speech is more fundamental than writing. Reading is mediated by spoken language in surprising ways.</p>
+<p>Our eyes have very limited acuity. As such, we must saccade from one word to the next. In between saccades, we fixate. In each fixation, a word is most often recognized as a gestalt unit. Our ability to recognize words depends on both local context (other words in the sentence) and a larger context (our history of reading and our knowledge of the world).</p>
+<p>Speed reading doesn’t work.</p>
+<p>The only credible suggestion for becoming a faster reader is: Read more.</p>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-mcguinness1997">
+<p>McGuinness, Diane. 1997. <em>Why Our Children Can’t Read, and What We Can Do About It: A Scientific Revolution in Reading</em>. Simon; Schuster.</p>
+</div>
+<div id="ref-rayner2016">
+<p>Rayner, Keith, Elizabeth R Schotter, Michael EJ Masson, Mary C Potter, and Rebecca Treiman. 2016. “So Much to Read, so Little Time: How Do We Read, and Can Speed Reading Help?” <em>Psychological Science in the Public Interest</em> 17 (1). SAGE Publications Sage CA: Los Angeles, CA: 4–34.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Though I’d argue that a homograph (“melt” as verb vs <a href="https://en.wikipedia.org/wiki/Melt_sandwich">melt sandwhich</a>) is a confusing choice of example.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>The <a href="https://en.wikipedia.org/wiki/Stroop_effect">Stroop effect</a> is an easy example of the automaticity of this process in practiced readers.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Technically, <a href="https://en.wikipedia.org/wiki/Morpheme">morphemes</a>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>A regression is a backwards move in the text to a previous word. Skilled readers do this 10-15% of the time.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>It’s unclear to me at the moment whether they mean absolute or relative frequency. If I look exclusively at unusual words, does that only improve my ability to recognize them rapidly? Or does it also degrade my ability to rapidly recognize common words? By distorting my <a href="https://en.wikipedia.org/wiki/Prior_probability">prior</a>?<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Thus we progress from unigrams to <a href="https://en.wikipedia.org/wiki/N-gram"><em>n</em>-grams</a>.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>
