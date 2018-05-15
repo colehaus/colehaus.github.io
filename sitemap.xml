@@ -29,6 +29,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/putting-out-gig-economy-i/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/how-do-we-read/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -197,6 +204,20 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/current%20events/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/economic%20history/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/economics/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -226,6 +247,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/information-theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/labor/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

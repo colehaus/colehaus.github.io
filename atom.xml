@@ -8,13 +8,76 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-04-23T00:00:00Z</updated>
+    <updated>2018-05-04T00:00:00Z</updated>
     <entry>
+    <title>Putting-out with smartphones I</title>
+    <link href="https://www.col-ex.org/posts/putting-out-gig-economy-i/" />
+    <id>https://www.col-ex.org/posts/putting-out-gig-economy-i/</id>
+    <published>2018-05-04T00:00:00Z</published>
+    <updated>2018-05-04T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<blockquote>
+[S]carcity, to a certain degree, promoted industry, and that the manufacturer (worker) who can subsist on three days work will be idle and drunken the remainder of the week… The poor in the manufacturing counties will never work any more time in general than is necessary just to live and support their weekly debauches… We can fairly aver that a reduction of wages in the woolen manufacture would be a national blessing and advantage, and no real injury to the poor. <span class="attribution"><span class="citation" data-cites="smith1765">(Smith 1765)</span></span>
+</blockquote>
+<h1 id="putting-out-system">Putting-out system</h1>
+<p>Between the <a href="https://en.wikipedia.org/wiki/Guild#Fall_of_the_guilds">guild system</a> and the full steam <a href="https://en.wikipedia.org/wiki/Industrial_Revolution">Industrial Revolution</a>, England briefly used the <a href="https://en.wikipedia.org/wiki/Putting-out_system">putting-out system</a>. Under this system, finished goods were assembled not in factories or dedicated workshops, but component-by-component in a multitude of homes and cottages.</p>
+<p>For example (illustrative hypothetical based on <a href="https://en.wikipedia.org/wiki/Textile_manufacturing_by_pre-industrial_methods">Wikipedia</a>): One worker would trundle their hand cart to the market, drop off cleaned wool in exchange for a piece rate payment, and the merchant would dispatch them with a new load of wool. That merchant would take this cleaned wool and give it to another independent worker for <a href="https://en.wikipedia.org/wiki/Carding">carding</a>. The carder would take the cleaned wool home, the family would process it in their home, and then return to the market in a couple weeks to give the merchant carded wool. This staged process would repeat with a separate family taking home loads of inputs and returning outputs for each subsequent stage in the process—spinning, plying, weaving, etc. When the final task was complete, the merchant would take the finished goods to a market or store and sell them to consumers. In this way, the task was broken down into small components and coordinated by the merchants—somewhat like a (spatially and temporally) disaggregated assembly line.</p>
+<p><!--more--></p>
+<h2 id="transition">Transition</h2>
+<p>But this system didn’t last forever. Early factories soon arose and by 1850, piece work was all but dead. <span class="citation" data-cites="marglin1974">(Marglin 1974)</span> The factory had won out. To what effect?</p>
+<p><span class="citation" data-cites="mokyr2001">(Mokyr 2001)</span> highlights a number of detriments unique to factory work:</p>
+<dl>
+<dt>Commuting</dt>
+<dd>Walking to work (the only widely accessible form of transit then available) reduces time available for leisure and so reduces welfare in ways that don’t show up in the most obvious measures (e.g. GDP).
+</dd>
+<dt>Leisure-income choice</dt>
+<dd>In the putting out system, households (this unjustly ignores intra-household decision-making) could choose how much time they wanted to devote to work in very fine-grained increments. With the factory system, work became “all or nothing”. For many, this reduced choice would have reduced welfare. I’ve often heard even modern coworkers wish for an option to work only, say, three days a week.
+</dd>
+<dt>Multitasking</dt>
+<dd>The shift to factory work eliminated the opportunity for multitasking. The most important example of multitasking available in the putting-out system was looking after children while performing other work.
+</dd>
+<dt>Working environment</dt>
+<dd>Early factories were nasty, brutish and liable to shorten the lives of their workers.
+</dd>
+</dl>
+<p>If we listen to <span class="citation" data-cites="marglin1974">(Marglin 1974)</span> tell it, factories were a disaster for workers and to the benefit of only the capitalists:</p>
+<blockquote>
+[T]he origin and success of the factory lay not in technological superiority, but in the substitution of the capitalist’s for the worker’s control of the work process and the quantity of output, in the change in the workman’s choice from one of how much to work and produce […] to one of whether or not to work at all, which of course is hardly much of a choice.
+</blockquote>
+<p>I’ll take a moment to explicitly note this for the ensuing discussion: An avowed leftist publishing in the <em>Review of radical political economics</em> comes out strongly in favor of putting-out over factory work. I suspect many other leftists would have similar sympathies.</p>
+<h1 id="the-gig-economy">The gig economy</h1>
+<p>I hope the earlier description of the putting-out system echoed in your brain. To me, it sounds a great deal like a technologically limited gig economy. In both systems, workers have considerable freedom over how much work they perform, but not which tasks. Their tasks are assigned by a central clearinghouse which also mediates their relationship with the final consumer. Unlike freelancers, workers have relationships with only one or a few buyers (<a href="https://en.wikipedia.org/wiki/Monopsony">monopsony</a>/ <a href="https://en.wikipedia.org/wiki/Oligopsony">oligopsony</a>). Unlike modern full-time employees, in both systems, workers have very limited and almost purely monetary interactions with their employer.</p>
+<p>If you accept the aptness of this analogy, we’re left with a confusion. Why was the putting-out system considered better than full-time, centralized employment while the gig economy is often considered worse? Especially from the leftist perspective?</p>
+<div class="skippable">
+<h2 id="gig-hate">Gig hate</h2>
+<p>If you doubt that leftists look dimly on the gig economy, look no further:</p>
+<ul>
+<li><a href="http://www.wired.co.uk/article/gig-economy-dpd-courier-taylor-review">The gig economy is being fuelled by exploitation, not innovation</a></li>
+<li><a href="https://www.theguardian.com/commentisfree/2018/apr/26/gig-economy-flexibility-exploitation-record-employment-low-wages-zero-hours">Some praise our gig economy flexibility. I call it exploitation</a></li>
+<li><a href="http://observer.com/2016/09/the-gig-economy-brave-new-world-and-pure-exploitation">The Gig Economy: Brave New World and Pure Exploitation</a></li>
+<li><a href="https://www.irishtimes.com/opinion/gig-economy-is-the-mass-exploitation-of-millennials-1.3379569">Gig economy is the mass exploitation of millennials</a></li>
+</ul>
+</div>
+<h1 id="reconciliation">Reconciliation</h1>
+<p>We have three ways to reconcile the apparent conflict. People are wrong about the putting-out system, people are wrong about the gig economy, or the two systems are crucially different. But that will have to wait for another day.</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-marglin1974">
+<p>Marglin, Stephen A. 1974. “What Do Bosses Do? The Origins and Functions of Hierarchy in Capitalist Production.” <em>Review of Radical Political Economics</em> 6 (2). Sage Publications Sage CA: Thousand Oaks, CA: 60–112. <a href="http://scholar.harvard.edu/files/marglin/files/review_of_radical_political_economics-1974-marglin-60-112_0.pdf" class="uri uri">http://scholar.harvard.edu/files/marglin/files/review_of_radical_political_economics-1974-marglin-60-112_0.pdf</a>.</p>
+</div>
+<div id="ref-mokyr2001">
+<p>Mokyr, Joel. 2001. “The Rise and Fall of the Factory System: Technology, Firms, and Households Since the Industrial Revolution.” In <em>Carnegie-Rochester Conference Series on Public Policy</em>, 55:1–45. 1. Elsevier. <a href="https://cpb-us-e1.wpmucdn.com/sites.northwestern.edu/dist/3/1222/files/2016/06/The-Rise-and-Fall-of-the-Factory-System-Nov-2000-1dey3ic.pdf" class="uri uri">https://cpb-us-e1.wpmucdn.com/sites.northwestern.edu/dist/3/1222/files/2016/06/The-Rise-and-Fall-of-the-Factory-System-Nov-2000-1dey3ic.pdf</a>.</p>
+</div>
+<div id="ref-smith1765">
+<p>Smith, J. 1765. <em>Memoirs of Wool: Woolen Manufacture, and Trade, (Particularly in England) from the Earliest to the Present Times; with Occasional Notes, Dissertations, and Reflections. By John Smith, Ll. B. In Two Volumes. …</em> B. Law.</p>
+</div>
+</div>]]></summary>
+</entry>
+<entry>
     <title>Most of us read with our eyes <em>and</em> our brains</title>
     <link href="https://www.col-ex.org/posts/how-do-we-read/" />
     <id>https://www.col-ex.org/posts/how-do-we-read/</id>
-    <published>2018-04-23T00:00:00Z</published>
-    <updated>2018-04-23T00:00:00Z</updated>
+    <published>2018-04-30T00:00:00Z</published>
+    <updated>2018-04-30T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I spend a lot of time reading. But I’m not actually reading very quickly. The typical educated adult reads at about 200 to 400 <abbr title="words per minute">wpm</abbr> (for context, a speaking rate of 150 to 160 <abbr title="words per minute">wpm</abbr> is comfortable). Given that, it seems <em>possible</em> that a better understanding of reading could help me spend that time better. So I read <span class="citation" data-cites="rayner2016">(Rayner et al. 2016)</span>. Spoiler: It didn’t transform the way I read (and reaffirmed that speed reading is rather less than advocates claim), but it was definitely interesting. The regurgitation that follows focuses more on the article’s description of the ‘how’ of reading and less on the debunking of speed reading.</p>
 <p><a href="#summary" class="no-home">Summary</a></p>
 <h1 id="speech-writing">Speech &gt; writing</h1>
@@ -74,7 +137,7 @@
 <p>McGuinness, Diane. 1997. <em>Why Our Children Can’t Read, and What We Can Do About It: A Scientific Revolution in Reading</em>. Simon; Schuster.</p>
 </div>
 <div id="ref-rayner2016">
-<p>Rayner, Keith, Elizabeth R Schotter, Michael EJ Masson, Mary C Potter, and Rebecca Treiman. 2016. “So Much to Read, so Little Time: How Do We Read, and Can Speed Reading Help?” <em>Psychological Science in the Public Interest</em> 17 (1). SAGE Publications Sage CA: Los Angeles, CA: 4–34.</p>
+<p>Rayner, Keith, Elizabeth R Schotter, Michael EJ Masson, Mary C Potter, and Rebecca Treiman. 2016. “So Much to Read, so Little Time: How Do We Read, and Can Speed Reading Help?” <em>Psychological Science in the Public Interest</em> 17 (1). SAGE Publications Sage CA: Los Angeles, CA: 4–34. <a href="http://journals.sagepub.com/doi/full/10.1177/1529100615623267" class="uri uri">http://journals.sagepub.com/doi/full/10.1177/1529100615623267</a>.</p>
 </div>
 </div>
 <section class="footnotes">
@@ -105,8 +168,8 @@
     <title>A visual intuition for the instrumental argument for equality</title>
     <link href="https://www.col-ex.org/posts/utilitarian-egalitarianism/" />
     <id>https://www.col-ex.org/posts/utilitarian-egalitarianism/</id>
-    <published>2018-04-20T00:00:00Z</published>
-    <updated>2018-04-20T00:00:00Z</updated>
+    <published>2018-04-26T00:00:00Z</published>
+    <updated>2018-04-26T00:00:00Z</updated>
     <summary type="html"><![CDATA[<h1 id="introduction">Introduction</h1>
 <h2 id="equality">Equality</h2>
 <p><span class="noted">Our moral intuition</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> easily suggests that equality has moral value. The world in which <a href="https://en.wikipedia.org/wiki/Robinson_Crusoe_economy">Robinson Crusoe and Friday</a> share coconuts seems vastly better than the world in which Crusoe sits on his coconut throne and doles out the barest sustenance to Friday. It is easy to leap from this intuition to the conclusion that equality is an <a href="https://en.wikipedia.org/wiki/Instrumental_and_intrinsic_value">intrinsic</a> good. But, in this post, let’s make a stop at the proposition that equality is instead only an instrumental good.</p>
@@ -191,8 +254,8 @@
     <title>Notebook–A visual intuition for the instrumental argument for equality</title>
     <link href="https://www.col-ex.org/posts/utilitarian-egalitarianism-notebook/" />
     <id>https://www.col-ex.org/posts/utilitarian-egalitarianism-notebook/</id>
-    <published>2018-04-19T00:00:00Z</published>
-    <updated>2018-04-19T00:00:00Z</updated>
+    <published>2018-04-25T00:00:00Z</published>
+    <updated>2018-04-25T00:00:00Z</updated>
     <summary type="html"><![CDATA[<!--more-->
 
 <div class="sourceCode" id="cb1" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">var</span> nerd <span class="op">=</span> <span class="at">require</span>(<span class="st">'nerdamer/all'</span>)</a>
@@ -398,8 +461,8 @@
     <title>Notebooks</title>
     <link href="https://www.col-ex.org/posts/notebooks/" />
     <id>https://www.col-ex.org/posts/notebooks/</id>
-    <published>2018-04-18T00:00:00Z</published>
-    <updated>2018-04-18T00:00:00Z</updated>
+    <published>2018-04-24T00:00:00Z</published>
+    <updated>2018-04-24T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>Anything tagged <code>notebook</code> is safely skippable by the vast majority of readers. Such posts are a <span class="noted">rendering of code and date explorations performed</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> in the service of later posts. I include them for the sake of completeness/transparency/intelligibility.</p>
 <p><!--more--></p>
 <section class="footnotes">
@@ -1242,7 +1305,7 @@ H(A,B,C,D) - \cond{H}{A,B,C,D}{\alpha,\beta,\kappa,\delta} &amp;=
     <published>2015-02-17T00:00:00Z</published>
     <updated>2015-02-17T00:00:00Z</updated>
     <summary type="html"><![CDATA[<blockquote>
-The human race, to which so many of my readers belong, has been playing at children’s games from the beginning…. And one of the games to which it is most attached is called “Keep to-morrow dark,” …. The players listen very carefully and respectfully to all that the clever men have to say about what is to happen in the next generation. The players then wait until all the clever men are dead, and bury them nicely. They then go and do something else. That is all. For a race of simple tastes, however, it is great fun. <span class="citation" data-cites="chesterton04">(Chesterton 1904)</span>
+The human race, to which so many of my readers belong, has been playing at children’s games from the beginning…. And one of the games to which it is most attached is called “Keep to-morrow dark,” …. The players listen very carefully and respectfully to all that the clever men have to say about what is to happen in the next generation. The players then wait until all the clever men are dead, and bury them nicely. They then go and do something else. That is all. For a race of simple tastes, however, it is great fun. <span class="attribution"><span class="citation" data-cites="chesterton04">(Chesterton 1904)</span></span>
 </blockquote>
 <div class="conversation">
 <p>“How likely are we to have <a href="https://theinfosphere.org/Holophonor">holophonors</a> by 3002?”</p>
@@ -1373,7 +1436,7 @@ The human race, to which so many of my readers belong, has been playing at child
 <div class="open">
 <p>The state is a “framework … needed to simplify the application of the two principles of justice”:</p>
 <blockquote>
-First: each person is to have an equal right to the most extensive scheme of equal basic liberties compatible with a similar scheme of liberties for others. Second: social and economic inequalities are to be arranged so that they are both (a) reasonably expected to be to everyone’s advantage, and (b) attached to positions and offices open to all. <span class="citation" data-cites="rawls09">(Rawls 2009)</span>
+First: each person is to have an equal right to the most extensive scheme of equal basic liberties compatible with a similar scheme of liberties for others. Second: social and economic inequalities are to be arranged so that they are both (a) reasonably expected to be to everyone’s advantage, and (b) attached to positions and offices open to all. <span class="attribution"><span class="citation" data-cites="rawls09">(Rawls 2009)</span></span>
 </blockquote>
 <p>(these principles justified by the <a href="http://plato.stanford.edu/entries/original-position/">original position</a>.)</p>
 </div>
@@ -1456,7 +1519,7 @@ Before the decision is finalized, however, an observant member notices that the 
 <p><!--more--></p>
 <h1 id="quorum">Quorum</h1>
 <blockquote>
-<a href="#quorum-map" id="quorum-def" class="arg-map">The minimum number of members who must be present at the meetings</a> of a deliberative assembly for business to be validly transacted is the <em>quorum</em> of the assembly. The requirement of a quorum is a protection against totally unrepresentative action in the name of the body by an unduly small number of persons. <span class="citation" data-cites="ronr">(Robert, Honemann, and Balch 2011)</span>
+<a href="#quorum-map" id="quorum-def" class="arg-map">The minimum number of members who must be present at the meetings</a> of a deliberative assembly for business to be validly transacted is the <em>quorum</em> of the assembly. The requirement of a quorum is a protection against totally unrepresentative action in the name of the body by an unduly small number of persons. <span class="attribution"><span class="citation" data-cites="ronr">(Robert, Honemann, and Balch 2011)</span></span>
 </blockquote>
 <p>So quorum is a proxy for representativeness. But as the examples demonstrate, it’s, at best, a loose proxy. Sometimes (as in the <a href="#example1">first example</a>) quorum is too demanding—it forbids a decision when the votes endorse one. On other occasions (as in the <a href="#example2">second example</a>), quorum is too lax—it declares representativeness when there can be no certainty of it.</p>
 <p>Is there an alternative then? How do we determine if a vote is representative? Statistics!</p>
