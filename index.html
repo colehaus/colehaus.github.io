@@ -48,6 +48,105 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/construct-vnm-utility-function/">Standalone–Build your own von Neumann–Morgenstern utility function</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/decision%20theory/">decision theory</a></li>
+    
+      <li><a href="./tag/economics/">economics</a></li>
+    
+</ul></nav>
+
+        <span class="date">Published on <time datetime="May 14, 2018">May 14, 2018</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>Standalone version of <a href="./posts/construct-vnm-utility-function-explained/">previous post</a> for convenience.</p></div>
+       
+
+        <form>
+<p>
+Which things would you like to make a utility function out of?
+</p>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
+        <h2><a href="./posts/construct-vnm-utility-function-explained/">Build your own von Neumann–Morgenstern utility function</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/decision%20theory/">decision theory</a></li>
+    
+      <li><a href="./tag/economics/">economics</a></li>
+    
+</ul></nav>
+
+        <span class="date">Published on <time datetime="May 13, 2018">May 13, 2018</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>The von Neumann–Morgenstern utility theorem lets us turn an ordinal utility function into a cardinal utility function. Here, we have an interactive widget that actually constructs a utility function from a series of questions using the theorem.</p></div>
+       
+
+        <h3 id="von-neumannmorgenstern-utility-theorem">von Neumann–Morgenstern utility theorem</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Morgenstern_utility_theorem">von Neumann–Morgenstern utility theorem</a> says that, “under certain axioms of rational behavior, a decision-maker faced with risky (probabilistic) outcomes of different choices will behave as if he or she is maximizing the expected value of some function defined over the potential outcomes at some specified point in the future”. But the somewhat sloppy way I like to think of it is this: If a person has merely <a href="https://en.wikipedia.org/wiki/Ordinal_utility">ordinal preferences</a> (e.g. I prefer an apple to a banana but can’t or won’t quantify the magnitude of that preference. The preceding information alone isn’t enough to conclude how I’d feel about one apple vs. two bananas.) and reasons well under uncertainty, we can transform those ordinal preferences into a <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility function</a> (e.g. I like apples exactly twice as much as bananas and would be indifferent between an apple and two bananas (ignoring diminishing marginal utility for the same of exposition).).</p>
+<p>This transformation is often useful because a cardinal utility function is much richer and more informative than an ordinal utility function. The extra information is useful, for example, in sidestepping <a href="https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem">Arrow’s impossibility theorem</a> (which says that it’s impossible to have a good voting system if you only ask people for their ordering of candidates).</p>
+<h3 id="interactive-vnm">Interactive VNM</h3>
+<p>The standard descriptions of the mechanism of the VNM utility theorem may be a little opaque. But because the theorem is <a href="https://en.wikipedia.org/wiki/Constructive_proof">constructive</a>, we can actually give people a feel for it by putting them ‘inside’ the mechanism and showing them the result. That’s what we attempt here.</p>
+<p>In the first text area, enter a list of goods (each on a separate line) for which you’d like to generate a utility function. It starts with a few sample goods, but you’re free to add, remove or otherwise alter these.</p>
+<p>Once you’ve decided upon the goods you’re interested in, you can proceed to the next step. Here, you’ll be presented with a series of lotteries. In each lottery, you have to decide whether you prefer <span class="math inline">\(x\)</span> lottery tickets for one good over <span class="math inline">\(y\)</span> lottery tickets for the other good, or if you’re indifferent. If your lottery ticket is drawn, you win whatever good is on the ticket. You can register your answer as to which set of tickets you prefer by clicking on one of the three blue boxes.</p>
+<p>For example, if you mildly prefer bananas to carrots, you’d click on the banana box when presented with one lottery ticket for each. A <span class="math inline">\(\frac{1}{n}\)</span> chance of a banana is better than a <span class="math inline">\(\frac{1}{n}\)</span> chance of a carrot, by your lights (<span class="math inline">\(n \geq 2\)</span>). On the other hand (because your preference was only mild), you’d click on the carrot box if offered 100 carrot tickets vs. 1 banana ticket. A <span class="math inline">\(\frac{100}{n}\)</span> chance of a carrot is better than a <span class="math inline">\(\frac{1}{n}\)</span> chance of a banana (<span class="math inline">\(n \geq 101\)</span>).</p>
+<p>After you’ve repeated this process enough, we can deduce what your favorite good of all the listed goods is. With this as a <a href="https://en.wikipedia.org/wiki/Num%C3%A9raire">numéraire</a>, we can start to visualize your utility function and do so with a chart that appears at the bottom. But, of course, we still have uncertainty about the relative value of these goods. Based on the questions you answer, we know upper and lower bounds for your value (a carrot is better than <span class="math inline">\(\frac{1}{100}\)</span> banana but worse than <span class="math inline">\(\frac{1}{1}\)</span> banana). Over time, by answering more questions, we can refine these intervals until they’re arbitrarily small.</p>
+<p>Try it out!</p>
+<hr />
+<form>
+<p>
+Which things would you like to make a utility function out of?
+</p>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
+        <h2><a href="./posts/pareto-partial-order/">Pareto improvement as partial order</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/economics/">economics</a></li>
+    
+      <li><a href="./tag/metrics/">metrics</a></li>
+    
+</ul></nav>
+
+        <span class="date">Published on <time datetime="May  7, 2018">May  7, 2018</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>We use the concept of Pareto improvement to motivate and illustrate partial and total orders.</p></div>
+       
+
+        <p>We covered the notion of <a href="https://en.wikipedia.org/wiki/Pareto_efficiency">Pareto improvement</a> in the <a href="./posts/pareto-examples/">preceding post</a>. I briefly alluded to the fact that it’s a strict <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>. Let’s explore that a bit more.</p>
+<h3 id="partial-order">Partial order</h3>
+<p>A strict partial order is a <a href="https://en.wikipedia.org/wiki/Binary_relation">binary relation</a> that is irreflexive (no element precedes itself), and transitive. Pareto improvement satisfies both of these criteria:</p>
+<dl>
+<dt>Irreflexive: <span class="math inline">\(\neg (A \prec A)\)</span></dt>
+<dd>No scenario is a Pareto improvement over itself because no one strictly prefers it (person 1 doesn’t prefer scenario A to scenario A), trivially.
+</dd>
+<dt>Transitive: <span class="math inline">\(A \prec B, B \prec C \Rightarrow A \prec C\)</span></dt>
+<dd>If arbitrary scenario B is a Pareto improvement over arbitrary scenario A and arbitrary scenario C is a Pareto improvement over scenario B, then scenario C is a Pareto improvement over scenario A. In other words, if no one is worse off in scenario B than scenario A and no one is worse off in scenario C than scenario B, then, clearly, no one is worse off in scenario three than scenario A. And if at least one person is better off in scenario B than scenario A and at least one person is better off in scenario C than scenario B, then, clearly, at least one person is better off in scenario C than scenario A.
+</dd>
+</dl>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/putting-out-gig-economy-i/">Putting-out with smartphones I</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -162,242 +261,6 @@ if (/Trident/.test(navigator.userAgent)) {
         
 
     </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/notebooks/">Notebooks</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/notebook/">notebook</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 24, 2018">April 24, 2018</time>.</span>
-       </div>
-
-       
-
-        <p>Anything tagged <code>notebook</code> is safely skippable by the vast majority of readers. Such posts are a <span class="noted">rendering of code and date explorations performed</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> in the service of later posts. I include them for the sake of completeness/transparency/intelligibility.</p>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/meta-monday/">Meta Monday</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/meta%20monday/">meta monday</a></li>
-    
-      <li><a href="./tag/meta/">meta</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 16, 2018">April 16, 2018</time>.</span>
-       </div>
-
-       
-
-        <p>There are lots of things that I do habitually. I probably do some of them badly. It seems worthwhile to occasionally re-examine these things, learn about them, and try to do them better.</p>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/assorted-links-ii/">Assorted links II</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/links/">links</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 15, 2018">April 15, 2018</time>.</span>
-       </div>
-
-       
-
-        <ol type="1">
-<li><p><a href="http://bostonreview.net/class-inequality/dani-rodrik-rescuing-economics-neoliberalism">Rescuing Economics from Neoliberalism</a></p>
-<p>Reductive summary of claims: It’s not that the core principles of economic theory are wrong. The problem comes when we apply those principles with insufficient imagination.</p>
-<blockquote>
-“But isn’t economics a science, and aren’t you one of its most distinguished practitioners? Even though you do not know much about our economy, surely there are some general theories and prescriptions you can share with us to guide our economic policies and reforms.”
-</blockquote>
-<blockquote>
-So [the visiting economist] begins. The efficiency with which an economy’s resources are allocated is a critical determinant of the economy’s performance, he says. Efficiency, in turn, requires aligning the incentives of households and businesses with social costs and benefits. The incentives faced by entrepreneurs, investors, and producers are particularly important when it comes to economic growth. Growth needs a system of property rights and contract enforcement that will ensure those who invest can retain the returns on their investments. And the economy must be open to ideas and innovations from the rest of the world.
-</blockquote>
-<blockquote>
-By the time the economist stops, it appears as if he has laid out a full-fledged neoliberal agenda. A critic in the audience will have heard all the code words: efficiency, incentives, property rights, sound money, fiscal prudence. Yet the universal principles that the economist describes are in fact quite open-ended. … And therein lies the central conceit, and the fatal flaw, of neoliberalism: the belief that first-order economic principles map onto a unique set of policies, approximated by a Thatcher–Reagan-style agenda.
-</blockquote></li>
-<li><p><a href="https://mxgm.org/2012/07/07/the-jackson-plan-a-struggle-for-self-determination-participatory-democracy-and-economic-justice/">The Jackson plan: a struggle for self-determination, participatory democracy, and economic justice</a></p>
-<blockquote>
-The three fundamental programmatic components are:
-<ul>
-<li>Building People’s Assemblies</li>
-<li>Building a Network of Progressive Political Candidates</li>
-<li>Building a broad based Solidarity Economy</li>
-</ul>
-</blockquote>
-<p>Cf. <a href="https://www.ssc.wisc.edu/~wright/ERU.htm">Envisioning Real Utopias</a></p></li>
-<li><p><a href="ftp://repec.iza.org/RePEc/Discussionpaper/dp11345.pdf">The Effect of the H-1B Quota on the Employment and Selection of Foreign-Born Labor</a></p>
-<blockquote>
-The annual quota on new H-1B issuances fell from 195,000 to 65,000 for employees of most firms in fiscal year 2004. … Using a triple difference approach, this paper demonstrates that cap restrictions significantly reduced the employment of new H-1B workers in for-profit firms relative to what would have occurred in an unconstrained environment. Employment of similar natives in for-profit firms did not change, consistent with a low degree of substitutability between H-1B and native workers.
-</blockquote></li>
-<li><p><a href="https://research.google.com/semantris/">Tetris with words</a></p>
-<p>Now you too can feel a visceral frustration at opaque, brittle ML algorithms. Recent lowlights include “von Braun” not matching “rockets” until the third try.</p>
-<p>In related news, <a href="https://www.reddit.com/r/teslamotors/comments/8a0jfh/autopilot_barrier_lust_201812/">autonomous cars driving into highway barriers</a>, <video style="width:100%;margin-top:0.5ex;" controls="true" src="https://v.redd.it/n6iukmpsw3q01/DASH_2_4_M"></video></p></li>
-<li><p><a href="http://www.ctbuh.org/TallBuildings/FeaturedTallBuildings/tabid/1736/language/en-US/Default.aspx">The Council on Tall Buildings and Urban Habitat’s Featured Tall Buildings</a></p>
-<p>Keep the Internet weird.</p></li>
-</ol>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/pareto-examples/">Some things which are and aren't Pareto optimal</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/economics/">economics</a></li>
-    
-      <li><a href="./tag/metrics/">metrics</a></li>
-    
-      <li><a href="./tag/self-flagellation%20friday/">self-flagellation friday</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 13, 2018">April 13, 2018</time>.</span>
-       </div>
-
-       
-
-        <h3 id="definition-and-context">Definition and context</h3>
-<p>Briefly, a scenario (<span class="noted">canonically, a distribution of resources across individuals</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>) is <a href="https://en.wikipedia.org/wiki/Pareto_efficiency">Pareto optimal</a> in a set of scenarios if no other scenario is weakly preferred by <em>all</em> individuals (to be more precise, scenario A is a Pareto improvement over scenario B if no individual prefers scenario B to scenario A and at least one individual prefers scenario A). An immediate consequence of this definition is that Pareto improvement is a strict <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>. That is, in opposition to a <a href="https://en.wikipedia.org/wiki/Total_order">total order</a>, not all pairs of scenarios can be ranked; sometimes we can only throw up our hands and say, “I don’t know which is better. They both count as Pareto optimal.”</p>
-<p><span class="noted">Economists, policy makers and others like the tools of Pareto optimality and improvement</span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> because they allow us to make some claims about the societal ranking of outcomes using only individual rankings of outcomes as input. That is, Pareto optimal is a <a href="https://plato.stanford.edu/entries/thick-ethical-concepts/">thin</a> concept which does not rely on the analyst’s moral intuition to make any controversial moral claims or tradeoffs. We expect all non-sadists to agree that a Pareto improvement is a moral improvement while we expect some to disagree with the <a href="https://en.wikipedia.org/wiki/Justice_as_Fairness#Difference_principle">Difference Principle</a> or with Parfit’s <a href="https://plato.stanford.edu/entries/identity-ethics/#IdeNorEth">impersonal ethics</a>.</p>
-<h3 id="sets-of-scenarios-without-pareto-improvements">Sets of scenarios without Pareto improvements</h3>
-<table>
-<thead>
-<tr>
-<th>
-Scenario
-</th>
-<th>
-Person A
-</th>
-<th>
-Person B
-</th>
-</tr>
-<tr>
-<th>
-</th>
-<th>
-no. widgets possessed
-</th>
-<th>
-no. widgets possessed
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-1
-</td>
-<td>
-0
-</td>
-<td>
-100
-</td>
-</tr>
-<tr>
-<td>
-2
-</td>
-<td>
-1
-</td>
-<td>
-99
-</td>
-</tr>
-<tr>
-<td>
-3
-</td>
-<td>
-45
-</td>
-<td>
-55
-</td>
-</tr>
-<tr>
-<td>
-4
-</td>
-<td>
-50
-</td>
-<td>
-50
-</td>
-</tr>
-</tbody>
-</table>
-<div class="skippable">
-<ul>
-<li>Scenario 1 isn’t a Pareto improvement over scenarios 2–4 because person A has fewer goods in scenario 1. (We assume that people prefer more goods to fewer.)</li>
-<li>Scenario 2 isn’t a Pareto improvement over scenarios 3 or 4 because person A has fewer goods in scenario 2. It’s not a Pareto improvement over scenario 1 because person B has fewer goods in scenario 2.</li>
-<li>Scenario 3 isn’t a Pareto improvement over scenario 4 because person A has fewer goods in scenario 3. It’s not a Pareto improvement over scenario 1 or 2 because person B has fewer goods in scenario 3.</li>
-<li>Scenario 4 isn’t a Pareto improvement over scenarios 1–3 because person B has fewer goods in scenario 4.</li>
-</ul>
-</div>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/innocuous-invidious-majoritarian-tyrannies/">Innocuous and invidious majoritarian tyrannies</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/social%20choice/">social choice</a></li>
-    
-      <li><a href="./tag/mechanism%20design/">mechanism design</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 10, 2018">April 10, 2018</time>.</span>
-       </div>
-
-       
-         <div class="abstract"><p>‘Tyranny of the majority’ is a powerful invocation when discussing trade-offs and policy. Using that power well demands careful attention to the meaning of the phrase. There are, in fact, a couple different kinds of majoritarian tyrannies. Invidious tyrannies occur when the majority’s whims overrule the minority’s vital interests to detriment of society as a whole. Innocuous tyrannies occur when the majority’s whims overrule the minority to the benefit of society.</p></div>
-       
-
-        <div class="macros">
-<p><span class="math display">\[
-\newcommand{\norm}[1]{\lvert #1 \rvert}
-\]</span></p>
-</div>
-<blockquote class="epigraph">
-Democracy is two wolves and a lamb voting on what to eat for lunch.
-</blockquote>
-<p>It seems that, <span class="noted">in common use</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, the term ‘tyranny of the majority’ conflates two importantly distinct concepts.</p>
-<h3 id="invidious">Invidious</h3>
-<p>The first sense in which one can mean tyranny of the majority is the one highlighted in the epigraph. In this form, some passing whim of the majority overrules and outweighs the critical interest of the minority. The wolves’ purely gustatory (pretending that wolves aren’t obligate carnivores) interest in the lamb trumps the lamb’s literally vital interest in living. Real world examples in this category include: <span class="noted"><a href="https://en.wikipedia.org/wiki/Jim_Crow_laws">Jim Crow laws</a></span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>; <a href="https://en.wikipedia.org/wiki/Same-sex_marriage">marriage for same-sex couples</a>; often <a href="https://en.wikipedia.org/wiki/NIMBY">Nimbyism</a>.</p>
-<h3 id="a-shift-in-perspective">A shift in perspective</h3>
-<p>Tyranny of the majority is often framed as a majority violating the political and moral rights of the minority. Once we permit ourselves the ontological spookiness that is ‘rights’, it seems only fair to allow ourselves <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a> and <a href="https://en.wikipedia.org/wiki/Social_choice_theory#Interpersonal_utility_comparison">interpersonal utility comparison</a>. With these tools, we can reframe and make precise the tyranny of the majority described above.</p>
-<p>Invidious tyranny of the majority occurs when the weak preferences of many outweigh the strong preferences of the few such that <span class="noted">the actual outcome doesn’t maximize utility/satisfaction of preferences</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
-
-
-    </article></li>
     
 </ul></main>
 
@@ -407,7 +270,7 @@ Democracy is two wolves and a lamb voting on what to eat for lunch.
     <li><a title="Oldest" href="./page/1/">⇤</a></li>
   
   
-    <li><a title="Older" href="./page/2/">⇠</a></li>
+    <li><a title="Older" href="./page/3/">⇠</a></li>
   
   
     <li class="inactive">⇢</li>
@@ -424,7 +287,7 @@ Democracy is two wolves and a lamb voting on what to eat for lunch.
     <li><a title="Oldest" href="./page/1/">⇤</a></li>
   
   
-    <li><a title="Older" href="./page/2/">⇠</a></li>
+    <li><a title="Older" href="./page/3/">⇠</a></li>
   
   
     <li class="inactive">⇢</li>

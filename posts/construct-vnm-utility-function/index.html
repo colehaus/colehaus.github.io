@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Tagged economics—ColEx</title>
+    <title>Standalone–Build your own von Neumann–Morgenstern utility function—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -34,148 +34,79 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    </head>
+    
+  <link rel="stylesheet" type="text/css" href="../../css/construct-vnm-utility-function.css" />
+
+</head>
 <body>
 <div id="underlay">
-<main>
-  <h2>Tagged economics</h2>
-  <dl class="posts">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Standalone–Build your own von Neumann–Morgenstern utility function</h2>
   
-    <dt><a href="../../posts/construct-vnm-utility-function/">Standalone–Build your own von Neumann–Morgenstern utility function</a></dt>
-    <dd><nav class="tags"><ul>
+  <div class="metadata">
+  <nav class="tags"><ul>
     
       <li><a href="../../tag/decision%20theory/">decision theory</a></li>
     
       <li><a href="../../tag/economics/">economics</a></li>
     
 </ul></nav>
-</dd>
-    <dd class="date"><time datetime="May 14, 2018">May 14, 2018</time></dd>
-  
-    <dt><a href="../../posts/construct-vnm-utility-function-explained/">Build your own von Neumann–Morgenstern utility function</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/decision%20theory/">decision theory</a></li>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="May 13, 2018">May 13, 2018</time></dd>
-  
-    <dt><a href="../../posts/pareto-partial-order/">Pareto improvement as partial order</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-      <li><a href="../../tag/metrics/">metrics</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="May  7, 2018">May  7, 2018</time></dd>
-  
-    <dt><a href="../../posts/utilitarian-egalitarianism/">A visual intuition for the instrumental argument for equality</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/social%20welfare/">social welfare</a></li>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-      <li><a href="../../tag/inequality/">inequality</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="April 26, 2018">April 26, 2018</time></dd>
-  
-    <dt><a href="../../posts/utilitarian-egalitarianism-notebook/">Notebook–A visual intuition for the instrumental argument for equality</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/notebook/">notebook</a></li>
-    
-      <li><a href="../../tag/social%20welfare/">social welfare</a></li>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-      <li><a href="../../tag/inequality/">inequality</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="April 25, 2018">April 25, 2018</time></dd>
-  
-    <dt><a href="../../posts/pareto-examples/">Some things which are and aren't Pareto optimal</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-      <li><a href="../../tag/metrics/">metrics</a></li>
-    
-      <li><a href="../../tag/self-flagellation%20friday/">self-flagellation friday</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="April 13, 2018">April 13, 2018</time></dd>
-  
-    <dt><a href="../../posts/cooperatives/">The scarcity of cooperatives</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/automaton/">automaton</a></li>
-    
-      <li><a href="../../tag/cooperatives/">cooperatives</a></li>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="April  5, 2015">April  5, 2015</time></dd>
-  
-</dl>
 
-</main>
+  <span class="date">Published on <time datetime="2018-05-14">May 14, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>Standalone version of <a href="../../posts/construct-vnm-utility-function-explained/">previous post</a> for convenience.</p>
+    </div>
+  
 
-<header>
-  <h1>Collectively Exhaustive</h1><span>A weblog</span>
-  <hr />
-</header>
+  
 
-<div class="main-menu top">
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
-
-  <hr />
+  <form>
+<p>
+Which things would you like to make a utility function out of?
+</p>
+<!--more-->
+<textarea id="goods">
+Apple
+Banana
+Carrot
+</textarea>
+<p>
+Which do you prefer?
+</p>
+<div class="scenario">
+<p>Receive <span id="first-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Banana</span> lottery ticket(s)</span><br /><br />or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Carrot</span> lottery ticket(s)</span><br /><br /> <span id="indifferent" class="lottery">Indifferent</span></p>
 </div>
+</form>
+<output>
+<figure id="function-visualization">
+<figcaption>
+Estimated value of goods relative to favorite good
+</figcaption>
+<div id="function-chart">
 
-<div class="main-menu bottom">
-  <hr />
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
+</div>
+</figure>
+</output>
+</article></main>
 
 </div>
 
-</div>
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+<script defer type="text/javascript" src="../../js/construct-vnm-utility-function.js"></script>
+
 
   </body>
 </html>

@@ -29,6 +29,27 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/construct-vnm-utility-function/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/construct-vnm-utility-function-explained/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/pareto-partial-order/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/putting-out-gig-economy-i/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -205,6 +226,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/current%20events/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/decision%20theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -415,6 +443,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/4/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/5/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
