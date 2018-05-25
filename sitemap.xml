@@ -29,6 +29,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/devil-donor-lottery/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/putting-out-gig-economy-ii/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -253,6 +260,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/donor%20lottery/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/economic%20history/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -261,6 +275,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/economics/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/effective%20altruism/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

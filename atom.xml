@@ -8,8 +8,31 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-05-20T00:00:00Z</updated>
+    <updated>2018-05-23T00:00:00Z</updated>
     <entry>
+    <title>Doning with the devil</title>
+    <link href="https://www.col-ex.org/posts/devil-donor-lottery/" />
+    <id>https://www.col-ex.org/posts/devil-donor-lottery/</id>
+    <published>2018-05-23T00:00:00Z</published>
+    <updated>2018-05-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="donor-lotteries">Donor lotteries</h1>
+<p>Effective altruists have proposed and promoted <a href="http://effective-altruism.com/ea/14d/donor_lotteries_demonstration_and_faq/">donor lotteries</a>. Briefly, in a donor lottery, donors pool money for charitable contribution. They’re given lottery tickets in proportion to their contributions. The winner of the lottery gets to decide where the pool of charitable funds should be donated. For example, two people each set aside $1,000 for charitable contribution. They then make an agreement and the winner of the coin flip gets to donate the whole $2,000 to the charity of their choosing.</p>
+<p>The primary claimed advantage to these lotteries is economies of scale. It probably doesn’t make sense to spend 100 hours picking the absolutely perfect charity when you’re only disbursing $1000 as a solo donor. It probably does make sense to spend the time to make the decision carefully when disbursing $100,000 as the winner of a donor lottery. Other economies of scale include things like: improved chance of response when asking charities for more information, can fund projects with threshold cost (i.e. we can’t even start the project unless we receive at least $XX,000 dollars).</p>
+<h1 id="a-common-concern">A common concern</h1>
+<p>Though the original proposals all highlight that the primary benefit of donor lotteries is economies of scale, I’ve heard many in the EA community concerned about alignment of other donors: “What if I don’t trust others in the lottery to do thorough research?” “What if others in the lottery prioritize different cause areas?”</p>
+<p>Though early advocates address these concerns briefly, subsequent discussions suggests it might be useful to address these concerns more vividly.</p>
+<h1 id="donor-lottery-with-the-devil">Donor lottery with the devil</h1>
+<p>I contend you should be willing to enter a donor lottery with the devil (this is the weirdly honorable <a href="https://en.wikipedia.org/wiki/Deal_with_the_Devil">Faustian</a> devil that respects all his compacts). To see this, we just proceed systematically.</p>
+<p>Suppose you and the devil each contribute $10,000 dollars. This is your life savings while the devil merely tosses in a carbuncular carbuncle from his pit of gems and anguish. You flip a fair coin.</p>
+<p><!--more--></p>
+<p>First, suppose you abstain: You spend your $10,000 dollars to do good, the devil spends his $X trillion to do evil, and the world hangs in the balance.</p>
+<p>Suppose you enter the lottery and win: You’ve doubled your money. Because we suppose economies of scale at relatively small amounts like this, the good you can do is more than doubled versus abstaining from the lottery and donating the initial $10,000. On the other side of the bet, the devil is forced to bankroll evil with a mere $X trillion - $10,000. Given the devil’s vast wealth, his plans are unconstrained by funding and the loss of $10,000 represents the evaporation of a single drop in an endless sea of agony. He goes on to do almost exactly as much evil as he would have done without the lottery.</p>
+<p>Suppose you enter the lottery and lose: You’ve lost all your money and do no good whatsoever. The devil laughs in triumph, but his heart isn’t really in it. Because, again, the money means nothing to him. He’s working on higher levels in <a href="https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs">Maslow’s hierarchy of needs</a>.</p>
+<p>Now we can calculate the expected value. The devil does just as much evil in each of the three outcomes. If you abstain from dealing with the devil, you do X good. If you enter the lottery, there’s a 50% chance you do &gt; 2X good and a 50% chance you do 0 good. The expected value of entering the lottery is then &gt; X.</p>
+<h1 id="real-donor-lotteries">Real donor lotteries</h1>
+<p>Obviously, this isn’t actually the decision that confronts you. But it highlights that the crucial consideration for donor lotteries is economies of scale. You should only worry about your fellow lottery participants insofar as you think they are significantly misaligned with you <em>and</em> have significantly <em>greater</em> economies of scale than you do. If either of these factors is small, you have little to worry about in this regard.</p>]]></summary>
+</entry>
+<entry>
     <title>Putting-out with smartphones II</title>
     <link href="https://www.col-ex.org/posts/putting-out-gig-economy-ii/" />
     <id>https://www.col-ex.org/posts/putting-out-gig-economy-ii/</id>
@@ -18,6 +41,7 @@
     <summary type="html"><![CDATA[<blockquote>
 They have driven us away from our houses and gardens to work as prisoners in their factories and their seminaries of vice. <span class="attribution">Thomas Exell, 1838</span>
 </blockquote>
+<h1 id="intro">Intro</h1>
 <p><a href="https://www.col-ex.org/posts/putting-out-gig-economy-i/">Last time</a> we reviewed the putting out system—a pre-industrial system of manufacture used in England where workers would take intermediate products home, refine them in some way, and return them to a merchant so that some other worker could perform the next step in the production process. Then, I suggested that this system sounds a lot like the modern gig economy.</p>
 <p>Which left us with the question: Why is the gig economy worse than regular, full-time employment (for workers), but putting-out was better than factories (for workers)? We can resolve this tension by either finding that contemporary praise of the putting out system is wrong, finding that criticism of the gig economy is wrong, or (hint, hint) highlighting the disanalogies between the systems.</p>
 <h1 id="was-putting-out-actually-preferred-to-factories">Was putting-out actually preferred to factories?</h1>
@@ -93,7 +117,8 @@ They have driven us away from our houses and gardens to work as prisoners in the
     <id>https://www.col-ex.org/posts/ethics-well-order/</id>
     <published>2018-05-17T00:00:00Z</published>
     <updated>2018-05-17T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Ethics is fundamentally about ‘ought’. What ought we to do? Which actions are proscribed and which prescribed? Among all available actions, which should we actually pursue? I think we can formalize this basic understanding and draw some interesting conclusions.</p>
+    <summary type="html"><![CDATA[<h1 id="intro">Intro</h1>
+<p>Ethics is fundamentally about ‘ought’. What ought we to do? Which actions are proscribed and which prescribed? Among all available actions, which should we actually pursue? I think we can formalize this basic understanding and draw some interesting conclusions.</p>
 <p>For any given ethical decision, we have some nonempty set <span class="math inline">\(\mathcal{A}\)</span> (depending on how we individuate, possibly infinite) of possible actions. But, alas, we cannot perform all these actions; only one. So an ethical theory is something that for every possible <span class="math inline">\(\mathcal{A}\)</span> selects a distinguished element <span class="math inline">\(a \in \mathcal{A}\)</span>. That is, an ethical theory is a <a href="https://en.wikipedia.org/wiki/Choice_function">choice function</a> over nonempty sets of actions.</p>
 <p>In the rest of the post, we’ll discuss what properties such an ethical choice function might have and build up an understanding of how the tools of <a href="https://en.wikipedia.org/wiki/Order_theory">order theory</a> might be applied to metaethical reasoning.</p>
 <p><!--more--></p>
