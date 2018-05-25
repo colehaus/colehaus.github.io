@@ -80,6 +80,46 @@ if (/Trident/.test(navigator.userAgent)) {
     <hr />
   
     <li><article class="teaser">
+        <h2><a href="./posts/assorted-links-iii/">Assorted links III</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/links/">links</a></li>
+    
+</ul></nav>
+
+        <span class="date">Published on <time datetime="May 22, 2018">May 22, 2018</time>.</span>
+       </div>
+
+       
+
+        <ol type="1">
+<li><p><a href="http://www.realclimate.org/index.php/archives/2018/04/the-alsup-aftermath/">The Alsup Aftermath</a></p>
+<blockquote>
+A few weeks ago, I had an unusual — and challenging — assignment: providing a one-hour “tutorial” on the basic science of human-induced climate change to a Federal District Court in San Francisco. Judge William Alsup had requested this tutorial to bring him up to speed on the fundamental science before proceedings begin in earnest in a case brought by the cities of San Francisco and Oakland, on behalf of the people of California, against a group of major fossil fuel companies, addressing the costs of climate change caused, they argue, by products those companies have sold.
+</blockquote>
+<p>The most interesting part for me was learning that the basic story I’d heard about the greenhouse effect is so simplified as to be basically wrong. The actual mechanism of warming is examined in more detail <a href="http://clivebest.com/blog/?p=1169">here</a>.</p></li>
+<li><p><a href="https://ourworldindata.org/mental-health">Mental Health</a></p></li>
+</ol>
+<p>“[M]ental and substance use disorders account for around 7 percent of global disease burden in 2016, but this reaches up to 13-14 percent in several countries.”</p>
+<ol start="3" type="1">
+<li><p><a href="https://www.dropbox.com/s/dvi19mo1032cdz0/Fitzroy%2C%20F.%20Journal%20of%20Poverty%20and%20Social%20Justice%202018%20Basic%20Income%20and%20a%20Public%20Job%20Offer.pdf">Basic income and a public job offer: complementary policies to reduce poverty and unemployment</a></p>
+<p>The paper’s a bit meandering, but I think the core idea—that a universal basic income and a job guarantee aren’t mutually exclusive or even particularly competitive—is valuable and true. The most import sources of conflict are probably finite supplies of political capital and the enormous complexity of implementing one of these policies, yet alone two.</p></li>
+<li><p><a href="https://americanaffairsjournal.org/2018/05/earmarks-better-government-through-honest-graft/">Earmarks: Better Government through Honest Graft</a></p>
+<p>Related to the early post here on the <a href="./posts/innocuous-invidious-majoritarian-tyrannies/">tyranny of the majority</a>.</p>
+<blockquote>
+<p>Under simple majority rule, a largely indifferent majority can approve a result that is intensely opposed by everyone in the minority. If out-and-out bribery were permitted, it would be relatively easy for the minority to bribe the majority faction to defeat the hated policy, and, since the minority does really hate the original proposal, both they and the majority would be, on balance, better off in the post-bribe situation. The original result of majority rule was not Pareto optimal. It was economically inefficient.</p>
+In the real world, it is not necessary to buy votes, either of individual voters or their representatives. What we actually see as a part of normal democratic practice is a process of vote trading, sometimes called “logrolling.” Voter 1 cares deeply about issue A but not about issue B. It is then rational for voter 1 to trade his vote on B for voter 2’s vote on A. As a result, everyone is better off. Dennis Mueller, Geoffrey Philpotts, and Jaroslav Vanek demonstrated in a 1972 paper in Public Choice that the analogy between the efficiency of ordinary markets and the efficiency of vote trading in the political sphere is almost perfect.1 In nearly all cases, a system of logrolling will take a society to a state very close to Pareto optimality.Earmarks are merely a special case of logrolling. They enable political minorities (even a minority of one) to have an impact on policy, despite an apathetic or even hostile majority.
+</blockquote></li>
+<li><p><a href="http://andrewgelman.com/2018/05/07/replication-crisis-centered-social-psychology/">Why is the replication crisis centered on social psychology?</a></p>
+<p>Interestingly, most of the reasons advanced here aren’t about social psychology being ‘worse’ than other fields (e.g. more corrupt, less competent) but ‘better’ (e.g. more open with data, replications are easier). The one explanation offered contrary to that pattern is “psychology studies often (not always, but often) feature weak theory + weak measurement”.</p></li>
+</ol>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/putting-out-gig-economy-ii/">Putting-out with smartphones II</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -204,158 +244,6 @@ Which things would you like to make a utility function out of?
 
 
     </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/pareto-partial-order/">Pareto improvement as partial order</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/social%20choice/">social choice</a></li>
-    
-      <li><a href="./tag/order%20theory/">order theory</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="May  7, 2018">May  7, 2018</time>.</span>
-       </div>
-
-       
-         <div class="abstract"><p>We use the concept of Pareto improvement to motivate and illustrate partial and total orders.</p></div>
-       
-
-        <p>We covered the notion of <a href="https://en.wikipedia.org/wiki/Pareto_efficiency">Pareto improvement</a> in the <a href="./posts/pareto-examples/">preceding post</a>. I briefly alluded to the fact that it’s a strict <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>. Let’s explore that a bit more.</p>
-<h3 id="partial-order">Partial order</h3>
-<p>A strict partial order is a <a href="https://en.wikipedia.org/wiki/Binary_relation">binary relation</a> that is irreflexive (no element precedes itself), and transitive. Pareto improvement satisfies both of these criteria:</p>
-<dl>
-<dt>Irreflexive: <span class="math inline">\(\neg (A \prec A)\)</span></dt>
-<dd>No scenario is a Pareto improvement over itself because no one strictly prefers it (person 1 doesn’t prefer scenario A to scenario A), trivially.
-</dd>
-<dt>Transitive: <span class="math inline">\(A \prec B, B \prec C \Rightarrow A \prec C\)</span></dt>
-<dd>If arbitrary scenario B is a Pareto improvement over arbitrary scenario A and arbitrary scenario C is a Pareto improvement over scenario B, then scenario C is a Pareto improvement over scenario A. In other words, if no one is worse off in scenario B than scenario A and no one is worse off in scenario C than scenario B, then, clearly, no one is worse off in scenario three than scenario A. And if at least one person is better off in scenario B than scenario A and at least one person is better off in scenario C than scenario B, then, clearly, at least one person is better off in scenario C than scenario A.
-</dd>
-</dl>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/putting-out-gig-economy-i/">Putting-out with smartphones I</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/economic%20history/">economic history</a></li>
-    
-      <li><a href="./tag/current%20events/">current events</a></li>
-    
-      <li><a href="./tag/labor/">labor</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="May  4, 2018">May  4, 2018</time>.</span>
-       </div>
-
-       
-         <div class="abstract"><p>The putting-out system was a pre-industrial way of organizing work. It involved workers performing small, discrete stages of work in their own homes as merchants coordinated this work across many such households. The subsequent transition to factory labor was detrimental in many ways and is decried by leftists. But the preferred putting-out system seems quite similar to the gig economy which is <em>also</em> poo-pooed by leftists.</p></div>
-       
-
-        <blockquote class="epigraph">
-[S]carcity, to a certain degree, promoted industry, and that the manufacturer (worker) who can subsist on three days work will be idle and drunken the remainder of the week… The poor in the manufacturing counties will never work any more time in general than is necessary just to live and support their weekly debauches… We can fairly aver that a reduction of wages in the woolen manufacture would be a national blessing and advantage, and no real injury to the poor. <span class="attribution"><span class="citation" data-cites="smith1765">(Smith <a href="#ref-smith1765">1765</a>)</span></span>
-</blockquote>
-<h3 id="putting-out-system">Putting-out system</h3>
-<p>Between the <a href="https://en.wikipedia.org/wiki/Guild#Fall_of_the_guilds">guild system</a> and the full steam <a href="https://en.wikipedia.org/wiki/Industrial_Revolution">Industrial Revolution</a>, England briefly used the <a href="https://en.wikipedia.org/wiki/Putting-out_system">putting-out system</a>. Under this system, finished goods were assembled not in factories or dedicated workshops, but component-by-component in a multitude of homes and cottages.</p>
-<p>For example (illustrative hypothetical based on <a href="https://en.wikipedia.org/wiki/Textile_manufacturing_by_pre-industrial_methods">Wikipedia</a>): One worker would trundle their hand cart to the market, drop off cleaned wool in exchange for a piece rate payment, and the merchant would dispatch them with a new load of wool. That merchant would take this cleaned wool and give it to another independent worker for <a href="https://en.wikipedia.org/wiki/Carding">carding</a>. The carder would take the cleaned wool home, the family would process it in their home, and then return to the market in a couple weeks to give the merchant carded wool. This staged process would repeat with a separate family taking home loads of inputs and returning outputs for each subsequent stage in the process—spinning, plying, weaving, etc. When the final task was complete, the merchant would take the finished goods to a market or store and sell them to consumers. In this way, the task was broken down into small components and coordinated by the merchants—somewhat like a (spatially and temporally) disaggregated assembly line.</p>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/how-do-we-read/">Most of us read with our eyes <em>and</em> our brains</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/meta%20monday/">meta monday</a></li>
-    
-      <li><a href="./tag/reading/">reading</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 30, 2018">April 30, 2018</time>.</span>
-       </div>
-
-       
-
-        <p>I spend a lot of time reading. But I’m not actually reading very quickly. The typical educated adult reads at about 200 to 400 <abbr title="words per minute">wpm</abbr> (for context, a speaking rate of 150 to 160 <abbr title="words per minute">wpm</abbr> is comfortable). Given that, it seems <em>possible</em> that a better understanding of reading could help me spend that time better. So I read <span class="citation" data-cites="rayner2016">(Rayner et al. <a href="#ref-rayner2016">2016</a>)</span>. Spoiler: It didn’t transform the way I read (and reaffirmed that speed reading is rather less than advocates claim), but it was definitely interesting. The regurgitation that follows focuses more on the article’s description of the ‘how’ of reading and less on the debunking of speed reading.</p>
-<p><a href="#summary" class="no-home">Summary</a></p>
-<h3 id="speech-writing">Speech &gt; writing</h3>
-<p>Speech is prior to writing. Spoken language is thought to have originated around 100,000 years ago; written language 5,000 years ago. All human societies have spoken language; not so for writing. No natural language is purely written. Children learn to speak and interpret language without explicit instruction; not so for reading. Thus, we reach the claim that reading and writing is an “optional accessory that must be painstakingly bolted on” <span class="citation" data-cites="mcguinness1997">(McGuinness <a href="#ref-mcguinness1997">1997</a>)</span>.</p>
-<p>After this bolting is complete, many of our reading processes are still mediated by our more fundamental spoken language processes—even during silent reading:</p>
-<ul>
-<li><p>For example, when researches asked silent readers to rapidly decide whether words belonged to a category, homophones produced incorrect “yes”es 19% of the time (whether “meet” belongs in the category food) compared to the base rate for orthographically similar words of 3% (<span class="noted">whether “melt” belongs in the category food</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>). The implication here is that we have difficulty translating directly from visual input to units of meaning and this visual-meaning connection is often mediated by the auditory representation.</p></li>
-<li><p>In a different study, researchers asked readers to repeat an irrelevant word or phrase aloud while reading in an effort to impede any <a href="https://en.wikipedia.org/wiki/Subvocalization">subvocalization</a>. These readers performed worse on a subsequent test of comprehension than those asked to repeat a sequence of finger taps.</p></li>
-</ul>
-<p>So our brains aren’t great at reading. But neither are our eyes.</p>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/utilitarian-egalitarianism/">A visual intuition for the instrumental argument for equality</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/social%20welfare/">social welfare</a></li>
-    
-      <li><a href="./tag/economics/">economics</a></li>
-    
-      <li><a href="./tag/inequality/">inequality</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 26, 2018">April 26, 2018</time>.</span>
-       </div>
-
-       
-
-        <h3 id="introduction">Introduction</h3>
-<h4 id="equality">Equality</h4>
-<p><span class="noted">Our moral intuition</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> easily suggests that equality has moral value. The world in which <a href="https://en.wikipedia.org/wiki/Robinson_Crusoe_economy">Robinson Crusoe and Friday</a> share coconuts seems vastly better than the world in which Crusoe sits on his coconut throne and doles out the barest sustenance to Friday. It is easy to leap from this intuition to the conclusion that equality is an <a href="https://en.wikipedia.org/wiki/Instrumental_and_intrinsic_value">intrinsic</a> good. But, in this post, let’s make a stop at the proposition that equality is instead only an instrumental good.</p>
-<h4 id="equality-instrumentally">Equality instrumentally</h4>
-<p>If our sole intrinsic good is something like <a href="https://en.wikipedia.org/wiki/Utility">utils</a>, we will still often prefer equality to inequality. What sorcery could introduce such deontological concepts into our consequentialist paradise? The incantation is <a href="https://en.wikipedia.org/wiki/Marginal_utility#Diminishing_marginal_utility">“diminishing marginal utility”</a>. It is an empirical proposition (and mostly fact) that humans do not enjoy their 10th print copy of even their favorite book as much as the first. Thus, a bibliomaniac can improve overall well-being by sharing the love. Losing copy 10 hurts less than gaining copy 1 helps.</p>
-<h3 id="visualizing-the-utilitarian-consequences-of-income-distribution">Visualizing the utilitarian consequences of income distribution</h3>
-<p>We can start to build a visual intuition for this instrumental egalitarianism. Suppose we have an income distribution that looks like this:</p>
-
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="./posts/utilitarian-egalitarianism-notebook/">Notebook–A visual intuition for the instrumental argument for equality</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="./tag/notebook/">notebook</a></li>
-    
-      <li><a href="./tag/social%20welfare/">social welfare</a></li>
-    
-      <li><a href="./tag/economics/">economics</a></li>
-    
-      <li><a href="./tag/inequality/">inequality</a></li>
-    
-</ul></nav>
-
-        <span class="date">Published on <time datetime="April 25, 2018">April 25, 2018</time>.</span>
-       </div>
-
-       
-
-        <p>— link-citations: true title: Notebook–A visual intuition for the instrumental argument for equality published: 2018-04-25 tags: notebook, social welfare, economics, inequality —</p>
-
-
-    </article></li>
     
 </ul></main>
 
@@ -365,7 +253,7 @@ Which things would you like to make a utility function out of?
     <li><a title="Oldest" href="./page/1/">⇤</a></li>
   
   
-    <li><a title="Older" href="./page/3/">⇠</a></li>
+    <li><a title="Older" href="./page/4/">⇠</a></li>
   
   
     <li class="inactive">⇢</li>
@@ -382,7 +270,7 @@ Which things would you like to make a utility function out of?
     <li><a title="Oldest" href="./page/1/">⇤</a></li>
   
   
-    <li><a title="Older" href="./page/3/">⇠</a></li>
+    <li><a title="Older" href="./page/4/">⇠</a></li>
   
   
     <li class="inactive">⇢</li>
