@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Tagged social choice—ColEx</title>
+    <title>Strategic voting in the moral parliament—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -34,84 +34,82 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    </head>
+    
+</head>
 <body>
 <div id="underlay">
-<main>
-  <h2>Tagged social choice</h2>
-  <dl class="posts">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Strategic voting in the moral parliament</h2>
   
-    <dt><a href="../../posts/pareto-partial-order/">Pareto improvement as partial order</a></dt>
-    <dd><nav class="tags"><ul>
+    <h3 id="article-subtitle">Objecting to a claim in MacAskill's <i>Normative Uncertainty</i></h3>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/moral%20uncertainty/">moral uncertainty</a></li>
     
       <li><a href="../../tag/social%20choice/">social choice</a></li>
     
-      <li><a href="../../tag/order%20theory/">order theory</a></li>
-    
 </ul></nav>
-</dd>
-    <dd class="date"><time datetime="May  7, 2018">May  7, 2018</time></dd>
+
+  <span class="date">Published on <time datetime="2018-04-17">April 17, 2018</time>.</span>
   
-    <dt><a href="../../posts/innocuous-invidious-majoritarian-tyrannies/">Innocuous and invidious majoritarian tyrannies</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/social%20choice/">social choice</a></li>
-    
-      <li><a href="../../tag/mechanism%20design/">mechanism design</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="April 10, 2018">April 10, 2018</time></dd>
+  </div>
   
-</dl>
+  
 
-</main>
+  
 
-<header>
-  <h1>Collectively Exhaustive</h1><span>A weblog</span>
-  <hr />
-</header>
+  <h3 id="moral-uncertainty">Moral uncertainty</h3>
+<p>Briefly, moral uncertainty in <span class="citation" data-cites="macaskill2014">(MacAskill <a href="#ref-macaskill2014">2014</a>)</span> starts from the premise that we will never have absolute certainty as to the one, true moral theory (Just as we don’t in the emprical realm. See, for example, <a href="https://www.iep.utm.edu/fallibil/">fallibilism</a>.). How should we account for this? Do we just ignore all theories other than the one which we grant the most credence? MacAskill proposes that we don’t and instead combine the results of different theories using the tools of <a href="https://en.wikipedia.org/wiki/Social_choice_theory">social choice theory</a>. In particular, he suggests that we allow moral theories to cast weighted “votes” and that we reach a final decision by using the <a href="https://en.wikipedia.org/wiki/Borda_count">Borda count</a> on these votes.</p>
+<p>(If this explanation is too rushed, chapter 2 of <span class="citation" data-cites="macaskill2014">(MacAskill <a href="#ref-macaskill2014">2014</a>)</span> explains it all at greater length. It’s quite readable.)</p>
+<h3 id="we-cant-have-nice-things">We can’t have nice things</h3>
+<p>If you have a social choice sense, it should be tingling now. Aren’t there a bunch of impossibility results in social choice theory saying, roughly, that no voting system is satisfactory? Alas, yes. See, for example, <a href="https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem">Arrow’s impossibility theorem</a> and the <a href="https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem">Gibbard-Satterthwaite theorem</a>. These seem like shaky grounds to build the core of your moral metatheory…</p>
+<h4 id="what-about-honest-people-can-honest-people-have-nice-things">What about honest people? Can honest people have nice things?</h4>
+<p>MacAskill claims to sidestep these results because tactical voting is irrelevant in the moral parliament. Moral theories are not agents and cannot dissemble:</p>
+<blockquote>
+It should be clear that this [strategic voting] consideration should bear no weight in the context of decision-making under moral uncertainty. We have no need to worry about theories “lying” about their choice-worthiness function (whatever that would mean). The decision-maker knows what moral theories she has credence in, and she knows their choice-worthiness functions. So, unlike in the case of voting, there is no gap between an individual’s stated preferences and an individual’s true preferences.
+</blockquote>
+<h4 id="sadly-no">Sadly, no</h4>
+<p>Social choice theory doesn’t call out strategic voting in order to condemn those tricksy voters for their lack of virtue. <span class="noted">Strategic voting is a problem because it reduces the quality of information available for making social decisions</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The ultimate goal of any social choice mechanism is social efficiency—the social decision should always maximize aggregate welfare. Inaccurate information as to what individuals want makes that (in the general case) impossible. If somebody insists they adore <a href="https://en.wikipedia.org/wiki/Vermin_Supreme">Vermin Supreme</a> despite a private loathing, <span class="noted">no voting system</span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> can remedy that.</p>
+<p>Is it possible to have inaccurate information in the moral parliament? Of course. Even without agency, there can be yawning chasms between our moral beliefs and the moral fact of the matter.</p>
+<!--more-->
+<hr class="references">
+<!--
+The condition that the Borda Rule violates is Contraction Consistency. Within the context of decision-making under moral uncertainty, we may define this condition as follows:
 
-<div class="main-menu top">
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
+Contraction Consistency: Let $\mathcal{C}$ be the option-set, $\mathcal{M}$ be the set of maximally appropriate options given the option-set $\mathcal{C}$, and $\mathcal{S}$ be a subset of $\mathcal{C}$ that contains all the members of $\mathcal{M}$. The set $\mathcal{ℳ}*$ of the maximally appropriate options given the option-set $\mathcal{S}$ has all and only the same members as $\mathcal{M}$.
 
-  <hr />
+First, a reason why Contraction Consistency is thought desirable in the voting context is that violating it leads to susceptibility to tactical voting. ... And, indeed, the Borda Rule is often dismissed for being extremely susceptible to tactical voting. However, as I have noted, while tactical voting is a real problem when it comes to aggregating the stated preferences of people, it is no problem at all in the context of decision-making under moral uncertainty. Theories aren’t agents, and so there’s no way that they can conceal their choice-worthiness ordering. If a decision-maker were to pretend that one theory’s choice-worthiness ordering were different than it is, she would only be deceiving herself.
+
+I understand my project as still within the domain of ideal rationality, and of giving a criterion of rightness rather than a decision-procedure.
+-->
+<div id="refs" class="references">
+<div id="ref-macaskill2014">
+<p>MacAskill, William. 2014. “Normative Uncertainty.” PhD thesis, University of Oxford. <a href="http://commonsenseatheism.com/wp-content/uploads/2014/03/MacAskill-Normative-Uncertainty.pdf" class="uri">http://commonsenseatheism.com/wp-content/uploads/2014/03/MacAskill-Normative-Uncertainty.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Mechanism_design">Mechanism design</a> (sort of a constructive version of social choice theory) even conceives of itself as the theory of extracting and making public private information.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>At least with current balloting technology. Reliable polygraphesque technology could change that. Utopia or dystopia?<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
 </div>
 
-<div class="main-menu bottom">
-  <hr />
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">Posts by date</a></li>
-    
-    
-      <li><a href="../../tags/">Posts by tag</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-</ul></nav>
 
-  <a class="rss" href="../../atom.xml">RSS</a>
-</div>
 
-</div>
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
 
   </body>
 </html>

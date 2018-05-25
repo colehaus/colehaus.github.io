@@ -943,53 +943,6 @@ or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <spa
 </section>]]></summary>
 </entry>
 <entry>
-    <title>Strategic voting in the moral parliament</title>
-    <link href="https://www.col-ex.org/posts/strategic-voting-moral-parliament/" />
-    <id>https://www.col-ex.org/posts/strategic-voting-moral-parliament/</id>
-    <published>2018-04-17T00:00:00Z</published>
-    <updated>2018-04-17T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1 id="moral-uncertainty">Moral uncertainty</h1>
-<p>Briefly, moral uncertainty in <span class="citation" data-cites="macaskill2014">(MacAskill <a href="#ref-macaskill2014">2014</a>)</span> starts from the premise that we will never have absolute certainty as to the one, true moral theory (Just as we don’t in the emprical realm. See, for example, <a href="https://www.iep.utm.edu/fallibil/">fallibilism</a>.). How should we account for this? Do we just ignore all theories other than the one which we grant the most credence? MacAskill proposes that we don’t and instead combine the results of different theories using the tools of <a href="https://en.wikipedia.org/wiki/Social_choice_theory">social choice theory</a>. In particular, he suggests that we allow moral theories to cast weighted “votes” and that we reach a final decision by using the <a href="https://en.wikipedia.org/wiki/Borda_count">Borda count</a> on these votes.</p>
-<p>(If this explanation is too rushed, chapter 2 of <span class="citation" data-cites="macaskill2014">(MacAskill <a href="#ref-macaskill2014">2014</a>)</span> explains it all at greater length. It’s quite readable.)</p>
-<h1 id="we-cant-have-nice-things">We can’t have nice things</h1>
-<p>If you have a social choice sense, it should be tingling now. Aren’t there a bunch of impossibility results in social choice theory saying, roughly, that no voting system is satisfactory? Alas, yes. See, for example, <a href="https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem">Arrow’s impossibility theorem</a> and the <a href="https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem">Gibbard-Satterthwaite theorem</a>. These seem like shaky grounds to build the core of your moral metatheory…</p>
-<h2 id="what-about-honest-people-can-honest-people-have-nice-things">What about honest people? Can honest people have nice things?</h2>
-<p>MacAskill claims to sidestep these results because tactical voting is irrelevant in the moral parliament. Moral theories are not agents and cannot dissemble:</p>
-<blockquote>
-It should be clear that this [strategic voting] consideration should bear no weight in the context of decision-making under moral uncertainty. We have no need to worry about theories “lying” about their choice-worthiness function (whatever that would mean). The decision-maker knows what moral theories she has credence in, and she knows their choice-worthiness functions. So, unlike in the case of voting, there is no gap between an individual’s stated preferences and an individual’s true preferences.
-</blockquote>
-<h2 id="sadly-no">Sadly, no</h2>
-<p>Social choice theory doesn’t call out strategic voting in order to condemn those tricksy voters for their lack of virtue. <span class="noted">Strategic voting is a problem because it reduces the quality of information available for making social decisions</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. The ultimate goal of any social choice mechanism is social efficiency—the social decision should always maximize aggregate welfare. Inaccurate information as to what individuals want makes that (in the general case) impossible. If somebody insists they adore <a href="https://en.wikipedia.org/wiki/Vermin_Supreme">Vermin Supreme</a> despite a private loathing, <span class="noted">no voting system</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a> can remedy that.</p>
-<p>Is it possible to have inaccurate information in the moral parliament? Of course. Even without agency, there can be yawning chasms between our moral beliefs and the moral fact of the matter.</p>
-<p><!--more--></p>
-<hr />
-<p><!--
-The condition that the Borda Rule violates is Contraction Consistency. Within the context of decision-making under moral uncertainty, we may define this condition as follows:
-
-Contraction Consistency: Let $\mathcal{C}$ be the option-set, $\mathcal{M}$ be the set of maximally appropriate options given the option-set $\mathcal{C}$, and $\mathcal{S}$ be a subset of $\mathcal{C}$ that contains all the members of $\mathcal{M}$. The set $\mathcal{ℳ}*$ of the maximally appropriate options given the option-set $\mathcal{S}$ has all and only the same members as $\mathcal{M}$.
-
-First, a reason why Contraction Consistency is thought desirable in the voting context is that violating it leads to susceptibility to tactical voting. ... And, indeed, the Borda Rule is often dismissed for being extremely susceptible to tactical voting. However, as I have noted, while tactical voting is a real problem when it comes to aggregating the stated preferences of people, it is no problem at all in the context of decision-making under moral uncertainty. Theories aren’t agents, and so there’s no way that they can conceal their choice-worthiness ordering. If a decision-maker were to pretend that one theory’s choice-worthiness ordering were different than it is, she would only be deceiving herself.
-
-I understand my project as still within the domain of ideal rationality, and of giving a criterion of rightness rather than a decision-procedure.
---></p>
-<div id="refs" class="references">
-<div id="ref-macaskill2014">
-<p>MacAskill, William. 2014. “Normative Uncertainty.” PhD thesis, University of Oxford. <a href="http://commonsenseatheism.com/wp-content/uploads/2014/03/MacAskill-Normative-Uncertainty.pdf" class="uri uri">http://commonsenseatheism.com/wp-content/uploads/2014/03/MacAskill-Normative-Uncertainty.pdf</a>.</p>
-</div>
-</div>
-<section class="footnotes">
-<hr />
-<ol>
-<li><div id="fn1">
-<p><a href="https://en.wikipedia.org/wiki/Mechanism_design">Mechanism design</a> (sort of a constructive version of social choice theory) even conceives of itself as the theory of extracting and making public private information.<a href="#fnref1" class="footnote-back">↩</a></p>
-</div></li>
-<li><div id="fn2">
-<p>At least with current balloting technology. Reliable polygraphesque technology could change that. Utopia or dystopia?<a href="#fnref2" class="footnote-back">↩</a></p>
-</div></li>
-</ol>
-</section>]]></summary>
-</entry>
-<entry>
     <title>Meta Monday</title>
     <link href="https://www.col-ex.org/posts/meta-monday/" />
     <id>https://www.col-ex.org/posts/meta-monday/</id>
