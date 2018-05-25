@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Ethics as well-order—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+  <link rel="stylesheet" type="text/css" href="../../css/ethics-well-order.css" />
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Ethics as well-order</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/metaethics/">metaethics</a></li>
+    
+      <li><a href="../../tag/order%20theory/">order theory</a></li>
+    
+</ul></nav>
+
+  <span class="date">Published on <time datetime="2018-05-17">May 17, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>There is an analogy to be found between choice functions and ethical theories. Both select a distinguished element/action from a collection of sets/actions. If we continue along this line of thought, certain assumptions permit us to make a further analogy between well-orders and ethical theories.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>Cranky</summary><p>I have a formal education in neither philosophy nor math but am making bold claims involving both.</p></details></li>
+      
+        <li><details><summary>Sketchy</summary><p>This post moves quickly and makes some assumptions without spending much time to defend them. The hope is to give a coherent outline of the whole idea here and fill in the details subsequently.</p></details></li>
+      
+        <li><details><summary>Wankery</summary><p>The motivation for this approach isn't terribly apparent within this post. I hope to be able to defend the claim that this machinery is worth the cost at some later point.</p></details></li>
+      
+    </ul></aside>
+  
+
+  <p>Ethics is fundamentally about ‘ought’. What ought we to do? Which actions are proscribed and which prescribed? Among all available actions, which should we actually pursue? I think we can formalize this basic understanding and draw some interesting conclusions.</p>
+<p>For any given ethical decision, we have some nonempty set <span class="math inline">\(\mathcal{A}\)</span> (depending on how we individuate, possibly infinite) of possible actions. But, alas, we cannot perform all these actions; only one. So an ethical theory is something that for every possible <span class="math inline">\(\mathcal{A}\)</span> selects a distinguished element <span class="math inline">\(a \in \mathcal{A}\)</span>. That is, an ethical theory is a <a href="https://en.wikipedia.org/wiki/Choice_function">choice function</a> over nonempty sets of actions.</p>
+<p>In the rest of the post, we’ll discuss what properties such an ethical choice function might have and build up an understanding of how the tools of <a href="https://en.wikipedia.org/wiki/Order_theory">order theory</a> might be applied to metaethical reasoning.</p>
+<!--more-->
+<h3 id="one-elementaction">One element/action</h3>
+<p>Let’s try to think about this ethical choice function in a little more detail. We’ll start with the simplest case:</p>
+<div class="single-choice">
+<div class="math-col">
+<p>sets with only a single element. Here, our choice function simply plucks out this single element. In symbols, <span class="math inline">\(\forall a \in \mathcal{A} : f(\{a\}) = a\)</span>.</p>
+</div>
+<div class="ethics-col">
+<p>ethical choices with only one possible action (i.e. there is not even a choice between action and inaction). Here, <a href="https://en.wikipedia.org/wiki/Ought_implies_can">we’d hope our ethical theory would recommend the only possible action</a>.</p>
+</div>
+</div>
+<h3 id="two-elementsactions">Two elements/actions</h3>
+<p>On to the next step:</p>
+<div class="double-choice">
+<div class="math-col">
+<p>Now, we want to define our choice function over two element sets as well. In order to relate the two elements in each set, we must talk about a <a href="https://en.wikipedia.org/wiki/Binary_relation">binary relation</a> that we’ll call <span class="math inline">\(\prec\)</span> (read <span class="math inline">\(a \prec b\)</span> as <span class="math inline">\(a\)</span> is worse than <span class="math inline">\(b\)</span> or as <span class="math inline">\(b\)</span> is better than <span class="math inline">\(a\)</span>). What properties should this relation have? We’ll make our relation <span class="noted"><a href="https://en.wikipedia.org/wiki/Reflexive_relation">irreflexive</a></span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. It should also be <span class="noted"><a href="https://en.wikipedia.org/wiki/Asymmetric_relation">asymmetric</a></span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. If we stick to our earlier claim that an ethical theory must pick a distinguished element “for every possible” <span class="math inline">\(\mathcal{A}\)</span> (which, tendentiously, we will for the rest of the post), then we’re also requesting <span class="noted"><a href="https://en.wikipedia.org/wiki/Serial_relation">totality</a></span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. (Totality also demands an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a>. We choose the <a href="https://en.wikipedia.org/wiki/Equality_(mathematics)">identity relation</a> for the remaining discussion.)</p>
+<p>So our choice function applies our irreflexive, asymmetric binary relation to our two element set and always chooses the better element of the two.</p>
+</div>
+<div class="ethics-col">
+<p>What happens when our ethical theory needs to actually start pulling its weight and giving guidance between two different actions (call them A and B)? At its simplest, the theory can either declare that A is better or instead that B is better. Or it might declare that the two actions are incomparable—neither stands anywhere in ethical relation to the other. This is often unsatisfactory (as suggested in a <a href="../../posts/pareto-examples/">previous post</a>). So we’ll provisionally adhere to the introduction’s demand that our ethical theory never avail itself of this escape hatch. This demand for comprehensive guidance means that we also need a notion of moral equivalence. At a minimum, every action must be morally equivalent to itself. (Our ethical theory ought not to claim that action A is better than A.)</p>
+<p>All of that is to say, when presented with two different actions, our ethical theory always recommends one or the other as the better to pursue.</p>
+</div>
+</div>
+<h3 id="three-elementsactions">Three elements/actions</h3>
+<p>Now it really starts to get complicated.</p>
+<div class="triple-choice">
+<div class="math-col">
+<p>We’ve defined our choice function for sets <span class="math inline">\(\mathcal{A}\)</span> of cardinality <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>. What about <span class="math inline">\(3\)</span>?</p>
+<p>(These next several paragraphs are a belaboring of what are presumably widely shared intuitions about transitivity and using a binary relation to pick the greatest element in a set.)</p>
+<p>Let’s try to build it out of what we already know. For any given <span class="math inline">\(a, b, c \in \mathcal{A}\)</span>, if we look at the binary relation as defined on <span class="math inline">\(a ? b\)</span> and <span class="math inline">\(b ? c\)</span>, we have 9 cases to consider:</p>
+<figure>
+<figcaption>
+Generic choice function on elements of cardinality 3 based on relationship between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and between <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(a ? b\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(b ? c\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(f(\{a,b,c\})\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{W}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{Y}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{Z}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{W}\)</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>I’ve taken the liberty of categorizing the rows. Those in category <span class="math inline">\(\mathcal{W}\)</span> rely on <span class="noted">transitivity</span><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> of our binary relation. Those in category <span class="math inline">\(\mathcal{X}\)</span> rely on transitivity of the identity relation. In category <span class="math inline">\(\mathcal{Y}\)</span>, <span class="math inline">\(a ? c\)</span> is underdetermined, but each <span class="math inline">\(\prec b\)</span>. In category <span class="math inline">\(\mathcal{Z}\)</span>, <span class="math inline">\(a ? c\)</span> is again undefined but <span class="math inline">\(b \prec\)</span> each.</p>
+<p>Transitivity of the identity relation strikes me as /very/ innocuous. Transitivity of the binary relation also seems very intuitive to me, but some contest it. See, for example, <span class="citation" data-cites="rachels1998">(Rachels <a href="#ref-rachels1998">1998</a>)</span>. In category $, because our choice function only needs to select the one best element, we don’t care that <span class="math inline">\(a ? c\)</span> is undetermined—<span class="math inline">\(b\)</span> is greater than both. It’s only in <span class="math inline">\(\mathcal{Z}\)</span>, that we must again resort to our binary relation to settle whether element <span class="math inline">\(a\)</span> or <span class="math inline">\(c\)</span> is greater. Putting that all together, we rewrite the table:</p>
+<figure>
+<figcaption>
+Choice function on elements of cardinality 3 based on relationship between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and between <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> under certain constraining assumptions
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(a ? b\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(b ? c\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(f(\{a,b,c\})\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b/c\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a/b/c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a/b\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a?c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a\)</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>That’s all a long-winded way of suggesting that we can ‘lift’ our binary relation to a choice function on sets of cardinality 3 with the help of transitivity.</p>
+</div>
+<div class="ethics-col">
+<p>How does our ethical theory cope when asked to recommend among three distinct, ethically relevant actions (call them A, B, and C)? Let’s start by just making pairwise comparisons—we already established a system for this in the prior step. Because we’re making sure to consider only distinct actions which are not morally equivalent, there are <span class="math inline">\(2^3 = 8\)</span> possible pairwise combinations.</p>
+<figure>
+<figcaption>
+Table showing possible results of pairwise comparisons between ethically relevant actions A, B, and C.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">A vs. B</th>
+<th style="text-align: left;">B vs. C</th>
+<th style="text-align: left;">A vs. C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>6 of the 8 (i.e. all but rows 2 and 7 in the table) are perfectly reasonable and take a form like ‘A is better than B which is better than C with is the worst.’. However, 2 of the 8 pairwise combinations (i.e. rows 2 and 7 in the table) produce cycles like ‘A is better than B which is better than C which is better than A which is better than B’ which continues ad nauseum.</p>
+<p>Needless to say, permitting cycles in our ethical theory has many strange consequences. If we wish to forbid these cycles, the property we must appeal to is <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitivity</a>. Nevertheless, the transitivity of ‘better than’ is actually an open question in the philosophical community. See, for example, <span class="citation" data-cites="rachels1998">(Rachels <a href="#ref-rachels1998">1998</a>)</span> for an entry point into that discussion.</p>
+<p>Since my intuitions argue in favor of transitivity being important, we’ll assume that for the remainder of the post.</p>
+<p>Summarizing, we’ve upgraded our ethical theory to work across sets of three actions by doing pairwise comparisons and aggregating them to find the best option subject to certain reasonableness constraints.</p>
+</div>
+</div>
+<h3 id="and-beyond">And beyond</h3>
+<p>This is quickly becoming tedious. Surely, we can’t hope to construct the choice function for each possible cardinality of <span class="math inline">\(\mathcal{A}\)</span> on unto infinity. As it turns out we don’t need to. We now have all the tools we need to generalize.</p>
+<div class="general-choice">
+<div class="math-col">
+<p>If we review all the properties we’ve accumulated on our binary relation, it is (somewhat redundantly) irreflexive, asymmetric, transitive, trichotomous, and total. That is, our binary relation is actually a <a href="https://en.wikipedia.org/wiki/Total_order#Strict_total_order">strict total order</a>. And the choice function we’ve been implementing so far simply picks the greatest element in each subset of <span class="math inline">\(\mathcal{A}\)</span>. We can extend this indefinitely. A total order on <span class="math inline">\(\mathcal{S}\)</span> with the property that every nonempty subset of <span class="math inline">\(\mathcal{S}\)</span> has a greatest element is a (inverted) <a href="https://en.wikipedia.org/wiki/Well-order">well-order</a>. <a href="https://proofwiki.org/wiki/Finite_Totally_Ordered_Set_is_Well-Ordered">Every finite total order is also a well-order</a>. So we can generalize this approach to the choice function to arbitrary subsets of <span class="math inline">\(\mathcal{A}\)</span> of finite cardinality <span class="math inline">\(n\)</span>. We leave the issue of infinite <span class="math inline">\(\mathcal{A}\)</span> aside for the moment.</p>
+</div>
+<div class="ethics-col">
+<p>We can, in principle, follow this same basic approach to scale our ethical theory to choose among an arbitrary number of actions. We just keep making pairwise comparisons until we conclude what the best option is (We’re guaranteed a unique answer as long as the pairwise comparisons obey transitivity.).</p>
+</div>
+</div>
+<h3 id="conclusion">Conclusion</h3>
+<p>We started with the claimed insight that ethical theories are choice functions—for each moral decision, an ethical theory must pick a single distinguished action (that which we ought to perform) from the set of all available actions. From there, we built up a procedure for turning a ‘better than’ binary relation into a well-order. Once we have a well-order with its greatest element guarantee, a choice function is trivial. That is, if the problem of ethics is to find a choice function, an ethical well-order is a good candidate for that choice function.</p>
+<p>Along the way, we made several choices about how our choice function and binary relation ought to behave. While these choices weren’t arbitrary, they were only sparsely defended. I plan to examine these assumptions and alternatives in more depth in future posts.</p>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-rachels1998">
+<p>Rachels, Stuart. 1998. “Counterexamples to the Transitivity of Better Than.” <em>Australasian Journal of Philosophy</em> 76 (1). Taylor &amp; Francis Group: 71–83. <a href="http://www.jamesrachels.org/stuart/countex.pdf" class="uri">http://www.jamesrachels.org/stuart/countex.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Irreflexive—<span class="math inline">\(\forall a \in \mathcal{A} : \neg \left(a \prec a\right)\)</span>. For example, <span class="math inline">\(\leq\)</span> on the integers is reflexive while <span class="math inline">\(\lt\)</span> is irreflexive.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Asymmetric—<span class="math inline">\(\forall a, b \in \mathcal{A} : a \prec b \implies \neg \left(b \prec a\right)\)</span>. For example, it’s not true that both <span class="math inline">\(1 &lt; 2\)</span> and <span class="math inline">\(2 &lt; 1\)</span>.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Totality—<span class="math inline">\(\forall a, b \in \mathcal{A} : a \prec b \veebar b \prec a \veebar a \approx b\)</span>. For any two integers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, only one of the following holds: <span class="math inline">\(a &lt; b\)</span>; <span class="math inline">\(b &lt; b\)</span>; <span class="math inline">\(a = b\)</span>. You cannot pick two integers which are ‘undefined’ with respect to <span class="math inline">\(&lt;\)</span> and <span class="math inline">\(=\)</span>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Transitivity—<span class="math inline">\(\forall a, b, c \in \mathcal{A} : \left(a \prec b \land b \prec c\right) \implies a \prec c\)</span>. For example, <span class="math inline">\(1 &lt; 2\)</span>, <span class="math inline">\(2 &lt; 3\)</span>, and <span class="math inline">\(1 &lt; 3\)</span>.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>

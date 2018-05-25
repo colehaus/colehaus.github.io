@@ -29,6 +29,20 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/putting-out-gig-economy-ii/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/ethics-well-order/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/construct-vnm-utility-function/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -79,6 +93,13 @@
 
     <url>
         <loc>https://www.col-ex.org/posts/notebooks/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/strategic-voting-moral-parliament/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -323,6 +344,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/metaethics/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/metrics/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -338,6 +366,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/notebook/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/order%20theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

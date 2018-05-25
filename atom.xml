@@ -8,8 +8,361 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-05-14T00:00:00Z</updated>
+    <updated>2018-05-20T00:00:00Z</updated>
     <entry>
+    <title>Putting-out with smartphones II</title>
+    <link href="https://www.col-ex.org/posts/putting-out-gig-economy-ii/" />
+    <id>https://www.col-ex.org/posts/putting-out-gig-economy-ii/</id>
+    <published>2018-05-20T00:00:00Z</published>
+    <updated>2018-05-20T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<blockquote>
+They have driven us away from our houses and gardens to work as prisoners in their factories and their seminaries of vice. <span class="attribution">Thomas Exell, 1838</span>
+</blockquote>
+<p><a href="https://www.col-ex.org/posts/putting-out-gig-economy-i/">Last time</a> we reviewed the putting out system—a pre-industrial system of manufacture used in England where workers would take intermediate products home, refine them in some way, and return them to a merchant so that some other worker could perform the next step in the production process. Then, I suggested that this system sounds a lot like the modern gig economy.</p>
+<p>Which left us with the question: Why is the gig economy worse than regular, full-time employment (for workers), but putting-out was better than factories (for workers)? We can resolve this tension by either finding that contemporary praise of the putting out system is wrong, finding that criticism of the gig economy is wrong, or (hint, hint) highlighting the disanalogies between the systems.</p>
+<h1 id="was-putting-out-actually-preferred-to-factories">Was putting-out actually preferred to factories?</h1>
+<h2 id="direct-evidence">Direct evidence</h2>
+<p>Obviously, we can’t answer this question definitively and our <span class="noted">direct evidence</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> is weak. One piece of direct evidence we do have is contemporary complaints about the factory system like that in the epigraph. Of course, these are only anecdotes and it’s hard to generalize or be sure they’re representative, but, try as I might, I couldn’t find any anecdotes on the other side of the issue—there were no early factory workers singing praises of child labor and 14 hour days.</p>
+<p>Another piece of information which tends to reveal preferences is: “[W]here alternatives to factory employment were available, there is evidence that workers flocked to them. […] [D]espite the abysmally low level to which wages fell [in the non-factory cotton weaving industry], a force of domestic cotton weavers numbering some 250,000 survived well into the nineteenth century.” <span class="citation" data-cites="marglin1974">(Marglin <a href="#ref-marglin1974">1974</a>)</span> It is, of course, impossible to be certain that worker aversion to factories is what drove this behavior.</p>
+<p><!--more--></p>
+<p>One last claim from this angle: It seems widely acknowledged that workers struggled to transition to the factory model. Factory work was perhaps never fully accepted by adults forced to transition to it and was only accepted by children who had grown up working in factories or expecting to work in factories (a la “Science advances one funeral at a time.”). “The early industrial capitalists spent a great deal of effort and time in the social conditioning of their labor force” <span class="citation" data-cites="mokyr2001">(Mokyr <a href="#ref-mokyr2001">2001</a>)</span>.</p>
+<h2 id="indirect-evidence">Indirect evidence</h2>
+<p><a href="https://www.col-ex.org/posts/putting-out-gig-economy-i/#transition">Last time, we covered some of the reasons that factory work might have been unappealing.</a></p>
+<p>I trust that the reader can call to mind or find lots more about the abysmal conditions of early factories.</p>
+<h2 id="an-objection">An objection</h2>
+<p>One objection the attentive reader might raise is: If the workers didn’t like factories, why did they transition to them? Standard economic logic dictates that actors don’t make self-defeating choices so they must have actually preferred factories. The story here is that the productivity of factories was so great and decreased prices so much that the comparatively inefficient putting-out system was no longer sustainable. Factory driven changes in market conditions meant workers were faced with the choice of penury or factory work. <span class="citation" data-cites="mokyr2001">(Mokyr <a href="#ref-mokyr2001">2001</a>)</span></p>
+<h2 id="summation">Summation</h2>
+<p>I’ll readily admit that no particular of evidence here is impressive. In the aggregate though, I’m still fairly ready to believe that workers preferred the putting-out system to factory work.</p>
+<h1 id="is-flsa-work-actually-preferred-to-gig-work">Is FLSA work actually preferred to gig work?</h1>
+<p>(FLSA stands for <a href="https://en.wikipedia.org/wiki/Fair_Labor_Standards_Act_of_1938">Fair Labor Standards Act</a> and we’ll use work where these rules apply as a conceptual shorthand for ‘normal’ work.)</p>
+<p>Sadly, the intervening centuries don’t mean that we’re drowning in evidence on this question either. Everyone in the nascent literature seems to lament that the best source of data is a 2005 (!) BLS report on <em>Contingent and Alternative Employment Arrangements</em> <span class="citation" data-cites="bls2005">(Labor Statistics (BLS). <a href="#ref-bls2005">2004</a>)</span>. Obviously, there wasn’t much of a gig economy in 2005 so data from that report is best interpreted with caution.</p>
+<h2 id="direct-evidence-1">Direct evidence</h2>
+<p>Caveats aside, here’s a key finding: By their narrowest definition of contingent worker (wage and salary workers who indicate that they expect to work in their current job for 1 year or less and who have worked for their current employer for 1 year or less) 63% of workers in these contingent and alternative arrangements would have preferred a job that was permanent. A somewhat broader definition of contingent worker (includes the self-employed) drops that to 57%.</p>
+<p>Another story you can tell as to worker attitudes on contingent work: “When workers were in a strong bargaining position from 1995 to 2001, the share of contingent workers fell. Gig jobs declined as a share of the economy when workers had more bargaining leverage during the employment boom—the first internet boom—of the second Clinton Administration. This suggests that it is employers, not employees, who are pushing the gig economy.” <span class="citation" data-cites="friedman2014">(Friedman <a href="#ref-friedman2014">2014</a>)</span></p>
+<h2 id="indirect-evidence-1">Indirect evidence</h2>
+<p>There are, of course, many disadvantages to gig work which might cause workers to dislike it. For one, gig workers tend to earn less than traditional employees after controlling for education <span class="citation" data-cites="friedman2014">(Friedman <a href="#ref-friedman2014">2014</a>)</span>.</p>
+<p>There’s also a whole bundle of benefits mandated by the FLSA in the U.S. Gig workers are not guaranteed these things. The benefits include:</p>
+<ul>
+<li>minimum wage</li>
+<li>overtime compensation</li>
+<li>unemployment compensation</li>
+<li>family and medical leave</li>
+<li>employer payroll taxes</li>
+<li>collective bargaining rights</li>
+</ul>
+<p>Furthermore, a majority of workers in FLSA positions are offered the following benefits:</p>
+<ul>
+<li>health insurance</li>
+<li>retirement</li>
+<li>life insurance</li>
+<li>paid sick leave</li>
+<li>paid vacations</li>
+</ul>
+<p>Of course, the arguments in favor of gig work are very similar to those advanced in favor of putting-out in the <a href="https://www.col-ex.org/posts/putting-out-gig-economy-i/#transition">previous post in the series</a>.</p>
+<h2 id="summation-1">Summation</h2>
+<p>Ultimately, though I’m far from certain, I find the evidence above somewhat persuasive. It seems likely to me that most workers in the gig economy would prefer other arrangements.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>It’s hard to be certain, but it seems that both claims might be true. Putting-out was better than factories for workers and gig work is worse than FLSA employment for most workers. That means our only way out is to discern the crucial differences between now and then. Next time.</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-friedman2014">
+<p>Friedman, Gerald. 2014. “Workers Without Employers: Shadow Corporations and the Rise of the Gig Economy.” <em>Review of Keynesian Economics</em> 2 (2). Edward Elgar Publishing Ltd: 171–88. <a href="https://www.researchgate.net/profile/Gerald_Friedman/publication/276191257_Workers_without_employers_Shadow_corporations_and_the_rise_of_the_gig_economy/links/5731c7bf08ae6cca19a3081f.pdf" class="uri uri">https://www.researchgate.net/profile/Gerald_Friedman/publication/276191257_Workers_without_employers_Shadow_corporations_and_the_rise_of_the_gig_economy/links/5731c7bf08ae6cca19a3081f.pdf</a>.</p>
+</div>
+<div id="ref-bls2005">
+<p>Labor Statistics (BLS)., Bureau of. 2004. “Contingent and Alternative Employment Arrangements.” <a href="https://www.bls.gov/news.release/pdf/conemp.pdf" class="uri uri">https://www.bls.gov/news.release/pdf/conemp.pdf</a>.</p>
+</div>
+<div id="ref-marglin1974">
+<p>Marglin, Stephen A. 1974. “What Do Bosses Do? The Origins and Functions of Hierarchy in Capitalist Production.” <em>Review of Radical Political Economics</em> 6 (2). Sage Publications Sage CA: Thousand Oaks, CA: 60–112. <a href="http://scholar.harvard.edu/files/marglin/files/review_of_radical_political_economics-1974-marglin-60-112_0.pdf" class="uri uri">http://scholar.harvard.edu/files/marglin/files/review_of_radical_political_economics-1974-marglin-60-112_0.pdf</a>.</p>
+</div>
+<div id="ref-mokyr2001">
+<p>Mokyr, Joel. 2001. “The Rise and Fall of the Factory System: Technology, Firms, and Households Since the Industrial Revolution.” In <em>Carnegie-Rochester Conference Series on Public Policy</em>, 55:1–45. 1. Elsevier. <a href="https://cpb-us-e1.wpmucdn.com/sites.northwestern.edu/dist/3/1222/files/2016/06/The-Rise-and-Fall-of-the-Factory-System-Nov-2000-1dey3ic.pdf" class="uri uri">https://cpb-us-e1.wpmucdn.com/sites.northwestern.edu/dist/3/1222/files/2016/06/The-Rise-and-Fall-of-the-Factory-System-Nov-2000-1dey3ic.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>By direct evidence, I mean evidence about the preferences of workers. This contrasts with indirect evidence where we find what working conditions were like and infer how workers must have felt about those conditions.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>Ethics as well-order</title>
+    <link href="https://www.col-ex.org/posts/ethics-well-order/" />
+    <id>https://www.col-ex.org/posts/ethics-well-order/</id>
+    <published>2018-05-17T00:00:00Z</published>
+    <updated>2018-05-17T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Ethics is fundamentally about ‘ought’. What ought we to do? Which actions are proscribed and which prescribed? Among all available actions, which should we actually pursue? I think we can formalize this basic understanding and draw some interesting conclusions.</p>
+<p>For any given ethical decision, we have some nonempty set <span class="math inline">\(\mathcal{A}\)</span> (depending on how we individuate, possibly infinite) of possible actions. But, alas, we cannot perform all these actions; only one. So an ethical theory is something that for every possible <span class="math inline">\(\mathcal{A}\)</span> selects a distinguished element <span class="math inline">\(a \in \mathcal{A}\)</span>. That is, an ethical theory is a <a href="https://en.wikipedia.org/wiki/Choice_function">choice function</a> over nonempty sets of actions.</p>
+<p>In the rest of the post, we’ll discuss what properties such an ethical choice function might have and build up an understanding of how the tools of <a href="https://en.wikipedia.org/wiki/Order_theory">order theory</a> might be applied to metaethical reasoning.</p>
+<p><!--more--></p>
+<h1 id="one-elementaction">One element/action</h1>
+<p>Let’s try to think about this ethical choice function in a little more detail. We’ll start with the simplest case:</p>
+<div class="single-choice">
+<div class="math-col">
+<p>sets with only a single element. Here, our choice function simply plucks out this single element. In symbols, <span class="math inline">\(\forall a \in \mathcal{A} : f(\{a\}) = a\)</span>.</p>
+</div>
+<div class="ethics-col">
+<p>ethical choices with only one possible action (i.e. there is not even a choice between action and inaction). Here, <a href="https://en.wikipedia.org/wiki/Ought_implies_can">we’d hope our ethical theory would recommend the only possible action</a>.</p>
+</div>
+</div>
+<h1 id="two-elementsactions">Two elements/actions</h1>
+<p>On to the next step:</p>
+<div class="double-choice">
+<div class="math-col">
+<p>Now, we want to define our choice function over two element sets as well. In order to relate the two elements in each set, we must talk about a <a href="https://en.wikipedia.org/wiki/Binary_relation">binary relation</a> that we’ll call <span class="math inline">\(\prec\)</span> (read <span class="math inline">\(a \prec b\)</span> as <span class="math inline">\(a\)</span> is worse than <span class="math inline">\(b\)</span> or as <span class="math inline">\(b\)</span> is better than <span class="math inline">\(a\)</span>). What properties should this relation have? We’ll make our relation <span class="noted"><a href="https://en.wikipedia.org/wiki/Reflexive_relation">irreflexive</a></span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. It should also be <span class="noted"><a href="https://en.wikipedia.org/wiki/Asymmetric_relation">asymmetric</a></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. If we stick to our earlier claim that an ethical theory must pick a distinguished element “for every possible” <span class="math inline">\(\mathcal{A}\)</span> (which, tendentiously, we will for the rest of the post), then we’re also requesting <span class="noted"><a href="https://en.wikipedia.org/wiki/Serial_relation">totality</a></span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>. (Totality also demands an <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a>. We choose the <a href="https://en.wikipedia.org/wiki/Equality_(mathematics)">identity relation</a> for the remaining discussion.)</p>
+<p>So our choice function applies our irreflexive, asymmetric binary relation to our two element set and always chooses the better element of the two.</p>
+</div>
+<div class="ethics-col">
+<p>What happens when our ethical theory needs to actually start pulling its weight and giving guidance between two different actions (call them A and B)? At its simplest, the theory can either declare that A is better or instead that B is better. Or it might declare that the two actions are incomparable—neither stands anywhere in ethical relation to the other. This is often unsatisfactory (as suggested in a <a href="https://www.col-ex.org/posts/pareto-examples/">previous post</a>). So we’ll provisionally adhere to the introduction’s demand that our ethical theory never avail itself of this escape hatch. This demand for comprehensive guidance means that we also need a notion of moral equivalence. At a minimum, every action must be morally equivalent to itself. (Our ethical theory ought not to claim that action A is better than A.)</p>
+<p>All of that is to say, when presented with two different actions, our ethical theory always recommends one or the other as the better to pursue.</p>
+</div>
+</div>
+<h1 id="three-elementsactions">Three elements/actions</h1>
+<p>Now it really starts to get complicated.</p>
+<div class="triple-choice">
+<div class="math-col">
+<p>We’ve defined our choice function for sets <span class="math inline">\(\mathcal{A}\)</span> of cardinality <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>. What about <span class="math inline">\(3\)</span>?</p>
+<p>(These next several paragraphs are a belaboring of what are presumably widely shared intuitions about transitivity and using a binary relation to pick the greatest element in a set.)</p>
+<p>Let’s try to build it out of what we already know. For any given <span class="math inline">\(a, b, c \in \mathcal{A}\)</span>, if we look at the binary relation as defined on <span class="math inline">\(a ? b\)</span> and <span class="math inline">\(b ? c\)</span>, we have 9 cases to consider:</p>
+<figure>
+<figcaption>
+Generic choice function on elements of cardinality 3 based on relationship between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and between <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(a ? b\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(b ? c\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(f(\{a,b,c\})\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{W}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{Y}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{Z}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{X}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\mathcal{W}\)</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>I’ve taken the liberty of categorizing the rows. Those in category <span class="math inline">\(\mathcal{W}\)</span> rely on <span class="noted">transitivity</span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a> of our binary relation. Those in category <span class="math inline">\(\mathcal{X}\)</span> rely on transitivity of the identity relation. In category <span class="math inline">\(\mathcal{Y}\)</span>, <span class="math inline">\(a ? c\)</span> is underdetermined, but each <span class="math inline">\(\prec b\)</span>. In category <span class="math inline">\(\mathcal{Z}\)</span>, <span class="math inline">\(a ? c\)</span> is again undefined but <span class="math inline">\(b \prec\)</span> each.</p>
+<p>Transitivity of the identity relation strikes me as /very/ innocuous. Transitivity of the binary relation also seems very intuitive to me, but some contest it. See, for example, <span class="citation" data-cites="rachels1998">(Rachels <a href="#ref-rachels1998">1998</a>)</span>. In category $, because our choice function only needs to select the one best element, we don’t care that <span class="math inline">\(a ? c\)</span> is undetermined—<span class="math inline">\(b\)</span> is greater than both. It’s only in <span class="math inline">\(\mathcal{Z}\)</span>, that we must again resort to our binary relation to settle whether element <span class="math inline">\(a\)</span> or <span class="math inline">\(c\)</span> is greater. Putting that all together, we rewrite the table:</p>
+<figure>
+<figcaption>
+Choice function on elements of cardinality 3 based on relationship between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and between <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> under certain constraining assumptions
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(a ? b\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(b ? c\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(f(\{a,b,c\})\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b/c\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a/b/c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a = b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a/b\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b \prec c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a?c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(b = c\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(b \prec a\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(c \prec b\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a\)</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>That’s all a long-winded way of suggesting that we can ‘lift’ our binary relation to a choice function on sets of cardinality 3 with the help of transitivity.</p>
+</div>
+<div class="ethics-col">
+<p>How does our ethical theory cope when asked to recommend among three distinct, ethically relevant actions (call them A, B, and C)? Let’s start by just making pairwise comparisons—we already established a system for this in the prior step. Because we’re making sure to consider only distinct actions which are not morally equivalent, there are <span class="math inline">\(2^3 = 8\)</span> possible pairwise combinations.</p>
+<figure>
+<figcaption>
+Table showing possible results of pairwise comparisons between ethically relevant actions A, B, and C.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">A vs. B</th>
+<th style="text-align: left;">B vs. C</th>
+<th style="text-align: left;">A vs. C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">a better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">a better</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">b better</td>
+<td style="text-align: left;">c better</td>
+<td style="text-align: left;">c better</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>6 of the 8 (i.e. all but rows 2 and 7 in the table) are perfectly reasonable and take a form like ‘A is better than B which is better than C with is the worst.’. However, 2 of the 8 pairwise combinations (i.e. rows 2 and 7 in the table) produce cycles like ‘A is better than B which is better than C which is better than A which is better than B’ which continues ad nauseum.</p>
+<p>Needless to say, permitting cycles in our ethical theory has many strange consequences. If we wish to forbid these cycles, the property we must appeal to is <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitivity</a>. Nevertheless, the transitivity of ‘better than’ is actually an open question in the philosophical community. See, for example, <span class="citation" data-cites="rachels1998">(Rachels <a href="#ref-rachels1998">1998</a>)</span> for an entry point into that discussion.</p>
+<p>Since my intuitions argue in favor of transitivity being important, we’ll assume that for the remainder of the post.</p>
+<p>Summarizing, we’ve upgraded our ethical theory to work across sets of three actions by doing pairwise comparisons and aggregating them to find the best option subject to certain reasonableness constraints.</p>
+</div>
+</div>
+<h1 id="and-beyond">And beyond</h1>
+<p>This is quickly becoming tedious. Surely, we can’t hope to construct the choice function for each possible cardinality of <span class="math inline">\(\mathcal{A}\)</span> on unto infinity. As it turns out we don’t need to. We now have all the tools we need to generalize.</p>
+<div class="general-choice">
+<div class="math-col">
+<p>If we review all the properties we’ve accumulated on our binary relation, it is (somewhat redundantly) irreflexive, asymmetric, transitive, trichotomous, and total. That is, our binary relation is actually a <a href="https://en.wikipedia.org/wiki/Total_order#Strict_total_order">strict total order</a>. And the choice function we’ve been implementing so far simply picks the greatest element in each subset of <span class="math inline">\(\mathcal{A}\)</span>. We can extend this indefinitely. A total order on <span class="math inline">\(\mathcal{S}\)</span> with the property that every nonempty subset of <span class="math inline">\(\mathcal{S}\)</span> has a greatest element is a (inverted) <a href="https://en.wikipedia.org/wiki/Well-order">well-order</a>. <a href="https://proofwiki.org/wiki/Finite_Totally_Ordered_Set_is_Well-Ordered">Every finite total order is also a well-order</a>. So we can generalize this approach to the choice function to arbitrary subsets of <span class="math inline">\(\mathcal{A}\)</span> of finite cardinality <span class="math inline">\(n\)</span>. We leave the issue of infinite <span class="math inline">\(\mathcal{A}\)</span> aside for the moment.</p>
+</div>
+<div class="ethics-col">
+<p>We can, in principle, follow this same basic approach to scale our ethical theory to choose among an arbitrary number of actions. We just keep making pairwise comparisons until we conclude what the best option is (We’re guaranteed a unique answer as long as the pairwise comparisons obey transitivity.).</p>
+</div>
+</div>
+<h1 id="conclusion">Conclusion</h1>
+<p>We started with the claimed insight that ethical theories are choice functions—for each moral decision, an ethical theory must pick a single distinguished action (that which we ought to perform) from the set of all available actions. From there, we built up a procedure for turning a ‘better than’ binary relation into a well-order. Once we have a well-order with its greatest element guarantee, a choice function is trivial. That is, if the problem of ethics is to find a choice function, an ethical well-order is a good candidate for that choice function.</p>
+<p>Along the way, we made several choices about how our choice function and binary relation ought to behave. While these choices weren’t arbitrary, they were only sparsely defended. I plan to examine these assumptions and alternatives in more depth in future posts.</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-rachels1998">
+<p>Rachels, Stuart. 1998. “Counterexamples to the Transitivity of Better Than.” <em>Australasian Journal of Philosophy</em> 76 (1). Taylor &amp; Francis Group: 71–83. <a href="http://www.jamesrachels.org/stuart/countex.pdf" class="uri uri">http://www.jamesrachels.org/stuart/countex.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Irreflexive—<span class="math inline">\(\forall a \in \mathcal{A} : \neg \left(a \prec a\right)\)</span>. For example, <span class="math inline">\(\leq\)</span> on the integers is reflexive while <span class="math inline">\(\lt\)</span> is irreflexive.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>Asymmetric—<span class="math inline">\(\forall a, b \in \mathcal{A} : a \prec b \implies \neg \left(b \prec a\right)\)</span>. For example, it’s not true that both <span class="math inline">\(1 &lt; 2\)</span> and <span class="math inline">\(2 &lt; 1\)</span>.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>Totality—<span class="math inline">\(\forall a, b \in \mathcal{A} : a \prec b \veebar b \prec a \veebar a \approx b\)</span>. For any two integers <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, only one of the following holds: <span class="math inline">\(a &lt; b\)</span>; <span class="math inline">\(b &lt; b\)</span>; <span class="math inline">\(a = b\)</span>. You cannot pick two integers which are ‘undefined’ with respect to <span class="math inline">\(&lt;\)</span> and <span class="math inline">\(=\)</span>.<a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn4">
+<p>Transitivity—<span class="math inline">\(\forall a, b, c \in \mathcal{A} : \left(a \prec b \land b \prec c\right) \implies a \prec c\)</span>. For example, <span class="math inline">\(1 &lt; 2\)</span>, <span class="math inline">\(2 &lt; 3\)</span>, and <span class="math inline">\(1 &lt; 3\)</span>.<a href="#fnref4" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Standalone–Build your own von Neumann–Morgenstern utility function</title>
     <link href="https://www.col-ex.org/posts/construct-vnm-utility-function/" />
     <id>https://www.col-ex.org/posts/construct-vnm-utility-function/</id>
@@ -159,7 +512,7 @@ or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <spa
 </blockquote>
 <p>I’ll take a moment to explicitly note this for the ensuing discussion: An avowed leftist publishing in the <em>Review of radical political economics</em> comes out strongly in favor of putting-out over factory work. I suspect many other leftists would have similar sympathies.</p>
 <h1 id="the-gig-economy">The gig economy</h1>
-<p>I hope the earlier description of the putting-out system echoed in your brain. To me, it sounds a great deal like a technologically limited gig economy. In both systems, workers have considerable freedom over how much work they perform, but not which tasks. Their tasks are assigned by a central clearinghouse which also mediates their relationship with the final consumer. Unlike freelancers, workers have relationships with only one or a few buyers (<a href="https://en.wikipedia.org/wiki/Monopsony">monopsony</a>/ <a href="https://en.wikipedia.org/wiki/Oligopsony">oligopsony</a>). Unlike modern full-time employees, in both systems, workers have very limited and almost purely monetary interactions with their employer.</p>
+<p>I hope the earlier description of the putting-out system echoed in your brain. To me, it sounds a great deal like a technologically limited gig economy. In both systems, workers have considerable freedom over how much work they perform, but not which tasks. Their tasks are assigned by a central clearinghouse which also mediates their relationship with the final consumer. Unlike freelancers, workers have relationships with only one or a few buyers (<a href="https://en.wikipedia.org/wiki/Monopsony">monopsony</a>/ <a href="https://en.wikipedia.org/wiki/Oligopsony">oligopsony</a>). Unlike modern full-time employees, in both systems, workers have very limited physical interactions with their employer.</p>
 <p>If you accept the aptness of this analogy, we’re left with a confusion. Why was the putting-out system considered better than full-time, centralized employment while the gig economy is often considered worse? Especially from the leftist perspective?</p>
 <div class="skippable">
 <h2 id="gig-hate">Gig hate</h2>
@@ -172,7 +525,7 @@ or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <spa
 </ul>
 </div>
 <h1 id="reconciliation">Reconciliation</h1>
-<p>We have three ways to reconcile the apparent conflict. People are wrong about the putting-out system, people are wrong about the gig economy, or the two systems are crucially different. But that will have to wait for another day.</p>
+<p>We have three ways to reconcile the apparent conflict. People are wrong about the putting-out system, people are wrong about the gig economy, or the two systems are crucially different. But that will have to wait for <a href="https://www.col-ex.org/posts/putting-out-gig-economy-i/">another day</a>.</p>
 <hr />
 <div id="refs" class="references">
 <div id="ref-marglin1974">
@@ -585,6 +938,53 @@ or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <spa
 <ol>
 <li><div id="fn1">
 <p>Think <a href="https://jupyter.org/">Jupyter</a>.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>Strategic voting in the moral parliament</title>
+    <link href="https://www.col-ex.org/posts/strategic-voting-moral-parliament/" />
+    <id>https://www.col-ex.org/posts/strategic-voting-moral-parliament/</id>
+    <published>2018-04-17T00:00:00Z</published>
+    <updated>2018-04-17T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="moral-uncertainty">Moral uncertainty</h1>
+<p>Briefly, moral uncertainty in <span class="citation" data-cites="macaskill2014">(MacAskill <a href="#ref-macaskill2014">2014</a>)</span> starts from the premise that we will never have absolute certainty as to the one, true moral theory (Just as we don’t in the emprical realm. See, for example, <a href="https://www.iep.utm.edu/fallibil/">fallibilism</a>.). How should we account for this? Do we just ignore all theories other than the one which we grant the most credence? MacAskill proposes that we don’t and instead combine the results of different theories using the tools of <a href="https://en.wikipedia.org/wiki/Social_choice_theory">social choice theory</a>. In particular, he suggests that we allow moral theories to cast weighted “votes” and that we reach a final decision by using the <a href="https://en.wikipedia.org/wiki/Borda_count">Borda count</a> on these votes.</p>
+<p>(If this explanation is too rushed, chapter 2 of <span class="citation" data-cites="macaskill2014">(MacAskill <a href="#ref-macaskill2014">2014</a>)</span> explains it all at greater length. It’s quite readable.)</p>
+<h1 id="we-cant-have-nice-things">We can’t have nice things</h1>
+<p>If you have a social choice sense, it should be tingling now. Aren’t there a bunch of impossibility results in social choice theory saying, roughly, that no voting system is satisfactory? Alas, yes. See, for example, <a href="https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem">Arrow’s impossibility theorem</a> and the <a href="https://en.wikipedia.org/wiki/Gibbard%E2%80%93Satterthwaite_theorem">Gibbard-Satterthwaite theorem</a>. These seem like shaky grounds to build the core of your moral metatheory…</p>
+<h2 id="what-about-honest-people-can-honest-people-have-nice-things">What about honest people? Can honest people have nice things?</h2>
+<p>MacAskill claims to sidestep these results because tactical voting is irrelevant in the moral parliament. Moral theories are not agents and cannot dissemble:</p>
+<blockquote>
+It should be clear that this [strategic voting] consideration should bear no weight in the context of decision-making under moral uncertainty. We have no need to worry about theories “lying” about their choice-worthiness function (whatever that would mean). The decision-maker knows what moral theories she has credence in, and she knows their choice-worthiness functions. So, unlike in the case of voting, there is no gap between an individual’s stated preferences and an individual’s true preferences.
+</blockquote>
+<h2 id="sadly-no">Sadly, no</h2>
+<p>Social choice theory doesn’t call out strategic voting in order to condemn those tricksy voters for their lack of virtue. <span class="noted">Strategic voting is a problem because it reduces the quality of information available for making social decisions</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. The ultimate goal of any social choice mechanism is social efficiency—the social decision should always maximize aggregate welfare. Inaccurate information as to what individuals want makes that (in the general case) impossible. If somebody insists they adore <a href="https://en.wikipedia.org/wiki/Vermin_Supreme">Vermin Supreme</a> despite a private loathing, <span class="noted">no voting system</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a> can remedy that.</p>
+<p>Is it possible to have inaccurate information in the moral parliament? Of course. Even without agency, there can be yawning chasms between our moral beliefs and the moral fact of the matter.</p>
+<p><!--more--></p>
+<hr />
+<p><!--
+The condition that the Borda Rule violates is Contraction Consistency. Within the context of decision-making under moral uncertainty, we may define this condition as follows:
+
+Contraction Consistency: Let $\mathcal{C}$ be the option-set, $\mathcal{M}$ be the set of maximally appropriate options given the option-set $\mathcal{C}$, and $\mathcal{S}$ be a subset of $\mathcal{C}$ that contains all the members of $\mathcal{M}$. The set $\mathcal{ℳ}*$ of the maximally appropriate options given the option-set $\mathcal{S}$ has all and only the same members as $\mathcal{M}$.
+
+First, a reason why Contraction Consistency is thought desirable in the voting context is that violating it leads to susceptibility to tactical voting. ... And, indeed, the Borda Rule is often dismissed for being extremely susceptible to tactical voting. However, as I have noted, while tactical voting is a real problem when it comes to aggregating the stated preferences of people, it is no problem at all in the context of decision-making under moral uncertainty. Theories aren’t agents, and so there’s no way that they can conceal their choice-worthiness ordering. If a decision-maker were to pretend that one theory’s choice-worthiness ordering were different than it is, she would only be deceiving herself.
+
+I understand my project as still within the domain of ideal rationality, and of giving a criterion of rightness rather than a decision-procedure.
+--></p>
+<div id="refs" class="references">
+<div id="ref-macaskill2014">
+<p>MacAskill, William. 2014. “Normative Uncertainty.” PhD thesis, University of Oxford. <a href="http://commonsenseatheism.com/wp-content/uploads/2014/03/MacAskill-Normative-Uncertainty.pdf" class="uri uri">http://commonsenseatheism.com/wp-content/uploads/2014/03/MacAskill-Normative-Uncertainty.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p><a href="https://en.wikipedia.org/wiki/Mechanism_design">Mechanism design</a> (sort of a constructive version of social choice theory) even conceives of itself as the theory of extracting and making public private information.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>At least with current balloting technology. Reliable polygraphesque technology could change that. Utopia or dystopia?<a href="#fnref2" class="footnote-back">↩</a></p>
 </div></li>
 </ol>
 </section>]]></summary>
