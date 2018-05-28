@@ -29,6 +29,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/moral-limits-markets-summary/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/devil-donor-lottery/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -295,6 +302,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/ethics/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/frequentist/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -338,6 +352,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/machine%20ethics/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/markets/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
