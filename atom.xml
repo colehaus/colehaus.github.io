@@ -575,7 +575,7 @@ Table showing possible results of pairwise comparisons between ethically relevan
 <p>Apple Banana Carrot</p>
 </textarea>
 <p>Which do you prefer?</p>
-<div class="scenario">
+<div class="scenario input">
 <p>Receive <span id="first-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Banana</span> lottery ticket(s)</span><br />
 <br />
 or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Carrot</span> lottery ticket(s)</span><br />
@@ -618,7 +618,7 @@ or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <spa
 <p>Apple Banana Carrot</p>
 </textarea>
 <p>Which do you prefer?</p>
-<div class="scenario">
+<div class="input scenario">
 <p>Receive <span id="first-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Banana</span> lottery ticket(s)</span><br />
 <br />
 or <span id="second-good" class="lottery"><span class="odds">1.00e+0</span> <span class="good">Carrot</span> lottery ticket(s)</span><br />
