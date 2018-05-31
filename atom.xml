@@ -8,8 +8,55 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-05-28T00:00:00Z</updated>
+    <updated>2018-05-30T00:00:00Z</updated>
     <entry>
+    <title>Minor blessings of a god emperor</title>
+    <link href="https://www.col-ex.org/posts/minor-blessings-god-emperor/" />
+    <id>https://www.col-ex.org/posts/minor-blessings-god-emperor/</id>
+    <published>2018-05-30T00:00:00Z</published>
+    <updated>2018-05-30T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="life-extension-in-autocrats">Life extension in autocrats</h1>
+<p>In a <a href="https://80000hours.org/podcast/episodes/bryan-caplan-case-for-and-against-education/">recent episode of the 80,000 hours podcast</a>, <a href="http://econlog.econlib.org/authorbcaplan.html">Bryan Caplan</a> briefly talked about totalitarianism. During that section of the conversation, he dropped this tidbit:</p>
+<blockquote>
+[F]un fact is Stalin actually had a life-extension program dedicated to try to make himself immortal. It didn’t work, but my view that is if it worked, than I think the Soviet Union would still be ruled by Joseph Stalin.
+</blockquote>
+<h1 id="incentive-alignment">Incentive alignment</h1>
+<p>Infinite tyrants sound worse than finite tyrants. But there’s a silver lining: Long tenure in autocrats discourages rapacity.</p>
+<h2 id="theory">Theory</h2>
+<p>For the theoretical argument, we turn to <span class="citation" data-cites="olson1993">(Olson <a href="#ref-olson1993">1993</a>)</span>. First, we suppose an autocrat is a rational, economically informed actor trying to maximize their total consumption over their lifetime. Then:</p>
+<blockquote>
+<p>We know that an economy will generate its maximum income only if there is a high rate of investment and that much of the return on long-term investments is received long after the investment is made. This means that an autocrat who is taking a long view will try to convince his subjects that their assets will be permanently protected not only from theft by others but also from expropriation by the autocrat himself. If his subjects fear expropriation, they will invest less, and in the long run his tax collections will be reduced.</p>
+<p>[…]</p>
+<p>Now suppose that an autocrat is only concerned about getting through the next year. He will then gain by expropriating any convenient capital asset whose tax yield over the year is less than its total value.</p>
+</blockquote>
+<p>Beyond limiting expropriation, an immortal autocrat would want to support other economic freedoms that increase long-run growth—as long as they encourage growth more than they imperil the autocrat. Other things in this category might include: the impartial enforcement of contracts and a stable currency.</p>
+<p>Recapitulating, an autocrat that orients toward the long run gets to consume more in the long run—as long as they stay in power. All else equal, an immortal autocrat will stay in power longer than a merely mortal autocrat and thus has more incentive to focus on the long run. The good news is that everyone else also gets to consume more and enjoy more economic freedoms along the way.</p>
+<p><!--more--></p>
+<h2 id="empirical-evidence">Empirical evidence</h2>
+<p>If this model actually described reality, what might we observe? One thing we’d expect to see is that precarious autocrats expropriate more (to the extent they recognize their own precarity). And, indeed, we do see this.</p>
+<p><span class="citation" data-cites="azzimonti2018">(Azzimonti <a href="#ref-azzimonti2018">2018</a>)</span> uses panel data on 145 countries from 1984–2014 and (among other things) looks at <span class="noted">government stability</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> as determined by a panel of experts and risk of expropriation as determined by a panel of experts. It finds “a strong negative correlation between government stability and the risk of expropriation across regions. This indicates that countries where political turnover is high are more likely to engage in expropriation activities.”</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-azzimonti2018">
+<p>Azzimonti, Marina. 2018. “The Politics of Fdi Expropriation.” <em>International Economic Review</em> 59 (2). Wiley Online Library: 479–510. <a href="http://marina-azzimonti.com/wp-content/uploads/2015/01/w22705.pdf" class="uri uri">http://marina-azzimonti.com/wp-content/uploads/2015/01/w22705.pdf</a>.</p>
+</div>
+<div id="ref-howell2012icrg">
+<p>Howell, Llewellyn D. “ICRG Methodology.” <a href="https://www.prsgroup.com/wp-content/uploads/2014/08/icrgmethodology.pdf" class="uri uri">https://www.prsgroup.com/wp-content/uploads/2014/08/icrgmethodology.pdf</a>.</p>
+</div>
+<div id="ref-olson1993">
+<p>Olson, Mancur. 1993. “Dictatorship, Democracy, and Development.” <em>American Political Science Review</em> 87 (3). Cambridge University Press: 567–76. <a href="http://www.svt.ntnu.no/iss/Indra.de.Soysa/POL3503H05/olson.pdf" class="uri uri">http://www.svt.ntnu.no/iss/Indra.de.Soysa/POL3503H05/olson.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>“This is an assessment both of the government’s ability to carry out its declared program(s), and its ability to stay in office.” <span class="citation" data-cites="howell2012icrg">(Howell)</span>)<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Hot takes—The Moral Limits of Markets</title>
     <link href="https://www.col-ex.org/posts/moral-limits-markets-critique/" />
     <id>https://www.col-ex.org/posts/moral-limits-markets-critique/</id>
@@ -55,6 +102,9 @@
 <p>Ultimately, this is an empirical question. I think it’s clear that people do give special moral consideration to those that are close to them. The only question that’s left is if the lesser moral consideration allotted to strangers is sufficient to enable modern society without social technologies like markets.</p>
 <hr />
 <div id="refs" class="references">
+<div id="ref-acemoglu2005">
+<p>Acemoglu, Daron, Simon Johnson, and James A Robinson. 2005. “Institutions as a Fundamental Cause of Long-Run Growth.” <em>Handbook of Economic Growth</em> 1. Elsevier: 385–472. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf" class="uri uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf</a>.</p>
+</div>
 <div id="ref-sandel2012">
 <p>Sandel, Michael J. 2012. <em>What Money Can’t Buy: The Moral Limits of Markets</em>. Macmillan.</p>
 </div>
@@ -68,9 +118,11 @@
 <li><div id="fn2">
 <p>By ‘squicky’, I mean ‘incenses my moral intution’ or ‘is likely to incense the moral intuition of others’.<a href="#fnref2" class="footnote-back">↩</a></p>
 </div></li>
-<li><div id="fn3">
-<p>It sounds more conniving and conspiratorial here in shorthand than I mean it to.<a href="#fnref3" class="footnote-back">↩</a></p>
-</div></li>
+<li><p><span id="fn3">It sounds more conniving and conspiratorial here in shorthand than I mean it to. My claim is intended to be read a la Robinson and Acemoglu <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>:</span></p>
+<blockquote>
+Economic institutions determine the incentives of and the constraints on economic actors, and shape economic outcomes. As such, they are social decisions, chosen for their consequences. Because different groups and individuals typically benefit from different economic institutions, there is generally a conflict over these social choices, ultimately resolved in favor of groups with greater political power.
+</blockquote>
+<p><a href="#fnref3" class="footnote-back">↩</a></p></li>
 <li><div id="fn4">
 <p>I’m not claiming this <em>is</em> what’s moral. Just that it might be how our biology predisposes us to act.<a href="#fnref4" class="footnote-back">↩</a></p>
 </div></li>

@@ -29,9 +29,16 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/posts/moral-limits-markets-critique/index.html</loc>
+        <loc>https://www.col-ex.org/posts/minor-blessings-god-emperor/index.html</loc>
         <changefreq>weekly</changefreq>
         
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/moral-limits-markets-critique/index.html</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2018-05-31</lastmod>
         <priority>0.8</priority>
     </url>
 
@@ -219,6 +226,13 @@
 
     <url>
         <loc>https://www.col-ex.org/posts/about/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/autocracy/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -422,6 +436,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/order%20theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/political%20economy/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
