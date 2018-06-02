@@ -163,7 +163,7 @@ Stage of repeated game of economic production in an autocratic regime. Incorpora
 <h5 id="analysis">Analysis</h5>
 <p>The utility of player <span class="math inline">\(i\)</span> given all actions of all players across time (<span class="math inline">\(\mathbf{a}\)</span>) is <span class="math inline">\(U_i(\mathbf{a}) = \sum_{t=0}^\infty \delta^t \cdot u_i(a_i^t, a_{-i}^t, \mathbf{a^{t-1}})\)</span>.</p>
 <p>We’ll start by examining the utility obtained by each player when they pursue a constant strategy (e.g. <em>always</em> invest, <em>always</em> loot).</p>
-<h6 id="texttax-mathttinvest"><span class="math inline">\(\text{Tax}\)</span>, <span class="math inline">\(\mathtt{Invest}\)</span></h6>
+<h6 id="texttaxbackslashmathttinvest"><span class="math inline">\(\text{Tax}\backslash\mathtt{Invest}\)</span></h6>
 <p>In the first round, $ invest but have not yet reaped the benefit. So they obtain only <span class="math inline">\((1 - k) - c\)</span> (what’s left after the <span class="math inline">\(\text{Autocrat}\)</span>’s taxes minus the cost of <span class="math inline">\(\mathtt{Investing}\)</span>) while the <span class="math inline">\(\text{Autocrat}\)</span> simply receives their tax share of output <span class="math inline">\(k\)</span>. In all subsequent rounds, output is scaled by the competing factors of the discount rate <span class="math inline">\(\delta\)</span> and the growth rate <span class="math inline">\(r\)</span> while cost is scaled only by the discount rate <span class="math inline">\(\delta\)</span>.</p>
 <figure>
 <figcaption>
@@ -178,7 +178,7 @@ U_{\mathtt{P}}(\mathbf{a}) &amp;= (1 - k) - c + \sum_{t=1}^\infty \delta^t \cdot
 \end{align*}
 \]</span>
 </figure>
-<h6 id="textloot-mathttinvest"><span class="math inline">\(\text{Loot}\)</span>, <span class="math inline">\(\mathtt{Invest}\)</span></h6>
+<h6 id="textlootbackslashmathttinvest"><span class="math inline">\(\text{Loot}\backslash\mathtt{Invest}\)</span></h6>
 <p>The setup is identical here except that the lower <span class="math inline">\(\text{Tax}\)</span> rate <span class="math inline">\(k\)</span> has been replaced by the higher <span class="math inline">\(\text{Looting}\)</span> rate <span class="math inline">\(l\)</span>.</p>
 <figure>
 <figcaption>
@@ -193,7 +193,7 @@ U_{\mathtt{P}}(\mathbf{a}) &amp;= (1 - l) - c + \sum_{t=1}^\infty \delta^t \cdot
 \end{align*}
 \]</span>
 </figcaption>
-<h6 id="texttax-mathttshirk"><span class="math inline">\(\text{Tax}\)</span>, <span class="math inline">\(\mathtt{Shirk}\)</span></h6>
+<h6 id="texttaxbackslashmathttshirk"><span class="math inline">\(\text{Tax}\backslash\mathtt{Shirk}\)</span></h6>
 <p>In the first round, <span class="math inline">\(\mathtt{Producers}\)</span> don’t invest so they simply receive <span class="math inline">\(1 - k\)</span>. Similarly, the <span class="math inline">\(\text{Autocrat}\)</span> receives only <span class="math inline">\(k\)</span> in the first round. In all subsequent rounds, players’ rewards are scaled by the discount factor <span class="math inline">\(\delta\)</span>.</p>
 <figure>
 <figcaption>
@@ -208,7 +208,7 @@ U_{\mathtt{P}}(\mathbf{a}) &amp;= (1 - k) + \sum_{t=1}^\infty \delta^t \cdot (o 
 \end{align*}
 \]</span>
 </figcaption>
-<h6 id="textloot-mathttshirk"><span class="math inline">\(\text{Loot}\)</span>, <span class="math inline">\(\mathtt{Shirk}\)</span></h6>
+<h6 id="textlootbackslashmathttshirk"><span class="math inline">\(\text{Loot}\backslash\mathtt{Shirk}\)</span></h6>
 <p>The setup is identical here except that the lower <span class="math inline">\(\text{Tax}\)</span> rate <span class="math inline">\(k\)</span> has been replaced by the higher <span class="math inline">\(\text{Looting}\)</span> rate <span class="math inline">\(l\)</span>.</p>
 <figure>
 <figcaption>
@@ -238,10 +238,10 @@ r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 <p>For <span class="math inline">\(r\)</span> less than this, <span class="math inline">\(\mathtt{Shirking}\)</span> is preferred. The intuition here is simply that it makes no sense to incur the costs of investing if the payoff is too low (or even 0).</p>
 <p>So we find ourselves in the same equilibrium again than. When only constant strategies are available, <span class="math inline">\(\text{Loot}\)</span> and <span class="math inline">\(\mathtt{Shirk}\)</span> is the equilibrium.</p>
 <h6 id="tit-for-tat">Tit for tat</h6>
-<p>In repeated games, we can encourage cooperation by punishing defection. What happens if we permit <span class="math inline">\(\mathtt{Producers}\)</span> to use a <a href="https://en.wikipedia.org/wiki/Trigger_strategy">tit for tat strategy</a>? First, we’ll note that if the <span class="math inline">\(\text{Autocrat}\)</span> <span class="math inline">\(\text{Taxes}\)</span>, the <span class="math inline">\(\mathtt{Producers}\)</span> never need to punish and so it plays out exactly like <span class="math inline">\(\text{Tax}\)</span>, <span class="math inline">\(\mathtt{Invest}\)</span>. On the other hand, if the autocrat follows a constant <span class="math inline">\(\text{Loot}\)</span> strategy, the <span class="math inline">\(\mathtt{Producers Invest}\)</span> in the first round and never again.</p>
+<p>In repeated games, we can encourage cooperation by punishing defection. What happens if we permit <span class="math inline">\(\mathtt{Producers}\)</span> to use a <a href="https://en.wikipedia.org/wiki/Trigger_strategy">tit for tat strategy</a>? First, we’ll note that if the <span class="math inline">\(\text{Autocrat}\)</span> <span class="math inline">\(\text{Taxes}\)</span>, the <span class="math inline">\(\mathtt{Producers}\)</span> never need to punish and so it plays out exactly like <span class="math inline">\(\text{Tax}\backslash\mathtt{Invest}\)</span>. On the other hand, if the autocrat follows a constant <span class="math inline">\(\text{Loot}\)</span> strategy, the <span class="math inline">\(\mathtt{Producers Invest}\)</span> in the first round and never again.</p>
 <figure>
 <figcaption>
-Discounted utility obtained by the <span class="math inline">\(\text{Autocrat}\)</span> and <span class="math inline">\(\mathtt{Producers}\)</span> given they play <span class="math inline">\(\text{Loot}\)</span> and <span class="math inline">\(\mathtt{Tit for tat}\)</span> against each other.
+Discounted utility obtained by the <span class="math inline">\(\text{Autocrat}\)</span> and <span class="math inline">\(\mathtt{Producers}\)</span> given they play <span class="math inline">\(\text{Loot}\)</span> and <span class="math inline">\(\mathtt{Tit-for-tat}\)</span> against each other.
 </figcaption>
 <span class="math display">\[
 \begin{align*}
@@ -252,8 +252,8 @@ U_{\mathtt{P}}(\mathbf{a}) &amp;= (1 - l) - c + \sum_{t=1}^\infty \delta^t (o \c
 \end{align*}
 \]</span>
 </figcaption>
-<p>It turns out that <span class="math inline">\(\text{Tax}, \mathtt{Tit for tat}\)</span> is an equilibrium (given the strategy space) and the appropriate parameters.</p>
-<p>To see this, we first confirm that the <span class="math inline">\(\mathtt{Producer}\)</span> can do no better. Here, we appeal to our earlier claim that the payoffs for this game are the same as for <span class="math inline">\(\text{Tax}, \mathtt{Invest}\)</span> so no improvement is possible there. Comparing <span class="math inline">\(\mathtt{Tit for tat}\)</span> to <span class="math inline">\(\mathtt{Shirking}\)</span> while <span class="math inline">\(\text{Taxed}\)</span> is also structurally identical to our earlier comparison of <span class="math inline">\(\mathtt{Investing}\)</span> to <span class="math inline">\(\mathtt{Shirking}\)</span> while <span class="math inline">\(\mathtt{Looted}\)</span>. We just swap out the higher tax rate <span class="math inline">\(l\)</span> in favor of a <span class="math inline">\(k\)</span>. The critical growth rate then is <span class="math inline">\(r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - k)}\)</span>. For <span class="math inline">\(r\)</span> less than this, <span class="math inline">\(\mathtt{Producers}\)</span> prefer <span class="math inline">\(\mathtt{Shirking}\)</span> and otherwise <span class="math inline">\(\mathtt{Investing}\)</span>.</p>
+<p>It turns out that <span class="math inline">\(\text{Tax}, \mathtt{Tit-for-tat}\)</span> is an equilibrium (given the strategy space) and the appropriate parameters.</p>
+<p>To see this, we first confirm that the <span class="math inline">\(\mathtt{Producer}\)</span> can do no better. Here, we appeal to our earlier claim that the payoffs for this game are the same as for <span class="math inline">\(\text{Tax}, \mathtt{Invest}\)</span> so no improvement is possible there. Comparing <span class="math inline">\(\mathtt{Tit-for-tat}\)</span> to <span class="math inline">\(\mathtt{Shirking}\)</span> while <span class="math inline">\(\text{Taxed}\)</span> is also structurally identical to our earlier comparison of <span class="math inline">\(\mathtt{Investing}\)</span> to <span class="math inline">\(\mathtt{Shirking}\)</span> while <span class="math inline">\(\mathtt{Looted}\)</span>. We just swap out the higher tax rate <span class="math inline">\(l\)</span> in favor of a <span class="math inline">\(k\)</span>. The critical growth rate then is <span class="math inline">\(r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - k)}\)</span>. For <span class="math inline">\(r\)</span> less than this, <span class="math inline">\(\mathtt{Producers}\)</span> prefer <span class="math inline">\(\mathtt{Shirking}\)</span> and otherwise <span class="math inline">\(\mathtt{Investing}\)</span>.</p>
 <p>Now we have only to confirm that the <span class="math inline">\(\text{Autocrat}\)</span> can’t improve their lot by <span class="math inline">\(\text{Looting}\)</span>. Again, we’ll copy over the two utility expressions and set them equal to find the critical growth rate <span class="math inline">\(r\)</span>.</p>
 <figure>
 <figcaption>
@@ -266,7 +266,7 @@ l + \frac{\delta \cdot r \cdot l}{1 - \delta} = k + \frac{\delta \cdot r \cdot k
 r = \frac{\sqrt{\delta^2 \cdot l + (4 \cdot \delta - 4) \cdot (k - l)}}{2 \cdot \delta \cdot \sqrt{l}} + \frac{1}{2}
 \]</span>
 </figure>
-<p>If <span class="math inline">\(r\)</span> is greater than this, the <span class="math inline">\(\text{Autocrat}\)</span> will prefer <span class="math inline">\(\text{Taxing}\)</span>. That means when <span class="math inline">\(r\)</span> satisfies both of these constraints, <span class="math inline">\(\text{Tax}, \mathtt{Tit for tat}\)</span> is an equilibrium.</p>
+<p>If <span class="math inline">\(r\)</span> is greater than this, the <span class="math inline">\(\text{Autocrat}\)</span> will prefer <span class="math inline">\(\text{Taxing}\)</span>. That means when <span class="math inline">\(r\)</span> satisfies both of these constraints, <span class="math inline">\(\text{Tax}, \mathtt{Tit-for-tat}\)</span> is an equilibrium.</p>
 <h6 id="concrete">Concrete</h6>
 <p>Let’s check our math and make this a bit more concrete by plugging in some numbers. If we pick <span class="math inline">\(k = 0.2\)</span>, <span class="math inline">\(l = 0.8\)</span>, <span class="math inline">\(c = 0.8\)</span> and <span class="math inline">\(\delta = 0.95\)</span>, we find that our two constraints on <span class="math inline">\(r\)</span> work out to <span class="math inline">\(r &gt; \frac{39}{38} \approx 1.02632\)</span> and <span class="math inline">\(r \gtrapprox 1.03995\)</span>. We’ll pick <span class="math inline">\(r = 1.04\)</span>. Now plugging in all our parameters, we can calculate all the payoffs. We end up with a game like this:</p>
 <table>
@@ -281,7 +281,7 @@ r = \frac{\sqrt{\delta^2 \cdot l + (4 \cdot \delta - 4) \cdot (k - l)}}{2 \cdot 
 <th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
 <th><span class="math inline">\(\mathtt{Invest}\)</span></th>
 <th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
-<th><span class="math inline">\(\mathtt{Tit for tat}\)</span></th>
+<th><span class="math inline">\(\mathtt{Tit-for-tat}\)</span></th>
 </tr>
 </thead>
 <tbody>

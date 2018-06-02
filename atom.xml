@@ -99,7 +99,7 @@
 <h3 id="analysis">Analysis</h3>
 <p>The utility of player <span class="math inline">\(i\)</span> given all actions of all players across time (<span class="math inline">\(\mathbf{a}\)</span>) is <span class="math inline">\(U_i(\mathbf{a}) = \sum_{t=0}^\infty \delta^t \cdot u_i(a_i^t, a_{-i}^t, \mathbf{a^{t-1}})\)</span>.</p>
 <p>We’ll start by examining the utility obtained by each player when they pursue a constant strategy (e.g. <em>always</em> invest, <em>always</em> loot).</p>
-<h4 id="texttax-mathttinvest"><span class="math inline">\(\text{Tax}\)</span>, <span class="math inline">\(\mathtt{Invest}\)</span></h4>
+<h4 id="texttaxbackslashmathttinvest"><span class="math inline">\(\text{Tax}\backslash\mathtt{Invest}\)</span></h4>
 <p>In the first round, $ invest but have not yet reaped the benefit. So they obtain only <span class="math inline">\((1 - k) - c\)</span> (what’s left after the <span class="math inline">\(\text{Autocrat}\)</span>’s taxes minus the cost of <span class="math inline">\(\mathtt{Investing}\)</span>) while the <span class="math inline">\(\text{Autocrat}\)</span> simply receives their tax share of output <span class="math inline">\(k\)</span>. In all subsequent rounds, output is scaled by the competing factors of the discount rate <span class="math inline">\(\delta\)</span> and the growth rate <span class="math inline">\(r\)</span> while cost is scaled only by the discount rate <span class="math inline">\(\delta\)</span>.</p>
 <figure>
 <img src="https://www.col-ex.org/images/latex/-2488830548868812487.svg" title="
@@ -111,7 +111,7 @@ U_{\mathtt{P}}(\mathbf{a}) &amp;= (1 - k) - c + \sum_{t=1}^\infty \delta^t \cdot
 \end{align*}
 " alt="Discounted utility obtained by the \(\text{Autocrat}\) and \(\mathtt{Producers}\) given they play \(\text{Tax}\) and \(\mathtt{Invest}\) against each other." /><figcaption>Discounted utility obtained by the <span class="math inline">\(\text{Autocrat}\)</span> and <span class="math inline">\(\mathtt{Producers}\)</span> given they play <span class="math inline">\(\text{Tax}\)</span> and <span class="math inline">\(\mathtt{Invest}\)</span> against each other.</figcaption>
 </figure>
-<h4 id="textloot-mathttinvest"><span class="math inline">\(\text{Loot}\)</span>, <span class="math inline">\(\mathtt{Invest}\)</span></h4>
+<h4 id="textlootbackslashmathttinvest"><span class="math inline">\(\text{Loot}\backslash\mathtt{Invest}\)</span></h4>
 <p>The setup is identical here except that the lower <span class="math inline">\(\text{Tax}\)</span> rate <span class="math inline">\(k\)</span> has been replaced by the higher <span class="math inline">\(\text{Looting}\)</span> rate <span class="math inline">\(l\)</span>.</p>
 <figure>
 <img src="https://www.col-ex.org/images/latex/5433162689657803305.svg" title="
@@ -133,7 +133,7 @@ U_{\mathtt{S}}(\mathbf{a}) = (1 - l) + \frac{\delta \cdot (1 - l)}{1 - \delta} \
 r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 " alt="Parameter values at which \(\text{Looted}\) \(\mathtt{Producers}\) are indifferent between \(\mathtt{Investing}\) and \(\mathtt{Shirking}\)." /><figcaption>Parameter values at which <span class="math inline">\(\text{Looted}\)</span> <span class="math inline">\(\mathtt{Producers}\)</span> are indifferent between <span class="math inline">\(\mathtt{Investing}\)</span> and <span class="math inline">\(\mathtt{Shirking}\)</span>.</figcaption>
 </figure>
-<p>If <span class="math inline">\(r\)</span> is greater than this, the <span class="math inline">\(\text{Autocrat}\)</span> will prefer <span class="math inline">\(\text{Taxing}\)</span>. That means when <span class="math inline">\(r\)</span> satisfies both of these constraints, <span class="math inline">\(\text{Tax}, \mathtt{Tit for tat}\)</span> is an equilibrium.</p>
+<p>If <span class="math inline">\(r\)</span> is greater than this, the <span class="math inline">\(\text{Autocrat}\)</span> will prefer <span class="math inline">\(\text{Taxing}\)</span>. That means when <span class="math inline">\(r\)</span> satisfies both of these constraints, <span class="math inline">\(\text{Tax}, \mathtt{Tit-for-tat}\)</span> is an equilibrium.</p>
 <h4 id="concrete">Concrete</h4>
 <p>Let’s check our math and make this a bit more concrete by plugging in some numbers. If we pick <span class="math inline">\(k = 0.2\)</span>, <span class="math inline">\(l = 0.8\)</span>, <span class="math inline">\(c = 0.8\)</span> and <span class="math inline">\(\delta = 0.95\)</span>, we find that our two constraints on <span class="math inline">\(r\)</span> work out to <span class="math inline">\(r &gt; \frac{39}{38} \approx 1.02632\)</span> and <span class="math inline">\(r \gtrapprox 1.03995\)</span>. We’ll pick <span class="math inline">\(r = 1.04\)</span>. Now plugging in all our parameters, we can calculate all the payoffs. We end up with a game like this:</p>
 <table style="width:98%;">
@@ -148,7 +148,7 @@ r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 <th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
 <th><span class="math inline">\(\mathtt{Invest}\)</span></th>
 <th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
-<th><span class="math inline">\(\mathtt{Tit for tat}\)</span></th>
+<th><span class="math inline">\(\mathtt{Tit-for-tat}\)</span></th>
 </tr>
 </thead>
 <tbody>
