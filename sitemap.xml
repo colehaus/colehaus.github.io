@@ -29,6 +29,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/autocrats-accelerate-growth-cooperation/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/minor-blessings-god-emperor/index.html</loc>
         <changefreq>weekly</changefreq>
         

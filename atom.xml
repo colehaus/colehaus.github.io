@@ -8,8 +8,191 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-05-30T00:00:00Z</updated>
+    <updated>2018-06-01T00:00:00Z</updated>
     <entry>
+    <title>Autocrats <em>can</em> accelerate growth through cooperation</title>
+    <link href="https://www.col-ex.org/posts/autocrats-accelerate-growth-cooperation/" />
+    <id>https://www.col-ex.org/posts/autocrats-accelerate-growth-cooperation/</id>
+    <published>2018-06-01T00:00:00Z</published>
+    <updated>2018-06-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="intro">Intro</h1>
+<p>In <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span> and <span class="citation" data-cites="acemoglu2013">(Acemoglu and Robinson <a href="#ref-acemoglu2013">2013</a>)</span> (and surely elsewhere), Acemoglu and Robinson contend that inclusive societies have inherent economic advantages over stratified societies. If true, this is quite important; it suggests that, in the long run, we should <span class="noted">expect inclusive societies to “win” out</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. The moral arc of the universe bends toward justice and all that.</p>
+<h1 id="scenario">Scenario</h1>
+<p>But is it true? As far as I can tell, the best articulation of this claim is in section 6 of <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>. It lays out several claims in support of the argument that authoritarian societies have a structural disadvantage when it comes to economic growth. In this post, we’ll focus on the first:</p>
+<blockquote>
+<p>Imagine a situation in which an individual or a group holds unconstrained political power. Also suppose that productive investments can be undertaken by a group of citizens or producers that are distinct from the “political elites”, i.e., the current power holders. The producers will only undertake the productive investments if they expect to receive the benefits from their investments. Therefore, a set of economic institutions protecting their property rights are necessary for investment. Can the society opt for a set of economic institutions ensuring such secure property rights? The answer is often no (even assuming that “society” wants to do so).</p>
+<p>The problem is that the political elites—those in control of political power—cannot commit to respect the property rights of the producers once the investment are undertaken. Naturally, ex ante, before investments are undertaken, they would like to promise secure property rights. But the fact that the monopoly of political power in their hands implies that they cannot commit to not hold-up producers once the investments are sunk.</p>
+<p>[…] The consequence is clear: without such protection, productive investments are not undertaken, and opportunities for economic growth go unexploited.</p>
+</blockquote>
+<h1 id="model">Model</h1>
+<h2 id="single-shot">Single-shot</h2>
+<p>Let’s model this situation more explicitly to make our claims precise. We can describe it as a two player <a href="https://en.wikipedia.org/wiki/Game_theory">game</a>. Player one is the <span class="math inline">\(\text{Autocrat}\)</span> and player two is the <span class="noted"><span class="math inline">\(\mathtt{Producers}\)</span></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. During the game, the <span class="math inline">\(\text{Autocrat}\)</span> must decide to either <span class="math inline">\(\text{Tax}\)</span> at a sustainable rate or <span class="math inline">\(\text{Loot}\)</span> by taxing at an onerous rate, expropriating and otherwise taking a larger share of the economic output. We represent these actions as fractions of economic output taken by the <span class="math inline">\(\text{Autocrat}\)</span> with <span class="math inline">\(1 \geq l &gt; k \geq 0\)</span>. The <span class="math inline">\(\mathtt{Producers}\)</span> must decide to <span class="math inline">\(\mathtt{Shirk}\)</span>—just get by with a minimum amount of work at a subsistence standard of living—or <span class="math inline">\(\mathtt{Invest}\)</span>—devote more effort to production in the hopes of future improvements to productivity. The extra cost that producers pay when <span class="math inline">\(\mathtt{Investing}\)</span> is represented by <span class="math inline">\(c &gt; 0\)</span>. In either case, <span class="math inline">\(\mathtt{Producers}\)</span> receive whatever fraction of the economic output the dictator doesn’t take—<span class="math inline">\(1 - k\)</span> or <span class="math inline">\(1 - l\)</span>. This is all described more succinctly in the table below:</p>
+<figure>
+<figcaption>
+<p>Single-shot game of economic production in an autocratic regime</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
+<th><span class="math inline">\(\mathtt{Invest}\)</span></th>
+<th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\text{Tax}\)</span></td>
+<td><span class="math inline">\(k \backslash \mathtt{(1 - k) - c}\)</span></td>
+<td><span class="math inline">\(k \backslash \mathtt{1 - k}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{Loot}\)</span></td>
+<td><span class="math inline">\(l \backslash \mathtt{(1 - l) - c}\)</span></td>
+<td><span class="math inline">\(l \backslash \mathtt{1 - l}\)</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>In this game, Acemoglu’s and Robinson’s claim is correct. <span class="math inline">\(\text{Tax}\backslash\mathtt{Invest}\)</span> is not an equilibrium. The <span class="math inline">\(\text{Autocrat}\)</span> can always improve their outcome by switching from a strategy of <span class="math inline">\(\text{Tax}\)</span> to <span class="math inline">\(\text{Loot}\)</span>. Similarly, without any opportunity to recoup the increased cost of <span class="math inline">\(\mathtt{Investing}\)</span>, <span class="math inline">\(\mathtt{Producers}\)</span> will always prefer <span class="math inline">\(\mathtt{Shirking}\)</span>.</p>
+<p><!--more--></p>
+<h2 id="iterated">Iterated</h2>
+<h3 id="setup">Setup</h3>
+<p>But this isn’t a good model of the situation. <span class="math inline">\(\text{Autocrats}\)</span> and <span class="math inline">\(\mathtt{Producers}\)</span> interact repeatedly over a sustained period of time. We have a <a href="https://en.wikipedia.org/wiki/Repeated_game">repeated game</a>. Because no one knows when an autocrats reign will end, we avoid a <a href="https://en.wikipedia.org/wiki/Repeated_game#Finitely_repeated_games">finitely repeated game</a> and model this is an <a href="https://en.wikipedia.org/wiki/Repeated_game#Infinitely_repeated_games">infinitely repeated game</a> with a discount rate <span class="math inline">\(\delta\)</span> or, less pessimistically, as a game with some fixed probability of continuing after each stage <span class="math inline">\(\delta\)</span>.</p>
+<p>Now that the game has a sequence of stages, we can meaningfully incorporate the impact of <span class="math inline">\(\mathtt{Investing}\)</span>. The basic intuition is that there is some growth rate <span class="noted"><span class="math inline">\(\frac{1}{\delta} &gt; r \geq 1\)</span></span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a> and each instance of <span class="math inline">\(\mathtt{Investment}\)</span> compounds it. More formally, the productivity produced by actions up through time <span class="math inline">\(t\)</span> is <span class="math inline">\(p(\mathbf{a^t}) = r^{\sum_{t=0}^t \mathtt{I}(a_{\mathtt{R}}^t)}\)</span> where <span class="math inline">\(I\)</span> is an indicator function defined as <img src="https://www.col-ex.org/images/latex/8714069561825009905.svg" title="
+\mathtt{I}(a_{\mathtt{R}}^t) = \begin{cases}
+  1 &amp; a_{\mathtt{R}}^t = \mathtt{Invest} \\
+  0 &amp; a_{\mathtt{R}}^t = \mathtt{Shirk} \\
+\end{cases}
+" />.</p>
+<p>We just use this productivity multiplicatively with our previous terms so the new stage game looks like:</p>
+<figure>
+<figcaption>
+<p>Stage of repeated game of economic production in an autocratic regime. Incorporates conditional productivity growth.</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 35%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
+<th><span class="math inline">\(\mathtt{Invest}\)</span></th>
+<th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\text{Tax}\)</span></td>
+<td><span class="math inline">\(p \cdot k \backslash \mathtt{p \cdot (1 - k) - c}\)</span></td>
+<td><span class="math inline">\(p \cdot k \backslash \mathtt{p \cdot (1 - k)}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{Loot}\)</span></td>
+<td><span class="math inline">\(p \cdot l \backslash \mathtt{p \cdot (1 - l) - c}\)</span></td>
+<td><span class="math inline">\(p \cdot l \backslash \mathtt{p \cdot (1 - l)}\)</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="analysis">Analysis</h3>
+<p>The utility of player <span class="math inline">\(i\)</span> given all actions of all players across time (<span class="math inline">\(\mathbf{a}\)</span>) is <span class="math inline">\(U_i(\mathbf{a}) = \sum_{t=0}^\infty \delta^t \cdot u_i(a_i^t, a_{-i}^t, \mathbf{a^{t-1}})\)</span>.</p>
+<p>We’ll start by examining the utility obtained by each player when they pursue a constant strategy (e.g. <em>always</em> invest, <em>always</em> loot).</p>
+<h4 id="texttax-mathttinvest"><span class="math inline">\(\text{Tax}\)</span>, <span class="math inline">\(\mathtt{Invest}\)</span></h4>
+<p>In the first round, $ invest but have not yet reaped the benefit. So they obtain only <span class="math inline">\((1 - k) - c\)</span> (what’s left after the <span class="math inline">\(\text{Autocrat}\)</span>’s taxes minus the cost of <span class="math inline">\(\mathtt{Investing}\)</span>) while the <span class="math inline">\(\text{Autocrat}\)</span> simply receives their tax share of output <span class="math inline">\(k\)</span>. In all subsequent rounds, output is scaled by the competing factors of the discount rate <span class="math inline">\(\delta\)</span> and the growth rate <span class="math inline">\(r\)</span> while cost is scaled only by the discount rate <span class="math inline">\(\delta\)</span>.</p>
+<figure>
+<img src="https://www.col-ex.org/images/latex/-2488830548868812487.svg" title="
+\begin{align*}
+U_{\text{A}}(\mathbf{a}) &amp;= k + \sum_{t=1}^\infty \delta^t \cdot r^t \cdot k \\
+&amp;= k + \frac{\delta \cdot r \cdot k}{1 - \delta \cdot r} \\
+U_{\mathtt{P}}(\mathbf{a}) &amp;= (1 - k) - c + \sum_{t=1}^\infty \delta^t \cdot (r ^t \cdot (1 - k) - c) \\
+&amp;= (1 - k) - c + \frac{\delta \cdot r \cdot (1 - k)}{1 - \delta \cdot r} - \frac{\delta \cdot c}{1 - \delta} \\
+\end{align*}
+" alt="Discounted utility obtained by the \(\text{Autocrat}\) and \(\mathtt{Producers}\) given they play \(\text{Tax}\) and \(\mathtt{Invest}\) against each other." /><figcaption>Discounted utility obtained by the <span class="math inline">\(\text{Autocrat}\)</span> and <span class="math inline">\(\mathtt{Producers}\)</span> given they play <span class="math inline">\(\text{Tax}\)</span> and <span class="math inline">\(\mathtt{Invest}\)</span> against each other.</figcaption>
+</figure>
+<h4 id="textloot-mathttinvest"><span class="math inline">\(\text{Loot}\)</span>, <span class="math inline">\(\mathtt{Invest}\)</span></h4>
+<p>The setup is identical here except that the lower <span class="math inline">\(\text{Tax}\)</span> rate <span class="math inline">\(k\)</span> has been replaced by the higher <span class="math inline">\(\text{Looting}\)</span> rate <span class="math inline">\(l\)</span>.</p>
+<figure>
+<img src="https://www.col-ex.org/images/latex/5433162689657803305.svg" title="
+\begin{align*}
+U_{\text{A}}(\mathbf{a}) &amp;= l + \sum_{t=1}^\infty \delta^t \cdot r^t \cdot l \\
+&amp;= l + \frac{\delta \cdot r \cdot l}{1 - \delta \cdot r} \\
+U_{\mathtt{P}}(\mathbf{a}) &amp;= (1 - l) - c + \sum_{t=1}^\infty \delta^t \cdot (r ^t \cdot (1 - l) - c) \\
+&amp;= (1 - l) - c + \frac{\delta \cdot r \cdot (1 - l)}{1 - \delta \cdot r} - \frac{\delta \cdot c}{1 - \delta} \\
+\end{align*}
+" alt="Discounted utility obtained by the \(\text{Autocrat}\) and \(\mathtt{Producers}\) given they play \(\text{Loot}\) and \(\mathtt{Invest}\) against each other." /><figcaption>Discounted utility obtained by the <span class="math inline">\(\text{Autocrat}\)</span> and <span class="math inline">\(\mathtt{Producers}\)</span> given they play <span class="math inline">\(\text{Loot}\)</span> and <span class="math inline">\(\mathtt{Invest}\)</span> against each other.</figcaption>
+</figure>
+<h4 id="equilibrium-with-constant-strategies">Equilibrium with constant strategies</h4>
+<p>Examination makes it clear that, with only these constant strategies available, <span class="math inline">\(\text{Looting}\)</span> is still the best strategy for the <span class="math inline">\(\text{Autocrat}\)</span>. How should the <span class="math inline">\(\mathtt{Producers}\)</span> respond? That depends on the parameters. If we copy our utility expressions from above for <span class="math inline">\(\mathtt{Investing}\)</span> and <span class="math inline">\(\mathtt{Shirking}\)</span> and set them equal, we find the critical growth rate <span class="math inline">\(r\)</span>:</p>
+<figure>
+<img src="https://www.col-ex.org/images/latex/6711513497868136471.svg" title="
+U_{\mathtt{I}}(\mathbf{a}) = (1 - l) - c + \frac{\delta \cdot r \cdot (1 - l)}{1 - \delta \cdot r} - \frac{\delta \cdot c}{1 - \delta} \\
+U_{\mathtt{S}}(\mathbf{a}) = (1 - l) + \frac{\delta \cdot (1 - l)}{1 - \delta} \\
+(1 - l) - c + \frac{\delta \cdot r \cdot (1 - l)}{1 - \delta \cdot r} - \frac{\delta \cdot c}{1 - \delta} = U_{\mathtt{S}}(\mathbf{a}) = (1 - l) + \frac{\delta \cdot (1 - l)}{1 - \delta} \\
+r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
+" alt="Parameter values at which \(\text{Looted}\) \(\mathtt{Producers}\) are indifferent between \(\mathtt{Investing}\) and \(\mathtt{Shirking}\)." /><figcaption>Parameter values at which <span class="math inline">\(\text{Looted}\)</span> <span class="math inline">\(\mathtt{Producers}\)</span> are indifferent between <span class="math inline">\(\mathtt{Investing}\)</span> and <span class="math inline">\(\mathtt{Shirking}\)</span>.</figcaption>
+</figure>
+<p>If <span class="math inline">\(r\)</span> is greater than this, the <span class="math inline">\(\text{Autocrat}\)</span> will prefer <span class="math inline">\(\text{Taxing}\)</span>. That means when <span class="math inline">\(r\)</span> satisfies both of these constraints, <span class="math inline">\(\text{Tax}, \mathtt{Tit for tat}\)</span> is an equilibrium.</p>
+<h4 id="concrete">Concrete</h4>
+<p>Let’s check our math and make this a bit more concrete by plugging in some numbers. If we pick <span class="math inline">\(k = 0.2\)</span>, <span class="math inline">\(l = 0.8\)</span>, <span class="math inline">\(c = 0.8\)</span> and <span class="math inline">\(\delta = 0.95\)</span>, we find that our two constraints on <span class="math inline">\(r\)</span> work out to <span class="math inline">\(r &gt; \frac{39}{38} \approx 1.02632\)</span> and <span class="math inline">\(r \gtrapprox 1.03995\)</span>. We’ll pick <span class="math inline">\(r = 1.04\)</span>. Now plugging in all our parameters, we can calculate all the payoffs. We end up with a game like this:</p>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 21%" />
+<col style="width: 17%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
+<th><span class="math inline">\(\mathtt{Invest}\)</span></th>
+<th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
+<th><span class="math inline">\(\mathtt{Tit for tat}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\text{Tax}\)</span></td>
+<td><span class="math inline">\(16.66 \backslash 50.66\)</span></td>
+<td><span class="math inline">\(4 \backslash 2.32\)</span></td>
+<td><span class="math inline">\(16.66 \backslash 50.66\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{Loot}\)</span></td>
+<td><span class="math inline">\(66.66 \backslash 0.66\)</span></td>
+<td><span class="math inline">\(16 \backslash 0.58\)</span></td>
+<td><span class="math inline">\(16.61 \backslash 3.352\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Happily, this supports our earlier claim that, with the right choice of parameters and strategy space, cooperation is an equilibrium.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Contra <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>, autocrats can credibly cooperate in support of economic institutions which promote growth. The possibility for cooperation arises when we move from a single-shot game to a repeated game (as is often the case). This is bad news because it means we have one fewer reason to suppose that economics supports inclusivity in the long run.</p>
+<div id="refs" class="references">
+<div id="ref-acemoglu2005">
+<p>Acemoglu, Daron, Simon Johnson, and James A Robinson. 2005. “Institutions as a Fundamental Cause of Long-Run Growth.” <em>Handbook of Economic Growth</em> 1. Elsevier: 385–472. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf" class="uri uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf</a>.</p>
+</div>
+<div id="ref-acemoglu2013">
+<p>Acemoglu, Daron, and James A Robinson. 2013. <em>Why Nations Fail: The Origins of Power, Prosperity, and Poverty</em>. Broadway Business.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>The victory of inclusive societies is maintained, they argue, by a virtuous circle in which inclusive institutions are robust to perturbations.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>We will grant ourselves the unrealistic convenience of modeling the disparate group of producers as a single coordinated actor.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>We demand <span class="math inline">\(\delta \cdot r &lt; 1\)</span> for reasons of both mathematical tractability and economic plausibility.<a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Minor blessings of a god emperor</title>
     <link href="https://www.col-ex.org/posts/minor-blessings-god-emperor/" />
     <id>https://www.col-ex.org/posts/minor-blessings-god-emperor/</id>
