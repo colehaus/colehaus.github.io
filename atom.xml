@@ -10,6 +10,45 @@
     </author>
     <updated>2018-06-01T00:00:00Z</updated>
     <entry>
+    <title>In praise of principal-agent problems</title>
+    <link href="https://www.col-ex.org/posts/praise-principal-agent-problems/" />
+    <id>https://www.col-ex.org/posts/praise-principal-agent-problems/</id>
+    <published>2018-06-01T00:00:00Z</published>
+    <updated>2018-06-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="the-concept">The concept</h1>
+<p>Briefly, <a href="https://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem">principal–agent problems</a> occur when a principal enlists an agent to act on their behalf, but the agent has private information and independent interests. This scenario means that the principal incurs <a href="https://en.wikipedia.org/wiki/Agency_cost">agency costs</a> when compared to simply acting themselves.</p>
+<p>Examples include brokers <a href="https://en.wikipedia.org/wiki/Front_running">front running</a>, doctors <a href="https://www.propublica.org/article/doctors-who-take-company-cash-tend-to-prescribe-more-brand-name-drugs">prescribing medications based on their relationships with pharmaceutical companies</a>, and <a href="https://auto.howstuffworks.com/taxi-meter3.htm">taxis taking overlong routes</a>.</p>
+<h1 id="principal-agent-possibilities">Principal-agent possibilities</h1>
+<p>As these examples suggest, principal–agent problems are (I think) usually viewed as a bad thing. And they often are. But they can also be a refuge. To see this, we just have to flip our sympathies. The common examples encourage us to sympathize with the principal and see the agent as abusing their power.</p>
+<p>Examples from this perspective include:</p>
+<dl>
+<dt>Micromanager</dt>
+<dd>If your manager at work is a petty tyrant, you surely appreciate and exploit whatever gaps in their knowledge you can find to work in ways you believe more effective or just to preserve your psychological health.
+</dd>
+<dt>Overbearing parents</dt>
+<dd>Some parents seem to think of their children as agents in the project of aggrandizing themselves. Children in this situation may justly find that moving out–an increase in agency costs—represents a gift.
+</dd>
+</dl>
+<p><!--more--></p>
+<p>The common theme here is that the principals are people of power misusing it and their ignorances open up little pockets of possibility for the less powerful.</p>
+<h2 id="seeing-like-a-state"><em>Seeing like a state</em></h2>
+<p>We can put this perspective to more grandiose ends. For example, we can view the story of <span class="citation" data-cites="scott1998">(Scott <a href="#ref-scott1998">1998</a>)</span> as the story of high modernists trying to reduce agency costs. In weak, early states, elite principals had limited capacity to bend the populace (agents) to their will. There simply wasn’t enough information for elites to make any but the most basic demands. It’s hard to conscript or tax citizens when you don’t know their names or even how many there are. From this principal–agent perspective, the celebrated ‘metis’ (local knowledge) is precisely the information asymmetry that justifies granting agents (some) freedom of action.</p>
+<p>In other words, metis means that elite principals should delegate to agents because they don’t know everything. Principals respond to this fact by either trying to limit metis (to reduce agency costs) and make the people legible or by ignoring metis—to sometimes disastrous effect.</p>
+<h2 id="why-nations-fail"><em>Why nations fail</em></h2>
+<p><span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span> talks about problems that arise in stratified societies due to <a href="http://www.econport.org/content/teaching/modules/NFG/Commit.html">commitment problems</a>. I think we can also think of principal–agent problems as constraining autocracies (and other stratified, non-inclusive societies). A society in which there were no information asymmetries between autocrat and citizens would be the most perfect totalitarianism. Fortunately, no autocrat has yet achieved this and so autocrats must rely on other agents. These agents are assigned tasks with some latitude because the autocrat doesn’t know exactly how a task should be performed and task performance is evaluated with some latitude because the autocrat can’t know precisely how a task was executed. These twin latitudes create room for subversion or otherwise allow independent human expression rather than providing the autocrat with a nation of perfect puppets.</p>
+<p>Just like in <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>, we can use this structural feature of stratified societies to explain the benefits of inclusive institutions. Principal–agent relationships will always be limited and brittle because the principal can only specify finite requirements. The success we see in principal–agent relationships often relies on good faith on the part of the agent. But autocracies should often expect the principal–agent relationship to be adversarial. <a href="https://en.wikipedia.org/wiki/Work-to-rule">Under these conditions, contracts and explicit requirements are often woefully inadequate.</a> On the other hand, inclusive institutions give everybody an independent stake in success—thereby converting agents into fellow principals and providing robust incentive alignment.</p>
+<p>Finally, I’ll note that as <a href="https://en.wikipedia.org/wiki/Mass_surveillance">mass surveillance</a> improves, this advantage for inclusivity weakens. As mentioned previously, principal–agent problems only exist in the face of information asymmetries. To the extent that surveillance gives principals more information about agents and their actions, agency costs are reduced and autocracies become more effective. I’m certainly not the first to point out how mass surveillance can enable further domination, but I think this is a somewhat interesting angle on that observation.</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-acemoglu2005">
+<p>Acemoglu, Daron, Simon Johnson, and James A Robinson. 2005. “Institutions as a Fundamental Cause of Long-Run Growth.” <em>Handbook of Economic Growth</em> 1. Elsevier: 385–472. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf" class="uri uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf</a>.</p>
+</div>
+<div id="ref-scott1998">
+<p>Scott, James C. 1998. <em>Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed</em>. Yale University Press. <a href="https://theanarchistlibrary.org/library/james-c-scott-seeing-like-a-state.a4.pdf" class="uri uri">https://theanarchistlibrary.org/library/james-c-scott-seeing-like-a-state.a4.pdf</a>.</p>
+</div>
+</div>]]></summary>
+</entry>
+<entry>
     <title>Autocrats <em>can</em> accelerate growth through cooperation</title>
     <link href="https://www.col-ex.org/posts/autocrats-accelerate-growth-cooperation/" />
     <id>https://www.col-ex.org/posts/autocrats-accelerate-growth-cooperation/</id>
@@ -24,6 +63,8 @@
 <p>The problem is that the political elites—those in control of political power—cannot commit to respect the property rights of the producers once the investment are undertaken. Naturally, ex ante, before investments are undertaken, they would like to promise secure property rights. But the fact that the monopoly of political power in their hands implies that they cannot commit to not hold-up producers once the investments are sunk.</p>
 <p>[…] The consequence is clear: without such protection, productive investments are not undertaken, and opportunities for economic growth go unexploited.</p>
 </blockquote>
+<h1 id="counterclaim">Counterclaim</h1>
+<p>Contrary to the claim here, I think a rational and informed autocrat could credibly support economic institutions like property rights. If the autocrat and the producers interact over a non-trivial period of time, producers can condition their behavior on the autocrat’s. That is, the producers can decide that they’ll only invest if the autocrat preserves economic freedoms. If the autocrat expropriates and otherwise abuses the producers, they’ll do the bare minimum (shirk). Knowing this, the autocrat realizes that they can’t simply choose to loot while the producers continue to invest. The autocrat’s choice is between looting a minimal economy and a more restrained taxation of a growing economy. Under the right circumstances, a rational autocrat would do best to choose taxing a growing economy rather than looting a minimal economy.</p>
 <h1 id="model">Model</h1>
 <h2 id="single-shot">Single-shot</h2>
 <p>Let’s model this situation more explicitly to make our claims precise. We can describe it as a two player <a href="https://en.wikipedia.org/wiki/Game_theory">game</a>. Player one is the <span class="math inline">\(\text{Autocrat}\)</span> and player two is the <span class="noted"><span class="math inline">\(\mathtt{Producers}\)</span></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. During the game, the <span class="math inline">\(\text{Autocrat}\)</span> must decide to either <span class="math inline">\(\text{Tax}\)</span> at a sustainable rate or <span class="math inline">\(\text{Loot}\)</span> by taxing at an onerous rate, expropriating and otherwise taking a larger share of the economic output. We represent these actions as fractions of economic output taken by the <span class="math inline">\(\text{Autocrat}\)</span> with <span class="math inline">\(1 \geq l &gt; k \geq 0\)</span>. The <span class="math inline">\(\mathtt{Producers}\)</span> must decide to <span class="math inline">\(\mathtt{Shirk}\)</span>—just get by with a minimum amount of work at a subsistence standard of living—or <span class="math inline">\(\mathtt{Invest}\)</span>—devote more effort to production in the hopes of future improvements to productivity. The extra cost that producers pay when <span class="math inline">\(\mathtt{Investing}\)</span> is represented by <span class="math inline">\(c &gt; 0\)</span>. In either case, <span class="math inline">\(\mathtt{Producers}\)</span> receive whatever fraction of the economic output the dictator doesn’t take—<span class="math inline">\(1 - k\)</span> or <span class="math inline">\(1 - l\)</span>. This is all described more succinctly in the table below:</p>
