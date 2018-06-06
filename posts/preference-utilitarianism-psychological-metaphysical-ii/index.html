@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Preference utilitarianism—psychological or metaphysical? II—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Preference utilitarianism—psychological or metaphysical? II</h2>
+  
+    <h3 id="article-subtitle">Preliminary implications</h3>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/ethics/">ethics</a></li>
+    
+</ul></nav>
+
+  <span class="date">Published on <time datetime="2018-06-05">June  5, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>There are at least two possible interpretations of preference utilitarianism: psychological preference utilitarianism (the morally important part of preference satisfaction is when the preferrer believes it to be satisfied) and metaphysical preference utilitarianism (the morally important part of preference satisfaction is when the world comes into accord with the preference). Each has strange implications. PPU favors deception and gives up intuitive supervenience. MPU requires us to pick us some demarcation criterion; the broadest possible demarcation criterion is a bad candidate.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>With apologies to the Vienna Circle</summary><p>I'm not yet myself convinced that this is of vital practical importance.</p></details></li>
+      
+    </ul></aside>
+  
+
+  <h3 id="intro">Intro</h3>
+<p><a href="../../posts/preference-utilitarianism-psychological-metaphysical-i/">Last time</a> we highlighted that there are actual several possible interpretations of preference utilitarianism. These depend on when you get to a recognize a preference as having been satisfied in your moral accounting: When the world changes to accord with your preference? When you believe the world to have changed? When you have a justified true belief that the world has changed?</p>
+<p>In this post, we’ll draw out some implications of these views which will also serve as preliminary arguments for and against. For simplicity’s sake, we’ll focus on the two poles: preferences are satisfied when the preferrer believes the world to have changed (purely psychological), and preferences are satisfied when the world has changed (purely metaphysical).</p>
+<p>(I’ll also note that I assume advocates of preference utilitarianism implicitly (or explicitly and silently?) believe the psychological variant and my intuition favors it. If I argue against that position more vehemently, it’s only a sign of esteem.)</p>
+<h3 id="psychological">Psychological</h3>
+<h4 id="deception">Deception</h4>
+<p>One obvious but unfortunate implication of the psychological point of view is that self-deception is A-OK. Obligatory even. If I’d like to be create a grand unified theory of physics, I may find it easier to set myself a bastardized version of the problem than to solve the real thing. And if I can deceive myself in this way, the psychological theory of preference utilitarianism (henceforth PPU) makes a prima facie case that I am morally obliged to. (Because this deceptive approach is easier, it means I can satisfy this preference quickly and move on the satisfaction of other preferences rather than sinking vast gobs of time into the ‘authentic’ method.)</p>
+<!--more-->
+<p>But it’s not just self-deception. It’s any and all deception. Suppose I want to be loved by my family. If I’m a bit of git, my family might judge that just <a href="https://en.wikipedia.org/wiki/Gaslighting">gaslighting</a> me into believing I already am is easier and more likely to succeed than going through the hard personal and interpersonal work of improvement. Again, they may even be morally obliged to gaslight me. Similarly, depending on circumstances, a polity might be morally obliged to wage an effective propaganda campaign denying the presence of poverty rather than actually solving it. We’ve reached peak Orwell already.</p>
+<p>One reasonable response is that these deceptions are short-sighted. Satisfying these ‘gateway’ preferences might unlock new and better possibilities that are unavailable to the deceived. An actual grand unified theory of physics might allow things heretofore considered impossible.</p>
+<p>But not all preferences are like this. Some are truly terminal. No further beliefs or actions are contingent upon their fulfillment in the world and so there is nothing that pragmatically militates for their accuracy. Being loved might be like this. I struggle to think of any further beliefs or actions that are only available to the truly loved and unavailable to those who are surrounded by committed gaslighters.</p>
+<p>Finally, I’d rest uneasy if my only defense against being morally obliged to deceive was that it was sometimes pragmatically unwise. If a thing seems bad, it’s nice to have a principled way of avoiding it rather than hoping that contingent fact works in our favor.</p>
+<h4 id="supervenience-lost">Supervenience lost</h4>
+<p>At the end of the hazing, Broseph’s frat brother came back into the room and gave the CCTV a good ol’ Fonze thump. The colors shifted back and reflected the fact of the matter. “Bro, We got you <em>good</em>!. The TV had distorted colors. The M&amp;Ms actually started out mixed and he was sorting them into separate piles for each color. Psych!”</p>
+<p>With Broseph’s new beliefs about what happened, his evaluation of the morality of the original M&amp;M shuffling has flipped. Furthermore, if you’d asked Broseph about returning the M&amp;Ms to their original position before the revelation, he’d have correctly said it was good (he believed it satisfied his preferences). Just after the revelation, he would also be correct in claiming that it was bad (he believed it frustrated his preferences). So under PPU, a single action can correctly be said to both right and wrong. That’s worrying because <a href="https://plato.stanford.edu/entries/supervenience-ethics/">supervenience</a> isn’t something to give up lightly.</p>
+<p>The only way to retain supervenience is to contextualize each action in light of observers’ beliefs. For example, “Returning the M&amp;Ms to their original position is good <em>when</em> Broseph believes the CCTV and thus believes all the M&amp;Ms are the same color.” and “Returning to the M&amp;Ms to their original position is good <em>when</em> Broseph doubts the CCTV and thus believes all the resulting piles are different colors.”</p>
+<p>This works, but it’s contrary to the plain language used when people make moral evaluations. If we want PPU and supervenience, we must interpret statements like “Action A is right.” as having a silent contextualizer: “I believe action A in the context of belief B is right.” This is a bit weird.</p>
+<h4 id="anthropic-effects">Anthropic effects</h4>
+<p>PPU also seems to imply that surprise, secret murders aren’t wrong. Even though we imagine most people have a preference for life, if they’re dead, there is no preferrer that’s frustrated. But this issue applies to any embodied ethic including, for example, hedonic utilitarianism so we won’t belabor it here.</p>
+<h3 id="metaphysical">Metaphysical</h3>
+<h4 id="scope">Scope</h4>
+<p>One benefit of PPU is that it ‘screens out’ the vast majority of preferrers. The preferences an actor must account for are precisely those of agents that will come to know about the action. On the other hand, metaphysical preference utilitarianism (henceforth MPU) commits us to caring about <em>all</em> preferences.</p>
+<p>Suppose the frat brothers had cut the CCTV cable so Broseph was just sitting in an empty room staring at a blank TV. MPU implies the masked brother is still morally obliged to sort the M&amp;Ms—it brings the world into accord with Broseph’s preferences which is good even if Broseph doesn’t know about it.</p>
+<p>On the other hand, there are potentially many other humans on Earth with preferences about M&amp;M sorting. The masked brother ought to try to satisfy these as well. Satisfying these preferences with almost no information is quixotic, but I’ve typically found a “Just do your best!” reply to concerns about tractability issues in utilitarianism pretty satisfying.</p>
+<p>Even stranger is the possibility that the masked brother might be obliged to account for preferences outside of his light cone. If an alien that cares about M&amp;M sorting lives on the edge of the universe such that the alien is outside of our light cone (i.e. we can never have any causal influence on it), the most obvious versions of MPU suggest that the masked brother should still account for these preferences.</p>
+<p>And once you’ve opened the door to honoring preferrers who are causally isolated from the actor, it seems that you ought to honor the preferences of both past (i.e. the deceased) and future (i.e. the unborn) preferrers. This is both weird and a bit convenient because it provides a way to talk about <a href="https://plato.stanford.edu/entries/justice-intergenerational/">intergenerational justice</a>.</p>
+<h5 id="path-dependence">Path dependence</h5>
+<p>If we accept the implication that past preferences have moral import for current actions, we’ve introduced path dependence. The same action can be correctly subject to different moral evaluations depending on past preferences. For example, if we’re in time 2 and indifferent between actions A and B, but someone in time 1 preferred action A, we ought to do A. On the other hand, if the person in time 1 preferred action B, we ought to do that. So our moral obligations in time 2 differ even if the preferrer in time 1 is now deceased and these two counterfactual worlds are identical at time 2. We’ve lost supervenience again.</p>
+<h5 id="mistaken-preferences">Mistaken preferences</h5>
+<p>Another bizarre consequence of honoring past preferences is that we might be obliged to honor our own past preferences that we now regard as mistaken. If our preferences are time-weighted (i.e. the longer a preference is held, the more weight it’s granted in our moral calculus), naive MPU suggests I’m morally obliged to honor an old, long-standing preference contrary to my current preferences until I’ve held the current preference long enough. That is, if I preferred action A to B for times 1-10, and start preferring action B at time 11, it is only morally permissible to undertake B from time 21 on.</p>
+<h5 id="conclusion">Conclusion</h5>
+<p>These concerns all suggest that we must be more selective in which preferences we regard as morally important—all preferences everywhere and everywhen quickly becomes baffling. What is the demarcation criterion that doesn’t rely on psychology? Light cones? It’s hard to be certain.</p>
+<h3 id="conclusion-1">Conclusion</h3>
+<p>We’ve examined two possible interpretations of preference utilitarianism: psychological preference utilitarianism (the morally important part of preference satisfaction is when the preferrer believes it to be satisfied) and metaphysical preference utilitarianism (the morally important part of preference satisfaction is when the world comes into accord with the preference). Each has strange implications. PPU favors deception and gives up intuitive supervenience. MPU requires us to pick us some alternative, non-obvious demarcation criterion; the broadest possible demarcation criterion is a bad candidate.</p>
+<p>Maybe the best solution is knowledge preference utilitarianism? Rather than the preferrer’s belief being the crucial ingredient, it’s knowledge—justified true belief.</p>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>
