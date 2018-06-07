@@ -29,6 +29,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/inclusive-extractive-societies-each-structural-advantages/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/preference-utilitarianism-psychological-metaphysical-iii/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -618,6 +625,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/7/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/8/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

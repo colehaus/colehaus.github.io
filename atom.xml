@@ -8,8 +8,39 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-06-06T00:00:00Z</updated>
+    <updated>2018-06-07T00:00:00Z</updated>
     <entry>
+    <title>Inclusive and extractive societies each have structural advantages</title>
+    <link href="https://www.col-ex.org/posts/inclusive-extractive-societies-each-structural-advantages/" />
+    <id>https://www.col-ex.org/posts/inclusive-extractive-societies-each-structural-advantages/</id>
+    <published>2018-06-07T00:00:00Z</published>
+    <updated>2018-06-07T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="intro">Intro</h1>
+<p>In <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span> and <span class="citation" data-cites="acemoglu2013">(Acemoglu and Robinson <a href="#ref-acemoglu2013">2013</a>)</span> (and surely elsewhere), Acemoglu and Robinson contend that inclusive societies have inherent economic advantages over stratified (extractive) societies. If true, this is quite important; it suggests that, in the long run, we should <span class="noted">expect inclusive societies to “win” out</span>[^inclusive-win]. The moral arc of the universe bends toward justice and all that.</p>
+<h1 id="oligarchs-favor-stability-over-growth">Oligarchs favor stability over growth</h1>
+<p>But is it true? As far as I can tell, the best articulation of this claim is in section 6 of <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>. It lays out several claims in support of the argument that oligarchic societies have a structural disadvantage when it comes to economic growth. <a href="https://www.col-ex.org/posts/autocrats-accelerate-growth-cooperation/">Last time</a>, we examined their first claim and found it wanting. In this post, we’ll focus on the second:</p>
+<blockquote>
+Another related source of inefficient economic institutions arises from the desire of political elites to protect their political power. [..] [T]he political elite should evaluate every potential economic change not only according to its economic consequences, such as its effects on economic growth and income distribution, but also according to its political consequences. […] Fearing these potential threats to their political power, the elites may oppose changes in economic institutions that would stimulate economic growth.
+</blockquote>
+<p>I have no problems with this claim in itself.</p>
+<h1 id="invidious-majoritarian-tyrannies-again">Invidious majoritarian tyrannies, again</h1>
+<p>But I think it tells an incomplete story. It’s not the case that social efficiency can only be impeded by minorities in oligarchic societies. Societies with inclusive institutions can also user their decision-making process to block <a href="https://en.wikipedia.org/wiki/Kaldor%E2%80%93Hicks_efficiency">Kaldor-Hicks improvements</a>. If a majority weakly prefers A to B while a minority strongly prefers B to A, majority voting will choose A even though this doesn’t necessarily maximize social welfare. This is precisely the <a href="https://www.col-ex.org/posts/innocuous-invidious-majoritarian-tyrannies">invidious tyranny of the majority we talked about before</a>. An oligarchic society could well avoid this problem.</p>
+<p><!--more--></p>
+<h1 id="collective-action-problems">Collective action problems</h1>
+<p>I think it’s fair to gloss Acemoglu and Robinson’s ‘inclusive’ and ‘extractive’ as societies with, respectively, many agents and few agents when it comes to making important political decisions. In this case, we should expect inclusive societies to have more numerous and more serious <a href="https://en.wikipedia.org/wiki/Collective_action_problem">problems of collective action</a>. At the most extreme—autocracy, there can be no coordination problems at the highest levels of power.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Of course, these counterarguments also aren’t definitive. For example, taking advantage of the structural benefits of oligarchy requires fairly sophisticated oligarchs.</p>
+<p>But these considerations do change the overall picture. Instead of saying that stratified societies are at a pure disadvantage to inclusive societies and inclusive societies are thus destined to win out, we see that each has structure has advantages and disadvantages. It comes down to an empirical question about which set of advantages is more important in practice.</p>
+<div id="refs" class="references">
+<div id="ref-acemoglu2005">
+<p>Acemoglu, Daron, Simon Johnson, and James A Robinson. 2005. “Institutions as a Fundamental Cause of Long-Run Growth.” <em>Handbook of Economic Growth</em> 1. Elsevier: 385–472. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf" class="uri uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf</a>.</p>
+</div>
+<div id="ref-acemoglu2013">
+<p>Acemoglu, Daron, and James A Robinson. 2013. <em>Why Nations Fail: The Origins of Power, Prosperity, and Poverty</em>. Broadway Business.</p>
+</div>
+</div>]]></summary>
+</entry>
+<entry>
     <title>Preference utilitarianism—psychological or metaphysical? III</title>
     <link href="https://www.col-ex.org/posts/preference-utilitarianism-psychological-metaphysical-iii/" />
     <id>https://www.col-ex.org/posts/preference-utilitarianism-psychological-metaphysical-iii/</id>
@@ -192,7 +223,7 @@ The WHO estimates that 2 to 3 million deaths are prevented every year through im
     <summary type="html"><![CDATA[<h1 id="intro">Intro</h1>
 <p>In <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span> and <span class="citation" data-cites="acemoglu2013">(Acemoglu and Robinson <a href="#ref-acemoglu2013">2013</a>)</span> (and surely elsewhere), Acemoglu and Robinson contend that inclusive societies have inherent economic advantages over stratified societies. If true, this is quite important; it suggests that, in the long run, we should <span class="noted">expect inclusive societies to “win” out</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. The moral arc of the universe bends toward justice and all that.</p>
 <h1 id="scenario">Scenario</h1>
-<p>But is it true? As far as I can tell, the best articulation of this claim is in section 6 of <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>. It lays out several claims in support of the argument that authoritarian societies have a structural disadvantage when it comes to economic growth. In this post, we’ll focus on the first:</p>
+<p>But is it true? As far as I can tell, the best articulation of this claim is in section 6 of <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>. It lays out several claims in support of the argument that oligarchic societies have a structural disadvantage when it comes to economic growth. In this post, we’ll focus on the first:</p>
 <blockquote>
 <p>Imagine a situation in which an individual or a group holds unconstrained political power. Also suppose that productive investments can be undertaken by a group of citizens or producers that are distinct from the “political elites”, i.e., the current power holders. The producers will only undertake the productive investments if they expect to receive the benefits from their investments. Therefore, a set of economic institutions protecting their property rights are necessary for investment. Can the society opt for a set of economic institutions ensuring such secure property rights? The answer is often no (even assuming that “society” wants to do so).</p>
 <p>The problem is that the political elites—those in control of political power—cannot commit to respect the property rights of the producers once the investment are undertaken. Naturally, ex ante, before investments are undertaken, they would like to promise secure property rights. But the fact that the monopoly of political power in their hands implies that they cannot commit to not hold-up producers once the investments are sunk.</p>
