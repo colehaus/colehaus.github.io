@@ -29,6 +29,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/value-of-information-calculator-explained/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/inclusive-extractive-societies-each-structural-advantages/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -569,6 +576,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/text/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/value%20of%20information/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
