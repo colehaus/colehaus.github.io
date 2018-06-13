@@ -8,8 +8,44 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-06-12T00:00:00Z</updated>
+    <updated>2018-06-13T00:00:00Z</updated>
     <entry>
+    <title>Standalone–Value of information calculator</title>
+    <link href="https://www.col-ex.org/posts/value-information-calculator/" />
+    <id>https://www.col-ex.org/posts/value-information-calculator/</id>
+    <published>2018-06-13T00:00:00Z</published>
+    <updated>2018-06-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="calculator">Calculator</h1>
+<p>The input required by the calculator is a tree in <a href="https://en.wikipedia.org/wiki/YAML">YAML format</a>. The top level of the tree describes the different pieces of information you might find (e.g. the coin is double heads) after investigating and how likely you think each piece of information is. Each of these info nodes has children corresponding to actions you might take (e.g. bet heads). The final level of the tree (the children of the action nodes) describe the outcomes that actually occur and their probability of occurrence given the information received.</p>
+<p>In addition to showing the expected value of information, the calculator shows the corresponding simplified scenario in which you have no way of gaining information about outcomes at the bottom. For example, it shows you the original coin flip scenario before your susurrous friend comes along. This is offered simply as a point of comparison.</p>
+<p><!--more--></p>
+<h2 id="input">Input</h2>
+<form id="voi">
+<textarea class="voi-tree" id="voi-text">
+<p>- outcome: finding: coin is double heads choices: - choice: bet heads results: - outcome: {label: heads, value: 1} prob: 1 - outcome: {label: tails, value: 0} prob: 0 - choice: bet tails results: - outcome: {label: heads, value: 0} prob: 1 - outcome: {label: tails, value: 1} prob: 0 prob: 0.5 - outcome: finding: coin is double tails choices: - choice: bet heads results: - outcome: {label: heads, value: 1} prob: 0 - outcome: {label: tails, value: 0} prob: 1 - choice: bet tails results: - outcome: {label: heads, value: 0} prob: 0 - outcome: {label: tails, value: 1} prob: 1 prob: 0.5</p>
+</textarea>
+</form>
+<h2 id="results">Results</h2>
+<output form="voi" for="voi-text">
+<div id="voi-error">
+
+</div>
+<div id="result-numbers">
+<p><span class="label">Expected value with information</span><span id="expected-value"></span><br />
+<span class="label">Expected value without information</span><span id="forgotten-expected-value"></span><br />
+<span class="label">Expected value of information</span><span id="voi-result"></span><br />
+</p>
+</div>
+<figure>
+<figcaption>
+<p>Scenario without information</p>
+</figcaption>
+<pre id="forgotten" class="voi-tree"><code></code></pre>
+</figure>
+</output>
+<hr />]]></summary>
+</entry>
+<entry>
     <title>Value of information calculator</title>
     <link href="https://www.col-ex.org/posts/value-of-information-calculator-explained/" />
     <id>https://www.col-ex.org/posts/value-of-information-calculator-explained/</id>

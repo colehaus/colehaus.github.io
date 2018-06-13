@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Mo money, mo problems—autocrat remix—ColEx</title>
+    <title>Standalone–Value of information calculator—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -41,75 +41,89 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
     
+  <link rel="stylesheet" type="text/css" href="../../css/value-of-information-calculator.css" />
+
 </head>
 <body>
 <div id="underlay">
 <nav><a href="../../">Home</a></nav>
 <main><article>
-  <h2 id="article-title">Mo money, mo problems—autocrat remix</h2>
+  <h2 id="article-title">Standalone–Value of information calculator</h2>
   
   <div class="metadata">
   <nav class="tags"><ul>
     
-      <li><a href="../../tag/political%20economy/">political economy</a></li>
+      <li><a href="../../tag/value%20of%20information/">value of information</a></li>
     
-      <li><a href="../../tag/autocracy/">autocracy</a></li>
+      <li><a href="../../tag/decision%20theory/">decision theory</a></li>
     
 </ul></nav>
 
-  <span class="date">Published on <time datetime="2018-06-12">June 12, 2018</time>.</span>
+  <span class="date">Published on <time datetime="2018-06-13">June 13, 2018</time>.</span>
   
   </div>
   
   
-    <div class="abstract">
-      <p>We’ve been wondering why stratified societies grow more slowly than inclusive societies. After challenging offered explanations in previous posts, we offer a new explanation. Perhaps dictators don’t seek economic growth because increased material wealth is basically pointless for the already obscenely wealthy.</p>
-    </div>
-  
 
   
 
-  <blockquote class="epigraph">
-<p>El-Materi’s house is spacious, and directly above and along the Hammamet public beach. The compound is large and well guarded by government security. It is close to the center of Hammamet, with a view of the fort and the southern part of the town. The house was recently renovated and includes an infinity pool and a terrace of perhaps 50 meters. While the house is done in a modern style (and largely white), there are ancient artifacts everywhere: Roman columns, frescoes and even a lion’s head from which water pours into the pool. El Materi insisted the pieces are real. He hopes to move into his new (and palatial) house in Sidi Bou Said in eight to ten months.</p>
-<p>The dinner included perhaps a dozen dishes, including fish, steak, turkey, octopus, fish couscous and much more. The quantity was sufficient for a very large number of guests. Before dinner a wide array of small dishes were served, along with three different juices (including Kiwi juice, not normally available here). After dinner, he served ice cream and frozen yoghurt he brought in by plane from Saint Tropez, along with blueberries and raspberries and fresh fruit and chocolate cake. (NB. El Materi and Nesrine had just returned from Saint Tropez on their private jet after two weeks vacation. El Materi was concerned about his American pilot finding a community here. The Ambassador said he would be pleased to invite the pilot to appropriate American community events.)</p>
-<p>El Materi has a large tiger (“Pasha”) on his compound, living in a cage. He acquired it when it was a few weeks old. The tiger consumes four chickens a day. (Comment: The situation reminded the Ambassador of Uday Hussein’s lion cage in Baghdad.) El Materi had staff everywhere. There were at least a dozen people, including a butler from Bangladesh and a nanny from South Africa. (NB. This is extraordinarily rare in Tunisia, and very expensive.)</p>
-<p>[…]</p>
-Even more extravagant is their home still under construction in Sidi Bou Said. That residence, from its outward appearance, will be closer to a palace. It dominates the Sidi Bou Said skyline from some vantage points and has been the occasion of many private, critical comments. The opulence with which El Materi and Nesrine live and their behavior make clear why they and other members of Ben Ali’s family are disliked and even hated by some Tunisians. The excesses of the Ben Ali family are growing. <span class="attribution"><span class="citation" data-cites="godec2009">(Godec <a href="#ref-godec2009">2009</a>)</span></span>
-</blockquote>
-<p>The epigraph here describes the <a href="https://en.wikipedia.org/wiki/Sakher_El_Materi">son-in-law</a> of <a href="https://en.wikipedia.org/wiki/Tunisia">Tunisia</a>’s former <a href="https://en.wikipedia.org/wiki/Zine_El_Abidine_Ben_Ali">double threat prime minister and president</a> (read: autocrat). It seems that his connection to the ruler was enough for him to lead an incomparably opulent life. I contend that this fact may actually be key to the riddle we’ve been pondering recently about autocracies.</p>
-<h3 id="explaining-autocratic-underachievement">Explaining autocratic underachievement</h3>
-<h4 id="recapitulating">Recapitulating</h4>
-<p><span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span> suggests that stratified societies are at a structural disadvantage when it comes to economic growth. There, they suggest that autocracies underperform inclusive societies because:</p>
-<ol type="1">
-<li>Autocrats cannot commit to upholding economic rights essential for growth. Realizing this, producers ‘shirk’ and growth slows.</li>
-<li>Autocrats block <a href="https://en.wikipedia.org/wiki/Kaldor%E2%80%93Hicks_efficiency">Kaldor-Hicks improvements</a> that disadvantage them.</li>
-</ol>
-<p>But when we examined these explanations we found them wanting:</p>
-<ol type="1">
-<li><a href="../../posts/autocrats-accelerate-growth-cooperation/">First</a>, we built a game theoretic model which showed that, under the right conditions, a rational dictator could credibly commit to upholding certain economic rights because it’s in their long-term interest.</li>
-</ol>
-<ol start="2" type="1">
-<li><a href="../../posts/inclusive-extractive-societies-each-structural-advantages/">Second</a>, we pointed out that, even in inclusive societies, there are blocs capable of blocking Kaldor-Hicks improvements.</li>
-</ol>
-<h4 id="an-alternative-explanation">An alternative explanation</h4>
-<p>We can resuscitate the second explanation by noting how pervasive it is.</p>
-<p>If you’re the dictator of basically any country, you’re so materially wealthy that more money for personal consumption is close to pointless. Tunisia (from the epigraph) is not a wealthy country. Its per capita GDP is $3,553 and its total GDP is $40 billion putting it in 96th place out of 191 listed countries <span class="citation" data-cites="weod2017">(Fund <a href="#ref-weod2017">2017</a>)</span>. Yet the president’s son-in-law has a tiger named Pasha. I’m sure you could tell a similar story about North Korea.</p>
-<p>Formalizing this somewhat, I’m suggesting that basically every dictator is in the region of their utility function where the marginal utility of more money is very small indeed. If we also suppose that increasing economic growth has some expected cost (most saliently, increased risk of deposition), autocrats’ reluctance to increase growth is quite rational. In symbols and sloppily, <span class="math inline">\(u(\Delta\$ + \$) \cdot (1 - (\Delta r + r)) &lt; u(\$) \cdot (1 - r)\)</span> where <span class="math inline">\(r\)</span> is the risk of deposition, <span class="math inline">\(u(\$)\)</span> is the utility from money, and <span class="math inline">\(\Delta\$\)</span> and <span class="math inline">\(\Delta r\)</span> are the increased money and risk associated with some proposed reform.</p>
+  <h3 id="calculator">Calculator</h3>
+<p>The input required by the calculator is a tree in <a href="https://en.wikipedia.org/wiki/YAML">YAML format</a>. The top level of the tree describes the different pieces of information you might find (e.g. the coin is double heads) after investigating and how likely you think each piece of information is. Each of these info nodes has children corresponding to actions you might take (e.g. bet heads). The final level of the tree (the children of the action nodes) describe the outcomes that actually occur and their probability of occurrence given the information received.</p>
+<p>In addition to showing the expected value of information, the calculator shows the corresponding simplified scenario in which you have no way of gaining information about outcomes at the bottom. For example, it shows you the original coin flip scenario before your susurrous friend comes along. This is offered simply as a point of comparison.</p>
 <!--more-->
-<h3 id="conclusion">Conclusion</h3>
-<p>We’ve been wondering why stratified societies grow more slowly than inclusive societies. After challenging offered explanations in previous posts, we offered a new explanation. Perhaps dictators don’t seek economic growth because increased material wealth is basically pointless for the already obscenely wealthy.</p>
+<h4 id="input">Input</h4>
+<form id="voi">
+<textarea class="voi-tree" id="voi-text">
+- outcome:
+    finding: coin is double heads
+    choices:
+    - choice: bet heads
+      results:
+      - outcome: {label: heads, value: 1}
+        prob: 1
+      - outcome: {label: tails, value: 0}
+        prob: 0
+    - choice: bet tails
+      results:
+      - outcome: {label: heads, value: 0}
+        prob: 1
+      - outcome: {label: tails, value: 1}
+        prob: 0
+  prob: 0.5
+- outcome:
+    finding: coin is double tails
+    choices:
+    - choice: bet heads
+      results:
+      - outcome: {label: heads, value: 1}
+        prob: 0
+      - outcome: {label: tails, value: 0}
+        prob: 1
+    - choice: bet tails
+      results:
+      - outcome: {label: heads, value: 0}
+        prob: 0
+      - outcome: {label: tails, value: 1}
+        prob: 1
+  prob: 0.5
+</textarea>
+</form>
+<h4 id="results">Results</h4>
+<output form="voi" for="voi-text">
+<div id="voi-error">
+
+</div>
+<div id="result-numbers">
+<p><span class="label">Expected value with information</span><span id="expected-value"></span><br /> <span class="label">Expected value without information</span><span id="forgotten-expected-value"></span><br /> <span class="label">Expected value of information</span><span id="voi-result"></span><br /></p>
+</div>
+<figure>
+<figcaption>
+Scenario without information
+</figcaption>
+<pre class="voi-tree" id="forgotten"></pre>
+</figure>
+</output>
 <hr class="references">
-<div id="refs" class="references">
-<div id="ref-acemoglu2005">
-<p>Acemoglu, Daron, Simon Johnson, and James A Robinson. 2005. “Institutions as a Fundamental Cause of Long-Run Growth.” <em>Handbook of Economic Growth</em> 1. Elsevier: 385–472. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf" class="uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf</a>.</p>
-</div>
-<div id="ref-weod2017">
-<p>Fund, International Monetary. 2017. “World Economic Outlook Database.” IMF Washington. <a href="http://www.imf.org/external/pubs/ft/weo/2017/01/weodata/index.aspx" class="uri">http://www.imf.org/external/pubs/ft/weo/2017/01/weodata/index.aspx</a>.</p>
-</div>
-<div id="ref-godec2009">
-<p>Godec, Robert F. 2009. “TUNISIA: DINNER with Sakher El Materi.” <a href="https://wikileaks.org/plusd/cables/09TUNIS516_a.html" class="uri">https://wikileaks.org/plusd/cables/09TUNIS516_a.html</a>.</p>
-</div>
-</div>
 </article></main>
 
 </div>
@@ -122,6 +136,8 @@ Even more extravagant is their home still under construction in Sidi Bou Said. T
 
 <script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
 
+
+<script defer type="text/javascript" src="../../js/value-of-information-calculator.js"></script>
 
 
   </body>
