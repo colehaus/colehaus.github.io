@@ -29,6 +29,20 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/deposition-schemes/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/constructive/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/mo-money-mo-problems-autocrat-remix/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -344,6 +358,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/constructive/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/contract%20theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -428,7 +449,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/information-theory/index.html</loc>
+        <loc>https://www.col-ex.org/tag/information%20theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -526,13 +547,6 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/publishing/index.html</loc>
-        <changefreq>weekly</changefreq>
-        
-        <priority>0.8</priority>
-    </url>
-
-    <url>
         <loc>https://www.col-ex.org/tag/reading/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -541,13 +555,6 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/review/index.html</loc>
-        <changefreq>weekly</changefreq>
-        
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://www.col-ex.org/tag/science/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -660,6 +667,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/8/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/9/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
