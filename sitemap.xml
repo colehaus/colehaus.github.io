@@ -15,6 +15,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/series/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -365,7 +372,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/contract%20theory/index.html</loc>
+        <loc>https://www.col-ex.org/tag/contract%2520theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -379,28 +386,28 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/current%20events/index.html</loc>
+        <loc>https://www.col-ex.org/tag/current%2520events/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/decision%20theory/index.html</loc>
+        <loc>https://www.col-ex.org/tag/decision%2520theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/donor%20lottery/index.html</loc>
+        <loc>https://www.col-ex.org/tag/donor%2520lottery/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/economic%20history/index.html</loc>
+        <loc>https://www.col-ex.org/tag/economic%2520history/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -414,7 +421,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/effective%20altruism/index.html</loc>
+        <loc>https://www.col-ex.org/tag/effective%2520altruism/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -449,7 +456,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/information%20theory/index.html</loc>
+        <loc>https://www.col-ex.org/tag/information%2520theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -470,7 +477,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/machine%20ethics/index.html</loc>
+        <loc>https://www.col-ex.org/tag/machine%2520ethics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -484,14 +491,14 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/mechanism%20design/index.html</loc>
+        <loc>https://www.col-ex.org/tag/mechanism%2520design/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/meta%20monday/index.html</loc>
+        <loc>https://www.col-ex.org/tag/meta%2520monday/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -519,7 +526,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/moral%20uncertainty/index.html</loc>
+        <loc>https://www.col-ex.org/tag/moral%2520uncertainty/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -533,14 +540,14 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/order%20theory/index.html</loc>
+        <loc>https://www.col-ex.org/tag/order%2520theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/political%20economy/index.html</loc>
+        <loc>https://www.col-ex.org/tag/political%2520economy/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -561,21 +568,21 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/self-flagellation%20friday/index.html</loc>
+        <loc>https://www.col-ex.org/tag/self-flagellation%2520friday/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/social%20choice/index.html</loc>
+        <loc>https://www.col-ex.org/tag/social%2520choice/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/social%20welfare/index.html</loc>
+        <loc>https://www.col-ex.org/tag/social%2520welfare/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -603,7 +610,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/value%20of%20information/index.html</loc>
+        <loc>https://www.col-ex.org/tag/value%2520of%2520information/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -611,6 +618,34 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/voting/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/Preference%20utilitarianism%E2%80%94psychological%20or%20metaphysical%3F/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/Putting-out%20with%20smartphones/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/The%20Moral%20Limits%20of%20Markets/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/Why%20Nations%20Fail/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
