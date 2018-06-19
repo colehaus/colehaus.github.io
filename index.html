@@ -54,6 +54,88 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/ideal-calibration/">Ideal theory as calibration</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/ideal%2520theory/">ideal theory</a></li>
+    
+      <li><a href="./tag/political%2520philosophy/">political philosophy</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/The%2520Tyranny%2520of%2520the%2520Ideal/">Series: The Tyranny of the Ideal</a></nav>
+        
+        <span class="date">Published on <time datetime="June 20, 2018">June 20, 2018</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>The ideal serves not only as destination but as calibration. Once we acknowledge our ignorance of possible worlds, we must treat the task of social engineering as a problem of statistical inference. From the statistical inference perspective, the ideal (maximum) is very informative about the underlying distribution of possible worlds and helps us make more informed trade-offs.</p></div>
+       
+
+        <div class="macros">
+
+</div>
+<h3 id="intro">Intro</h3>
+<p><a href="./posts/utopia-infinitude-secretaries/">Last time</a>, I described how <span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span> juxtaposes unidimensional and multidimensional models of justice. I went on to contest the claim that the ideal is otiose in the unidimensional model and made an analogy to <a href="https://en.wikipedia.org/wiki/Secretary_problem">the secretary problem</a>.</p>
+<p>This time I’ll make the (related) argument directly that there are two distinct uses of ideal theorizing and only one is bad from the unidimensional perspective.</p>
+<h3 id="dimensionality-of-justice">Dimensionality of justice</h3>
+<p>Let’s try to formalize ‘unidimensional’ and ‘multidimensional’ models of justice so we can be sure we’re thinking of the same thing. Gaus suggests (and I’ll accept) that a key part of any theory of ideal justice includes a function <span class="noted"><span class="math inline">\(e \colon \mathbb{W} \to \mathbb{R}\)</span></span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, a set of possible worlds <span class="math inline">\(\mathbb{W}\)</span>. In other words, each such theory should be able to assign a ‘justice score’ to every possible world. In terms of this machinery, the unidimensional model simply limits itself to using <em>only</em> <span class="math inline">\(e\)</span> and <span class="math inline">\(\mathbb{W}\)</span>. The multidimensional model on the other hand also gives us a tool to inspect the structure of <span class="math inline">\(\mathbb{W}\)</span> in the form of a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">metric</a> <span class="math inline">\(d \colon \mathbb{W} \times \mathbb{W} \to [0,\inf)\)</span>. In other words, the multidimensional model lets us determine how similar two possible worlds are in some way that’s not directly related to their justice scores.</p>
+<p>To actually use this in a model, we’ll also need a way of finding worlds <span class="math inline">\(W\)</span> from <span class="math inline">\(\mathbb{W}\)</span> to evaluate. We denote a a random, ‘nearby’ (i.e. one with a small distance <span class="math inline">\(d(W, W_c)\)</span> from the then-current world <span class="math inline">\(W_c\)</span>) world as <span class="math inline">\(W_r\)</span>.</p>
+<h3 id="ideal-as-destination">Ideal as destination</h3>
+<p><span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span> and the rest of the literature suggest that the an ideal is useful as a destination. According to Rawls, “By showing how the social world may realize the features of a realistic Utopia, political philosophy provides a long-term goal of political endeavor, and in working toward it gives meaning to what we can do today.” <span class="citation" data-cites="rawls1993">(Rawls <a href="#ref-rawls1993">1993</a>)</span></p>
+<p>In terms of our model, the ideal is <span class="math inline">\(\mathop{\mathrm{argmax}}\limits_{W \in \mathbb{W}} e(W) = W_i\)</span>, the possible world that achieves the highest justice score. A wholly naive algorithm would then:</p>
+<ol type="1">
+<li>Use our ideal <span class="math inline">\(W_i\)</span> to orient societal progress by always picking <span class="math inline">\(\mathop{\mathrm{argmin}}\limits_{W \in \{W_c, W_r\}} d(W, W_i) = W_{bk}\)</span>. In other words, on every ‘step’, someone proposes some random alternative world <span class="math inline">\(W_r\)</span> and this naive algorithm compares it to the current world and picks whichever is closer to the ideal.</li>
+<li>Stop when <span class="math inline">\(d(W_c, W_i) = 0\)</span>.</li>
+</ol>
+<p>With this interpretation, it’s clear that the ideal as destination as not only otiose in the unidimensional model but nonsensical. The unidimensional perspective was defined by its omission of the metric <span class="math inline">\(d\)</span> so we certainly can’t use it in our algorithm to find <span class="math inline">\(W_{bk}\)</span>.</p>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
+        <h2><a href="./posts/utopia-infinitude-secretaries/">Utopia and an infinitude of secretaries</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/ideal%2520theory/">ideal theory</a></li>
+    
+      <li><a href="./tag/political%2520philosophy/">political philosophy</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/The%2520Tyranny%2520of%2520the%2520Ideal/">Series: The Tyranny of the Ideal</a></nav>
+        
+        <span class="date">Published on <time datetime="June 19, 2018">June 19, 2018</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p><i>The Tyranny of the Ideal</i> juxtaposes a unidimensional model of worlds with a multidimensional model. It goes on to suggest that ideal theory is otiose in the unidimensional model. I disagree and attempt to illustrate the disagreement via analogy to the famous secretary problem.</p></div>
+       
+
+        <h3 id="ideals-as-superfluous">Ideals as superfluous</h3>
+<p>In <span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span>, the author lays out two conflicting views of social engineering. The <a href="https://plato.stanford.edu/entries/rawls/#IdeNonIdeThe">ideal theorists</a> insist on the value of having an ideal society in mind when deciding between possible futures. Their opponents, represented by <a href="https://en.wikipedia.org/wiki/Amartya_Sen">Amartya Sen</a>, suggest this is a bit silly.</p>
+<blockquote>
+The possibility of having an identifiably perfect alternative does not indicate that it is necessary, or indeed useful, to refer to it in judging the relative merits of two alternatives; for example, we may be willing to accept, with great certainty, that Mount Everest is the tallest mountain in the world, completely unbeatable in terms of stature by any other peak, but that understanding is neither needed, nor particularly helpful, in comparing the peak heights of, say, Mount Kilimanjaro and Mount McKinley. There would be something off in the general belief that a comparison of any two alternatives cannot be sensibly made without a prior identification of a supreme alternative. <span class="attribution"><span class="citation" data-cites="sen2011">(Sen <a href="#ref-sen2011">2011</a>)</span></span>
+</blockquote>
+<p>(The mountain climbing metaphor is popular in discussions of ideal theory.)</p>
+<p>Gaus goes on to characterize Sen’s perspective as fundamentally unidimensional. He concludes the discussion with the following, “In this book, then, I shall explore multidimensional ways of thinking about justice, for they provide the most compelling response to Sen’s elegant unidimensional analysis—an analysis that makes the ideal otiose.”</p>
+<h3 id="counterclaim">Counterclaim</h3>
+<p>But I, random Internet blogger, claim they are both wrong. Or, at a minimum, very misleading. The ideal serves a role even from the unidimensional perspective.</p>
+<p>Implicitly, they are both modeling the unidimensional search for a better world as one across a known set of worlds with a <a href="https://en.wikipedia.org/wiki/Well-order">well-order</a> guiding the way. But this assumes too much. Even if we (unrealistically) suppose we can flawlessly evaluate each world or pair of worlds, we do not know the full set of possible worlds. Rather than perfect information, we are in a state of relative ignorance, groping in the dark. Given our ignorance, any information about the distribution of possible worlds (including the maximum—the ideal) is valuable.</p>
+<h4 id="secretary-problem">Secretary problem</h4>
+<p>To see that distributional information is valuable even in a unidimensional context, we’ll model ideal theory as a classic unidimensional problem: <a href="https://en.wikipedia.org/wiki/Secretary_problem">the secretary problem</a>. In this problem, an employer wants to hire a secretary and starts to interview applicants. After each interview, the employer can decide to continue interviewing or hire the last interviewee and end the process. Their goal is to stop optimally so that they hire the best possible applicant.</p>
+<p>The crucial consideration for us is that the employer doesn’t know in advance the quality of the best secretary in the applicant pool. After each interview, the employer must decide if this is as good as it gets or whether to gamble by continuing on. If the employer knew in advance what the best applicant looked like, the problem would be trivial—just keep interviewing until you reach the best applicant.</p>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/how-not-write-book/">How not to write a book</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -388,7 +470,7 @@ Another related source of inefficient economic institutions arises from the desi
 
 <script defer type="text/javascript" src="./js/custom-elements.js"></script>
 
-<script defer type="text/javascript" src="./js/vendors~custom-elements~quorum~util-egal.js"></script>
+<script defer type="text/javascript" src="./js/vendors~custom-elements~ideal-calibration~quorum~util-egal.js"></script>
 
 <script defer type="text/javascript" src="./js/vendors~custom-elements~util-egal.js"></script>
 

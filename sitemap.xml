@@ -36,6 +36,20 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/ideal-calibration/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/utopia-infinitude-secretaries/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/how-not-write-book/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -456,6 +470,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/ideal%2520theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/inequality/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -561,6 +582,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/political%2520philosophy/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/reading/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -646,6 +674,13 @@
 
     <url>
         <loc>https://www.col-ex.org/series/The%2520Moral%2520Limits%2520of%2520Markets/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/The%2520Tyranny%2520of%2520the%2520Ideal/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Pareto improvement as partial order—ColEx</title>
+    <title>Tagged ideal theory—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -40,83 +40,91 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    
-</head>
+    </head>
 <body>
 <div id="underlay">
-<nav><a href="../../">Home</a></nav>
-<main><article>
-  <h2 id="article-title">Pareto improvement as partial order</h2>
+<main>
+  <h2>Tagged ideal theory</h2>
+  <dl class="posts">
   
-  <div class="metadata">
-  <nav class="tags"><ul>
+    <dt><a href="../../posts/ideal-calibration/">Ideal theory as calibration</a></dt>
+    <dd><nav class="tags"><ul>
     
-      <li><a href="../../tag/social%2520choice/">social choice</a></li>
+      <li><a href="../../tag/ideal%2520theory/">ideal theory</a></li>
     
-      <li><a href="../../tag/order%2520theory/">order theory</a></li>
+      <li><a href="../../tag/political%2520philosophy/">political philosophy</a></li>
     
 </ul></nav>
-
-  
-  <span class="date">Published on <time datetime="2018-05-07">May  7, 2018</time>.</span>
-  
-  </div>
-  
-  
-    <div class="abstract">
-      <p>We use the concept of Pareto improvement to motivate and illustrate partial and total orders.</p>
-    </div>
-  
-
-  
-    <aside class="sidenote" id="warnings">Warnings: <ul>
-      
-        <li><details><summary>Gratuitous math</summary><p>Viewing things from this more formal angle probably isn't helpful for most people and purposes.</p></details></li>
-      
-    </ul></aside>
-  
-
-  <p>We covered the notion of <a href="https://en.wikipedia.org/wiki/Pareto_efficiency">Pareto improvement</a> in the <a href="../../posts/pareto-examples/">preceding post</a>. I briefly alluded to the fact that it’s a strict <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>. Let’s explore that a bit more.</p>
-<h3 id="partial-order">Partial order</h3>
-<p>A strict partial order is a <a href="https://en.wikipedia.org/wiki/Binary_relation">binary relation</a> that is irreflexive (no element precedes itself), and transitive. Pareto improvement satisfies both of these criteria:</p>
-<dl>
-<dt>Irreflexive: <span class="math inline">\(\neg (A \prec A)\)</span></dt>
-<dd>No scenario is a Pareto improvement over itself because no one strictly prefers it (person 1 doesn’t prefer scenario A to scenario A), trivially.
 </dd>
-<dt>Transitive: <span class="math inline">\(A \prec B, B \prec C \Rightarrow A \prec C\)</span></dt>
-<dd>If arbitrary scenario B is a Pareto improvement over arbitrary scenario A and arbitrary scenario C is a Pareto improvement over scenario B, then scenario C is a Pareto improvement over scenario A. In other words, if no one is worse off in scenario B than scenario A and no one is worse off in scenario C than scenario B, then, clearly, no one is worse off in scenario three than scenario A. And if at least one person is better off in scenario B than scenario A and at least one person is better off in scenario C than scenario B, then, clearly, at least one person is better off in scenario C than scenario A.
+    <dd class="date"><time datetime="June 20, 2018">June 20, 2018</time></dd>
+  
+    <dt><a href="../../posts/utopia-infinitude-secretaries/">Utopia and an infinitude of secretaries</a></dt>
+    <dd><nav class="tags"><ul>
+    
+      <li><a href="../../tag/ideal%2520theory/">ideal theory</a></li>
+    
+      <li><a href="../../tag/political%2520philosophy/">political philosophy</a></li>
+    
+</ul></nav>
 </dd>
+    <dd class="date"><time datetime="June 19, 2018">June 19, 2018</time></dd>
+  
 </dl>
-<!--more-->
-<p>Alternatively, we can just take the shortcut of noting that Pareto improvement is the <a href="https://en.wikipedia.org/wiki/Product_order">componentwise order</a> of the total orders of individual preferences.</p>
-<h3 id="total-order">Total order</h3>
-<p>In the <a href="../../posts/pareto-examples/">preceding post</a>, we objected to the fact that Pareto improvement is partial—unable to render judgment between many scenarios and declare one as better than another despite our strongest intuitions. <span class="noted">We could remedy this problem if instead we had a <a href="https://en.wikipedia.org/wiki/Total_order">total order</a></span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. We turn a strict partial order into a strict total order by adding the following property:</p>
-<dl>
-<dt>Trichotomous: <span class="math inline">\((A \prec B) \lor (B \prec A) \lor (A = B)\)</span></dt>
-<dd>Arbitrary scenario A is preferred to arbitrary scenario B or scenario B is preferred to scenario A or scenario A and B are the same.
-</dd>
-</dl>
-<p>The question is, how to introduce this property? If we’re able to introduce this property while retaining the <a href="https://plato.stanford.edu/entries/thick-ethical-concepts/">thinness</a> (i.e. value neutrality) of Pareto improvement, that would be a very interesting thing indeed. We would have a tool to judge any and every policy, any and every state of society, any and every counterfactual world while keeping our private values out of the decision. We would, perhaps, have “solved” objective morality.</p>
-<!-- In fact, we could define an "index of totality" for a partially ordered set $P$ as $\frac{\text{no. of antichains in }P}{|P|}$ where $\frac{1}{|P|}$ means all elements in $P$ are incomparable to each other (e.g. $(0, 2)$, $(1, 1)$, and $(2, 0)$ when lifting $\lt$ via the componentwise order) and $\frac{|P|}{|P|}$ means all elements are comparable to each other (e.g. $(0, 0)$, $(1, 1)$ and $(2, 2)$). Thus, an index of totality at $1$ actually indicates a total order. With this notion in mind, instead of demanding a total order, we could instead try to fix the problems of Pareto improvement by demanding some partial order with a sufficiently high index of totality. All that said, we'll set this idea aside for the moment. -->
-<section class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>You may object that we’re making too big a leap. The problem we outlined is only that Pareto improvement is too partial a partial order. We don’t necessarily need a total order. It may suffice to have fewer and smaller <a href="https://en.wikipedia.org/wiki/Antichain">antichains</a>. We’ll set this aside for the moment.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</section>
-</article></main>
+
+</main>
+
+<header>
+  <h1>Collectively Exhaustive</h1><span>A weblog</span>
+  <hr />
+</header>
+
+<div class="main-menu top">
+  <nav><ul>
+    
+      <li><a href="../../">Home</a></li>
+    
+    
+      <li><a href="../../posts/">By date</a></li>
+    
+    
+      <li><a href="../../tags/">By tag</a></li>
+    
+    
+      <li><a href="../../series/">By series</a></li>
+    
+    
+      <li><a href="../../tag/meta/">Meta</a></li>
+    
+    <li class="rss"><a href="../../atom.xml">RSS</a></li>
+</ul></nav>
+
+  <hr />
+</div>
+
+<div class="main-menu bottom">
+  <hr />
+  <nav><ul>
+    
+      <li><a href="../../">Home</a></li>
+    
+    
+      <li><a href="../../posts/">By date</a></li>
+    
+    
+      <li><a href="../../tags/">By tag</a></li>
+    
+    
+      <li><a href="../../series/">By series</a></li>
+    
+    
+      <li><a href="../../tag/meta/">Meta</a></li>
+    
+    <li class="rss"><a href="../../atom.xml">RSS</a></li>
+</ul></nav>
 
 </div>
 
-
-
-<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
-
-<script defer type="text/javascript" src="../../js/vendors~custom-elements~ideal-calibration~quorum~util-egal.js"></script>
-
-<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
-
-
+</div>
 
   </body>
 </html>
