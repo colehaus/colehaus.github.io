@@ -8,8 +8,31 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-06-20T00:00:00Z</updated>
+    <updated>2018-06-21T00:00:00Z</updated>
     <entry>
+    <title>Ideal theory in the shadow realm</title>
+    <link href="https://www.col-ex.org/posts/ideal-theory-shadow-realm/" />
+    <id>https://www.col-ex.org/posts/ideal-theory-shadow-realm/</id>
+    <published>2018-06-21T00:00:00Z</published>
+    <updated>2018-06-21T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>It’s opposite day! Instead of talking about the ideal, we’re going to talk about the anti-ideal—the worst of all possible worlds. I contend that, if ideal theory is useful, anti-ideal theory is also useful.</p>
+<p><a href="https://www.col-ex.org/posts/ideal-calibration/">Last time</a>, we covered two roles for ideal theory—ideal as destination and ideal as calibration. We’ll examine the anti-ideal from each perspective.</p>
+<h1 id="ideal-as-destination">Ideal as destination</h1>
+<p>To recapitulate, this line of thinking claims the ideal is useful because it provides a long-term goal and something to work toward. Symmetrically, the anti-ideal is useful because it provides a long-term anti-goal and something to avoid. We operationalize this as seeking to minimize the distance between our current world and the ideal and maximize the distance between our world and the anti-ideal.</p>
+<p>This is where the symmetry breaks down. For most reasonable <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">metrics</a>, there is only one world with a minimum distance to the ideal—namely, the ideal itself. Depending on what we believe about the set of possible worlds, there might be none, one or many points which are at a maximum distance from the anti-ideal.</p>
+<p><!--more--></p>
+<p>A physical analogy may help your intuition. If the ideal is the attractive pole of a magnet, drawing us toward it, the anti-ideal is the repulsive pole of a magnet. If we place an iron ball bearing in a ring surrounding the repulsive pole, any position on the edge of the ring is (subject to the constraints imposed by the ring) at a maximum distance from the repulsive pole.</p>
+<p>So the anti-ideal isn’t as useful as the ideal in terms of orientation but it still is useful. Some illustrative scenarios:</p>
+<ul>
+<li>If there are two viable routes to the ideal, but one passes perilously close to the anti-ideal and one doesn’t, we should take the latter. (We suppose that our social engineering skills are imperfect so that skirting the anti-ideal entails some non-zero risk of accidentally falling into it.)</li>
+<li>If there’s not one unique maximum value (ideal) but several, we might well prefer to break the tie by picking the one farthest from the anti-ideal. Again, this minimizes the risk of catastrophe.</li>
+</ul>
+<h1 id="ideal-as-calibration">Ideal as calibration</h1>
+<p>I think the argument for the anti-ideal is more compelling here. Last time, we said that given our imperfect knowledge of possible worlds and of justice, we can treat the social engineering problem of finding the best problem as a problem of <a href="https://en.wikipedia.org/wiki/Statistical_inference">statistical inference</a>. When inferring the true distribution of possible worlds, a maximum (the ideal) is useful data and can shift our estimates substantially. Symmetrically, the minimum (the anti-ideal) also helps us better understand the distribution of possible worlds.</p>
+<p>Knowing only our own neighborhood of possible worlds as determined by those we’ve experienced is a very limited perspective. Envisioning the ideal helps us understand what we have to gain through change; envisioning the anti-ideal helps us understand what we have to lose.</p>
+<p>Even more simply: More information about the distribution is better.</p>]]></summary>
+</entry>
+<entry>
     <title>Ideal theory as calibration</title>
     <link href="https://www.col-ex.org/posts/ideal-calibration/" />
     <id>https://www.col-ex.org/posts/ideal-calibration/</id>
@@ -251,6 +274,8 @@ A similar problem plagues the reverse solution, whereby the dictator agrees to a
 <h1 id="justice-and-incentives">Justice and incentives</h1>
 <p>Discussions in this area like those cited above and like <span class="citation" data-cites="bosco2017">(Bosco <a href="#ref-bosco2017">2017</a>)</span> often end up talking about the perverse impact of the <a href="https://en.wikipedia.org/wiki/International_Criminal_Court">International Criminal Court</a>. In trying to ensure that autocrats are held accountable for atrocities, the ICC may actually encourage autocrats to cling to power. When in power, autocrats are relatively hard to prosecute. When out of power, they’re likely easier to prosecute.</p>
 <p>A tension is then established between a deontological commitment to justice and providing autocrats with the right incentives. I think this conflict can mostly be dissolved by offering ‘credit’ for abdication. If the ICC would sentence a forcibly deposed autocrat with sentence X for their actions, that autocrat should receive sentence X - A in the case of voluntary abdication. Now, the autocrat is generally discouraged from committing atrocities and generally encouraged to abdicate. The only problem is if the credit cancels out the punishment entirely so that the autocrat gets some ‘freebie’ atrocities. The size of the credit should be carefully calibrated to account for this.</p>
+<h1 id="disclaimers">Disclaimers</h1>
+<p>Obviously, <em>obviously</em>, If you are the leader of a nation state or a powerful international organization, you shouldn’t just take any of this at face value. These are complex matters involving issues (beyond those already mentioned) of interventionism, parochialism, hubris, unintended consequences, etc.</p>
 <hr />
 <div id="refs" class="references">
 <div id="ref-acemoglu2005">

@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/ideal-theory-shadow-realm/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/ideal-calibration/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -59,7 +66,7 @@
     <url>
         <loc>https://www.col-ex.org/posts/deposition-schemes/index.html</loc>
         <changefreq>weekly</changefreq>
-        
+        <lastmod>2018-06-21</lastmod>
         <priority>0.8</priority>
     </url>
 
