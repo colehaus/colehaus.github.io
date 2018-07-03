@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/is-development-easy/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/assorted-links-v/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -435,6 +442,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/development/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/donor%2520lottery/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -688,6 +702,13 @@
 
     <url>
         <loc>https://www.col-ex.org/series/The%2520Moral%2520Limits%2520of%2520Markets/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/The%2520Singapore%2520Story/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
