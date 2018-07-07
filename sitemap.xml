@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/exemplars-curse-now-with-more-math/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/exemplars-curse-singapore/index.html</loc>
         <changefreq>weekly</changefreq>
         

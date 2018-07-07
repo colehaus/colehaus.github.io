@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Tagged decision theory—ColEx</title>
+    <title>Exemplar's curse—Now with 80% more math!—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -40,133 +40,108 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    </head>
+    
+  <link rel="stylesheet" type="text/css" href="../../css/exemplars-curse.css" />
+
+</head>
 <body>
 <div id="underlay">
-<main>
-  <h2>Tagged decision theory</h2>
-  <dl class="posts">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Exemplar's curse—Now with 80% more math!</h2>
   
-    <dt><a href="../../posts/exemplars-curse-now-with-more-math/">Exemplar's curse—Now with 80% more math!</a></dt>
-    <dd><nav class="tags"><ul>
+  <div class="metadata">
+  <nav class="tags"><ul>
     
       <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
     
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="July  6, 2018">July  6, 2018</time></dd>
-  
-    <dt><a href="../../posts/exemplars-curse-singapore/">The Exemplar's Curse and Singapore</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
-    
-      <li><a href="../../tag/development/">development</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="July  3, 2018">July  3, 2018</time></dd>
-  
-    <dt><a href="../../posts/value-information-calculator/">Standalone–Value of information calculator</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/value%2520of%2520information/">value of information</a></li>
-    
-      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="June 13, 2018">June 13, 2018</time></dd>
-  
-    <dt><a href="../../posts/value-of-information-calculator-explained/">Value of information calculator</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/value%2520of%2520information/">value of information</a></li>
-    
-      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="June 12, 2018">June 12, 2018</time></dd>
-  
-    <dt><a href="../../posts/construct-vnm-utility-function/">Standalone–Build your own von Neumann–Morgenstern utility function</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="May 14, 2018">May 14, 2018</time></dd>
-  
-    <dt><a href="../../posts/construct-vnm-utility-function-explained/">Build your own von Neumann–Morgenstern utility function</a></dt>
-    <dd><nav class="tags"><ul>
-    
-      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
-    
-      <li><a href="../../tag/economics/">economics</a></li>
-    
-</ul></nav>
-</dd>
-    <dd class="date"><time datetime="May 13, 2018">May 13, 2018</time></dd>
-  
-</dl>
-
-</main>
-
-<header>
-  <h1>Collectively Exhaustive</h1><span>A weblog</span>
-  <hr />
-</header>
-
-<div class="main-menu top">
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">By date</a></li>
-    
-    
-      <li><a href="../../tags/">By tag</a></li>
-    
-    
-      <li><a href="../../series/">By series</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-    <li class="rss"><a href="../../atom.xml">RSS</a></li>
 </ul></nav>
 
-  <hr />
+  
+  <span class="date">Published on <time datetime="2018-07-06">July  6, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>We recently described the exemplar’s curse in words. Now we describe it with math and an interactive calculator. We also rebut one possible retort: exemplar’s curse scenarios don’t just mean we were too optimistic; they also lead us to picking the wrong exemplar.</p>
+    </div>
+  
+
+  
+
+  <h3 id="intro">Intro</h3>
+<p><a href="../../posts/exemplars-curse-singapore/">Last time</a>, I outlined the exemplar’s curse in the context of Singapore with a parable and an informal description. Rest easy; I’ve heard your needful clamoring—I’ll now describe the curse more precisely with math.</p>
+<h3 id="the-exemplars-curse">The exemplar’s curse</h3>
+<p>Restating the core idea in words: The exemplar’s curse occurs when we select an exemplar from a set of outcomes which resulted from both stochastic and deterministic factors. If many outcomes have similarly compelling deterministic factors, the chosen winner is probably unusually lucky. Reversion to the mean then suggests that the chosen winner will disappoint when the deterministic factors are replicated.</p>
+<h4 id="model">Model</h4>
+<p>We can model this with the use of <a href="https://en.wikipedia.org/wiki/Random_variable">random variables</a>. We’ll call our bundle of deterministic factors <span class="math inline">\(\mathcal{D}\)</span> and say they range uniformly in cumulative value from <span class="math inline">\(0\)</span> to <span class="math inline">\(D\)</span> where <span class="math inline">\(D\)</span> is finite. Our bundle of stochastic factors <span class="math inline">\(\mathcal{S}\)</span> range uniformly in value from from <span class="math inline">\(0\)</span> to <span class="math inline">\(S\)</span> where <span class="math inline">\(S\)</span> is finite. Since we observe only visible outcomes rather than underlying causal factors, we see <span class="math inline">\(\mathcal{O} = \mathcal{D} + \mathcal{S}\)</span>. The exemplar’s curse is then about the inferrable properties of the causal factors <span class="math inline">\(\mathcal{D}\)</span> corresponding to the selected maximum <span class="math inline">\(\mathcal{O}\)</span> from a set of outcomes <span class="math inline">\(\mathbb{O}\)</span>.</p>
+<h3 id="false-exemplars">False exemplars</h3>
+<p>In the last post, we only went so far as to claim that we should expect replicating causal factors to produce disappointing outcomes due to reversion to the mean. That is, the stochastic factors <span class="math inline">\(\mathcal{S}_1\)</span> for the maximum outcome <span class="math inline">\(\mathcal{O}_1 = \max \mathbb{O}\)</span> are likely better than average (<span class="math inline">\(\frac{S}{2}\)</span>). If we generate a new outcome <span class="math inline">\(\mathcal{O}_2\)</span> using the same deterministic factors <span class="math inline">\(\mathcal{D}\)</span> that served us well in <span class="math inline">\(\mathcal{O}_1\)</span>, we should expect our new stochastic factors to be worse <span class="math inline">\(\mathcal{S}_2 &lt; \mathcal{S}_1\)</span> and so we should expect <span class="math inline">\(\mathcal{O}_2 &lt; \mathcal{O}_1\)</span>.</p>
+<p>This leaves a open a compelling retort. One could say, “Even though I’m too optimistic about the eventual outcome, in selecting the exemplar, I’m still selecting the best deterministic factors. That means I’m still making the best choice I can so no harm done.”</p>
+<p>Alas, this is not true. Depending on the parameters, there could be only a vanishingly small chance that the bundle of deterministic factors corresponding to the best outcome (the sum of the deterministic and stochastic factors) is also the best bundle of deterministic factors when looking <em>only</em> at the deterministic factors. In symbols, supposing we have a projection function <span class="math inline">\(p_\mathcal{D} : \mathbb{O} \rightarrow \mathbb{D}\)</span> which finds the bundle of deterministic factors <span class="math inline">\(\mathcal{D}\)</span> used in outcome <span class="math inline">\(\mathcal{O}\)</span>, we’re interested in <span class="math inline">\(P(\max \mathbb{D} = p_\mathcal{D}(\max \mathbb{O}))\)</span>.</p>
+<p>For example, if we choose the max from 1000 outcomes and the value of stochastic factors ranges from 0 to 100 while the value of deterministic factors ranges from 0 to 1, we should actually be quite surprised if our best outcome actually has the best deterministic factors.</p>
+<h3 id="calculator">Calculator</h3>
+<p>We can help build up an intuition around this math using the calculator below. The calculator uses <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo methods</a> to estimate the probability that the maximum outcome corresponds to the maximum bundle of deterministic factors.</p>
+<!--more-->
+<p>You can change the range of values for stochastic and deterministic factors and change the number of outcomes we’re taking the max from (i.e. Our winner is the winner out of how many contestants?).</p>
+<p>This results in:</p>
+<ul>
+<li>The mean value of stochastic factors in best outcomes across Monte Carlo samples. This allows us to estimate the magnitude of expected mean reversion.</li>
+<li>An estimated probability that our observed best outcome actually corresponds to the best bundle of deterministic factors.</li>
+<li>A chart showing all the trials used to produce the estimate. One interesting thing to note about the chart is that the number of points on the diagonal corresponds to the probability of ‘success’ (i.e. the probability that the best outcome also has the best deterministic factors).</li>
+</ul>
+<form>
+<p>
+Stochastic factors: 0 to <input id="stochastic-max" type="number" min="0" value="1" step="0.1" />
+</p>
+<p>
+Deterministic factors: 0 to <input id="deterministic-max" type="number" min="0" value="1" step="0.1" />
+</p>
+<p>
+Number of outcomes to choose max from: <input id="num-contestants" type="number" min="1" value="5" />
+</p>
+</form>
+<output>
+<p>
+Mean of stochastic factors across samples: <span id="mean-stochastic">0.75</span>
+</p>
+<p>
+Probability best measured outcome has best deterministic factors: <span id="prob-max">0.5</span>
+</p>
+<figure>
+<figcaption>
+Comparing deterministic component of best outcome to best deterministic component across Monte Carlo samples
+</figcaption>
+<div id="combined-chart">
+
 </div>
-
-<div class="main-menu bottom">
-  <hr />
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">By date</a></li>
-    
-    
-      <li><a href="../../tags/">By tag</a></li>
-    
-    
-      <li><a href="../../series/">By series</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-    <li class="rss"><a href="../../atom.xml">RSS</a></li>
-</ul></nav>
+</figure>
+</output>
+<p>Some trends worth noting:</p>
+<ul>
+<li>As the stochastic factors get relatively larger, the probability goes down</li>
+<li>As the deterministic factors get relatively larger, the probability goes down</li>
+<li>As the number of outcomes goes up, the probability goes down and the mean of stochastic factors goes up</li>
+</ul>
+<p>This confirms the intuition highlighted by the example a few paragraphs up.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>So we see that the exemplar’s curse is even worse than we thought. It’s not just about our outcomes reverting to the mean in spite of making the best possible choice. It will often lead us to pick the wrong exemplar!</p>
+</article></main>
 
 </div>
 
-</div>
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~ideal-calibration~is-development-easy~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+<script defer type="text/javascript" src="../../js/exemplars-curse.js"></script>
+
 
   </body>
 </html>
