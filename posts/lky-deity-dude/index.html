@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Lee Kuan Yew—Deity or dude?—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Lee Kuan Yew—Deity or dude?</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/development/">development</a></li>
+    
+</ul></nav>
+
+  
+    <nav><a class="series" href="../../series/The%2520Singapore%2520Story/">Series: The Singapore Story</a></nav>
+  
+  <span class="date">Published on <time datetime="2018-07-07">July  7, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>Why was Singapore’s development so easy? Here, I harry Lee Kuan Yew and suggest that Singapore’s success isn’t attributable to his putatively singular perspicacity.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>Trivia</summary><p>This post isn't of broad importance. It's only value is in militating against one possible explanation for the success of Singapore.</p></details></li>
+      
+        <li><details><summary>Those who can't do, write. And those who can't write, quote.</summary><p>This post is stuffed full of quotes which, presumably, makes it a bit disorienting.</p></details></li>
+      
+        <li><details><summary>It's not that kind of book</summary><p>I think this post is susceptible to the charge that I'm looking for love in all the wrong places—it's a memoir, not a series of policy analyses.</p></details></li>
+      
+    </ul></aside>
+  
+
+  <h3 id="intro">Intro</h3>
+<p>In a <a href="../../posts/is-development-easy/">previous post</a>, I presented a puzzle: <a href="https://en.wikipedia.org/wiki/Lee_Kuan_Yew">Lee Kuan Yew</a>’s <i>The Singapore Story</i> <span class="citation" data-cites="yew2012">(Yew <a href="#ref-yew2012">2012</a>)</span> makes the incredible success of Singapore sound easy, but everything else I know suggests that growth and governance are far from easy. How do we explain the discrepancy?</p>
+<p>One explanation that I think some people advance is that these problems are genuinely difficult, but they crumble before the searing brilliance of LKY (Lee Kuan Yew). I’ll confess that I had thought this might be the case before reading. Based on the memoir, I’m come to believe that LKY is closer to competent than Promethean.</p>
+<h3 id="he-put-his-pants-on-one-leg-at-a-time">He put his pants on one leg at a time</h3>
+<p>First, we’ll start with some trifling excerpts which suggest that, indeed, LKY is an ordinary mortal:</p>
+<ul>
+<li><blockquote>
+Eating and talking through the meal while conserving energy and not letting myself go and drink in case I lose my sharp cutting edge is quite a strain. It is part of the price to promote American investments.
+</blockquote></li>
+<li><blockquote>
+[H]owever hard and hectic the day had been, I would take two hours off in the late afternoon to go on the practice tee to hit 50–100 balls and play nine holes with one or two friends.
+</blockquote></li>
+</ul>
+<h3 id="facile-solutions-to-complex-problems">Facile solutions to complex problems</h3>
+<p>He also sometimes responds to problems with solutions that seem like they can’t possibly be sufficient:</p>
+<ul>
+<li><blockquote>
+Visiting CEOs used to call on me before making investment decisions. I thought the best way to convince them was to ensure that the roads from the airport to their hotel and to my office were neat and spruce, lined with shrubs and trees. When they drove into the Istana domain, they would see right in the heart of the city a green oasis, 90 acres of immaculate rolling lawns and woodland, and nestling between them a nine-hole golf course.
+</blockquote></li>
+<li><blockquote>
+The most effective [anti-corruption] change we made in 1960 was to allow the courts to treat proof that an accused was living beyond his means or had property his income could not explain as corroborating <span class="noted">evidence that the accused had accepted or obtained a bribe</span>[^corruption]. With a keen nose to the ground and the power to investigate every officer and every minister, the director of the CPIB, working from the Prime Minister’s Office, developed a justly formidable reputation for sniffing out those betraying the public trust.
+</blockquote>
+<p>It’s my understanding that anti-corruption measures are often a double-edge sword; they’re just as ably used by ruthless politicians to eliminate competition. In fact, LKY alludes to this very behavior elsewhere:</p>
+<blockquote>
+[D]uring the height of the Cultural Revolution, 1966–76, the system broke down. […] The whole society was degraded as opportunists masqueraded as revolutionaries and achieved “helicopter promotions” by betraying and persecuting their peers or superiors.
+</blockquote></li>
+<li><blockquote>
+[…] Singapore should not have a central bank which could issue currency and create money. We were determined not to allow our currency to lose its value against the strong currencies of the big nations, especially the United States. So we retained our currency board which issued Singapore dollars only when backed by its equivalent value in foreign exchange.
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Monetary_policy">Monetary policy</a> has real value and it’s far from obvious that the winning move is not to play.</p></li>
+<li><blockquote>
+[On limiting social programs:] We have arranged help but in such a way that only those who have no other choice will seek it. This is the opposite of attitudes in the West, where liberals actively encourage people to demand their entitlements with no sense of shame, causing an explosion of welfare costs.
+</blockquote>
+<p>An alternative consequence is those with the most acute sense of social responsibility will forgo entitlements and the most shameless will avail themselves of entitlements.</p></li>
+<li><blockquote>
+Soon afterwards we also phased out protection for the assembly of refrigerators, air-conditioners, television sets, radios and other consumer electrical and electronic products.
+</blockquote>
+<p>Economic theory both recommends free trade for its positive impact on aggregate welfare and warns of its distributional consequences. I saw no engagement with the latter concern in the memoirs.</p></li>
+<li><blockquote>
+[…] I wanted: good health services, with waste and costs kept in check by requiring co-payments from the user. Subsidies for health care were necessary, but could be extremely wasteful and ruinous for the budget.
+</blockquote>
+<p>Requiring co-payments doesn’t solve <a href="https://en.wikipedia.org/wiki/Moral_hazard">moral hazard</a>—it only mitigates. There are no easy solutions that eliminate moral hazard <em>and</em> retain subsidies.</p></li>
+</ul>
+<p>To be clear, I’m not suggesting that these are easy problems or that I know the answer. In fact, that’s precisely my complaint—it seems LKY is suggesting they <em>are</em> problems with simple answers. One might respond that LKY <em>had</em> to make choices and didn’t have the luxury of indecision. I grant that, but think his presentation of these problems is less ‘forced to make the least bad choice when confronted with unsolved dilemmas’ and more ‘plucked out an answer to a trivialized problem’.</p>
+<!--more-->
+<h3 id="contradictions">Contradictions</h3>
+<p>There are also occasions on which LKY seems to contradict himself. If indeed he does, he’s decidedly fallible. For example:</p>
+<ul>
+<li><p>Throughout, LKY emphasizes the importance of economic rationality and incentives. Then we get snippets like:</p>
+<blockquote>
+The [Stock Exchange of Singapore] was closed for three days while [Monetary Authority of Singapore] officials, led by Koh Beng Seng, worked around the clock with the Big Four banks to arrange an emergency “lifeboat” fund of S$180 million to rescue the stockbrokers. Koh’s efforts enabled the SES to avoid systemic market failure.
+</blockquote>
+<p>This is <a href="https://en.wikipedia.org/wiki/Too_big_to_fail">too big to fail</a> and moral hazard years before the <a href="https://en.wikipedia.org/wiki/Financial_crisis_of_2007%E2%80%932008">global financial crisis</a>.</p>
+<blockquote>
+The [Housing &amp; Development Board] started with a demonstration phase for older flats, spending S$58,000 per flat to upgrade the estates and build additional space for a utility room, bathroom or kitchen extension, but charging the owner only S$4,500.
+</blockquote>
+<p>It seems hard to imagine that this didn’t have distortionary effects.</p></li>
+<li><p>LKY promoted eugenic programs as a response to:</p>
+<blockquote>
+Our best women were not reproducing themselves because men who were their educational equals did not want to marry them. About half of our university graduates were women; nearly two-thirds of them were unmarried.
+</blockquote>
+<p>He seems not to notice that his eugenic concerns are solved by symmetry:</p>
+<blockquote>
+The result was that the least-educated men could find no women to marry, because the women who remained unmarried were all better-educated and would not marry them.
+</blockquote></li>
+</ul>
+<h3 id="wrong">Wrong</h3>
+<p>There are also some occasions on which he is, to the best of my knowledge, just plain wrong. For example:</p>
+<ul>
+<li><blockquote>
+I quoted studies of identical twins done in Minnesota in the 1980s which showed that these twins were similar in so many respects. Although they had been brought up separately and in different countries, about 80 per cent of their vocabulary, IQ, habits, likes and dislikes in food and friends, and other character and personality traits were identical. In other words, nearly 80 per cent of a person’s makeup was from nature, and about 20 per cent the result of nurture.
+</blockquote>
+<p>I think his last sentence is a gesture to <a href="https://en.wikipedia.org/wiki/Heritability">heritability</a>. Alas, it is not even a good popular interpretation of the concept.</p></li>
+<li><blockquote>
+After what I had seen of human conduct in the years of deprivation and harshness of Japanese occupation, I did not accept the theory that a criminal is a victim of society. Punishment then was so severe that even in 1944–45, when many did not have enough to eat, there were no burglaries and people could leave their front doors on latch, day or night. The deterrent was effective.
+</blockquote>
+<p>LKY seems to generalize this in support of severe punishment generally. However, I think <span class="noted">the literature generally suggests that the severity of punishment is less important</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> for deterrence than other factors <span class="citation" data-cites="wright2010">(Wright <a href="#ref-wright2010">2010</a>)</span>.</p></li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>We’ve seen a variety of ways in which LKY isn’t beyond reproach. This puts an upper bound on his competence and suggests that we can’t explain the apparent ease of Singapore’s development by appealing to his singular qualities.</p>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-wright2010">
+<p>Wright, Valerie. 2010. “Deterrence in Criminal Justice.” The Sentencing Project. <a href="https://www.sentencingproject.org/wp-content/uploads/2016/01/Deterrence-in-Criminal-Justice.pdf" class="uri">https://www.sentencingproject.org/wp-content/uploads/2016/01/Deterrence-in-Criminal-Justice.pdf</a>.</p>
+</div>
+<div id="ref-yew2012">
+<p>Yew, Lee Kuan. 2012. <em>From Third World to First: The Singapore Story, 1965-2000</em>. Vol. 2. Marshall Cavendish International Asia Pte Ltd.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>You might object that it’s unfair to judge LKY for being ignorant of research which did not yet exist. It is, a little. But he also could have been more circumspect.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~ideal-calibration~is-development-easy~quorum~util-egal.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>

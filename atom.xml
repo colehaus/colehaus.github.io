@@ -8,8 +8,112 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-07-06T00:00:00Z</updated>
+    <updated>2018-07-07T00:00:00Z</updated>
     <entry>
+    <title>Lee Kuan Yew—Deity or dude?</title>
+    <link href="https://www.col-ex.org/posts/lky-deity-dude/" />
+    <id>https://www.col-ex.org/posts/lky-deity-dude/</id>
+    <published>2018-07-07T00:00:00Z</published>
+    <updated>2018-07-07T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="intro">Intro</h1>
+<p>In a <a href="https://www.col-ex.org/posts/is-development-easy/">previous post</a>, I presented a puzzle: <a href="https://en.wikipedia.org/wiki/Lee_Kuan_Yew">Lee Kuan Yew</a>’s <em>The Singapore Story</em> <span class="citation" data-cites="yew2012">(Yew <a href="#ref-yew2012">2012</a>)</span> makes the incredible success of Singapore sound easy, but everything else I know suggests that growth and governance are far from easy. How do we explain the discrepancy?</p>
+<p>One explanation that I think some people advance is that these problems are genuinely difficult, but they crumble before the searing brilliance of LKY (Lee Kuan Yew). I’ll confess that I had thought this might be the case before reading. Based on the memoir, I’m come to believe that LKY is closer to competent than Promethean.</p>
+<h1 id="he-put-his-pants-on-one-leg-at-a-time">He put his pants on one leg at a time</h1>
+<p>First, we’ll start with some trifling excerpts which suggest that, indeed, LKY is an ordinary mortal:</p>
+<ul>
+<li><blockquote>
+Eating and talking through the meal while conserving energy and not letting myself go and drink in case I lose my sharp cutting edge is quite a strain. It is part of the price to promote American investments.
+</blockquote></li>
+<li><blockquote>
+[H]owever hard and hectic the day had been, I would take two hours off in the late afternoon to go on the practice tee to hit 50–100 balls and play nine holes with one or two friends.
+</blockquote></li>
+</ul>
+<h1 id="facile-solutions-to-complex-problems">Facile solutions to complex problems</h1>
+<p>He also sometimes responds to problems with solutions that seem like they can’t possibly be sufficient:</p>
+<ul>
+<li><blockquote>
+Visiting CEOs used to call on me before making investment decisions. I thought the best way to convince them was to ensure that the roads from the airport to their hotel and to my office were neat and spruce, lined with shrubs and trees. When they drove into the Istana domain, they would see right in the heart of the city a green oasis, 90 acres of immaculate rolling lawns and woodland, and nestling between them a nine-hole golf course.
+</blockquote></li>
+<li><blockquote>
+The most effective [anti-corruption] change we made in 1960 was to allow the courts to treat proof that an accused was living beyond his means or had property his income could not explain as corroborating <span class="noted">evidence that the accused had accepted or obtained a bribe</span>[^corruption]. With a keen nose to the ground and the power to investigate every officer and every minister, the director of the CPIB, working from the Prime Minister’s Office, developed a justly formidable reputation for sniffing out those betraying the public trust.
+</blockquote>
+<p>It’s my understanding that anti-corruption measures are often a double-edge sword; they’re just as ably used by ruthless politicians to eliminate competition. In fact, LKY alludes to this very behavior elsewhere:</p>
+<blockquote>
+[D]uring the height of the Cultural Revolution, 1966–76, the system broke down. […] The whole society was degraded as opportunists masqueraded as revolutionaries and achieved “helicopter promotions” by betraying and persecuting their peers or superiors.
+</blockquote></li>
+<li><blockquote>
+[…] Singapore should not have a central bank which could issue currency and create money. We were determined not to allow our currency to lose its value against the strong currencies of the big nations, especially the United States. So we retained our currency board which issued Singapore dollars only when backed by its equivalent value in foreign exchange.
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Monetary_policy">Monetary policy</a> has real value and it’s far from obvious that the winning move is not to play.</p></li>
+<li><blockquote>
+[On limiting social programs:] We have arranged help but in such a way that only those who have no other choice will seek it. This is the opposite of attitudes in the West, where liberals actively encourage people to demand their entitlements with no sense of shame, causing an explosion of welfare costs.
+</blockquote>
+<p>An alternative consequence is those with the most acute sense of social responsibility will forgo entitlements and the most shameless will avail themselves of entitlements.</p></li>
+<li><blockquote>
+Soon afterwards we also phased out protection for the assembly of refrigerators, air-conditioners, television sets, radios and other consumer electrical and electronic products.
+</blockquote>
+<p>Economic theory both recommends free trade for its positive impact on aggregate welfare and warns of its distributional consequences. I saw no engagement with the latter concern in the memoirs.</p></li>
+<li><blockquote>
+[…] I wanted: good health services, with waste and costs kept in check by requiring co-payments from the user. Subsidies for health care were necessary, but could be extremely wasteful and ruinous for the budget.
+</blockquote>
+<p>Requiring co-payments doesn’t solve <a href="https://en.wikipedia.org/wiki/Moral_hazard">moral hazard</a>—it only mitigates. There are no easy solutions that eliminate moral hazard <em>and</em> retain subsidies.</p></li>
+</ul>
+<p>To be clear, I’m not suggesting that these are easy problems or that I know the answer. In fact, that’s precisely my complaint—it seems LKY is suggesting they <em>are</em> problems with simple answers. One might respond that LKY <em>had</em> to make choices and didn’t have the luxury of indecision. I grant that, but think his presentation of these problems is less ‘forced to make the least bad choice when confronted with unsolved dilemmas’ and more ‘plucked out an answer to a trivialized problem’.</p>
+<p><!--more--></p>
+<h1 id="contradictions">Contradictions</h1>
+<p>There are also occasions on which LKY seems to contradict himself. If indeed he does, he’s decidedly fallible. For example:</p>
+<ul>
+<li><p>Throughout, LKY emphasizes the importance of economic rationality and incentives. Then we get snippets like:</p>
+<blockquote>
+The [Stock Exchange of Singapore] was closed for three days while [Monetary Authority of Singapore] officials, led by Koh Beng Seng, worked around the clock with the Big Four banks to arrange an emergency “lifeboat” fund of S$180 million to rescue the stockbrokers. Koh’s efforts enabled the SES to avoid systemic market failure.
+</blockquote>
+<p>This is <a href="https://en.wikipedia.org/wiki/Too_big_to_fail">too big to fail</a> and moral hazard years before the <a href="https://en.wikipedia.org/wiki/Financial_crisis_of_2007%E2%80%932008">global financial crisis</a>.</p>
+<blockquote>
+The [Housing &amp; Development Board] started with a demonstration phase for older flats, spending S$58,000 per flat to upgrade the estates and build additional space for a utility room, bathroom or kitchen extension, but charging the owner only S$4,500.
+</blockquote>
+<p>It seems hard to imagine that this didn’t have distortionary effects.</p></li>
+<li><p>LKY promoted eugenic programs as a response to:</p>
+<blockquote>
+Our best women were not reproducing themselves because men who were their educational equals did not want to marry them. About half of our university graduates were women; nearly two-thirds of them were unmarried.
+</blockquote>
+<p>He seems not to notice that his eugenic concerns are solved by symmetry:</p>
+<blockquote>
+The result was that the least-educated men could find no women to marry, because the women who remained unmarried were all better-educated and would not marry them.
+</blockquote></li>
+</ul>
+<h1 id="wrong">Wrong</h1>
+<p>There are also some occasions on which he is, to the best of my knowledge, just plain wrong. For example:</p>
+<ul>
+<li><blockquote>
+I quoted studies of identical twins done in Minnesota in the 1980s which showed that these twins were similar in so many respects. Although they had been brought up separately and in different countries, about 80 per cent of their vocabulary, IQ, habits, likes and dislikes in food and friends, and other character and personality traits were identical. In other words, nearly 80 per cent of a person’s makeup was from nature, and about 20 per cent the result of nurture.
+</blockquote>
+<p>I think his last sentence is a gesture to <a href="https://en.wikipedia.org/wiki/Heritability">heritability</a>. Alas, it is not even a good popular interpretation of the concept.</p></li>
+<li><blockquote>
+After what I had seen of human conduct in the years of deprivation and harshness of Japanese occupation, I did not accept the theory that a criminal is a victim of society. Punishment then was so severe that even in 1944–45, when many did not have enough to eat, there were no burglaries and people could leave their front doors on latch, day or night. The deterrent was effective.
+</blockquote>
+<p>LKY seems to generalize this in support of severe punishment generally. However, I think <span class="noted">the literature generally suggests that the severity of punishment is less important</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> for deterrence than other factors <span class="citation" data-cites="wright2010">(Wright <a href="#ref-wright2010">2010</a>)</span>.</p></li>
+</ul>
+<h1 id="conclusion">Conclusion</h1>
+<p>We’ve seen a variety of ways in which LKY isn’t beyond reproach. This puts an upper bound on his competence and suggests that we can’t explain the apparent ease of Singapore’s development by appealing to his singular qualities.</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-wright2010">
+<p>Wright, Valerie. 2010. “Deterrence in Criminal Justice.” The Sentencing Project. <a href="https://www.sentencingproject.org/wp-content/uploads/2016/01/Deterrence-in-Criminal-Justice.pdf" class="uri uri">https://www.sentencingproject.org/wp-content/uploads/2016/01/Deterrence-in-Criminal-Justice.pdf</a>.</p>
+</div>
+<div id="ref-yew2012">
+<p>Yew, Lee Kuan. 2012. <em>From Third World to First: The Singapore Story, 1965-2000</em>. Vol. 2. Marshall Cavendish International Asia Pte Ltd.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>You might object that it’s unfair to judge LKY for being ignorant of research which did not yet exist. It is, a little. But he also could have been more circumspect.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Exemplar's curse—Now with 80% more math!</title>
     <link href="https://www.col-ex.org/posts/exemplars-curse-now-with-more-math/" />
     <id>https://www.col-ex.org/posts/exemplars-curse-now-with-more-math/</id>
@@ -144,24 +248,34 @@ The new [political opponents] were lacklustre and did not measure up. Chiam was 
 <h1 id="whats-so-hard-about-growth-just-stop-making-bad-decisions-and-start-making-good-ones.">What’s so hard about growth? Just stop making bad decisions and start making good ones.</h1>
 <p>A book club I recently attended read <a href="https://en.wikipedia.org/wiki/Lee_Kuan_Yew">Lee Kuan Yew’s</a> (the prime minister of Singapore from independence in 1965 to 1990) memoir, <em>The Singapore Story</em> <span class="citation" data-cites="yew2012">(Yew <a href="#ref-yew2012">2012</a>)</span>. My friend’s first reaction to the book was, “He makes it sound so easy!”, and I can’t disagree. My overwhelming impression of the book is that of proficient nonchalance.</p>
 <p>Some examples from the text which I hope convey that feeling:</p>
+<ul>
+<li>
 <blockquote>
 I had many pressing concerns: first, to get international recognition for Singapore’s independence, including our membership of the United Nations. I chose Sinnathamby Rajaratnam (affectionately called Raja by all of us) as foreign minister. […] He was to be much liked and respected by all those he worked with at home and abroad. As messages of recognition flowed in, Toh Chin Chye, the deputy prime minister, and Raja as foreign minister set off to New York to take our seat at the UN that September of 1965.
 </blockquote>
+</li>
+<li>
 <blockquote>
 <p>Mordecai Kidron, the Israeli ambassador in Bangkok […] had approached me several times in 1962–63 to ask for an Israeli consulate in Singapore. […] I replied that it … [might] create an issue that would excite the Malay Muslim grassroots and upset my plans […].</p>
+</li>
+</ul>
 <p>[…]</p>
 <p>[N]ow that the Israeli presence in Singapore was well-known, we allowed them a diplomatic mission. They wanted an embassy. We decided to allow them a trade representative office first, in October 1968. The following May, after Malay Muslims in Singapore and the region had become accustomed to an Israeli presence, we allowed them to upgrade it to an embassy.</p>
 </blockquote>
-<blockquote>
+<ul>
+<li><blockquote>
 Seah Mui Kok, a union leader and PAP MP, another old friend from my time with the unions, objected to the wide latitude given to employers to hire and fire, but accepted the need for unions to be less confrontational to create a better climate for foreign investments. I included safeguards against misuse of these powers.
-</blockquote>
+</blockquote></li>
+</ul>
 <p><!--more--></p>
-<blockquote>
+<ul>
+<li><blockquote>
 We suffered a reverse in the Asian financial crisis of 1997: unemployment increased to 3.2 per cent in 1998. To regain our competitiveness, the unions and government agreed and implemented a package of measures that reduced wages and other costs by 15 per cent […]
-</blockquote>
-<blockquote>
+</blockquote></li>
+<li><blockquote>
 From 1955 to 1968 the <a href="https://en.wikipedia.org/wiki/Central_Provident_Fund">CPF</a> contribution had remained unchanged. I raised it in stages from 5 per cent to 25 per cent in 1984, making a total [compulsory] savings rate of 50 per cent of wages. This was later reduced to 40 per cent.
-</blockquote>
+</blockquote></li>
+</ul>
 <h1 id="am-i-out-of-touch-no-its-lee-kuan-yew-that-is-wrong.">Am I out of touch? No, it’s Lee Kuan Yew that is wrong.</h1>
 <p>The proposition that growth and governance are easy is—to say the least—contrary to my impression. I’m not prepared to make a rigorous argument for the claim that ‘development is hard’ but some fragments which I think inform my intuition:</p>
 <ul>
@@ -186,7 +300,7 @@ The results of the first years of transition were uneven. All countries suffered
 <li>Development isn’t easy. Lee Kuan Yew deceived us. The version of events he presents in the memoir is sanitized, simplified, summarized or otherwise filtered in a way that makes it seem easier than it actually was.</li>
 </ol>
 <p>There will surely be some solution 4 in whatever mix we ultimately decide on, but it’s hard to know how much without reading other sources. And that’s a bridge too far. Also, it seems plausible that there are no other widely available sources to contradict or corroborate many of the key claims in the memoir.</p>
-<p>In future posts, we’ll examine solution 1 and <a href="https://www.col-ex.org/posts/exemplars-curse-singapore/">solution 3</a> using the text itself. If I’m feeling brash, I might also offer baseless speculation on 2 in some future post.</p>
+<p>In future posts, we’ll examine <a href="https://www.col-ex.org/posts/lky-deity-dude/">solution 1</a> and <a href="https://www.col-ex.org/posts/exemplars-curse-singapore/">solution 3</a> using the text itself. If I’m feeling brash, I might also offer baseless speculation on 2 in some future post.</p>
 <hr />
 <div id="refs" class="references">
 <div id="ref-gdp_per_capita_china">
