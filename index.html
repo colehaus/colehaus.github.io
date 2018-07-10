@@ -54,6 +54,39 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/example-lazy-approach-ai-safety/">An example of the lazy approach to AI safety</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/machine%2520ethics/">machine ethics</a></li>
+    
+      <li><a href="./tag/moral%2520uncertainty/">moral uncertainty</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/Lazy%2520AI%2520safety/">Series: Lazy AI safety</a></nav>
+        
+        <span class="date">Published on <time datetime="July 10, 2018">July 10, 2018</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>The lazy approach to AI safety suggests that we explicitly encode our moral uncertainty into artificial agents. Then agents can decide to undertake moral investigation via value of information calculations. We make the description of this approach more concrete by examining its application in a nearly trivial setting.</p></div>
+       
+
+        <p>Examples often clarify. Let’s see an example of the <a href="./posts/lazy-ai-safety/">lazy approach to AI safety</a> in action.</p>
+<h3 id="the-setting">The setting</h3>
+<p>Suppose <a href="https://en.wikipedia.org/wiki/The_Professor_(Gilligan%27s_Island)">The Professor</a> has performed another bamboo miracle and built an AI agent on the <a href="https://en.wikipedia.org/wiki/Gilligan%27s_Island">island</a>. Sadly, the castaways forgot the agent in their frantic final escape. So it’s just our agent, alone on an island in the Pacific.</p>
+<p>As a man of taste and refinement, the professor has followed the lazy approach to AI safety. As such, the agent’s utility futility is quite simple: The utility of any state of affairs is exactly the moral good of that state of affairs according to whatever turns out to be the <span class="noted">One True Moral Theory (OTMT)</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. In symbols, <span class="math inline">\(u(x) = g(x)\)</span> where <span class="math inline">\(u : X \rightarrow \mathbb{R}\)</span> and <span class="noted"><span class="math inline">\(g : X \rightarrow \mathbb{R}\)</span></span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> where <span class="math inline">\(X\)</span> is the set of possible states of affairs, <span class="math inline">\(u\)</span> is the utility function, and <span class="math inline">\(g\)</span> evaluates the moral goodness of a state of affairs according to the OTMT.</p>
+<p>For simplicity, we’ll suppose there are only two possible interventions the agent can make: <a href="https://en.wiktionary.org/wiki/ze">Ze</a> can harvest coconuts or harvest bamboo. Furthermore, we’ll fiat that there are only two possible moral theories in all the world: the coconut imperative and bamboocentrism. According to the coconut imperative, the goodness of a state of affairs is defined as <span class="math inline">\(g_c(b, c) = 0 \cdot b + 3 \cdot c\)</span> where <span class="math inline">\(c\)</span> is the total number of coconuts that have been harvested and <span class="math inline">\(b\)</span> is the total number of bamboo shoots that have been harvested. On the bamboocentric view of things, <span class="math inline">\(g_b(b, c) = 2 \cdot b + 0 \cdot c\)</span>. (The fact that we only have moral theories which express goodness in terms of real numbers permits our earlier simplification of assuming that the OTMT takes this shape.)</p>
+<h3 id="initial-behavior">Initial behavior</h3>
+<p>Before the Professor <a href="https://giphy.com/gifs/will-arnett-UGAwRa9KWjO2Q/fullscreen">abandoned his child</a>, he programmed the agent with a uniform prior over all possible ethical theories. That is, the agent thinks there’s a 50% chance bamboocentrism is true and a 50% chance the coconut imperative is the OTMT. Thus, in the absence of better information, the agent spends zir days harvesting coconuts (we assume the resources required to harvest a coconut are identical to the resources required to harvest a bamboo stalk). To be fully explicit:</p>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/false-dichotomy-ideal-theory-debate/">False dichotomies and the ideal theory debate</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>

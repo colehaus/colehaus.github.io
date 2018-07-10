@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/example-lazy-approach-ai-safety/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/false-dichotomy-ideal-theory-debate/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -709,6 +716,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/voting/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/Lazy%2520AI%2520safety/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

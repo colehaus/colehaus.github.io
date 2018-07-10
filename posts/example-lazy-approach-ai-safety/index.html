@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>An example of the lazy approach to AI safety—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+  <link rel="stylesheet" type="text/css" href="../../css/example-lazy-approach-ai-safety.css" />
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">An example of the lazy approach to AI safety</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/machine%2520ethics/">machine ethics</a></li>
+    
+      <li><a href="../../tag/moral%2520uncertainty/">moral uncertainty</a></li>
+    
+</ul></nav>
+
+  
+    <nav><a class="series" href="../../series/Lazy%2520AI%2520safety/">Series: Lazy AI safety</a></nav>
+  
+  <span class="date">Published on <time datetime="2018-07-10">July 10, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>The lazy approach to AI safety suggests that we explicitly encode our moral uncertainty into artificial agents. Then agents can decide to undertake moral investigation via value of information calculations. We make the description of this approach more concrete by examining its application in a nearly trivial setting.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>Cognitive load</summary><p>I think there's a tricky trade-off with examples between providing useful intuitions and specificity while minimizing extraneous details that tax the reader. Hopefully, I've struck an okay balance.</p></details></li>
+      
+    </ul></aside>
+  
+
+  <p>Examples often clarify. Let’s see an example of the <a href="../../posts/lazy-ai-safety/">lazy approach to AI safety</a> in action.</p>
+<h3 id="the-setting">The setting</h3>
+<p>Suppose <a href="https://en.wikipedia.org/wiki/The_Professor_(Gilligan%27s_Island)">The Professor</a> has performed another bamboo miracle and built an AI agent on the <a href="https://en.wikipedia.org/wiki/Gilligan%27s_Island">island</a>. Sadly, the castaways forgot the agent in their frantic final escape. So it’s just our agent, alone on an island in the Pacific.</p>
+<p>As a man of taste and refinement, the professor has followed the lazy approach to AI safety. As such, the agent’s utility futility is quite simple: The utility of any state of affairs is exactly the moral good of that state of affairs according to whatever turns out to be the <span class="noted">One True Moral Theory (OTMT)</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. In symbols, <span class="math inline">\(u(x) = g(x)\)</span> where <span class="math inline">\(u : X \rightarrow \mathbb{R}\)</span> and <span class="noted"><span class="math inline">\(g : X \rightarrow \mathbb{R}\)</span></span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> where <span class="math inline">\(X\)</span> is the set of possible states of affairs, <span class="math inline">\(u\)</span> is the utility function, and <span class="math inline">\(g\)</span> evaluates the moral goodness of a state of affairs according to the OTMT.</p>
+<p>For simplicity, we’ll suppose there are only two possible interventions the agent can make: <a href="https://en.wiktionary.org/wiki/ze">Ze</a> can harvest coconuts or harvest bamboo. Furthermore, we’ll fiat that there are only two possible moral theories in all the world: the coconut imperative and bamboocentrism. According to the coconut imperative, the goodness of a state of affairs is defined as <span class="math inline">\(g_c(b, c) = 0 \cdot b + 3 \cdot c\)</span> where <span class="math inline">\(c\)</span> is the total number of coconuts that have been harvested and <span class="math inline">\(b\)</span> is the total number of bamboo shoots that have been harvested. On the bamboocentric view of things, <span class="math inline">\(g_b(b, c) = 2 \cdot b + 0 \cdot c\)</span>. (The fact that we only have moral theories which express goodness in terms of real numbers permits our earlier simplification of assuming that the OTMT takes this shape.)</p>
+<h3 id="initial-behavior">Initial behavior</h3>
+<p>Before the Professor <a href="https://giphy.com/gifs/will-arnett-UGAwRa9KWjO2Q/fullscreen">abandoned his child</a>, he programmed the agent with a uniform prior over all possible ethical theories. That is, the agent thinks there’s a 50% chance bamboocentrism is true and a 50% chance the coconut imperative is the OTMT. Thus, in the absence of better information, the agent spends zir days harvesting coconuts (we assume the resources required to harvest a coconut are identical to the resources required to harvest a bamboo stalk). To be fully explicit:</p>
+<!--more-->
+<span class="math display">\[\begin{align*}
+E[\Delta u(h_b)] &amp;= E[u(b + 1, c) - u(b, c)] \\
+&amp;= E[u(b + 1, c)] - E[u(b, c)] \\
+&amp;= E[g(b + 1, c)] - E[g(b, c)] \\
+&amp;= (\frac{1}{2} \cdot g_b(b + 1, c) + \frac{1}{2} \cdot g_c(b + 1, c)) - (\frac{1}{2} \cdot g_b(b, c) + \frac{1}{2} \cdot g_c(b, c)) \\
+&amp;= \frac{1}{2} \cdot g_b(b + 1, c) - \frac{1}{2} \cdot g_b(b, c) \\
+&amp;= \frac{1}{2} (2 \cdot (b + 1) + 0 \cdot c) - \frac{1}{2} (2 \cdot b + 0 \cdot c) \\
+&amp;= 1
+\end{align*}\]</span>
+<span class="math display">\[\begin{align*}
+E[\Delta u(h_c)] &amp;= E[u(b, c + 1) - u(b, c)] \\
+&amp;= E[u(b, c + 1)] - E[u(b, c)] \\
+&amp;= E[g(b, c + 1)] - E[g(b, c)] \\
+&amp;= (\frac{1}{2} \cdot g_b(b, c + 1) + \frac{1}{2} \cdot g_c(b, c + 1)) - (\frac{1}{2} \cdot g_b(b, c) + \frac{1}{2} \cdot g_c(b, c)) \\
+&amp;= \frac{1}{2} \cdot g_c(b, c + 1) - \frac{1}{2} \cdot g_c(b, c) \\
+&amp;= \frac{1}{2} (0 \cdot b + 3 \cdot (c + 1)) - \frac{1}{2} (0 \cdot b + 3 \cdot c) \\
+&amp;= 1.5
+\end{align*}\]</span>
+<p>In words, the expected utility gain from harvesting a bamboo stalk <span class="math inline">\(E[\Delta u(h_b)]\)</span> is <span class="math inline">\(1\)</span> util and thus less than the expected utility gain of <span class="math inline">\(1.5\)</span> from harvesting a coconut <span class="math inline">\(E[\Delta u(h_c)]\)</span>.</p>
+<h3 id="moral-investigation">Moral investigation</h3>
+<p>Now, suppose a magic <a href="https://en.wikipedia.org/wiki/Magic_8-Ball">Magic 8-Ball</a> washes up on the island as narrative devices so obligingly did in ’60s television. Somehow this 8-Ball is a moral oracle able to reveal the OTMT with certainty and somehow the agent knows and believes this. In exchange for this knowledge, the 8-Ball asks for nothing less than an <em>immortal SOUL</em>—*cough* some utils. Should the agent accept this utils for info bargain? The lazy approach to AI safety perspective suggests the next step is to calculate the value of this moral information.</p>
+<p>If we go back to the <a href="../../posts/value-information-calculator/">value of information calculator</a> and paste in our scenario:</p>
+<pre><code>- outcome:
+    finding: coconut imperative is correct
+    choices:
+    - choice: harvest coconut
+      results:
+      - outcome: {label: coconut imperative, value: 3}
+        prob: 1
+      - outcome: {label: bamboocentrism, value: 0}
+        prob: 0
+    - choice: harvest bamboo
+      results:
+      - outcome: {label: coconut imperative, value: 0}
+        prob: 1
+      - outcome: {label: bamboocentrism, value: 2}
+        prob: 0
+  prob: 0.5
+- outcome:
+    finding: bamboocentrism is correct
+    choices:
+    - choice: harvest coconut
+      results:
+      - outcome: {label: coconut imperative, value: 3}
+        prob: 0
+      - outcome: {label: bamboocentrism, value: 0}
+        prob: 1
+    - choice: harvest bamboo
+      results:
+      - outcome: {label: coconut imperative, value: 0}
+        prob: 0
+      - outcome: {label: bamboocentrism, value: 2}
+        prob: 1
+  prob: 0.5</code></pre>
+<p>we find that the expected value of information is <span class="math inline">\(1\)</span>. This makes sense. Based on the agent’s current beliefs, there’s a 50% chance ze’ll find out bamboocentrism is true and harvest bamboo accordingly. Ze’d generate <span class="math inline">\(2\)</span> utils in such a scenario. There’s also a 50% chance that the 8-Ball will reveal that the coconut imperative is correct and the agent would get <span class="math inline">\(3\)</span> utils there for acting accordingly. So the expected value with perfect information is <span class="math inline">\(2.5\)</span> and the current expected value is <span class="math inline">\(1.5\)</span>. <span class="math inline">\(2.5 - 1.5 = 1\)</span> so the agent should be willing to pay up to <span class="math inline">\(1\)</span> util per expected future harvesting decision. For example, if the agent expects the island to be consumed in a fiery volcano imminently (precluding further harvesting), ze shouldn’t sacrifice any utils for the info. On the other hand, if the agent will make ten more harvesting decisions, ze should be willing to pay the 8-Ball up to <span class="math inline">\(10\)</span> utils.</p>
+<h3 id="outro">Outro</h3>
+<p>Obviously, our example is grossly simplified. Among other things, we assume a tiny set of moral theories, a tiny fixed set of actions, and a moral oracle. The hope is that the simplification makes the core, novel elements easier to grasp and that the complexities can be reintroduced later.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>For the sake of simplicity in our exposition, we’ll assume a metaethical view which makes this sensible without justifying that assumption here.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>We’re also assuming goodness ought to be mapped to the reals. We’ll address this shortly.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~false-dichotomy-ideal-theory-debate~ideal-calibration~is-development-easy~qu~30bf37d2.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>

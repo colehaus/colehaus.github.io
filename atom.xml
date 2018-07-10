@@ -8,8 +8,73 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-07-09T00:00:00Z</updated>
+    <updated>2018-07-10T00:00:00Z</updated>
     <entry>
+    <title>An example of the lazy approach to AI safety</title>
+    <link href="https://www.col-ex.org/posts/example-lazy-approach-ai-safety/" />
+    <id>https://www.col-ex.org/posts/example-lazy-approach-ai-safety/</id>
+    <published>2018-07-10T00:00:00Z</published>
+    <updated>2018-07-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Examples often clarify. Let’s see an example of the <a href="https://www.col-ex.org/posts/lazy-ai-safety/">lazy approach to AI safety</a> in action.</p>
+<h1 id="the-setting">The setting</h1>
+<p>Suppose <a href="https://en.wikipedia.org/wiki/The_Professor_(Gilligan%27s_Island)">The Professor</a> has performed another bamboo miracle and built an AI agent on the <a href="https://en.wikipedia.org/wiki/Gilligan%27s_Island">island</a>. Sadly, the castaways forgot the agent in their frantic final escape. So it’s just our agent, alone on an island in the Pacific.</p>
+<p>As a man of taste and refinement, the professor has followed the lazy approach to AI safety. As such, the agent’s utility futility is quite simple: The utility of any state of affairs is exactly the moral good of that state of affairs according to whatever turns out to be the <span class="noted">One True Moral Theory (OTMT)</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. In symbols, <span class="math inline">\(u(x) = g(x)\)</span> where <span class="math inline">\(u : X \rightarrow \mathbb{R}\)</span> and <span class="noted"><span class="math inline">\(g : X \rightarrow \mathbb{R}\)</span></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a> where <span class="math inline">\(X\)</span> is the set of possible states of affairs, <span class="math inline">\(u\)</span> is the utility function, and <span class="math inline">\(g\)</span> evaluates the moral goodness of a state of affairs according to the OTMT.</p>
+<p>For simplicity, we’ll suppose there are only two possible interventions the agent can make: <a href="https://en.wiktionary.org/wiki/ze">Ze</a> can harvest coconuts or harvest bamboo. Furthermore, we’ll fiat that there are only two possible moral theories in all the world: the coconut imperative and bamboocentrism. According to the coconut imperative, the goodness of a state of affairs is defined as <span class="math inline">\(g_c(b, c) = 0 \cdot b + 3 \cdot c\)</span> where <span class="math inline">\(c\)</span> is the total number of coconuts that have been harvested and <span class="math inline">\(b\)</span> is the total number of bamboo shoots that have been harvested. On the bamboocentric view of things, <span class="math inline">\(g_b(b, c) = 2 \cdot b + 0 \cdot c\)</span>. (The fact that we only have moral theories which express goodness in terms of real numbers permits our earlier simplification of assuming that the OTMT takes this shape.)</p>
+<h1 id="initial-behavior">Initial behavior</h1>
+<p>Before the Professor <a href="https://giphy.com/gifs/will-arnett-UGAwRa9KWjO2Q/fullscreen">abandoned his child</a>, he programmed the agent with a uniform prior over all possible ethical theories. That is, the agent thinks there’s a 50% chance bamboocentrism is true and a 50% chance the coconut imperative is the OTMT. Thus, in the absence of better information, the agent spends zir days harvesting coconuts (we assume the resources required to harvest a coconut are identical to the resources required to harvest a bamboo stalk). To be fully explicit:</p>
+<p><!--more--> <span class="math display">\[\begin{align*} E[\Delta u(h_b)] &amp;= E[u(b + 1, c) - u(b, c)] \\ &amp;= E[u(b + 1, c)] - E[u(b, c)] \\ &amp;= E[g(b + 1, c)] - E[g(b, c)] \\ &amp;= (\frac{1}{2} \cdot g_b(b + 1, c) + \frac{1}{2} \cdot g_c(b + 1, c)) - (\frac{1}{2} \cdot g_b(b, c) + \frac{1}{2} \cdot g_c(b, c)) \\ &amp;= \frac{1}{2} \cdot g_b(b + 1, c) - \frac{1}{2} \cdot g_b(b, c) \\ &amp;= \frac{1}{2} (2 \cdot (b + 1) + 0 \cdot c) - \frac{1}{2} (2 \cdot b + 0 \cdot c) \\ &amp;= 1 \end{align*}\]</span> <span class="math display">\[\begin{align*} E[\Delta u(h_c)] &amp;= E[u(b, c + 1) - u(b, c)] \\ &amp;= E[u(b, c + 1)] - E[u(b, c)] \\ &amp;= E[g(b, c + 1)] - E[g(b, c)] \\ &amp;= (\frac{1}{2} \cdot g_b(b, c + 1) + \frac{1}{2} \cdot g_c(b, c + 1)) - (\frac{1}{2} \cdot g_b(b, c) + \frac{1}{2} \cdot g_c(b, c)) \\ &amp;= \frac{1}{2} \cdot g_c(b, c + 1) - \frac{1}{2} \cdot g_c(b, c) \\ &amp;= \frac{1}{2} (0 \cdot b + 3 \cdot (c + 1)) - \frac{1}{2} (0 \cdot b + 3 \cdot c) \\ &amp;= 1.5 \end{align*}\]</span></p>
+<p>In words, the expected utility gain from harvesting a bamboo stalk <span class="math inline">\(E[\Delta u(h_b)]\)</span> is <span class="math inline">\(1\)</span> util and thus less than the expected utility gain of <span class="math inline">\(1.5\)</span> from harvesting a coconut <span class="math inline">\(E[\Delta u(h_c)]\)</span>.</p>
+<h1 id="moral-investigation">Moral investigation</h1>
+<p>Now, suppose a magic <a href="https://en.wikipedia.org/wiki/Magic_8-Ball">Magic 8-Ball</a> washes up on the island as narrative devices so obligingly did in ’60s television. Somehow this 8-Ball is a moral oracle able to reveal the OTMT with certainty and somehow the agent knows and believes this. In exchange for this knowledge, the 8-Ball asks for nothing less than an <em>immortal SOUL</em>—*cough* some utils. Should the agent accept this utils for info bargain? The lazy approach to AI safety perspective suggests the next step is to calculate the value of this moral information.</p>
+<p>If we go back to the <a href="https://www.col-ex.org/posts/value-information-calculator/">value of information calculator</a> and paste in our scenario:</p>
+<pre><code>- outcome:
+    finding: coconut imperative is correct
+    choices:
+    - choice: harvest coconut
+      results:
+      - outcome: {label: coconut imperative, value: 3}
+        prob: 1
+      - outcome: {label: bamboocentrism, value: 0}
+        prob: 0
+    - choice: harvest bamboo
+      results:
+      - outcome: {label: coconut imperative, value: 0}
+        prob: 1
+      - outcome: {label: bamboocentrism, value: 2}
+        prob: 0
+  prob: 0.5
+- outcome:
+    finding: bamboocentrism is correct
+    choices:
+    - choice: harvest coconut
+      results:
+      - outcome: {label: coconut imperative, value: 3}
+        prob: 0
+      - outcome: {label: bamboocentrism, value: 0}
+        prob: 1
+    - choice: harvest bamboo
+      results:
+      - outcome: {label: coconut imperative, value: 0}
+        prob: 0
+      - outcome: {label: bamboocentrism, value: 2}
+        prob: 1
+  prob: 0.5</code></pre>
+<p>we find that the expected value of information is <span class="math inline">\(1\)</span>. This makes sense. Based on the agent’s current beliefs, there’s a 50% chance ze’ll find out bamboocentrism is true and harvest bamboo accordingly. Ze’d generate <span class="math inline">\(2\)</span> utils in such a scenario. There’s also a 50% chance that the 8-Ball will reveal that the coconut imperative is correct and the agent would get <span class="math inline">\(3\)</span> utils there for acting accordingly. So the expected value with perfect information is <span class="math inline">\(2.5\)</span> and the current expected value is <span class="math inline">\(1.5\)</span>. <span class="math inline">\(2.5 - 1.5 = 1\)</span> so the agent should be willing to pay up to <span class="math inline">\(1\)</span> util per expected future harvesting decision. For example, if the agent expects the island to be consumed in a fiery volcano imminently (precluding further harvesting), ze shouldn’t sacrifice any utils for the info. On the other hand, if the agent will make ten more harvesting decisions, ze should be willing to pay the 8-Ball up to <span class="math inline">\(10\)</span> utils.</p>
+<h1 id="outro">Outro</h1>
+<p>Obviously, our example is grossly simplified. Among other things, we assume a tiny set of moral theories, a tiny fixed set of actions, and a moral oracle. The hope is that the simplification makes the core, novel elements easier to grasp and that the complexities can be reintroduced later.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>For the sake of simplicity in our exposition, we’ll assume a metaethical view which makes this sensible without justifying that assumption here.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>We’re also assuming goodness ought to be mapped to the reals. We’ll address this shortly.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>False dichotomies and the ideal theory debate</title>
     <link href="https://www.col-ex.org/posts/false-dichotomy-ideal-theory-debate/" />
     <id>https://www.col-ex.org/posts/false-dichotomy-ideal-theory-debate/</id>
@@ -2937,7 +3002,7 @@ This true story illustrates a saddening aspect of the human condition. We normal
 <p><!--more--></p>
 <h1 id="ethical-surrender">Ethical surrender</h1>
 <p>Our prior should be that “solving” ethics is hard: Many smart people have worked on it for centuries. We can also take a step back and allude to more <a href="https://plato.stanford.edu/entries/skepticism/">fundamental limitations to knowledge</a> which suggest a definitive solution to ethics isn’t around the corner.</p>
-<p>There is a certain simplicity to the empirical domain. We can see it, taste it, feel it. And yet, the possibility of certain, empirical knowledge has faced strong skepticism from philosophers for centuries (dating at least to <a href="https://plato.stanford.edu/entries/induction-problem/">David Hume</a>). Do we simplify the problem of induction by moving to the abstracted domain of ethics? I think not.</p>
+<p>There is a certain simplicity to the empirical domain. We can see it, taste it, feel it. And yet, the possibility of certain, empirical knowledge has faced strong skepticism from philosophers for centuries (dating at least to <a href="https://plato.stanford.edu/entries/induction-problem/">David Hume</a>). Do we simplify the problem of induction by moving to the abstracted domain of ethics? It seems doubtful.</p>
 <p>If induction is out, what about deduction? Again, there are <a href="https://plato.stanford.edu/entries/goedel-incompleteness/">limits</a>.</p>
 <p>Obviously, this section is brief and handwavey. We’ve sidestepped big, intricate arguments about the nature of ethics and moral epistemology. But I hope it primes your intuition enough that you’re willing to provisionally accept that uncertainty is a major feature of ethics now and in the future.</p>
 <h1 id="moral-uncertainty">Moral uncertainty</h1>
@@ -2945,19 +3010,19 @@ This true story illustrates a saddening aspect of the human condition. We normal
 <p>A compelling alternative is to <a href="http://www.overcomingbias.com/2009/01/moral-uncertainty-towards-a-solution.html">retain our uncertainty and evaluate actions against a weighted parliament of ethical theories</a>. In our 80-20 scenario above, any action is evaluated against both theories. If utilitarianism marginally prefers action B to A while the categorical imperative heavily favors A over B, we do A (even though we are “mostly” utilitarian!).</p>
 <h2 id="moral-uncertainty-in-machines">Moral uncertainty in machines</h2>
 <p>The impression I have (admittedly, mostly from afar) is that AI alignment has mostly (implicitly) revolved around the “my favorite theory” approach. That is, people have been approaching the issue as deciding which single ethical theory they will encode in an agent. Until they’re certain they’ve decided upon the “one true theory” of ethics, all powerful agents are the stuff of nightmares. I think the parliamentary model improves on this situation.</p>
-<p>When encoding the parliamentary model in machines, <span class="noted">there’s good reason to avoid simply transferring our own intuitions and perspectives into the machine</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. Instead, the parliament’s initial distribution should probably be set by a <span class="noted"><a href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution">maximum entropy distribution</a></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a> (i.e. each ethical theory starts with equal likelihood). Of course, we can’t leave it there. That would throw away valuable information about the fact of the matter (i.e. what evidence do we have bearing on the relative likelihood of each moral theory to be correct). An abhorrence for discarding information (that is, we objected to “forgetting” our uncertainty and acting as though we’re certain of our favored theory) is precisely what motivated us to choose the parliamentary approach in the first place.</p>
+<p>When encoding the parliamentary model in machines, <span class="noted">there’s good reason to avoid simply transferring our own intuitions and perspectives into the machine</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. Instead, the parliament’s initial distribution should probably be set by a <span class="noted"><a href="https://en.wikipedia.org/wiki/Maximum_entropy_probability_distribution">maximum entropy distribution</a></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>—that is each ethical theory starts with equal likelihood. Of course, we can’t leave it there.</p>
 <p>Instead, we will allow and expect our agent to perform <a href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayesian updates</a> to reweight the moral parliament. That is, in addition to any actions it can take in the world (e.g. an autonomous car turning left, a paperclip factory agent reconfiguring its supply chain. For lack of familiarity with a better term, we’ll call actions-in-the-world “interventions” henceforth), the agent also always has the option of performing ethical investigation. This supposes that we have a workable answer to the questions of <a href="https://plato.stanford.edu/entries/moral-epistemology/">moral epistemology</a> and thus a well-founded way to perform these updates. We’ll bracket the question of how exactly this can be done while noting that moral epistemology is at least a different hard problem to solve than the problem which AI alignment typically confronts.</p>
 <h3 id="necessity-of-agent-embedding">Necessity of agent embedding</h3>
 <p>The above sounds like a generic algorithm for ethical investigation. Why embed it in an agent rather than asking it to run “to completion” and using the result, or creating a <a href="https://www.lesswrong.com/posts/6SGqkCgHuNr7d4yJm/thoughts-on-the-singularity-institute-si">tool AI</a>? Under most plausible moral epistemes, I suspect running “to completion” would be <span class="noted">computationally intractable</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>. On the subject of tool AIs, I’ll leave it to <a href="https://www.gwern.net/Tool-AI">Why tool AIs want to be agent AIs</a> and note that foundational ethical investigation seems like a bad place to skimp on capability.</p>
 <h1 id="arbitrating-between-interventions-and-investigations">Arbitrating between interventions and investigations</h1>
 <p>How should ethical investigation be valued in the agent’s utility function? We must answer this question before our agent can make appropriate trade-offs between intervention and ethical investigation. Once we see the ethical investigation as an information-gathering task, the solution falls out naturally. We should use <a href="https://en.wikipedia.org/wiki/Value_of_information">value of information calculations</a> to value ethical investigation.</p>
-<p>Briefly, <a href="https://www.col-ex.org/posts/value-of-information-calculator-explained/">value of information</a> is a well-founded way of quantifying our intuition that uncertainty has a cost. When our actions result in uncertain outcomes, we muddle through as best we can. But information that reduces the uncertainty associated with an action has a tangible value. It may actually cause us to change our actions and obtain better outcomes. If a decision maker would pay up to $X for this information, then we say it has a value of $X.</p>
-<p>In this case, the value in our value of information calculation is determined by our parliament of moral theories. This is circular (and thus a bit confusing), but, I think, can be <span class="noted">made to work</span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a>. So we’d expect our agent to perform ethical investigation only insofar as the information produced by that investigation might affect interventions under consideration (Hence the “lazy” in our title. In particular, we’re appealing to the concept of <a href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a>—values (both computational and ethical) ought to be computed only on an as needed basis instead of eagerly and preemptively.) and where the value of that information is greater than any currently available intervention.</p>
+<p>Briefly, <a href="https://www.col-ex.org/posts/value-of-information-calculator-explained/">value of information</a> is a well-founded way of quantifying our intuition that uncertainty has a cost. When our actions result in uncertain outcomes, we muddle through as best we can. But information that reduces the uncertainty associated with an action has a tangible value—it may actually cause us to change our actions and obtain better outcomes. If a rational decision maker would pay up to $X for this information, then we say it has a value of $X.</p>
+<p>In this case, the value in our value of information calculation is determined by our parliament of moral theories. This is circular (and thus a bit confusing), but, I think, can be <span class="noted">made to work</span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a>. So we’d expect our agent to perform ethical investigation <span class="noted">only insofar as the information produced by that investigation might affect interventions under consideration</span><a href="#fn5" id="fnref5" class="footnote-ref"><sup>5</sup></a> and where the value of that information is greater than any currently available intervention.</p>
 <h1 id="claimed-benefits">Claimed benefits</h1>
 <h2 id="ai-arms-race">AI arms race</h2>
-<p>In an <a href="https://www.fhi.ox.ac.uk/wp-content/uploads/Racing-to-the-precipice-a-model-of-artificial-intelligence-development.pdf">AI arms race</a>, the naive approach to alignment (First, solve ethics. Then, develop AGI.) puts the most scrupulous developers at a disadvantage. Because the costs of scrupulosity are so high, we expect most developers to end up in the “unscrupulous” category. The lazy approach may offer a significant advantage here. Because the approach is conceptually straightforward, implementation could be relatively manageable. As such, asking all agent creators to include it is a more plausible request than demanding the cessation of all agent development. Furthermore, when an agent finds itself doing trivial actions of no moral import, it can remain fairly disinterested in ethics. Broad approximations of ethical truth suffice. This means agent creators working in certain fields can be fairly confident that the run time costs (e.g. agent performance overhead, constraints on agent actions, agent predictability) are minimal. Again, this makes ethical consideration cheaper.</p>
+<p>In an <a href="https://www.fhi.ox.ac.uk/wp-content/uploads/Racing-to-the-precipice-a-model-of-artificial-intelligence-development.pdf">AI arms race</a>, the naive approach to alignment—first, solve ethics; then, develop AGI—puts the most scrupulous developers at a disadvantage. Because the costs of scrupulosity are so high, we expect most developers to end up in the ‘unscrupulous’ category. The lazy approach may offer a significant advantage here. Because the approach is conceptually straightforward, implementation could be relatively manageable. As such, asking all agent creators to include it is a more plausible request than demanding the cessation of all agent development. Furthermore, when an agent finds itself doing trivial actions of no moral import, it can remain fairly disinterested in ethics. Broad approximations of ethical truth suffice. This means agent creators working in certain fields can be fairly confident that the run time costs—in terms of agent performance overhead, constraints on agent actions, agent predictability, etc.—are minimal. Again, this makes ethical consideration cheaper and more likely.</p>
 <h2 id="ambiguity-alignment">Ambiguity alignment</h2>
-<p>All the moral conundrums that we humans confront are now moral conundrums for our agent as well. When it is faced with truly difficult and important moral decisions, rather than blithely running ahead, our agent will be prompted to pause and refine its ethical views. We can even imagine moral epistemes in which human intuition is a vital input so our agent would actively seek human advice precisely when we are most afraid of the interventions of alien intelligence.</p>
+<p>All the moral conundrums that we humans confront are now moral conundrums for our agent as well. When it is faced with truly difficult and important moral decisions, rather than blithely running ahead, our agent will be prompted to pause and refine its ethical views. We can even imagine moral epistemes in which human intuition is a vital input so our agent would actively seek human advice precisely when we are most afraid of alien intelligence.</p>
 <section class="footnotes">
 <hr />
 <ol>
@@ -2972,6 +3037,9 @@ This true story illustrates a saddening aspect of the human condition. We normal
 </div></li>
 <li><div id="fn4">
 <p>Future post. <!-- TODO --><a href="#fnref4" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn5">
+<p>Hence the “lazy” in our title. In particular, we’re appealing to the concept of <a href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a>—values (both computational and ethical) ought to be computed only on an as needed basis instead of eagerly and preemptively.<a href="#fnref5" class="footnote-back">↩</a></p>
 </div></li>
 </ol>
 </section>]]></summary>
