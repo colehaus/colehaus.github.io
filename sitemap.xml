@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/assorted-links-vi/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/example-lazy-approach-ai-safety/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -681,13 +688,6 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/social%2520welfare/index.html</loc>
-        <changefreq>weekly</changefreq>
-        
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://www.col-ex.org/tag/statistics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
