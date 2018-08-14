@@ -8,8 +8,64 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-08-04T00:00:00Z</updated>
+    <updated>2018-08-13T00:00:00Z</updated>
     <entry>
+    <title>Human cognitive architecture and learning</title>
+    <link href="https://www.col-ex.org/posts/human-cognitive-architecture-learning/" />
+    <id>https://www.col-ex.org/posts/human-cognitive-architecture-learning/</id>
+    <published>2018-08-13T00:00:00Z</published>
+    <updated>2018-08-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="preface">Preface</h1>
+<p>The following post is basically a straightforward regurgitation of (part of) <span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span>. That paper is very readable so there’s really no reason to read the rest of this post. With that out of the way, I liked this paper for two main reasons:</p>
+<ul>
+<li>It fairly radically changed my opinion on the value of long-term memory in ways that are practically important</li>
+<li>It provides a coherent theory which unifies many phenomena. A coherent theory is easier to remember and easier to apply in novel situations than a disparate collection of facts.</li>
+</ul>
+<h1 id="working-memory">Working memory</h1>
+<p>Essentially all human problem-solving is about the manipulation of items in working memory. Alas, our working memory is tragically limited—traditionally, research suggests the upper limit on the number of ‘chunks’ in working memory is the <a href="https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two">“magical number seven”</a>. (Interestingly, there’s some evidence that chimpanzees have superior working memory to humans. <a href="https://www.youtube.com/watch?v=nTgeLEWr614">Video</a> and <a href="https://www.cell.com/current-biology/pdf/S0960-9822(07)02088-X.pdf">paper</a>). Despite this grievous limitation, experience suggests that humans do actually carry out impressive feats of problem-solving. How?</p>
+<h1 id="long-term-memory">Long-term memory</h1>
+<p>The key is exploiting a ‘loophole’—“huge amounts of organized information can be transferred from long-term memory to working memory without overloading working memory” <span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span>. Thus, we arrive at the central importance of long-term memory to human cognition. Contra the denigration of rote memorization, “[task-relevant long-term memory] is the only reliable difference that has been obtained differentiating novices and experts in problem-solving skill and is the only difference required to fully explain why an individual is an expert in solving particular classes of problems” <span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span>. In other words, long-term memory is necessary and sufficient to explain expertise.</p>
+<h2 id="chess-board-recall">Chess board recall</h2>
+<p>We can make illustrate these claims with the results of a classic study <span class="citation" data-cites="degroot2014">(De Groot <a href="#ref-degroot2014">2014</a>)</span>. Look at the next image for a few seconds, close your eyes, and try to recall the positions of pieces.</p>
+<figure>
+<img src="https://www.col-ex.org/images/chess-real.png" alt="Leko vs. Kramnik, World Championship 2004" class="chess-board" /><figcaption>Leko vs. Kramnik, World Championship 2004</figcaption>
+</figure>
+<p>If you’re a chess amateur, this should have been quite hard (i.e. you probably misremembered the pieces). On the other hand, if you’re a chess expert, this was probably fairly straightforward.</p>
+<p><!--more--></p>
+<p>Now, look at the next image for a few seconds, close your eyes, and try to recall the positions of pieces.</p>
+<figure>
+<img src="https://www.col-ex.org/images/chess-fake.png" alt="Random chess configuration" class="chess-board" /><figcaption>Random chess configuration</figcaption>
+</figure>
+<p>Because this is a random configuration of chess pieces that would never arise in an ordinary game, experts and novices alike should find board recall difficult.</p>
+<p>Researchers interpret this as strong evidence of the centrality of task-specific long-term memory in expert performance. Novices have no choice but to recall the type, position and color of 10 separate pieces. The demands of this task easily exceed the capabilities of working memory. Experts can encode the same information in larger chunks by referring to existing knowledge in their long-term memory. These results also count as evidence against some plausible alternative explanations of chess expertise. If there were some innate aptitude for chess, we would, contrary to the fact of the matter, expect to find some novices with accurate recall on realistic board configurations like the first image. If chess experts were just generally smarter or chess expertise had broad scope, we would, contrary to the fact of the matter, expect to find that chess experts had good recall for even the random board configuration.</p>
+<h1 id="adding-to-long-term-memory">Adding to long-term memory</h1>
+<p>If long-term memory is central to cognition, the question of how to add more information to our long-term memory naturally arises. <span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span> suggests that there are two possible modes of learning—deliberate transfer of deliberately constructed knowledge and random generation of propositions followed by tests for effectiveness—before concluding that “knowledge transfer is vastly more effective”. We won’t go into detail on random generation and testing here and instead skip straight to understanding how transfer works.</p>
+<h2 id="cognitive-load-theory">Cognitive load theory</h2>
+<p>The unifying framework here is ‘cognitive load theory’. Cognitive load refers to the demands placed on working memory and cognitive load theory says that there are three key kinds of cognitive load present in any knowledge transfer situation—intrinsic cognitive load, extraneous cognitive load, and germane cognitive load. Intrinsic cognitive load reflects the essential complexity of the material to be learned. Extraneous cognitive load reflects the incidental complexity arising from instructional design. Germane cognitive load reflects the effort required to transform and store the information to be learned. Because these three types of demand for working memory are additive, optimizing learning in the face of our supremely finite working memory amounts to minimizing extraneous cognitive load and maximizing germane cognitive load, especially in the face of subject matter with high intrinsic complexity.</p>
+<h3 id="applications">Applications</h3>
+<p>We can briefly see the practical value of this theory by listing some of the instructional recommendations it generates:</p>
+<dl>
+<dt>Worked example effect</dt>
+<dd><p>“[N]ovice learners studying worked solutions to problems perform better on a problem-solving test than learners who have been given the equivalent problems to solve during training” <span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span>. The attention devoted to the problem-solving procedure leaves less available for germane cognitive load and committing the correct procedures to memory.</p>
+</dd>
+<dt>Split attention effect</dt>
+<dd><p>If non-redundant instructional information is presented in two separate sources (e.g. in a diagram and in a textual description), learners must mentally integrate the information which imposes extraneous cognitive load. This impairs learning.</p>
+</dd>
+<dt>Redundancy effect</dt>
+<dd><p>If redundant instructional material is presented (e.g. a textual description of blood flow in the human circulatory system which repeats information available in a diagram of the body with arrows), it impairs learning. Examining unnecessary information and attempting to integrate it imposes extraneous cognitive load.</p>
+</dd>
+</dl>
+<hr />
+<div id="refs" class="references">
+<div id="ref-degroot2014">
+<p>De Groot, Adriaan D. 2014. <em>Thought and Choice in Chess</em>. Vol. 4. Walter de Gruyter GmbH &amp; Co KG.</p>
+</div>
+<div id="ref-sweller2008">
+<p>Sweller, John. 2008. “Human Cognitive Architecture.” <em>Handbook of Research on Educational Communications and Technology</em>. Lawrence Erlbaum Associates New York, 369–81. <a href="http://www.csuchico.edu/~nschwartz/Sweller_2008.pdf" class="uri uri">http://www.csuchico.edu/~nschwartz/Sweller_2008.pdf</a>.</p>
+</div>
+</div>]]></summary>
+</entry>
+<entry>
     <title>Assorted Links VI</title>
     <link href="https://www.col-ex.org/posts/assorted-links-vi/" />
     <id>https://www.col-ex.org/posts/assorted-links-vi/</id>
@@ -125,24 +181,24 @@
     <id>https://www.col-ex.org/posts/false-dichotomy-ideal-theory-debate/</id>
     <published>2018-07-09T00:00:00Z</published>
     <updated>2018-07-09T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1 id="ideal-and-anti-ideal-theory">Ideal and anti-ideal theory</h1>
-<p>We’ve already described ideal theory in <a href="https://www.col-ex.org/posts/utopia-infinitude-secretaries/">previous posts</a>, but we’ll give a short recap here for the sake of self-sufficiency. Ideal theory suggests that when making decisions about alternative social worlds—that is, about different political and economic institutions, we should have an ideally just society in mind. Anti-idealists argue that this information is irrelevant; we only need to be able to perform pairwise comparisons. A popular metaphor in the area is that of mountain climbing. In the language of this metaphor, ideal theorists like <a href="https://en.wikipedia.org/wiki/John_Rawls">John Rawls</a> suggest that mountaineers orient themselves toward Everest while anti-idealists like <a href="https://en.wikipedia.org/wiki/Amartya_Sen">Amartya Sen</a> suggest that knowledge of <a href="https://en.wikipedia.org/wiki/Mount_Everest">Everest</a> is irrelevant when comparing the heights of <a href="https://en.wikipedia.org/wiki/Mount_Kilimanjaro">Kilimanjaro</a> and <a href="https://en.wikipedia.org/wiki/Denali">Denali</a>.</p>
+    <summary type="html"><![CDATA[<h1 id="ideal-and-non-ideal-theory">Ideal and non-ideal theory</h1>
+<p>We’ve already described ideal theory in <a href="https://www.col-ex.org/posts/utopia-infinitude-secretaries/">previous posts</a>, but we’ll give a short recap here for the sake of self-sufficiency. Ideal theory suggests that when making decisions about alternative social worlds—that is, about different political and economic institutions, we should have an ideally just society in mind. Non-idealists argue that this information is irrelevant; we only need to be able to perform pairwise comparisons. A popular metaphor in the area is that of mountain climbing. In the language of this metaphor, ideal theorists like <a href="https://en.wikipedia.org/wiki/John_Rawls">John Rawls</a> suggest that mountaineers orient themselves toward Everest while non-idealists like <a href="https://en.wikipedia.org/wiki/Amartya_Sen">Amartya Sen</a> suggest that knowledge of <a href="https://en.wikipedia.org/wiki/Mount_Everest">Everest</a> is irrelevant when comparing the heights of <a href="https://en.wikipedia.org/wiki/Mount_Kilimanjaro">Kilimanjaro</a> and <a href="https://en.wikipedia.org/wiki/Denali">Denali</a>.</p>
 <h1 id="thesis">Thesis</h1>
 <p>I contend this is a debate which can be <a href="http://askphilosophers.com/question/5254">dissolved</a>. There is no necessary opposition between incrementalism and idealism. Instead, all of these perspectives can be ably unified under the framework of decision theory.</p>
 <h1 id="dichotomy">Dichotomy</h1>
 <p>Before I can make the argument that’s it’s a <em>false</em> dichotomy, I need to show that it’s a putative dichotomy. There’s little value in attacking <a href="https://en.wikipedia.org/wiki/Straw_man">straw men</a>. Since I’ve just read <span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span>, we’ll examine that in detail and expect that it’s representative of the larger discussion.</p>
-<p>The boundary that Gaus draws is between worlds in the ‘neighborhood’ of the status quo and those outside it. If we restrict our attention to worlds in the neighborhood, we’re engaging in anti-ideal theory, but if we speculate on distant worlds we’re doing ideal theory. What is this key neighborhood concept? In Gaus’s words: “A neighborhood delimits a set of nearby social worlds characterized by relatively similar justice-relevant social structures.”</p>
-<p>So we’re already on firm grounds for a claim of dichotomous thinking. On this view, the <span class="noted">structure of the problem is dichotomous</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. But Gaus also demonstrates the dichotomous view when describing the divergent implications of the ideal and anti-ideal view:</p>
+<p>The boundary that Gaus draws is between worlds in the ‘neighborhood’ of the status quo and those outside it. If we restrict our attention to worlds in the neighborhood, we’re engaging in non-ideal theory, but if we speculate on distant worlds we’re doing ideal theory. What is this key neighborhood concept? In Gaus’s words: “A neighborhood delimits a set of nearby social worlds characterized by relatively similar justice-relevant social structures.”</p>
+<p>So we’re already on firm grounds for a claim of dichotomous thinking. On this view, the <span class="noted">structure of the problem is dichotomous</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. But Gaus also demonstrates the dichotomous view when describing the divergent implications of the ideal and non-ideal view:</p>
 <blockquote>
 [L]ocal optimization often points in a different direction than pursuit of the ideal. We then confront what I have called <span id="the-choice">The Choice</span>: should we turn our back on local optimization and move toward the ideal? [… O]ur judgments within our neighborhood have better warrant than judgments outside of it; if the ideal is outside our current neighborhood, then we are forgoing relatively clear gains in justice for an uncertain prospect that our realistic utopia lies in a different direction. <span class="noted">Mill’s revolutionaries</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>, certain of their own wisdom and judgment, were more than willing to commit society to the pursuit of their vision of the ideal; their hubris had terrible costs for many.
 </blockquote>
 <h1 id="similarities">Similarities</h1>
-<p>Now, I’ll hope you agree ideal and anti-ideal theory are framed as incompatible. On that assumption, I’ll begin to argue against the dichotomy.</p>
+<p>Now, I’ll hope you agree ideal and non-ideal theory are framed as incompatible. On that assumption, I’ll begin to argue against the dichotomy.</p>
 <h2 id="uncertainty-all-around">Uncertainty all around</h2>
 <p>I do accept Gaus’s Neigborhood Constraint—our knowledge of distant social words is much less reliable than our knowledge of worlds similar to the status quo. Furthermore, I think we have non-trivial uncertainties about the workings and justice of worlds that <em>are</em> nearby. Importantly, (though not, I think, crucially) I don’t see any obvious reason for discontinuities in the reliability of our knowledge. My intuition suggests it drops off smoothly with distance from the status quo <span id="reliability" class="spark"></span>.</p>
 <p><!--more--></p>
 <h2 id="foresight-all-around">Foresight all around</h2>
-<p>Anti-idealists not only contend that our knowledge of the ideal is highly uncertain, they suggest it’s otiose. On the contrary, knowledge about world C is useful for evaluating worlds A and B not only when C is the ideal but when all of A, B, and C are in the same neighborhood. As long as we don’t expect the next world we inhabit to be the last world we ever inhabit, a thorough evaluation of that next world should include it’s likely effects on the subsequent chain of worlds. That is, an evaluation which judges B against A only on the immediate effects and not on how B enables and forecloses other nearby possibilities like C is a very blinkered analysis indeed. So again, we see a difference of degree rather than kind—we should surely evaluate the knock-on effects of our choices and the only real question is how rapidly does the value of such estimation decline as we step into the future and away from the status quo.</p>
+<p>Non-idealists not only contend that our knowledge of the ideal is highly uncertain, they suggest it’s otiose. On the contrary, knowledge about world C is useful for evaluating worlds A and B not only when C is the ideal but when all of A, B, and C are in the same neighborhood. As long as we don’t expect the next world we inhabit to be the last world we ever inhabit, a thorough evaluation of that next world should include it’s likely effects on the subsequent chain of worlds. That is, an evaluation which judges B against A only on the immediate effects and not on how B enables and forecloses other nearby possibilities like C is a very blinkered analysis indeed. So again, we see a difference of degree rather than kind—we should surely evaluate the knock-on effects of our choices and the only real question is how rapidly does the value of such estimation decline as we step into the future and away from the status quo.</p>
 <h1 id="decision-theory">Decision theory</h1>
 <p>Finally, the promised unification. If we believe the story so far, key problems in ideal theorizing include making <a href="#the-choice">hard trade-offs</a>, <a href="#uncertainty-all-around">choice under uncertainty</a>, and <a href="#foresight-all-around">intertemporal choice</a>. But these are precisely the problems that decision theory (broadly construed) seeks to address!</p>
 <p>For example, decision theory offers fairly straightforward recommendations in Gaus’s Choice (between pursuing local improvements and the ideal when they point in opposite directions). If you buy into an expected utility maximizing decision theory, you simply calculate the value of each choice on offer, accounting for uncertainty and risk aversion, and pick the maximal.</p>
