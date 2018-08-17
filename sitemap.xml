@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/ideal-theory-decision-theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/human-cognitive-architecture-learning/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -470,13 +477,6 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/cooperatives/index.html</loc>
-        <changefreq>weekly</changefreq>
-        
-        <priority>0.8</priority>
-    </url>
-
-    <url>
         <loc>https://www.col-ex.org/tag/current%2520events/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -506,13 +506,6 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/economic%2520history/index.html</loc>
-        <changefreq>weekly</changefreq>
-        
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://www.col-ex.org/tag/economics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -562,6 +555,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/information%2520theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/interactive/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
@@ -646,6 +646,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/order%2520theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/organizational%2520economics/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

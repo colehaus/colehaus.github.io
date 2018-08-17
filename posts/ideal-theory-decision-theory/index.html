@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Ideal theory and decision theory—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Ideal theory and decision theory</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/ideal%2520theory/">ideal theory</a></li>
+    
+      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
+    
+      <li><a href="../../tag/political%2520philosophy/">political philosophy</a></li>
+    
+</ul></nav>
+
+  
+    <nav><a class="series" href="../../series/The%2520Tyranny%2520of%2520the%2520Ideal/">Series: The Tyranny of the Ideal</a></nav>
+  
+  <span class="date">Published on <time datetime="2018-08-15">August 15, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>The ideal theory debate is actually applied decision theory. The tools and vocabulary of decision theory—at a minimum, the von Neumann-Morgenstern utility theorem, the concept of epistemic risk aversion, and the area of sequential decision theory—are useful in this new domain.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>STEMlord</summary><p>I'm a STEMmy person applying a STEMmy perspective to something that's not inherently STEMmy. Gaffes surely ensue.</p></details></li>
+      
+        <li><details><summary>n=1</summary><p>I'm taking Gaus as representative of a whole thread of discussion when he's likely not.</p></details></li>
+      
+    </ul></aside>
+  
+
+  <h3 id="ideal-theory">Ideal theory</h3>
+<p>If I may editorialize, the ideal theory debate is essentially about how to translate our understanding of justice into actions in the present. Reductively, one side (the idealists) advocates for always moving the world we inhabit closer to the ideally just world while the other side (the non-idealists) advocates for always moving the world we inhabit toward the best adjacent world.</p>
+<p>What’s not usually at issue in the ideal theory debate is: our understanding of the status quo, our predictive models of the future, or our notion of justice. That’s not to say that there’s consensus on these issues—far from it. It’s just that discussion of these issues doesn’t fall under the heading of ‘ideal theory’. No one considers themselves to be waging that debate when they talk about currently existing inequality in Germany or what justice recommends with regard to positive and negative rights. By all this I merely mean to emphasize that the scope of the ideal theory debate is rather small—given all the presuppositions above, what algorithm do we employ to choose the next possible world we’ll inhabit?</p>
+<p>Hopefully, by framing the ideal theory debate in the foregoing terms, I’ve predisposed you to my point of view: The subject matter of the ideal theory debate is also the subject matter of decision theory. That is, the ideal theory debate is really a debate about applied decision theory.</p>
+<h3 id="normative-decision-theory">Normative decision theory</h3>
+<p><del><a href="http://www.patheos.com/blogs/religionprof/2016/12/websters-dictionary-defines.html">Webster’s dictionary defines</a></del>—*cough*—<span class="citation" data-cites="hansson1994">(Hansson <a href="#ref-hansson1994">1994</a>)</span> says “decision theory is concerned with goal-directed behaviour in the presence of options”. We’ll try to make this description more comprehensive by appealing to <a href="https://plato.stanford.edu/entries/decision-theory/#SavThe">Leonard Savage’s formalization</a>. The hope is that by describing decision theory fully, we can see how the boundaries of the ideal theory debate line up with the boundaries of decision theory.</p>
+<!--more-->
+<p>Savage starts by highlighting a set <span class="math inline">\(S\)</span> of initial states of the world, a set <span class="math inline">\(O\)</span> of outcomes, and a set <span class="math inline">\(F\)</span> of actions represented by functions from <span class="math inline">\(S\)</span> to <span class="math inline">\(O\)</span>. <span class="math inline">\(f(s_i)\)</span> denotes the outcome of action <span class="math inline">\(f \in F\)</span> when state <span class="math inline">\(s_i \in S\)</span> is the actual state of the world. Furthermore, we have a probability function <span class="math inline">\(P\)</span> from states <span class="math inline">\(S\)</span> to probabilities <span class="math inline">\(\mathbb{I}\)</span> and a utility function <span class="math inline">\(u\)</span> from outcomes <span class="math inline">\(O\)</span> to utilities <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<p>Each of these elements has a parallel in the overall problem of social engineering. Descriptive social sciences like anthropology and sociology all advance different (overlapping) descriptions of the existing world—these correspond to Savage’s set <span class="math inline">\(S\)</span> of world states. Our uncertainty about which description is correct corresponds to the probability function over states <span class="math inline">\(P\)</span>. Things like emancipatory social science <span class="citation" data-cites="wright2010eru">(Wright <a href="#ref-wright2010eru">2010</a>)</span>, in part, outline the set of actions <span class="math inline">\(F\)</span> available to transform our world into some outcome <span class="math inline">\(o \in O\)</span>. The task of determining which outcomes correspond to which actions is the job of <span class="noted">predictive social science like economics</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The proper utility function <span class="math inline">\(u\)</span> assigning values to outcomes is debated by ethicists and political philosophers.</p>
+<p>Obviously, there are a lot of moving pieces here because the problem of social engineering is complex. After apportioning out all the above responsibilities to different fields of study, what’s left over? In the purely formal context, we still have to determine which action in <span class="math inline">\(F\)</span> to take, in the face of all our assumptions about <span class="math inline">\(S\)</span>, <span class="math inline">\(O\)</span>, <span class="math inline">\(F\)</span>, <span class="math inline">\(P\)</span>, and <span class="math inline">\(u\)</span>, and what rules generate that recommendation—this is decision theory. And in the social engineering context, we still have to determine which world we ought to try to move to, in the face of all our positive and normative beliefs, and what rules generate that recommendation—this is the ideal theory debate. As <span class="citation" data-cites="gauss2016">(<span class="citeproc-not-found" data-reference-id="gauss2016"><strong>???</strong></span>)</span> says, “[T]he question that confronts the political theorist: … [W]hat moves (reforms) does our political philosophy recommend?”.</p>
+<h3 id="so-what">So what?</h3>
+<p>Let’s pretend you’re thoroughly convinced by this argument and move on. Is knowing that the ideal theory debate is actually about decision theory of any use? I think so. Here are some tools and concepts from decision theory that seem useful in the domain of ideal theory:</p>
+<h4 id="von-neumann-morgenstern-utility-theorem">von Neumann-Morgenstern utility theorem</h4>
+<p><span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span> says one of the key distinctions between ideal theory and non-ideal theory is their ‘dimensionality’. Anti-idealists like Sen evaluate each world only with respect to its justice. Idealists are committed, he claims, to evaluating worlds on both their inherent justice and their proximity to the ideally just world. Anti-idealists are thus unidimensional while idealists are multidimensional. This distinction is explained more fully and formally in an <a href="../../posts/ideal-calibration/">earlier post</a>.</p>
+<p>Decision theory almost insists on the unidimensional view. If we accept a certain set of very plausible axioms about our preferences over <span class="noted">lotteries</span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> of possible worlds, the <a href="https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Morgenstern_utility_theorem">Von Neumann-Morgenstern utility theorem</a> (there’s an alternate explanation of the theorem along with an interactive calculator in a <a href="posts/construct-vnm-utility-function-explained/">previous post</a>) shows that there exists a utility function <span class="math inline">\(u\)</span> assigning real numbers to each outcome and rational agents will act as if they are maximizing the expected value of this function. Central to our point here is that the only decision-relevant dimension is the numbers that <span class="math inline">\(u\)</span> provides—our procedure is unidimensional. All considerations like the inherent justice of a social world or its proximity to other worlds are bundled into <span class="math inline">\(u\)</span>.</p>
+<p>Of course, we could argue about the appropriacy of the theorem here and our willingness to accept the axioms in the matter at hand. In particular, I imagine objections to the concept of lotteries over possible worlds. It’s not immediately obvious what a lottery consisting of a 20% probability of one world and a 80% probability of another world is. It’s not as though we can construct such a lottery by stepping ‘outside’ the world and picking one or the other world based on the result of a die roll. And there are extensive discussions about the nature of probability and how it ought to be interpreted—on frequentist grounds, as a subject Bayesian, as an objective Bayesian? Despite these difficulties, I’m not the only one to talk about probabilities over worlds. <span class="citation" data-cites="gauss2016">(<span class="citeproc-not-found" data-reference-id="gauss2016"><strong>???</strong></span>)</span>, for example, says, “[F]or any set C of constraints there is a probability distribution of possible social worlds that might emerge[.]”.</p>
+<p>The VNM utility theorem doesn’t settle the debate unidimensional vs multidimensional debate once and for all—our quibbles about probability may turn out to be more than quibbles. But I think it is the beginnings of a strong argument in favor of the unidimensional view.</p>
+<h4 id="epistemic-risk-aversion">Epistemic risk aversion</h4>
+<p><span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span> highlights another consideration in support of non-ideal theory, the ‘Neighborhood Constraint’. The Neighborhood Constraint arises from the fact that “we have far better information about the realization of justice [in worlds similar to the status quo] than in far-flung social worlds”. From this fact (which I don’t dispute), he infers that we ought to focus on adjacent worlds and ignore the ideal (which I do dispute).</p>
+<p>I think this attitude is a good exemplar of epistemic risk aversion, a topic in decision theory. The simplest form of <a href="https://en.wikipedia.org/wiki/Risk_aversion">risk aversion</a> is actuarial or aleatoric risk aversion. Someone exhibits this kind of risk aversion when they decline a fair bet. We can easily reconcile aleatoric risk aversion with rationality by remembering that utility in money can be <a href="https://en.wikipedia.org/wiki/Concave_function">concave</a>. Epistemic risk aversion or ambiguity aversion is a bit more complicated. It arises when the uncertainty about outcomes is a feature of our minds, not the world—the map, not the territory. It’s this second form of risk aversion which make the Neighborhood Constraint a constraint and not the Neighborhood Observation.</p>
+<p>Making the connection between the ideal theory debate and decision theory here allows us to apply useful insights from the discussion in decision theory. In particular, we’ll start by acknowledging that the dominant decision rule in decision theory is that of maximizing expected value. Many are reluctant to treat epistemic risk differently from aleatory risk and would thus simply maximize expected utility in the social engineering problem, even in the face of uncertainty. This directly contravenes the Neighborhood Constraint. Even if you wanted to treat aleatory and epistemic risk differently, you probably wouldn’t come up with a rule that recommends you ignore any action that’s highly uncertain a la the Neighborhood Constraint. Instead, you might settle on something like maximin over expected utility as described in <span class="citation" data-cites="gardenfors1982">(Gärdenfors and Sahlin <a href="#ref-gardenfors1982">1982</a>)</span>.</p>
+<p>Decision theory then tends to argue against the Neighborhood Constraint as a constraint and proposes some alternative decision rules.</p>
+<h4 id="sequential-decision-theory">Sequential decision theory</h4>
+<p>A final problem with ideal theory that <span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span> highlights is ‘The Choice’: “In cases where there is a clear social optimum within our neighborhood that requires movement away from our understanding of the ideal, we must choose between relatively certain (perhaps large) local improvements in justice and pursuit of a considerably less certain ideal.”</p>
+<p>But I’d argue this is a bad framing. Sequential decision theory suggests that we shouldn’t evaluate the imminent decision only in terms of its immediate consequences. We must also evaluate how that decision affects future decisions and the whole eventual sequence of outcomes. Part of what makes any given possible world good or bad is its relationship to future possible worlds. As we discussed in <a href="#von-neumann-morgenstern-utility-theorem">the section on the VNM utility theorem</a>, all decision relevant factors are ultimately combined into a single dimension. If we accept this framing, we can never be confronted with a choice between optimizing on inherent justice and optimizing on proximity to the ideal because these aren’t the terms in which we address the problem.</p>
+<p>Metaphorically, when Gaus advocates taking the branch of the fork that ignores the ideal in favor of the present, he’s advising that you “live every day as if it were your last”. The logic of the anti-ideal branch of The Choice would suggest that you always make your plans on Monday with zero regard for how that affects Tuesday. The idealizing branch would suggest that you spend your days journeying through Hell and back in the hopes of spending your final day in Heaven. Obviously, neither of these approaches is right.</p>
+<p>When we view The Choice as an ordinary sequential decision problem, it’s clear that neither myopia nor hyperopia is correct. We have to integrate our forecasts of the future into our understanding of the present.</p>
+<h3 id="summary">Summary</h3>
+<p>We started with a tendentious description of the ideal theory debate. After briefly formalizing decision theory, I suggested that the ideal theory debate can be seen as applied decision theory. From this perspective, we turn up easy, compelling answers to the issues of: unidimensional vs multidimensional pursuit of justice, the Neighborhood Constraint, and The Choice.</p>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-aldridge1999">
+<p>Aldridge, Alan. 1999. “Prediction in Sociology: Prospects for a Devalued Activity.” <em>Sociological Research Online</em> 4 (3). SAGE Publications Sage UK: London, England: 1–6. <a href="http://www.socresonline.org.uk/4/3/aldridge.html" class="uri">http://www.socresonline.org.uk/4/3/aldridge.html</a>.</p>
+</div>
+<div id="ref-flyvbjerg2005">
+<p>Flyvbjerg, Bent. 2005. “Social Science That Matters.” <em>Foresight Europe</em> 2: 38–42. <a href="https://groups.nceas.ucsb.edu/sustainability-science/2010%20weekly-sessions/session-4-2013-10.4.2010-the-human-environment-system-a-conceptual-framework/supplemental-readings-from-cambridge-students/Flyvbjerg%20Social%20Science%20that%20Matters.pdf">https://groups.nceas.ucsb.edu/sustainability-science/2010%20weekly-sessions/session-4-2013-10.4.2010-the-human-environment-system-a-conceptual-framework/supplemental-readings-from-cambridge-students/Flyvbjerg%20Social%20Science%20that%20Matters.pdf</a>.</p>
+</div>
+<div id="ref-gaus2016">
+<p>Gaus, Gerald. 2016. <em>The Tyranny of the Ideal: Justice in a Diverse Society</em>. Princeton University Press.</p>
+</div>
+<div id="ref-gardenfors1982">
+<p>Gärdenfors, Peter, and Nils-Eric Sahlin. 1982. “Unreliable Probabilities, Risk Taking, and Decision Making.” <em>Synthese</em> 53 (3). Springer: 361–86. <a href="https://math.berkeley.edu/~slingamn/gardenfors-sahlin-unreliable-probabilities.pdf" class="uri">https://math.berkeley.edu/~slingamn/gardenfors-sahlin-unreliable-probabilities.pdf</a>.</p>
+</div>
+<div id="ref-hansson1994">
+<p>Hansson, Sven Ove. 1994. “Decision Theory.” <a href="http://148.204.210.204/mdid/decisiontheory.pdf" class="uri">http://148.204.210.204/mdid/decisiontheory.pdf</a>.</p>
+</div>
+<div id="ref-jasny2017">
+<p>Jasny, Barbara R, and Richard Stone. 2017. “Prediction and Its Limits.” American Association for the Advancement of Science. <a href="http://science.sciencemag.org/content/355/6324/468" class="uri">http://science.sciencemag.org/content/355/6324/468</a>.</p>
+</div>
+<div id="ref-wright2010eru">
+<p>Wright, Erik Olin. 2010. <em>Envisioning Real Utopias</em>. Vol. 98. Verso London. <a href="https://www.ssc.wisc.edu/~wright/ERU_files/ERU-full-manuscript.pdf" class="uri">https://www.ssc.wisc.edu/~wright/ERU_files/ERU-full-manuscript.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I’ll admit that I’m much more familiar with economics than other social sciences. Nevertheless, some brief searching seems to confirm my impression that other social sciences are much less focused on prediction. Despite Auguste Comte’s early declaration that we ought to “Know in order to predict, predict in order to control” and an issue of <em>Science</em> devoted to the issue <span class="citation" data-cites="jasny2017">(Jasny and Stone <a href="#ref-jasny2017">2017</a>)</span>, misgivings about prediction are both prevalent <span class="citation" data-cites="aldridge1999">(Aldridge <a href="#ref-aldridge1999">1999</a>)</span> and dearly held <span class="citation" data-cites="flyvbjerg2005">(Flyvbjerg <a href="#ref-flyvbjerg2005">2005</a>)</span> in other corners of the social sciences.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>In this context, a lottery is a probabilistic mixture of outcomes. A 20% chance of receiving an apple and an 80% chance of receiving a banana constitutes a lottery.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~false-dichotomy-ideal-theory-debate~ideal-calibration~is-development-easy~qu~30bf37d2.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>
