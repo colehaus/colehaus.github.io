@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/list-problems-ignorant-priors/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/ideal-theory-decision-theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -519,6 +526,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/epistemology/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/ethics/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -807,6 +821,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/11/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/12/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
