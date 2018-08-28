@@ -8,8 +8,75 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-08-21T00:00:00Z</updated>
+    <updated>2018-08-27T00:00:00Z</updated>
     <entry>
+    <title>Shilling for Anki</title>
+    <link href="https://www.col-ex.org/posts/shilling-anki/" />
+    <id>https://www.col-ex.org/posts/shilling-anki/</id>
+    <published>2018-08-27T00:00:00Z</published>
+    <updated>2018-08-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="the-decline-and-rise-of-long-term-memory">The decline and rise of long-term memory</h1>
+<p>I used to scorn long-term memory. My brain is an exquisite organ for vanquishing conundra, thank you very much, not some library card catalog. I assume I assimilated this attitude from <span class="noted">discussion like</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>:</p>
+<ul>
+<li><a href="https://hechingerreport.org/memorizers-are-the-lowest-achievers-and-other-common-core-math-surprises/">Memorizers are the lowest achievers</a></li>
+<li><a href="https://www.dummies.com/education/common-core-standards/why-connections-trump-memorization-in-common-core-math/">Why connections trump memorization in Common Core math</a></li>
+<li><a href="Deeper%20Learning:%20Moving%20Students%20Beyond%20Memorization">Deeper Learning: Moving Students Beyond Memorization</a></li>
+<li><a href="https://www.reuters.com/article/us-china-education/wen-says-rote-learning-must-go-in-chinese-schools-idUSTRE67U18Y20100831">Wen says rote learning must go in Chinese schools</a></li>
+</ul>
+<p>But, after reading up on pedagogy in articles like <a href="https://www.col-ex.org/posts/human-cognitive-architecture-learning">the one we discussed earlier</a>, “[I] no longer see longterm memory as a repository of isolated, unrelated facts that are occasionally stored and retrieved; instead, it is the central structure of human cognitive architecture.” <span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span></p>
+<h1 id="spaced-repetition">Spaced repetition</h1>
+<p>Thus, I present my own entry in the burgeoning <a href="https://www.gwern.net/Spaced-repetition">subgenre</a> of <a href="http://augmentingcognition.com/ltm.html">spaced repetition software</a> <a href="http://devonzuegel.com/post/thoughts-on-spaced-repetition">encomia</a>.</p>
+<p>Briefly, <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a> software optimally schedules flashcard review to radically boost retention of information in long-term memory. Anki is one such program. I’d heard of Anki in the past but only managed to acquire the habit of regular review more recently. I’ve performed a total of 4803 reviews of 1518 cards during review sessions covering 40 of the last 42 days (Let it never be said that I do things in half measures.). This is probably too intense and more than I’d recommend for most people. But that information should serve to calibrate you as to how much experience I have with Anki.</p>
+<h2 id="the-feel-of-a-thing">The feel of a thing</h2>
+<p>The dominant feeling I now have is a mild frustration at the betrayal of present me by past me—so much of my prior reading and general intellectual development was wasted effort. If we each had <a href="https://en.wikipedia.org/wiki/Anterograde_amnesia">anterograde amnesia</a> and forgot 100% of what we’d read or otherwise experienced, we’d surely take a different approach to life. We wouldn’t just wander along <a href="https://en.wikipedia.org/wiki/Memento_(film)">learning and forgetting in an endless cycle</a>. But the truth of our memories is not so far off!</p>
+<p><!--more--></p>
+<blockquote>
+A modern example of this loss of knowledge without repetition is a study of cardiopulmonary resuscitation (CPR) skills that demonstrated rapid decay in the year following training. <strong>By 3 years post-training only 2.4% were able to perform CPR successfully</strong>. <strong>Another recent study</strong> of physicians taking a tutorial they rated as very good or excellent showed mean knowledge scores increasing from 50% before the tutorial to 76% immediately afterward. However, score gains were only half as great 3–8 days later and incredibly, <strong>there was no significant knowledge retention measurable at all at 55 days</strong>. <span class="attribution"><span class="citation" data-cites="stahl2010">(Stahl et al. <a href="#ref-stahl2010">2010</a>)</span></span>
+</blockquote>
+<p>These feelings of loss and waste are confirmed by my Anki bootstrapping process. Recently, I’ve been rereading and Ankifying (more on what this means later) books I’ve read over the past several years. Even for topics which I had found interesting and important, review reveals that vast gobs of information I once knew have been lost to the sands of time.</p>
+<p>And what was lost isn’t mere trivia—“If it’s important, you’ll remember it.” is a wish for a more congenial world, not a description of ours. The things which I had forgotten but now review in Anki come up in thoughts, conversations, and other readings daily. Academics sometimes extol “the life of the mind”. If this is something you value, I very much recommend Anki. It is one of the better things I’ve done in this regard—certainly one of the most tangible and transferable in that my recommendation can be straightforwardly adopted by others.</p>
+<h2 id="anki-and-cognitive-load-theory">Anki and cognitive load theory</h2>
+<p><a href="https://en.wikipedia.org/wiki/Michael_Nielsen">Michael Nielsen</a> <a href="http://augmentingcognition.com/ltm.html">talks about using Anki</a> to understand a difficult paper on <a href="https://en.wikipedia.org/wiki/AlphaGo">AlphaGo</a> (emphasis mine):</p>
+<blockquote>
+<p>I began with the AlphaGo paper itself. <strong>I began reading it quickly, almost skimming.</strong> I wasn’t looking for a comprehensive understanding. Rather, I was doing two things. One, I was trying to simply identify the most important ideas in the paper. What were the names of the key techniques I’d need to learn about? Second, there was a kind of hoovering process, <strong>looking for basic facts that I could understand easily</strong>, and that would obviously benefit me. Things like basic terminology, the rules of Go, and so on.</p>
+<p>[…]</p>
+<p><strong>I made several rapid passes over the paper in this way</strong>, each time getting deeper and deeper. At this stage I wasn’t trying to obtain anything like a complete understanding of AlphaGo. Rather, I was trying to build up my background understanding. At all times, <strong>if something wasn’t easy to understand, I didn’t worry about it, I just keep [sic] going</strong>. But as I made repeat passes, <strong>the range of things that were easy to understand grew and grew</strong>. I found myself adding questions about the types of features used as inputs to AlphaGo’s neural networks, basic facts about the structure of the networks, and so on.</p>
+<p>After five or six such passes over the paper, <strong>I went back and attempted a thorough read</strong>. This time the purpose was to understand AlphaGo in detail. By now I understood much of the background context, and <strong>it was relatively easy to do a thorough read, certainly far easier than coming into the paper cold</strong>. Don’t get me wrong: it was still challenging. But it was far easier than it would have been otherwise.</p>
+</blockquote>
+<p>This is in perfect accord with our <a href="https://www.col-ex.org/posts/human-cognitive-architecture-learning">earlier post on cognitive load theory</a>:</p>
+<blockquote>
+<strong>When element interactivity is very high, it may be impossible for learners to understand the material</strong> because it may be impossible for them to simultaneously process all of the interacting elements in working memory. How should such material be presented? From a cognitive load theory perspective, <strong>the only way seems to be to initially present the material as individual elements ignoring their interactions</strong>. This procedure will permit the elements to be learned but without understanding. Once the individual elements have been learned, their interactions can be emphasized. <span class="attribution"><span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span></span>
+</blockquote>
+<h2 id="how-i-anki">How I Anki</h2>
+<p>This isn’t meant to be an exhaustive tutorial; there are already many of those.</p>
+<ul>
+<li>I read on an eBook reader and highlight seemingly important snippets as I go.</li>
+<li>I then transfer these snippets to the computer and make <a href="https://en.wikipedia.org/wiki/Cloze_test">cloze deletions</a>.</li>
+<li>I can use the number of Anki cards created as a measure of progress. It can be discouraging to spend hours reading and only cover a few pages. The number of new cards created in the process is both a reminder of a progress and a way to pace myself. If I limit Anki to only show 40 new cards a day, having created 40 new cards is a strong signal that I ought to switch tasks and pursue something else for the rest of the day.</li>
+<li>Almost all of my cards are cloze deletions. Cloze deletion cards are convenient to create and very general. For example, “bidirectional” terminology cards (i.e. it’s useful to be able to recall the word when cued by the definition and to be able to recall the definition when cued by the word) can be created quickly by creating one deletion around the term and one around its definition.</li>
+<li>I’ll <a href="https://www.supermemo.com/en/articles/20rules">echo</a> the advice to avoid sets (an unordered collection of items such that the memory cue for each item is inconstant) in favor of enumerations (an ordered collection of items such that the memory cue for each item is consant).</li>
+<li>On the other hand, be careful with the <a href="https://www.supermemo.com/en/articles/20rules">“minimum information principle”</a>. Creating cards with many small deletions can leave too much inappropriate context. For example, a card like, “The <a href="https://en.wikipedia.org/wiki/Taiping_Rebellion">Taiping rebellion</a> lasted from <em>1850</em> to <em>1864</em>”, with one cloze deletion for each year is troublesome. I’ve found that I’m quite likely to remember only the relationship between the numbers in these circumstances. When cued with “1850”, I’ll think “14 years later” and remember “1864”. When cued with “1864”, I’ll think “14 years earlier” and remember “1850”. But if I try to remember the actual dates outside of Anki, I’m left without an anchor. Making these deletions “correlated”—so that the years are both omitted simultaneously—seems to work better.</li>
+<li>Somewhat relatedly, it’s useful to minimize the number of “orphans”. An isolated fact or a collection of facts is not only less useful because it’s less accessible (i.e. not readily found from other pieces of knowledge and invoked in thought) but also harder to remember. Organizing cognitive <a href="https://en.wikipedia.org/wiki/Schema_(psychology)">schema</a> generally make learning and retention easier. To this end, I sometimes informally envision my collection of Anki cards as a <a href="https://en.wikipedia.org/wiki/Directed_graph">directed graph</a> and try to ensure that all cards reachable from as few roots as possible. This promotes a cohesive, coherent understanding of the material under review rather than a disjointed, disorienting one.</li>
+</ul>
+<hr />
+<div id="refs" class="references">
+<div id="ref-stahl2010">
+<p>Stahl, Stephen M, Richard L Davis, Dennis H Kim, Nicole Gellings Lowe, Richard E Carlson, Karen Fountain, and Meghan M Grady. 2010. “Play It Again: The Master Psychopharmacology Program as an Example of Interval Learning in Bite-Sized Portions.” <em>CNS Spectrums</em> 15 (8). Cambridge University Press: 491–504. <a href="https://www.researchgate.net/profile/Stephen_Stahl2/publication/249008560_416-MPP_PlayItAgain/links/02e7e51e1f044483b7000000.pdf" class="uri uri">https://www.researchgate.net/profile/Stephen_Stahl2/publication/249008560_416-MPP_PlayItAgain/links/02e7e51e1f044483b7000000.pdf</a>.</p>
+</div>
+<div id="ref-sweller2008">
+<p>Sweller, John. 2008. “Human Cognitive Architecture.” <em>Handbook of Research on Educational Communications and Technology</em>. Lawrence Erlbaum Associates New York, 369–81. <a href="http://www.csuchico.edu/~nschwartz/Sweller_2008.pdf" class="uri uri">http://www.csuchico.edu/~nschwartz/Sweller_2008.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Of course, some of the key players in these discussions are often making the subtler point that we ought not to <em>substitute</em> memorization for understanding. They would presumably acknowledge, if asked in just the right way, that long-term memory is indeed vital. But in the game of <a href="https://en.wikipedia.org/wiki/Chinese_whispers">telephone</a> that is human mass communication, that nuance often seems to get lost.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Assorted Links VII</title>
     <link href="https://www.col-ex.org/posts/assorted-links-vii/" />
     <id>https://www.col-ex.org/posts/assorted-links-vii/</id>
