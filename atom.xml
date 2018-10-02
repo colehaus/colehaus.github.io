@@ -8,8 +8,378 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-08-27T00:00:00Z</updated>
+    <updated>2018-10-01T00:00:00Z</updated>
     <entry>
+    <title>YAAS Epistemology</title>
+    <link href="https://www.col-ex.org/posts/yaas-epistemology/" />
+    <id>https://www.col-ex.org/posts/yaas-epistemology/</id>
+    <published>2018-10-01T00:00:00Z</published>
+    <updated>2018-10-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<menu id="just-explain" type="popup">
+<p><menuitem label="Anecdotal" type="radio" checked="checked"></menuitem> <menuitem label="Schematic" type="radio"></menuitem> <menuitem label="Graphical" type="radio"></menuitem></p>
+</menu>
+<p>Epistemology is the study of <a href="#yaas-epistemology-map" id="knowledge" class="arg-map">knowledge</a>.</p>
+<h1 id="what-is-knowledge"><a href="#yaas-epistemology-map" id="what" class="arg-map">What is knowledge?</a></h1>
+<p>For literally millenia, people were content to think of knowledge as justified true belief <span class="citation" data-cites="plato360">(Plato <a href="#ref-plato360">360BC</a>)</span>. Let’s break that down briefly:</p>
+<dl>
+<dt>Belief</dt>
+<dd>A belief is mental content held as true. Thinking to myself, with conviction, “I am a human.” and “I am a dragon.” are each equally examples of beliefs.
+</dd>
+<dt>True</dt>
+<dd>Alas, only one of the above claims is true. Even if I have very convincing hallucinations of breathing fire and flying, “I am a dragon” is merely justified belief. It’s not true and so not knowledge.
+</dd>
+<dt>Justified</dt>
+<dd>On the other hand, if I stumble onto true belief, it still doesn’t count as knowledge. If you roll a 100-sided die and hide the result under a cup, I don’t <em>know</em> that the result is 64 even if I believe it and it turns out to be true—I have no justification for the belief.
+</dd>
+</dl>
+<p>It’s only when beliefs are both true <em>and</em> justified that they count as knowledge. Sounds reasonable, right?</p>
+<h2 id="gettier-problem"><a href="#yaas-epistemology-map" id="gettier" class="arg-map">Gettier problem</a></h2>
+<p>Not to Edmund Gettier. In a three page paper <span class="citation" data-cites="gettier1963">(Gettier <a href="#ref-gettier1963">1963</a>)</span>, he presented two compelling counterexamples to this analysis. An example of this vein of anecdote is:</p>
+<p>Whetu is driving home from work one day and happens to see her coworker Sigrún in a <a href="https://en.wikipedia.org/wiki/Volkswagen_Type_2_(T3)">Vanagon</a>. She thinks to herself, “Ah, one of my coworkers owns a Vanagon.” However, unbeknownst to Whetu, Sigrún does not actually own the Vanagon she was driving—she was in the midst of stealing it. But, coincidentally, one of Whetu’s other coworkers <em>does</em> own a Vanagon.</p>
+<p>So Whetu’s initial belief—“One of my coworkers owns a Vanagon”—turns out to be true and justified (we’ll count seeing someone driving a car as convincing justification for believing that they own it). But intuitively, we’re reluctant to accept that Whetu knows that one of her coworkers owns a Vanagon. It seems like she just got lucky—her mistaken justification was rescued by a fact that she would be surprised to learn.</p>
+<p><!--more--></p>
+<p>This set off a frenzy of philosophical activity that has yet to cease <span class="citation" data-cites="shope2017">(Shope <a href="#ref-shope2017">2017</a>)</span>. Most philosophers try to repair the traditional analysis by finding some appropriate link between justification and truth. If Whetu just got lucky, we need to ensure that luck doesn’t suffice to constitute knowledge. For reasons of brevity (among others), I’ll direct the interested to <a href="https://plato.stanford.edu/entries/knowledge-analysis/">SEP</a> for a further discussion of the reams of argumentation here.</p>
+<h2 id="justification"><a href="#yaas-epistemology-map" id="justified" class="arg-map">Justification</a></h2>
+<p>Let’s circle back to justification and look at it more closely.</p>
+<h3 id="münchhausen-trilemma"><a href="#yaas-epistemology-map" id="munch" class="arg-map">Münchhausen trilemma</a></h3>
+<div class="switch" type="menu" data-menu="just-explain">
+<div class="open">
+<p>Suppose you’re with an inquisitive, relentless, precocious, philosophically convenient child in the park. They turn to you and ask:</p>
+<div class="conversation">
+<p>“What shape is that cloud?”</p>
+<p>“Square.”</p>
+<p>“Why do you believe that?”</p>
+<p>“Because I see it with my eyes.”</p>
+<p>“Why do you believe your eyes?”</p>
+<p>“Because they’ve historically been reliable.”</p>
+<p>“Why do you believe your eyes have historically been reliable?”</p>
+</div>
+<p>Now, we have a choice.</p>
+<dl>
+<dt><a href="#yaas-epistemology-map" id="infinit" class="arg-map">Infinitism</a></dt>
+<dd><p>It seems clear that we may well face an endless stream of “why”s. We can choose to accept this and generate an endless series of responses, to the best of our ability:</p>
+<div class="conversation">
+<p>“Why do you believe your eyes have historically been reliable?”</p>
+<p>“Because last time I believed that my eyes were reliable, I met with success.”</p>
+<p>“Why did you believe that your eyes were reliable last time?”</p>
+<p>“Because the time before that, I believed my eyes were reliable and met with success.</p>
+<p>…</p>
+</div>
+<p>Endorsing infinite chains of justification characterizes <a href="https://www.iep.utm.edu/inf-epis/">infinitism</a>.</p>
+</dd>
+<dt><a href="#yaas-epistemology-map" id="found" class="arg-map">Foundationalism</a></dt>
+<dd><p>Alternatively, we can try to stem the stream of “why”s. One way is bare assertion:</p>
+<div class="conversation">
+<p>“Why do you believe your eyes have historically been reliable?”</p>
+<p>“Because they agree with my other senses and my other senses have historically been reliable.”</p>
+<p>“Why do you believe your other senses are reliable?”</p>
+<p>“I just do. I have to have some kernel beyond doubt.”</p>
+</div>
+<p>Endorsing justification by some set of basic beliefs which are themselves justified without reference to other beliefs characterizes <a href="https://plato.stanford.edu/entries/justep-foundational/">foundationalism</a>.</p>
+</dd>
+<dt><a href="#yaas-epistemology-map" id="coherent" class="arg-map">Coherentism</a></dt>
+<dd><p>Finally, we can try to avoid an infinite stream of “why”s by justifying one belief with another belief we’ve already justified:</p>
+<div class="conversation">
+<p>“Why do you believe your eyes have historically been reliable?”</p>
+<p>“Because they agree with my other senses and my other senses have historically been reliable.”</p>
+<p>“Why do you believe your other senses have historically been reliable?”</p>
+<p>“Because they agree with my eyes and my eyes have historically been reliable.”</p>
+</div>
+<p>Endorsing cyclic justification—we justify sight with reference to other senses and other senses with reference to sight— characterizes <a href="https://plato.stanford.edu/entries/justep-coherence/">coherentism</a>.</p>
+</dd>
+</dl>
+<p>So, to summarize, when faced with endless ’why’s, we can pursue one of three strategies: Provide an endless stream of responses, declare that some beliefs are above questioning, or provide circular justification. Again, there’s lots of arguments about which (if any) of these positions is correct which we’ll not cover here.</p>
+</div>
+</div>
+<h3 id="internalism-v.-externalism"><a href="#yaas-epistemology-map" id="internal-external" class="arg-map">Internalism v. externalism</a></h3>
+<p>All this talk about the structure of justification probably raises the question: What <em>is</em> justification? There’s surprisingly little agreement. Philosophers have staked out some views though.</p>
+<p>One key disagreement is between <a href="https://www.iep.utm.edu/int-ext/">externalist and internalist accounts of justification</a>. Internalists hold that all the features relevant for justification are “internal” to a person. Externalists hold that factors “outside” of an individual can also be relevant to the question of whether that person’s belief is justified. Internal factors are things like beliefs and other mental content we can access upon reflection. External factors are things like the process by which we arrived at those beliefs—we often don’t recall or know the mechanism by which we arrived at some arbitrary belief.</p>
+<p>For example, suppose you believe that your aunt is in the same province as you. You believe this because you believe that she’s on a vacation there. You believe your aunt is on a vacation to your province because a <a href="https://en.wikipedia.org/wiki/Tarot#Occult_tarot_decks">tarot deck</a> said so. An internalist is closer to being obliged to call the original belief (about your aunt being in the same province) justified because the structure of beliefs—internal mental content—in the immediate vicinity is proper. An externalist has additional grounds on which they can reject this as valid justification—they can object that a tarot deck is not a reliable method for forming beliefs and so not a firm ground for justification. The internalist, on the other hand, can make no appeals to the (un)reliability of tarot cards because it’s a claim about the world at large, not the internal mental state of the believer.</p>
+<p>Yet again, there’s lots of argument on both sides of this debate. We can’t possibly do it justice here. It is interesting to note though that a solid plurality of surveyed philosophers favored externalism <span class="citation" data-cites="bourget2014">(Bourget and Chalmers <a href="#ref-bourget2014">2014</a>)</span>:</p>
+<figure>
+<figcaption>
+<p>Epistemic justification: internalism or externalism?</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>Responses</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accept or lean toward: externalism</td>
+<td>398 / 931</td>
+<td>42.7%</td>
+</tr>
+<tr class="even">
+<td>Other</td>
+<td>287 / 931</td>
+<td>30.8%</td>
+</tr>
+<tr class="odd">
+<td>Accept or lean toward: internalism</td>
+<td>246 / 931</td>
+<td>26.4%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="the-problem-of-induction"><a href="#yaas-epistemology-map" id="induction" class="arg-map">The problem of induction</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Inductive_reasoning">Induction</a> (not the <a href="https://en.wikipedia.org/wiki/Mathematical_induction">mathematical sort</a>) is about generalizing from particulars to generalities not logically entailed by those particulars. For example, I’ve seen a dozen black crows in a dozen different places and on this basis conclude that all crows are black.</p>
+<p>We perform this sort of operation all the time but on what warrant? Our (often implicit) belief in the validity of induction relies on what we’ll call the uniformity principle:</p>
+<blockquote>
+instances, of which we have had no experience, must resemble those, of which we have had experience, and that the course of nature continues always uniformly the same. <span class="attribution"><span class="citation" data-cites="hume1739">(Hume <a href="#ref-hume1739">1739</a>)</span></span>
+</blockquote>
+<p>But <a href="https://plato.stanford.edu/entries/induction-problem/">how can we justify belief in such a proposition</a>? It does not seem to be a logical inevitability. And on the other hand, it doesn’t seem that any finite set of empirical observations elevates it above doubt. Even if the laws of physics have applied uniformly over the past century, that’s little guarantee that they’ll proceed on placidly forevermore. Any attempt to generalize particular instantiations of the uniformity principle into a universal affirmation of the uniformity principle would <em>itself</em> rely on the uniformity principle.</p>
+<h3 id="a-priori-and-a-posteriori"><a href="#yaas-epistemology-map" id="priori-posteriori" class="arg-map"><em>A priori</em> and <em>a posteriori</em></a></h3>
+<p>A proposition is justified <a href="https://www.iep.utm.edu/apriori/"><em>a priori</em></a> if it is <span class="noted">justified without reference to any sense experience</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. If the justification relies on sense experience, a proposition is justified <em>a posteriori</em>.</p>
+<p>For example, our belief in the proposition “All bachelors are unmarried.” isn’t contingent on any particular sense experience. Even if I’d lived my whole life apart from human society and had never seen any other humans—bachelor or otherwise—I’d readily assent to the proposition as soon as I understood the terms involved.</p>
+<p>Conversely, the proposition “It’s chilly outside.” is intimately connected to sense experience. It is sometimes true and sometimes false and which case obtains ultimately depends on sense data. If I go outside and feel the cool air on my skin, it may well change my disbelief to belief.</p>
+<p>Should we care about this distinction or is its continued regurgitation just ritual genuflection before our lord and savior Immanuel Kant? I make no definite claims on the matter here, but I do hope that the distinction seem a bit more interesting in light of the next section.</p>
+<h2 id="belief"><a href="#yaas-epistemology-map" id="belief" class="arg-map">Belief</a></h2>
+<p>Closely related to the notions of <em>a priori</em> and <em>a posteriori</em> justification are <span class="noted">the notions of necessary and contingent propositions, and analytic and synthetic propositions</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. All were addressed prominently in <span class="citation" data-cites="kant1781">(Kant <a href="#ref-kant1781">1781</a>)</span>.</p>
+<h3 id="necessary-and-contingent"><a href="#yaas-epistemology-map" id="modal" class="arg-map">Necessary and contingent</a></h3>
+<p>A proposition is <a href="https://plato.stanford.edu/entries/modality-varieties/">necessarily true</a> if its negation is impossible or contradictory. That is, the proposition is true in all <a href="https://plato.stanford.edu/entries/possible-worlds/">possible worlds</a>. Conversely, a proposition is contingently true if being both true without contradiction and false without contradiction. That is, the proposition is true in some possible worlds and false in others.</p>
+<p>For example, the proposition “All bachelors are unmarried.” is necessarily true. Given a fixed meaning for the terms, there is no possible world in which the proposition is false. On the other hand, “It’s chilly outside.” is true in some possible worlds and false in others—it is contingent.</p>
+<p>Hopefully, the following claims come as no surprise to you:</p>
+<ul>
+<li>Contingent propositions are closely related to <em>a posteriori</em> justification. If a proposition is true in some possible worlds and false in others, we quite plausibly have need of our senses to determine which possible world we actually inhabit and, correspondingly, whether the proposition in question is true or false.</li>
+<li>Necessary propositions are closely related to <em>a priori</em> justification. If a proposition is true in all possible worlds, the task of determining which world we actually inhabit is otiose when it comes to determining the truth of the proposition. Since we don’t care which world we actually inhabit, our sense experience is irrelevant to the task at hand.</li>
+</ul>
+<p>Alas, the relationship between these categories isn’t actually as straightforward as all that. There’s ongoing disagreement about the precise nature of the relationship. In fact, there’s not even universal acknowledgment that <em>a priori</em> knowledge exists <span class="citation" data-cites="bourget2014">(Bourget and Chalmers <a href="#ref-bourget2014">2014</a>)</span>:</p>
+<figure>
+<figcaption>
+<p><em>A priori</em> knowledge: yes or no?</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>Responses</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accept or lean toward: yes</td>
+<td>662 / 931</td>
+<td>71.1%</td>
+</tr>
+<tr class="even">
+<td>Accept or lean toward: no</td>
+<td>171 / 931</td>
+<td>18.4%</td>
+</tr>
+<tr class="odd">
+<td>Other</td>
+<td>98 / 931</td>
+<td>10.5%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="analytic-and-synthetic"><a href="#yaas-epistemology-map" id="ana-synth" class="arg-map">Analytic and synthetic</a></h3>
+<p>The final Kantian distinction is between <a href="https://plato.stanford.edu/entries/analytic-synthetic/">analytic and synthetic propositions</a>. An analytic proposition is one whose meaning is true in light of the meaning its terms. A synthetic proposition is one whose meaning is true in light of the correspondence between its meaning and the world. “All bachelors are unmarried.” is an analytic proposition and “It’s chilly outside.” is a synthetic proposition.</p>
+<p>Hopefully, that distinction is fairly straightforward at this point (If not, you can always follow the link above.). With it out of the way, we can move on to talk about a slightly more complex taxonomy:</p>
+<figure>
+<figcaption>
+<p>The relationship between analytic-synthetic and <em>a priori</em>-<em>a posteriori</em></p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><em>A priori</em></th>
+<th><em>A posteriori</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Analytic</td>
+<td>Logical propositions; Mostly accepted</td>
+<td>Mostly rejected</td>
+</tr>
+<tr class="even">
+<td>Synthetic</td>
+<td>Empiricists v. rationalists</td>
+<td>Empirical propositions; Mostly accepted</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>There’s general philosophical agreement that analytic propositions with <em>a priori</em> justification exist, that synthetic propositions with <em>a posteriori</em> justification exist, and that analytic propositions with <em>a posteriori</em> justification don’t exist. The most controversial intersection then is between <em>a priori</em> and synthetic. On one view, this is what the <a href="https://plato.stanford.edu/entries/rationalism-empiricism/">rationalism v. empiricism</a> debate is about—rationalists hold that synthetic <em>a priori</em> knowledge is possible while empiricists deny it.</p>
+<p>That also serves as the segue for the shoehorning of two more survey results <span class="citation" data-cites="bourget2014">(Bourget and Chalmers <a href="#ref-bourget2014">2014</a>)</span>:</p>
+<figure>
+<figcaption>
+<p>Analytic-synthetic distinction: yes or no?</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>Responses</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accept or lean toward: yes</td>
+<td>604 / 931</td>
+<td>64.9%</td>
+</tr>
+<tr class="even">
+<td>Accept or lean toward: no</td>
+<td>252 / 931</td>
+<td>27.1%</td>
+</tr>
+<tr class="odd">
+<td>Other</td>
+<td>75 / 931</td>
+<td>8.1%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="empiri-rati">
+<figcaption>
+<p>Knowledge: empiricism or rationalism?</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>Responses</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Other</td>
+<td>346 / 931</td>
+<td>37.2%</td>
+</tr>
+<tr class="even">
+<td>Accept or lean toward: empiricism</td>
+<td>326 / 931</td>
+<td>35.0%</td>
+</tr>
+<tr class="odd">
+<td>Accept or lean toward: rationalism</td>
+<td>259 / 931</td>
+<td>27.8%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h2 id="truth"><a href="#yaas-epistemology-map" id="true" class="arg-map">Truth</a></h2>
+<p>Your patience for these persnickety philosophers likely begins to grow thin. They cavil and niggle, carp and quibble. They’ve taken common sense notions like knowledge, belief and justification, raised questions, drawn distinctions and offered precious little in the way of answers. But at last, you think, we come to truth—a concept so straightforward it’s beyond the grasping claws of even the most wretched sophist. Alas…</p>
+<p>Philosophers advance myriad interpretations of truth. These can be categorized under a few broad headings:</p>
+<dl>
+<dt><a href="#yaas-epistemology-map" id="correspondence" class="arg-map">Correspondence</a></dt>
+<dd><p><a href="https://plato.stanford.edu/entries/truth-correspondence/">Correspondence theories of truth</a> are probably closest to common sense, folk theories of truth. They said that a proposition is true if and only if it corresponds to the world—if the map corresponds to the territory.</p>
+</dd>
+<dt><a href="#yaas-epistemology-map" id="epistemic" class="arg-map">Epistemic</a></dt>
+<dd><p><a href="https://en.wikipedia.org/wiki/Epistemic_theories_of_truth">Epistemic theories of truth</a> are a heterogeneous lot. The common element is that they all suggest that the truth of a proposition depends on our beliefs. For example, the <span class="noted"><a href="https://plato.stanford.edu/entries/truth-coherence/">coherence theory of truth</a></span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a> holds that a proposition is true in light of coherence with other propositions.</p>
+</dd>
+<dt><a href="#yaas-epistemology-map" id="deflationary" class="arg-map">Deflationary</a></dt>
+<dd><p><a href="https://plato.stanford.edu/entries/truth-deflationary/">Deflationary theories of truth</a> are a bit hard to succinctly explain. We’ll just say that, like it says on the tin, they try to take the magic out of ‘truth’ and get by with a minimal notion.</p>
+</dd>
+</dl>
+<p>Here too, the debate is unresolved <span class="citation" data-cites="bourget2014">(Bourget and Chalmers <a href="#ref-bourget2014">2014</a>)</span>:</p>
+<figure>
+<figcaption>
+<p>Truth: correspondence, deflationary, or epistemic?</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>Responses</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accept or lean toward: correspondence</td>
+<td>473 / 931</td>
+<td>50.8%</td>
+</tr>
+<tr class="even">
+<td>Accept or lean toward: deflationary</td>
+<td>231 / 931</td>
+<td>24.8%</td>
+</tr>
+<tr class="odd">
+<td>Other</td>
+<td>163 / 931</td>
+<td>17.5%</td>
+</tr>
+<tr class="even">
+<td>Accept or lean toward: epistemic</td>
+<td>64 / 931</td>
+<td>6.9%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h1 id="is-knowledge-possible"><a href="#yaas-epistemology-map" id="possible" class="arg-map">Is knowledge possible?</a></h1>
+<h2 id="skepticism"><a href="#yaas-epistemology-map" id="skeptics" class="arg-map">Skepticism</a></h2>
+<p>When we presented the <a href="#münchhausen-trilemma">Münchhausen trilemma</a>, we actually omitted one possible response. We said that justifying knowledge ultimately required coherentism, foundationalism, or infinitism. The fourth option is to deny the possibility of knowledge altogether. Without any knowledge at all, nothing stands in need of justification and the whole problem is neatly avoided. Denying the possibility of knowledge characterizes <a href="https://plato.stanford.edu/entries/skepticism/">skepticism</a>.</p>
+<p>One thought experiment that generates an intuition for skepticism is <a href="https://en.wikipedia.org/wiki/Dream_argument">the dream argument</a>: When we dream, we usually don’t know we’re dreaming. How do we know we’re not dreaming now? How can we have complete certainty that our perceptual experiences relate to the real, physical world rather than a dream world?</p>
+<h2 id="fallibilism"><a href="#yaas-epistemology-map" id="fallibilists" class="arg-map">Fallibilism</a></h2>
+<p>In some ways, <a href="https://www.iep.utm.edu/fallibil/">fallibilism</a> is the softer cousin of skepticism. Like skepticism, it denies that we can ever make claims with absolute conviction; we can never be certain we know the truth. Unlike skepticism, it is content to call fallibly justified beliefs—which may turn out to be false—knowledge.</p>
+<h2 id="epistemism"><a href="#yaas-epistemology-map" id="epistemists" class="arg-map">Epistemism</a></h2>
+<p>Epistemism doesn’t seem to be a term in common use, but, for the sake of completeness, we’ll use it to describe the position that says we can have certain knowledge.</p>
+<h1 id="omitted">Omitted</h1>
+<p>In additional to all the details we’ve skated over, there are whole subtopics covered in <span class="citation" data-cites="crumley2009">(Crumley II <a href="#ref-crumley2009">2009</a>)</span> that we’ve omitted here. These include:</p>
+<ul>
+<li>Perception</li>
+<li>Feminist epistemology</li>
+<li>Naturalized epistemology</li>
+</ul>
+<hr />
+<div id="refs" class="references">
+<div id="ref-bourget2014">
+<p>Bourget, David, and David J Chalmers. 2014. “What Do Philosophers Believe?” <em>Philosophical Studies</em> 170 (3). Springer: 465–500. <a href="https://philpapers.org/archive/bouwdp" class="uri uri">https://philpapers.org/archive/bouwdp</a>.</p>
+</div>
+<div id="ref-crumley2009">
+<p>Crumley II, Jack S. 2009. <em>An Introduction to Epistemology</em>. Broadview Press.</p>
+</div>
+<div id="ref-gettier1963">
+<p>Gettier, Edmund L. 1963. “Is Justified True Belief Knowledge?” <em>Analysis</em> 23 (6). JSTOR: 121–23. <a href="http://fitelson.s464.sureserver.com/proseminar/gettier.pdf" class="uri uri">http://fitelson.s464.sureserver.com/proseminar/gettier.pdf</a>.</p>
+</div>
+<div id="ref-hume1739">
+<p>Hume, David. 1739. <em>A Treatise of Human Nature</em>. <a href="https://www.gutenberg.org/files/4705/4705-h/4705-h.htm" class="uri uri">https://www.gutenberg.org/files/4705/4705-h/4705-h.htm</a>.</p>
+</div>
+<div id="ref-kant1781">
+<p>Kant, Immanuel. 1781. <em>Critique of Pure Reason</em>. <a href="https://www.gutenberg.org/files/4280/4280-h/4280-h.htm" class="uri uri">https://www.gutenberg.org/files/4280/4280-h/4280-h.htm</a>.</p>
+</div>
+<div id="ref-plato360">
+<p>Plato. 360BC. <em>Theaetetus</em>. <a href="http://classics.mit.edu/Plato/theatu.html" class="uri uri">http://classics.mit.edu/Plato/theatu.html</a>.</p>
+</div>
+<div id="ref-shope2017">
+<p>Shope, Robert K. 2017. <em>The Analysis of Knowing: A Decade of Research</em>. Vol. 4914. Princeton University Press.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Of course, humans can never actually come to hold beliefs independent of all sense experience. Our lives are filled with sensory experiences and before believing a proposition, we must come to understand it and the language used to express it (a process which necessarily relies on our senses). The <em>a priori</em>-<em>a posteriori</em> distinction is not about the causal mechanism by which we come to believe a proposition; it’s about the epistemic justification for a proposition.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>Putting these under “Beliefs” is a bit cute—they’re more properly regarded as describing propositions. But the contents of beliefs are propositions and this fits into our overarching organizational structure nicely.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>Note that this is not the same as <a href="https://plato.stanford.edu/entries/justep-coherence/">coherentist theories of epistemic justification</a>.<a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Shilling for Anki</title>
     <link href="https://www.col-ex.org/posts/shilling-anki/" />
     <id>https://www.col-ex.org/posts/shilling-anki/</id>
@@ -380,7 +750,7 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 </section>]]></summary>
 </entry>
 <entry>
-    <title>Human cognitive architecture and learning</title>
+    <title>YAAS Human cognitive architecture and learning</title>
     <link href="https://www.col-ex.org/posts/human-cognitive-architecture-learning/" />
     <id>https://www.col-ex.org/posts/human-cognitive-architecture-learning/</id>
     <published>2018-08-13T00:00:00Z</published>
