@@ -88,7 +88,7 @@
 <h3 id="initial-behavior">Initial behavior</h3>
 <p>Before the Professor <a href="https://giphy.com/gifs/will-arnett-UGAwRa9KWjO2Q/fullscreen">abandoned his child</a>, he programmed the agent with a uniform prior over all possible ethical theories. That is, the agent thinks there’s a 50% chance bamboocentrism is true and a 50% chance the coconut imperative is the OTMT. Thus, in the absence of better information, the agent spends zir days harvesting coconuts (we assume the resources required to harvest a coconut are identical to the resources required to harvest a bamboo stalk). To be fully explicit:</p>
 <!--more-->
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 E[\Delta u(h_b)] &amp;= E[u(b + 1, c) - u(b, c)] \\
 &amp;= E[u(b + 1, c)] - E[u(b, c)] \\
 &amp;= E[g(b + 1, c)] - E[g(b, c)] \\
@@ -96,8 +96,8 @@ E[\Delta u(h_b)] &amp;= E[u(b + 1, c) - u(b, c)] \\
 &amp;= \frac{1}{2} \cdot g_b(b + 1, c) - \frac{1}{2} \cdot g_b(b, c) \\
 &amp;= \frac{1}{2} (2 \cdot (b + 1) + 0 \cdot c) - \frac{1}{2} (2 \cdot b + 0 \cdot c) \\
 &amp;= 1
-\end{align*}\]</span>
-<span class="math display">\[\begin{align*}
+\end{align*}\]</span></p>
+<p><span class="math display">\[\begin{align*}
 E[\Delta u(h_c)] &amp;= E[u(b, c + 1) - u(b, c)] \\
 &amp;= E[u(b, c + 1)] - E[u(b, c)] \\
 &amp;= E[g(b, c + 1)] - E[g(b, c)] \\
@@ -105,7 +105,7 @@ E[\Delta u(h_c)] &amp;= E[u(b, c + 1) - u(b, c)] \\
 &amp;= \frac{1}{2} \cdot g_c(b, c + 1) - \frac{1}{2} \cdot g_c(b, c) \\
 &amp;= \frac{1}{2} (0 \cdot b + 3 \cdot (c + 1)) - \frac{1}{2} (0 \cdot b + 3 \cdot c) \\
 &amp;= 1.5
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>In words, the expected utility gain from harvesting a bamboo stalk <span class="math inline">\(E[\Delta u(h_b)]\)</span> is <span class="math inline">\(1\)</span> util and thus less than the expected utility gain of <span class="math inline">\(1.5\)</span> from harvesting a coconut <span class="math inline">\(E[\Delta u(h_c)]\)</span>.</p>
 <h3 id="moral-investigation">Moral investigation</h3>
 <p>Now, suppose a magic <a href="https://en.wikipedia.org/wiki/Magic_8-Ball">Magic 8-Ball</a> washes up on the island as narrative devices so obligingly did in ’60s television. Somehow this 8-Ball is a moral oracle able to reveal the OTMT with certainty and somehow the agent knows and believes this. In exchange for this knowledge, the 8-Ball asks for nothing less than an <em>immortal SOUL</em>—*cough* some utils. Should the agent accept this utils for info bargain? The lazy approach to AI safety perspective suggests the next step is to calculate the value of this moral information.</p>
