@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/yaas/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/yaas-epistemology/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -863,6 +870,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/12/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/13/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
