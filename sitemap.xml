@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/norms-wild-clickbait/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/yaas/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -505,6 +512,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/clickbait/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/constructive/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -687,6 +701,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/norms/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/notebook/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -800,6 +821,13 @@
 
     <url>
         <loc>https://www.col-ex.org/series/Lazy%2520AI%2520safety/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/Norms%2520in%2520the%2520Wild/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
