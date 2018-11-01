@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/assorted-links-viii/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/norms-wild-clickbait/index.html</loc>
         <changefreq>weekly</changefreq>
         
