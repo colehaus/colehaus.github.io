@@ -54,7 +54,98 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
-        <h2><a href="../../posts/assorted-links-viii/">Assorted Links VIII</a></h2>
+        <h2><a href="../../posts/curse-altruistic-voter/">The curse of the altruistic voter</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="../../tag/voting/">voting</a></li>
+    
+      <li><a href="../../tag/mechanism%2520design/">mechanism design</a></li>
+    
+      <li><a href="../../tag/constructive/">constructive</a></li>
+    
+</ul></nav>
+
+        
+        <span class="date">Published on <time datetime="November  6, 2018">November  6, 2018</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>If voters have social preferences (second-order preferences about the preference satisfaction of others) and imperfect information, voting altruistically may produce worse outcomes—for the individual voter and for society at large—than ignoring their social preferences and voting egocentrically. This problem seems like it may actually be common in the real world. While I doubt any voting system can eliminate it, including information about private preferences in polls may ameliorate it.</p></div>
+       
+
+        <dl>
+<dt>Broke</dt>
+<dd>Voting on election day
+</dd>
+<dt>Woke</dt>
+<dd>Advocating for alternative voting systems on election day
+</dd>
+<dt>Bespoke</dt>
+<dd>Talking about obscure desiderata of voting systems on election day
+</dd>
+</dl>
+<h3 id="scenario">Scenario</h3>
+<h4 id="narrative">Narrative</h4>
+<p>Suppose you’re voting on increased funding for the local library. You don’t personally use the library much, but you figure that others in the polity are reliant on the library. Out of a sense of solidarity you vote for increased funding even though, from a purely egocentric perspective, this reduces your welfare (i.e. the increased cost outweighs your private benefit). When results come in, the library funding measure passes in a landslide and you bask in your altruism.</p>
+<p>Alas, the voting results are no guarantee that you’ve <em>actually</em> acted altruistically. It’s entirely possible that you misunderstood the preferences of others and that the polity has made a decision that’s net harmful.</p>
+<h4 id="numerical">Numerical</h4>
+<p>For generality, we’ll call voting for increased library funding option <span class="math inline">\(\alpha\)</span> and voting against (the status quo) option <span class="math inline">\(\beta\)</span>.</p>
+<figure>
+<table>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 17%" />
+<col style="width: 16%" />
+<col style="width: 30%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Voter</th>
+<th>Private value of <span class="math inline">\(\alpha\)</span></th>
+<th>Private value of <span class="math inline">\(\beta\)</span></th>
+<th>Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
+<th>Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>-1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>-1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>-1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<figcaption>
+Individual voters private values for options <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> and their belief about others’ private values for these options
+</figure>
+<p>The table outlines a scenario in which each of three voters (it’s a small polity) prefers option <span class="math inline">\(\beta\)</span>. Unfortunately, they’ve each come to the inaccurate belief that each other voter prefers option <span class="math inline">\(\alpha\)</span>. That is voter A slightly prefers <span class="math inline">\(\beta\)</span> but believes voter B and voter C each slightly prefer <span class="math inline">\(\alpha\)</span>.</p>
+<p>If our voters are good utilitarians in a <a href="https://en.wikipedia.org/wiki/First-past-the-post_voting">first-past-the-post</a> system, they’ll all vote for <span class="math inline">\(\alpha\)</span> (because <span class="math inline">\(1 + 1 - 1 &gt; 0 + 0 + 0\)</span>) and it will win. The resulting <a href="https://en.wikipedia.org/wiki/Social_welfare_function">social welfare</a> will be <span class="math inline">\(-3 = 3 \cdot -1\)</span>. If our voters had voted in a purely egocentric manner—ignoring the preferences of others, they would each pick <span class="math inline">\(\beta\)</span> and the social welfare would have been <span class="math inline">\(0 = 3 \cdot 0\)</span>.</p>
+<p>This is pretty perverse—our voters have selected the social welfare minimizing option despite their scrupulous motives and they would have better achieved their altruistic ends by voting selfishly!</p>
+
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
+        <h2><a href="../../posts/assorted-links-viii/">Assorted links VIII</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
     
