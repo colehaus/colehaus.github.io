@@ -21,10 +21,10 @@
 <p>When agents act or plan to act, they do so on the basis of both beliefs and preferences. Alternatively, we can phrase these as <a href="https://plato.stanford.edu/entries/hume-moral/">reasons and passions</a>. Or we can say that <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">a reward function and a model of the environment are required for a policy</a>.</p>
 <h1 id="foundation">Foundation</h1>
 <p>Before we can analyze collective behavior, we have to make a few foundational distinctions.</p>
-<h2 id="preferences">Preferences</h2>
-<h3 id="individual-or-social">Individual or social</h3>
+<h2 id="preferences"><a href="#yaas-social-norms-map" id="pref" class="arg-map">Preferences</a></h2>
+<h3 id="individual-or-social"><a href="#yaas-social-norms-map" id="social-pref" class="arg-map">Individual or social</a></h3>
 <p>Preferences can be either individual or social preferences. Social preferences are those that “take into account the behavior, beliefs, and outcomes of other people” while individual preferences do not <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>. (Example to come.) This distinction is important because changing individual preferences can plausibly happen in isolation, one person after another. Changing social preferences on the other hand is more likely to require coordinated group action.</p>
-<h3 id="conditional-or-unconditional">Conditional or unconditional</h3>
+<h3 id="conditional-or-unconditional"><a href="#yaas-social-norms-map" id="conditional" class="arg-map">Conditional or unconditional</a></h3>
 <p>Preferences can also be conditional or <span class="noted">unconditional</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. Conditional preferences are those that vary with some feature of the environment while unconditional preferences do not. This is an important distinction because a social engineer can change the way conditional preferences manifest by changing the environment while unconditional preferences can only be altered in a direct confrontation.</p>
 <p><abbr title="Norms in the Wild">NitW</abbr> also draws a distinction between prudential and moral preferences. I think these can be viewed as a special case of conditional and unconditional preferences. It seems we can gloss these to preferences which seek to satisfy <a href="https://en.wikipedia.org/wiki/Instrumental_and_intrinsic_value">instrumental or intrinsic values</a>. Preferring not to cheat out of a fear of getting caught is a prudential preference; preferring not to cheat because it’s an odious breach of faith is a moral preference. This distinction is important because moral preferences are typically more stable—prudential preferences may change with changing circumstances while moral preferences will not.</p>
 <h3 id="together">Together</h3>
@@ -61,10 +61,10 @@
 </table>
 </figure>
 <p><!--more--></p>
-<h2 id="beliefs">Beliefs</h2>
-<h3 id="normative-and-non-normative">Normative and non-normative</h3>
+<h2 id="beliefs"><a href="#yaas-social-norms-map" id="beliefs" class="arg-map">Beliefs</a></h2>
+<h3 id="normative-and-non-normative"><a href="#yaas-social-norms-map" id="normative" class="arg-map">Normative and non-normative</a></h3>
 <p>We can also distinguish between <a href="https://en.wikipedia.org/wiki/Positive_statement#Positive_statements_and_normative_statements">normative and non-normative beliefs</a> (<a href="https://en.wikipedia.org/wiki/Is%E2%80%93ought_problem">ought vs is</a>). This distinction is important when discussing norms because demonstrations and other empirical evidence can be used to change non-normative beliefs but are harder to apply to normative beliefs.</p>
-<h3 id="social-and-non-social-beliefs">Social and non-social beliefs</h3>
+<h3 id="social-and-non-social-beliefs"><a href="#yaas-social-norms-map" id="social-belief" class="arg-map">Social and non-social beliefs</a></h3>
 <p>Some beliefs are social and others are not. Social beliefs are “expectations we have about other people’s behaviors and beliefs” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>. This distinction is important for much the same reason as the distinction between social and non-social preferences is important—it determines whether a social engineer has a divisible problem or one that must be tackled at the scale of groups.</p>
 <h2 id="together-1">Together</h2>
 <p>If we put these two axes together, we end up with a classificatory grid like this:</p>
@@ -95,20 +95,20 @@
 </table>
 </figure>
 <p>To be explicit, empirical expectations are “beliefs about how other people are going to act or react in certain situations” while normative expectations are “beliefs about other people’s personal normative beliefs (i.e., they are second-order beliefs)” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>. That is, “All do it” is an empirical expectation while “All approve of it” is a normative expectation.</p>
-<h1 id="collective-behavior">Collective behavior</h1>
+<h1 id="collective-behavior"><a href="#yaas-social-norms-map" id="collective" class="arg-map">Collective behavior</a></h1>
 <p>With those distinctions made, we can start to suss out the varieties of collective behavior. <abbr title="Norms in the Wild">NitW</abbr> suggests something like the following overview:</p>
 <figure>
 <img src="https://www.col-ex.org/images/norm-diagnosis.svg" alt="Diagnostic process of identifying collective behaviors" id="diagnosis-diagram" /><figcaption>Diagnostic process of identifying collective behaviors</figcaption>
 </figure>
 <p>We’ll start from the bottom. There are three different types of collective behavior identified here:</p>
 <dl>
-<dt>Custom</dt>
+<dt><a href="#yaas-social-norms-map" id="custom" class="arg-map">Custom</a></dt>
 <dd>“a pattern of behavior such that individuals (unconditionally) prefer to conform to it because it meets their needs” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>
 </dd>
-<dt>Descriptive norm</dt>
+<dt><a href="#yaas-social-norms-map" id="descriptive" class="arg-map">Descriptive norm</a></dt>
 <dd>“a pattern of behavior such that individuals prefer to conform to it on condition that they believe that most people in their reference network conform to it (empirical expectation)” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>
 </dd>
-<dt>Social norm</dt>
+<dt><a href="#yaas-social-norms-map" id="norm" class="arg-map">Social norm</a></dt>
 <dd>“a rule of behavior such that individuals prefer to conform to it on condition that they believe that (a) most people in their reference network conform to it (empirical expectation), and (b) that most people in their reference network believe they ought to conform to it (normative expectation)” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>
 </dd>
 </dl>
@@ -161,7 +161,7 @@
 </tbody>
 </table>
 </figure>
-<h3 id="pluralistic-ignorance">Pluralistic ignorance</h3>
+<h3 id="pluralistic-ignorance"><a href="#yaas-social-norms-map" id="ignorance" class="arg-map">Pluralistic ignorance</a></h3>
 <p>A social engineer needs to ask about personal normative beliefs and normative social expectations because these don’t always align. When each person (or most people) in a community falsely believes that others support a norm and their private disapproval is exceptional, we have <a href="https://en.wikipedia.org/wiki/Pluralistic_ignorance">pluralistic ignorance</a>. <a href="https://www.col-ex.org/posts/norms-wild-clickbait#on-reluctant-female-genital-cutting">The table on female genital cutting</a>, for example, suggests a serious divergence between private beliefs and public professions due to pluralistic ignorance in countries like Djibouti and Somalia.</p>
 <p>The distinction between norms which are the result of pluralistic ignorance and those which are the result of genuine community endorsement is, of course, an important one. We’ll talk more about the different strategies these scenarios demand shortly.</p>
 <h3 id="methodological-tips-and-tricks">Methodological tips and tricks</h3>
@@ -190,30 +190,30 @@
 <li>“[T]heir actions have to be coordinated”</li>
 </ol>
 <p>We’ll tackle these in order.</p>
-<h2 id="problem">Problem</h2>
+<h2 id="problem"><a href="#yaas-social-norms-map" id="persistence" class="arg-map">Problem</a></h2>
 <p>A harmful (from the social engineer’s perspective) norm may persist for one of many reasons <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>:</p>
 <ul>
-<li>“People may not see the current norm as problematic, and even if presented with alternatives, they may defend their ways as superior.”</li>
-<li>“A second reason why a norm may not seem problematic is the lack of knowledge of possible alternatives”</li>
+<li><a href="#yaas-social-norms-map" id="preferred" class="arg-map">“People may not see the current norm as problematic, and even if presented with alternatives, they may defend their ways as superior.”</a></li>
+<li><a href="#yaas-social-norms-map" id="alternatives" class="arg-map">“A second reason why a norm may not seem problematic is the lack of knowledge of possible alternatives”</a></li>
 <li>Pluralistic ignorance</li>
 </ul>
-<h2 id="shared-reasons">Shared reasons</h2>
+<h2 id="shared-reasons"><a href="#yaas-social-norms-map" id="reasons" class="arg-map">Shared reasons</a></h2>
 <p>Because of each of the above problem scenarios has distinct implications, we’ll consider them separately when walking through the shared reasons part of norm change.</p>
 <div class="switch" type="menu" data-menu="norm-problem">
 <div class="open">
 <p>The most challenging circumstances for the social engineer are when a community actively prefers the current norm to alternatives. In this case, the social engineer must undertake a campaign of persuasion. Of course, neither the original book nor this summary can cover this topic comprehensively. That said, here’s a first look at that topic:</p>
 <h3 id="targets-of-persuasion">Targets of persuasion</h3>
 <p>It’s often prohibitively difficult to convince a community to abandon a norm entirely. Norms are often the outgrowth of deeply held moral beliefs; convincing someone to abandon their core moral beliefs is both difficult and (hopefully) unnecessary. Imagine someone trying to convince you to abandon your belief that wanton killing is wrong—they’d have a hard time of it. Instead, a social engineer can take advantage of the multiplicity of norms and interpretations of norms.</p>
-<p>Defiance of an undesirable norm can be grounded in adherence to some alternative norm. For example, the <a href="https://en.wikipedia.org/wiki/Franca_Viola">Franca Viola</a> case involved giving the norm of protecting your child priority over the norm of honor:</p>
+<p>Defiance of an undesirable norm can be <a href="#yaas-social-norms-map" id="prioritize" class="arg-map">grounded in adherence to some alternative norm</a>. For example, the <a href="https://en.wikipedia.org/wiki/Franca_Viola">Franca Viola</a> case involved giving the norm of protecting your child priority over the norm of honor:</p>
 <blockquote>
 People who abide by honor norms also hold norms of protective parenting. In the 1960s, Sicily was a place where honor norms held strong. For example, a girl who was raped was expected to marry her rapist to preserve her family’s honor. In the well-known case of Franca Viola, this expectation was completely reframed. She was raped but refused to marry her rapist, and her unusual decision was supported by her father, who put caring for and protecting his child above the powerful norm of honor. By appealing to this other norm, he was able to justifiably defy honor norms. <span class="attribution"><span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span></span>
 </blockquote>
-<p>Another option is to change the way a moral ideal is manifested in practice while leaving the ideal itself untouched. For example, the saleema campaign reframed uncut girls as intact and pure whereas the old interpretation had been that cut girls were chaste and pure:</p>
+<p>Another option is to <a href="#yaas-social-norms-map" id="reinterpret" class="arg-map">change the way a moral ideal is manifested</a> in practice while leaving the ideal itself untouched. For example, the saleema campaign reframed uncut girls as intact and pure whereas the old interpretation had been that cut girls were chaste and pure:</p>
 <blockquote>
 The word saleema means whole, intact, healthy, and perfect. It conveys the idea that being uncut is the natural, pristine state. Radio and video campaigns linked traditional values of honor and purity to the idea that uncut girls are complete and pure. Media campaigns and community discussions were framed and organized around this positive message. Perceiving girls through the “Saleema lens” functionally disconfirmed the belief that uncut girls are not chaste and pure. <span class="attribution"><span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span></span>
 </blockquote>
 <p>In either case, these approaches make the social engineer’s task easier. They must simply make some existing beliefs more salient rather than attempting to destroy existing norms entirely and create new ones whole cloth.</p>
-<h3 id="theories-of-persuasion">Theories of persuasion</h3>
+<h3 id="theories-of-persuasion"><a href="#yaas-social-norms-map" id="theories" class="arg-map">Theories of persuasion</a></h3>
 <p>We can theorize the task of persuasion as changing people’s underlying <em><a href="https://en.wikipedia.org/wiki/Schema_(psychology)">schemata</a></em> and <em><a href="https://en.wikipedia.org/wiki/Behavioral_script">scripts</a></em>. Schemata are patterns of thought that organize information and the relationships among pieces of information. Scripts are schemata applied to events and behavior—scripts are sequences of expected actions linked to particular circumstances (the response in <a href="https://en.wikipedia.org/wiki/Stimulus%E2%80%93response_model">stimulus-response</a>, if you will).</p>
 <p><span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span> outline’s three theories of script and schema change:</p>
 <dl>
@@ -236,33 +236,34 @@ The word saleema means whole, intact, healthy, and perfect. It conveys the idea 
 Allcott and Mullainathan (2010) report that American households who got mailers comparing their own electricity consumption to that of their neighbors reduced their consumption as much as they would have if the cost of power had risen by 11–20 percent. <span class="attribution"><span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span></span>
 </blockquote>
 <p>Another example of the priority of empirical expectations is given in the section <a href="https://www.col-ex.org/posts/norms-wild-clickbait/#on-dirty-laundry">on dirty laundry in another post on <em>Norms in the Wild</em></a>.</p>
+<p>This suggests that harmful <a href="#yaas-social-norms-map" id="defiance" class="arg-map">norms can be undermined by highlighting existing non-compliance</a>.</p>
 </div>
 </div>
-<h2 id="expectation-change">Expectation change</h2>
+<h2 id="expectation-change"><a href="#yaas-social-norms-map" id="expectation-change" class="arg-map">Expectation change</a></h2>
 <p>Even if the above persuasion succeeds, that’s not enough. Individuals privately supporting an alternative norm doesn’t necessarily lead to changed behavior. The reason is that social norms, unlike customs and descriptive norms, are rarely self-enforcing.</p>
 <p>By <em>self-enforcing</em>, we mean that individuals will follow some pattern of collective behavior even in the absence of any social response to their behavior. People don’t need social approval before putting on a coat in cold weather. Walking on the wrong side of the sidewalk would be self-defeating because you’d get to your destination slower due to the need to dodge everyone walking against you. On the other hand, an unscrupulous person might cut in line every time they thought they could get away with it. The near absence of line cutting (in certain cultures) is maintained only through continuous <a href="https://www.google.com/search?q=fight+cutting+in+line">social sanctions for norm violators</a>.</p>
 <p>Because social norms are socially enforced, unilateral defiance is rarely advantageous. It’s only when social expectations collectively change that changed behavior becomes possible. All of this means that attempts to advocate for alternative collective behaviors must be broadly effective before any change will be visible—there’s a threshold. But even convincing a majority of people that some alternative is preferable isn’t enough.</p>
 <p>The social engineer must convince each person in a community of three things: 1. An alternative norm is superior (accomplishing this is covered in the <a href="#shared-reasons">shared reasons</a> section) 2. Other people in the community support an alternative norm 3. Other people in the community are also convinced of the above</p>
 <p>If the social engineer succeeds only at the first two, each individual will still be afraid to defy the existing norm. <span class="noted">For example, even if Fiorenzo believes that others in his community privately dislike some norm, if he thinks they believe the norm still has public support, he’ll think they’ll still enforce the norm and sanction him for violating it</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>.</p>
 <p>The necessity of <span class="noted">common knowledge</span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a> means that public fora are quite useful. When people discuss norms, their concerns, and their changing attitudes with other members of their community, it becomes possible for people to “infer that others’ beliefs are changing alongside their own” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>.</p>
-<h2 id="collective-action">Collective action</h2>
+<h2 id="collective-action"><a href="#yaas-social-norms-map" id="collective-action" class="arg-map">Collective action</a></h2>
 <p>We’re almost there. In the first three steps, the social engineer identified why a problematic norm persists, convinced people privately that an alternative is superior, and then made people’s preferences for change common knowledge. The final step is to realize these common preferences and enact a new norm.</p>
 <p>Of course, this isn’t easy; it is a <a href="https://en.wikipedia.org/wiki/Collective_action_problem">problem of collective action</a>. The core issue is that individual incentives can diverge from group incentives. For example, cutting in line is advantageous for any individual if not punished. But if every individual tries to cut, the outcome is worse for everyone than adhering to the no cutting norm.</p>
 <p>This echoes back to the discussion on social norms not being self-enforcing. Just as a social engineer wanted to eliminate social sanction for defying a bad norm, they may want to introduce social sanction for defying a good norm. This is one way to solve collective action problems.</p>
 <p>Sanctions aren’t the only way to solve collective action problems. There are other opportunities too, but the literature on collective action is deep and we won’t cover any more of it here. I hope to address it more directly in a future post.</p>
-<h1 id="tools">Tools</h1>
+<h1 id="tools"><a href="#yaas-social-norms-map" id="tools" class="arg-map">Tools</a></h1>
 <p>That last section is the last of the core content in <em>Norms in the Wild</em>. This last section will just cover some tools it outlines as potentially useful for a social engineer.</p>
-<h2 id="economic">Economic</h2>
+<h2 id="economic"><a href="#yaas-social-norms-map" id="economic" class="arg-map">Economic</a></h2>
 <p>One obvious option for changing norms (in particular, providing shared reasons for change) is altering economic incentives. However, this approach has several limitations:</p>
 <ul>
 <li>“The activity may be reframed as a monetary transaction, thus obscuring its moral significance.” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span></li>
 <li>“If the price is too low, it may signal that the activity is of low import, discouraging engagement in it.” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span></li>
 <li>“Finally, a monetary incentive may implicitly suggest that an inducement is needed, otherwise people would skirt the activity.” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span></li>
 </ul>
-<h2 id="legal">Legal</h2>
+<h2 id="legal"><a href="#yaas-social-norms-map" id="legal" class="arg-map">Legal</a></h2>
 <p>Alternatively, one could simply try to mandate adherence to a new norm with the force of law. This should provide strong shared reasons to change. However, “if a new legal norm imposes harsh penalties against an accepted social norm, police will be less likely to enforce the legal norm, prosecutors will be less likely to charge, and juries to convict, with the effect of ultimately reinforcing the social norm that was intended to be changed.” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>.</p>
 <p>The efficacy of legal mandates for changing norms is strongly correlated with trust in formal institutions.</p>
-<h3 id="trendsetters">Trendsetters</h3>
+<h2 id="trendsetters"><a href="#yaas-social-norms-map" id="trend" class="arg-map">Trendsetters</a></h2>
 <p><em>Trendsetters</em> may be useful for both providing reasons to change and altering shared expectations. As previously mentioned, the <a href="https://en.wikipedia.org/wiki/Positive_deviance">positive deviance</a> approach suggests that lived demonstrations by one trendsetter may be worth a thousand exhortations from a social engineer. Additionally, if a trendsetter is not sanctioned or only sanctioned lightly, this may change observers expectations about the cost of their own defiance.</p>
 <p>Trendsetters are likely to be:</p>
 <dl>
@@ -276,7 +277,7 @@ Allcott and Mullainathan (2010) report that American households who got mailers 
 <dd>They may not have much esteem for the norm and what it represents
 </dd>
 </dl>
-<h3 id="media">Media</h3>
+<h2 id="media"><a href="#yaas-social-norms-map" id="media" class="arg-map">Media</a></h2>
 <p>Finally, edutainment is, reportedly, <a href="https://www.col-ex.org/posts/norms-wild-clickbait/#on-the-unreasonable-effectiveness-of-tv">shockingly effective at changing norms</a>.</p>
 <p>Edutainment may be effective for some combination of the following reasons:</p>
 <ul>
@@ -1063,7 +1064,7 @@ instances, of which we have had no experience, must resemble those, of which we 
 <p>But, after reading up on pedagogy in articles like <a href="https://www.col-ex.org/posts/human-cognitive-architecture-learning">the one we discussed earlier</a>, “[I] no longer see longterm memory as a repository of isolated, unrelated facts that are occasionally stored and retrieved; instead, it is the central structure of human cognitive architecture.” <span class="citation" data-cites="sweller2008">(Sweller <a href="#ref-sweller2008">2008</a>)</span></p>
 <h1 id="spaced-repetition">Spaced repetition</h1>
 <p>Thus, I present my own entry in the burgeoning <a href="https://www.gwern.net/Spaced-repetition">subgenre</a> of <a href="http://augmentingcognition.com/ltm.html">spaced repetition software</a> <a href="http://devonzuegel.com/post/thoughts-on-spaced-repetition">encomia</a>.</p>
-<p>Briefly, <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a> software optimally schedules flashcard review to radically boost retention of information in long-term memory. <a href="https://apps.ankiweb.net/">Anki</a> is one such program. I’d heard of Anki in the past but only managed to acquire the habit of regular review more recently. I’ve performed a total of 4803 reviews of 1518 cards during review sessions covering 40 of the last 42 days (Let it never be said that I do things in half measures.). This is probably too intense and more than I’d recommend for most people. But that information should serve to calibrate you as to how much experience I have with Anki.</p>
+<p>Briefly, <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a> software optimally schedules flashcard review to radically boost retention of information in long-term memory. <a href="https://apps.ankiweb.net/">Anki</a> is one such program. I’d heard of Anki in the past but only managed to acquire the habit of regular review more recently. I’ve performed a total of 14306 reviews of 3811 cards during review sessions and reviewed on 58 of the last 58 days (Let it never be said that I do things in half measures.). This is probably too intense and more than I’d recommend for most people. But that information should serve to calibrate you as to how much experience I have with Anki.</p>
 <h2 id="the-feel-of-a-thing">The feel of a thing</h2>
 <p>The dominant feeling I now have is a mild frustration at the betrayal of present me by past me—so much of my prior reading and general intellectual development was wasted effort. If we each had <a href="https://en.wikipedia.org/wiki/Anterograde_amnesia">anterograde amnesia</a> and forgot 100% of what we’d read or otherwise experienced, we’d surely take a different approach to life. We wouldn’t just wander along <a href="https://en.wikipedia.org/wiki/Memento_(film)">learning and forgetting in an endless cycle</a>. But the truth of our memories is not so far off!</p>
 <p><!--more--></p>
@@ -1091,9 +1092,9 @@ A modern example of this loss of knowledge without repetition is a study of card
 <li>I then transfer these snippets to the computer and make <a href="https://en.wikipedia.org/wiki/Cloze_test">cloze deletions</a>.</li>
 <li>I can use the number of Anki cards created as a measure of progress. It can be discouraging to spend hours reading and only cover a few pages. The number of new cards created in the process is both a reminder of a progress and a way to pace myself. If I limit Anki to only show 40 new cards a day, having created 40 new cards is a strong signal that I ought to switch tasks and pursue something else for the rest of the day.</li>
 <li>Almost all of my cards are cloze deletions. Cloze deletion cards are convenient to create and very general. For example, “bidirectional” terminology cards (i.e. it’s useful to be able to recall the word when cued by the definition and to be able to recall the definition when cued by the word) can be created quickly by creating one deletion around the term and one around its definition.</li>
-<li>I’ll <a href="https://www.supermemo.com/en/articles/20rules">echo</a> the advice to avoid sets (an unordered collection of items such that the memory cue for each item is inconstant) in favor of enumerations (an ordered collection of items such that the memory cue for each item is consant).</li>
+<li>I’ll <a href="https://www.supermemo.com/en/articles/20rules">echo</a> the advice to avoid sets (an unordered collection of items such that the memory cue for each item is inconstant) in favor of enumerations (an ordered collection of items such that the memory cue for each item is constant).</li>
 <li>On the other hand, be careful with the <a href="https://www.supermemo.com/en/articles/20rules">“minimum information principle”</a>. Creating cards with many small deletions can leave too much inappropriate context. For example, a card like, “The <a href="https://en.wikipedia.org/wiki/Taiping_Rebellion">Taiping rebellion</a> lasted from <em>1850</em> to <em>1864</em>”, with one cloze deletion for each year is troublesome. I’ve found that I’m quite likely to remember only the relationship between the numbers in these circumstances. When cued with “1850”, I’ll think “14 years later” and remember “1864”. When cued with “1864”, I’ll think “14 years earlier” and remember “1850”. But if I try to remember the actual dates outside of Anki, I’m left without an anchor. Making these deletions “correlated”—so that the years are both omitted simultaneously—seems to work better.</li>
-<li>Somewhat relatedly, it’s useful to minimize the number of “orphans”. An isolated fact or a collection of facts is not only less useful because it’s less accessible (i.e. not readily found from other pieces of knowledge and invoked in thought) but also harder to remember. Organizing cognitive <a href="https://en.wikipedia.org/wiki/Schema_(psychology)">schema</a> generally make learning and retention easier. To this end, I sometimes informally envision my collection of Anki cards as a <a href="https://en.wikipedia.org/wiki/Directed_graph">directed graph</a> and try to ensure that all cards reachable from as few roots as possible. This promotes a cohesive, coherent understanding of the material under review rather than a disjointed, disorienting one.</li>
+<li>Somewhat relatedly, it’s useful to minimize the number of “orphans”. An isolated fact or a collection of facts is not only less useful because it’s less accessible (i.e. not readily found from other pieces of knowledge and invoked in thought) but also harder to remember. Organizing cognitive <a href="https://en.wikipedia.org/wiki/Schema_(psychology)">schema</a> generally make learning and retention easier. To this end, I sometimes informally envision my collection of Anki cards as a <a href="https://en.wikipedia.org/wiki/Directed_graph">directed graph</a> and try to ensure that all cards are reachable from as few roots as possible. This promotes a cohesive, coherent understanding of the material under review rather than a disjointed, disorienting one.</li>
 </ul>
 <hr />
 <div id="refs" class="references">
@@ -1304,41 +1305,156 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
     <id>https://www.col-ex.org/posts/list-problems-ignorant-priors/</id>
     <published>2018-08-17T00:00:00Z</published>
     <updated>2018-08-17T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>The <a href="https://en.wikipedia.org/wiki/Principle_of_indifference">principle of indifference</a> (a.k.a. the principle of insufficient reason) suggests that when considering a set of possibilities and there’s no known reason for granting special credence to one possibility, we ought to assign all possibilities the same credence (which, on the <a href="https://plato.stanford.edu/entries/epistemology-bayesian/">Bayesian</a> point of view, is also a probability). For example, when someone asks what the result of a 6-sided die roll is, the principle of indifference recommends we assign a probability of 1/6 to each outcome. Slightly more interesting is that it /also/ recommends assigning a probability of 1/6 to each outcome even when we’re told the die is weighted as long as we’re not told how it’s weighted.</p>
+    <summary type="html"><![CDATA[<p>The <a href="https://en.wikipedia.org/wiki/Principle_of_indifference">principle of indifference</a> (a.k.a. the principle of insufficient reason) suggests that when considering a set of possibilities and there’s no known reason for granting special credence to one possibility, we ought to assign all possibilities the same credence (which, on the <a href="https://plato.stanford.edu/entries/epistemology-bayesian/">Bayesian</a> point of view, is also a probability). For example, when someone asks what the result of a 6-sided die roll is, the principle of indifference recommends we assign a probability of 1/6 to each outcome. Slightly more interesting is that it <em>also</em> recommends assigning a probability of 1/6 to each outcome even when we’re told the die is weighted as long as we’re not told how it’s weighted.</p>
 <p>There’s a definite intuitive plausibility and appeal to this rule. But it turns out there are a lot of difficulties when it comes to actually operationalizing it. Below, I list some of the problems that have been raised over the years. Some of these problems seem silly to me and will doubtless seem silly to you. Others strike me as important. I list them all here regardless and ignore any claimed solutions for the moment.</p>
 <h1 id="coarsening">Coarsening</h1>
 <p>“What is the origin country of this unknown traveler? France, Ireland or Great Britain?”</p>
 <p>Naive application of the principle of indifference (NAPI) suggests we assign probability 1/3 to each possibility.</p>
 <p>The question can be rephrased: “What is the origin country of this unknown traveler? France, or the British Isles?”.</p>
-<p>In this case, NAPI suggests we ought to assign a probability 1/2 to each possibility.</p>
+<p>In this case, <abbr title="Naive application of the principle of indifference">NAPI</abbr> suggests we ought to assign a probability of 1/2 to each possibility.</p>
 <p>So, depending on the framing, we assign probability 1/2 or 1/3 to the same outcome—the traveler is from France.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Outcome</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>France, Ireland, or Great Britain</td>
+<td>France</td>
+<td>1/3</td>
+</tr>
+<tr class="even">
+<td>France or British Isles</td>
+<td>France</td>
+<td>1/2</td>
+</tr>
+</tbody>
+</table>
 <h1 id="negation">Negation</h1>
 <p>“I’ve just pulled a colored ball from an urn containing an equal number of red, black and yellow balls. Which color is the ball? Red, black, or yellow?”</p>
-<p>NAPI suggests we assign probability 1/3 to each possibility.</p>
+<p><abbr title="Naive application of the principle of indifference">NAPI</abbr> suggests we assign probability 1/3 to each possibility.</p>
 <p>The question can be rephrased: “Which color is the ball? Red or not red?”.</p>
-<p>In this case, NAPI suggests we ought to assign a probability 1/2 to each possibility.</p>
+<p>In this case, <abbr title="Naive application of the principle of indifference">NAPI</abbr> suggests we ought to assign a probability 1/2 to each possibility.</p>
 <p>So, depending on the framing, we assign probability 1/2 or 1/3 to the same outcome—the ball is red.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Outcome</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Red, black or yellow</td>
+<td>Red</td>
+<td>1/3</td>
+</tr>
+<tr class="even">
+<td>Red or not red</td>
+<td>Red</td>
+<td>1/2</td>
+</tr>
+</tbody>
+</table>
 <h1 id="bertrand-paradox"><a href="https://en.wikipedia.org/wiki/Bertrand_paradox_(probability)">Bertrand paradox</a></h1>
 <p>“I have an equilateral triangle inscribed in a circle. I’ve also chosen a chord in the circle randomly. What is the probability that the chord is longer than a side of the triangle?”</p>
 <p>If we construct our random chords by choosing two random points on the circumference of the circle and construct a chord between them, we find that the probability of a long chord is 1/3.</p>
 <p>If we construct our random chords by choosing a random radius and then constructing a chord perpendicular to a random point on that radius, we find that the probability of a long chord is 1/2.</p>
 <p>If we construct our random chords by choosing a random point inside the circle and constructing a chord with that point as its midpoint, we find that the probability of a long chord is 1/4.</p>
 <p>So depending on our framing, we assign probability of 1/4, 1/3 or 1/2 to the same proposition.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Outcome</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Chord by two points on circumference</td>
+<td>Long chord</td>
+<td>1/3</td>
+</tr>
+<tr class="even">
+<td>Chord by random radius and point</td>
+<td>Long chord</td>
+<td>1/2</td>
+</tr>
+<tr class="odd">
+<td>Chord by random point as midpoint</td>
+<td>Long chord</td>
+<td>1/4</td>
+</tr>
+</tbody>
+</table>
 <p><!--more--></p>
-<h1 id="cube-factory">Cube factory</h1>
+<h1 id="cube">Cube</h1>
 <p>“I’m holding a perfect cube behind my back. It’s sides are between 0 cm and 2 cm. What is the probability that its sides are less than 1 cm?”</p>
 <p>If we straightforwardly apply the principle of indifference and assign a uniform probability distribution over all possible cube side lengths, the probability is 1/2.</p>
 <p>If we apply the principle of indifference and assign a uniform probability distribution over all possible cube surface areas, the probability is 1/4.</p>
 <p>If we apply the principle of indifference and assign a uniform probability distribution over all possible cube volumes, the probability is 1/8.</p>
 <p>So depending on our framing, we assign probability of 1/8, 1/4 or 1/2 to the same proposition.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Outcome</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Indifferent over side lengths</td>
+<td>Short sides</td>
+<td>1/2</td>
+</tr>
+<tr class="even">
+<td>Indifferent over surface areas</td>
+<td>Short sides</td>
+<td>1/4</td>
+</tr>
+<tr class="odd">
+<td>Indifferent over volumes</td>
+<td>Short sides</td>
+<td>1/8</td>
+</tr>
+</tbody>
+</table>
 <h1 id="water-and-wine">Water and wine</h1>
 <p>“I have a goblet of mixed water and wine. The ratio of wine to water is between 1/3 and 3. What is the probability that the ratio of wine to water is less than 2?”</p>
 <p>If we apply the principle of indifference over the possible ratios of wine to water, the probability is 5/8.</p>
 <p>If we apply the principle of indifference over the possible ratios of water to wine, the probability is 15/16.</p>
 <p>So depending on our framing, we assign probability of 5/8 and 15/16 to the same proposition.</p>
-<p><!-- # Impossible invariances --></p>
+<table>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Outcome</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Indifferent over wine:water</td>
+<td>Dilute mixture</td>
+<td>5/8</td>
+</tr>
+<tr class="even">
+<td>Indifferent over water:wine</td>
+<td>Dilute mixture</td>
+<td>15/16</td>
+</tr>
+</tbody>
+</table>
 <h1 id="inductive-disjunction-fallacy">Inductive disjunction fallacy</h1>
-<p>There is only one way for nothing to exist, but there are many possible ways for the universe to exist. By assigning equal probability to all these nothing and something possibilities, the principle of indifference explains why nothing is improbable and why the universe exists. <span class="citation" data-cites="van1996">(Van Inwagen and Lowe <a href="#ref-van1996">1996</a>)</span></p>
+<p>There is only one way for <span class="small-caps">Nothing</span> to exist, but there are many possible ways for something to exist. By assigning equal probability to all these <span class="small-caps">Nothing</span> and something possibilities, the principle of indifference explains why <span class="small-caps">Nothing</span> is improbable and why the existence of the universe is probable. <span class="citation" data-cites="van1996">(Van Inwagen and Lowe <a href="#ref-van1996">1996</a>)</span></p>
+<hr />
 <div id="refs" class="references">
 <div id="ref-van1996">
 <p>Van Inwagen, Peter, and EJ Lowe. 1996. “Why Is There Anything at All?” <em>Proceedings of the Aristotelian Society, Supplementary Volumes</em> 70. JSTOR: 95–120. <a href="https://philarchive.org/archive/VANWIT-15v1" class="uri uri">https://philarchive.org/archive/VANWIT-15v1</a>.</p>
