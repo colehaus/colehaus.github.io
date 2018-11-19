@@ -42,20 +42,20 @@
 <thead>
 <tr class="header">
 <th></th>
-<th>Individual preferences</th>
-<th>Social preferences</th>
+<th style="text-align: left;">Individual preferences</th>
+<th style="text-align: left;">Social preferences</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><span class="label-row">Unconditional</span></td>
-<td>“I want apples.”</td>
-<td>“I want more apples than you.”</td>
+<td style="text-align: left;">“I want apples.”</td>
+<td style="text-align: left;">“I want more apples than you.”</td>
 </tr>
 <tr class="even">
 <td><span class="label-row">Conditional</span></td>
-<td>“I want apples if it is autumn.”</td>
-<td>“I want apples if my friends want apples.”</td>
+<td style="text-align: left;">“I want apples if it is autumn.”</td>
+<td style="text-align: left;">“I want apples if my friends want apples.”</td>
 </tr>
 </tbody>
 </table>
@@ -76,20 +76,20 @@
 <thead>
 <tr class="header">
 <th></th>
-<th>Non-social beliefs</th>
-<th>Social beliefs</th>
+<th style="text-align: left;">Non-social beliefs</th>
+<th style="text-align: left;">Social beliefs</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><span class="label-row">Non-normative beliefs</span></td>
-<td>Factual beliefs</td>
-<td>Empirical expectations</td>
+<td style="text-align: left;">Factual beliefs</td>
+<td style="text-align: left;">Empirical expectations</td>
 </tr>
 <tr class="even">
 <td><span class="label-row">Normative beliefs</span></td>
-<td>Personal normative beliefs</td>
-<td>Normative expectations</td>
+<td style="text-align: left;">Personal normative beliefs</td>
+<td style="text-align: left;">Normative expectations</td>
 </tr>
 </tbody>
 </table>
@@ -139,24 +139,24 @@
 </colgroup>
 <thead>
 <tr class="header">
-<th>What one believes about</th>
-<th>Self</th>
-<th>Others</th>
-<th>Others 2nd order</th>
+<th style="text-align: left;">What one believes about</th>
+<th style="text-align: left;">Self</th>
+<th style="text-align: left;">Others</th>
+<th style="text-align: left;">Others 2nd order</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="label-row">Empirical</span></td>
-<td>What I am going to do</td>
-<td>What others do (empirical expectation)</td>
-<td>What others believe I/others do</td>
+<td style="text-align: left;"><span class="label-row">Empirical</span></td>
+<td style="text-align: left;">What I am going to do</td>
+<td style="text-align: left;">What others do (empirical expectation)</td>
+<td style="text-align: left;">What others believe I/others do</td>
 </tr>
 <tr class="even">
-<td><span class="label-row">Normative</span></td>
-<td>What I should do (personal normative belief)</td>
-<td>What others should do (personal normative belief)</td>
-<td>What others believe I/others should do (normative expectation)</td>
+<td style="text-align: left;"><span class="label-row">Normative</span></td>
+<td style="text-align: left;">What I should do (personal normative belief)</td>
+<td style="text-align: left;">What others should do (personal normative belief)</td>
+<td style="text-align: left;">What others believe I/others should do (normative expectation)</td>
 </tr>
 </tbody>
 </table>
@@ -346,34 +346,34 @@ Allcott and Mullainathan (2010) report that American households who got mailers 
 </colgroup>
 <thead>
 <tr class="header">
-<th>Voter</th>
-<th>Private value of <span class="math inline">\(\alpha\)</span></th>
-<th>Private value of <span class="math inline">\(\beta\)</span></th>
-<th>Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
-<th>Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
+<th style="text-align: left;">Voter</th>
+<th style="text-align: left;">Private value of <span class="math inline">\(\alpha\)</span></th>
+<th style="text-align: left;">Private value of <span class="math inline">\(\beta\)</span></th>
+<th style="text-align: left;">Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
+<th style="text-align: left;">Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>A</td>
-<td>-1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
 </tr>
 <tr class="even">
-<td>B</td>
-<td>-1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
 </tr>
 <tr class="odd">
-<td>C</td>
-<td>-1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0</td>
 </tr>
 </tbody>
 </table>
@@ -516,78 +516,78 @@ All the communities where the practice was successfully abandoned collectively d
 <table>
 <thead>
 <tr class="header">
-<th>Area</th>
-<th>Time period</th>
-<th>Prevalence</th>
-<th>Support</th>
+<th style="text-align: left;">Area</th>
+<th style="text-align: left;">Time period</th>
+<th style="text-align: left;">Prevalence</th>
+<th style="text-align: left;">Support</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Somalia</td>
-<td>2006</td>
-<td>97.9</td>
-<td>64.5</td>
+<td style="text-align: left;">Somalia</td>
+<td style="text-align: left;">2006</td>
+<td style="text-align: left;">97.9</td>
+<td style="text-align: left;">64.5</td>
 </tr>
 <tr class="even">
-<td>Guinea</td>
-<td>2005</td>
-<td>95.6</td>
-<td>69.2</td>
+<td style="text-align: left;">Guinea</td>
+<td style="text-align: left;">2005</td>
+<td style="text-align: left;">95.6</td>
+<td style="text-align: left;">69.2</td>
 </tr>
 <tr class="odd">
-<td>Djibouti</td>
-<td>2006</td>
-<td>93.1</td>
-<td>36.6</td>
+<td style="text-align: left;">Djibouti</td>
+<td style="text-align: left;">2006</td>
+<td style="text-align: left;">93.1</td>
+<td style="text-align: left;">36.6</td>
 </tr>
 <tr class="even">
-<td>Egypt</td>
-<td>2008</td>
-<td>91.1</td>
-<td>54</td>
+<td style="text-align: left;">Egypt</td>
+<td style="text-align: left;">2008</td>
+<td style="text-align: left;">91.1</td>
+<td style="text-align: left;">54</td>
 </tr>
 <tr class="odd">
-<td>Sudan</td>
-<td>2006</td>
-<td>89.3</td>
-<td>23.7</td>
+<td style="text-align: left;">Sudan</td>
+<td style="text-align: left;">2006</td>
+<td style="text-align: left;">89.3</td>
+<td style="text-align: left;">23.7</td>
 </tr>
 <tr class="even">
-<td>Mali</td>
-<td>2007</td>
-<td>85.2</td>
-<td>76</td>
+<td style="text-align: left;">Mali</td>
+<td style="text-align: left;">2007</td>
+<td style="text-align: left;">85.2</td>
+<td style="text-align: left;">76</td>
 </tr>
 <tr class="odd">
-<td>Ethiopia</td>
-<td>2005</td>
-<td>74.3</td>
-<td>31.4</td>
+<td style="text-align: left;">Ethiopia</td>
+<td style="text-align: left;">2005</td>
+<td style="text-align: left;">74.3</td>
+<td style="text-align: left;">31.4</td>
 </tr>
 <tr class="even">
-<td>Burkina Faso</td>
-<td>2006</td>
-<td>72.5</td>
-<td>11.1</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: left;">2006</td>
+<td style="text-align: left;">72.5</td>
+<td style="text-align: left;">11.1</td>
 </tr>
 <tr class="odd">
-<td>Mauritania</td>
-<td>2007</td>
-<td>72.2</td>
-<td>53.4</td>
+<td style="text-align: left;">Mauritania</td>
+<td style="text-align: left;">2007</td>
+<td style="text-align: left;">72.2</td>
+<td style="text-align: left;">53.4</td>
 </tr>
 <tr class="even">
-<td>Chad</td>
-<td>2004</td>
-<td>44.9</td>
-<td>49.4</td>
+<td style="text-align: left;">Chad</td>
+<td style="text-align: left;">2004</td>
+<td style="text-align: left;">44.9</td>
+<td style="text-align: left;">49.4</td>
 </tr>
 <tr class="odd">
-<td>Yemen</td>
-<td>1997</td>
-<td>22.6</td>
-<td>41</td>
+<td style="text-align: left;">Yemen</td>
+<td style="text-align: left;">1997</td>
+<td style="text-align: left;">22.6</td>
+<td style="text-align: left;">41</td>
 </tr>
 </tbody>
 </table>
@@ -771,26 +771,26 @@ there was a 33 percent increase in Mexican visits to family planning clinics to
 <table>
 <thead>
 <tr class="header">
-<th>Position</th>
-<th>Responses</th>
-<th>Percentage</th>
+<th style="text-align: left;">Position</th>
+<th style="text-align: left;">Responses</th>
+<th style="text-align: left;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Accept or lean toward: externalism</td>
-<td>398 / 931</td>
-<td>42.7%</td>
+<td style="text-align: left;">Accept or lean toward: externalism</td>
+<td style="text-align: left;">398 / 931</td>
+<td style="text-align: left;">42.7%</td>
 </tr>
 <tr class="even">
-<td>Other</td>
-<td>287 / 931</td>
-<td>30.8%</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: left;">287 / 931</td>
+<td style="text-align: left;">30.8%</td>
 </tr>
 <tr class="odd">
-<td>Accept or lean toward: internalism</td>
-<td>246 / 931</td>
-<td>26.4%</td>
+<td style="text-align: left;">Accept or lean toward: internalism</td>
+<td style="text-align: left;">246 / 931</td>
+<td style="text-align: left;">26.4%</td>
 </tr>
 </tbody>
 </table>
@@ -825,26 +825,26 @@ instances, of which we have had no experience, must resemble those, of which we 
 <table>
 <thead>
 <tr class="header">
-<th>Position</th>
-<th>Responses</th>
-<th>Percentage</th>
+<th style="text-align: left;">Position</th>
+<th style="text-align: left;">Responses</th>
+<th style="text-align: left;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Accept or lean toward: yes</td>
-<td>662 / 931</td>
-<td>71.1%</td>
+<td style="text-align: left;">Accept or lean toward: yes</td>
+<td style="text-align: left;">662 / 931</td>
+<td style="text-align: left;">71.1%</td>
 </tr>
 <tr class="even">
-<td>Accept or lean toward: no</td>
-<td>171 / 931</td>
-<td>18.4%</td>
+<td style="text-align: left;">Accept or lean toward: no</td>
+<td style="text-align: left;">171 / 931</td>
+<td style="text-align: left;">18.4%</td>
 </tr>
 <tr class="odd">
-<td>Other</td>
-<td>98 / 931</td>
-<td>10.5%</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: left;">98 / 931</td>
+<td style="text-align: left;">10.5%</td>
 </tr>
 </tbody>
 </table>
@@ -859,21 +859,21 @@ instances, of which we have had no experience, must resemble those, of which we 
 <table>
 <thead>
 <tr class="header">
-<th></th>
-<th><em>A priori</em></th>
-<th><em>A posteriori</em></th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><em>A priori</em></th>
+<th style="text-align: left;"><em>A posteriori</em></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Analytic</td>
-<td>Logical propositions; Mostly accepted</td>
-<td>Mostly rejected</td>
+<td style="text-align: left;"><span class="label-row">Analytic</span></td>
+<td style="text-align: left;">Logical propositions; Mostly accepted</td>
+<td style="text-align: left;">Mostly rejected</td>
 </tr>
 <tr class="even">
-<td>Synthetic</td>
-<td>Empiricists v. rationalists</td>
-<td>Empirical propositions; Mostly accepted</td>
+<td style="text-align: left;"><span class="label-row">Synthetic</span></td>
+<td style="text-align: left;">Empiricists v. rationalists</td>
+<td style="text-align: left;">Empirical propositions; Mostly accepted</td>
 </tr>
 </tbody>
 </table>
@@ -887,26 +887,26 @@ instances, of which we have had no experience, must resemble those, of which we 
 <table>
 <thead>
 <tr class="header">
-<th>Position</th>
-<th>Responses</th>
-<th>Percentage</th>
+<th style="text-align: left;">Position</th>
+<th style="text-align: left;">Responses</th>
+<th style="text-align: left;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Accept or lean toward: yes</td>
-<td>604 / 931</td>
-<td>64.9%</td>
+<td style="text-align: left;">Accept or lean toward: yes</td>
+<td style="text-align: left;">604 / 931</td>
+<td style="text-align: left;">64.9%</td>
 </tr>
 <tr class="even">
-<td>Accept or lean toward: no</td>
-<td>252 / 931</td>
-<td>27.1%</td>
+<td style="text-align: left;">Accept or lean toward: no</td>
+<td style="text-align: left;">252 / 931</td>
+<td style="text-align: left;">27.1%</td>
 </tr>
 <tr class="odd">
-<td>Other</td>
-<td>75 / 931</td>
-<td>8.1%</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: left;">75 / 931</td>
+<td style="text-align: left;">8.1%</td>
 </tr>
 </tbody>
 </table>
@@ -918,26 +918,26 @@ instances, of which we have had no experience, must resemble those, of which we 
 <table>
 <thead>
 <tr class="header">
-<th>Position</th>
-<th>Responses</th>
-<th>Percentage</th>
+<th style="text-align: left;">Position</th>
+<th style="text-align: left;">Responses</th>
+<th style="text-align: left;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Other</td>
-<td>346 / 931</td>
-<td>37.2%</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: left;">346 / 931</td>
+<td style="text-align: left;">37.2%</td>
 </tr>
 <tr class="even">
-<td>Accept or lean toward: empiricism</td>
-<td>326 / 931</td>
-<td>35.0%</td>
+<td style="text-align: left;">Accept or lean toward: empiricism</td>
+<td style="text-align: left;">326 / 931</td>
+<td style="text-align: left;">35.0%</td>
 </tr>
 <tr class="odd">
-<td>Accept or lean toward: rationalism</td>
-<td>259 / 931</td>
-<td>27.8%</td>
+<td style="text-align: left;">Accept or lean toward: rationalism</td>
+<td style="text-align: left;">259 / 931</td>
+<td style="text-align: left;">27.8%</td>
 </tr>
 </tbody>
 </table>
@@ -964,31 +964,31 @@ instances, of which we have had no experience, must resemble those, of which we 
 <table>
 <thead>
 <tr class="header">
-<th>Position</th>
-<th>Responses</th>
-<th>Percentage</th>
+<th style="text-align: left;">Position</th>
+<th style="text-align: left;">Responses</th>
+<th style="text-align: left;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Accept or lean toward: correspondence</td>
-<td>473 / 931</td>
-<td>50.8%</td>
+<td style="text-align: left;">Accept or lean toward: correspondence</td>
+<td style="text-align: left;">473 / 931</td>
+<td style="text-align: left;">50.8%</td>
 </tr>
 <tr class="even">
-<td>Accept or lean toward: deflationary</td>
-<td>231 / 931</td>
-<td>24.8%</td>
+<td style="text-align: left;">Accept or lean toward: deflationary</td>
+<td style="text-align: left;">231 / 931</td>
+<td style="text-align: left;">24.8%</td>
 </tr>
 <tr class="odd">
-<td>Other</td>
-<td>163 / 931</td>
-<td>17.5%</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: left;">163 / 931</td>
+<td style="text-align: left;">17.5%</td>
 </tr>
 <tr class="even">
-<td>Accept or lean toward: epistemic</td>
-<td>64 / 931</td>
-<td>6.9%</td>
+<td style="text-align: left;">Accept or lean toward: epistemic</td>
+<td style="text-align: left;">64 / 931</td>
+<td style="text-align: left;">6.9%</td>
 </tr>
 </tbody>
 </table>
@@ -1155,31 +1155,31 @@ The shortest-lived child of Prohibition actually survived to adulthood. This was
 <table>
 <thead>
 <tr class="header">
-<th></th>
-<th>Muse</th>
-<th>AAVE</th>
+<th style="text-align: left;">Tense</th>
+<th style="text-align: left;">Muse</th>
+<th style="text-align: left;">AAVE</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>present perfect</td>
-<td>I have walked</td>
-<td>I have walked</td>
+<td style="text-align: left;">present perfect</td>
+<td style="text-align: left;">I have walked</td>
+<td style="text-align: left;">I have walked</td>
 </tr>
 <tr class="even">
-<td>past perfect</td>
-<td>I had walked</td>
-<td>I had walked</td>
+<td style="text-align: left;">past perfect</td>
+<td style="text-align: left;">I had walked</td>
+<td style="text-align: left;">I had walked</td>
 </tr>
 <tr class="odd">
-<td>completive</td>
-<td>n/a</td>
-<td>I done walked</td>
+<td style="text-align: left;">completive</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">I done walked</td>
 </tr>
 <tr class="even">
-<td>remote time</td>
-<td>n/a</td>
-<td>I been walked</td>
+<td style="text-align: left;">remote time</td>
+<td style="text-align: left;">n/a</td>
+<td style="text-align: left;">I been walked</td>
 </tr>
 </tbody>
 </table>
@@ -1316,21 +1316,21 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 <table>
 <thead>
 <tr class="header">
-<th>Description</th>
-<th>Outcome</th>
-<th>Probability</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Outcome</th>
+<th style="text-align: left;">Probability</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>France, Ireland, or Great Britain</td>
-<td>France</td>
-<td>1/3</td>
+<td style="text-align: left;">France, Ireland, or Great Britain</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">1/3</td>
 </tr>
 <tr class="even">
-<td>France or British Isles</td>
-<td>France</td>
-<td>1/2</td>
+<td style="text-align: left;">France or British Isles</td>
+<td style="text-align: left;">France</td>
+<td style="text-align: left;">1/2</td>
 </tr>
 </tbody>
 </table>
@@ -1343,21 +1343,21 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 <table>
 <thead>
 <tr class="header">
-<th>Description</th>
-<th>Outcome</th>
-<th>Probability</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Outcome</th>
+<th style="text-align: left;">Probability</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Red, black or yellow</td>
-<td>Red</td>
-<td>1/3</td>
+<td style="text-align: left;">Red, black or yellow</td>
+<td style="text-align: left;">Red</td>
+<td style="text-align: left;">1/3</td>
 </tr>
 <tr class="even">
-<td>Red or not red</td>
-<td>Red</td>
-<td>1/2</td>
+<td style="text-align: left;">Red or not red</td>
+<td style="text-align: left;">Red</td>
+<td style="text-align: left;">1/2</td>
 </tr>
 </tbody>
 </table>
@@ -1370,26 +1370,26 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 <table>
 <thead>
 <tr class="header">
-<th>Description</th>
-<th>Outcome</th>
-<th>Probability</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Outcome</th>
+<th style="text-align: left;">Probability</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Chord by two points on circumference</td>
-<td>Long chord</td>
-<td>1/3</td>
+<td style="text-align: left;">Chord by two points on circumference</td>
+<td style="text-align: left;">Long chord</td>
+<td style="text-align: left;">1/3</td>
 </tr>
 <tr class="even">
-<td>Chord by random radius and point</td>
-<td>Long chord</td>
-<td>1/2</td>
+<td style="text-align: left;">Chord by random radius and point</td>
+<td style="text-align: left;">Long chord</td>
+<td style="text-align: left;">1/2</td>
 </tr>
 <tr class="odd">
-<td>Chord by random point as midpoint</td>
-<td>Long chord</td>
-<td>1/4</td>
+<td style="text-align: left;">Chord by random point as midpoint</td>
+<td style="text-align: left;">Long chord</td>
+<td style="text-align: left;">1/4</td>
 </tr>
 </tbody>
 </table>
@@ -1403,26 +1403,26 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 <table>
 <thead>
 <tr class="header">
-<th>Description</th>
-<th>Outcome</th>
-<th>Probability</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Outcome</th>
+<th style="text-align: left;">Probability</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Indifferent over side lengths</td>
-<td>Short sides</td>
-<td>1/2</td>
+<td style="text-align: left;">Indifferent over side lengths</td>
+<td style="text-align: left;">Short sides</td>
+<td style="text-align: left;">1/2</td>
 </tr>
 <tr class="even">
-<td>Indifferent over surface areas</td>
-<td>Short sides</td>
-<td>1/4</td>
+<td style="text-align: left;">Indifferent over surface areas</td>
+<td style="text-align: left;">Short sides</td>
+<td style="text-align: left;">1/4</td>
 </tr>
 <tr class="odd">
-<td>Indifferent over volumes</td>
-<td>Short sides</td>
-<td>1/8</td>
+<td style="text-align: left;">Indifferent over volumes</td>
+<td style="text-align: left;">Short sides</td>
+<td style="text-align: left;">1/8</td>
 </tr>
 </tbody>
 </table>
@@ -1434,21 +1434,21 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 <table>
 <thead>
 <tr class="header">
-<th>Description</th>
-<th>Outcome</th>
-<th>Probability</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Outcome</th>
+<th style="text-align: left;">Probability</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Indifferent over wine:water</td>
-<td>Dilute mixture</td>
-<td>5/8</td>
+<td style="text-align: left;">Indifferent over wine:water</td>
+<td style="text-align: left;">Dilute mixture</td>
+<td style="text-align: left;">5/8</td>
 </tr>
 <tr class="even">
-<td>Indifferent over water:wine</td>
-<td>Dilute mixture</td>
-<td>15/16</td>
+<td style="text-align: left;">Indifferent over water:wine</td>
+<td style="text-align: left;">Dilute mixture</td>
+<td style="text-align: left;">15/16</td>
 </tr>
 </tbody>
 </table>
@@ -2817,21 +2817,21 @@ The WHO estimates that 2 to 3 million deaths are prevented every year through im
 <table>
 <thead>
 <tr class="header">
-<th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
-<th><span class="math inline">\(\mathtt{Invest}\)</span></th>
-<th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathtt{Invest}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathtt{Shirk}\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(\text{Tax}\)</span></td>
-<td><span class="math inline">\(k \backslash \mathtt{(1 - k) - c}\)</span></td>
-<td><span class="math inline">\(k \backslash \mathtt{1 - k}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{Tax}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(k \backslash \mathtt{(1 - k) - c}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(k \backslash \mathtt{1 - k}\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\text{Loot}\)</span></td>
-<td><span class="math inline">\(l \backslash \mathtt{(1 - l) - c}\)</span></td>
-<td><span class="math inline">\(l \backslash \mathtt{1 - l}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{Loot}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(l \backslash \mathtt{(1 - l) - c}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(l \backslash \mathtt{1 - l}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -2860,21 +2860,21 @@ The WHO estimates that 2 to 3 million deaths are prevented every year through im
 </colgroup>
 <thead>
 <tr class="header">
-<th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
-<th><span class="math inline">\(\mathtt{Invest}\)</span></th>
-<th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathtt{Invest}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathtt{Shirk}\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(\text{Tax}\)</span></td>
-<td><span class="math inline">\(p \cdot k \backslash \mathtt{p \cdot (1 - k) - c}\)</span></td>
-<td><span class="math inline">\(p \cdot k \backslash \mathtt{p \cdot (1 - k)}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{Tax}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p \cdot k \backslash \mathtt{p \cdot (1 - k) - c}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p \cdot k \backslash \mathtt{p \cdot (1 - k)}\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\text{Loot}\)</span></td>
-<td><span class="math inline">\(p \cdot l \backslash \mathtt{p \cdot (1 - l) - c}\)</span></td>
-<td><span class="math inline">\(p \cdot l \backslash \mathtt{p \cdot (1 - l)}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{Loot}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p \cdot l \backslash \mathtt{p \cdot (1 - l) - c}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p \cdot l \backslash \mathtt{p \cdot (1 - l)}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -2928,24 +2928,24 @@ r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 </colgroup>
 <thead>
 <tr class="header">
-<th><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
-<th><span class="math inline">\(\mathtt{Invest}\)</span></th>
-<th><span class="math inline">\(\mathtt{Shirk}\)</span></th>
-<th><span class="math inline">\(\mathtt{Tit-for-tat}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\text{Autocrat} \backslash \mathtt{Producers}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathtt{Invest}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathtt{Shirk}\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\mathtt{Tit-for-tat}\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(\text{Tax}\)</span></td>
-<td><span class="math inline">\(16.66 \backslash 50.66\)</span></td>
-<td><span class="math inline">\(4 \backslash 2.32\)</span></td>
-<td><span class="math inline">\(16.66 \backslash 50.66\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{Tax}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(16.66 \backslash 50.66\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(4 \backslash 2.32\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(16.66 \backslash 50.66\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(\text{Loot}\)</span></td>
-<td><span class="math inline">\(66.66 \backslash 0.66\)</span></td>
-<td><span class="math inline">\(16 \backslash 0.58\)</span></td>
-<td><span class="math inline">\(16.61 \backslash 3.352\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\text{Loot}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(66.66 \backslash 0.66\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(16 \backslash 0.58\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(16.61 \backslash 3.352\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -4225,10 +4225,10 @@ The annual quota on new H-1B issuances fell from 195,000 to 65,000 for employees
 <th>
 <p>Scenario</p>
 </th>
-<th>
+<th style="text-align: left;">
 <p>Person A</p>
 </th>
-<th>
+<th style="text-align: left;">
 <p>Person B</p>
 </th>
 </tr>
@@ -4441,21 +4441,21 @@ The annual quota on new H-1B issuances fell from 195,000 to 65,000 for employees
 <table>
 <thead>
 <tr class="header">
-<th>Scenario</th>
-<th>Diabetic</th>
-<th>Thief</th>
+<th style="text-align: left;">Scenario</th>
+<th style="text-align: left;">Diabetic</th>
+<th style="text-align: left;">Thief</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>Consumes insulin</td>
-<td>Does nothing</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Consumes insulin</td>
+<td style="text-align: left;">Does nothing</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>Foot amputation</td>
-<td>Steals and sells insulin</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Foot amputation</td>
+<td style="text-align: left;">Steals and sells insulin</td>
 </tr>
 </tbody>
 </table>
@@ -4468,21 +4468,21 @@ The annual quota on new H-1B issuances fell from 195,000 to 65,000 for employees
 <table>
 <thead>
 <tr class="header">
-<th>Scenario</th>
-<th>Hitler</th>
-<th>World</th>
+<th style="text-align: left;">Scenario</th>
+<th style="text-align: left;">Hitler</th>
+<th style="text-align: left;">World</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>Assassinated</td>
-<td>Safe</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Assassinated</td>
+<td style="text-align: left;">Safe</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>Safe</td>
-<td>Holocaust</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Safe</td>
+<td style="text-align: left;">Holocaust</td>
 </tr>
 </tbody>
 </table>
