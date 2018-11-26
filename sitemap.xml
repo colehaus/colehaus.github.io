@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/anthropological-clickbait/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/yaas-social-norms/index.html</loc>
         <changefreq>weekly</changefreq>
         <lastmod>2018-11-15</lastmod>
@@ -491,6 +498,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/anthropology/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/autocracy/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -926,6 +940,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/13/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/14/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
