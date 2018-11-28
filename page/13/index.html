@@ -100,19 +100,19 @@ Classifying different types of preferences
 </colgroup>
 <thead>
 <tr class="header">
-<th></th>
+<th style="text-align: left;"></th>
 <th style="text-align: left;">Individual preferences</th>
 <th style="text-align: left;">Social preferences</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="label-row">Unconditional</span></td>
+<td style="text-align: left;"><span class="label-row">Unconditional</span></td>
 <td style="text-align: left;">“I want apples.”</td>
 <td style="text-align: left;">“I want more apples than you.”</td>
 </tr>
 <tr class="even">
-<td><span class="label-row">Conditional</span></td>
+<td style="text-align: left;"><span class="label-row">Conditional</span></td>
 <td style="text-align: left;">“I want apples if it is autumn.”</td>
 <td style="text-align: left;">“I want apples if my friends want apples.”</td>
 </tr>
@@ -163,6 +163,9 @@ Classifying different types of preferences
 <h4 id="numerical">Numerical</h4>
 <p>For generality, we’ll call voting for increased library funding option <span class="math inline">\(\alpha\)</span> and voting against (the status quo) option <span class="math inline">\(\beta\)</span>.</p>
 <figure>
+<figcaption>
+Individual voters private values for options <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> and <br> their belief about others’ private values for these options
+</figcaption>
 <table>
 <colgroup>
 <col style="width: 4%" />
@@ -174,38 +177,36 @@ Classifying different types of preferences
 <thead>
 <tr class="header">
 <th style="text-align: left;">Voter</th>
-<th style="text-align: left;">Private value of <span class="math inline">\(\alpha\)</span></th>
-<th style="text-align: left;">Private value of <span class="math inline">\(\beta\)</span></th>
-<th style="text-align: left;">Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
-<th style="text-align: left;">Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">Private value of <span class="math inline">\(\alpha\)</span></th>
+<th style="text-align: right;">Private value of <span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
+<th style="text-align: right;">Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">A</td>
-<td style="text-align: left;">-1</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">B</td>
-<td style="text-align: left;">-1</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">C</td>
-<td style="text-align: left;">-1</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
-<figcaption>
-Individual voters private values for options <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> and their belief about others’ private values for these options
 </figure>
 <p>The table outlines a scenario in which each of three voters (it’s a small polity) prefers option <span class="math inline">\(\beta\)</span>. Unfortunately, they’ve each come to the inaccurate belief that each other voter prefers option <span class="math inline">\(\alpha\)</span>. That is voter A slightly prefers <span class="math inline">\(\beta\)</span> but believes voter B and voter C each slightly prefer <span class="math inline">\(\alpha\)</span>.</p>
 <p>If our voters are good utilitarians in a <a href="https://en.wikipedia.org/wiki/First-past-the-post_voting">first-past-the-post</a> system, they’ll all vote for <span class="math inline">\(\alpha\)</span> (because <span class="math inline">\(1 + 1 - 1 &gt; 0 + 0 + 0\)</span>) and it will win. The resulting <a href="https://en.wikipedia.org/wiki/Social_welfare_function">social welfare</a> will be <span class="math inline">\(-3 = 3 \cdot -1\)</span>. If our voters had voted in a purely egocentric manner—ignoring the preferences of others, they would each pick <span class="math inline">\(\beta\)</span> and the social welfare would have been <span class="math inline">\(0 = 3 \cdot 0\)</span>.</p>

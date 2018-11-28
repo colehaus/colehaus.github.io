@@ -177,19 +177,19 @@ A common kind of <a href="https://en.wikipedia.org/wiki/Trial_by_ordeal">ordeal<
 </colgroup>
 <thead>
 <tr class="header">
-<th></th>
+<th style="text-align: left;"></th>
 <th style="text-align: left;">Individual preferences</th>
 <th style="text-align: left;">Social preferences</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="label-row">Unconditional</span></td>
+<td style="text-align: left;"><span class="label-row">Unconditional</span></td>
 <td style="text-align: left;">“I want apples.”</td>
 <td style="text-align: left;">“I want more apples than you.”</td>
 </tr>
 <tr class="even">
-<td><span class="label-row">Conditional</span></td>
+<td style="text-align: left;"><span class="label-row">Conditional</span></td>
 <td style="text-align: left;">“I want apples if it is autumn.”</td>
 <td style="text-align: left;">“I want apples if my friends want apples.”</td>
 </tr>
@@ -211,19 +211,19 @@ A common kind of <a href="https://en.wikipedia.org/wiki/Trial_by_ordeal">ordeal<
 <table>
 <thead>
 <tr class="header">
-<th></th>
+<th style="text-align: left;"></th>
 <th style="text-align: left;">Non-social beliefs</th>
 <th style="text-align: left;">Social beliefs</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="label-row">Non-normative beliefs</span></td>
+<td style="text-align: left;"><span class="label-row">Non-normative beliefs</span></td>
 <td style="text-align: left;">Factual beliefs</td>
 <td style="text-align: left;">Empirical expectations</td>
 </tr>
 <tr class="even">
-<td><span class="label-row">Normative beliefs</span></td>
+<td style="text-align: left;"><span class="label-row">Normative beliefs</span></td>
 <td style="text-align: left;">Personal normative beliefs</td>
 <td style="text-align: left;">Normative expectations</td>
 </tr>
@@ -262,7 +262,7 @@ A common kind of <a href="https://en.wikipedia.org/wiki/Trial_by_ordeal">ordeal<
 <h2 id="social-expectations">Social expectations</h2>
 <p>The next step is to establish whether there are normative social expectations behind the collective pattern of behavior. To this end, a social engineer must measure the normative beliefs of the individuals in the relevant community.</p>
 <p>Questionnaires are a fairly straightforward way to do this. Crucially, the survey should ask about each of personal normative beliefs (“Do you personally think female genital cutting is morally obligatory, permissible or forbidden?”), empirical social expectations (“How prevalent do you think female genital cutting is in your community?”), and normative social expectations (“What fraction of your community do you think believes that female genital cutting is morally obligatory? Permissible? Forbidden?”). We can actually go even further as outlined in the following table:</p>
-<figure>
+<figure class="big-fig">
 <figcaption>
 <p>Summary of personal and social beliefs a social engineer may want to assess</p>
 </figcaption>
@@ -472,6 +472,10 @@ Allcott and Mullainathan (2010) report that American households who got mailers 
 <h2 id="numerical">Numerical</h2>
 <p>For generality, we’ll call voting for increased library funding option <span class="math inline">\(\alpha\)</span> and voting against (the status quo) option <span class="math inline">\(\beta\)</span>.</p>
 <figure>
+<figcaption>
+<p>Individual voters private values for options <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> and<br />
+their belief about others’ private values for these options</p>
+</figcaption>
 <table style="width:97%;">
 <colgroup>
 <col style="width: 4%" />
@@ -483,38 +487,36 @@ Allcott and Mullainathan (2010) report that American households who got mailers 
 <thead>
 <tr class="header">
 <th style="text-align: left;">Voter</th>
-<th style="text-align: left;">Private value of <span class="math inline">\(\alpha\)</span></th>
-<th style="text-align: left;">Private value of <span class="math inline">\(\beta\)</span></th>
-<th style="text-align: left;">Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
-<th style="text-align: left;">Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">Private value of <span class="math inline">\(\alpha\)</span></th>
+<th style="text-align: right;">Private value of <span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
+<th style="text-align: right;">Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">A</td>
-<td style="text-align: left;">-1</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">B</td>
-<td style="text-align: left;">-1</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">C</td>
-<td style="text-align: left;">-1</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">0</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
-<figcaption>
-<p>Individual voters private values for options <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> and their belief about others’ private values for these options</p>
 </figure>
 <p>The table outlines a scenario in which each of three voters (it’s a small polity) prefers option <span class="math inline">\(\beta\)</span>. Unfortunately, they’ve each come to the inaccurate belief that each other voter prefers option <span class="math inline">\(\alpha\)</span>. That is voter A slightly prefers <span class="math inline">\(\beta\)</span> but believes voter B and voter C each slightly prefer <span class="math inline">\(\alpha\)</span>.</p>
 <p>If our voters are good utilitarians in a <a href="https://en.wikipedia.org/wiki/First-past-the-post_voting">first-past-the-post</a> system, they’ll all vote for <span class="math inline">\(\alpha\)</span> (because <span class="math inline">\(1 + 1 - 1 &gt; 0 + 0 + 0\)</span>) and it will win. The resulting <a href="https://en.wikipedia.org/wiki/Social_welfare_function">social welfare</a> will be <span class="math inline">\(-3 = 3 \cdot -1\)</span>. If our voters had voted in a purely egocentric manner—ignoring the preferences of others, they would each pick <span class="math inline">\(\beta\)</span> and the social welfare would have been <span class="math inline">\(0 = 3 \cdot 0\)</span>.</p>
@@ -647,83 +649,84 @@ All the communities where the practice was successfully abandoned collectively d
 <p><!--more--></p>
 <figure>
 <figcaption>
-<p>Female genital cutting prevalence vs support of the practice among women 15–49</p>
+<p>Female genital cutting prevalence vs<br />
+support of the practice among women <span style="font-size: smaller;">15–49</span></p>
 </figcaption>
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Area</th>
 <th style="text-align: left;">Time period</th>
-<th style="text-align: left;">Prevalence</th>
-<th style="text-align: left;">Support</th>
+<th style="text-align: right;">Prevalence</th>
+<th style="text-align: right;">Support</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Somalia</td>
 <td style="text-align: left;">2006</td>
-<td style="text-align: left;">97.9</td>
-<td style="text-align: left;">64.5</td>
+<td style="text-align: right;">97.9</td>
+<td style="text-align: right;">64.5</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Guinea</td>
 <td style="text-align: left;">2005</td>
-<td style="text-align: left;">95.6</td>
-<td style="text-align: left;">69.2</td>
+<td style="text-align: right;">95.6</td>
+<td style="text-align: right;">69.2</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Djibouti</td>
 <td style="text-align: left;">2006</td>
-<td style="text-align: left;">93.1</td>
-<td style="text-align: left;">36.6</td>
+<td style="text-align: right;">93.1</td>
+<td style="text-align: right;">36.6</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Egypt</td>
 <td style="text-align: left;">2008</td>
-<td style="text-align: left;">91.1</td>
-<td style="text-align: left;">54</td>
+<td style="text-align: right;">91.1</td>
+<td style="text-align: right;">54</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sudan</td>
 <td style="text-align: left;">2006</td>
-<td style="text-align: left;">89.3</td>
-<td style="text-align: left;">23.7</td>
+<td style="text-align: right;">89.3</td>
+<td style="text-align: right;">23.7</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mali</td>
 <td style="text-align: left;">2007</td>
-<td style="text-align: left;">85.2</td>
-<td style="text-align: left;">76</td>
+<td style="text-align: right;">85.2</td>
+<td style="text-align: right;">76</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Ethiopia</td>
 <td style="text-align: left;">2005</td>
-<td style="text-align: left;">74.3</td>
-<td style="text-align: left;">31.4</td>
+<td style="text-align: right;">74.3</td>
+<td style="text-align: right;">31.4</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Burkina Faso</td>
 <td style="text-align: left;">2006</td>
-<td style="text-align: left;">72.5</td>
-<td style="text-align: left;">11.1</td>
+<td style="text-align: right;">72.5</td>
+<td style="text-align: right;">11.1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Mauritania</td>
 <td style="text-align: left;">2007</td>
-<td style="text-align: left;">72.2</td>
-<td style="text-align: left;">53.4</td>
+<td style="text-align: right;">72.2</td>
+<td style="text-align: right;">53.4</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Chad</td>
 <td style="text-align: left;">2004</td>
-<td style="text-align: left;">44.9</td>
-<td style="text-align: left;">49.4</td>
+<td style="text-align: right;">44.9</td>
+<td style="text-align: right;">49.4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Yemen</td>
 <td style="text-align: left;">1997</td>
-<td style="text-align: left;">22.6</td>
-<td style="text-align: left;">41</td>
+<td style="text-align: right;">22.6</td>
+<td style="text-align: right;">41</td>
 </tr>
 </tbody>
 </table>
@@ -908,25 +911,25 @@ there was a 33 percent increase in Mexican visits to family planning clinics to
 <thead>
 <tr class="header">
 <th style="text-align: left;">Position</th>
-<th style="text-align: left;">Responses</th>
-<th style="text-align: left;">Percentage</th>
+<th style="text-align: right;">Responses</th>
+<th style="text-align: right;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Accept or lean toward: externalism</td>
-<td style="text-align: left;">398 / 931</td>
-<td style="text-align: left;">42.7%</td>
+<td style="text-align: right;">398 / 931</td>
+<td style="text-align: right;">42.7%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Other</td>
-<td style="text-align: left;">287 / 931</td>
-<td style="text-align: left;">30.8%</td>
+<td style="text-align: right;">287 / 931</td>
+<td style="text-align: right;">30.8%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Accept or lean toward: internalism</td>
-<td style="text-align: left;">246 / 931</td>
-<td style="text-align: left;">26.4%</td>
+<td style="text-align: right;">246 / 931</td>
+<td style="text-align: right;">26.4%</td>
 </tr>
 </tbody>
 </table>
@@ -962,25 +965,25 @@ instances, of which we have had no experience, must resemble those, of which we 
 <thead>
 <tr class="header">
 <th style="text-align: left;">Position</th>
-<th style="text-align: left;">Responses</th>
-<th style="text-align: left;">Percentage</th>
+<th style="text-align: right;">Responses</th>
+<th style="text-align: right;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Accept or lean toward: yes</td>
-<td style="text-align: left;">662 / 931</td>
-<td style="text-align: left;">71.1%</td>
+<td style="text-align: right;">662 / 931</td>
+<td style="text-align: right;">71.1%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Accept or lean toward: no</td>
-<td style="text-align: left;">171 / 931</td>
-<td style="text-align: left;">18.4%</td>
+<td style="text-align: right;">171 / 931</td>
+<td style="text-align: right;">18.4%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Other</td>
-<td style="text-align: left;">98 / 931</td>
-<td style="text-align: left;">10.5%</td>
+<td style="text-align: right;">98 / 931</td>
+<td style="text-align: right;">10.5%</td>
 </tr>
 </tbody>
 </table>
@@ -1024,25 +1027,25 @@ instances, of which we have had no experience, must resemble those, of which we 
 <thead>
 <tr class="header">
 <th style="text-align: left;">Position</th>
-<th style="text-align: left;">Responses</th>
-<th style="text-align: left;">Percentage</th>
+<th style="text-align: right;">Responses</th>
+<th style="text-align: right;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Accept or lean toward: yes</td>
-<td style="text-align: left;">604 / 931</td>
-<td style="text-align: left;">64.9%</td>
+<td style="text-align: right;">604 / 931</td>
+<td style="text-align: right;">64.9%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Accept or lean toward: no</td>
-<td style="text-align: left;">252 / 931</td>
-<td style="text-align: left;">27.1%</td>
+<td style="text-align: right;">252 / 931</td>
+<td style="text-align: right;">27.1%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Other</td>
-<td style="text-align: left;">75 / 931</td>
-<td style="text-align: left;">8.1%</td>
+<td style="text-align: right;">75 / 931</td>
+<td style="text-align: right;">8.1%</td>
 </tr>
 </tbody>
 </table>
@@ -1055,25 +1058,25 @@ instances, of which we have had no experience, must resemble those, of which we 
 <thead>
 <tr class="header">
 <th style="text-align: left;">Position</th>
-<th style="text-align: left;">Responses</th>
-<th style="text-align: left;">Percentage</th>
+<th style="text-align: right;">Responses</th>
+<th style="text-align: right;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Other</td>
-<td style="text-align: left;">346 / 931</td>
-<td style="text-align: left;">37.2%</td>
+<td style="text-align: right;">346 / 931</td>
+<td style="text-align: right;">37.2%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Accept or lean toward: empiricism</td>
-<td style="text-align: left;">326 / 931</td>
-<td style="text-align: left;">35.0%</td>
+<td style="text-align: right;">326 / 931</td>
+<td style="text-align: right;">35.0%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Accept or lean toward: rationalism</td>
-<td style="text-align: left;">259 / 931</td>
-<td style="text-align: left;">27.8%</td>
+<td style="text-align: right;">259 / 931</td>
+<td style="text-align: right;">27.8%</td>
 </tr>
 </tbody>
 </table>
@@ -1101,30 +1104,30 @@ instances, of which we have had no experience, must resemble those, of which we 
 <thead>
 <tr class="header">
 <th style="text-align: left;">Position</th>
-<th style="text-align: left;">Responses</th>
-<th style="text-align: left;">Percentage</th>
+<th style="text-align: right;">Responses</th>
+<th style="text-align: right;">Percentage</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Accept or lean toward: correspondence</td>
-<td style="text-align: left;">473 / 931</td>
-<td style="text-align: left;">50.8%</td>
+<td style="text-align: right;">473 / 931</td>
+<td style="text-align: right;">50.8%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Accept or lean toward: deflationary</td>
-<td style="text-align: left;">231 / 931</td>
-<td style="text-align: left;">24.8%</td>
+<td style="text-align: right;">231 / 931</td>
+<td style="text-align: right;">24.8%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Other</td>
-<td style="text-align: left;">163 / 931</td>
-<td style="text-align: left;">17.5%</td>
+<td style="text-align: right;">163 / 931</td>
+<td style="text-align: right;">17.5%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Accept or lean toward: epistemic</td>
-<td style="text-align: left;">64 / 931</td>
-<td style="text-align: left;">6.9%</td>
+<td style="text-align: right;">64 / 931</td>
+<td style="text-align: right;">6.9%</td>
 </tr>
 </tbody>
 </table>
@@ -3088,6 +3091,7 @@ r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 <p>Happily, this supports our earlier claim that, with the right choice of parameters and strategy space, cooperation is an equilibrium.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>Contra <span class="citation" data-cites="acemoglu2005">(Acemoglu, Johnson, and Robinson <a href="#ref-acemoglu2005">2005</a>)</span>, autocrats can credibly cooperate in support of economic institutions which promote growth. The possibility for cooperation arises when we move from a single-shot game to a repeated game (as is often the case). This is bad news because it means we have one fewer reason to suppose that economics supports inclusivity in the long run.</p>
+<hr />
 <div id="refs" class="references">
 <div id="ref-acemoglu2005">
 <p>Acemoglu, Daron, Simon Johnson, and James A Robinson. 2005. “Institutions as a Fundamental Cause of Long-Run Growth.” <em>Handbook of Economic Growth</em> 1. Elsevier: 385–472. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf" class="uri uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf</a>.</p>
