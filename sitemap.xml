@@ -50,6 +50,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/assorted-links-ix/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/curse-altruistic-voter/index.html</loc>
         <changefreq>weekly</changefreq>
         
