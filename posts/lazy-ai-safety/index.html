@@ -94,7 +94,7 @@
 <p>If induction is out, what about deduction? Again, there are <a href="https://plato.stanford.edu/entries/goedel-incompleteness/">limits</a>.</p>
 <p>Obviously, this section is brief and handwavey. We’ve sidestepped big, intricate arguments about the nature of ethics and moral epistemology. But I hope it primes your intuition enough that you’re willing to provisionally accept that uncertainty is a major feature of ethics now and in the future.</p>
 <h3 id="moral-uncertainty">Moral uncertainty</h3>
-<p>Once we accept this uncertainty, we must choose how to respond. If we don’t reflect on the idea of moral uncertainty, our approach is likely to approximate <a href="http://johanegustafsson.net/papers/in-defence-of-my-favourite-theory.pdf">“my favorite theory”</a>. In this approach, we weigh the options, find whichever ethical theory fares best, and discard the rest. That is, if, after analysis, we think the categorical imperative is 20% likely to be true and utilitarianism is 80% likely to be true, we act as utilitarians.</p>
+<p>Once we accept this uncertainty, we must choose how to respond. If we don’t reflect on the idea of moral uncertainty, our approach is likely to approximate “my favorite theory” <span class="citation" data-cites="gustafsson2014">(Gustafsson and Torpman <a href="#ref-gustafsson2014">2014</a>)</span>. In this approach, we weigh the options, find whichever ethical theory fares best, and discard the rest. That is, if, after analysis, we think the categorical imperative is 20% likely to be true and utilitarianism is 80% likely to be true, we act as utilitarians.</p>
 <p>A compelling alternative is to <a href="http://www.overcomingbias.com/2009/01/moral-uncertainty-towards-a-solution.html">retain our uncertainty and evaluate actions against a weighted parliament of ethical theories</a>. In our 80-20 scenario above, any action is evaluated against both theories. If utilitarianism marginally prefers action B to A while the categorical imperative heavily favors A over B, we do A (even though we are “mostly” utilitarian!).</p>
 <h4 id="moral-uncertainty-in-machines">Moral uncertainty in machines</h4>
 <p>The impression I have (admittedly, mostly from afar) is that AI alignment has mostly (implicitly) revolved around the “my favorite theory” approach. That is, people have been approaching the issue as deciding which single ethical theory they will encode in an agent. Until they’re certain they’ve decided upon the “one true theory” of ethics, all powerful agents are the stuff of nightmares. I think the parliamentary model improves on this situation.</p>
@@ -108,9 +108,18 @@
 <p>In this case, the value in our value of information calculation is determined by our parliament of moral theories. This is circular (and thus a bit confusing), but, I think, can be <span class="noted">made to work</span><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. So we’d expect our agent to perform ethical investigation <span class="noted">only insofar as the information produced by that investigation might affect interventions under consideration</span><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> and where the value of that information is greater than any currently available intervention.</p>
 <h3 id="claimed-benefits">Claimed benefits</h3>
 <h4 id="ai-arms-race">AI arms race</h4>
-<p>In an <a href="https://www.fhi.ox.ac.uk/wp-content/uploads/Racing-to-the-precipice-a-model-of-artificial-intelligence-development.pdf">AI arms race</a>, the naive approach to alignment—first, solve ethics; then, develop AGI—puts the most scrupulous developers at a disadvantage. Because the costs of scrupulosity are so high, we expect most developers to end up in the ‘unscrupulous’ category. The lazy approach may offer a significant advantage here. Because the approach is conceptually straightforward, implementation could be relatively manageable. As such, asking all agent creators to include it is a more plausible request than demanding the cessation of all agent development. Furthermore, when an agent finds itself doing trivial actions of no moral import, it can remain fairly disinterested in ethics. Broad approximations of ethical truth suffice. This means agent creators working in certain fields can be fairly confident that the run time costs—in terms of agent performance overhead, constraints on agent actions, agent predictability, etc.—are minimal. Again, this makes ethical consideration cheaper and more likely.</p>
+<p>In an AI arms race, the naive approach to alignment—first, solve ethics; then, develop AGI—puts the most scrupulous developers at a disadvantage <span class="citation" data-cites="armstrong2016">(Armstrong, Bostrom, and Shulman <a href="#ref-armstrong2016">2016</a>)</span>. Because the costs of scrupulosity are so high, we expect most developers to end up in the ‘unscrupulous’ category. The lazy approach may offer a significant advantage here. Because the approach is conceptually straightforward, implementation could be relatively manageable. As such, asking all agent creators to include it is a more plausible request than demanding the cessation of all agent development. Furthermore, when an agent finds itself doing trivial actions of no moral import, it can remain fairly disinterested in ethics. Broad approximations of ethical truth suffice. This means agent creators working in certain fields can be fairly confident that the run time costs—in terms of agent performance overhead, constraints on agent actions, agent predictability, etc.—are minimal. Again, this makes ethical consideration cheaper and more likely.</p>
 <h4 id="ambiguity-alignment">Ambiguity alignment</h4>
 <p>All the moral conundrums that we humans confront are now moral conundrums for our agent as well. When it is faced with truly difficult and important moral decisions, rather than blithely running ahead, our agent will be prompted to pause and refine its ethical views. We can even imagine moral epistemes in which human intuition is a vital input so our agent would actively seek human advice precisely when we are most afraid of alien intelligence.</p>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-armstrong2016">
+<p>Armstrong, Stuart, Nick Bostrom, and Carl Shulman. 2016. “Racing to the Precipice: A Model of Artificial Intelligence Development.” <em>AI &amp; Society</em> 31 (2). Springer: 201–6. <a href="http://www.warwick.ac.uk/fac/soc/pais/research/researchcentres/csgr/green/foresight/economy/2012_china_economic_quarterly_wang_feng_racing_towards_the_precipice.pdf" class="uri">http://www.warwick.ac.uk/fac/soc/pais/research/researchcentres/csgr/green/foresight/economy/2012_china_economic_quarterly_wang_feng_racing_towards_the_precipice.pdf</a>.</p>
+</div>
+<div id="ref-gustafsson2014">
+<p>Gustafsson, Johan E, and Olle Torpman. 2014. “In Defence of My Favourite Theory.” <em>Pacific Philosophical Quarterly</em> 95 (2). Wiley Online Library: 159–74. <a href="http://johanegustafsson.net/papers/in-defence-of-my-favourite-theory.pdf" class="uri">http://johanegustafsson.net/papers/in-defence-of-my-favourite-theory.pdf</a>.</p>
+</div>
+</div>
 <section class="footnotes">
 <hr />
 <ol>
@@ -127,11 +136,10 @@
 
 
 
+
 <script defer type="text/javascript" src="../../js/custom-elements.js"></script>
 
-<script defer type="text/javascript" src="../../js/vendors~custom-elements~false-dichotomy-ideal-theory-debate~ideal-calibration~is-development-easy~qu~30bf37d2.js"></script>
-
-<script defer type="text/javascript" src="../../js/vendors~custom-elements~util-egal.js"></script>
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
 
 
 
