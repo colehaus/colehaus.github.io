@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Gas taxes for thee, but not for me—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Gas taxes for thee, but not for me</h2>
+  
+    <h3 id="article-subtitle">Why the popular opposition to Pigovian taxes?</h3>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/current%2520events/">current events</a></li>
+    
+      <li><a href="../../tag/pigovian%2520taxes/">pigovian taxes</a></li>
+    
+</ul></nav>
+
+  
+  <span class="date">Published on <time datetime="2018-12-08">December  8, 2018</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>It’s pretty easy to find instances of people claiming to support some goal but opposing Pigovian taxes that work toward that goal. Economists love Pigovian taxes. Why don’t the laity? Some objections seems to be based on a misunderstanding—the distributional impact of a well-designed gas tax, for example—while others—the preference for allowing harm over doing harm—seem to be more dearly held.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>Imperious</summary><p>I'm pretty certain Pigovian taxes are a good idea and this post is largely based on the premise that anyone that disagrees is wrong or bad.</p></details></li>
+      
+        <li><details><summary>Neoliberal scum</summary><p>Pigovian taxes are pretty much peak neoliberal.</p></details></li>
+      
+        <li><details><summary>Carving nature at its diaphyses</summary><p>The categorization of objections here feels especially dubious to me but still better than a totally unorganized list.</p></details></li>
+      
+    </ul></aside>
+  
+
+  <p>Paris and other French cities have recently been the site of large and heated (there were fires) protests. The most prominent symbol of the protests is the high-visibility <a href="https://en.wikipedia.org/wiki/Yellow_vests_movement"><abbr title="yellow vests">‘gilets jaunes’</abbr></a> which all French motorists are required to own. This symbol is fitting for a series of protests that coalesced in opposition to an increase in the gas tax. While this protest (and any other protest) <a href="https://www.nytimes.com/2018/12/06/world/europe/france-fuel-carbon-tax.html">isn’t about a single grievance</a>, it certainly seems to signify something about the popular opinion of gas taxes.</p>
+<p>These protests pair <span class="noted">somewhat uncomfortably</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> with the popular <a href="https://www.independent.ie/world-news/thousands-march-in-paris-against-climate-change-37296183.html">march against climate change in Paris</a> just three months ago.</p>
+<p>This pattern seems common: Acknowledgment that global warming and excessive fossil fuel use are problems which must be addressed followed by reluctance or opposition to concrete responses <span class="citation" data-cites="leiserowitz2006climate">(Leiserowitz <a href="#ref-leiserowitz2006climate">2006</a>)</span>.</p>
+<p>Other examples include:</p>
+<dl>
+<dt><a href="https://en.wikipedia.org/wiki/Washington_Initiative_732">Washington Initiative 732</a></dt>
+<dd>A 2016 revenue neutral carbon tax that would have used revenues from the tax to reduce the (highly regressive) state sales tax and increase a low-income tax credit. It lost despite Washington’s reputation for environmental concern.
+</dd>
+<dt><a href="https://en.wikipedia.org/wiki/Washington_Initiative_1631">Washington Initiative 1631</a></dt>
+<dd>A 2018 carbon tax that would have used revenue from the tax to invest in green initiatives and other infrastructure projects. <span class="noted">Again, the measure did not pass.</span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+</dd>
+<dt><a href="https://en.wikipedia.org/wiki/Carbon_pricing_in_Australia">Australian carbon tax</a></dt>
+<dd>Introduced in 2012 by the Labor government, it was repealed in 2014 by the Liberal government.
+</dd>
+</dl>
+<p>(Carbon taxes aren’t always doomed to failure. British Columbia has had <a href="https://en.wikipedia.org/wiki/British_Columbia_carbon_tax">a carbon tax of $35 per tonne</a> in place since 2008. Sweden has the world’s highest <a href="https://www.government.se/government-policy/taxes-and-tariffs/swedens-carbon-tax/">carbon tax at about $138 per tonne</a>. California recently voted down <a href="https://ballotpedia.org/California_Proposition_6,_Voter_Approval_for_Future_Gas_and_Vehicle_Taxes_and_2017_Tax_Repeal_Initiative_(2018)">a repeal of recent gas tax increases</a>.)</p>
+<h3 id="pigovian-taxes">Pigovian taxes</h3>
+<h4 id="what-are-pigovian-taxes">What are Pigovian taxes?</h4>
+<p>So gas and carbon taxes are controversial with the public. Not so for economists and technocrats. They are both examples of <a href="https://en.wikipedia.org/wiki/Pigovian_tax">Pigovian taxes</a>. In brief, Pigovian taxes seek to correct market failures arising from negative externalities. A negative externality is any cost generated by a market activity that is not priced into the market exchange.</p>
+<p>For example, local air pollution caused by combustion of gasoline harms other nearby people—think especially of those who don’t even own a car—who receive nothing in exchange for bearing this harm. Because these costs aren’t included in the price of gasoline, gas is cheaper than it ought to be, all things considered. This leads to overconsumption of gasoline.</p>
+<p>A Pigovian tax tries to remedy this market failure by making the ‘invisible’ costs of externalities manifest via a tax. If the total external costs of driving—due to externalities like greenhouse warming, congestion and local pollution—amount to $1.76 per gallon (an estimate from <span class="citation" data-cites="parry2007">(Parry, Walls, and Harrington <a href="#ref-parry2007">2007</a>)</span>), a tax of $1.76 on each gallon forces the gasoline purchaser to ‘internalize’ those costs—account for the social harm they are creating with their actions.</p>
+<h4 id="a-tax-only-an-economist-could-love">A tax only an economist could love</h4>
+<p>“Economists are in almost universal agreement that, in concept, pollution taxes are the most cost-effective means of reducing pollution” <span class="citation" data-cites="hsu2009psychological">(Hsu <a href="#ref-hsu2009psychological">2009</a>)</span>. In a direct survey, 65% of economists attested that there should be an overall increase in energy taxes <span class="citation" data-cites="whaples2006economists">(Whaples <a href="#ref-whaples2006economists">2006</a>)</span>. Gregory Mankiw keeps a partial list of prominent economists that support Pigovian taxes in the form of the <a href="http://gregmankiw.blogspot.com/2006/09/rogoff-joins-pigou-club.html">membership rolls of the Pigou Club</a>.</p>
+<p>Contrariwise, only 5% of the general public supported a tax on driving in <a href="https://www.wsj.com/articles/SB118304470725951593">a 2007 survey</a>.</p>
+<p>For a (very accessible) fuller discussion in support of Pigovian taxes from an economist, see <span class="citation" data-cites="mankiw2009">(Mankiw <a href="#ref-mankiw2009">2009</a>)</span>.</p>
+<h3 id="reasons-to-oppose">Reasons to oppose</h3>
+<p>I’ll confess myself to be on the side of economists when it comes to Pigovian taxes. I’m then left with the question, why are they so unpopular with the general public? There are many possible reasons which we’ll now rehearse. Since the case for Pigovian taxes rests on both positive (these are the effects of Pigovian taxes) and normative (these effects are good) premises, <span class="noted">we’ll categorize</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> the objections as:</p>
+<ol type="1">
+<li>Misapprehensions of the positive</li>
+<li>Disagreements with the positive</li>
+<li>Misapprehensions of the normative</li>
+<li>Disagreements with the normative</li>
+</ol>
+<!--more-->
+<h4 id="positive-misapprehensions">Positive misapprehensions</h4>
+<h5 id="visible-costs-hidden-benefits">Visible costs, hidden benefits</h5>
+<p>When a new Pigovian tax is instituted, the costs it imposes are certain and immediate. The promised benefits only dangle from the end of a causal chain (i.e. tax → increased cost → reduced consumption → benefit). This compares unfavorably to direct regulations like <a href="https://en.wikipedia.org/wiki/Corporate_average_fuel_economy">CAFE</a> where the benefits are obvious and the costs are hidden. It takes more deliberate and careful analysis to reverse first impressions and come to the conclusion that, all things considered, Pigovian tax A is preferable to regulation B (a conclusion economists reach much more often than the public). <span class="citation" data-cites="barthold1994issues">(Barthold <a href="#ref-barthold1994issues">1994</a>)</span></p>
+<h5 id="metric-effect">Metric effect</h5>
+<p>Gas taxes are usually proposed in terms of currency per volume—e.g. cents per gallon. <span class="noted">Apparently</span><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, people tend to overweight these kinds of taxes in comparison to taxes presented in percentage terms. So this works against gas taxes. <span class="citation" data-cites="hsu2009psychological">(Hsu <a href="#ref-hsu2009psychological">2009</a>)</span></p>
+<h5 id="isolation-effect">Isolation effect</h5>
+<p>Gas taxes are relatively complicated. The isolation effect says that in complicated decision scenarios, people will focus on a single dominant aspect and neglect other considerations. With gas taxes, the dominant consideration may be the cost of buying gas since this a common, salient experience for many. The other benefits then will be relatively neglected and overall evaluations of the gas tax will be imbalanced. <span class="citation" data-cites="hsu2009psychological">(Hsu <a href="#ref-hsu2009psychological">2009</a>)</span></p>
+<h5 id="distributional-impact">Distributional impact</h5>
+<p>The biggest concern by far (according to my sense of the public discussion) is about the distributional impacts. It’s often believed that gas taxes (and other Pigovian taxes) are unfair and regressive. The story is that poor people spend a larger fraction of their income on gas, so increasing the gas tax flatly (i.e. without regard to income) ends up taxing poor people at a higher percentage of their income. Their are several possible responses to this:</p>
+<h6 id="flat-denial">Flat denial</h6>
+<p>The regressive argument looks at incomes. But income is only part of the story. Arguably, <a href="https://stats.oecd.org/glossary/detail.asp?ID=36">actual individual consumption</a> is a better measure. The total value of people’s consumption is determined not only by their private incomes but also by the assistance they receive from the government and non-profits. If we account for this additional income analogue, “low-expenditure households devote a smaller share of their budget to gasoline than do their counterparts in the middle of the expenditure distribution” <span class="citation" data-cites="poterba1991gasoline">(Poterba <a href="#ref-poterba1991gasoline">1991</a>)</span>.</p>
+<h6 id="less-regressive-than-alternatives">Less regressive than alternatives</h6>
+<p>If we treat the amount of revenue to be raised as fixed (a mildly reasonable assumption), then the question changes from “Is a gasoline tax regressive?” to “Is a gasoline tax more regressive than alternative sources of funding?”. Is it more regressive than a progressive income tax? Probably. Is it more regressive than a flat sales tax? Usually not. So a shift to a gas tax from a sales tax—a common revenue-neutral proposal—is actually progressive.</p>
+<h6 id="depends-on-how-revenue-is-spent">Depends on how revenue is spent</h6>
+<p>If the revenue raised by a gas tax is spent on, for example, <a href="https://en.wikipedia.org/wiki/Earned_income_tax_credit">low-income tax credits</a> or increasing funding for public transit, it can easily be made progressive. “Lump-sum rebates are […] much more progressive, benefiting the three lower income quintiles even when ignoring environmental benefits” <span class="citation" data-cites="williams2014initial">(Williams et al. <a href="#ref-williams2014initial">2014</a>)</span>.</p>
+<h6 id="distribution-of-benefits">Distribution of benefits</h6>
+<p>The externalities that Pigovian taxes seek to reduce don’t have equal incidence across the income spectrum. For example, low-income people likely work jobs which are less flexible making them more sensitive to unpredictable congestion during commutes <span class="citation" data-cites="arnott1994welfare">(Arnott, De Palma, and Lindsey <a href="#ref-arnott1994welfare">1994</a>)</span>. They also have reduced ability to choose housing in areas with good air quality. Consideration of factors like these mean that the benefits may accrue disproportionately to the poor which could make the overall scheme progressive even if the tax itself is regressive.</p>
+<h6 id="concluding-remarks-on-distributional-impacts">Concluding remarks on distributional impacts</h6>
+<p>If you’re still concerned, <span class="citation" data-cites="schweitzer2009empirical">(Schweitzer <a href="#ref-schweitzer2009empirical">2009</a>)</span> and <span class="citation" data-cites="metcalf1999distributional">(Metcalf <a href="#ref-metcalf1999distributional">1999</a>)</span> address the issues fairly comprehensively.</p>
+<p>Even though concerns about the distributional impact are primarily normative, I categorize this issue under positive misapprehensions because that’s where the error lies. People aren’t wrong to be concerned about the distributional impacts of policy; they just happen to be wrong as to how (at least some) gas taxes affect different income groups.</p>
+<h4 id="positive-disagreements">Positive disagreements</h4>
+<h5 id="non-uniform-marginal-cost">Non-uniform marginal cost</h5>
+<p>Carbon taxes are essentially an ideal case for Pigovian tax because the harm being done is the degradation of a global common resource. This means that the marginal social cost of any additional carbon is nearly constant so a flat, uniform tax closely aligns with costs. On the other hand, a Pigovian <a href="https://en.wikipedia.org/wiki/Sugary_drink_tax">tax on soda</a> would be difficult to implement well because the social cost of consumption varies widely with the consumer—nothing at all for those who are healthy and much higher for those who are likely to rely on socialized health care to remediate unhealthy eating. This consideration only limits the scope of Pigovian taxes though; it does nothing to argue against the efficacy of Pigovian taxes that are applied in fitting circumstances. <span class="citation" data-cites="fleischer2015curb">(Fleischer <a href="#ref-fleischer2015curb">2015</a>)</span></p>
+<h4 id="normative-misapprehensions">Normative misapprehensions</h4>
+<h5 id="status-quo-bias"><a href="https://en.wikipedia.org/wiki/Status_quo_bias">Status quo bias</a></h5>
+<p>Many people already drive and have established expectations about the benefits and costs of doing so. An increased gas tax increases the costs of present activities while providing new and uncertain benefits. Because people overvalue the present state of affairs, this factor tends to oppose the gas tax. (<span class="citation" data-cites="hsu2009psychological">(Hsu <a href="#ref-hsu2009psychological">2009</a>)</span> points to the <a href="https://en.wikipedia.org/wiki/Endowment_effect">endowment effect</a> but it strikes me as a bit weird to call the habit of driving a possession.)</p>
+<p>(I call this a misapprehension due to my belief that no popular moral theory endorses stasis as an intrinsic good. Presumably, people could be cajoled into overcoming this bias by coming to a fuller understanding of themselves, their preferences, and alternative states of the world.)</p>
+<h4 id="normative-disagreements">Normative disagreements</h4>
+<h5 id="doing-vs.allowing-harm"><a href="https://plato.stanford.edu/entries/doing-allowing/">Doing vs. allowing harm</a></h5>
+<p>Imposing a gas tax seems to proactively harm intensive consumers and current producers while the less-taxed status quo seems to harm only by accident. People generally seem to find allowing harm preferable to doing harm. See also the <a href="https://en.wikipedia.org/wiki/Principle_of_double_effect">doctrine of double effect</a> and people’s reluctance to redirect the trolley in the <a href="https://en.wikipedia.org/wiki/Trolley_problem">trolley problem</a>. (<span class="citation" data-cites="hsu2009psychological">(Hsu <a href="#ref-hsu2009psychological">2009</a>)</span> talks about this as a psychological bias called the do-no-harm effect.)</p>
+<h5 id="moral-circle">Moral circle</h5>
+<p>The costs and benefits of a Pigovian tax are not always evenly spread. <span class="noted">We see some of this dynamic</span><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> in the foot-dragging of the United States in regards to global warming. A flat global carbon tax would be more costly for Americans as the average American produces <a href="https://data.worldbank.org/indicator/EN.ATM.CO2E.PC">16.5 tonnes of CO<sub>2</sub> annually</a> compared to the global average of 5.0 tonnes. Additionally, the US is likely to suffer less from global warming than other countries because of its climate and wealth. If Americans look only to the costs and benefits for themselves and their fellow citizens, they may be perfectly rational (in a particular narrow sense) in rejecting carbon taxes and other global warming mitigations. <span class="noted">A similar dynamic plays out any time some egocentric subgroup is harmed more by a Pigovian tax than helped by reduced externalities.</span><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
+<h5 id="discount-rate-and-population-ethics">Discount rate and population ethics</h5>
+<p>Some of the harms which a Pigovian tax would avert peak decades in the future. A carbon tax, for example, would be paid now with the biggest benefits coming decades in the future. In those cases, an individual would pay a cost now for benefits they’d reap far in the future, if it all. If their <a href="https://en.wikipedia.org/wiki/Social_discount_rate">discount rate</a> is high or if they value present persons more than potential future persons <span class="citation" data-cites="parfit1984reasons">(Parfit <a href="#ref-parfit1984reasons">1984</a>)</span>, it would be fully rational (again, in a particular sense) for them to disfavor the tax.</p>
+<hr class="references">
+<div id="refs" class="references">
+<div id="ref-arnott1994welfare">
+<p>Arnott, Richard, De PalmaAndré, and Robin Lindsey. 1994. “The Welfare Effects of Congestion Tolls with Heterogeneous Commuters.” <em>Journal of Transport Economics and Policy</em>. JSTOR, 139–61. <a href="http://www.bath.ac.uk/e-journals/jtep/pdf/Volume_XXV111_No_2_139-161.pdf" class="uri">http://www.bath.ac.uk/e-journals/jtep/pdf/Volume_XXV111_No_2_139-161.pdf</a>.</p>
+</div>
+<div id="ref-barthold1994issues">
+<p>Barthold, Thomas A. 1994. “Issues in the Design of Environmental Excise Taxes.” <em>Journal of Economic Perspectives</em> 8 (1): 133–51. <a href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.8.1.133" class="uri">https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.8.1.133</a>.</p>
+</div>
+<div id="ref-fleischer2015curb">
+<p>Fleischer, Victor. 2015. “Curb Your Enthusiasm for Pigovian Taxes.” <em>Vand. L. Rev.</em> 68. HeinOnline: 1673. <a href="https://digital.sandiego.edu/cgi/viewcontent.cgi?referer=https://scholar.google.com/&amp;httpsredir=1&amp;article=1004&amp;context=law_fac_works" class="uri">https://digital.sandiego.edu/cgi/viewcontent.cgi?referer=https://scholar.google.com/&amp;httpsredir=1&amp;article=1004&amp;context=law_fac_works</a>.</p>
+</div>
+<div id="ref-hsu2009psychological">
+<p>Hsu, S. 2009. “Psychological Barriers to Gasoline Taxation.” <em>Critical Issues in Environmental Taxation</em> 6. <a href="http://myweb.fsu.edu/shsu/publications/bkchap_psychbarriersgastax.pdf" class="uri">http://myweb.fsu.edu/shsu/publications/bkchap_psychbarriersgastax.pdf</a>.</p>
+</div>
+<div id="ref-leiserowitz2006climate">
+<p>Leiserowitz, Anthony. 2006. “Climate Change Risk Perception and Policy Preferences: The Role of Affect, Imagery, and Values.” <em>Climatic Change</em> 77 (1-2). Springer: 45–72. <a href="http://anthonyleiserowitz.com/pubs_assets/LeiserowitzClimaticChange.pdf" class="uri">http://anthonyleiserowitz.com/pubs_assets/LeiserowitzClimaticChange.pdf</a>.</p>
+</div>
+<div id="ref-mankiw2009">
+<p>Mankiw, N Gregory. 2009. “Smart Taxes: An Open Invitation to Join the Pigou Club.” <em>Eastern Economic Journal</em> 35 (1). Springer: 14–23. <a href="https://dash.harvard.edu/bitstream/handle/1/4263740/Mankiw_SmartTaxes.pdf" class="uri">https://dash.harvard.edu/bitstream/handle/1/4263740/Mankiw_SmartTaxes.pdf</a>.</p>
+</div>
+<div id="ref-metcalf1999distributional">
+<p>Metcalf, Gilbert E. 1999. “A Distributional Analysis of Green Tax Reforms.” <em>National Tax Journal</em>. JSTOR, 655–81. <a href="https://www.ntanet.org/NTJ/52/4/ntj-v52n04p655-82-distributional-analysis-green-tax.pdf" class="uri">https://www.ntanet.org/NTJ/52/4/ntj-v52n04p655-82-distributional-analysis-green-tax.pdf</a>.</p>
+</div>
+<div id="ref-parfit1984reasons">
+<p>Parfit, Derek. 1984. <em>Reasons and Persons</em>. OUP Oxford. <a href="https://track3.mixtape.moe/ncaynk.pdf" class="uri">https://track3.mixtape.moe/ncaynk.pdf</a>.</p>
+</div>
+<div id="ref-parry2007">
+<p>Parry, Ian WH, Margaret Walls, and Winston Harrington. 2007. “Automobile Externalities and Policies.” <em>Journal of Economic Literature</em> 45 (2): 373–99. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.661.7936&amp;rep=rep1&amp;type=pdf" class="uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.661.7936&amp;rep=rep1&amp;type=pdf</a>.</p>
+</div>
+<div id="ref-poterba1991gasoline">
+<p>Poterba, James M. 1991. “Is the Gasoline Tax Regressive?” <em>Tax Policy and the Economy</em> 5. National Bureau of Economic Research; The MIT Press: 145–64. <a href="https://dspace.mit.edu/bitstream/handle/1721.1/63747/isgasolinetaxreg00pote.pdf;sequence=1" class="uri">https://dspace.mit.edu/bitstream/handle/1721.1/63747/isgasolinetaxreg00pote.pdf;sequence=1</a>.</p>
+</div>
+<div id="ref-schweitzer2009empirical">
+<p>Schweitzer, Lisa. 2009. “The Empirical Research on the Social Equity of Gas Taxes, Emissions Fees, and Congestion Charges.” <em>Transportation Research Board Special Report</em> 303: 1–26. <a href="https://www.academia.edu/download/33278201/sr303Schweitzer.pdf" class="uri">https://www.academia.edu/download/33278201/sr303Schweitzer.pdf</a>.</p>
+</div>
+<div id="ref-whaples2006economists">
+<p>Whaples, Robert. 2006. “Do Economists Agree on Anything? Yes!” <em>The Economists’ Voice</em> 3 (9). De Gruyter. <a href="https://ew-econ.typepad.fr/articleaeasurvey.pdf" class="uri">https://ew-econ.typepad.fr/articleaeasurvey.pdf</a>.</p>
+</div>
+<div id="ref-williams2014initial">
+<p>Williams, Roberton, Hal Gordon, Dallas Burtraw, Jared Carbone, and Richard Morgenstern. 2014. “The Initial Incidence of a Carbon Tax Across Income Groups.” <a href="http://www.rff.org/files/sharepoint/WorkImages/Download/RFF-DP-14-24.pdf" class="uri">http://www.rff.org/files/sharepoint/WorkImages/Download/RFF-DP-14-24.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Of course, crowds aren’t individuals so the juxtaposition of these two isn’t clear evidence of hypocrisy or anything of the sort. In theory, the protesters for these two protests could be entirely non-overlapping sets.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><a href="https://www.vox.com/2016/10/18/13012394/i-732-carbon-tax-washington">The left vs. a carbon tax</a> is an alternately fascinating and frustrating detailing of the internecine conflict around the 2016 Washington carbon tax proposal. The <a href="https://jobscleanenergywa.com/">Alliance for Jobs and Clean Energy</a> opposed the 2016 proposal on the theory that any carbon tax proposal needed the support of a broad coalition secured by the promise of funding for favored projects from new tax revenue. The 2018 carbon tax proposal tried to execute on this strategy and also failed.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>This categorization, as all categorizations are, is tendentious. In particular, it is a bit presumptuous of me to anoint some objections as defensible disagreement and dismiss others as mere misapprehension. So be it.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>I’m kind of skeptical of this effect. I’ve not encountered it before so I’m not sure what the evidence base for it looks like. The <a href="https://en.wikipedia.org/wiki/Replication_crisis">replication crisis</a> seems to have a habit of failing to replicate these effects that show humans to be <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/TooDumbToLive">too dumb to live</a>. Since this effect seems to require people to be really, really silly, I remain skeptical of it.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Plausibly. It’s hard to be confident in declaring the motive behind the actions of an entire country and people.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>This might explain why cap and trade with <a href="https://en.wikipedia.org/wiki/Emissions_trading#Permit_allocation_versus_auctioning">grandfathering</a> seems to be a popular market-based response to emissions problems. It essentially bribes polluters to accept a scheme that would otherwise be against their interests.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>
