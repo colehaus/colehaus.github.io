@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/pigouvian-compendium/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/assorted-links-x/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -645,6 +652,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/externalities/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/frequentist/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -792,7 +806,7 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/tag/pigovian%2520taxes/index.html</loc>
+        <loc>https://www.col-ex.org/tag/pigouvian%2520taxes/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
