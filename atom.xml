@@ -8,8 +8,373 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2018-12-19T00:00:00Z</updated>
+    <updated>2019-01-08T00:00:00Z</updated>
     <entry>
+    <title>Anthropological enumerations</title>
+    <link href="https://www.col-ex.org/posts/anthropological-enumerations/" />
+    <id>https://www.col-ex.org/posts/anthropological-enumerations/</id>
+    <published>2019-01-08T00:00:00Z</published>
+    <updated>2019-01-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="getting-food">Getting food</h1>
+<h2 id="foraging">Foraging</h2>
+<p>Anatomically modern humans showed up to the party rather late—perhaps as late as only <a href="https://www.nytimes.com/2002/02/26/science/when-humans-became-human.html">130,000 years ago</a>. This was right also right around the time <em>Homo sapiens</em> become <a href="https://theconversation.com/what-the-use-of-ochre-tells-us-about-the-capabilities-of-our-african-ancestry-47081">cognitively modern and capable of symbolic thought</a>. But looking good and thinking symbolically do not a good party make. Everyone would have been leaning against the wall and stealing furtive glances at each other for many millennia until they worked up the courage to finally invent language and talk to each other around 50,000 years ago.</p>
+<p>So, regardless of what you use as your benchmark for modernity—anatomic, cognitive, or linguistic, the advent of food production in around 8,000 B.C.E. is relatively recent. That means, for most of human history, we’ve been foragers. “Foragers” are often called “hunter-gatherers” but this name is somewhat misleading. Hunting and gathering each typically contribute about 25-35% of caloric intake while fishing constituted the remaining 30-50%.</p>
+<p>There is ongoing debate about just how sweet the pre-historic foraging life was. On one hand, per capita GDP between $90 and $200 for essentially forever doesn’t sound so hot <span class="citation" data-cites="delong1998estimating">(DeLong <a href="#ref-delong1998estimating">1998</a>)</span> from the perspective of modernity. On the other hand, as we mentioned in <a href="https://www.col-ex.org/posts/anthropological-clickbait/">a previous post</a>, even modern foragers (who are typically thought to live in more marginal territory than early foragers) work fairly little. For example, the <a href="https://en.wikipedia.org/wiki/%C7%83Kung_people">!Kung</a> spend only about 42 hours on foraging, housework and tool-making all together. On the third hand, <a href="https://en.wikipedia.org/wiki/John_Zerzan">John <span class="noted">“You’ve to break a few billion eggs to make an omelet”</span></a><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> Zerzan</a> is on the primitivist side so no thank you.</p>
+<h2 id="food-production">Food production</h2>
+<p>Like we said, the earliest food production arose in around 8,000 B.C.E. in the Near East.</p>
+<p>Food production perhaps arose because it was the only way to support increased population. At some point, new <a href="https://en.wikipedia.org/wiki/Band_society">bands</a> of humans simply ran out of unoccupied territory to move into. Thereafter, population density would have increased beyond what foraging could support and horticulture, more productive per unit area than foraging, would have been the only option. This commonsensical theory of the rise of food production is called the Binford-Flannery model.</p>
+<p>An alternative theory is that climate change reduced the availability of wild food supplies.</p>
+<p>Regardless of the origin story, there are three major categories of food production:</p>
+<dl>
+<dt>Horticulture</dt>
+<dd>“Plant cultivation carried out with relatively simple tools and methods”. Probably the earliest form of food production. <a href="https://en.wikipedia.org/wiki/Shifting_cultivation">Shifting cultivation</a>, in which land is worked temporarily and then abandoned while soil nutrients naturally replenish, is a common form. 60 of 186 <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> cultures are horticultural (variable 246) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Intensive agriculture</dt>
+<dd>“Food production characterized by the permanent cultivation of fields and made possible by the use of the plow, draft animals or machines, fertilizers, irrigation, water-storage techniques, and other complex agricultural techniques.” 57 of 186 <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> cultures are intensively agricultural (variable 246) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Pastoralism</dt>
+<dd>“A form of subsistence technology in which food-getting is based directly or indirectly on the maintenance of domesticated animals.” 16 of 186 cultures <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> are pastoral (variable 246) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+</dl>
+<p><!--more--></p>
+<h1 id="economic-systems">Economic systems</h1>
+<h2 id="allocation-of-resources">Allocation of resources</h2>
+<h3 id="land">Land</h3>
+<p>Land ownership patterns tend to covary with food-getting patterns. Typically:</p>
+<dl>
+<dt>Foraging</dt>
+<dd>No individual ownership of land. Sometimes, territoriality by collective groups when sources of food are abundant and predictable.
+</dd>
+<dt>Horticulture</dt>
+<dd>No individual ownership of land. Sometimes plots are assigned for use.
+</dd>
+<dt>Pastoralism</dt>
+<dd>Grazing land held communally. Herds owned individually.
+</dd>
+<dt>Intensive agriculture</dt>
+<dd>Individual ownership of land.
+</dd>
+</dl>
+<h2 id="conversion-of-resources">Conversion of resources</h2>
+<p>Alas, clothes, tools and other products don’t grow on trees. Raw resources must be converted into final products. <span class="citation" data-cites="ember2014">(Ember, Ember, and Peregrine <a href="#ref-ember2014">2014</a>)</span> categorizes these production processes as follows (I’ll note that these categories seem a bit haphazard to me):</p>
+<dl>
+<dt>Domestic</dt>
+<dd>“Labor consisted of people getting food and producing shelter and implements for themselves and their kin.”
+</dd>
+<dt>Industrial</dt>
+<dd>“Because machines and materials are costly, only some individuals (capitalists), corporations, or governments can afford the expenses of production. Therefore, most people in industrial societies labor for others as wage earners.”
+</dd>
+<dt>Tributary</dt>
+<dd>“[M]ost people still produce their own food but an elite or aristocracy controls a portion of production, including the products of specialized crafts.”
+</dd>
+<dt>Post-industrial</dt>
+<dd>“Businesses are now more knowledge and service oriented. … [W]hen information and knowledge become more important than capital equipment, more people can own and have access to the productive resources of society.”
+</dd>
+</dl>
+<h2 id="distributing-resources">Distributing resources</h2>
+<p>Resources and products are also distributed and redistributed within groups. <span class="citation" data-cites="ember2014">(Ember, Ember, and Peregrine <a href="#ref-ember2014">2014</a>)</span> has the following categories (which, pleasingly, line up pretty well with <a href="http://www.rmt.ucla.edu/">relational models theory</a>):</p>
+<dl>
+<dt>Reciprocity</dt>
+<dd>“Giving and taking without the use of money”. Divided into generalized reciprocity—“Gift giving without any immediate or planned return”—and balanced reciprocity—“Giving with the expectation of a straightforward immediate or limited-time trade”.
+</dd>
+<dt>Redistribution</dt>
+<dd>“the accumulation of goods or labor by a particular person or agency […] for the purpose of subsequent distribution.” Most important in societies with political hierarchies.
+</dd>
+<dt>Market exchange</dt>
+<dd>“Transactions in which the”prices&quot; are subject to supply and demand“. Interestingly, anthropologists suggest that money arose in service of noncommercial”payments&quot; like taxes. This differs from the economic account in which money arose to solve the problem of the <a href="https://en.wikipedia.org/wiki/Coincidence_of_wants">coincidence of wants</a>.
+</dd>
+</dl>
+<h1 id="social-stratification">Social stratification</h1>
+<p>We can categorize the patterns of resource distribution. The resources to be analyzed are:</p>
+<dl>
+<dt>Economic resources</dt>
+<dd>“Things that have value in a culture, including land, tools and other technology, goods, and money.”
+</dd>
+<dt>Power</dt>
+<dd>“The ability to make others do what they do not want to do or influence based on the threat of force.” (If you’re not satisfied with this definition, many others are discussed in <span class="citation" data-cites="steven1974power">(Steven <a href="#ref-steven1974power">1974</a>)</span>.)
+</dd>
+<dt>Prestige</dt>
+<dd>“Being accorded particular respect or honor.”
+</dd>
+</dl>
+<p>And the possible distributions are egalitarian, rank and class/caste:</p>
+<figure>
+<figcaption>
+<p>Types of social stratification</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type of society</th>
+<th style="text-align: left;">Resources</th>
+<th style="text-align: left;">Power</th>
+<th style="text-align: left;">Prestige</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Egalitarian</td>
+<td style="text-align: left;">Equal access</td>
+<td style="text-align: left;">Equal access</td>
+<td style="text-align: left;">Equal access</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rank</td>
+<td style="text-align: left;">Equal access</td>
+<td style="text-align: left;">Equal access</td>
+<td style="text-align: left;">Unequal access</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Class/caste</td>
+<td style="text-align: left;">Unequal access</td>
+<td style="text-align: left;">Unequal access</td>
+<td style="text-align: left;">Unequal access</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>In every society, there is individual variation along these dimensions. <span class="citation" data-cites="ember2014">(Ember, Ember, and Peregrine <a href="#ref-ember2014">2014</a>)</span> emphasizes that the key distinction is <span class="noted">whether there are <em>groups</em> with systematically unequal access</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>.</p>
+<p>A caste system is a closed class system in which class is assigned at birth and virtually immutable. Marriage is also confined to caste boundaries.</p>
+<p><abbr title="Standard Cross-Cultural Sample">SCSS</abbr> reports that 65 of 186 cultures are egalitarian, 52 have hereditary slavery and 69 have classes <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>. (Rank is not one of the categories for variable 158.)</p>
+<p>The table above raises an obvious question? Are there other patterns of social stratification? For example, societies where there is equal access to economic resources but unequal access to power and prestige. Perhaps this is impossible because inequalities of power are always leveraged to produce inequalities of economic resources. But it’s not perfectly obvious to me why you couldn’t tell a similar story about unequal prestige inevitably snowballing into more comprehensive inequality.</p>
+<h1 id="sex-and-gender">Sex and Gender</h1>
+<p><span class="citation" data-cites="ember2014">(Ember, Ember, and Peregrine <a href="#ref-ember2014">2014</a>)</span> offers four explanations of differing gender roles from the anthropological literature. None are wholly convincing:</p>
+<dl>
+<dt>Strength theory</dt>
+<dd>“[M]ales generally possess greater strength and a superior capacity to mobilize their strength in quick bursts of energy.” Men then pursue activities which take advantage of this.
+</dd>
+<dt>Compatibility-with-child-care theory</dt>
+<dd>“In most societies, women breast-feed their children, on average, for two years, so the compatibility-with-child-care theory suggests that for much of human history it would have been maladaptive to have women take on roles that interfere with their ability to feed their child regularly or put their child in danger while taking care of them.”
+</dd>
+<dt>Economy-of-effort theory</dt>
+<dd>This theory suggests that certain tasks are related in their required skills, knowledge, location, etc. and will thus be performed by one gender. When paired with one of the other theories, this can fill in some gaps. For example, men may make wooden instruments (which is not obviously tied to maleness) because they generally lumber (which strength theory suggests is tied to maleness) and knowledge of wood is useful for both tasks.
+</dd>
+<dt>Expendability theory</dt>
+<dd>“The idea that men, rather than women, will tend to do the dangerous work in a society because the loss of men is not as great a disadvantage reproductively as the loss of women is called the expendability theory.”
+</dd>
+</dl>
+<h1 id="marriage-and-the-family">Marriage and the family</h1>
+<p>“[P]hysical anthropologists surmise that [more or less permanent male-female bonding was] possibly in place over a million years ago”.</p>
+<h2 id="explanations-of-marriage">Explanations of marriage</h2>
+<p>The durability and prevalence of marriage (or something like it) demand an explanation. Here are some of the attempts:</p>
+<dl>
+<dt>Gender division of labor</dt>
+<dd>“As long as there is a division of labor by gender, society has to structure a way for women and men to share the products of their labor.” Obviously, marriage isn’t the only possible solution.
+</dd>
+<dt>Prolonged infant dependency</dt>
+<dd>“The burden of prolonged child care by human females may limit the kinds of work they can do. They may need the help of a man to do certain types of work, such as hunting, that are incompatible with child care.” Again, it’s not obvious that a dyad is a better solution to this problem than general cooperation within a band.
+</dd>
+<dt>Sexual competition</dt>
+<dd>“[Society] had to develop some way of minimizing the rivalry among males for females to reduce the chance of lethal and destructive conflict.” Yet again, other solutions seem possible.
+</dd>
+</dl>
+<h2 id="economic-exchange">Economic exchange</h2>
+<p>“In about 75 percent of the societies known to anthropology, one or more explicit economic transactions take place before or after the marriage.”</p>
+<dl>
+<dt>Bride price</dt>
+<dd>“A substantial gift of goods or money given to the bride’s kin by the groom or his kin at or before the marriage.” Occurs in 71 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 208) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Bride service</dt>
+<dd>“Work performed by the groom for his bride’s family for a variable length of time either before or after the marriage.” Occurs in 24 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 208) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Exchange of females</dt>
+<dd>“[T]he custom whereby a sister or female relative of the groom is exchanged for the bride.” Occurs in 9 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 208) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Gift exchange</dt>
+<dd>“The exchange of gifts of about equal value by the two kin groups.” Occurs in 15 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 208) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Dowry</dt>
+<dd>“A substantial transfer of goods or money from the bride’s family to the bride. [S]ocieties with dowry tend to be those in which women contribute relatively little to primary subsistence activities, there is a high degree of social stratification, and a man is not allowed to be married to more than one woman simultaneously. [… One] theory is that the dowry is intended to attract the best bridegroom for a daughter in monogamous societies with a high degree of social inequality.” Occurs in 9 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 208) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+</dl>
+<h2 id="who-to-marry">Who to marry</h2>
+<p>There are often rules about whether a marriage partner ought to come from inside or outside the community.</p>
+<dl>
+<dt>Exogamy</dt>
+<dd>“[R]equires that the marriage partner come from outside one’s own kin group or community.” Almost complete exogamy occurs in 35 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 72) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Endogamy</dt>
+<dd>“[O]bliges a person to marry within a particular group.” Almost complete endogamy occurs in 11 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 72) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+</dl>
+<h2 id="how-many-to-marry">How many to marry</h2>
+<dl>
+<dt>Polygny</dt>
+<dd>“The marriage of one man to more than one woman at a time.” Occurs in 153 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 79) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Polyandry</dt>
+<dd>“The marriage of one woman to more than one man at a time.” Occurs in 2 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 79) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+</dl>
+<h2 id="family-forms">Family forms</h2>
+<p>Not every family is composed of a couple, their 2.2 kids and a dog:</p>
+<dl>
+<dt>Nuclear family</dt>
+<dd>“A family consisting of a married couple and their young children.” Occurs in 7 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 80) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Independent family</dt>
+<dd>“A family unit consisting of one monogamous (nuclear) family, or one polygynous or one polyandrous family.” Occurs in 70 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 80) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Extended family</dt>
+<dd>“A family consisting of two or more single-parent, monogamous, polygynous, or polyandrous families linked by a blood tie.” Occurs in 109 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 80) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+</dl>
+<p>Why are extended families so prevalent? One explanation is that “extended-family households come to prevail in societies that have incompatible activity requirements—that is, requirements that cannot be met by a mother or a father in a one-family household. In other words, extended-family households are generally favored when the work a mother has to do outside the home (cultivating fields or gathering foods far away) makes it difficult for her to also care for her children and do other household tasks.”</p>
+<h1 id="marital-residence-and-kinship">Marital residence and kinship</h1>
+<h2 id="marital-residence">Marital residence</h2>
+<p>Many societies have widespread norms about where married couples reside in relation to their families:</p>
+<dl>
+<dt>Neolocal</dt>
+<dd>“A pattern of residence whereby a married couple lives separately, and usually at some distance, from the kin of both spouses.” Occurs in 9 of 185 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 69) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>. Thought to be related to the presence of a commercial economy which reduces need for direct aid from family members.
+</dd>
+<dt>Patrilocal</dt>
+<dd>“A pattern of residence in which a married couple lives with or near the husband’s parents.” Occurs in 118 of 185 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 69) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Matrilocal</dt>
+<dd>“A pattern of residence in which a married couple lives with or near the wife’s parents.” Occurs in 38 of 185 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 69) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>. Patrilocality vs. matrilocality is thought to be determined by the presence of warfare between groups that are geographically and culturally nearby. If you might some day fight the neighboring community, you’d want your son to stay in your community even after marriage so he’s your ally rather than your enemy.
+</dd>
+<dt>Ambilocal</dt>
+<dd>“A pattern of residence in which a married couple lives with or near either the husband’s parents or the wife’s parents.” Occurs in 12 of 185 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 69) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>. Thought to arise in societies depopulated by, for example, contact with Europeans. In the face of severe depopulation, couples choose to live with whichever parents are still alive.
+</dd>
+<dt>Avunculolocal</dt>
+<dd>“A pattern of residence in which a married couple settles with or near the husband’s mother’s brother.” Occurs in 8 of 185 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 69) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+</dl>
+<h2 id="kinship">Kinship</h2>
+<p>In noncommercial societies, kinship is often the main organizing structure of society. The parts of this kinship structure that are considered salient vary from society to society:</p>
+<h3 id="unilineal-descent">Unilineal descent</h3>
+<p>In unilineal descent, important kin are determined through descent links of a single, consistent sex. Depending on the salient sex you get:</p>
+<dl>
+<dt>Patrilineal descent</dt>
+<dd>“The rule of descent that affiliates individuals with kin of both sexes related to them through men only.” For example, your father, your father’s siblings and your father’s father would all be part of your kin group while your mother, your mother’s siblings and your father’s mother would not be. Occurs in 75 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 70) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+<dt>Matrilineal</dt>
+<dd>“The rule of descent that affiliates individuals with kin of both sexes related to them through women only.” For example, your mother, your mother’s siblings and your mother’s mother would all be part of your kin group while your father, your father’s siblings and your mother’s father would not be. Occurs in 26 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 70) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.
+</dd>
+</dl>
+<p>There is also variation in how tight the unilineal boundaries are:</p>
+<dl>
+<dt>Lineage</dt>
+<dd>“A set of kin whose members trace descent from a common ancestor through known links.”
+</dd>
+<dt>Clan/sib</dt>
+<dd>“A set of kin whose members believe themselves to be descended from a common ancestor or ancestress but cannot specify the links back to that founder[.]”
+</dd>
+<dt>Phratry</dt>
+<dd>“A unilineal descent group composed of a number of supposedly related clans (sibs).”
+</dd>
+<dt>Moiety</dt>
+<dd>Every member of society claims to be a member of one of two unilineal descent groups.
+</dd>
+</dl>
+<h3 id="ambilineal">Ambilineal</h3>
+<p>“The rule of descent that affiliates individuals with groups of kin related to them through men or women. […] In other words, some people in the society affiliate with a group of kin through their fathers; others affiliate through their mothers.” Occurs in 6 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 70) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.</p>
+<h3 id="double-unilineal">Double unilineal</h3>
+<p>“A system that affiliates individuals with a group of matrilineal kin for some purposes and with a group of patrilineal kin for other purposes.” Occurs in 10 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 70) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.</p>
+<h3 id="bilateral-kinship">Bilateral kinship</h3>
+<p>“The type of kinship system in which individuals affiliate more or less equally with their mother’s and father’s relatives.” Because each individual has an idiosyncratic kin group (my matrilineal and patrilineal kin, considered together, are distinct from both my mother’s and my father’s kin), there are no corporate kin groups under this system. Occurs in 69 of 186 cultures in the <abbr title="Standard Cross-Cultural Sample">SCSS</abbr> (variable 70) <span class="citation" data-cites="murdock1969standard">(Murdock and White <a href="#ref-murdock1969standard">1969</a>)</span>.</p>
+<h1 id="associations-and-interest-groups">Associations and interest groups</h1>
+<p>Anthropologists define associations as groupings satisfying the following criteria: - Institutionalized structure - Exclusion of some people - Common interest or purpose - Members with a sense of pride and belonging</p>
+<h2 id="non-voluntary">Non-voluntary</h2>
+<p>In many societies, non-voluntary associations are important. They tend to take on increased importance when, for whatever reason, kin groups are an inadequate organizational structure. Common types of non-voluntary association include:</p>
+<dl>
+<dt>Age-grade</dt>
+<dd>An association comprised of all individuals who fall within a particular, culturally distinguished age range.
+</dd>
+<dt>Age-set</dt>
+<dd>An association comprised of all individuals of a particular sex who fall within a particular, culturally distinguished age range.
+</dd>
+</dl>
+<h2 id="voluntary">Voluntary</h2>
+<p>There are also, of course, voluntarily associations. Since these are more familiar to the reader, I presume, and less easily generalizable, nothing more on them will be said here.</p>
+<h1 id="political-life">Political life</h1>
+<p>Political organizations also operate on many different scales:</p>
+<dl>
+<dt>Band</dt>
+<dd>“A fairly small, usually nomadic local group that is politically autonomous.” Typically, bands have fewer than 100 members. Most recent foragers live in bands so some anthropologists believe that essentially all humans lived in bands until the advent of agriculture.
+</dd>
+<dt>Tribe</dt>
+<dd>“The kind of political organization in which local communities mostly act autonomously but there are kin groups (such as clans) or associations (such as age-sets) that can temporarily integrate a number of local groups into a larger unit.” Tends to co-occur with simple food production (i.e. horticulture and pastoralism) and has somewhat higher population density as a result.
+</dd>
+<dt>Chiefdom</dt>
+<dd>“A political unit, with a chief at its head, integrating more than one community but not necessarily the whole society or language group.” This is arguably the first form of political organization where there’s formal political authority.
+</dd>
+<dt>State</dt>
+<dd>“An autonomous political unit with centralized decision making over many communities with power to govern by force[.]” Co-occurs with intensive agriculture and high population densities. The earliest states arose, apparently independently, after about 3500 B.C.E. in Iraq, Mexico, India, China and Egypt.
+</dd>
+</dl>
+<p>Over time, political complexity seems to increase along this scale. One explanation of this trend is that higher population densities and greater political organization all but ensure victory during military conflict.</p>
+<h1 id="religion-and-magic">Religion and magic</h1>
+<p>Belief in the supernatural is universal and, based on material remains of funeral rites, dates to at least 60,000 years ago. Common supernatural beliefs include:</p>
+<dl>
+<dt>Animism</dt>
+<dd>“A belief in a dual existence for all things—a physical, visible body, and a psychic, invisible soul.”
+</dd>
+<dt>Mana</dt>
+<dd>“A supernatural, impersonal force that inhabits certain objects or people and is believed to confer success and/or strength.”
+</dd>
+<dt>Taboo</dt>
+<dd>“A prohibition that, if violated, is believed to bring supernatural punishment.”
+</dd>
+<dt>Gods</dt>
+<dd>“Supernatural beings of nonhuman origin who are named personalities; often anthropomorphic.”
+</dd>
+<dt>Spirits</dt>
+<dd>“Unnamed supernatural beings of nonhuman origin who are beneath the gods in prestige and often closer to the people; may be helpful, mischievous, or evil.”
+</dd>
+<dt>Ghosts</dt>
+<dd>“Supernatural beings who were once human; the souls of dead people.”
+</dd>
+</dl>
+<p>Supernatural beliefs plausibly shape and are shaped by society. For example:</p>
+<ul>
+<li>Societies with punitive child-rearing tend to believe in malevolent gods while societies with less punitive child-rearing practices tend to believe in benevolent gods.</li>
+<li>Societies with substantial political hierarchy tend to believe in the existence of a “high god” with supreme authority.</li>
+<li>Moralizing gods are more common in societies with substantial wealth inequality.</li>
+</ul>
+<p>People also put their supernatural belief into practice. There are several core types of supernatural practitioners:</p>
+<dl>
+<dt>Shamans</dt>
+<dd>A religious intermediary, usually part-time, whose primary function is to cure people through sacred songs, pantomime, and other means; sometimes called witch doctor by Westerners.
+</dd>
+<dt>Sorcerers and witches</dt>
+<dd>Sorcerers use tangible ritual materials in an attempt to harm people. Witches attempt to harm people through emotion and thought alone.
+</dd>
+<dt>Mediums</dt>
+<dd>Part-time religious practitioners who are asked to heal and divine while in a trance.
+</dd>
+<dt>Priests</dt>
+<dd>Generally full-time specialists, with very high status, who are thought to be able to relate to superior or high gods beyond the ordinary person’s access or control.
+</dd>
+</dl>
+<hr />
+<div id="refs" class="references">
+<div id="ref-delong1998estimating">
+<p>DeLong, J Bradford. 1998. “Estimating World Gdp, One Million Bc–Present.” <em>Draft Paper. Berkeley, California</em>. <a href="https://delong.typepad.com/print/20061012_LRWGDP.pdf" class="uri uri">https://delong.typepad.com/print/20061012_LRWGDP.pdf</a>.</p>
+</div>
+<div id="ref-ember2014">
+<p>Ember, Carol R, Melvin R Ember, and Peter N Peregrine. 2014. <em>Cultural Anthropology</em>. Pearson.</p>
+</div>
+<div id="ref-murdock1969standard">
+<p>Murdock, George P, and Douglas R White. 1969. “Standard Cross-Cultural Sample.” <em>Ethnology</em> 8 (4). JSTOR: 329–69. <a href="http://capone.mtsu.edu/eaeff/downloads/mycloud/SCCScodebook.txt" class="uri uri">http://capone.mtsu.edu/eaeff/downloads/mycloud/SCCScodebook.txt</a>.</p>
+</div>
+<div id="ref-steven1974power">
+<p>Steven, Lukes. 1974. “Power: A Radical View.” <em>London and New York: Macmillan</em>.</p>
+</div>
+</div>
+<section class="footnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Zerzan advocates a relinquishment of agriculture. <a href="http://www.anarkismo.net/newswire.php?story_id=1451">Earth can support maybe 10 million foragers</a>. The implications of returning to a global population of 10 million are obvious and terrible.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>It seems to me that making theses distinctions precise requires a lot more work. For example, you can trivially call the wealthiest 10% of people in a society in a group and then you definitionally have groups with unequal access to economic resources—the 10% and everyone else. You could rule this kind of trick out and say that the groups have be defined by some <em>other</em> criteria: say sex or age. But this doesn’t really seem to match our intuitive understanding of inequality. I wouldn’t think that a society in which toddlers are reliably less wealthy than adults is a breach of justice. My best guess at a more careful definition is that a society is <em>pro tanto</em> socially stratified if there is unequal access that persists over years and generations.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Pigouvian compendium</title>
     <link href="https://www.col-ex.org/posts/pigouvian-compendium/" />
     <id>https://www.col-ex.org/posts/pigouvian-compendium/</id>
@@ -957,7 +1322,7 @@ With regard to discount rates for life saving, we find that individuals do, inde
 <h3 id="distributional-impact">Distributional impact</h3>
 <p>The biggest concern by far (according to my sense of the public discussion) is about the distributional impacts. It’s often believed that gas taxes (and other Pigouvian taxes) are unfair and regressive. The story is that poor people spend a larger fraction of their income on gas, so increasing the gas tax flatly (i.e. without regard to income) ends up taxing poor people at a higher percentage of their income. There are several possible responses to this:</p>
 <h4 id="flat-denial">Flat denial</h4>
-<p>The regressive argument looks at incomes. But income is only part of the story. Arguably, <a href="https://stats.oecd.org/glossary/detail.asp?ID=36">actual individual consumption</a> is a better measure. The total value of people’s consumption is determined not only by their private incomes but also by the assistance they receive from the government and non-profits. If we account for this additional income analogue, “low-expenditure households devote a smaller share of their budget to gasoline than do their counterparts in the middle of the expenditure distribution” <span class="citation" data-cites="poterba1991gasoline">(Poterba <a href="#ref-poterba1991gasoline">1991</a>)</span>.</p>
+<p>The regressive argument looks at incomes. But income is only part of the story. Arguably, <a href="https://stats.oecd.org/glossary/detail.asp?ID=36">actual individual consumption</a> is a better measure <span class="citation" data-cites="fitoussi2009report">(Fitoussi, Sen, and Stiglitz <a href="#ref-fitoussi2009report">2009</a>)</span>. The total value of people’s consumption is determined not only by their private incomes but also by the assistance they receive from the government and non-profits. If we account for this additional income analogue, “low-expenditure households devote a smaller share of their budget to gasoline than do their counterparts in the middle of the expenditure distribution” <span class="citation" data-cites="poterba1991gasoline">(Poterba <a href="#ref-poterba1991gasoline">1991</a>)</span>.</p>
 <h4 id="less-regressive-than-alternatives">Less regressive than alternatives</h4>
 <p>If we treat the amount of revenue to be raised as fixed (a mildly reasonable assumption), then the question changes from “Is a gasoline tax regressive?” to “Is a gasoline tax more regressive than alternative sources of funding?”. Is it more regressive than a progressive income tax? Probably. Is it more regressive than a flat sales tax? Usually not. So a shift to a gas tax from a sales tax—a common revenue-neutral proposal—is actually progressive.</p>
 <h4 id="depends-on-how-revenue-is-spent">Depends on how revenue is spent</h4>
@@ -989,6 +1354,9 @@ With regard to discount rates for life saving, we find that individuals do, inde
 </div>
 <div id="ref-barthold1994issues">
 <p>Barthold, Thomas A. 1994. “Issues in the Design of Environmental Excise Taxes.” <em>Journal of Economic Perspectives</em> 8 (1): 133–51. <a href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.8.1.133" class="uri uri">https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.8.1.133</a>.</p>
+</div>
+<div id="ref-fitoussi2009report">
+<p>Fitoussi, Jean-Paul, Amartya Sen, and Joseph Stiglitz. 2009. “Report by the Commission on the Measurement of Economic Performance and Social Progress.” <em>The Commission on the Measurement of Economic Performance and Social Progress</em>. <a href="https://ec.europa.eu/eurostat/documents/118025/118123/Fitoussi+Commission+report" class="uri uri">https://ec.europa.eu/eurostat/documents/118025/118123/Fitoussi+Commission+report</a>.</p>
 </div>
 <div id="ref-fleischer2015curb">
 <p>Fleischer, Victor. 2015. “Curb Your Enthusiasm for Pigovian Taxes.” <em>Vand. L. Rev.</em> 68. HeinOnline: 1673. <a href="https://digital.sandiego.edu/cgi/viewcontent.cgi?referer=https://scholar.google.com/&amp;httpsredir=1&amp;article=1004&amp;context=law_fac_works" class="uri uri">https://digital.sandiego.edu/cgi/viewcontent.cgi?referer=https://scholar.google.com/&amp;httpsredir=1&amp;article=1004&amp;context=law_fac_works</a>.</p>
