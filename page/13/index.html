@@ -144,7 +144,7 @@ Classifying different types of preferences
        </div>
 
        
-         <div class="abstract"><p>If voters have social preferences (second-order preferences about the preference satisfaction of others) and imperfect information, voting altruistically may produce worse outcomes—for the individual voter and for society at large—than ignoring their social preferences and voting egocentrically. This problem seems like it may actually be common in the real world. While I doubt any voting system can eliminate it, including information about private preferences in polls may ameliorate it.</p></div>
+         <div class="abstract"><p>If voters have social preferences (second-order preferences that the preferences of others be satisfied or thwarted) and imperfect information about the preferences of others, voting altruistically may produce worse outcomes—for the individual voter and for society at large—than ignoring social preferences and voting egocentrically. This problem seems like it may actually be common in the real world. While I doubt any voting system can eliminate the problem, including information about private preferences in polls may ameliorate it.</p></div>
        
 
         <dl>
@@ -160,13 +160,13 @@ Classifying different types of preferences
 </dl>
 <h3 id="scenario">Scenario</h3>
 <h4 id="narrative">Narrative</h4>
-<p>Suppose you’re voting on increased funding for the local library. You don’t personally use the library much, but you figure that others in the polity are reliant on the library. Out of a sense of solidarity you vote for increased funding even though, from a purely egocentric perspective, this reduces your welfare (i.e. the increased cost outweighs your private benefit). When results come in, the library funding measure passes in a landslide and you bask in your altruism.</p>
-<p>Alas, the voting results are no guarantee that you’ve <em>actually</em> acted altruistically. It’s entirely possible that you misunderstood the preferences of others and that the polity has made a decision that’s net harmful.</p>
+<p>Suppose you’re voting on increased funding for the local library. You don’t personally use the library much, but you figure that others in the polity are reliant on the library. Out of a sense of solidarity, you vote for increased funding. This is despite the fact that, from a purely egocentric perspective, increased funding for the library reduces your welfare (that is, the harm of increased taxes outweighs the negligible benefit of a better library that you won’t use). When the voting results come in, the library funding measure passes in a landslide and you bask in the warm glow of your altruism.</p>
+<p>Alas, the voting results are no guarantee that you’ve <em>actually</em> acted altruistically. It’s entirely possible that you misunderstood the preferences of others and that the polity has made a decision that’s net harmful. For example, it could be the case that each voter was just like you—personally uninterested but willing to vote prosocially. In such a scenario, everyone has increased their taxes and no one benefits because no one actually uses the library.</p>
 <h4 id="numerical">Numerical</h4>
-<p>For generality, we’ll call voting for increased library funding option <span class="math inline">\(\alpha\)</span> and voting against (the status quo) option <span class="math inline">\(\beta\)</span>.</p>
+<p>If it helps, we can make this example a bit more precise by picking cardinal utilities to illustrate.</p>
 <figure>
 <figcaption>
-Individual voters private values for options <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> and <br> their belief about others’ private values for these options
+Individual voters private values for options More Library and Same Library and <br> their belief about others’ private values for these options
 </figcaption>
 <table>
 <colgroup>
@@ -179,10 +179,10 @@ Individual voters private values for options <span class="math inline">\(\alpha\
 <thead>
 <tr class="header">
 <th style="text-align: left;">Voter</th>
-<th style="text-align: right;">Private value of <span class="math inline">\(\alpha\)</span></th>
-<th style="text-align: right;">Private value of <span class="math inline">\(\beta\)</span></th>
-<th style="text-align: right;">Belief about others’ private value of <span class="math inline">\(\alpha\)</span></th>
-<th style="text-align: right;">Belief about others’ private value of <span class="math inline">\(\beta\)</span></th>
+<th style="text-align: right;">Private value of More Library</th>
+<th style="text-align: right;">Private value of Same Library</th>
+<th style="text-align: right;">Belief about others’ private value of More Library</th>
+<th style="text-align: right;">Belief about others’ private value of Same Library</th>
 </tr>
 </thead>
 <tbody>
@@ -210,8 +210,8 @@ Individual voters private values for options <span class="math inline">\(\alpha\
 </tbody>
 </table>
 </figure>
-<p>The table outlines a scenario in which each of three voters (it’s a small polity) prefers option <span class="math inline">\(\beta\)</span>. Unfortunately, they’ve each come to the inaccurate belief that each other voter prefers option <span class="math inline">\(\alpha\)</span>. That is voter A slightly prefers <span class="math inline">\(\beta\)</span> but believes voter B and voter C each slightly prefer <span class="math inline">\(\alpha\)</span>.</p>
-<p>If our voters are good utilitarians in a <a href="https://en.wikipedia.org/wiki/First-past-the-post_voting">first-past-the-post</a> system, they’ll all vote for <span class="math inline">\(\alpha\)</span> (because <span class="math inline">\(1 + 1 - 1 &gt; 0 + 0 + 0\)</span>) and it will win. The resulting <a href="https://en.wikipedia.org/wiki/Social_welfare_function">social welfare</a> will be <span class="math inline">\(-3 = 3 \cdot -1\)</span>. If our voters had voted in a purely egocentric manner—ignoring the preferences of others, they would each pick <span class="math inline">\(\beta\)</span> and the social welfare would have been <span class="math inline">\(0 = 3 \cdot 0\)</span>.</p>
+<p>The table outlines a scenario in which each of three voters (it’s a small polity) prefers option Same Library. Unfortunately, they’ve each come to the inaccurate belief that each other voter prefers option More Library. That is voter A slightly prefers Same Library but believes voter B and voter C each slightly prefer More Library.</p>
+<p>If our voters are earnest utilitarians in a <a href="https://en.wikipedia.org/wiki/First-past-the-post_voting">first-past-the-post</a> system, they’ll all vote for More Library (because the perceived social welfare of More Library is <span class="math inline">\(1 + 1 - 1 = 2\)</span> which is greater than <span class="math inline">\(0 + 0 + 0 = 0\)</span>) and it will win. The resulting actual <a href="https://en.wikipedia.org/wiki/Social_welfare_function">social welfare</a> will be <span class="math inline">\(-3 = 3 \cdot -1\)</span>. If our voters had voted in a purely egocentric manner—ignoring the preferences of others, they would each pick Same Library and the social welfare would have been <span class="math inline">\(0 = 3 \cdot 0\)</span>.</p>
 <p>This is pretty perverse—our voters have selected the social welfare minimizing option despite their scrupulous motives and they would have better achieved their altruistic ends by voting selfishly!</p>
 
 
