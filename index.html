@@ -54,6 +54,72 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/dominated-decisions/">Dominated decisions</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/decision%2520theory/">decision theory</a></li>
+    
+      <li><a href="./tag/interactive/">interactive</a></li>
+    
+      <li><a href="./tag/yaas/">yaas</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/An%2520Introduction%2520to%2520Decision%2520Theory/">Series: An Introduction to Decision Theory</a></nav>
+        
+        <span class="date">Published on <time datetime="January 17, 2019">January 17, 2019</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>Preliminaries of decision theory and a basic interactive tool demonstrating dominance.</p></div>
+       
+
+        <h3 id="decision-matrices">Decision matrices</h3>
+<p><span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction">2017</a>)</span> points out that we can represent decisions with decision matrices. For example, when considering the purchase of home insurance, we have:</p>
+<figure>
+<figcaption>
+A decision matrix describing the decision to purchase home insurance
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Fire</th>
+<th>No fire</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Take out insurance</td>
+<td>No house and $100,00</td>
+<td>House and $0</td>
+</tr>
+<tr class="even">
+<td>No insurance</td>
+<td>No house and $100</td>
+<td>House and $100</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>Each row (after the first) represents a different action and each column (after the first) represents a different possible state of the world. Their intersections—the four cells that are the combination of an act and a world state—are called outcomes.</p>
+<h3 id="sets-of-settings">Sets of settings</h3>
+<p>In <a href="https://en.wikipedia.org/wiki/Decision_theory">decision theory</a> (and <a href="https://en.wikipedia.org/wiki/Social_choice_theory">social choice theory</a>, <a href="https://en.wikipedia.org/wiki/Game_theory">game theory</a>, <a href="https://en.wikipedia.org/wiki/Mechanism_design">mechanism design</a>, etc.), when presented with a decision, it’s often useful to start by taking stock of what information we have available and what information we would like but don’t have. Depending on the result of this assessment, we will have better or worse strategies available. That is, we’d like to determine the best strategy or solution given the information available. And are there better strategies that we could execute with more information? What is that information? For example, we approach the question of “Should we buy home insurance?” very differently if we know the precise chance of our house catching on fire. Without key information like that, we have to resort to second-best strategies.</p>
+<h3 id="dominance">Dominance</h3>
+<p>The decision matrix we depicted above reflects one of the <span class="noted">simplest possible</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> settings. In particular, we don’t have any probabilities associated with the different states of the world (“Fire” or “No fire”) which makes it a “decision under ignorance”. Another key limitation is that we don’t have a number representing how good or bad each outcome is—that is, our outcomes have not been assigned <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a>.</p>
+<p>Because this setting is so minimal, it both has wide applicability—it makes very few assumptions that can be contradicted by facts on the ground—and limited insight—the best you can do with minimal information still isn’t very good.</p>
+<h4 id="prose">Prose</h4>
+<p>One of the rules that exemplifies both broad applicability and limited insight is the <a href="https://en.wikipedia.org/wiki/Dominating_decision_rule">dominating decision rule</a>. Action A weakly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world. Action A strongly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world AND is strictly better than action B in at least one state of the world.</p>
+
+
+        <a href="./posts/dominated-decisions/">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/assorted-links-xi/">Assorted Links XI</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>

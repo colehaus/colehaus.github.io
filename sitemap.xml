@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/dominated-decisions/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/assorted-links-xi/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -905,6 +912,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/yaas/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/An%2520Introduction%2520to%2520Decision%2520Theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
