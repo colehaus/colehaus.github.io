@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Priority decisions—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+  <link rel="stylesheet" type="text/css" href="../../css/priority-decisions.css" />
+
+
+  <meta name="description" content="<p>Explanations and interactive tools demonstrating maximin, maximax and leximin decision rules.</p>">
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Priority decisions</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
+    
+      <li><a href="../../tag/interactive/">interactive</a></li>
+    
+      <li><a href="../../tag/yaas/">yaas</a></li>
+    
+</ul></nav>
+
+  
+    <nav><a class="series" href="../../series/An%2520Introduction%2520to%2520Decision%2520Theory/">Series: An Introduction to Decision Theory</a></nav>
+  
+  <span class="date">Published on <time datetime="2019-01-30">January 30, 2019</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>Explanations and interactive tools demonstrating maximin, maximax and leximin decision rules.</p>
+    </div>
+  
+
+  
+
+  <p><a href="../../posts/dominated-decisions/">Last time</a>, we introduced the basic setup of decision theory and examined the dominance decision rule. We also emphasized that the dominance decision rule is “weak” because it applies in very general settings with limited information to go on.</p>
+<p>This time, we’ll look at other decision rules that apply in a very minimal setting.</p>
+<h3 id="maximin">Maximin</h3>
+<p>The first such decision rule is <a href="https://en.wikipedia.org/wiki/Minimax">maximin</a>.</p>
+<h4 id="prose">Prose</h4>
+<p>Maximin suggests that in any decision scenario, we look to the worst outcome that may come to pass under each plan of action. We should then pick the action which has the best such outcome. That is, we pick the action with the best worst case—maximize our minimum.</p>
+<h4 id="example">Example</h4>
+<p>You have the choice of two alternative routes to work. In good conditions, the first route takes 10 minutes and the second route 5 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes. With a scenario like this, the maximin rule demands that you take the first route since its worst case is only 10 minutes while the second route’s worst case is 20 minutes.</p>
+<figure>
+<figcaption>
+Decision matrix about route to work. Preferred action in bold.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>High traffic day</th>
+<th>Low traffic day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Route 1</strong></td>
+<td>10 minutes</td>
+<td>10 minutes</td>
+</tr>
+<tr class="even">
+<td>Route 2</td>
+<td>20 minutes</td>
+<td>5 minutes</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<!--more-->
+<h4 id="interactive">Interactive</h4>
+<p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
+<textarea id="maximin-table" class="decision-table">
+
+|          | State 1 | State 2 | State 3|
+|----------|---------|---------|--------|
+| Action 1 | a       | y       | z      |
+| Action 2 | b       | c       | y      |
+| Action 3 | b       | d       | z      |
+</textarea>
+<div id="maximin-analysis">
+<ul>
+<li>Action 2 beats Action 1</li>
+<li>Action 2 beats Action 3</li>
+<li>Action 3 beats Action 1</li>
+<li>Action 3 beats Action 2</li>
+</ul>
+</div>
+<p>We see that with the default input table, Actions 2 and 3 beat Action 1 since the worst case of ‘b’ is preferable to the worst case of ‘a’. Actions 2 and 3 beat each other since they have the same worst case—‘b’—and we’re using a weak maximin here.</p>
+<h4 id="code">Code</h4>
+<p>We can also explain maximin with its implementing source code:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">maximin ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-2" title="2">maximin row1 row2 <span class="fu">=</span> Foldable1.minimum row1 <span class="fu">&gt;=</span> Foldable1.minimum row2</a></code></pre></div>
+<p>Again, maximin applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <span class="noted"><a href="https://en.wikipedia.org/wiki/Total_order">orderable</a></span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<h4 id="math">Math</h4>
+<p>We can also describe maximin <span class="math inline">\(\preccurlyeq_{MaMi}\)</span> in symbols:</p>
+<p><span class="math display">\[a_i \preccurlyeq_{MaMi} a_j \leftrightarrow \min_{s \in S} v(a_i, s) \leq \min_{s \in S} v(a_j, s) s\]</span></p>
+<p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Total_order">total order</a> order of values <span class="math inline">\(V\)</span>.</p>
+<p>In other words, we start out with a totally ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can be compared to one another to determine which is preferable. Maximin is then a way of lifting the total order of outcome valuations and turning it into a binary relation on actions—each of which comprises several outcomes across different states of the world.</p>
+<p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>, <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a> and <a href="https://en.wikipedia.org/wiki/Connex_relation">connex</a>. This means maximin is a total preorder. If we strengthen it by switching to <span class="math inline">\(&lt;\)</span> in the right-hand side of the definition instead of <span class="math inline">\(\leq\)</span>, strong maximin (analogous to strong dominance) becomes a total order (with <a href="https://en.wikipedia.org/wiki/Antisymmetric_relation">antisymmetry</a> vacuously satisfied).</p>
+<h3 id="maximax">Maximax</h3>
+<p>The second decision rule we’ll look it maximax. It’s considerably more optimistic than maximin.</p>
+<h4 id="prose-1">Prose</h4>
+<p>Maximax suggests that in any decision scenario, we look to the best outcome that may come to pass under each plan of action. We should then pick the action which has the best such outcome. That is, we pick the action with the best best case—maximize our maximum.</p>
+<h4 id="example-1">Example</h4>
+<p>You have the choice of two alternative routes to work. In good conditions, the first route takes 10 minutes and the second route 5 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes. With a scenario like this, the maximax rule demands that you take the second route since its best case is only 5 minutes while the first route’s best case is 10 minutes.</p>
+<figure>
+<figcaption>
+Decision matrix about route to work. Preferred action in bold.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>High traffic day</th>
+<th>Low traffic day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Route 1</td>
+<td>10 minutes</td>
+<td>10 minutes</td>
+</tr>
+<tr class="even">
+<td><strong>Route 2</strong></td>
+<td>20 minutes</td>
+<td>5 minutes</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h4 id="interactive-1">Interactive</h4>
+<p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
+<textarea id="maximax-table" class="decision-table">
+
+|          | State 1 | State 2 | State 3|
+|----------|---------|---------|--------|
+| Action 1 | a       | y       | z      |
+| Action 2 | b       | c       | y      |
+| Action 3 | b       | d       | z      |
+</textarea>
+<div id="maximax-analysis">
+<ul>
+<li>Action 1 beats Action 2</li>
+<li>Action 1 beats Action 3</li>
+<li>Action 3 beats Action 1</li>
+<li>Action 3 beats Action 2</li>
+</ul>
+</div>
+<p>We see that with the default input table, Actions 1 and 3 beat Action 2 since the best case of ‘z’ is preferable to the best case of ‘y’. Actions 1 and 3 beat each other since they have the same best case—‘z’—and we’re using a weak maximax here.</p>
+<h4 id="code-1">Code</h4>
+<p>We can also explain maximax with its implementing source code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">maximax ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb2-2" title="2">maximax row1 row2 <span class="fu">=</span> Foldable1.maximum row1 <span class="fu">Prelude.&gt;=</span> Foldable1.maximum row2</a></code></pre></div>
+<p>Again, maximax applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <a href="https://en.wikipedia.org/wiki/Total_order">orderable</a>.</p>
+<h4 id="math-1">Math</h4>
+<p>We can also describe maximax <span class="math inline">\(\preccurlyeq_{MaMa}\)</span> in symbols:</p>
+<p><span class="math display">\[a_i \preccurlyeq_{MaMa} a_j \leftrightarrow \max_{s \in S} v(a_i, s) \leq \max_{s \in S} v(a_j, s) s\]</span></p>
+<p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Total_order">total order</a> order of values <span class="math inline">\(V\)</span>.</p>
+<p>In other words, we start out with a totally ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can be compared to one another to determine which is preferable. Maximax is then a way of lifting the total order of outcome valuations and turning it into a binary relation on actions—each of which comprises several outcomes across different states of the world.</p>
+<p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>, <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a> and <a href="https://en.wikipedia.org/wiki/Connex_relation">connex</a>. This means maximax is a total preorder. If we strengthen it by switching to <span class="math inline">\(&lt;\)</span> in the right-hand side of the definition instead of <span class="math inline">\(\leq\)</span>, strong maximax (analogous to strong dominance) becomes a total order (with <a href="https://en.wikipedia.org/wiki/Antisymmetric_relation">antisymmetry</a> vacuously satisfied).</p>
+<h3 id="leximin">Leximin</h3>
+<p>The final decision rule we’ll look at is leximin.</p>
+<h4 id="prose-2">Prose</h4>
+<p>We can think of leximin as maximin with a tiebreaking procedure. In leximin, if the worst outcomes are equal, we then look to the second worst outcomes and prefer whichever action has the better second worst outcome. This tiebreaking procedure continues all the way up the ordered list of worst-to-best outcomes per action and only declares indifference between the actions if outcomes are the same at each step.</p>
+<p>Alternatively, we can think of leximin as the general procedure and maximin and maximax as special cases of it. Leximin looks at the whole sorted list of outcomes for each action while maximin and maximax each only look at one end of the list.</p>
+<h4 id="example-2">Example</h4>
+<p>Suppose you’re choosing between routes to work again:</p>
+<figure>
+<figcaption>
+Decision matrix about route to work. Preferred action in bold.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>High traffic day</th>
+<th>Medium traffic day</th>
+<th>Low traffic day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Route 1</td>
+<td>20 minutes</td>
+<td>12 minutes</td>
+<td>4 minutes</td>
+</tr>
+<tr class="even">
+<td><strong>Route 2</strong></td>
+<td>20 minutes</td>
+<td>8 minutes</td>
+<td>8 minutes</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>Route 2 is preferable because the two routes tie in the worst case—20 minutes— but route 2’s 8 minutes is a better a second worst case than route 1’s 12 minutes.</p>
+<h4 id="interactive-2">Interactive</h4>
+<p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
+<textarea id="leximin-table" class="decision-table">
+
+|          | State 1 | State 2 | State 3|
+|----------|---------|---------|--------|
+| Action 1 | a       | y       | z      |
+| Action 2 | b       | c       | y      |
+| Action 3 | b       | d       | z      |
+</textarea>
+<div id="leximin-analysis">
+<ul>
+<li>Action 2 beats Action 1</li>
+<li>Action 3 beats Action 1</li>
+<li>Action 3 beats Action 2</li>
+</ul>
+</div>
+<p>We see that with the default input table, Actions 2 and 3 beat Action 1 since the worst case of ‘b’ is preferable to the worse case of ‘a’. Actions 3 beats Action 2 since the second worst case of ‘d’ is preferable to the second worst case ‘c’</p>
+<h4 id="code-2">Code</h4>
+<p>We can also explain leximin with its implementing source code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">leximin ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb3-2" title="2">leximin row1 row2 <span class="fu">=</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    fromMaybe true <span class="fu">&lt;&lt;&lt;</span> List.head <span class="fu">&lt;&lt;&lt;</span> NonEmpty.mapMaybe keepNonEq <span class="fu">$</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    NonEmpty.zipWith <span class="fu">compare</span> (NonEmpty.sort row1) (NonEmpty.sort row2)</a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    keepNonEq <span class="dt">GT</span> <span class="fu">=</span> <span class="dt">Just</span> true</a>
+<a class="sourceLine" id="cb3-7" title="7">    keepNonEq <span class="dt">LT</span> <span class="fu">=</span> <span class="dt">Just</span> false</a>
+<a class="sourceLine" id="cb3-8" title="8">    keepNonEq <span class="dt">EQ</span> <span class="fu">=</span> <span class="dt">Nothing</span></a></code></pre></div>
+<p>Again, leximin applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <a href="https://en.wikipedia.org/wiki/Total_order">orderable</a>.</p>
+<h4 id="math-2">Math</h4>
+<p>We start out with a totally ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can be compared to one another to determine which is preferable. Maximax is then a way of lifting the total order of outcome valuations and turning it into a binary relation on actions—each of which comprises several outcomes across different states of the world.</p>
+<p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>, <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a> and <a href="https://en.wikipedia.org/wiki/Connex_relation">connex</a>. This means leximin is a total preorder.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The only change in setting/assumptions we’ve made between dominance and maximin is upgrading our <code>cell</code> valuations from a partial order to a total order. This isn’t strictly necessary but incomparability becomes much more cumbersome with maximin because more pairwise comparisons are required. With dominance, the only comparisons needed to determine one action superior to another are those across two outcomes in each particular state of the world. With maximin, we need to be able to compare all the outcomes for a given state against each other and then compare the worst of these across actions.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
+<script defer type="text/javascript" src="../../js/priority-decisions.js"></script>
+
+
+  </body>
+</html>

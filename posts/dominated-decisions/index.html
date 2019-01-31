@@ -44,7 +44,7 @@
   <link rel="stylesheet" type="text/css" href="../../css/dominated-decisions.css" />
 
 
-  <meta name="description" content="<p>Preliminaries of decision theory and a basic interactive tool demonstrating dominance.</p>">
+  <meta name="description" content="<p>Preliminaries of decision theory and a basic interactive tool demonstrating the dominance decision rule.</p>">
 
 </head>
 <body>
@@ -69,11 +69,13 @@
   
   <span class="date">Published on <time datetime="2019-01-17">January 17, 2019</time>.</span>
   
+    <br><span class="date">Last edited on <time datetime="2019-01-30">January 30, 2019</time>.</span>
+  
   </div>
   
   
     <div class="abstract">
-      <p>Preliminaries of decision theory and a basic interactive tool demonstrating dominance.</p>
+      <p>Preliminaries of decision theory and a basic interactive tool demonstrating the dominance decision rule.</p>
     </div>
   
 
@@ -113,11 +115,39 @@ A decision matrix describing the decision to purchase home insurance
 <h3 id="dominance">Dominance</h3>
 <p>The decision matrix we depicted above reflects one of the <span class="noted">simplest possible</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> settings. In particular, we don’t have any probabilities associated with the different states of the world (“Fire” or “No fire”) which makes it a “decision under ignorance”. Another key limitation is that we don’t have a number representing how good or bad each outcome is—that is, our outcomes have not been assigned <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a>.</p>
 <p>Because this setting is so minimal, it both has wide applicability—it makes very few assumptions that can be contradicted by facts on the ground—and limited insight—the best you can do with minimal information still isn’t very good.</p>
-<h4 id="prose">Prose</h4>
-<p>One of the rules that exemplifies both broad applicability and limited insight is the <a href="https://en.wikipedia.org/wiki/Dominating_decision_rule">dominating decision rule</a>. Action A weakly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world. Action A strongly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world AND is strictly better than action B in at least one state of the world.</p>
 <!--more-->
+<h4 id="prose">Prose</h4>
+<p>One of the rules that exemplifies both broad applicability and limited insight is the dominance rule. Action A weakly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world. Action A strongly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world AND is strictly better than action B in at least one state of the world.</p>
+<h4 id="example">Example</h4>
+<p>You have the choice of two alternative routes to work. In good conditions, both take 10 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes. With a scenario like this, the dominance rule demands that you take the first route since it is never worse and sometimes better.</p>
+<figure>
+<figcaption>
+Decision matrix about route to work. Preferred action in bold.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>High traffic day</th>
+<th>Low traffic day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Route 1</strong></td>
+<td>10 minutes</td>
+<td>10 minutes</td>
+</tr>
+<tr class="even">
+<td>Route 2</td>
+<td>20 minutes</td>
+<td>10 minutes</td>
+</tr>
+</tbody>
+</table>
+</figure>
 <h4 id="interactive">Interactive</h4>
-<p>If the English description isn’t that helpful try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>). The analysis will update whenever you stop editing text and defocus the text area.</p>
+<p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
 <textarea id="decision-table">
 
 |          | State 1 | State 2 |
@@ -132,29 +162,29 @@ A decision matrix describing the decision to purchase home insurance
 </ul>
 </div>
 <h4 id="source-code">Source code</h4>
-<p>Yet another way to explain dominance is with source code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">dominatesWeakly ::</span></a>
-<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">forall</span> rowId columnId cell column<span class="fu">.</span></a>
-<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">Eq</span> rowId <span class="ot">=&gt;</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">Table</span> rowId columnId cell (<span class="dt">NonEmptyList</span> cell) column <span class="ot">-&gt;</span> rowId <span class="ot">-&gt;</span> rowId <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-5" title="5">dominatesWeakly table rowId1 rowId2 <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">case</span> <span class="dt">Tuple</span> (Table.row table rowId1) (Table.row table rowId2) <span class="kw">of</span></a>
-<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">Tuple</span> (<span class="dt">Just</span> row1) (<span class="dt">Just</span> row2) <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb1-8" title="8">      <span class="dt">Just</span> <span class="fu">$</span> <span class="dt">Foldable</span><span class="fu">.all</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;=</span>) row1 row2)</a>
-<a class="sourceLine" id="cb1-9" title="9">    <span class="dt">Tuple</span> _ _ <span class="ot">-&gt;</span> <span class="dt">Nothing</span></a>
-<a class="sourceLine" id="cb1-10" title="10"></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="ot">dominatesStrongly ::</span></a>
-<a class="sourceLine" id="cb1-12" title="12">  <span class="kw">forall</span> rowId columnId cell column<span class="fu">.</span></a>
-<a class="sourceLine" id="cb1-13" title="13">  <span class="dt">Eq</span> rowId <span class="ot">=&gt;</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb1-14" title="14">  <span class="dt">Table</span> rowId columnId cell (<span class="dt">NonEmptyList</span> cell) column <span class="ot">-&gt;</span> rowId <span class="ot">-&gt;</span> rowId <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-15" title="15">dominatesStrongly table rowId1 rowId2 <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-16" title="16">  <span class="kw">case</span> <span class="dt">Tuple</span> (Table.row table rowId1) (Table.row table rowId2) <span class="kw">of</span></a>
-<a class="sourceLine" id="cb1-17" title="17">    <span class="dt">Tuple</span> (<span class="dt">Just</span> row1) (<span class="dt">Just</span> row2) <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb1-18" title="18">      <span class="dt">Just</span> <span class="fu">$</span></a>
-<a class="sourceLine" id="cb1-19" title="19">        <span class="dt">Foldable</span><span class="fu">.all</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;=</span>) row1 row2) <span class="fu">&amp;&amp;</span></a>
-<a class="sourceLine" id="cb1-20" title="20">        <span class="dt">Foldable</span><span class="fu">.any</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;</span>) row1 row2)</a>
-<a class="sourceLine" id="cb1-21" title="21">    <span class="dt">Tuple</span> _ _ <span class="ot">-&gt;</span> <span class="dt">Nothing</span></a></code></pre></div>
-<p>To hammer home the point about dominance being applicable in very general settings: <code>rowId</code>, <code>columnId</code> and <code>cell</code> are totally polymorphic types except for the constraint that <code>rowId</code>s can be compared for equality and <code>cell</code>s form a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>.</p>
+<p>Another way to explain dominance is with source code:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">dominatesWeakly ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-2" title="2">dominatesWeakly row1 row2 <span class="fu">=</span> <span class="dt">Foldable</span><span class="fu">.all</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;=</span>) row1 row2)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ot">dominatesStrongly ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-5" title="5">dominatesStrongly row1 row2 <span class="fu">=</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">Foldable</span><span class="fu">.all</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;=</span>) row1 row2) <span class="fu">&amp;&amp;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">Foldable</span><span class="fu">.any</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;</span>) row1 row2)</a></code></pre></div>
+<p>To hammer home the point about dominance being applicable in very general settings: <code>cell</code> is totally polymorphic except for the constraint that <code>cell</code>s form a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>.</p>
+<h4 id="math">Math</h4>
+<p>And the final view on dominance will be the fully mathematical one:</p>
+<h5 id="weak-dominance">Weak dominance</h5>
+<p>We can also describe weak dominance <span class="math inline">\(\preccurlyeq_{WD}\)</span> in symbols:</p>
+<p><span class="math display">\[a_i \preccurlyeq_{WD} a_j \leftrightarrow \forall s \in S\ (v(a_i, s) \leq v(a_j, s))\]</span></p>
+<p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a> of values <span class="math inline">\(V\)</span>.</p>
+<p>In other words, we start out with a partially ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can (sometimes) be compared to one another to determine which is preferable. Weak dominance is then a way of lifting the partial order of outcome valuations and turning it into a binary relation on actions—each of which comprises several outcomes across different states of the world.</p>
+<p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Antisymmetric_relation">antisymmetric</a>, <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a> and <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a>. Depending on how we handle incomparable elements in the original partial order of valuations, this means the weak dominance relation is a either a partial or total order.</p>
+<h5 id="strong-dominance">Strong dominance</h5>
+<p>In symbols, strong dominance <span class="math inline">\(\prec_{SD}\)</span> is:</p>
+<p><span class="math display">\[a_i \prec_{SD} a_j \leftrightarrow \forall s \in S\ (v(a_i, s) \leq v(a_j, s)) \wedge \exists s \in S\ (v(a_i, s) &lt; v(a_j, s))\]</span></p>
+<p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a> of values <span class="math inline">\(V\)</span>.</p>
+<p>In other words, we start out with a partially ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can (sometimes) be compared to one another to determine which is preferable. Strong dominance is then a way of lifting the partial order of outcome valuations and turning it into a binary relation on actions—each of which comprises several outcomes across different states of the world.</p>
+<p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Asymmetric_relation">asymmetric</a>, <a href="https://en.wikipedia.org/wiki/Irreflexive_relation">irreflexive</a>, and <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a>. Depending on how we handle incomparable elements in the original partial order of valuations, this means the strong dominance relation is a either a strict partial or a strict total order.</p>
 <hr class="references">
 <div id="refs" class="references">
 <div id="ref-peterson2017introduction">

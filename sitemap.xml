@@ -36,9 +36,16 @@
     </url>
 
     <url>
-        <loc>https://www.col-ex.org/posts/dominated-decisions/index.html</loc>
+        <loc>https://www.col-ex.org/posts/priority-decisions/index.html</loc>
         <changefreq>weekly</changefreq>
         
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/dominated-decisions/index.html</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2019-01-30</lastmod>
         <priority>0.8</priority>
     </url>
 

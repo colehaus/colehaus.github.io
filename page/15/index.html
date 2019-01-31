@@ -54,6 +54,70 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="../../posts/priority-decisions/">Priority decisions</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="../../tag/decision%2520theory/">decision theory</a></li>
+    
+      <li><a href="../../tag/interactive/">interactive</a></li>
+    
+      <li><a href="../../tag/yaas/">yaas</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="../../series/An%2520Introduction%2520to%2520Decision%2520Theory/">Series: An Introduction to Decision Theory</a></nav>
+        
+        <span class="date">Published on <time datetime="January 30, 2019">January 30, 2019</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>Explanations and interactive tools demonstrating maximin, maximax and leximin decision rules.</p></div>
+       
+
+        <p><a href="../../posts/dominated-decisions/">Last time</a>, we introduced the basic setup of decision theory and examined the dominance decision rule. We also emphasized that the dominance decision rule is “weak” because it applies in very general settings with limited information to go on.</p>
+<p>This time, we’ll look at other decision rules that apply in a very minimal setting.</p>
+<h3 id="maximin">Maximin</h3>
+<p>The first such decision rule is <a href="https://en.wikipedia.org/wiki/Minimax">maximin</a>.</p>
+<h4 id="prose">Prose</h4>
+<p>Maximin suggests that in any decision scenario, we look to the worst outcome that may come to pass under each plan of action. We should then pick the action which has the best such outcome. That is, we pick the action with the best worst case—maximize our minimum.</p>
+<h4 id="example">Example</h4>
+<p>You have the choice of two alternative routes to work. In good conditions, the first route takes 10 minutes and the second route 5 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes. With a scenario like this, the maximin rule demands that you take the first route since its worst case is only 10 minutes while the second route’s worst case is 20 minutes.</p>
+<figure>
+<figcaption>
+Decision matrix about route to work. Preferred action in bold.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>High traffic day</th>
+<th>Low traffic day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Route 1</strong></td>
+<td>10 minutes</td>
+<td>10 minutes</td>
+</tr>
+<tr class="even">
+<td>Route 2</td>
+<td>20 minutes</td>
+<td>5 minutes</td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+        <a href="../../posts/priority-decisions/">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="../../posts/dominated-decisions/">Dominated decisions</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -73,7 +137,7 @@ if (/Trident/.test(navigator.userAgent)) {
        </div>
 
        
-         <div class="abstract"><p>Preliminaries of decision theory and a basic interactive tool demonstrating dominance.</p></div>
+         <div class="abstract"><p>Preliminaries of decision theory and a basic interactive tool demonstrating the dominance decision rule.</p></div>
        
 
         <h3 id="decision-matrices">Decision matrices</h3>
@@ -110,8 +174,6 @@ A decision matrix describing the decision to purchase home insurance
 <h3 id="dominance">Dominance</h3>
 <p>The decision matrix we depicted above reflects one of the <span class="noted">simplest possible</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> settings. In particular, we don’t have any probabilities associated with the different states of the world (“Fire” or “No fire”) which makes it a “decision under ignorance”. Another key limitation is that we don’t have a number representing how good or bad each outcome is—that is, our outcomes have not been assigned <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a>.</p>
 <p>Because this setting is so minimal, it both has wide applicability—it makes very few assumptions that can be contradicted by facts on the ground—and limited insight—the best you can do with minimal information still isn’t very good.</p>
-<h4 id="prose">Prose</h4>
-<p>One of the rules that exemplifies both broad applicability and limited insight is the <a href="https://en.wikipedia.org/wiki/Dominating_decision_rule">dominating decision rule</a>. Action A weakly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world. Action A strongly dominates action B if it produces an outcome which is at least as good as that of action B in every state of the world AND is strictly better than action B in at least one state of the world.</p>
 
 
         <a href="../../posts/dominated-decisions/">Full post</a>
