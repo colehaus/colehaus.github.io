@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/assorted-links-xii/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/priority-decisions/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -157,7 +164,7 @@
     <url>
         <loc>https://www.col-ex.org/posts/moral-imperative-mortal-peril-maximizing/index.html</loc>
         <changefreq>weekly</changefreq>
-        
+        <lastmod>2019-02-11</lastmod>
         <priority>0.8</priority>
     </url>
 
@@ -213,7 +220,7 @@
     <url>
         <loc>https://www.col-ex.org/posts/exemplars-curse-now-with-more-math/index.html</loc>
         <changefreq>weekly</changefreq>
-        
+        <lastmod>2019-02-11</lastmod>
         <priority>0.8</priority>
     </url>
 
@@ -360,7 +367,7 @@
     <url>
         <loc>https://www.col-ex.org/posts/moral-limits-markets-critique/index.html</loc>
         <changefreq>weekly</changefreq>
-        <lastmod>2018-05-31</lastmod>
+        <lastmod>2019-02-11</lastmod>
         <priority>0.8</priority>
     </url>
 
@@ -472,7 +479,7 @@
     <url>
         <loc>https://www.col-ex.org/posts/pareto-examples/index.html</loc>
         <changefreq>weekly</changefreq>
-        
+        <lastmod>2019-02-11</lastmod>
         <priority>0.8</priority>
     </url>
 

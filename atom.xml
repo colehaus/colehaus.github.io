@@ -8,8 +8,49 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-01-30T00:00:00Z</updated>
+    <updated>2019-02-11T00:00:00Z</updated>
     <entry>
+    <title>Assorted Links XII</title>
+    <link href="https://www.col-ex.org/posts/assorted-links-xii/" />
+    <id>https://www.col-ex.org/posts/assorted-links-xii/</id>
+    <published>2019-02-11T00:00:00Z</published>
+    <updated>2019-02-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<ol type="1">
+<li><a href="https://ganbreeder.app">Ganbreeder</a></li>
+</ol>
+<figure>
+<img src="https://www.col-ex.org/images/assorted-links-xii/catfish.jpg" />
+</figure>
+<ol start="2" type="1">
+<li><a href="https://www.nber.org/papers/w5050.pdf">On the number and size of nations</a></li>
+</ol>
+<blockquote>
+<p>This paper studies the equilibrium determination of the number of political jurisdictions […] . We focus on the trade off between the benefits of large jurisdictions in terms of economies of scale and the costs of heterogeneity of large and diverse populations.</p>
+</blockquote>
+<p>The model they use is grievously unrealistic, but it’s a question I’d long been idly interested in.</p>
+<ol start="3" type="1">
+<li><a href="http://www.apnorc.org/projects/Documents/EPIC%20fact%20sheet_v4_DTP.pdf">Is the Public Willing to Pay to Help Fix Climate Change?</a></li>
+</ol>
+<blockquote>
+<p>Fifty-eight percent of those who think climate change is happening support a carbon tax, while 62 percent of those who do not accept that climate change is taking place oppose a carbon tax.</p>
+</blockquote>
+<blockquote>
+<p>Support for a carbon tax is generally higher once told how the funds would be used.</p>
+</blockquote>
+<p>Provides some extra context on <a href="https://www.col-ex.org/posts/why-opposition-pigovian-taxes/">Gas taxes for thee, but not for me</a>.</p>
+<ol start="4" type="1">
+<li><a href="http://cityobservatory.org/ten-things-more-inequitable-that-road-pricing/">Ten things more inequitable than road pricing</a></li>
+</ol>
+<blockquote>
+<p>Any time we charge a positive price for anything, the cost of paying that price is a higher burden on the poor than it is on the rich. It takes a special combination of myopia and tunnel vision to look at the prospect of congestion pricing anything other than a minor blip on a system of transportation finance that is systematically unfair to the poor and those who don’t own (or can’t afford) car.</p>
+</blockquote>
+<p>Good rebuttal to a common objection to Pigouvian taxes as discussed <a href="https://www.col-ex.org/posts/why-opposition-pigovian-taxes/#distributional-impact">here</a>.</p>
+<ol start="5" type="1">
+<li><a href="https://osf.io/preprints/bitss/zamry/">Predicting the Replicability of Social Science Lab Experiments</a> and <a href="https://cos.io/about/news/can-machines-determine-credibility-research-claims-center-open-science-joins-new-darpa-program-find-out/">Can machines determine the credibility of research claims? The Center for Open Science joins a new DARPA program to find out</a></li>
+</ol>
+<p><!--more--></p>]]></summary>
+</entry>
+<entry>
     <title>Priority decisions</title>
     <link href="https://www.col-ex.org/posts/priority-decisions/" />
     <id>https://www.col-ex.org/posts/priority-decisions/</id>
@@ -306,7 +347,7 @@
 </div>
 <p>To hammer home the point about dominance being applicable in very general settings: <code>cell</code> is totally polymorphic except for the constraint that <code>cell</code>s form a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>.</p>
 <h2 id="math">Math</h2>
-<p>And the final view on dominance will be the fully mathematical one:</p>
+<p>And the final view on dominance will be <span class="noted">the fully mathematical one</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>:</p>
 <h3 id="weak-dominance">Weak dominance</h3>
 <p>We can also describe weak dominance <span class="math inline">\(\preccurlyeq_{WD}\)</span> in symbols:</p>
 <p><img src="https://www.col-ex.org/images/latex/-3272411906172403892.svg" title="a_i \preccurlyeq_{WD} a_j \leftrightarrow \forall s \in S\ (v(a_i, s) \leq v(a_j, s))" /></p>
@@ -330,6 +371,9 @@
 <ol>
 <li><div id="fn1">
 <p>Ways we could go simpler: only one action, only one state of the world. But these settings are <em>too</em> simple and rather boring.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>This perspective doesn’t really appear in <span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction">2017</a>)</span>; any errors here are my own.<a href="#fnref2" class="footnote-back">↩</a></p>
 </div></li>
 </ol>
 </section>]]></summary>
@@ -3281,14 +3325,14 @@ A single death is a tragedy; a million deaths is a statistic. <span class="attri
 <p>Whatever hopelessness you feel watching <a href="https://en.wikipedia.org/wiki/Cool_Hand_Luke">Cool Hand Luke</a>, it would echo and rebound magnified from the cells of more than 10 million detainees <span class="citation" data-cites="walmsley2015">(Walmsley and others <a href="#ref-walmsley2015">2015</a>)</span>.</p>
 <p>Whatever suffocation you feel watching <a href="https://en.wikipedia.org/wiki/Requiem_for_a_Dream">Requiem for a Dream</a>, you’d feel it on behalf of the approximately 164 million people with substance use disorders <span class="citation" data-cites="owidsubstance">(Ritchie and Roser <a href="#ref-owidsubstance">2018</a>)</span>.</p>
 <p>Whatever ache you feel watching <a href="https://en.wikipedia.org/wiki/Grave_of_the_Fireflies">Grave of the Fireflies</a>, it would hollow you out each day along with the approximately 815 million people who are chronically undernourished <span class="citation" data-cites="agriculture2014">(Organization <a href="#ref-agriculture2014">2014</a>)</span>.</p>
-<p>But, for good or for ill, we are bounded and parochial. We cannot comprehend in any but the most abstracted ways the daily ruin that nature visits on us, that we visit on ourselves and each other.</p>
+<p>But, for good or for ill, we are bounded and parochial. We cannot comprehend in any but the most abstracted ways the daily ruin that nature visits on us, that we visit on ourselves and on each other.</p>
 <p><!-- - Blue valentine: alcoholism --> <!-- - Old yeller, where the red fern grows: animals --> <!-- - Still Alice: Alzheimer's --> <!-- - Still life: Dying alone --> <!-- - ET: joke --> <!-- - Kramer vs Kramer: divorce --> <!-- - Mustang: Women & autonomy --> <!-- - One flew over the cuckoo's nest: Mental health --> <!-- - Philadelphia: AIDS --></p>
 <h1 id="the-world-as-we-imagine-it">The world as we imagine it</h1>
 <blockquote>
 [T]hose who would play this [utopian] game on the strength of their own private opinion … and would brave the frightful bloodshed and misery that would ensue if the attempt was resisted—must have a serene confidence in their own wisdom on the one hand and a recklessness of other people’s sufferings on the other, which Robespierre and St. Just […] scarcely came up to. <span class="attribution"><span class="citation" data-cites="mill1879">(Mill <a href="#ref-mill1879">1879</a>)</span></span>
 </blockquote>
 <p>The tragedies of life on Earth are no recent revelation. The <a href="https://en.wikipedia.org/wiki/Epic_of_Gilgamesh">Epic of Gilgamesh</a>—our earliest surviving great work of literature—is about the hero’s vain attempt to undo the great tragedy of his life.</p>
-<p>For some, the knowledge that tragedy has been with us from the beginning inspires not acquiescence but determination that we might leave it behind before we reach <a href="https://en.wikipedia.org/wiki/Heat_death_of_the_universe">the end</a>. These are names that go down in history. Names like:</p>
+<p>For some, the knowledge that tragedy has been with us from the beginning inspires not acquiescence but determination that we might leave it behind before we reach <a href="https://en.wikipedia.org/wiki/Heat_death_of_the_universe">the end</a>. These are names that go down in history. The names of those that struggle for a more perfect future, obstacles be damned. Names like:</p>
 <p><!--more--></p>
 <dl>
 <dt>Maximilien Robespierre</dt>
@@ -3297,11 +3341,8 @@ A single death is a tragedy; a million deaths is a statistic. <span class="attri
 <dt>Adolph Hitler</dt>
 <dd><p>“The exposure of sick, weak, deformed children, in short their destruction, was more decent and in truth a thousand times more humane than the wretched insanity of our day which preserves the most pathological subject, and indeed at any price, and yet takes the life of a hundred thousand healthy children in consequence of birth control or through abortions, in order subsequently to breed a race of degenerates burdened with illnesses.”</p>
 </dd>
-<dt>Charles Trevelyan</dt>
-<dd><p>In the face of the catastrophic Irish famine: “If the Irish once find out that there are any circumstances in which they can get free government grants, we shall have a system of mendicancy such as the world never knew.”</p>
-</dd>
 <dt>George W. Bush</dt>
-<dd><p>“In many nations of the Middle East – countries of great strategic importance – democracy has not yet taken root. And the questions arise: Are the peoples of the Middle East somehow beyond the reach of liberty? Are millions of men and women and children condemned by history or culture to live in despotism? Are they alone never to know freedom, and never even to have a choice in the matter? I, for one, do not believe it.”</p>
+<dd><p>“In many nations of the Middle East—countries of great strategic importance—democracy has not yet taken root. And the questions arise: Are the peoples of the Middle East somehow beyond the reach of liberty? Are millions of men and women and children condemned by history or culture to live in despotism? Are they alone never to know freedom, and never even to have a choice in the matter? I, for one, do not believe it.”</p>
 </dd>
 <dt>Pol Pot</dt>
 <dd><p>“I came to join the revolution, not to kill the Cambodian people. Look at me now. Am I a violent person? No. So, as far as my conscience and my mission were concerned, there was no problem.”</p>
@@ -3313,7 +3354,7 @@ A single death is a tragedy; a million deaths is a statistic. <span class="attri
 <blockquote>
 This war is not as in the past; whoever occupies a territory also imposes on it his own social system. Everyone imposes his own system as far as his army can reach. It cannot be otherwise. If now there is not a communist government in Paris, this is only because Russia has no an army which can reach Paris in 1945. <span class="attribution">—Actually Joseph Stalin</span>
 </blockquote>
-<p>If hubris is the problem, is the answer simply to look at all the fables on hubris—<a href="https://en.wikipedia.org/wiki/Icarus">Icarus</a>, <a href="https://en.wikipedia.org/wiki/Phaethon">Phaethon</a>, <a href="https://en.wikipedia.org/wiki/Paradise_Lost">Paradise Lost</a>, <a href="https://en.wikipedia.org/wiki/Frankenstein">Frankenstein</a>—and follow the sage advice found therein? Alas, the complexity of the world as it is exceeds the complexity of the world as we render it in stories. There’s no author to ensure that our repentance is rewarded and we cannot relinquish power to its rightful source.</p>
+<p>If hubris is the problem, is the answer simply to look at all the fables on hubris—<a href="https://en.wikipedia.org/wiki/Icarus">Icarus</a>, <a href="https://en.wikipedia.org/wiki/Phaethon">Phaethon</a>, <a href="https://en.wikipedia.org/wiki/Paradise_Lost">Paradise Lost</a>, <a href="https://en.wikipedia.org/wiki/Frankenstein">Frankenstein</a>—and follow the sage advice found therein? Alas, the complexity of the world as it is exceeds the complexity of the world as we render it in stories. There’s no author to ensure that our humility is rewarded and we cannot relinquish power to its rightful source.</p>
 <p>On the contrary, the only way out is through—we must maximize. As Stalin suggests in the epigraph, I fear that maximizers are destined to win out over satisficers. Just as a strain of bacteria which reproduces would dominate a petri dish when pitted against a sterile strain and a proselytizing religion spreads farther and faster than a disinterested one, totalizing world-systems tend to crowd out complacent ones. So whether the maximizer you fear is <a href="https://www.buzzfeednews.com/article/tedchiang/the-real-danger-to-civilization-isnt-ai-its-runaway">capitalism</a> or <a href="https://en.wikipedia.org/wiki/Superintelligence:_Paths,_Dangers,_Strategies">its claimed successor</a>, there is no refuge from maximizing.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>The only possibility left to us is to enthrone a benevolent maximizer—usher in utopia—before one of the many indifferent maximizers <a href="https://en.wikipedia.org/wiki/There_is_no_alternative">squeezes out all alternatives</a>. That is, we must find and reify the right epistemology, ethics, politics, economics, etc.—<a href="#the-world-as-we-understand-it">the world as we understand it forbids stasis</a>. And there are no half measures in sight—it’s <a href="#maximize-or-be-maximized">maximize or be maximized</a>. But we must undertake this task with full knowledge that it is doubtful and dangerous—<a href="#the-world-as-we-imagine-it">the world is better and worse and more than we imagine it to be</a>.</p>
@@ -3323,13 +3364,16 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 <ol type="1">
 <li><p>Inevitably, <a href="#the-world-as-we-understand-it">The world as we understand it</a> cannot represent all the ills of the world. Any selection of problems is incomplete and no particular instance of a problem as dramatized in a film can represent the whole class. The current list has many omissions which reflect limited data, time, and my own parochialism.</p></li>
 <li><p>I’m not a wholly credulous adherent of the <a href="https://en.wikipedia.org/wiki/Great_man_theory">great man theory</a> of history. The implied blame for the names listed in <a href="#the-world-as-we-imagine-it">The world as we imagine it</a> should surely be spread across many more actors.</p></li>
-<li><p>The arguments presented for <a href="#maximize-or-be-maximized">Maximize or be maximized</a> are far from conclusive. I am not myself convinced the claim is correct. Even if it’s not, I think the moral imperative to maximize can be made (under certain ethical views) in terms of opportunity cost. Opportunity cost just doesn’t stir the heart in the same way that averting catastrophe does.</p></li>
+<li><p>The arguments presented for <a href="#maximize-or-be-maximized">Maximize or be maximized</a> are far from conclusive. I am not myself convinced the claim is correct. (Edit: It turns out this argument that maximizers win in the end goes by the name “the singleton hypothesis” <span class="citation" data-cites="bostrom2006singleton">(Bostrom <a href="#ref-bostrom2006singleton">2006</a>)</span>.) Even if it’s not, I think the moral imperative to maximize can be made (under certain ethical views) in terms of opportunity cost.</p></li>
 </ol>
 </div>
 <hr />
 <div id="refs" class="references">
 <div id="ref-berardo1992">
 <p>Berardo, F. M. 1992. “Widowhood.” In <em>Encyclopedia of Sociology</em>, edited by E. F. Borgatta and M. L. Borgatta. Macmillan.</p>
+</div>
+<div id="ref-bostrom2006singleton">
+<p>Bostrom, Nick. 2006. “What Is a Singleton.” <em>Linguistic and Philosophical Investigations</em> 5 (2): 48–54. <a href="http://www.fhi.ox.ac.uk/wp-content/uploads/singleton.pdf" class="uri uri">http://www.fhi.ox.ac.uk/wp-content/uploads/singleton.pdf</a>.</p>
 </div>
 <div id="ref-desvousges1992">
 <p>Desvousges, William H, F Reed Johnson, Richard W Dunford, Kevin J Boyle, Sara P Hudson, and K Nicole Wilson. 1992. <em>Measuring Nonuse Damages Using Contingent Valuation: An Experimental Evaluation of Accuracy</em>. Vol. 1992. Research Triangle Institute Research Triangle Park, NC. <a href="https://www.rti.org/sites/default/files/resources/rti-publication-file-f8cec80a-7d7e-486d-bab3-0b9867eb1ef5.pdf" class="uri uri">https://www.rti.org/sites/default/files/resources/rti-publication-file-f8cec80a-7d7e-486d-bab3-0b9867eb1ef5.pdf</a>.</p>
@@ -3932,17 +3976,17 @@ After what I had seen of human conduct in the years of deprivation and harshness
     <id>https://www.col-ex.org/posts/exemplars-curse-now-with-more-math/</id>
     <published>2018-07-06T00:00:00Z</published>
     <updated>2018-07-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h1 id="intro">Intro</h1>
+    <summary type="html"><![CDATA[<p>Edit: <span class="citation" data-cites="marks2008satisficer">(Marks <a href="#ref-marks2008satisficer">2008</a>)</span> covers essentially the same ground. But there’s no interactive calculator!</p>
+<h1 id="intro">Intro</h1>
 <p><a href="https://www.col-ex.org/posts/exemplars-curse-singapore/">Last time</a>, I outlined the exemplar’s curse in the context of Singapore with a parable and an informal description. Rest easy; I’ve heard your needful clamoring—I’ll now describe the curse more precisely with math.</p>
 <h1 id="the-exemplars-curse">The exemplar’s curse</h1>
-<p>Restating the core idea in words: The exemplar’s curse occurs when we select an exemplar from a set of outcomes which resulted from both stochastic and deterministic factors. If many outcomes have similarly compelling deterministic factors, the chosen winner is probably unusually lucky. Reversion to the mean then suggests that the chosen winner will disappoint when the deterministic factors are replicated.</p>
+<p>Restating the core idea in words: The exemplar’s curse occurs when we select an exemplar from a set of outcomes which resulted from both stochastic and deterministic factors. If many outcomes have similarly compelling deterministic factors, the chosen winner is probably unusually lucky. Math then suggests that the chosen winner will disappoint when the deterministic factors are replicated.</p>
 <h2 id="model">Model</h2>
-<p>(If you don’t like the mathematical exposition that follows, you can also try <span class="citation" data-cites="barnett2004">(Barnett, Van Der Pols, and Dobson <a href="#ref-barnett2004">2004</a>)</span>.)</p>
-<p>We can model this with the use of <a href="https://en.wikipedia.org/wiki/Random_variable">random variables</a>. We’ll call our bundle of deterministic factors <span class="math inline">\(\mathcal{D}\)</span> and say they range uniformly in cumulative value from <span class="math inline">\(0\)</span> to <span class="math inline">\(D\)</span> where <span class="math inline">\(D\)</span> is finite. Our bundle of stochastic factors <span class="math inline">\(\mathcal{S}\)</span> range uniformly in value from from <span class="math inline">\(0\)</span> to <span class="math inline">\(S\)</span> where <span class="math inline">\(S\)</span> is finite. Since we observe only visible outcomes rather than underlying causal factors, we see <span class="math inline">\(\mathcal{O} = \mathcal{D} + \mathcal{S}\)</span>. The exemplar’s curse is then about the inferrable properties of the causal factors <span class="math inline">\(\mathcal{D}\)</span> corresponding to the selected maximum <span class="math inline">\(\mathcal{O}\)</span> from a set of outcomes <span class="math inline">\(\mathbb{O}\)</span>. In other words, if we have a set of observable outcomes <span class="math inline">\(\mathbb{O}\)</span> and select the best outcome from that set <span class="math inline">\(\mathcal{O}\)</span>, what can we infer about the underlying structure of <span class="math inline">\(\mathcal{O}\)</span>—how big are that <span class="math inline">\(\mathcal{O}\)</span>’s <span class="math inline">\(\mathcal{D}\)</span> and <span class="math inline">\(\mathcal{S}\)</span>?</p>
+<p>We can model this with the use of <a href="https://en.wikipedia.org/wiki/Random_variable">random variables</a>. We’ll say that there’s a bundle of deterministic factors which we’ll represent as having a cumulative value (on some presently ill-defined scale of quality) ranging uniformly from <span class="math inline">\(0\)</span> to <span class="math inline">\(D\)</span> where <span class="math inline">\(D\)</span> is finite. Our bundle of stochastic factors range uniformly in value from from <span class="math inline">\(0\)</span> to <span class="math inline">\(S\)</span> where <span class="math inline">\(S\)</span> is finite. Since we observe only visible outcomes rather than underlying causal factors, we see <span class="math inline">\(O = D + S\)</span>. The exemplar’s curse is then about the inferrable properties of the causal factors corresponding to the selected maximum <span class="math inline">\(O\)</span> from a set of outcomes <span class="math inline">\(\mathbb{O}\)</span>. In other words, if we have a set of observable outcomes <span class="math inline">\(\mathbb{O}\)</span> and select the best outcome <span class="math inline">\(O\)</span> from that set, what can we infer about the underlying structure of <span class="math inline">\(O\)</span>—how big are that <span class="math inline">\(O\)</span>’s <span class="math inline">\(D\)</span> and <span class="math inline">\(S\)</span>?</p>
 <h1 id="false-exemplars">False exemplars</h1>
-<p>In the last post, we only went so far as to claim that we should expect replicating causal factors to produce disappointing outcomes due to reversion to the mean. That is, the stochastic factors <span class="math inline">\(\mathcal{S}_1\)</span> for the maximum outcome <span class="math inline">\(\mathcal{O}_1 = \max \mathbb{O}\)</span> are likely better than average (<span class="math inline">\(\frac{S}{2}\)</span>). If we generate a new outcome <span class="math inline">\(\mathcal{O}_2\)</span> using the same deterministic factors <span class="math inline">\(\mathcal{D}\)</span> that served us well in <span class="math inline">\(\mathcal{O}_1\)</span>, we should expect our new stochastic factors to be worse <span class="math inline">\(\mathcal{S}_2 &lt; \mathcal{S}_1\)</span> and so we should expect <span class="math inline">\(\mathcal{O}_2 &lt; \mathcal{O}_1\)</span>.</p>
-<p>This leaves a open a compelling retort. One could say, “Even though I’m too optimistic about the eventual outcome, in selecting the exemplar, I’m still selecting the best deterministic factors. That means I’m still making the best choice I can so no harm done.”</p>
-<p>Alas, this is not true. Depending on the parameters, there could be only a vanishingly small chance that the bundle of deterministic factors corresponding to the best outcome (the sum of the deterministic and stochastic factors) is also the best bundle of deterministic factors when looking <em>only</em> at the deterministic factors. In symbols, supposing we have a projection function <span class="math inline">\(p_\mathcal{D} : \mathbb{O} \rightarrow \mathbb{D}\)</span> which finds the bundle of deterministic factors <span class="math inline">\(\mathcal{D}\)</span> used in outcome <span class="math inline">\(\mathcal{O}\)</span>, we’re interested in <span class="math inline">\(P(\max \mathbb{D} = p_\mathcal{D}(\max \mathbb{O}))\)</span>.</p>
+<p>In the last post, we only went so far as to claim that we should expect replicating causal factors to produce disappointing outcomes due to a sort of reversion to the mean. That is, the stochastic factors <span class="math inline">\(\mathcal{S}_1\)</span> for the maximum outcome <span class="math inline">\(O_1 = \max \mathbb{O}\)</span> are likely better than average (<span class="math inline">\(\frac{S}{2}\)</span>). If we generate a new outcome <span class="math inline">\(O_2\)</span> using the same deterministic factors <span class="math inline">\(\mathcal{D}\)</span> that served us well in <span class="math inline">\(O_1\)</span>, we should expect our new stochastic factors to be worse <span class="math inline">\(S_2 &lt; S_1\)</span> and so we should expect <span class="math inline">\(O_2 &lt; O_1\)</span>.</p>
+<p>This leaves a open a compelling retort. One could say, “Even though I’m too optimistic about the eventual outcome, in selecting the exemplar, I’m still selecting the best deterministic factors. That means I’m still making the best choice I can, so no harm done.”</p>
+<p>Alas, this is not true. Depending on the parameters, there could be only a vanishingly small chance that the bundle of deterministic factors corresponding to the best outcome (the sum of the deterministic and stochastic factors) is also the best bundle of deterministic factors when looking <em>only</em> at the deterministic factors. In symbols, supposing we have a projection function <span class="math inline">\(p_\mathcal{D} : \mathbb{O} \rightarrow \mathbb{D}\)</span> which finds the <span class="math inline">\(D\)</span> used in outcome <span class="math inline">\(O\)</span>, we’re interested in <span class="math inline">\(P(\max \mathbb{D} = p_\mathcal{D}(\max \mathbb{O}))\)</span>.</p>
 <p>For example, if we choose the max from 1000 outcomes and the value of stochastic factors ranges from 0 to 100 while the value of deterministic factors ranges from 0 to 1, we should be quite surprised if our best outcome actually has the best deterministic factors.</p>
 <h1 id="calculator">Calculator</h1>
 <p>We can help build up an intuition around this math using the calculator below. The calculator uses <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo methods</a> to estimate the probability that the maximum outcome corresponds to the maximum bundle of deterministic factors.</p>
@@ -3950,7 +3994,7 @@ After what I had seen of human conduct in the years of deprivation and harshness
 <p>You can change the range of values for stochastic and deterministic factors and change the number of outcomes we’re taking the max from (i.e. Our winner is the winner out of how many contestants?).</p>
 <p>This results in:</p>
 <ul>
-<li>The mean value of stochastic factors in best outcomes across Monte Carlo samples. This allows us to estimate the magnitude of expected mean regression.</li>
+<li>The mean value of stochastic factors in best outcomes across Monte Carlo samples. This allows us to estimate the magnitude of expected bias.</li>
 <li>An estimated probability that our observed best outcome actually corresponds to the best bundle of deterministic factors.</li>
 <li>A chart showing all the trials used to produce the estimate. One interesting thing to note about the chart is that the number of points on the diagonal corresponds to the probability of ‘success’ (i.e. the probability that the best outcome also has the best deterministic factors).</li>
 </ul>
@@ -3974,7 +4018,7 @@ After what I had seen of human conduct in the years of deprivation and harshness
 <p>Some trends worth noting:</p>
 <ul>
 <li>As the stochastic factors get relatively larger, the probability goes down</li>
-<li>As the deterministic factors get relatively larger, the probability goes down</li>
+<li>As the deterministic factors get relatively larger, the probability goes up</li>
 <li>As the number of outcomes goes up, the probability goes down and the mean of stochastic factors goes up</li>
 </ul>
 <p>This confirms the intuition highlighted by the example a few paragraphs up.</p>
@@ -3982,8 +4026,8 @@ After what I had seen of human conduct in the years of deprivation and harshness
 <p>So we see that the exemplar’s curse is even worse than we thought. It’s not just about our outcomes regressing to the mean in spite of making the best possible choice. It will often lead us to pick the wrong exemplar!</p>
 <hr />
 <div id="refs" class="references">
-<div id="ref-barnett2004">
-<p>Barnett, Adrian G, Van Der PolsJolieke C, and Annette J Dobson. 2004. “Regression to the Mean: What It Is and How to Deal with It.” <em>International Journal of Epidemiology</em> 34 (1). Oxford University Press: 215–20. <a href="https://academic.oup.com/ije/article/34/1/215/638499" class="uri uri">https://academic.oup.com/ije/article/34/1/215/638499</a>.</p>
+<div id="ref-marks2008satisficer">
+<p>Marks, Robert E. 2008. “The Satisficer’s Curse.” <a href="http://www.agsm.edu.au/bobm/papers/marks-tsc.pdf" class="uri uri">http://www.agsm.edu.au/bobm/papers/marks-tsc.pdf</a>.</p>
 </div>
 </div>]]></summary>
 </entry>
@@ -5116,6 +5160,7 @@ r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 <p>Once we leave the most naive versions of rational choice, we can suggest that humans sometimes act for expressive reasons. That is, we intend to or happen to communicate with our actions. When I show up late to pick up my child, I express that I don’t value the time of the day-care workers. Conversely, punctuality expresses that I do. When I agree to accept nuclear waste in my town, I am communicating that I value my fellow citizens and that I am sensitive to claims of civic need.</p>
 <p>On this view, market norms can crowd out other norms because they make it harder to express what people hope to express. Prompt pick up might express respect or it might express unwillingness to pay. Agreeing to house nuclear waste might express civic responsibility or it might just be a cash grab. If people are going to misinterpret an action, it’s a much less appealing expression.</p>
 <p>If we accept this story, crowding out isn’t unique to the introduction of market incentives. <em>Any</em> additional incentives muddy the expressive waters. Because observers only see the action and not the intention, they’re left to guess which predominated.</p>
+<p>(Edit: It turns out the theory described above is also talked about in the literature. See, for example, <span class="citation" data-cites="gneezy2011and">(Gneezy, Meier, and Rey-Biel <a href="#ref-gneezy2011and">2011</a>)</span>. I wish Sandel had engaged with this literature.)</p>
 <h1 id="preferences-are-malleable">Preferences are malleable</h1>
 <p>Markets as ‘corrupting’ is largely contingent. It depends on the meaning we assign to markets which is socioculturally determined. We can imagine some <a href="https://en.wikipedia.org/wiki/Objectivism_(Ayn_Rand)">Randian</a> paradise in which markets are held in the highest esteem. Here, allocating a thing via the market elevates rather than degrades.</p>
 <p>Even short of some mass reeducation program that shifts the whole culture, I think this is relevant. I and many economists object to the use of markets much less than average, it seems. This suggests that at least some individuals can independently make peace with atypical markets. If the meaning assigned to markets changed enough for enough people, markets might be both more efficient and non-corrupting.</p>
@@ -5135,6 +5180,9 @@ r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 <div id="refs" class="references">
 <div id="ref-acemoglu2005">
 <p>Acemoglu, Daron, Simon Johnson, and James A Robinson. 2005. “Institutions as a Fundamental Cause of Long-Run Growth.” <em>Handbook of Economic Growth</em> 1. Elsevier: 385–472. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf" class="uri uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.464.9644&amp;rep=rep1&amp;type=pdf</a>.</p>
+</div>
+<div id="ref-gneezy2011and">
+<p>Gneezy, Uri, Stephan Meier, and Pedro Rey-Biel. 2011. “When and Why Incentives (Don’t) Work to Modify Behavior.” <em>Journal of Economic Perspectives</em> 25 (4): 191–210. <a href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.25.4.191" class="uri uri">https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.25.4.191</a>.</p>
 </div>
 <div id="ref-sandel2012">
 <p>Sandel, Michael J. 2012. <em>What Money Can’t Buy: The Moral Limits of Markets</em>. Macmillan.</p>
@@ -6559,10 +6607,15 @@ The annual quota on new H-1B issuances fell from 195,000 to 65,000 for employees
 </div>
 <h1 id="scenarios-with-pareto-improvements">Scenarios with Pareto improvements</h1>
 <p>Person A and B split a pie in thirds. They each eat one third of the pie and throw the final third in the trash. Assuming everyone prefers more pie to less, giving half the pie to each person is a Pareto improvement.</p>
-<p>The <a href="https://en.wikipedia.org/wiki/K_Foundation_Burn_a_Million_Quid">K foundation burns a million quid</a>. Assuming people prefer more money to less and no one cares about performance art, it’s a Pareto improvement to <em>not</em> burn the million quid.</p>
 <p>Person A has 100 apples and is indifferent between 99 apples and 100 apples. Person B has 100 oranges and is indifferent between 99 oranges and 100 oranges. Assuming both parties prefer 1 of any given fruit to 0, it would be a Pareto improvement for person A to trade their 100th apple in exchange for person B’s 100th orange.</p>
 <h1 id="belaboring-the-obvious">Belaboring the obvious</h1>
-<p>The Pareto approach cannot render judgment as to weather the Holocaust is better than not-the-Holocaust. On the other hand, it condemns foregone trade. This is not an approach that should take pride of place in evaluating policies.</p>
+<p>The Pareto approach cannot render judgment as to weather the Holocaust is better than not-the-Holocaust. On the other hand, it condemns foregone trade. This is not an approach that should take pride of place in evaluating policies. For an early article on how limiting thin, value-free analyses like these are, see <span class="citation" data-cites="harrod1938scope">(Harrod <a href="#ref-harrod1938scope">1938</a>)</span>.</p>
+<hr />
+<div id="refs" class="references">
+<div id="ref-harrod1938scope">
+<p>Harrod, Roy F. 1938. “Scope and Method of Economics.” <em>The Economic Journal</em> 48 (191). JSTOR: 383–412.</p>
+</div>
+</div>
 <section class="footnotes">
 <hr />
 <ol>
