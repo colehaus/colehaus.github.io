@@ -125,12 +125,14 @@ Decision matrix about route to work. Preferred action in bold.
 <h4 id="interactive">Interactive</h4>
 <p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
 <textarea id="maximin-table" class="decision-table">
+```{=html}
 
 |          | State 1 | State 2 | State 3|
 |----------|---------|---------|--------|
 | Action 1 | a       | y       | z      |
 | Action 2 | b       | c       | y      |
 | Action 3 | b       | d       | z      |
+```
 </textarea>
 <div id="maximin-analysis">
 <ul>
@@ -143,9 +145,9 @@ Decision matrix about route to work. Preferred action in bold.
 <p>We see that with the default input table, Actions 2 and 3 beat Action 1 since the worst case of ‘b’ is preferable to the worst case of ‘a’. Actions 2 and 3 beat each other since they have the same worst case—‘b’—and we’re using a weak maximin here.</p>
 <h4 id="code">Code</h4>
 <p>We can also explain maximin with its implementing source code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">maximin ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-2" title="2">maximin row1 row2 <span class="fu">=</span> Foldable1.minimum row1 <span class="fu">&gt;=</span> Foldable1.minimum row2</a></code></pre></div>
-<p>Again, maximin applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <span class="noted"><a href="https://en.wikipedia.org/wiki/Total_order">orderable</a></span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">maximin ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-2" title="2">maximin row1 row2 <span class="ot">=</span> Foldable1.minimum row1 <span class="op">&gt;=</span> Foldable1.minimum row2</a></code></pre></div>
+<p>Again, maximin applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <span class="noted"><a href="https://en.wikipedia.org/wiki/Total_order">orderable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <h4 id="math">Math</h4>
 <p>We can also describe maximin <span class="math inline">\(\preccurlyeq_{MaMi}\)</span> in symbols:</p>
 <p><span class="math display">\[a_i \preccurlyeq_{MaMi} a_j \leftrightarrow \min_{s \in S} v(a_i, s) \leq \min_{s \in S} v(a_j, s)\]</span></p>
@@ -187,12 +189,14 @@ Decision matrix about route to work. Preferred action in bold.
 <h4 id="interactive-1">Interactive</h4>
 <p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
 <textarea id="maximax-table" class="decision-table">
+```{=html}
 
 |          | State 1 | State 2 | State 3|
 |----------|---------|---------|--------|
 | Action 1 | a       | y       | z      |
 | Action 2 | b       | c       | y      |
 | Action 3 | b       | d       | z      |
+```
 </textarea>
 <div id="maximax-analysis">
 <ul>
@@ -205,8 +209,8 @@ Decision matrix about route to work. Preferred action in bold.
 <p>We see that with the default input table, Actions 1 and 3 beat Action 2 since the best case of ‘z’ is preferable to the best case of ‘y’. Actions 1 and 3 beat each other since they have the same best case—‘z’—and we’re using a weak maximax here.</p>
 <h4 id="code-1">Code</h4>
 <p>We can also explain maximax with its implementing source code:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">maximax ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb2-2" title="2">maximax row1 row2 <span class="fu">=</span> Foldable1.maximum row1 <span class="fu">Prelude.&gt;=</span> Foldable1.maximum row2</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">maximax ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb2-2" title="2">maximax row1 row2 <span class="ot">=</span> Foldable1.maximum row1 <span class="op">Prelude.&gt;=</span> Foldable1.maximum row2</a></code></pre></div>
 <p>Again, maximax applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <a href="https://en.wikipedia.org/wiki/Total_order">orderable</a>.</p>
 <h4 id="math-1">Math</h4>
 <p>We can also describe maximax <span class="math inline">\(\preccurlyeq_{MaMa}\)</span> in symbols:</p>
@@ -254,12 +258,14 @@ Decision matrix about route to work. Preferred action in bold.
 <h4 id="interactive-2">Interactive</h4>
 <p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
 <textarea id="leximin-table" class="decision-table">
+```{=html}
 
 |          | State 1 | State 2 | State 3|
 |----------|---------|---------|--------|
 | Action 1 | a       | y       | z      |
 | Action 2 | b       | c       | y      |
 | Action 3 | b       | d       | z      |
+```
 </textarea>
 <div id="leximin-analysis">
 <ul>
@@ -271,22 +277,22 @@ Decision matrix about route to work. Preferred action in bold.
 <p>We see that with the default input table, Actions 2 and 3 beat Action 1 since the worst case of ‘b’ is preferable to the worse case of ‘a’. Actions 3 beats Action 2 since the second worst case of ‘d’ is preferable to the second worst case ‘c’</p>
 <h4 id="code-2">Code</h4>
 <p>We can also explain leximin with its implementing source code:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">leximin ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb3-2" title="2">leximin row1 row2 <span class="fu">=</span></a>
-<a class="sourceLine" id="cb3-3" title="3">    fromMaybe true <span class="fu">&lt;&lt;&lt;</span> List.head <span class="fu">&lt;&lt;&lt;</span> NonEmpty.mapMaybe keepNonEq <span class="fu">$</span></a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">leximin ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb3-2" title="2">leximin row1 row2 <span class="ot">=</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    fromMaybe true <span class="op">&lt;&lt;&lt;</span> List.head <span class="op">&lt;&lt;&lt;</span> NonEmpty.mapMaybe keepNonEq <span class="op">$</span></a>
 <a class="sourceLine" id="cb3-4" title="4">    NonEmpty.zipWith <span class="fu">compare</span> (NonEmpty.sort row1) (NonEmpty.sort row2)</a>
 <a class="sourceLine" id="cb3-5" title="5">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb3-6" title="6">    keepNonEq <span class="dt">GT</span> <span class="fu">=</span> <span class="dt">Just</span> true</a>
-<a class="sourceLine" id="cb3-7" title="7">    keepNonEq <span class="dt">LT</span> <span class="fu">=</span> <span class="dt">Just</span> false</a>
-<a class="sourceLine" id="cb3-8" title="8">    keepNonEq <span class="dt">EQ</span> <span class="fu">=</span> <span class="dt">Nothing</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-6" title="6">    keepNonEq <span class="dt">GT</span> <span class="ot">=</span> <span class="dt">Just</span> true</a>
+<a class="sourceLine" id="cb3-7" title="7">    keepNonEq <span class="dt">LT</span> <span class="ot">=</span> <span class="dt">Just</span> false</a>
+<a class="sourceLine" id="cb3-8" title="8">    keepNonEq <span class="dt">EQ</span> <span class="ot">=</span> <span class="dt">Nothing</span></a></code></pre></div>
 <p>Again, leximin applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <a href="https://en.wikipedia.org/wiki/Total_order">orderable</a>.</p>
 <h4 id="math-2">Math</h4>
 <p>We start out with a totally ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can be compared to one another to determine which is preferable. Maximax is then a way of lifting the total order of outcome valuations and turning it into a binary relation on actions—“lifting” is necessary because each action consists of <em>several</em> outcomes across different states of the world.</p>
 <p>The resulting binary relation on actions is <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>, <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a> and <a href="https://en.wikipedia.org/wiki/Connex_relation">connex</a>. This means leximin is a total preorder.</p>
-<section class="footnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>The only change in setting/assumptions we’ve made between dominance and maximin is upgrading our <code>cell</code> valuations from a partial order to a total order. This isn’t strictly necessary but incomparability becomes much more cumbersome with maximin because more pairwise comparisons are required. With dominance, the only comparisons needed to determine one action superior to another are those across two outcomes in each particular state of the world. With maximin, we need to be able to compare all the outcomes for a given state against each other and then compare the worst of these across actions.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>The only change in setting/assumptions we’ve made between dominance and maximin is upgrading our <code>cell</code> valuations from a partial order to a total order. This isn’t strictly necessary but incomparability becomes much more cumbersome with maximin because more pairwise comparisons are required. With dominance, the only comparisons needed to determine one action superior to another are those across two outcomes in each particular state of the world. With maximin, we need to be able to compare all the outcomes for a given state against each other and then compare the worst of these across actions.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>
 </article></main>

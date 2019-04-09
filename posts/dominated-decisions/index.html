@@ -82,7 +82,7 @@
   
 
   <h3 id="decision-matrices">Decision matrices</h3>
-<p><span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction">2017</a>)</span> points out that we can represent decisions with decision matrices. For example, when considering the purchase of home insurance, we have:</p>
+<p><span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction" role="doc-biblioref">2017</a>)</span> points out that we can represent decisions with decision matrices. For example, when considering the purchase of home insurance, we have:</p>
 <figure>
 <figcaption>
 A decision matrix describing the decision to purchase home insurance
@@ -112,7 +112,7 @@ A decision matrix describing the decision to purchase home insurance
 <p>Each row (after the first) represents a different action and each column (after the first) represents a different possible state of the world. Their intersections—the four cells that are the combination of an act and a world state—are called outcomes.</p>
 <h3 id="sets-of-settings">Sets of settings</h3>
 <p>In <a href="https://en.wikipedia.org/wiki/Decision_theory">decision theory</a> (and <a href="https://en.wikipedia.org/wiki/Social_choice_theory">social choice theory</a>, <a href="https://en.wikipedia.org/wiki/Game_theory">game theory</a>, <a href="https://en.wikipedia.org/wiki/Mechanism_design">mechanism design</a>, etc.), when presented with a decision, it’s often useful to start by taking stock of what information we have available and what information we would like but don’t have. Depending on the result of this assessment, we will have better or worse strategies available. That is, we’d like to determine the best strategy or solution given the information available. Are there better strategies that we could execute with more information? What is that information? For example, we approach the question of “Should we buy home insurance?” very differently if we know the precise chance of our house catching on fire. Without key information like that, we have to resort to second-best strategies.</p>
-<p>The decision matrix we depicted above reflects one of the <span class="noted">simplest possible</span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> settings. In particular, we don’t have any probabilities associated with the different states of the world (“Fire” or “No fire”) which makes it a “decision under ignorance”. Another key limitation is that we don’t have a number representing how good or bad each outcome is—our outcomes have not been assigned <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a>.</p>
+<p>The decision matrix we depicted above reflects one of the <span class="noted">simplest possible</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> settings. In particular, we don’t have any probabilities associated with the different states of the world (“Fire” or “No fire”) which makes it a “decision under ignorance”. Another key limitation is that we don’t have a number representing how good or bad each outcome is—our outcomes have not been assigned <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a>.</p>
 <p>Because this setting is so minimal, it both has wide applicability—it makes very few assumptions that can be contradicted by facts on the ground—and limited insight—the best you can do with minimal information still isn’t very good.</p>
 <!--more-->
 <h3 id="dominance">Dominance</h3>
@@ -149,30 +149,32 @@ Decision matrix about route to work. Preferred action in bold.
 <h4 id="interactive">Interactive</h4>
 <p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
 <textarea id="decision-table">
+```{=html}
 
 |          | State 1 | State 2 |
 |----------|---------|---------|
 | Action 1 | c       | d       |
 | Action 2 | e       | f       |
+```
 </textarea>
 <div id="decision-analysis">
 <ul>
 <li><p>Action 2 weakly dominates Action 1</p></li>
-<li>Action 2 strongly dominates Action 1</li>
+<li><p>Action 2 strongly dominates Action 1</p></li>
 </ul>
 </div>
 <h4 id="source-code">Source code</h4>
 <p>Another way to explain dominance is with source code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">dominatesWeakly ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-2" title="2">dominatesWeakly row1 row2 <span class="fu">=</span> <span class="dt">Foldable</span><span class="fu">.all</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;=</span>) row1 row2)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">dominatesWeakly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-2" title="2">dominatesWeakly row1 row2 <span class="ot">=</span> <span class="dt">Foldable</span><span class="op">.</span><span class="fu">all</span> ((<span class="op">==</span>) true) (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2)</a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="ot">dominatesStrongly ::</span> <span class="kw">forall</span> cell<span class="fu">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-5" title="5">dominatesStrongly row1 row2 <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">Foldable</span><span class="fu">.all</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;=</span>) row1 row2) <span class="fu">&amp;&amp;</span></a>
-<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">Foldable</span><span class="fu">.any</span> ((<span class="fu">==</span>) true) (NonEmpty.zipWith (<span class="fu">&gt;</span>) row1 row2)</a></code></pre></div>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ot">dominatesStrongly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-5" title="5">dominatesStrongly row1 row2 <span class="ot">=</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">Foldable</span><span class="op">.</span><span class="fu">all</span> ((<span class="op">==</span>) true) (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2) <span class="op">&amp;&amp;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">Foldable</span><span class="op">.</span><span class="fu">any</span> ((<span class="op">==</span>) true) (NonEmpty.zipWith (<span class="op">&gt;</span>) row1 row2)</a></code></pre></div>
 <p>To hammer home the point about dominance being applicable in very general settings: <code>cell</code> is totally polymorphic except for the constraint that <code>cell</code>s form a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>.</p>
 <h4 id="math">Math</h4>
-<p>And the final view on dominance will be <span class="noted">the fully mathematical one</span><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>:</p>
+<p>And the final view on dominance will be <span class="noted">the fully mathematical one</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
 <h5 id="weak-dominance">Weak dominance</h5>
 <p>We can also describe weak dominance <span class="math inline">\(\preccurlyeq_{WD}\)</span> in symbols:</p>
 <p><span class="math display">\[a_i \preccurlyeq_{WD} a_j \leftrightarrow \forall s \in S\ (v(a_i, s) \leq v(a_j, s))\]</span></p>
@@ -186,16 +188,16 @@ Decision matrix about route to work. Preferred action in bold.
 <p>In other words, we start out with a partially ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can (sometimes) be compared to one another to determine which is preferable. Strong dominance is then a way of lifting the partial order of outcome valuations and turning it into a binary relation on actions— “lifting” is necessary because each action consists of <em>several</em> outcomes across different states of the world.</p>
 <p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Asymmetric_relation">asymmetric</a>, <a href="https://en.wikipedia.org/wiki/Irreflexive_relation">irreflexive</a>, and <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a>. Depending on how we handle incomparable elements in the original partial order of valuations, this means the strong dominance relation is a either a strict partial or a strict total order.</p>
 <hr class="references">
-<div id="refs" class="references">
+<div id="refs" class="references" role="doc-bibliography">
 <div id="ref-peterson2017introduction">
 <p>Peterson, Martin. 2017. <em>An Introduction to Decision Theory</em>. Cambridge University Press.</p>
 </div>
 </div>
-<section class="footnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Ways we could go simpler: only one action, only one state of the world. But these settings are <em>too</em> simple and rather boring.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>This perspective doesn’t really appear in <span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction">2017</a>)</span>; any errors here are my own.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>Ways we could go simpler: only one action, only one state of the world. But these settings are <em>too</em> simple and rather boring.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>This perspective doesn’t really appear in <span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction" role="doc-biblioref">2017</a>)</span>; any errors here are my own.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>
 </article></main>

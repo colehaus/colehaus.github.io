@@ -83,7 +83,7 @@
 
 <div class="sourceCode" id="cb3" data-org-language="js" data-file="income.html"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> incomeDistributionFn <span class="op">=</span> <span class="va">incomeDistribution</span>.<span class="at">buildFunction</span>()</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw">var</span> values <span class="op">=</span> <span class="va">plot</span>.<span class="at">mkRange</span>(percentileDomain<span class="op">,</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3">  .<span class="at">map</span>(percentile <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  .<span class="at">map</span>(percentile <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb3-4" title="4">    <span class="cf">return</span> <span class="op">{</span> percentile<span class="op">,</span> <span class="dt">income</span><span class="op">:</span> <span class="at">incomeDistributionFn</span>(percentile) <span class="op">}</span></a>
 <a class="sourceLine" id="cb3-5" title="5">  <span class="op">}</span>)</a>
 <a class="sourceLine" id="cb3-6" title="6"><span class="kw">var</span> chart <span class="op">=</span> <span class="op">{</span></a>
@@ -116,7 +116,7 @@
 
 <div class="sourceCode" id="cb5" data-org-language="js" data-file="marginalUtility.html"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">var</span> utilityOfMarginalDollarFn <span class="op">=</span> <span class="va">utilityOfMarginalDollar</span>.<span class="at">buildFunction</span>()</a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="kw">var</span> values <span class="op">=</span> <span class="va">plot</span>.<span class="at">mkRange</span>(incomeDomain<span class="op">,</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3">  .<span class="at">map</span>(income <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  .<span class="at">map</span>(income <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb5-4" title="4">    <span class="cf">return</span> <span class="op">{</span> income<span class="op">,</span> <span class="dt">marginalUtility</span><span class="op">:</span> <span class="at">utilityOfMarginalDollarFn</span>(income) <span class="op">}</span></a>
 <a class="sourceLine" id="cb5-5" title="5">  <span class="op">}</span>)</a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="kw">var</span> chart <span class="op">=</span> <span class="op">{</span></a>
@@ -143,7 +143,7 @@
 
 <div class="sourceCode" id="cb7" data-org-language="js" data-file="utilityIncome.html"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> utilityOfIncomeFn <span class="op">=</span> <span class="va">utilityOfIncome</span>.<span class="at">buildFunction</span>()</a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="kw">var</span> values <span class="op">=</span> <span class="va">plot</span>.<span class="at">mkRange</span>(incomeDomain<span class="op">,</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb7-3" title="3">  .<span class="at">map</span>(income <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  .<span class="at">map</span>(income <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb7-4" title="4">    <span class="cf">return</span> <span class="op">{</span> income<span class="op">,</span> <span class="dt">utility</span><span class="op">:</span> <span class="at">utilityOfIncomeFn</span>(income) <span class="op">}</span></a>
 <a class="sourceLine" id="cb7-5" title="5">  <span class="op">}</span>)</a>
 <a class="sourceLine" id="cb7-6" title="6"><span class="kw">var</span> chart <span class="op">=</span> <span class="op">{</span></a>
@@ -170,7 +170,7 @@
 
 <div class="sourceCode" id="cb9" data-org-language="js" data-file="utilityPercentile.html"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">var</span> utilityAtPercentileFn <span class="op">=</span> <span class="va">utilityAtPercentile</span>.<span class="at">buildFunction</span>()</a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="kw">var</span> inegalitarianValues <span class="op">=</span> <span class="va">plot</span>.<span class="at">mkRange</span>(percentileDomain<span class="op">,</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb9-3" title="3">  .<span class="at">map</span>(percentile <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  .<span class="at">map</span>(percentile <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb9-4" title="4">    <span class="cf">return</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb9-5" title="5">      percentile<span class="op">,</span></a>
 <a class="sourceLine" id="cb9-6" title="6">      <span class="dt">utility</span><span class="op">:</span> <span class="at">utilityAtPercentileFn</span>(percentile)<span class="op">,</span></a>
@@ -210,7 +210,7 @@
 <a class="sourceLine" id="cb11-2" title="2"><span class="kw">var</span> egalUtilityAtPercentile <span class="op">=</span> <span class="va">utilityOfIncome</span>.<span class="at">sub</span>(<span class="st">'d'</span><span class="op">,</span> egalIncomeDistribution)</a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="kw">var</span> egalUtilityAtPercentileFn <span class="op">=</span> <span class="va">egalUtilityAtPercentile</span>.<span class="at">buildFunction</span>()</a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="kw">var</span> egalitarianValues <span class="op">=</span> <span class="va">plot</span>.<span class="at">mkRange</span>(percentileDomain<span class="op">,</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb11-5" title="5">  .<span class="at">map</span>(percentile <span class="op">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-5" title="5">  .<span class="at">map</span>(percentile <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb11-6" title="6">    <span class="cf">return</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb11-7" title="7">      percentile<span class="op">,</span></a>
 <a class="sourceLine" id="cb11-8" title="8">      <span class="dt">utility</span><span class="op">:</span> <span class="at">egalUtilityAtPercentileFn</span>(percentile)<span class="op">,</span></a>

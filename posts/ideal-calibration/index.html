@@ -87,13 +87,13 @@
 
 </div>
 <h3 id="intro">Intro</h3>
-<p><a href="../../posts/utopia-infinitude-secretaries/">Last time</a>, I described how <span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span> juxtaposes unidimensional and multidimensional models of justice. I went on to contest the claim that the ideal is otiose in the unidimensional model and made an analogy to <a href="https://en.wikipedia.org/wiki/Secretary_problem">the secretary problem</a>.</p>
+<p><a href="../../posts/utopia-infinitude-secretaries/">Last time</a>, I described how <span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016" role="doc-biblioref">2016</a>)</span> juxtaposes unidimensional and multidimensional models of justice. I went on to contest the claim that the ideal is otiose in the unidimensional model and made an analogy to <a href="https://en.wikipedia.org/wiki/Secretary_problem">the secretary problem</a>.</p>
 <p>This time I’ll make the (related) argument directly that there are two distinct uses of ideal theorizing and only one is bad from the unidimensional perspective.</p>
 <h3 id="dimensionality-of-justice">Dimensionality of justice</h3>
-<p>Let’s try to formalize ‘unidimensional’ and ‘multidimensional’ models of justice so we can be sure we’re thinking of the same thing. Gaus suggests (and I’ll accept) that a key part of any theory of ideal justice includes a function <span class="noted"><span class="math inline">\(e \colon \mathbb{W} \to \mathbb{R}\)</span></span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, a set of possible worlds <span class="math inline">\(\mathbb{W}\)</span>. In other words, each such theory should be able to assign a ‘justice score’ to every possible world. In terms of this machinery, the unidimensional model simply limits itself to using <em>only</em> <span class="math inline">\(e\)</span> and <span class="math inline">\(\mathbb{W}\)</span>. The multidimensional model on the other hand also gives us a tool to inspect the structure of <span class="math inline">\(\mathbb{W}\)</span> in the form of a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">metric</a> <span class="math inline">\(d \colon \mathbb{W} \times \mathbb{W} \to [0,\inf)\)</span>. In other words, the multidimensional model lets us determine how similar two possible worlds are in some way that’s not directly related to their justice scores.</p>
+<p>Let’s try to formalize ‘unidimensional’ and ‘multidimensional’ models of justice so we can be sure we’re thinking of the same thing. Gaus suggests (and I’ll accept) that a key part of any theory of ideal justice includes a function <span class="noted"><span class="math inline">\(e \colon \mathbb{W} \to \mathbb{R}\)</span></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, a set of possible worlds <span class="math inline">\(\mathbb{W}\)</span>. In other words, each such theory should be able to assign a ‘justice score’ to every possible world. In terms of this machinery, the unidimensional model simply limits itself to using <em>only</em> <span class="math inline">\(e\)</span> and <span class="math inline">\(\mathbb{W}\)</span>. The multidimensional model on the other hand also gives us a tool to inspect the structure of <span class="math inline">\(\mathbb{W}\)</span> in the form of a <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">metric</a> <span class="math inline">\(d \colon \mathbb{W} \times \mathbb{W} \to [0,\inf)\)</span>. In other words, the multidimensional model lets us determine how similar two possible worlds are in some way that’s not directly related to their justice scores.</p>
 <p>To actually use this in a model, we’ll also need a way of finding worlds <span class="math inline">\(W\)</span> from <span class="math inline">\(\mathbb{W}\)</span> to evaluate. We denote a a random, ‘nearby’ (i.e. one with a small distance <span class="math inline">\(d(W, W_c)\)</span> from the then-current world <span class="math inline">\(W_c\)</span>) world as <span class="math inline">\(W_r\)</span>.</p>
 <h3 id="ideal-as-destination">Ideal as destination</h3>
-<p><span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016">2016</a>)</span> and the rest of the literature suggest that the an ideal is useful as a destination. According to Rawls, “By showing how the social world may realize the features of a realistic Utopia, political philosophy provides a long-term goal of political endeavor, and in working toward it gives meaning to what we can do today.” <span class="citation" data-cites="rawls1993">(Rawls <a href="#ref-rawls1993">1993</a>)</span></p>
+<p><span class="citation" data-cites="gaus2016">(Gaus <a href="#ref-gaus2016" role="doc-biblioref">2016</a>)</span> and the rest of the literature suggest that the an ideal is useful as a destination. According to Rawls, “By showing how the social world may realize the features of a realistic Utopia, political philosophy provides a long-term goal of political endeavor, and in working toward it gives meaning to what we can do today.” <span class="citation" data-cites="rawls1993">(Rawls <a href="#ref-rawls1993" role="doc-biblioref">1993</a>)</span></p>
 <p>In terms of our model, the ideal is <span class="math inline">\(\mathop{\mathrm{argmax}}\limits_{W \in \mathbb{W}} e(W) = W_i\)</span>, the possible world that achieves the highest justice score. A wholly naive algorithm would then:</p>
 <ol type="1">
 <li>Use our ideal <span class="math inline">\(W_i\)</span> to orient societal progress by always picking <span class="math inline">\(\mathop{\mathrm{argmin}}\limits_{W \in \{W_c, W_r\}} d(W, W_i) = W_{bk}\)</span>. In other words, on every ‘step’, someone proposes some random alternative world <span class="math inline">\(W_r\)</span> and this naive algorithm compares it to the current world and picks whichever is closer to the ideal.</li>
@@ -123,7 +123,7 @@
 <h3 id="conclusion">Conclusion</h3>
 <p>The ideal can indeed serve as destination (i.e. we continually move toward the ideal). But it can also serve as calibration. Once we acknowledge our ignorance of possible worlds, we must treat the task of social engineering as a problem of statistical inference. From the statistical inference perspective, the ideal (maximum) is very informative about the underlying distribution of possible worlds and helps us make more informed trade-offs.</p>
 <hr class="references">
-<div id="refs" class="references">
+<div id="refs" class="references" role="doc-bibliography">
 <div id="ref-gaus2016">
 <p>Gaus, Gerald. 2016. <em>The Tyranny of the Ideal: Justice in a Diverse Society</em>. Princeton University Press.</p>
 </div>
@@ -131,10 +131,10 @@
 <p>Rawls, John. 1993. “The Law of Peoples.” <em>Critical Inquiry</em> 20 (1). University of Chicago Press: 36–68.</p>
 </div>
 </div>
-<section class="footnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>I think Gaus actually jumps to the conclusion of a cardinal evaluation function (rather than ordinal) too quickly, but we’ll set that aside for the moment.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>I think Gaus actually jumps to the conclusion of a cardinal evaluation function (rather than ordinal) too quickly, but we’ll set that aside for the moment.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>
 </article></main>

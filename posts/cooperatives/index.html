@@ -90,11 +90,11 @@
   
 
   <h3 id="introduction">Introduction</h3>
-<p>The <a href="#cooperatives-map" id="predominate" class="arg-map">predominance of capital-managed firms (CMF) over worker cooperatives (WC)</a> remains an open question in economics. Early explanations relied on a hypothesized comparative inefficiency of cooperatives. Subsequent empirical study has shown that <a href="#cooperatives-map" id="efficient" class="arg-map">cooperatives are at least as efficient as capital-managed firms</a> <span class="citation" data-cites="doucouliagos95">(Doucouliagos <a href="#ref-doucouliagos95">1995</a>)</span> <span class="citation" data-cites="estrin87">(Estrin, Jones, and Svejnar <a href="#ref-estrin87">1987</a>)</span> <span class="citation" data-cites="craig95">(Craig et al. <a href="#ref-craig95">1995</a>)</span> <span class="citation" data-cites="levine90">(Levine <a href="#ref-levine90">1990</a>)</span>.</p>
-<p>A profusion of hypotheses has since arisen. <span class="citation" data-cites="dow99">(Dow and Putterman <a href="#ref-dow99">1999</a>)</span> offers a good summary (though the term must be used loosely for a 126-page paper). One that I have not seen presented is: <a href="#cooperatives-map" id="hypothesis" class="arg-map">capital-managed firms predominate because capitalists have a greater incentive to expand than worker-owners in worker cooperatives</a>. Roughly, for each market segment a capitalist expands into, their income increases by capital’s share of the new segment’s profit. For each market segment a cooperative expands into, the expanders receive no direct remuneration (supposing that the new market segment is also a cooperative). Any new profit goes to worker-owners in the new segment.</p>
+<p>The <a href="#cooperatives-map" id="predominate" class="arg-map">predominance of capital-managed firms (CMF) over worker cooperatives (WC)</a> remains an open question in economics. Early explanations relied on a hypothesized comparative inefficiency of cooperatives. Subsequent empirical study has shown that <a href="#cooperatives-map" id="efficient" class="arg-map">cooperatives are at least as efficient as capital-managed firms</a> <span class="citation" data-cites="doucouliagos95">(Doucouliagos <a href="#ref-doucouliagos95" role="doc-biblioref">1995</a>)</span> <span class="citation" data-cites="estrin87">(Estrin, Jones, and Svejnar <a href="#ref-estrin87" role="doc-biblioref">1987</a>)</span> <span class="citation" data-cites="craig95">(Craig et al. <a href="#ref-craig95" role="doc-biblioref">1995</a>)</span> <span class="citation" data-cites="levine90">(Levine <a href="#ref-levine90" role="doc-biblioref">1990</a>)</span>.</p>
+<p>A profusion of hypotheses has since arisen. <span class="citation" data-cites="dow99">(Dow and Putterman <a href="#ref-dow99" role="doc-biblioref">1999</a>)</span> offers a good summary (though the term must be used loosely for a 126-page paper). One that I have not seen presented is: <a href="#cooperatives-map" id="hypothesis" class="arg-map">capital-managed firms predominate because capitalists have a greater incentive to expand than worker-owners in worker cooperatives</a>. Roughly, for each market segment a capitalist expands into, their income increases by capital’s share of the new segment’s profit. For each market segment a cooperative expands into, the expanders receive no direct remuneration (supposing that the new market segment is also a cooperative). Any new profit goes to worker-owners in the new segment.</p>
 <!--more-->
 <h3 id="cellular-automaton">Cellular automaton</h3>
-<p>We can make this hypothesis more tangible by representing it as a <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automaton</a>. <span class="noted"><a href="#cooperatives-map" id="automaton-link" class="arg-map">In this automaton</a></span><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, <a href="#cooperatives-map" id="segment" class="arg-map">each cell represents a market segment requiring a fixed quantity of labor and capital</a>. Adjacent cells represent similar market segments.</p>
+<p>We can make this hypothesis more tangible by representing it as a <a href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automaton</a>. <span class="noted"><a href="#cooperatives-map" id="automaton-link" class="arg-map">In this automaton</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, <a href="#cooperatives-map" id="segment" class="arg-map">each cell represents a market segment requiring a fixed quantity of labor and capital</a>. Adjacent cells represent similar market segments.</p>
 <div id="automaton"></div>
 
 <h4 id="initial-conditions">Initial conditions</h4>
@@ -102,7 +102,7 @@
 <h4 id="step">Step</h4>
 <h5 id="occupied-market-segments">Occupied market segments</h5>
 <p>In each step, an existing firm may go bankrupt (or exit the market segment in some other way) with fixed probability <span class="math inline">\(B = 0.1\)</span>. If a firm goes bankrupt, its market segment becomes empty once again.</p>
-<p>If it does not go bankrupt, <a href="#cooperatives-map" id="accum" class="arg-map">the profits generated during that step are distributed</a>. For worker cooperatives, all profits accrue to the worker-owners within the cooperative. For capital-managed segments, labor’s share of income (estimated at 70% <span class="citation" data-cites="karabarbounis13">(Karabarbounis and Neiman <a href="#ref-karabarbounis13">2013</a>)</span> <span class="citation" data-cites="gomme04">(Gomme and Rupert <a href="#ref-gomme04">2004</a>)</span>) accrues to the segment’s workers and capital’s share of income accrues to the capitalists of the segment’s firm.</p>
+<p>If it does not go bankrupt, <a href="#cooperatives-map" id="accum" class="arg-map">the profits generated during that step are distributed</a>. For worker cooperatives, all profits accrue to the worker-owners within the cooperative. For capital-managed segments, labor’s share of income (estimated at 70% <span class="citation" data-cites="karabarbounis13">(Karabarbounis and Neiman <a href="#ref-karabarbounis13" role="doc-biblioref">2013</a>)</span> <span class="citation" data-cites="gomme04">(Gomme and Rupert <a href="#ref-gomme04" role="doc-biblioref">2004</a>)</span>) accrues to the segment’s workers and capital’s share of income accrues to the capitalists of the segment’s firm.</p>
 <p>The accumulated income of workers in a capital-managed segment is represented in the automaton by opacity of the <span class="capital">purple cell interior</span>. The accumulated income of the capitalists (of a given firm) is represented by the opacity of the <span class="capital">purple cell border</span> enclosing all segments owned by the firm. The accumulated income of worker-owners in a worker cooperative is represented in the automaton by the opacity of the <span class="labor">green cell interior</span>. Worker cooperatives sharing an ancestor (e.g. cooperative B and C were both founded by cooperative A) are enclosed by a single border.</p>
 <h5 id="empty-market-segments">Empty market segments</h5>
 <p>In each step, an empty market segment may be occupied by <a href="#cooperatives-map" id="firm" class="arg-map">a newly formed firm</a> with chance <span class="math inline">\(N = 0.001\)</span>.</p>
@@ -133,7 +133,7 @@ A &amp;= \frac{K}{K - 1 + G} \\
 <li>Permit tweaking of other parameters</li>
 <li>Provide analysis in terms of <a href="https://en.wikipedia.org/wiki/Evolutionarily_stable_strategy">evolutionarily stable strategy</a></li>
 <li>Survey of how cooperatives decide to expand</li>
-<li>Empirical examination of rate of worker cooperative formation and altruism (charitable giving, diversity <span class="citation" data-cites="putnam07">(Putnam <a href="#ref-putnam07">2007</a>)</span>, &amp;c.)</li>
+<li>Empirical examination of rate of worker cooperative formation and altruism (charitable giving, diversity <span class="citation" data-cites="putnam07">(Putnam <a href="#ref-putnam07" role="doc-biblioref">2007</a>)</span>, &amp;c.)</li>
 <li>Empirical examination of rate of worker cooperative formation and labor’s share of income</li>
 </ul>
 <hr class="references">
@@ -142,21 +142,21 @@ document.addEventListener("DOMContentLoaded", function() {
     Elm.embed(Elm.Automaton, document.querySelector('#automaton'));
 });
 </script>
-<div id="refs" class="references">
+<div id="refs" class="references" role="doc-bibliography">
 <div id="ref-craig95">
 <p>Craig, Ben, John Pencavel, Henry Farber, and Alan Krueger. 1995. “Participation and Productivity: A Comparison of Worker Cooperatives and Conventional Firms in the Plywood Industry.” <em>Brookings Papers on Economic Activity. Microeconomics</em>.</p>
 </div>
 <div id="ref-doucouliagos95">
-<p>Doucouliagos, Chris. 1995. “Worker Participation and Productivity in Labor-Managed and Participatory Capitalist Firms: A Meta-Analysis.” <em>Industrial &amp; Labor Relations Review</em>. <a href="http://library.uniteddiversity.coop/Money_and_Economics/Cooperatives/Worker_Participation_and_Productivity-Meta_Analysis.pdf" class="uri">http://library.uniteddiversity.coop/Money_and_Economics/Cooperatives/Worker_Participation_and_Productivity-Meta_Analysis.pdf</a>.</p>
+<p>Doucouliagos, Chris. 1995. “Worker Participation and Productivity in Labor-Managed and Participatory Capitalist Firms: A Meta-Analysis.” <em>Industrial &amp; Labor Relations Review</em>. <a href="http://library.uniteddiversity.coop/Money_and_Economics/Cooperatives/Worker_Participation_and_Productivity-Meta_Analysis.pdf">http://library.uniteddiversity.coop/Money_and_Economics/Cooperatives/Worker_Participation_and_Productivity-Meta_Analysis.pdf</a>.</p>
 </div>
 <div id="ref-dow99">
-<p>Dow, Gregory K, and Louis Putterman. 1999. “Why Capital (Usually) Hires Labor: An Assessment of Proposed Explanations,“.” <em>Employees and Corporate Governance</em>. <a href="http://www.econ.brown.edu/1996/pdfs/96-21.pdf" class="uri">http://www.econ.brown.edu/1996/pdfs/96-21.pdf</a>.</p>
+<p>Dow, Gregory K, and Louis Putterman. 1999. “Why Capital (Usually) Hires Labor: An Assessment of Proposed Explanations,“.” <em>Employees and Corporate Governance</em>. <a href="http://www.econ.brown.edu/1996/pdfs/96-21.pdf">http://www.econ.brown.edu/1996/pdfs/96-21.pdf</a>.</p>
 </div>
 <div id="ref-estrin87">
 <p>Estrin, Saul, Derek C Jones, and Jan Svejnar. 1987. “The Productivity Effects of Worker Participation: Producer Cooperatives in Western Economies.” <em>Journal of Comparative Economics</em>.</p>
 </div>
 <div id="ref-gomme04">
-<p>Gomme, Paul, and Peter Rupert. 2004. “Measuring Labor’s Share of Income.” <em>FRB of Cleveland Policy Discussion Paper</em>. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.405.7400&amp;rep=rep1&amp;type=pdf" class="uri">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.405.7400&amp;rep=rep1&amp;type=pdf</a>.</p>
+<p>Gomme, Paul, and Peter Rupert. 2004. “Measuring Labor’s Share of Income.” <em>FRB of Cleveland Policy Discussion Paper</em>. <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.405.7400&amp;rep=rep1&amp;type=pdf">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.405.7400&amp;rep=rep1&amp;type=pdf</a>.</p>
 </div>
 <div id="ref-karabarbounis13">
 <p>Karabarbounis, Loukas, and Brent Neiman. 2013. <em>The Global Decline of the Labor Share</em>. National Bureau of Economic Research.</p>
@@ -165,13 +165,13 @@ document.addEventListener("DOMContentLoaded", function() {
 <p>Levine, David I. 1990. “Participation, Productivity, and the Firm’s Environment.” <em>California Management Review</em>.</p>
 </div>
 <div id="ref-putnam07">
-<p>Putnam, Robert D. 2007. “E Pluribus Unum: Diversity and Community in the Twenty-First Century the 2006 Johan Skytte Prize Lecture.” <em>Scandinavian Political Studies</em>. <a href="http://www.aimlessgromar.com/wp-content/uploads/2013/12/j-1467-9477-2007-00176-x.pdf" class="uri">http://www.aimlessgromar.com/wp-content/uploads/2013/12/j-1467-9477-2007-00176-x.pdf</a>.</p>
+<p>Putnam, Robert D. 2007. “E Pluribus Unum: Diversity and Community in the Twenty-First Century the 2006 Johan Skytte Prize Lecture.” <em>Scandinavian Political Studies</em>. <a href="http://www.aimlessgromar.com/wp-content/uploads/2013/12/j-1467-9477-2007-00176-x.pdf">http://www.aimlessgromar.com/wp-content/uploads/2013/12/j-1467-9477-2007-00176-x.pdf</a>.</p>
 </div>
 </div>
-<section class="footnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Sorry, <a href="http://elm-lang.org/">Elm</a>, Firefox, and this program don’t seem to mix well.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>Sorry, <a href="http://elm-lang.org/">Elm</a>, Firefox, and this program don’t seem to mix well.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>
 </article></main>
