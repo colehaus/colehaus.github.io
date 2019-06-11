@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>YAAS evidence-based policy—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+
+  <meta name="description" content="RCTs are good for producing claims like 'It worked there.'. But what we
+really care about is 'Will it work here?'. The standard answer to this
+question is external validity, but EBP disapproves of this answer for a
+variety of reasons. Instead, they propose that we answer the question of
+generalization by thinking about causal principles, causal roles and
+support factors. To find support factors and the right causal principle,
+we must engage in, respectively, horizontal search and vertical search
+up and down the ladder of abstraction.">
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">YAAS evidence-based policy</h2>
+  
+    <h3 id="article-subtitle">Yet Another Amateur Summary:<br>Cartwright and Hardie's <i>Evidence-based Policy: A practical guide to doing it better</i></h3>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/yaas/">yaas</a></li>
+    
+      <li><a href="../../tag/applied%2520epistemology/">applied epistemology</a></li>
+    
+</ul></nav>
+
+  
+    <nav><a class="series" href="../../series/Evidence-based%2520Policy/">Series: Evidence-based Policy</a></nav>
+  
+  <span class="date">Published on <time datetime="2019-06-10">June 10, 2019</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>RCTs are good for producing claims like “It worked there.”. But what we really care about is “Will it work here?”. The standard answer to this question is <a href="#the-standard-solution-external-validity">external validity</a>, but EBP disapproves of this answer for a variety of reasons. Instead, they propose that we answer the question of generalization by thinking about <a href="#causal-principle">causal principles</a>, <a href="#causal-role-and-support-factors">causal roles and support factors</a>. To find support factors and the right causal principle, we must engage in, respectively, <a href="#horizontal-search">horizontal search</a> and <a href="#vertical-search">vertical search</a> up and down the ladder of abstraction.</p>
+    </div>
+  
+
+  
+
+  <h3 id="vignette">Vignette</h3>
+<p>The Tamil Nadu Integrated Nutrition Program (TINP) was a program to reduce child malnutrition among the rural poor of India’s Tamil Nadu State. Core elements of the program were: nutrition counseling for pregnant mothers and supplementary food for the most deprived young children. TINP succeeded in reducing malnutrition substantially <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>. Seeing this success, policymakers in Bangladesh launched the Bangladesh Integrated Nutrition Program (BINP) modeled on TINP. Unfortunately, six years later, childhood malnutrition in Bangladesh continued unabated <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>.</p>
+<p>Why did BINP fail where TINP succeeded? One of the main problems was that, while mothers did indeed learn about childhood nutrition, mothers often weren’t the primary decision makers in matters of nutrition. In rural Bangladesh, men typically do the shopping. And if a mother lived with her mother-in-law, that mother-in-law was the final authority on issues within the women’s domain. Because the decision-makers hadn’t received BINP’s nutrition counseling, they often used supplemental food from BINP as a substitute and reallocated other food away from mother and child.</p>
+<h3 id="effectiveness">Effectiveness</h3>
+<h4 id="the-problem-generalization">The problem: Generalization</h4>
+<p>Even in the absence of that holy grail—the RCT—there’s considerable confidence that TINP worked. But BINP didn’t. <i>Evidence-Based Policy</i> takes problems like this as it’s central concern. How do we move from “It worked there.”—<a href="#key-terms">efficacy</a>—to “It will work here.”—<a href="#key-terms">effectiveness</a>?</p>
+<h4 id="the-standard-solution-external-validity">The standard solution: External validity</h4>
+<p>The standard way of thinking about this problem is <a href="https://en.wikipedia.org/wiki/External_validity">external validity</a>. Briefly, a study is internally valid when it provides strong reasons to believe its conclusions. A study has external validity when it can be generalized to other contexts—different times, places and populations.</p>
+<p>But <abbr title="Evidence-based Policy">EBP</abbr> disdains external validity. Claims of external validity usually take a shape like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on similar (to population C) population E at similar (to time and place D) time and place F.” But the word “similar” is doing all the work here. What does it mean?</p>
+<p>“Similar” can’t mean “identical”—then all studies would be pointless because we would never have external validity and could never generalize. But “similar” also shouldn’t be construed too permissively. If you insist that the population of Manhattanites and the population of rural Tibetans are “similar” because they both consist of humans living in communities with hierarchies of esteem under a system of hegemonic capitalism on planet Earth, you’ll be find yourself perpetually surprised when your interventions fail to replicate.</p>
+<p>Furthermore, similarity means radically different things in different contexts. If the original study is about reducing Alzheimer’s for high risk populations, similarity means biomedical similarity and certain elderly people in rural Tibet may in fact be more similar to certain elderly people in Manhattan than either subpopulation is to their neighbors. On the other hand, if the study is about the welfare effects of exposure to pervasive advertising, rural Tibet and Manhattan count as pretty dissimilar.</p>
+<p>So “similar” has to mean similar in <span class="noted">the right ways and to the right degree</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The external validity claim then becomes something like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on the right population E at the right time and place F.” But this is pretty tautological. To be a useful tool, external validity should transform a hard problem into a simpler one. But it turns out that, once we unpack things, it’s hard to know what “similar” means other than “right” and we’re back where we started—we have to rely on outside knowledge to know if we can translate “It worked there.” to “It will work here.”</p>
+<h4 id="the-evidence-based-policy-solution">The <i>Evidence-based Policy</i> solution</h4>
+<blockquote>
+To get a good argument from “it works somewhere” to “it will work here” facts about causal principles here and there are needed.
+</blockquote>
+<!--more-->
+<h4 id="terms">Terms</h4>
+<h5 id="causal-principle">Causal principle</h5>
+<p>A <a href="#key-terms">causal principle</a> provides a reliable, systematic connection between cause and effect. Because the world is complicated, causal principles often don’t take on a simple form. Instead, they are characterized by Insufficient but Necessary parts of an Unnecessary but Sufficient part (INUS). If I want to reach a <a href="https://lichess.org/">lichess.org</a> ELO of 1700, excellent knowledge of openings may necessary but insufficient because I would also need at least passable middlegame and endgame ability to finish out the game. However, all those necessary factors (excellent opening, passable middlegame and endgame), even if collectively sufficient, aren’t collectively necessary—I could take an entirely route to 1500 by overcoming mediocre opening play with excellent middlegame play or by learning how to cheat with a chess engine. <span class="noted">Schematically</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, this looks like a Boolean formula: <span id="boolean-formula">(A AND B AND C) OR (B AND D) OR (E AND F AND G) or H</span> where A, B, C, etc. can be either true or false. In order for the whole proposition to be true, one of the disjuncts in parentheses must be true. That means each disjunct (e.g. A AND B AND C) corresponds to an unnecessary but sufficient part. In order for any given disjunct to be true, each of its atoms must be true so each atom (e.g. A) corresponds to an insufficient but necessary part.</p>
+<h5 id="causal-factor">Causal factor</h5>
+<p><abbr title="Evidence-based Policy">EBP</abbr> calls each one of the atoms in the Boolean formula—each feature of the world that the causal principle specifies as important—a <a href="#key-terms">causal factor</a>. So, to go back to our example, excellent opening play, passable middlegame and endgame, ability to cheat with a chess engine, etc. are all causal factors.</p>
+<figure>
+<img src="../../images/evidence-based-policy/chess.svg" alt="Diagram labeling key terms on chess example" /><figcaption>Diagram labeling key terms on chess example</figcaption>
+</figure>
+<figure>
+<img src="../../images/evidence-based-policy/boolean.svg" alt="Diagram labeling key terms on Boolean formula example" /><figcaption>Diagram labeling key terms on Boolean formula example</figcaption>
+</figure>
+<h5 id="causal-role-and-support-factors">Causal role and support factors</h5>
+<p><abbr title="Evidence-based Policy">EBP</abbr> then goes on to emphasize <a href="#key-terms">causal roles</a> and <a href="#key-terms">support factors</a>—a distinction I initially found somewhat confusing. However, my current understanding is that they are really both ways of talking about causal factors (atoms). Any given intervention focuses on one or a few causal factors. <abbr title="Evidence-based Policy">EBP</abbr> describes these causal factors that are the subject of manipulation as having a causal role. The causal factors specified by the causal principle that aren’t the focus of the intervention (but are jointly necessary with the focused causal factor) are deemed support factors. So whether we talk about a causal factor with the language “causal role” or with the language “support factor” depends only on the focus of intervention. <span class="noted">We can interpret “X plays a causal role” as “X is a causal factor manipulated by our intervention” and “Y is a support factor” as “Y is a necessary causal factor not manipulated by our intervention”.</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>In our chess example, if I started memorizing openings from an opening book, I would be aiming to make my openings play a positive causal role. The other causal factors like passable middle and endgame—while considering this opening intervention—would be support factors. Learning how to cheat with a chess engine is a causal factor in the overall causal principal, but it’s not a support factor because it’s not relevant to the intervention we’re focusing on. In our Boolean formula, if I’m trying to change A from ‘false’ to ‘true’, I’m hoping to make ‘A’ play a positive causal role. While focusing on A, I consider B and C to be support factors. D, E, F, G and H are causal factors but not support factors for A.</p>
+<h4 id="thesis">Thesis</h4>
+<p>Now that we’ve <span class="noted">defined the key terms of <abbr title="Evidence-based Policy">EBP</abbr></span><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, we can present the thesis of <abbr title="Evidence-based Policy">EBP</abbr>. The thesis is that to feel confident that “It will work here.” based on evidence that “It worked there.” requires an argument like this:</p>
+<blockquote>
+<p>Effectiveness argument</p>
+<ol type="1">
+<li>The policy worked there (i.e., it played a positive causal role in the causal principles that hold there and the support factors necessary for it to play this positive role there were present for at least some individuals there).</li>
+<li>The policy can play the same causal role here as there.</li>
+<li>The support factors necessary for the policy to play a positive causal role here are in place for at least some individuals here post-implementation.</li>
+</ol>
+Conclusion. The policy will work here.
+</blockquote>
+<h4 id="making-the-effectiveness-argument">Making the effectiveness argument</h4>
+<p>If we have a efficacious intervention (“It worked there.”), how can we fill in the rest of the effectiveness argument above? <abbr title="Evidence-based Policy">EBP</abbr> advocates for what they call <a href="#key-terms">vertical</a> and <a href="#key-terms">horizontal search</a>.</p>
+<h5 id="vertical-search">Vertical search</h5>
+<p>Vertical search is about finding the right formulation for <span class="noted">a causal subprinciple</span><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Any putative causal subprinciple can be stated at different levels of abstraction. In order of increasing abstraction, we can have causal subprinciples like:</p>
+<ol type="1">
+<li>This hammer claw makes it possible to extract this nail.</li>
+<li>Hammer claws make it possible to extract nails.</li>
+<li>Levers make it possible to transform a small force exerted over a large distance into a large force exerted over a small distance.</li>
+<li>Simple machines make it possible to do things we otherwise couldn’t via mechanical advantage.</li>
+</ol>
+<p>Even if all these formulations are true, some are more useful than others. 1 is too specific to be of much use. 2 is useful in cases just like ours while 3 provides insights and may allow us to generalize to novel situations. 4 may be too abstract and requires expertise to turn into practical advice—if you’re struggling to pull out a nail and someone offers the advice that “Simple machines provide mechanical advantage.”, you may not be eternally grateful for their sage advice.</p>
+<p>It’s worth making explicit here that it won’t always be obvious how generalizable causal subprinciples are. In the <a href="#vignette">vignette</a> at the beginning, it might have sounded eminently plausible that the causal subprinciple to be learned from the successful TINP program was “If we increase the nutritional knowledge of mothers, then childhood malnutrition will be reduced.” It’s only after the BINP program—designed on this principle—failed that it became apparent that the principle is better phrased as “If we increase the nutritional knowledge of those in charge of childhood nutrition, then childhood malnutrition will be reduced.” In Tamil Nadu, these two principles are the same. It’s only in Bangladesh where fathers and mothers-in-law play a more important role in childhood nutrition that these two principles diverge and finding the correct level of abstraction becomes crucial.</p>
+<p>So generally there’s a tension between making causal subprinciples concrete enough to be useful and abstract enough to be true in new circumstances. This is why <abbr title="Evidence-based Policy">EBP</abbr> advocates careful vertical search up and down the ladder of abstraction.</p>
+<h5 id="horizontal-search">Horizontal search</h5>
+<p>Horizontal search is about identifying the full set of support factors necessary for an intervention to succeed. Because support factors aren’t the target of an intervention, it’s easy to miss them. But if they’re missing, the intervention will fail all the same.</p>
+<p>For example, in childhood malnutrition interventions like TINP and BINP, careful search could uncover additional support factors like:</p>
+<ul>
+<li>There’s an adequate amount of food available for purchase (if not dealing with subsistence farmers)</li>
+<li>It’s possible to construct a nutritious diet with locally available foods</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Parasite_load">parasite load</a> is low enough that a sufficient quantity of nutrients can be absorbed</li>
+</ul>
+<h4 id="in-practice">In practice</h4>
+<p>To its credit, <abbr title="Evidence-based Policy">EBP</abbr> recognizes that the alternative procedure it advocates is not a drop-in replacement. Devolution and discretion will be central to the new world order. Tendentiously, the book would have us supplant a mechanical method (RCTs, clearinghouses, external validity) with a much fuzzier one demanding more expertise and discretion of policymakers. But, <abbr title="Evidence-based Policy">EBP</abbr> argues, this is change is necessary because the mechanical method simply isn’t up to the task.</p>
+<blockquote>
+What’s wrong with the ideas of external validity and similarity is that they invite you to stop thinking. […] We do not think that it is possible to produce unambiguous rules for predicting the results of social policies. So, we do not think that we can produce these rules. So in our world, those who make the decisions will have to deliberate using their judgment and discretion.
+</blockquote>
+<h3 id="efficacy">Efficacy</h3>
+<p>Though the book is mainly about the problem of <a href="#key-terms">effectiveness</a> it also has a section on <a href="#key-terms">efficacy</a>. In particular, it talks about causal inference using RCTs and alternatives.</p>
+<h4 id="randomized-controlled-trials">Randomized controlled trials</h4>
+<p>RCTs are the holy grail for causal inference (well, meta-analyses and/or systematic reviews of RCTs). <abbr title="Evidence-based Policy">EBP</abbr> proposes that this is because RCTs are “self-validating”. By this, they mean that RCTs are something of a magic causality black box—perform the right <del>rituals</del> procedures and out pops a causal claim. There’s no need to have a detailed understanding of mechanism, context, population or anything at all in the domain.</p>
+<p>Most of the alternative mechanisms of causal inference require real subject matter expertise. Some of these alternatives include:</p>
+<dl>
+<dt><a href="https://en.wikipedia.org/wiki/Confounding#Control">Controlling for confounds</a></dt>
+<dd>You must know the full set of confounds to control for them. This is hard <span class="citation" data-cites="gordon2019comparison">(Gordon et al. <a href="#ref-gordon2019comparison" role="doc-biblioref">2019</a>)</span>.
+</dd>
+<dt><a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a></dt>
+<dd>You must know that there’s no other causal linkage between your instrument and your outcome variable.
+</dd>
+<dt><a href="https://en.wikipedia.org/wiki/Causal_graph">Causal graph</a></dt>
+<dd>You must know the <span class="noted">full</span><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> causal structure.
+</dd>
+</dl>
+<p>So what sets RCTs apart is not their ability to make causal claims—it’s that they can do so without expert domain knowledge. But <abbr title="Evidence-based Policy">EBP</abbr> argues that expert domain knowledge will be required anyway to make claims of effectiveness. If expert domain knowledge is required to assess effectiveness, we might as well desanctify RCTs and allow other techniques when assessing efficacy. (At least, I think this is a reasonable connection to make. <abbr title="Evidence-based Policy">EBP</abbr> doesn’t make this connection quite as explicit.)</p>
+<h3 id="omitted">Omitted</h3>
+<p>These are the things I’ve left out of the summary (and remembered to note here—I don’t guarantee exhaustiveness, blog name to the contrary).</p>
+<h4 id="what-is-an-argument">What is an argument?</h4>
+<p>There’s a whole section describing warrants, evidence, the structure of arguments, etc. I didn’t need to read this and I assume that’s true for most other readers of the book or this summary.</p>
+<h4 id="causal-cakes">Causal cakes</h4>
+<p>One of the central explanatory metaphors in <abbr title="Evidence-based Policy">EBP</abbr> is a “causal cake”. I omitted this because I found it supremely unhelpful. There’s no real reason to read it, but here is a list of my complaints:</p>
+<ul>
+<li>The book admits “The cake is just a picture of the list [of causal factors].”.</li>
+<li>The book says that it prefers a cake-and-ingredient metaphor to a pie-and-slice metaphor because each of the ingredients is integral to a cake while you still have a lot of pie left if you take out one slice. All the images of causal cakes have them sliced up into wedges in clear contradiction of the aforementioned rationale.</li>
+<li>Things become a bit dizzying when <abbr title="Evidence-based Policy">EBP</abbr> starts talking about “activating” one of the multiple cakes that make up a causal principle. The metaphor feels a bit thin—like <del>frosting</del> butter scraped over too much <del>cake</del> bread.</li>
+</ul>
+<h4 id="how-to-think">How to think</h4>
+<p>A whole chapter of <abbr title="Evidence-based Policy">EBP</abbr> is devoted to what I’d say are fairly general tools for thinking. It lists four strategies intended to help in constructing a robust effectiveness argument. However, since the chapter is not 1) integral to the rest of the book, 2) an exhaustive listing of all such thinking tools, 3) especially revelatory, I have not covered it in depth here. The four strategies mentioned are:</p>
+<ul>
+<li>pre-mortem</li>
+<li>thinking step-by-step and thinking backwards</li>
+<li>“If it is to work, by what means will it do so?”</li>
+<li>quick exit trees (a variant of decision trees)</li>
+</ul>
+<h4 id="evidence-ranking-schemes">Evidence-ranking schemes</h4>
+<p><abbr title="Evidence-based Policy">EBP</abbr> also has a full section on evidence-ranking schemes and policy clearinghouses like the <a href="https://www.gov.uk/guidance/what-works-network">What Works Network</a>. While I think these are interesting and valuable resources, the discussion doesn’t seem essential to the <abbr title="Evidence-based Policy">EBP</abbr>’s core thesis.</p>
+<h4 id="fidelity">Fidelity</h4>
+<p>The section on fidelity when implementing an efficacious intervention doesn’t seem to cover much that wasn’t already discussed when talking about vertical search and external validity.</p>
+<hr class="references">
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-gordon2019comparison">
+<p>Gordon, Brett R, Florian Zettelmeyer, Neha Bhargava, and Dan Chapsky. 2019. “A Comparison of Approaches to Advertising Measurement: Evidence from Big Field Experiments at Facebook.” <em>Marketing Science</em> 38 (2). INFORMS: 193–225.</p>
+</div>
+<div id="ref-rohrer2018thinking">
+<p>Rohrer, Julia M. 2018. “Thinking Clearly About Correlations and Causation: Graphical Causal Models for Observational Data.” <em>Advances in Methods and Practices in Psychological Science</em> 1 (1). SAGE Publications Sage CA: Los Angeles, CA: 27–42.</p>
+</div>
+<div id="ref-worldbank1995">
+<p>Weaving, Rachel V. 1995. “Tamil Nadu and Child Nutrition : A New Assessment.” World Bank. <a href="http://documents.worldbank.org/curated/en/841071468258312355/pdf/28513.pdf">http://documents.worldbank.org/curated/en/841071468258312355/pdf/28513.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Also, external validity’s demand for “similar” is too conservative. It’s possible to imagine contexts that differ in some intervention-relevant way where you’d still be happy to repeat the intervention. You probably shouldn’t say: “Oh, sorry, can’t do it. Direct cash transfers of $50 a month are only helpful for those with an annual income of $2,000. They wouldn’t work for those with an annual income of $1,000. $1,000 isn’t similar to $2,000—it’s only half as much.” Ultimately, what we want is not a “similar” context but a context which is at least as favorable for the intervention.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Of course, almost all real world causal principles can’t be expressed as Boolean formulas this simple. I’ve chosen a simplified example for pedagogical purposes and hope you can see or trust that similar dynamics arise with more complicated causal principles.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Perhaps my initial confusion now makes sense to you. Support factors also play a causal role by the plain meaning of “causal role”—if they were counterfactually absent, a different effect would result. <abbr title="Evidence-based Policy">EBP</abbr> just seems to have imbued the phrase “causal role” with a special (and, in my opinion, confusing) meaning.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Annoyingly, <abbr title="Evidence-based Policy">EBP</abbr> offers no succinct, upfront definition of “causal role” that I can find (Believe me, I’ve looked).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn5" role="doc-endnote"><p><abbr title="Evidence-based Policy">EBP</abbr> uses the term “causal principle” in two different ways. The first is the way we’ve already outlined—a specification of the full (possibly disjunctive) causal structure responsible for an effect. The second usage of “causal principle” is to describe the relationship between one set of jointly sufficient causes and their effect. To avoid confusion, I use the term “causal subprinciple” for this second concept.</p>
+<p>To be more explicit, a causal principle governs causal factors A through H in our Boolean formula. A causal subprinciple governs any of the disjuncts like (A AND B AND C). A causal principle governs all the causal factors about reaching an ELO of 1500 while a causal subprinciple governs all the causal factors about reaching 1500 via improving knowledge of openings with a passable middle and endgame.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Where “full” means “any additional variable that either directly or indirectly causally affects at least two variables already included in the DAG should be included” <span class="citation" data-cites="rohrer2018thinking">(Rohrer <a href="#ref-rohrer2018thinking" role="doc-biblioref">2018</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+<div id="overlay" class="inactive"><div id="key-terms">
+<dl>
+<dt>Efficacy</dt>
+<dd>An intervention is efficacious if it causes an effect. <abbr title="Evidence-based Policy">EBP</abbr> uses the phrase “It worked there.”. Other talk about internal validity.
+</dd>
+<dt>Effectiveness</dt>
+<dd>An intervention is effective if it can cause an effect in the context under consideration. <abbr title="Evidence-based Policy">EBP</abbr> uses the phrase “It will work here”. Others talk about external validity.
+</dd>
+<dt>Causal principle</dt>
+<dd>A reliable, systematic connection between cause and effect. Specifies effects for all configurations of causal factors.
+</dd>
+<dt>Causal factor</dt>
+<dd>A feature of the world that a causal principle specifies as important. Smallest atom in causal principle.
+</dd>
+<dt>Causal role</dt>
+<dd>We hope that a causal factor that’s the focus of an intervention will play a positive causal role.
+</dd>
+<dt>Support factors</dt>
+<dd>Causal factors necessary for the success of the intervention that aren’t manipulated by the intervention.
+</dd>
+<dt>Vertical search</dt>
+<dd>Climbing up and down the ladder of abstraction in search of the right formulation of a causal principle.
+</dd>
+<dt>Horizontal search</dt>
+<dd>Looking for additional non-obvious support factors
+</dd>
+</dl>
+</div></div>
+
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>

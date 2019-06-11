@@ -8,9 +8,160 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-04-09T00:00:00Z</updated>
+    <updated>2019-06-10T00:00:00Z</updated>
     <entry>
-    <title>Assorted Links XIII</title>
+    <title>YAAS evidence-based policy</title>
+    <link href="https://www.col-ex.org/posts/yaas-evidence-based-policy/" />
+    <id>https://www.col-ex.org/posts/yaas-evidence-based-policy/</id>
+    <published>2019-06-10T00:00:00Z</published>
+    <updated>2019-06-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="vignette">Vignette</h1>
+<p>The Tamil Nadu Integrated Nutrition Program (TINP) was a program to reduce child malnutrition among the rural poor of India’s Tamil Nadu State. Core elements of the program were: nutrition counseling for pregnant mothers and supplementary food for the most deprived young children. TINP succeeded in reducing malnutrition substantially <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995">1995</a>)</span>. Seeing this success, policymakers in Bangladesh launched the Bangladesh Integrated Nutrition Program (BINP) modeled on TINP. Unfortunately, six years later, childhood malnutrition in Bangladesh continued unabated <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995">1995</a>)</span>.</p>
+<p>Why did BINP fail where TINP succeeded? One of the main problems was that, while mothers did indeed learn about childhood nutrition, mothers often weren’t the primary decision makers in matters of nutrition. In rural Bangladesh, men typically do the shopping. And if a mother lived with her mother-in-law, that mother-in-law was the final authority on issues within the women’s domain. Because the decision-makers hadn’t received BINP’s nutrition counseling, they often used supplemental food from BINP as a substitute and reallocated other food away from mother and child.</p>
+<h1 id="effectiveness">Effectiveness</h1>
+<h2 id="the-problem-generalization">The problem: Generalization</h2>
+<p>Even in the absence of that holy grail—the RCT—there’s considerable confidence that TINP worked. But BINP didn’t. <em>Evidence-Based Policy</em> takes problems like this as it’s central concern. How do we move from “It worked there.”—<a href="#key-terms">efficacy</a>—to “It will work here.”—<a href="#key-terms">effectiveness</a>?</p>
+<h2 id="the-standard-solution-external-validity">The standard solution: External validity</h2>
+<p>The standard way of thinking about this problem is <a href="https://en.wikipedia.org/wiki/External_validity">external validity</a>. Briefly, a study is internally valid when it provides strong reasons to believe its conclusions. A study has external validity when it can be generalized to other contexts—different times, places and populations.</p>
+<p>But <abbr title="Evidence-based Policy">EBP</abbr> disdains external validity. Claims of external validity usually take a shape like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on similar (to population C) population E at similar (to time and place D) time and place F.” But the word “similar” is doing all the work here. What does it mean?</p>
+<p>“Similar” can’t mean “identical”—then all studies would be pointless because we would never have external validity and could never generalize. But “similar” also shouldn’t be construed too permissively. If you insist that the population of Manhattanites and the population of rural Tibetans are “similar” because they both consist of humans living in communities with hierarchies of esteem under a system of hegemonic capitalism on planet Earth, you’ll be find yourself perpetually surprised when your interventions fail to replicate.</p>
+<p>Furthermore, similarity means radically different things in different contexts. If the original study is about reducing Alzheimer’s for high risk populations, similarity means biomedical similarity and certain elderly people in rural Tibet may in fact be more similar to certain elderly people in Manhattan than either subpopulation is to their neighbors. On the other hand, if the study is about the welfare effects of exposure to pervasive advertising, rural Tibet and Manhattan count as pretty dissimilar.</p>
+<p>So “similar” has to mean similar in <span class="noted">the right ways and to the right degree</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. The external validity claim then becomes something like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on the right population E at the right time and place F.” But this is pretty tautological. To be a useful tool, external validity should transform a hard problem into a simpler one. But it turns out that, once we unpack things, it’s hard to know what “similar” means other than “right” and we’re back where we started—we have to rely on outside knowledge to know if we can translate “It worked there.” to “It will work here.”</p>
+<h2 id="the-evidence-based-policy-solution">The <em>Evidence-based Policy</em> solution</h2>
+<blockquote>
+To get a good argument from “it works somewhere” to “it will work here” facts about causal principles here and there are needed.
+</blockquote>
+<p><!--more--></p>
+<h2 id="terms">Terms</h2>
+<h3 id="causal-principle">Causal principle</h3>
+<p>A <a href="#key-terms">causal principle</a> provides a reliable, systematic connection between cause and effect. Because the world is complicated, causal principles often don’t take on a simple form. Instead, they are characterized by Insufficient but Necessary parts of an Unnecessary but Sufficient part (INUS). If I want to reach a <a href="https://lichess.org/">lichess.org</a> ELO of 1700, excellent knowledge of openings may necessary but insufficient because I would also need at least passable middlegame and endgame ability to finish out the game. However, all those necessary factors (excellent opening, passable middlegame and endgame), even if collectively sufficient, aren’t collectively necessary—I could take an entirely route to 1500 by overcoming mediocre opening play with excellent middlegame play or by learning how to cheat with a chess engine. <span class="noted">Schematically</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>, this looks like a Boolean formula: <span id="boolean-formula">(A AND B AND C) OR (B AND D) OR (E AND F AND G) or H</span> where A, B, C, etc. can be either true or false. In order for the whole proposition to be true, one of the disjuncts in parentheses must be true. That means each disjunct (e.g. A AND B AND C) corresponds to an unnecessary but sufficient part. In order for any given disjunct to be true, each of its atoms must be true so each atom (e.g. A) corresponds to an insufficient but necessary part.</p>
+<h3 id="causal-factor">Causal factor</h3>
+<p><abbr title="Evidence-based Policy">EBP</abbr> calls each one of the atoms in the Boolean formula—each feature of the world that the causal principle specifies as important—a <a href="#key-terms">causal factor</a>. So, to go back to our example, excellent opening play, passable middlegame and endgame, ability to cheat with a chess engine, etc. are all causal factors.</p>
+<figure>
+<img src="https://www.col-ex.org/images/evidence-based-policy/chess.svg" alt="Diagram labeling key terms on chess example" /><figcaption>Diagram labeling key terms on chess example</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/evidence-based-policy/boolean.svg" alt="Diagram labeling key terms on Boolean formula example" /><figcaption>Diagram labeling key terms on Boolean formula example</figcaption>
+</figure>
+<h3 id="causal-role-and-support-factors">Causal role and support factors</h3>
+<p><abbr title="Evidence-based Policy">EBP</abbr> then goes on to emphasize <a href="#key-terms">causal roles</a> and <a href="#key-terms">support factors</a>—a distinction I initially found somewhat confusing. However, my current understanding is that they are really both ways of talking about causal factors (atoms). Any given intervention focuses on one or a few causal factors. <abbr title="Evidence-based Policy">EBP</abbr> describes these causal factors that are the subject of manipulation as having a causal role. The causal factors specified by the causal principle that aren’t the focus of the intervention (but are jointly necessary with the focused causal factor) are deemed support factors. So whether we talk about a causal factor with the language “causal role” or with the language “support factor” depends only on the focus of intervention. <span class="noted">We can interpret “X plays a causal role” as “X is a causal factor manipulated by our intervention” and “Y is a support factor” as “Y is a necessary causal factor not manipulated by our intervention”.</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a></p>
+<p>In our chess example, if I started memorizing openings from an opening book, I would be aiming to make my openings play a positive causal role. The other causal factors like passable middle and endgame—while considering this opening intervention—would be support factors. Learning how to cheat with a chess engine is a causal factor in the overall causal principal, but it’s not a support factor because it’s not relevant to the intervention we’re focusing on. In our Boolean formula, if I’m trying to change A from ‘false’ to ‘true’, I’m hoping to make ‘A’ play a positive causal role. While focusing on A, I consider B and C to be support factors. D, E, F, G and H are causal factors but not support factors for A.</p>
+<h2 id="thesis">Thesis</h2>
+<p>Now that we’ve <span class="noted">defined the key terms of <abbr title="Evidence-based Policy">EBP</abbr></span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a>, we can present the thesis of <abbr title="Evidence-based Policy">EBP</abbr>. The thesis is that to feel confident that “It will work here.” based on evidence that “It worked there.” requires an argument like this:</p>
+<blockquote>
+<p>Effectiveness argument</p>
+<ol type="1">
+<li>The policy worked there (i.e., it played a positive causal role in the causal principles that hold there and the support factors necessary for it to play this positive role there were present for at least some individuals there).</li>
+<li>The policy can play the same causal role here as there.</li>
+<li>The support factors necessary for the policy to play a positive causal role here are in place for at least some individuals here post-implementation.</li>
+</ol>
+<p>Conclusion. The policy will work here.</p>
+</blockquote>
+<h2 id="making-the-effectiveness-argument">Making the effectiveness argument</h2>
+<p>If we have a efficacious intervention (“It worked there.”), how can we fill in the rest of the effectiveness argument above? <abbr title="Evidence-based Policy">EBP</abbr> advocates for what they call <a href="#key-terms">vertical</a> and <a href="#key-terms">horizontal search</a>.</p>
+<h3 id="vertical-search">Vertical search</h3>
+<p>Vertical search is about finding the right formulation for <span class="noted">a causal subprinciple</span><a href="#fn5" id="fnref5" class="footnote-ref"><sup>5</sup></a>. Any putative causal subprinciple can be stated at different levels of abstraction. In order of increasing abstraction, we can have causal subprinciples like:</p>
+<ol type="1">
+<li>This hammer claw makes it possible to extract this nail.</li>
+<li>Hammer claws make it possible to extract nails.</li>
+<li>Levers make it possible to transform a small force exerted over a large distance into a large force exerted over a small distance.</li>
+<li>Simple machines make it possible to do things we otherwise couldn’t via mechanical advantage.</li>
+</ol>
+<p>Even if all these formulations are true, some are more useful than others. 1 is too specific to be of much use. 2 is useful in cases just like ours while 3 provides insights and may allow us to generalize to novel situations. 4 may be too abstract and requires expertise to turn into practical advice—if you’re struggling to pull out a nail and someone offers the advice that “Simple machines provide mechanical advantage.”, you may not be eternally grateful for their sage advice.</p>
+<p>It’s worth making explicit here that it won’t always be obvious how generalizable causal subprinciples are. In the <a href="#vignette">vignette</a> at the beginning, it might have sounded eminently plausible that the causal subprinciple to be learned from the successful TINP program was “If we increase the nutritional knowledge of mothers, then childhood malnutrition will be reduced.” It’s only after the BINP program—designed on this principle—failed that it became apparent that the principle is better phrased as “If we increase the nutritional knowledge of those in charge of childhood nutrition, then childhood malnutrition will be reduced.” In Tamil Nadu, these two principles are the same. It’s only in Bangladesh where fathers and mothers-in-law play a more important role in childhood nutrition that these two principles diverge and finding the correct level of abstraction becomes crucial.</p>
+<p>So generally there’s a tension between making causal subprinciples concrete enough to be useful and abstract enough to be true in new circumstances. This is why <abbr title="Evidence-based Policy">EBP</abbr> advocates careful vertical search up and down the ladder of abstraction.</p>
+<h3 id="horizontal-search">Horizontal search</h3>
+<p>Horizontal search is about identifying the full set of support factors necessary for an intervention to succeed. Because support factors aren’t the target of an intervention, it’s easy to miss them. But if they’re missing, the intervention will fail all the same.</p>
+<p>For example, in childhood malnutrition interventions like TINP and BINP, careful search could uncover additional support factors like:</p>
+<ul>
+<li>There’s an adequate amount of food available for purchase (if not dealing with subsistence farmers)</li>
+<li>It’s possible to construct a nutritious diet with locally available foods</li>
+<li>The <a href="https://en.wikipedia.org/wiki/Parasite_load">parasite load</a> is low enough that a sufficient quantity of nutrients can be absorbed</li>
+</ul>
+<h2 id="in-practice">In practice</h2>
+<p>To its credit, <abbr title="Evidence-based Policy">EBP</abbr> recognizes that the alternative procedure it advocates is not a drop-in replacement. Devolution and discretion will be central to the new world order. Tendentiously, the book would have us supplant a mechanical method (RCTs, clearinghouses, external validity) with a much fuzzier one demanding more expertise and discretion of policymakers. But, <abbr title="Evidence-based Policy">EBP</abbr> argues, this is change is necessary because the mechanical method simply isn’t up to the task.</p>
+<blockquote>
+What’s wrong with the ideas of external validity and similarity is that they invite you to stop thinking. […] We do not think that it is possible to produce unambiguous rules for predicting the results of social policies. So, we do not think that we can produce these rules. So in our world, those who make the decisions will have to deliberate using their judgment and discretion.
+</blockquote>
+<h1 id="efficacy">Efficacy</h1>
+<p>Though the book is mainly about the problem of <a href="#key-terms">effectiveness</a> it also has a section on <a href="#key-terms">efficacy</a>. In particular, it talks about causal inference using RCTs and alternatives.</p>
+<h2 id="randomized-controlled-trials">Randomized controlled trials</h2>
+<p>RCTs are the holy grail for causal inference (well, meta-analyses and/or systematic reviews of RCTs). <abbr title="Evidence-based Policy">EBP</abbr> proposes that this is because RCTs are “self-validating”. By this, they mean that RCTs are something of a magic causality black box—perform the right <del>rituals</del> procedures and out pops a causal claim. There’s no need to have a detailed understanding of mechanism, context, population or anything at all in the domain.</p>
+<p>Most of the alternative mechanisms of causal inference require real subject matter expertise. Some of these alternatives include:</p>
+<dl>
+<dt><a href="https://en.wikipedia.org/wiki/Confounding#Control">Controlling for confounds</a></dt>
+<dd>You must know the full set of confounds to control for them. This is hard <span class="citation" data-cites="gordon2019comparison">(Gordon et al. <a href="#ref-gordon2019comparison">2019</a>)</span>.
+</dd>
+<dt><a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a></dt>
+<dd>You must know that there’s no other causal linkage between your instrument and your outcome variable.
+</dd>
+<dt><a href="https://en.wikipedia.org/wiki/Causal_graph">Causal graph</a></dt>
+<dd>You must know the <span class="noted">full</span><a href="#fn6" id="fnref6" class="footnote-ref"><sup>6</sup></a> causal structure.
+</dd>
+</dl>
+<p>So what sets RCTs apart is not their ability to make causal claims—it’s that they can do so without expert domain knowledge. But <abbr title="Evidence-based Policy">EBP</abbr> argues that expert domain knowledge will be required anyway to make claims of effectiveness. If expert domain knowledge is required to assess effectiveness, we might as well desanctify RCTs and allow other techniques when assessing efficacy. (At least, I think this is a reasonable connection to make. <abbr title="Evidence-based Policy">EBP</abbr> doesn’t make this connection quite as explicit.)</p>
+<h1 id="omitted">Omitted</h1>
+<p>These are the things I’ve left out of the summary (and remembered to note here—I don’t guarantee exhaustiveness, blog name to the contrary).</p>
+<h2 id="what-is-an-argument">What is an argument?</h2>
+<p>There’s a whole section describing warrants, evidence, the structure of arguments, etc. I didn’t need to read this and I assume that’s true for most other readers of the book or this summary.</p>
+<h2 id="causal-cakes">Causal cakes</h2>
+<p>One of the central explanatory metaphors in <abbr title="Evidence-based Policy">EBP</abbr> is a “causal cake”. I omitted this because I found it supremely unhelpful. There’s no real reason to read it, but here is a list of my complaints:</p>
+<ul>
+<li>The book admits “The cake is just a picture of the list [of causal factors].”.</li>
+<li>The book says that it prefers a cake-and-ingredient metaphor to a pie-and-slice metaphor because each of the ingredients is integral to a cake while you still have a lot of pie left if you take out one slice. All the images of causal cakes have them sliced up into wedges in clear contradiction of the aforementioned rationale.</li>
+<li>Things become a bit dizzying when <abbr title="Evidence-based Policy">EBP</abbr> starts talking about “activating” one of the multiple cakes that make up a causal principle. The metaphor feels a bit thin—like <del>frosting</del> butter scraped over too much <del>cake</del> bread.</li>
+</ul>
+<h2 id="how-to-think">How to think</h2>
+<p>A whole chapter of <abbr title="Evidence-based Policy">EBP</abbr> is devoted to what I’d say are fairly general tools for thinking. It lists four strategies intended to help in constructing a robust effectiveness argument. However, since the chapter is not 1) integral to the rest of the book, 2) an exhaustive listing of all such thinking tools, 3) especially revelatory, I have not covered it in depth here. The four strategies mentioned are:</p>
+<ul>
+<li>pre-mortem</li>
+<li>thinking step-by-step and thinking backwards</li>
+<li>“If it is to work, by what means will it do so?”</li>
+<li>quick exit trees (a variant of decision trees)</li>
+</ul>
+<h2 id="evidence-ranking-schemes">Evidence-ranking schemes</h2>
+<p><abbr title="Evidence-based Policy">EBP</abbr> also has a full section on evidence-ranking schemes and policy clearinghouses like the <a href="https://www.gov.uk/guidance/what-works-network">What Works Network</a>. While I think these are interesting and valuable resources, the discussion doesn’t seem essential to the <abbr title="Evidence-based Policy">EBP</abbr>’s core thesis.</p>
+<h2 id="fidelity">Fidelity</h2>
+<p>The section on fidelity when implementing an efficacious intervention doesn’t seem to cover much that wasn’t already discussed when talking about vertical search and external validity.</p>
+<hr />
+<div id="refs" class="references" role="doc-bibliography" role="doc-bibliography">
+<div id="ref-gordon2019comparison">
+<p>Gordon, Brett R, Florian Zettelmeyer, Neha Bhargava, and Dan Chapsky. 2019. “A Comparison of Approaches to Advertising Measurement: Evidence from Big Field Experiments at Facebook.” <em>Marketing Science</em> 38 (2). INFORMS: 193–225.</p>
+</div>
+<div id="ref-rohrer2018thinking">
+<p>Rohrer, Julia M. 2018. “Thinking Clearly About Correlations and Causation: Graphical Causal Models for Observational Data.” <em>Advances in Methods and Practices in Psychological Science</em> 1 (1). SAGE Publications Sage CA: Los Angeles, CA: 27–42.</p>
+</div>
+<div id="ref-worldbank1995">
+<p>Weaving, Rachel V. 1995. “Tamil Nadu and Child Nutrition : A New Assessment.” World Bank. <a href="http://documents.worldbank.org/curated/en/841071468258312355/pdf/28513.pdf">http://documents.worldbank.org/curated/en/841071468258312355/pdf/28513.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Also, external validity’s demand for “similar” is too conservative. It’s possible to imagine contexts that differ in some intervention-relevant way where you’d still be happy to repeat the intervention. You probably shouldn’t say: “Oh, sorry, can’t do it. Direct cash transfers of $50 a month are only helpful for those with an annual income of $2,000. They wouldn’t work for those with an annual income of $1,000. $1,000 isn’t similar to $2,000—it’s only half as much.” Ultimately, what we want is not a “similar” context but a context which is at least as favorable for the intervention.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>Of course, almost all real world causal principles can’t be expressed as Boolean formulas this simple. I’ve chosen a simplified example for pedagogical purposes and hope you can see or trust that similar dynamics arise with more complicated causal principles.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>Perhaps my initial confusion now makes sense to you. Support factors also play a causal role by the plain meaning of “causal role”—if they were counterfactually absent, a different effect would result. <abbr title="Evidence-based Policy">EBP</abbr> just seems to have imbued the phrase “causal role” with a special (and, in my opinion, confusing) meaning.<a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn4">
+<p>Annoyingly, <abbr title="Evidence-based Policy">EBP</abbr> offers no succinct, upfront definition of “causal role” that I can find (Believe me, I’ve looked).<a href="#fnref4" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn5">
+<p><abbr title="Evidence-based Policy">EBP</abbr> uses the term “causal principle” in two different ways. The first is the way we’ve already outlined—a specification of the full (possibly disjunctive) causal structure responsible for an effect. The second usage of “causal principle” is to describe the relationship between one set of jointly sufficient causes and their effect. To avoid confusion, I use the term “causal subprinciple” for this second concept.</p>
+<p>To be more explicit, a causal principle governs causal factors A through H in our Boolean formula. A causal subprinciple governs any of the disjuncts like (A AND B AND C). A causal principle governs all the causal factors about reaching an ELO of 1500 while a causal subprinciple governs all the causal factors about reaching 1500 via improving knowledge of openings with a passable middle and endgame.<a href="#fnref5" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn6">
+<p>Where “full” means “any additional variable that either directly or indirectly causally affects at least two variables already included in the DAG should be included” <span class="citation" data-cites="rohrer2018thinking">(Rohrer <a href="#ref-rohrer2018thinking">2018</a>)</span>.<a href="#fnref6" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>Assorted links XIII</title>
     <link href="https://www.col-ex.org/posts/assorted-links-xiii/" />
     <id>https://www.col-ex.org/posts/assorted-links-xiii/</id>
     <published>2019-04-09T00:00:00Z</published>
@@ -55,7 +206,7 @@
 <p><!--more--></p>]]></summary>
 </entry>
 <entry>
-    <title>Assorted Links XII</title>
+    <title>Assorted links XII</title>
     <link href="https://www.col-ex.org/posts/assorted-links-xii/" />
     <id>https://www.col-ex.org/posts/assorted-links-xii/</id>
     <published>2019-02-11T00:00:00Z</published>
@@ -102,13 +253,13 @@
     <published>2019-01-30T00:00:00Z</published>
     <updated>2019-01-30T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p><a href="https://www.col-ex.org/posts/dominated-decisions/">Last time</a>, we introduced the basic setup of decision theory and examined the dominance decision rule. We also emphasized that the dominance decision rule is “weak” because it applies in very general settings with limited information to go on.</p>
-<p>This time, we’ll look at other decision rules that apply in a very general setting.</p>
+<p>This time, we’ll look at other decision rules that apply in that very general setting. They’re still decisions under ignorance—no probabilities associated with states of the world—and outcomes are still measured only on an <a href="https://en.wikipedia.org/wiki/Level_of_measurement">ordinal scale</a>.</p>
 <h1 id="maximin">Maximin</h1>
 <p>The first such decision rule is <a href="https://en.wikipedia.org/wiki/Minimax">maximin</a>.</p>
 <h2 id="prose">Prose</h2>
 <p>Maximin suggests that in any decision scenario, we look to the worst outcome that may come to pass under each plan of action. We should then pick the action which has the best such outcome. That is, we pick the action with the best worst case—maximize our minimum.</p>
 <h2 id="example">Example</h2>
-<p>You have the choice of two alternative routes to work. In good conditions, the first route takes 10 minutes and the second route 5 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes. With a scenario like this, the maximin rule demands that you take the first route since its worst case is only 10 minutes while the second route’s worst case is 20 minutes.</p>
+<p>You have the choice of two alternative routes to work. In good conditions, the first route takes 10 minutes and the second route 5 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes.</p>
 <figure>
 <figcaption>
 <p>Decision matrix about route to work. Preferred action in bold.</p>
@@ -135,6 +286,7 @@
 </tbody>
 </table>
 </figure>
+<p>With a scenario like this, the maximin rule demands that you take the first route since its worst case is only 10 minutes while the second route’s worst case is 20 minutes.</p>
 <p><!--more--></p>
 <h2 id="interactive">Interactive</h2>
 <p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
@@ -160,22 +312,22 @@
 <h2 id="code">Code</h2>
 <p>We can also explain maximin with its implementing source code:</p>
 <div id="cb1" class="sourceCode">
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">maximin ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-2" title="2">maximin row1 row2 <span class="ot">=</span> Foldable1.minimum row1 <span class="op">&gt;=</span> Foldable1.minimum row2</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">maximin ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-2" title="2">maximin rows <span class="ot">=</span> Foldable1.minimum row1 <span class="op">Prelude.&gt;=</span> Foldable1.minimum row2</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a></code></pre></div>
 </div>
 <p>Again, maximin applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <span class="noted"><a href="https://en.wikipedia.org/wiki/Total_order">orderable</a></span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>.</p>
 <h2 id="math">Math</h2>
 <p>We can also describe maximin <span class="math inline">\(\preccurlyeq_{MaMi}\)</span> in symbols:</p>
 <p><img src="https://www.col-ex.org/images/latex/4827553576662725170.svg" title="a_i \preccurlyeq_{MaMi} a_j \leftrightarrow \min_{s \in S} v(a_i, s) \leq \min_{s \in S} v(a_j, s)" /></p>
 <p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Total_order">total order</a> order of values <span class="math inline">\(V\)</span>.</p>
-<p>In other words, we start out with a totally ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can be compared to one another to determine which is preferable. Maximin is then a way of lifting the total order of outcome valuations and turning it into a binary relation on actions—“lifting” is necessary because each action consists of <em>several</em> outcomes across different states of the world.</p>
-<p>The resulting binary relation on actions is <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>, <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a> and <a href="https://en.wikipedia.org/wiki/Connex_relation">connex</a>. This means maximin is a total preorder. If we strengthen it by switching to <span class="math inline">\(&lt;\)</span> in the right-hand side of the definition instead of <span class="math inline">\(\leq\)</span>, strong maximin (analogous to strong dominance) becomes a total order (with <a href="https://en.wikipedia.org/wiki/Antisymmetric_relation">antisymmetry</a> vacuously satisfied).</p>
 <h1 id="maximax">Maximax</h1>
 <p>The second decision rule we’ll look it maximax. It’s considerably more optimistic than maximin.</p>
 <h2 id="prose-1">Prose</h2>
 <p>Maximax suggests that in any decision scenario, we look to the best outcome that may come to pass under each plan of action. We should then pick the action which has the best such outcome. That is, we pick the action with the best best case—maximize our maximum.</p>
 <h2 id="example-1">Example</h2>
-<p>You have the choice of two alternative routes to work. In good conditions, the first route takes 10 minutes and the second route 5 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes. With a scenario like this, the maximax rule demands that you take the second route since its best case is only 5 minutes while the first route’s best case is 10 minutes.</p>
+<p>Suppose you’re choosing between routes to work again:</p>
 <figure>
 <figcaption>
 <p>Decision matrix about route to work. Preferred action in bold.</p>
@@ -202,6 +354,7 @@
 </tbody>
 </table>
 </figure>
+<p>With a scenario like this, the maximax rule demands that you take the second route since its best case is only 5 minutes while the first route’s best case is 10 minutes.</p>
 <h2 id="interactive-1">Interactive</h2>
 <p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
 <textarea id="maximax-table" class="decision-table">
@@ -226,16 +379,16 @@
 <h2 id="code-1">Code</h2>
 <p>We can also explain maximax with its implementing source code:</p>
 <div id="cb2" class="sourceCode">
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">maximax ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb2-2" title="2">maximax row1 row2 <span class="ot">=</span> Foldable1.maximum row1 <span class="op">Prelude.&gt;=</span> Foldable1.maximum row2</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">maximax ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb2-2" title="2">maximax rows <span class="ot">=</span> Foldable1.maximum row1 <span class="op">Prelude.&gt;=</span> Foldable1.maximum row2</a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a></code></pre></div>
 </div>
 <p>Again, maximax applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <a href="https://en.wikipedia.org/wiki/Total_order">orderable</a>.</p>
 <h2 id="math-1">Math</h2>
 <p>We can also describe maximax <span class="math inline">\(\preccurlyeq_{MaMa}\)</span> in symbols:</p>
 <p><img src="https://www.col-ex.org/images/latex/-7655752704812689354.svg" title="a_i \preccurlyeq_{MaMa} a_j \leftrightarrow \max_{s \in S} v(a_i, s) \leq \max_{s \in S} v(a_j, s)" /></p>
 <p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Total_order">total order</a> order of values <span class="math inline">\(V\)</span>.</p>
-<p>In other words, we start out with a totally ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can be compared to one another to determine which is preferable. Maximax is then a way of lifting the total order of outcome valuations and turning it into a binary relation on actions—“lifting” is necessary because each action consists of <em>several</em> outcomes across different states of the world.</p>
-<p>The resulting binary relation on actions is <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>, <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a> and <a href="https://en.wikipedia.org/wiki/Connex_relation">connex</a>. This means maximax is a total preorder. If we strengthen it by switching to <span class="math inline">\(&lt;\)</span> in the right-hand side of the definition instead of <span class="math inline">\(\leq\)</span>, strong maximax (analogous to strong dominance) becomes a total order (with <a href="https://en.wikipedia.org/wiki/Antisymmetric_relation">antisymmetry</a> vacuously satisfied).</p>
 <h1 id="leximin">Leximin</h1>
 <p>The final decision rule we’ll look at today is leximin.</p>
 <h2 id="prose-2">Prose</h2>
@@ -296,19 +449,17 @@
 <h2 id="code-2">Code</h2>
 <p>We can also explain leximin with its implementing source code:</p>
 <div id="cb3" class="sourceCode">
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">leximin ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb3-2" title="2">leximin row1 row2 <span class="ot">=</span></a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">leximin ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb3-2" title="2">leximin rows <span class="ot">=</span></a>
 <a class="sourceLine" id="cb3-3" title="3">    fromMaybe true <span class="op">&lt;&lt;&lt;</span> List.head <span class="op">&lt;&lt;&lt;</span> NonEmpty.mapMaybe keepNonEq <span class="op">$</span></a>
 <a class="sourceLine" id="cb3-4" title="4">    NonEmpty.zipWith <span class="fu">compare</span> (NonEmpty.sort row1) (NonEmpty.sort row2)</a>
 <a class="sourceLine" id="cb3-5" title="5">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb3-6" title="6">    keepNonEq <span class="dt">GT</span> <span class="ot">=</span> <span class="dt">Just</span> true</a>
-<a class="sourceLine" id="cb3-7" title="7">    keepNonEq <span class="dt">LT</span> <span class="ot">=</span> <span class="dt">Just</span> false</a>
-<a class="sourceLine" id="cb3-8" title="8">    keepNonEq <span class="dt">EQ</span> <span class="ot">=</span> <span class="dt">Nothing</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a>
+<a class="sourceLine" id="cb3-7" title="7">    keepNonEq <span class="dt">GT</span> <span class="ot">=</span> <span class="dt">Just</span> true</a>
+<a class="sourceLine" id="cb3-8" title="8">    keepNonEq <span class="dt">LT</span> <span class="ot">=</span> <span class="dt">Just</span> false</a>
+<a class="sourceLine" id="cb3-9" title="9">    keepNonEq <span class="dt">EQ</span> <span class="ot">=</span> <span class="dt">Nothing</span></a></code></pre></div>
 </div>
 <p>Again, leximin applies in very general settings because the only constraint we must satisfy is that <code>cell</code>s are <a href="https://en.wikipedia.org/wiki/Total_order">orderable</a>.</p>
-<h2 id="math-2">Math</h2>
-<p>We start out with a totally ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can be compared to one another to determine which is preferable. Maximax is then a way of lifting the total order of outcome valuations and turning it into a binary relation on actions—“lifting” is necessary because each action consists of <em>several</em> outcomes across different states of the world.</p>
-<p>The resulting binary relation on actions is <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a>, <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a> and <a href="https://en.wikipedia.org/wiki/Connex_relation">connex</a>. This means leximin is a total preorder.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
@@ -355,7 +506,7 @@
 <p>Each row (after the first) represents a different action and each column (after the first) represents a different possible state of the world. Their intersections—the four cells that are the combination of an act and a world state—are called outcomes.</p>
 <h1 id="sets-of-settings">Sets of settings</h1>
 <p>In <a href="https://en.wikipedia.org/wiki/Decision_theory">decision theory</a> (and <a href="https://en.wikipedia.org/wiki/Social_choice_theory">social choice theory</a>, <a href="https://en.wikipedia.org/wiki/Game_theory">game theory</a>, <a href="https://en.wikipedia.org/wiki/Mechanism_design">mechanism design</a>, etc.), when presented with a decision, it’s often useful to start by taking stock of what information we have available and what information we would like but don’t have. Depending on the result of this assessment, we will have better or worse strategies available. That is, we’d like to determine the best strategy or solution given the information available. Are there better strategies that we could execute with more information? What is that information? For example, we approach the question of “Should we buy home insurance?” very differently if we know the precise chance of our house catching on fire. Without key information like that, we have to resort to second-best strategies.</p>
-<p>The decision matrix we depicted above reflects one of the <span class="noted">simplest possible</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> settings. In particular, we don’t have any probabilities associated with the different states of the world (“Fire” or “No fire”) which makes it a “decision under ignorance”. Another key limitation is that we don’t have a number representing how good or bad each outcome is—our outcomes have not been assigned <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a>.</p>
+<p>The decision matrix we depicted above reflects one of the <span class="noted">simplest possible</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> settings. In particular, we don’t have any probabilities associated with the different states of the world (“Fire” or “No fire”) which makes it a “decision under ignorance”. Another key limitation is that we don’t have a number representing how good or bad each outcome is—our outcomes have not been assigned <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility</a>. Instead, our outcomes are only on an <a href="https://en.wikipedia.org/wiki/Level_of_measurement">ordinal scale</a>.</p>
 <p>Because this setting is so minimal, it both has wide applicability—it makes very few assumptions that can be contradicted by facts on the ground—and limited insight—the best you can do with minimal information still isn’t very good.</p>
 <p><!--more--></p>
 <h1 id="dominance">Dominance</h1>
@@ -391,7 +542,7 @@
 </figure>
 <h2 id="interactive">Interactive</h2>
 <p>If the above description isn’t sufficient, try poking around with this interactive analysis (Note that “better than” in this case means later in <a href="https://en.wikipedia.org/wiki/ASCII#Character_order">ASCIIbetical order</a>—later letters are better than earlier letters). The analysis will update whenever you stop editing text and defocus the text area.</p>
-<textarea id="decision-table">
+<textarea id="dominance-table" class="decision-table">
 ```{=html}
 
 |          | State 1 | State 2 |
@@ -400,22 +551,32 @@
 | Action 2 | e       | f       |
 ```
 </textarea>
-<div id="decision-analysis">
+<p>Weak:</p>
+<div id="weak-dominance-analysis">
 <ul>
-<li><p>Action 2 weakly dominates Action 1</p></li>
-<li><p>Action 2 strongly dominates Action 1</p></li>
+<li>Action 2 weakly dominates Action 1</li>
+</ul>
+</div>
+<p>Strong:</p>
+<div id="strong-dominance-analysis">
+<ul>
+<li>Action 2 strongly dominates Action 1</li>
 </ul>
 </div>
 <h2 id="source-code">Source code</h2>
 <p>Another way to explain dominance is with source code:</p>
 <div id="cb1" class="sourceCode">
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">dominatesWeakly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-2" title="2">dominatesWeakly row1 row2 <span class="ot">=</span> <span class="dt">Foldable</span><span class="op">.</span><span class="fu">all</span> ((<span class="op">==</span>) true) (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="ot">dominatesStrongly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Row</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-5" title="5">dominatesStrongly row1 row2 <span class="ot">=</span></a>
-<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">Foldable</span><span class="op">.</span><span class="fu">all</span> ((<span class="op">==</span>) true) (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2) <span class="op">&amp;&amp;</span></a>
-<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">Foldable</span><span class="op">.</span><span class="fu">any</span> ((<span class="op">==</span>) true) (NonEmpty.zipWith (<span class="op">&gt;</span>) row1 row2)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">dominatesWeakly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-2" title="2">dominatesWeakly rows <span class="ot">=</span> <span class="dt">Foldable</span><span class="op">.</span><span class="fu">and</span> (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2)</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="ot">dominatesStrongly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
+<a class="sourceLine" id="cb1-7" title="7">dominatesStrongly rows <span class="ot">=</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="dt">Foldable</span><span class="op">.</span><span class="fu">and</span> (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2) <span class="op">&amp;&amp;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">Foldable</span><span class="op">.</span><span class="fu">or</span> (NonEmpty.zipWith (<span class="op">&gt;</span>) row1 row2)</a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a></code></pre></div>
 </div>
 <p>To hammer home the point about dominance being applicable in very general settings: <code>cell</code> is totally polymorphic except for the constraint that <code>cell</code>s form a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>.</p>
 <h2 id="math">Math</h2>
@@ -424,14 +585,10 @@
 <p>We can also describe weak dominance <span class="math inline">\(\preccurlyeq_{WD}\)</span> in symbols:</p>
 <p><img src="https://www.col-ex.org/images/latex/-3272411906172403892.svg" title="a_i \preccurlyeq_{WD} a_j \leftrightarrow \forall s \in S\ (v(a_i, s) \leq v(a_j, s))" /></p>
 <p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a> of values <span class="math inline">\(V\)</span>.</p>
-<p>In other words, we start out with a partially ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can (sometimes) be compared to one another to determine which is preferable. Weak dominance is then a way of lifting the partial order of outcome valuations and turning it into a binary relation on actions—“lifting” is necessary because each action consists of <em>several</em> outcomes across different states of the world.</p>
-<p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Antisymmetric_relation">antisymmetric</a>, <a href="https://en.wikipedia.org/wiki/Reflexive_relation">reflexive</a> and <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a>. Depending on how we handle incomparable elements in the original partial order of valuations, this means the weak dominance relation is a either a partial or total order.</p>
 <h3 id="strong-dominance">Strong dominance</h3>
 <p>In symbols, strong dominance <span class="math inline">\(\prec_{SD}\)</span> is:</p>
 <p><img src="https://www.col-ex.org/images/latex/-2026509021354873551.svg" title="a_i \prec_{SD} a_j \leftrightarrow \forall s \in S\ (v(a_i, s) \leq v(a_j, s)) \wedge \exists s \in S\ (v(a_i, s) &lt; v(a_j, s))" /></p>
 <p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(a_j\)</span> represent the ith and jth actions, <span class="math inline">\(s\)</span> is a particular state of the world from the set <span class="math inline">\(S\)</span> of all states, and <span class="math inline">\(v : A \times S \to V\)</span> is a function mapping an action in a particular state of the world to an element in the <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a> of values <span class="math inline">\(V\)</span>.</p>
-<p>In other words, we start out with a partially ordered set of valuations where each outcome (cell in a decision table) corresponds to a valuation in this set. These outcomes can (sometimes) be compared to one another to determine which is preferable. Strong dominance is then a way of lifting the partial order of outcome valuations and turning it into a binary relation on actions— “lifting” is necessary because each action consists of <em>several</em> outcomes across different states of the world.</p>
-<p>The resulting binary relation is <a href="https://en.wikipedia.org/wiki/Asymmetric_relation">asymmetric</a>, <a href="https://en.wikipedia.org/wiki/Irreflexive_relation">irreflexive</a>, and <a href="https://en.wikipedia.org/wiki/Transitive_relation">transitive</a>. Depending on how we handle incomparable elements in the original partial order of valuations, this means the strong dominance relation is a either a strict partial or a strict total order.</p>
 <hr />
 <div id="refs" class="references" role="doc-bibliography" role="doc-bibliography">
 <div id="ref-peterson2017introduction">
@@ -451,7 +608,7 @@
 </section>]]></summary>
 </entry>
 <entry>
-    <title>Assorted Links XI</title>
+    <title>Assorted links XI</title>
     <link href="https://www.col-ex.org/posts/assorted-links-xi/" />
     <id>https://www.col-ex.org/posts/assorted-links-xi/</id>
     <published>2019-01-09T00:00:00Z</published>
@@ -1781,7 +1938,7 @@ The potential role of ETS costs in reevaluating the net negative externalities a
 <li><blockquote>
 <p>I regret nothing <a href="https://t.co/OCo4NiOxho">pic.twitter.com/OCo4NiOxho</a></p>
 </p>
-<p>— Unlearning Economics (<span class="citation" data-cites="UnlearningEcon">(<span class="citeproc-not-found" data-reference-id="UnlearningEcon"><strong>???</strong></span>)</span>) <a href="https://twitter.com/UnlearningEcon/status/1047589887518683137?ref_src=twsrc%5Etfw">October 3, 2018</a></p>
+<p>— Unlearning Economics (<span class="citation" data-cites="UnlearningEcon">(<span class="citeproc-not-found" data-reference-id="UnlearningEcon"><strong>???</strong></span>)</span>) <a href="https://twitter.com/UnlearningEcon/status/1047589887518683137">October 3, 2018</a></p>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
 <li><p><a href="https://www.christianpost.com/news/witches-outnumber-presbyterians-in-the-us-wicca-paganism-growing-astronomically-227857/">Witches Outnumber Presbyterians in the US</a></p>
@@ -1860,7 +2017,7 @@ The potential role of ETS costs in reevaluating the net negative externalities a
 <h3 id="distributional-impact">Distributional impact</h3>
 <p>The biggest concern by far (according to my sense of the public discussion) is about the distributional impacts. It’s often believed that gas taxes (and other Pigouvian taxes) are unfair and regressive. The story is that poor people spend a larger fraction of their income on gas, so increasing the gas tax flatly (i.e. without regard to income) ends up taxing poor people at a higher percentage of their income. There are several possible responses to this:</p>
 <h4 id="flat-denial">Flat denial</h4>
-<p>The regressive argument looks at incomes. But income is only part of the story. Arguably, <a href="https://stats.oecd.org/glossary/detail.asp?ID=36">actual individual consumption</a> is a better measure <span class="citation" data-cites="fitoussi2009report">(Fitoussi, Sen, and Stiglitz <a href="#ref-fitoussi2009report">2009</a>)</span>. The total value of people’s consumption is determined not only by their private incomes but also by the assistance they receive from the government and non-profits. If we account for this additional income analogue, “low-expenditure households devote a smaller share of their budget to gasoline than do their counterparts in the middle of the expenditure distribution” <span class="citation" data-cites="poterba1991gasoline">(Poterba <a href="#ref-poterba1991gasoline">1991</a>)</span>.</p>
+<p>The regressive argument looks at incomes. But income is only part of the story. Arguably, <a href="https://stats.oecd.org/glossary/detail.asp?ID=36">actual individual consumption</a> is a better measure <span class="citation" data-cites="fitoussi2009report">(Fitoussi, Sen, and Stiglitz <a href="#ref-fitoussi2009report">2009</a>)</span>. The total value of people’s consumption is determined not only by their private incomes but also by the assistance they receive from the government and non-profits. If we account for this additional income analogue, “low-expenditure households devote a smaller share of their budget to gasoline than do their counterparts in the middle of the expenditure distribution” <span class="citation" data-cites="poterba1991gasoline">(Poterba <a href="#ref-poterba1991gasoline">1991</a>)</span>. <span class="citation" data-cites="cronin2019vertical">(Cronin, Fullerton, and Sexton <a href="#ref-cronin2019vertical">2019</a>)</span> is a more recent article making a similar point about a general carbon tax.</p>
 <h4 id="less-regressive-than-alternatives">Less regressive than alternatives</h4>
 <p>If we treat the amount of revenue to be raised as fixed (a mildly reasonable assumption), then the question changes from “Is a gasoline tax regressive?” to “Is a gasoline tax more regressive than alternative sources of funding?”. Is it more regressive than a progressive income tax? Probably. Is it more regressive than a flat sales tax? Usually not. So a shift to a gas tax from a sales tax—a common revenue-neutral proposal—is actually progressive.</p>
 <h4 id="depends-on-how-revenue-is-spent">Depends on how revenue is spent</h4>
@@ -1892,6 +2049,9 @@ The potential role of ETS costs in reevaluating the net negative externalities a
 </div>
 <div id="ref-barthold1994issues">
 <p>Barthold, Thomas A. 1994. “Issues in the Design of Environmental Excise Taxes.” <em>Journal of Economic Perspectives</em> 8 (1): 133–51. <a href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.8.1.133">https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.8.1.133</a>.</p>
+</div>
+<div id="ref-cronin2019vertical">
+<p>Cronin, Julie Anne, Don Fullerton, and Steven Sexton. 2019. “Vertical and Horizontal Redistributions from a Carbon Tax and Rebate.” <em>Journal of the Association of Environmental and Resource Economists</em> 6 (S1). University of Chicago Press Chicago, IL: S169–S208. <a href="https://www.econstor.eu/bitstream/10419/155615/1/cesifo1_wp6373.pdf">https://www.econstor.eu/bitstream/10419/155615/1/cesifo1_wp6373.pdf</a>.</p>
 </div>
 <div id="ref-fitoussi2009report">
 <p>Fitoussi, Jean-Paul, Amartya Sen, and Joseph Stiglitz. 2009. “Report by the Commission on the Measurement of Economic Performance and Social Progress.” <em>The Commission on the Measurement of Economic Performance and Social Progress</em>. <a href="https://ec.europa.eu/eurostat/documents/118025/118123/Fitoussi+Commission+report">https://ec.europa.eu/eurostat/documents/118025/118123/Fitoussi+Commission+report</a>.</p>
@@ -2055,7 +2215,7 @@ The potential role of ETS costs in reevaluating the net negative externalities a
 <p><!--more--></p>]]></summary>
 </entry>
 <entry>
-    <title>Anthropological Clickbait</title>
+    <title>Anthropological clickbait</title>
     <link href="https://www.col-ex.org/posts/anthropological-clickbait/" />
     <id>https://www.col-ex.org/posts/anthropological-clickbait/</id>
     <published>2018-11-21T00:00:00Z</published>
@@ -2191,7 +2351,7 @@ A common kind of <a href="https://en.wikipedia.org/wiki/Trial_by_ordeal">ordeal<
 </div>]]></summary>
 </entry>
 <entry>
-    <title>YAAS Social Norms</title>
+    <title>YAAS social norms</title>
     <link href="https://www.col-ex.org/posts/yaas-social-norms/" />
     <id>https://www.col-ex.org/posts/yaas-social-norms/</id>
     <published>2018-11-13T00:00:00Z</published>
@@ -2865,7 +3025,7 @@ there was a 33 percent increase in Mexican visits to family planning clinics to
 </section>]]></summary>
 </entry>
 <entry>
-    <title>YAAS Epistemology</title>
+    <title>YAAS epistemology</title>
     <link href="https://www.col-ex.org/posts/yaas-epistemology/" />
     <id>https://www.col-ex.org/posts/yaas-epistemology/</id>
     <published>2018-10-01T00:00:00Z</published>
@@ -3720,7 +3880,7 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 </section>]]></summary>
 </entry>
 <entry>
-    <title>YAAS Human cognitive architecture and learning</title>
+    <title>YAAS human cognitive architecture and learning</title>
     <link href="https://www.col-ex.org/posts/human-cognitive-architecture-learning/" />
     <id>https://www.col-ex.org/posts/human-cognitive-architecture-learning/</id>
     <published>2018-08-13T00:00:00Z</published>
@@ -3776,7 +3936,7 @@ This war is not as in the past; whoever occupies a territory also imposes on it 
 </div>]]></summary>
 </entry>
 <entry>
-    <title>Assorted Links VI</title>
+    <title>Assorted links VI</title>
     <link href="https://www.col-ex.org/posts/assorted-links-vi/" />
     <id>https://www.col-ex.org/posts/assorted-links-vi/</id>
     <published>2018-08-04T00:00:00Z</published>
@@ -5293,7 +5453,7 @@ r = 1 + \frac{c \cdot (1 - \delta)}{c \cdot \delta + \delta \cdot (1 - l)}
 </section>]]></summary>
 </entry>
 <entry>
-    <title>Hot takes—The Moral Limits of Markets</title>
+    <title>Hot takes—<i>The Moral Limits of Markets</i></title>
     <link href="https://www.col-ex.org/posts/moral-limits-markets-critique/" />
     <id>https://www.col-ex.org/posts/moral-limits-markets-critique/</id>
     <published>2018-05-28T00:00:00Z</published>
@@ -5370,7 +5530,7 @@ Economic institutions determine the incentives of and the constraints on economi
 </section>]]></summary>
 </entry>
 <entry>
-    <title>Summary—The Moral Limits of Markets</title>
+    <title>Summary—<i>The Moral Limits of Markets</i></title>
     <link href="https://www.col-ex.org/posts/moral-limits-markets-summary/" />
     <id>https://www.col-ex.org/posts/moral-limits-markets-summary/</id>
     <published>2018-05-25T00:00:00Z</published>

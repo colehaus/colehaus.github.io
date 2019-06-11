@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/yaas-evidence-based-policy/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/assorted-links-xiii/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -52,14 +59,14 @@
     <url>
         <loc>https://www.col-ex.org/posts/priority-decisions/index.html</loc>
         <changefreq>weekly</changefreq>
-        
+        <lastmod>2019-06-10</lastmod>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://www.col-ex.org/posts/dominated-decisions/index.html</loc>
         <changefreq>weekly</changefreq>
-        <lastmod>2019-01-30</lastmod>
+        <lastmod>2019-06-10</lastmod>
         <priority>0.8</priority>
     </url>
 
@@ -94,7 +101,7 @@
     <url>
         <loc>https://www.col-ex.org/posts/why-opposition-pigovian-taxes/index.html</loc>
         <changefreq>weekly</changefreq>
-        <lastmod>2018-12-11</lastmod>
+        <lastmod>2019-04-09</lastmod>
         <priority>0.8</priority>
     </url>
 
@@ -575,6 +582,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/applied%2520epistemology/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/autocracy/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -940,6 +954,13 @@
 
     <url>
         <loc>https://www.col-ex.org/series/An%2520Introduction%2520to%2520Decision%2520Theory/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/Evidence-based%2520Policy/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
