@@ -69,7 +69,59 @@
 
   
 
-  <textarea id="graph-input">
+  <p>models and variables graphical representation: variables as vertices, causal relationships as directed edges acyclic</p>
+<p>path: undirected</p>
+<h3 id="causal-triplets">Causal triplets</h3>
+<p>Three vertices and two edges can be configured in one of <span class="noted">three ways</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We give a name to each triplet and to the center node in each triplet.</p>
+<dl>
+<dt>Chains and traverses</dt>
+<dd>Chains are the most straightforward. If A causes B and B causes C (A → B → C), <span class="noted">then A causes C</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. We call the central vertex B a mediator or a traverse. For example, if smoking causes (increased risk of) cancer and cancer causes (increased risk of) death, then smoking causes (increased risk of) death.
+</dd>
+<dt>Forks and common causes</dt>
+<dd>The next possible triplet configuration is what we call a fork. If B causes both A and C (A ← B → C), then A and C will not be independent in light of their common cause. For example, if smoking causes both yellowed fingers [TODO] and lung cancer, we’d expect lung cancer and yellowed fingers to be correlated.
+</dd>
+<dt>Inverted forks and colliders</dt>
+<dd>The final possible triplet configuration is what we call an inverted fork. If A causes B and C causes B (A → B ← C), then A and C will be independent. We call the central vertex B a collider. For example, if smoking causes lung cancer and exposure to high doses of radiation also causes lung cancer, we wouldn’t expect smoking and exposure to high doses of radiation to be correlated.
+</dd>
+</dl>
+<figure>
+<figcaption>
+Types of causal triplets
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th>Name of triplet</th>
+<th>Name of central vertex</th>
+<th>Diagram</th>
+<th>Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Chain</td>
+<td>Mediator/Traverse</td>
+<td>A → B → C</td>
+<td>Causally (probably)</td>
+</tr>
+<tr class="even">
+<td>Fork</td>
+<td>Confounder/Common cause</td>
+<td>A ← B → C</td>
+<td>Noncausally</td>
+</tr>
+<tr class="odd">
+<td>Inverted fork</td>
+<td>Collider</td>
+<td>A → B ← C</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>D-separated</p>
+<p>When we say that a pair of nodes are d-separated, we mean that the variables they represent are definitely independent; when we say that a pair of nodes are d-connected, we mean that they are possibly, or most likely, dependent. 1</p>
+<textarea id="graph-spec">
 ```{=html}
 a:
   - b
@@ -80,9 +132,33 @@ c:
   - b
 ```
 </textarea>
-<div id="graph-output">
+<p>Are <input id="d-connection-from" type="text" /> and <input id="d-connection-to" type="text" /> d-connected? <span id="d-connection-verdict"></span></p>
+<div id="graph-error">
 
 </div>
+<div id="graph-svg">
+
+</div>
+<div id="d-separated-input">
+
+</div>
+<div id="d-separated-results">
+
+</div>
+<div id="compatible-graphs">
+
+</div>
+<p>Back-door path. A noncausal path that connects the independent variable of interest with the dependent variable of interest.</p>
+<p>Back-door paths: All paths that start with an arrow pointing to the independent variable and end with an arrow pointing to the dependent variable</p>
+<p>Blocked path. A path that contains (a) a collider that the analysis has not been conditioned on or (b) a noncollider (confounder or mediator) that the analysis has been conditioned on. A blocked path does not transmit an association between variables. A path that is not blocked is unblocked, or open, and can transmit an association.</p>
+<hr class="references">
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Why three? We have two slots for a directed edge and in each slot an edge can point one of two ways. That creates four options (A ← B ← C; A → B → C; A ← B → C; A → B ← C) but the first two are symmetrical so we don’t bother to distinguish between them.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>See [TODO] and “intransitive dependence” for the rare cases where this doesn’t apply.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+</ol>
+</section>
 </article></main>
 
 </div>

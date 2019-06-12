@@ -54,6 +54,71 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/optimism-regret-indifference/">Optimism, regret and indifference</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/decision%2520theory/">decision theory</a></li>
+    
+      <li><a href="./tag/interactive/">interactive</a></li>
+    
+      <li><a href="./tag/yaas/">yaas</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/An%2520Introduction%2520to%2520Decision%2520Theory/">Series: An Introduction to Decision Theory</a></nav>
+        
+        <span class="date">Published on <time datetime="June 11, 2019">June 11, 2019</time>.</span>
+       </div>
+
+       
+
+        <p><a href="./posts/priority-decisions/">Last time</a>, we <a href="./posts/dominated-decisions/">continued</a> our discussion of decision rules that apply in information-poor settings. In particular, we’ve been focusing on “decisions under ignorance”—decisions where the probabilities associated with various states of the world are unknown.</p>
+<p>This time, we’ll look at three final decision rules in this category.</p>
+<h3 id="optimism-pessimism">Optimism-pessimism</h3>
+<p>The first decision rule we’ll look at is the optimism-pessimism rule.</p>
+<h4 id="prose">Prose</h4>
+<p>Conceptually, optimism-pessimism is a generalization of the <a href="./posts/priority-decisions/#maximin">maximin</a> and <a href="./posts/priority-decisions/#maximax">maximax</a> rules. The maximin rule tells us to make the decision which has the best worst case outcome. The maximax rule tells us to make the decision which has the best best case outcome.</p>
+<p>The optimism-pessimism rule tells us to look at both the best outcome which may come to pass after taking a particular action and the worst outcome which may come to pass. Then we should take a weighted average of the best and worst case outcome for each action and take the action that has the best such average. The weighting used in the decision rule is a parameter that the decision maker is free to choose based on how optimistic or pessimistic they are. So really the optimism-pessimism rule is a family of rules parameterized by a weighting factor.</p>
+<p>Also, it’s worth noting that the optimism-pessimism family of rules no longer work in the fully general setting we were working with in previous posts. While we still don’t have probabilities associated with states of the world, we will need to move from an <a href="https://en.wikipedia.org/wiki/Level_of_measurement">ordinal scale</a> of outcomes to an <a href="https://en.wikipedia.org/wiki/Level_of_measurement">interval scale</a>. This shift is necessary because it doesn’t make sense to take a weighted average of ordinal data.</p>
+<h4 id="example">Example</h4>
+<p>You have the choice of two alternative routes to work. In good conditions, the first route takes 10 minutes and the second route 5 minutes. But the second route is prone to traffic and on bad days takes 20 minutes while the first route still takes 10 minutes.</p>
+<figure>
+<figcaption>
+Decision matrix about route to work.
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>High traffic day</th>
+<th>Low traffic day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Route 1</td>
+<td>10 minutes</td>
+<td>10 minutes</td>
+</tr>
+<tr class="even">
+<td>Route 2</td>
+<td>20 minutes</td>
+<td>5 minutes</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>If you’re perfectly balanced between optimism and pessimism, the optimism-pessimism rule is indifferent between the two routes here. If you’re more pessimistic than you are optimistic, you should take route 1–just like in maximin. If you’re more optimistic than you are pessimistic, you should take route 2–just like in maximax.</p>
+
+
+        <a href="./posts/optimism-regret-indifference/">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/yaas-evidence-based-policy/">YAAS evidence-based policy</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -75,8 +140,8 @@ if (/Trident/.test(navigator.userAgent)) {
        
 
         <h3 id="vignette">Vignette</h3>
-<p>The Tamil Nadu Integrated Nutrition Program (TINP) was a program to reduce child malnutrition among the rural poor of India’s Tamil Nadu State. Core elements of the program were: nutrition counseling for pregnant mothers and supplementary food for the most deprived young children. TINP succeeded in reducing malnutrition substantially <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>. Seeing this success, policymakers in Bangladesh launched the Bangladesh Integrated Nutrition Program (BINP) modeled on TINP. Unfortunately, six years later, childhood malnutrition in Bangladesh continued unabated <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>.</p>
-<p>Why did BINP fail where TINP succeeded? One of the main problems was that, while mothers did indeed learn about childhood nutrition, mothers often weren’t the primary decision makers in matters of nutrition. In rural Bangladesh, men typically do the shopping. And if a mother lived with her mother-in-law, that mother-in-law was the final authority on issues within the women’s domain. Because the decision-makers hadn’t received BINP’s nutrition counseling, they often used supplemental food from BINP as a substitute and reallocated other food away from mother and child.</p>
+<p>The Tamil Nadu Integrated Nutrition Project (TINP) was a program to reduce child malnutrition among the rural poor of India’s Tamil Nadu State. Core elements of the program were: nutrition counseling for pregnant mothers and supplementary food for the most deprived young children. TINP succeeded in reducing malnutrition substantially <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>. Seeing this success, policymakers in Bangladesh launched the Bangladesh Integrated Nutrition Project (BINP) modeled on TINP. Unfortunately, six years later, childhood malnutrition in Bangladesh continued unabated <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>.</p>
+<p><span class="noted">Why did BINP fail where TINP succeeded?</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> One of the main problems was that, while mothers did indeed learn about childhood nutrition, mothers often weren’t the primary decision makers in matters of nutrition. In rural Bangladesh, men typically do the shopping. And if a mother lived with her mother-in-law, that mother-in-law was the final authority on issues within the women’s domain. Because the decision-makers hadn’t received BINP’s nutrition counseling, they often used supplemental food from BINP as a substitute and reallocated other food away from mother and child.</p>
 <h3 id="effectiveness">Effectiveness</h3>
 <h4 id="the-problem-generalization">The problem: Generalization</h4>
 <p>Even in the absence of that holy grail—the RCT—there’s considerable confidence that TINP worked. But BINP didn’t. <i>Evidence-Based Policy</i> takes problems like this as it’s central concern. How do we move from “It worked there.”—<a href="#key-terms">efficacy</a>—to “It will work here.”—<a href="#key-terms">effectiveness</a>?</p>
@@ -85,7 +150,7 @@ if (/Trident/.test(navigator.userAgent)) {
 <p>But <abbr title="Evidence-based Policy">EBP</abbr> disdains external validity. Claims of external validity usually take a shape like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on similar (to population C) population E at similar (to time and place D) time and place F.” But the word “similar” is doing all the work here. What does it mean?</p>
 <p>“Similar” can’t mean “identical”—then all studies would be pointless because we would never have external validity and could never generalize. But “similar” also shouldn’t be construed too permissively. If you insist that the population of Manhattanites and the population of rural Tibetans are “similar” because they both consist of humans living in communities with hierarchies of esteem under a system of hegemonic capitalism on planet Earth, you’ll be find yourself perpetually surprised when your interventions fail to replicate.</p>
 <p>Furthermore, similarity means radically different things in different contexts. If the original study is about reducing Alzheimer’s for high risk populations, similarity means biomedical similarity and certain elderly people in rural Tibet may in fact be more similar to certain elderly people in Manhattan than either subpopulation is to their neighbors. On the other hand, if the study is about the welfare effects of exposure to pervasive advertising, rural Tibet and Manhattan count as pretty dissimilar.</p>
-<p>So “similar” has to mean similar in <span class="noted">the right ways and to the right degree</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The external validity claim then becomes something like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on the right population E at the right time and place F.” But this is pretty tautological. To be a useful tool, external validity should transform a hard problem into a simpler one. But it turns out that, once we unpack things, it’s hard to know what “similar” means other than “right” and we’re back where we started—we have to rely on outside knowledge to know if we can translate “It worked there.” to “It will work here.”</p>
+<p>So “similar” has to mean similar in <span class="noted">the right ways and to the right degree</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The external validity claim then becomes something like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on the right population E at the right time and place F.” But this is pretty tautological. To be a useful tool, external validity should transform a hard problem into a simpler one. But it turns out that, once we unpack things, it’s hard to know what “similar” means other than “right” and we’re back where we started—we have to rely on outside knowledge to know if we can translate “It worked there.” to “It will work here.”</p>
 <h4 id="the-evidence-based-policy-solution">The <i>Evidence-based Policy</i> solution</h4>
 <blockquote>
 To get a good argument from “it works somewhere” to “it will work here” facts about causal principles here and there are needed.
