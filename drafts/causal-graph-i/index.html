@@ -84,45 +84,45 @@
 <dd>The final possible triplet configuration is what we call an inverted fork. If A causes B and C causes B (A → B ← C), then A and C will be independent. We call the central vertex B a collider. For example, if smoking causes lung cancer and exposure to high doses of radiation also causes lung cancer, we wouldn’t expect smoking and exposure to high doses of radiation to be correlated.
 </dd>
 </dl>
-<figure>
+<figure class="big-fig">
 <figcaption>
 Types of causal triplets
 </figcaption>
 <table>
 <thead>
 <tr class="header">
-<th>Name of triplet</th>
-<th>Name of central vertex</th>
-<th>Diagram</th>
-<th>Ends (A and C) dependent?</th>
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Chain</td>
-<td>Mediator/Traverse</td>
-<td>A → B → C</td>
-<td>Causally (probably)</td>
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">Causally (probably)</td>
 </tr>
 <tr class="even">
-<td>Fork</td>
-<td>Confounder/Common cause</td>
-<td>A ← B → C</td>
-<td>Noncausally</td>
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">Noncausally</td>
 </tr>
 <tr class="odd">
-<td>Inverted fork</td>
-<td>Collider</td>
-<td>A → B ← C</td>
-<td>No</td>
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">No</td>
 </tr>
 </tbody>
 </table>
 </figure>
 <p>D-separated</p>
 <p>When we say that a pair of nodes are d-separated, we mean that the variables they represent are definitely independent; when we say that a pair of nodes are d-connected, we mean that they are possibly, or most likely, dependent. 1</p>
+<div id="spec-and-render">
 <textarea id="graph-spec">
-```{=html}
 a:
   - b
 b:
@@ -130,23 +130,31 @@ b:
 c:
   - a
   - b
-```
+d:
+  - b
 </textarea>
-<p>Are <input id="d-connection-from" type="text" /> and <input id="d-connection-to" type="text" /> d-connected? <span id="d-connection-verdict"></span></p>
-<div id="graph-error">
-
-</div>
 <div id="graph-svg">
 
 </div>
-<div id="d-separated-input">
+</div>
+<div id="graph-error">
 
 </div>
-<div id="d-separated-results">
+<div class="analysis-panel">
+<div class="analysis-header">
+D-separations:
+</div>
+<div id="d-separation-results">
 
 </div>
-<div id="compatible-graphs">
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+How are <input id="d-connection-from" type="text" /> and <input id="d-connection-to" type="text" /> d-connected?
+</div>
+<div id="d-connection-result">
 
+</div>
 </div>
 <p>Back-door path. A noncausal path that connects the independent variable of interest with the dependent variable of interest.</p>
 <p>Back-door paths: All paths that start with an arrow pointing to the independent variable and end with an arrow pointing to the dependent variable</p>
