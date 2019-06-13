@@ -8,8 +8,166 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-06-12T00:00:00Z</updated>
+    <updated>2019-06-13T00:00:00Z</updated>
     <entry>
+    <title>Baby's first graphical causal models</title>
+    <link href="https://www.col-ex.org/posts/babys-first-graphical-causal-models/" />
+    <id>https://www.col-ex.org/posts/babys-first-graphical-causal-models/</id>
+    <published>2019-06-13T00:00:00Z</published>
+    <updated>2019-06-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h1 id="causal-graphs">Causal graphs</h1>
+<p>We can represent causal models as directed <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>. The vertices in the graph represent different variables—causes and effects—and the edges represent causal relationships. For example:</p>
+<figure>
+<img src="https://www.col-ex.org/images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
+</figure>
+<p>Some technical details:</p>
+<ul>
+<li>These graphs must be <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">acyclic</a>. In a strict sense, something can’t be both a cause and an effect of something else. Thing A at time 1 can effect thing B at time 2 which affects thing A at time 3. Causation only flows forward in time and time is acyclic.</li>
+<li>A <a href="https://en.wikipedia.org/wiki/Path_(graph_theory)">path</a> on a directed graph is a sequence of edges joining a sequence of vertices. We can ignore direction of the edges when forming a path.</li>
+</ul>
+<h1 id="causal-triplets">Causal triplets</h1>
+<p>Now that we’ve presented the basic idea of modeling causal systems with graphs, we can start to use graphs as a tool to analyze causal models. We’ll start by looking at the smallest interesting part of a graph—a triplet consisting of three vertices and two edges. Such a triplet can be configured in one of <span class="noted">three ways</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. We give a name to each triplet and to the center vertex in each triplet.</p>
+<dl>
+<dt><a href="#key-terms">Chains</a></dt>
+<dd>Chains are the most straightforward. If A causes B and B causes C (A → B → C), <span class="noted">then A causes C</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. We call the central vertex B a mediator or a traverse. For example, if smoking causes (increased risk of) cancer and cancer causes (increased risk of) death, then smoking causes (increased risk of) death.
+</dd>
+<dt><a href="#key-terms">Forks</a></dt>
+<dd>The next possible triplet configuration is what we call a fork. If B causes both A and C (A ← B → C), then A and C will not be independent in light of their common cause. For example, if smoking causes both yellowed fingers and lung cancer, we’d expect lung cancer and yellowed fingers to be correlated.
+</dd>
+<dt><a href="#key-terms">Inverted forks</a></dt>
+<dd>The final possible triplet configuration is what we call an inverted fork. If A causes B and C causes B (A → B ← C), then A and C will be independent. We call the central vertex B a <a href="#key-terms">collider</a>. For example, if smoking causes lung cancer and exposure to high doses of radiation also causes lung cancer, we wouldn’t expect smoking and exposure to high doses of radiation to be correlated.
+</dd>
+</dl>
+<figure id="triplets-table">
+<figcaption>
+<p>Types of causal triplets</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">Causally (probably)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>So we can determine the causal and non-causal dependence between three factors by turning them into a causal graph and looking at the configuration of the edges.</p>
+<p><!--more--></p>
+<h1 id="d-separation-and-d-connection-along-a-path">d-separation and d-connection along a path</h1>
+<p>But that’s not terribly useful in a world overflowing with causes, effects and connections. We need to be able to work with bigger graphs. Our next step on that route is to look at arbitrary paths and determine their dependence. The terms used for this are <a href="#key-terms">d-separation</a> and <a href="#key-terms">d-connection</a>. “When we say that a pair of nodes are d-separated, we mean that the variables they represent are definitely independent; when we say that a pair of nodes are d-connected, we mean that they are possibly, or most likely, <span class="noted">dependent</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>.” <span class="citation" data-cites="pearl2016causal">(Pearl, Glymour, and Jewell <a href="#ref-pearl2016causal">2016</a>)</span></p>
+<p>Two vertices on a path are d-connected if they have no colliders between them. So A and D are d-connected in each of:</p>
+<ul>
+<li>A → B → C → D</li>
+<li>A ← B → C → D</li>
+<li>A ← B ← C → D</li>
+<li>A ← B ← C ← D</li>
+</ul>
+<p>A and D are d-separated in each of:</p>
+<ul>
+<li>A → B ← C ← D</li>
+<li>A → B ← C → D</li>
+<li>A → B → C ← D</li>
+<li>A ← B → C ← D</li>
+</ul>
+<p>I hope the intuition behind this is clear as a fairly straightforward extension of the logic explained with causal triplets.</p>
+<p>We also call a path with a collider on it a <a href="#key-terms">blocked path</a>.</p>
+<h1 id="d-separation-and-d-connection-on-arbitrary-graphs">d-separation and d-connection on arbitrary graphs</h1>
+<p>But linear paths still aren’t that useful. It’s only when we get to full arbitrary graphs that we start to be able to make interesting claims.</p>
+<p>In arbitrary graphs, we say that any two vertices are d-connected if they have an undirected path between them which is not blocked (i.e. does not have a collider). If there are no such paths (i.e. there are no paths at all or all paths have a collider), the two vertices are d-separated.</p>
+<h2 id="interactive">Interactive</h2>
+<p>To get more of a feeling for these terms, you can fiddle with the widget below.</p>
+<p>In the top text area, you can specify a graph as a series of vertices with the edges they point to. So the starting text should be read as “a points to b. b points to nothing. c points to a and b. d points to b”. The graph rendered next to it to help you visualize should update once you defocus the text area.</p>
+<p>Below the text area, you can ask whether and how any two nodes are d-connected. If they are d-connected, the connecting paths will be highlighted and the paths will be listed.</p>
+<p>Finally, the full list of d-separations is always displayed for the current graph.</p>
+<hr />
+<div id="spec-and-render">
+<textarea id="graph-spec">
+a:
+  - b
+b:
+  []
+c:
+  - a
+  - b
+d:
+  - b
+</textarea>
+<div id="graph-svg">
+
+</div>
+</div>
+<div id="graph-error">
+
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+D-separations:
+</div>
+<div id="d-separation-results">
+
+</div>
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+How are <input id="d-connection-from" type="text" /> and <input id="d-connection-to" type="text" /> d-connected?
+</div>
+<div id="d-connection-result">
+
+</div>
+</div>
+<h1 id="aside">Aside</h1>
+<p>There are several other fairly effective, fairly short introductions to causal graphical models if this one isn’t doing it for you:</p>
+<ul>
+<li><a href="http://www.michaelnielsen.org/ddi/if-correlation-doesnt-imply-causation-then-what-does/">If correlation doesn’t imply causation, then what does?</a></li>
+<li><span class="citation" data-cites="rohrer2018thinking">(Rohrer <a href="#ref-rohrer2018thinking">2018</a>)</span></li>
+</ul>
+<hr />
+<div id="refs" class="references" role="doc-bibliography" role="doc-bibliography">
+<div id="ref-pearl2016causal">
+<p>Pearl, Judea, Madelyn Glymour, and Nicholas P Jewell. 2016. <em>Causal Inference in Statistics: A Primer</em>. John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-rohrer2018thinking">
+<p>Rohrer, Julia M. 2018. “Thinking Clearly About Correlations and Causation: Graphical Causal Models for Observational Data.” <em>Advances in Methods and Practices in Psychological Science</em> 1 (1). SAGE Publications Sage CA: Los Angeles, CA: 27–42.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Why three? We have two slots for a directed edge and in each slot an edge can point one of two ways. That creates four options (A ← B ← C; A → B → C; A ← B → C; A → B ← C), but the first two are symmetrical so we don’t bother to distinguish between them.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>See <span class="citation" data-cites="pearl2016causal">(Pearl, Glymour, and Jewell <a href="#ref-pearl2016causal">2016</a>)</span> and “intransitive dependence” for the rare cases where this doesn’t apply.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>The ‘d’ in d-separated and d-connected stands for “directional” according to most people. But at least <a href="https://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html">one place</a> says it stands for “dependence” which I think is much more intuitive.<a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Critiques and claims regarding <i>Evidence-based Policy</i></title>
     <link href="https://www.col-ex.org/posts/critiques-claims-evidence-based-policy/" />
     <id>https://www.col-ex.org/posts/critiques-claims-evidence-based-policy/</id>

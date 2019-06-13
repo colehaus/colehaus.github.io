@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/babys-first-graphical-causal-models/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/critiques-claims-evidence-based-policy/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -645,6 +652,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/causality/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/clickbait/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -975,6 +989,13 @@
 
     <url>
         <loc>https://www.col-ex.org/series/Evidence-based%2520Policy/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/series/Graphical%2520causal%2520models/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

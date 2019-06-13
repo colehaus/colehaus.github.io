@@ -54,6 +54,93 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="../../posts/babys-first-graphical-causal-models/">Baby's first graphical causal models</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="../../tag/causality/">causality</a></li>
+    
+      <li><a href="../../tag/interactive/">interactive</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="../../series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
+        
+        <span class="date">Published on <time datetime="June 13, 2019">June 13, 2019</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>We can describe causal models with directed graphs. The graph perspective allows us to specify precise procedures for determining when variables (vertices) are independent (d-separated) and dependent (d-connected).</p></div>
+       
+
+        <h3 id="causal-graphs">Causal graphs</h3>
+<p>We can represent causal models as directed <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>. The vertices in the graph represent different variables—causes and effects—and the edges represent causal relationships. For example:</p>
+<figure>
+<img src="../../images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
+</figure>
+<p>Some technical details:</p>
+<ul>
+<li>These graphs must be <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">acyclic</a>. In a strict sense, something can’t be both a cause and an effect of something else. Thing A at time 1 can effect thing B at time 2 which affects thing A at time 3. Causation only flows forward in time and time is acyclic.</li>
+<li>A <a href="https://en.wikipedia.org/wiki/Path_(graph_theory)">path</a> on a directed graph is a sequence of edges joining a sequence of vertices. We can ignore direction of the edges when forming a path.</li>
+</ul>
+<h3 id="causal-triplets">Causal triplets</h3>
+<p>Now that we’ve presented the basic idea of modeling causal systems with graphs, we can start to use graphs as a tool to analyze causal models. We’ll start by looking at the smallest interesting part of a graph—a triplet consisting of three vertices and two edges. Such a triplet can be configured in one of <span class="noted">three ways</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We give a name to each triplet and to the center vertex in each triplet.</p>
+<dl>
+<dt><a href="#key-terms">Chains</a></dt>
+<dd>Chains are the most straightforward. If A causes B and B causes C (A → B → C), <span class="noted">then A causes C</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. We call the central vertex B a mediator or a traverse. For example, if smoking causes (increased risk of) cancer and cancer causes (increased risk of) death, then smoking causes (increased risk of) death.
+</dd>
+<dt><a href="#key-terms">Forks</a></dt>
+<dd>The next possible triplet configuration is what we call a fork. If B causes both A and C (A ← B → C), then A and C will not be independent in light of their common cause. For example, if smoking causes both yellowed fingers and lung cancer, we’d expect lung cancer and yellowed fingers to be correlated.
+</dd>
+<dt><a href="#key-terms">Inverted forks</a></dt>
+<dd>The final possible triplet configuration is what we call an inverted fork. If A causes B and C causes B (A → B ← C), then A and C will be independent. We call the central vertex B a <a href="#key-terms">collider</a>. For example, if smoking causes lung cancer and exposure to high doses of radiation also causes lung cancer, we wouldn’t expect smoking and exposure to high doses of radiation to be correlated.
+</dd>
+</dl>
+<figure id="triplets-table">
+<figcaption>
+Types of causal triplets
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">Causally (probably)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>So we can determine the causal and non-causal dependence between three factors by turning them into a causal graph and looking at the configuration of the edges.</p>
+
+
+        <a href="../../posts/babys-first-graphical-causal-models/" class="full-post">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="../../posts/critiques-claims-evidence-based-policy/">Critiques and claims regarding <i>Evidence-based Policy</i></a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -93,7 +180,7 @@ Thus [Moving to Opportunity] data … are strictly informative only about this p
 <p>Finally, we could say that identifying support factors in the <abbr title="Evidence-based Policy">EBP</abbr> approach is too demanding. If we just listed off every fact we knew about the context of the original intervention and called it a support factor, it would clearly be extremely demanding—nowhere else would have this precise combination of support factors. It’s only by filtering proposed support factors through human judgment that we get a more manageable set and escape the demandingness critique. But if we move away from the straw man version of external validity and allow ourselves to apply judgment there too, then we can say that an intervention context only has to be similar in certain ways—thereby escaping the demandingess critique.</p>
 
 
-        <a href="../../posts/critiques-claims-evidence-based-policy/">Full post</a>
+        <a href="../../posts/critiques-claims-evidence-based-policy/" class="full-post">Full post</a>
 
     </article></li>
     <hr />
@@ -158,7 +245,7 @@ Decision matrix about route to work.
 <p>If you’re perfectly balanced between optimism and pessimism, the optimism-pessimism rule is indifferent between the two routes here. If you’re more pessimistic than you are optimistic, you should take route 1–just like in maximin. If you’re more optimistic than you are pessimistic, you should take route 2–just like in maximax.</p>
 
 
-        <a href="../../posts/optimism-regret-indifference/">Full post</a>
+        <a href="../../posts/optimism-regret-indifference/" class="full-post">Full post</a>
 
     </article></li>
     <hr />
@@ -202,7 +289,7 @@ To get a good argument from “it works somewhere” to “it will work here” 
 </blockquote>
 
 
-        <a href="../../posts/yaas-evidence-based-policy/">Full post</a>
+        <a href="../../posts/yaas-evidence-based-policy/" class="full-post">Full post</a>
 
     </article></li>
     <hr />
@@ -261,7 +348,7 @@ To get a good argument from “it works somewhere” to “it will work here” 
 </blockquote>
 
 
-        <a href="../../posts/assorted-links-xiii/">Full post</a>
+        <a href="../../posts/assorted-links-xiii/" class="full-post">Full post</a>
 
     </article></li>
     
