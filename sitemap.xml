@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/assorted-links-xiv/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/babys-first-graphical-causal-models/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -1108,6 +1115,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/16/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/17/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
