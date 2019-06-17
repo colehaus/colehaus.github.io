@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Causal graphs II—ColEx</title>
+    <title>Flip it and reverse it—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -44,12 +44,19 @@
   <link rel="stylesheet" type="text/css" href="../../css/causal-graphs.css" />
 
 
+  <meta name="description" content="Last time we found the d-separations that correspond to a graph. This
+time, we find the graphs that correspond to a set of d-separations.
+Which is more useful because we generally know d-separations and
+generally don't know graphs.">
+
 </head>
 <body>
 <div id="underlay">
 <nav><a href="../../">Home</a></nav>
 <main><article>
-  <h2 id="article-title">Causal graphs II</h2>
+  <h2 id="article-title">Flip it and reverse it</h2>
+  
+    <h3 id="article-subtitle">Where "it" is the process of going from a graphical causal model to d-separations</h3>
   
   <div class="metadata">
   <nav class="tags"><ul>
@@ -61,25 +68,71 @@
 </ul></nav>
 
   
-  <span class="date">Published on <time datetime="2019-06-09">June  9, 2019</time>.</span>
+    <nav><a class="series" href="../../series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
+  
+  <span class="date">Published on <time datetime="2019-06-17">June 17, 2019</time>.</span>
   
   </div>
   
   
+    <div class="abstract">
+      <p>Last time we found the d-separations that correspond to a graph. This time, we find the graphs that correspond to a set of d-separations. Which is more useful because we generally know d-separations and generally don’t know graphs.</p>
+    </div>
+  
 
   
 
-  <div id="nodes-and-seps">
+  <p><a href="../../posts/babys-first-graphical-causal-models/">Last time</a> we talked about causal graphs, what d-separation and d-connection mean, and how to infer these properties from a causal graph. But this isn’t terribly useful because it requires that we have a fully specified causal graph. If we’re performing research in new or uncertain areas, we have data rather than a causal graph. And this data tells us about d-separations (variables that are independent of each other) and d-connections (variables that are correlated). So our work last time was exactly backwards: graphs to d-separations. This time we’ll go from d-separations to graphs.</p>
+<h3 id="model-selection">Model selection</h3>
+<p>One way to think about d-separation and d-connection is as helping us with model selection. Last time we presented</p>
+<figure>
+<img src="../../images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
+</figure>
+<p>as one possible causal model regarding smoking. But it’s not the only possibility. We might also be worried that the true causal structure looks like this (just go with it):</p>
+<figure>
+<img src="../../images/smoking-graph-silly.svg" alt="Yellow fingers are independently caused by smoking and lung cancer" id="smoking-graph-silly" /><figcaption>Yellow fingers are independently caused by smoking and lung cancer</figcaption>
+</figure>
+<p>How can we tell them apart? Can we use observational data alone? In this case, observational data alone is enough to distinguish between these two causal models! The key is that the two models have different sets of d-separations. In the original model, all the vertices are d-connected and there are no d-separations (this must be the case since there are no colliders). In the second (silly) model, “smoking” and “lung cancer” are d-separated because “yellow fingers” is a collider between them. If our data show that smoking and lung cancer are independent, we must rule out the first model and prefer the second. If the two variables are correlated, we must rule out the second model and prefer the first.</p>
+<p>This is a procedure that works generally:</p>
+<ol type="1">
+<li>Draw out the plausible graphical causal models that include all the variables you have data on</li>
+<li>Determine the d-separations for each plausible model</li>
+<li>Determine the variables in your data that are independent</li>
+<li>Retain the models from step 1 whose d-separations in step 2 are compatible with the data analysis in step 3</li>
+</ol>
+<p>The ideal is that there’s only one model left at the end of step 4. However, it’s possible to end up with none. This means that step 1 wasn’t permissive enough and more models need to be considered. It’s also possible to end up with more than one model. Not all models are distinguishable by observational data alone. This occurs whenever two models have the same set of d-separations.</p>
+<!--more-->
+<h3 id="model-generation">Model generation</h3>
+<p>We can take this line of thinking even further and do model generation based on d-separations. This lets us go directly from our data to a an exhaustive visualization of all the compatible causal models. The procedure here is:</p>
+<ol type="1">
+<li>Take a list of variables</li>
+<li>Generate all possible directed acyclic graphs involving these variables as vertices</li>
+<li>Take a list of d-separations</li>
+<li>Retain the models from step 2 that are compatible with the d-separations provided in step 3.</li>
+</ol>
+<p>The widget below implements this algorithm. The box on the left takes a list of vertices (in <a href="https://en.wikipedia.org/wiki/YAML">YAML</a> format). The box on the right takes a list of d-separations where each d-separation is a pair of d-separated vertices like <code>[x, y]</code> (YAML again). The updated set of compatible models is rendered below when you defocus the text areas. (If you try to analyze too many vertices at once, the widget will crash because the numbers of possible graphs increases very rapidly and I implemented this in an embarrassingly naive way.)</p>
+<hr id="widget-hr">
+<div id="nodes-and-seps">
+<div>
+<div>
+<p>Vertices:</p>
+</div>
 <textarea id="nodes">
 - a
 - b
 - c
 - d
 </textarea>
+</div>
+<div>
+<div>
+<p>d-separations:</p>
+</div>
 <textarea id="d-separations">
 - [d, c]
 - [a, d]
 </textarea>
+</div>
 </div>
 <div id="compatible-graphs">
 

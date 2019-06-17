@@ -54,6 +54,53 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/flip-it-reverse-it-graphical-causal-models/">Flip it and reverse it</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/causality/">causality</a></li>
+    
+      <li><a href="./tag/interactive/">interactive</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
+        
+        <span class="date">Published on <time datetime="June 17, 2019">June 17, 2019</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>Last time we found the d-separations that correspond to a graph. This time, we find the graphs that correspond to a set of d-separations. Which is more useful because we generally know d-separations and generally don’t know graphs.</p></div>
+       
+
+        <p><a href="./posts/babys-first-graphical-causal-models/">Last time</a> we talked about causal graphs, what d-separation and d-connection mean, and how to infer these properties from a causal graph. But this isn’t terribly useful because it requires that we have a fully specified causal graph. If we’re performing research in new or uncertain areas, we have data rather than a causal graph. And this data tells us about d-separations (variables that are independent of each other) and d-connections (variables that are correlated). So our work last time was exactly backwards: graphs to d-separations. This time we’ll go from d-separations to graphs.</p>
+<h3 id="model-selection">Model selection</h3>
+<p>One way to think about d-separation and d-connection is as helping us with model selection. Last time we presented</p>
+<figure>
+<img src="./images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
+</figure>
+<p>as one possible causal model regarding smoking. But it’s not the only possibility. We might also be worried that the true causal structure looks like this (just go with it):</p>
+<figure>
+<img src="./images/smoking-graph-silly.svg" alt="Yellow fingers are independently caused by smoking and lung cancer" id="smoking-graph-silly" /><figcaption>Yellow fingers are independently caused by smoking and lung cancer</figcaption>
+</figure>
+<p>How can we tell them apart? Can we use observational data alone? In this case, observational data alone is enough to distinguish between these two causal models! The key is that the two models have different sets of d-separations. In the original model, all the vertices are d-connected and there are no d-separations (this must be the case since there are no colliders). In the second (silly) model, “smoking” and “lung cancer” are d-separated because “yellow fingers” is a collider between them. If our data show that smoking and lung cancer are independent, we must rule out the first model and prefer the second. If the two variables are correlated, we must rule out the second model and prefer the first.</p>
+<p>This is a procedure that works generally:</p>
+<ol type="1">
+<li>Draw out the plausible graphical causal models that include all the variables you have data on</li>
+<li>Determine the d-separations for each plausible model</li>
+<li>Determine the variables in your data that are independent</li>
+<li>Retain the models from step 1 whose d-separations in step 2 are compatible with the data analysis in step 3</li>
+</ol>
+<p>The ideal is that there’s only one model left at the end of step 4. However, it’s possible to end up with none. This means that step 1 wasn’t permissive enough and more models need to be considered. It’s also possible to end up with more than one model. Not all models are distinguishable by observational data alone. This occurs whenever two models have the same set of d-separations.</p>
+
+
+        <a href="./posts/flip-it-reverse-it-graphical-causal-models/" class="full-post">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/assorted-links-xiv/">Assorted links XIV</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -337,7 +384,7 @@ Decision matrix about route to work.
 <p>But <abbr title="Evidence-based Policy">EBP</abbr> disdains external validity. Claims of external validity usually take a shape like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on similar (to population C) population E at similar (to time and place D) time and place F.” But the word “similar” is doing all the work here. What does it mean?</p>
 <p>“Similar” can’t mean “identical”—then all studies would be pointless because we would never have external validity and could never generalize. But “similar” also shouldn’t be construed too permissively. If you insist that the population of Manhattanites and the population of rural Tibetans are “similar” because they both consist of humans living in communities with hierarchies of esteem under a system of hegemonic capitalism on planet Earth, you’ll be find yourself perpetually surprised when your interventions fail to replicate.</p>
 <p>Furthermore, similarity means radically different things in different contexts. If the original study is about reducing Alzheimer’s for high risk populations, similarity means biomedical similarity and certain elderly people in rural Tibet may in fact be more similar to certain elderly people in Manhattan than either subpopulation is to their neighbors. On the other hand, if the study is about the welfare effects of exposure to pervasive advertising, rural Tibet and Manhattan count as pretty dissimilar.</p>
-<p>So “similar” has to mean similar in <span class="noted">the right ways and to the right degree</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The external validity claim then becomes something like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on the right population E at the right time and place F.” But this is pretty tautological. To be a useful tool, external validity should transform a hard problem into a simpler one. But it turns out that, once we unpack things, it’s hard to know what “similar” means other than “right” and we’re back where we started—we have to rely on outside knowledge to know if we can translate “It worked there.” to “It will work here.”</p>
+<p>So “similar” has to mean similar in <span class="noted">the right ways and to the right degree</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The external validity claim then becomes something like “Study A gives us reason to believe that intervention B—which worked on population C at time and place D—will also work on the right population E at the right time and place F.” But this is pretty tautological. To be a useful tool, external validity should transform a hard problem into a simpler one. But it turns out that, once we unpack things, it’s hard to know what “similar” means other than “right” and we’re back where we started—we have to rely on outside knowledge to know if we can translate “It worked there.” to “It will work here.”.</p>
 <h4 id="the-evidence-based-policy-solution">The <i>Evidence-based Policy</i> solution</h4>
 <blockquote>
 To get a good argument from “it works somewhere” to “it will work here” facts about causal principles here and there are needed.
