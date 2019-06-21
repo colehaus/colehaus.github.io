@@ -54,6 +54,53 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/instrumental-variables-on-causal-graphs/">Instrumental variables on causal graphs</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/causality/">causality</a></li>
+    
+      <li><a href="./tag/interactive/">interactive</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
+        
+        <span class="date">Published on <time datetime="June 20, 2019">June 20, 2019</time>.</span>
+       </div>
+
+       
+
+        <p><a href="./posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
+<h3 id="instrumental-variables">Instrumental variables</h3>
+<p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our potential cause, but its only impact on the effect should be via the potential cause.</p>
+<p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer otherwise. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>
+<p>…</p>
+<p>An instrument that meets these criteria is a tax on cigarettes. We expect smoking to decrease as taxes increase, but it seems hard to imagine a cigarette tax otherwise having an effect on lung cancer.</p>
+<h3 id="instrumental-variables-on-causal-graphs">Instrumental variables on causal graphs</h3>
+<p>Okay, so that’s what <abbr title="instrument variable">IV</abbr>s are at a high level. But what are they concretely in the graphical causal model setting we’ve been developing?</p>
+<h4 id="a-brief-notational-interlude">A brief notational interlude</h4>
+<p>We’ll get this out of the way here:</p>
+<ul>
+<li><span class="math inline">\(\perp\!\!\!\perp\)</span> is the symbol for d-separation</li>
+<li>Once we add the strikethrough, <span class="math inline">\(\not\!\!{\perp\!\!\!\perp}\)</span> mean d-connected.</li>
+<li>If <span class="math inline">\(G\)</span> is a graph, <span class="math inline">\(G_{\overline{X}}\)</span>, is <span class="math inline">\(G\)</span> in which <span class="noted">all the edges pointing to X have been removed</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</li>
+</ul>
+<h4 id="defined">Defined</h4>
+<p>We’ll start with the definition and then try to build up a feel for it. An instrumental variable X for the causal effect of Y on Z in graph G must be:</p>
+<ol type="1">
+<li>d-connected to our cause Y—<span class="math inline">\((X \not\!\!{\perp\!\!\!\perp} Y)_G\)</span></li>
+<li>d-separated from our effect Z after severing the cause Y from all its parents—<span class="math inline">\((X \perp\!\!\!\perp Z)_{G_\overline{Y}}\)</span></li>
+</ol>
+
+
+        <a href="./posts/instrumental-variables-on-causal-graphs/" class="full-post">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/flip-it-reverse-it-graphical-causal-models/">Flip it and reverse it</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -177,7 +224,7 @@ if (/Trident/.test(navigator.userAgent)) {
        
 
         <h3 id="causal-graphs">Causal graphs</h3>
-<p>We can represent causal models as directed <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>. The vertices in the graph represent different variables—causes and effects—and the edges represent causal relationships. For example:</p>
+<p>We can represent causal models as directed <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>. The vertices in the graph represent different random variables—causes and effects—and the edges represent causal relationships. If two vertices do not have an edge between them, there is no direct causal relationship between them. For example:</p>
 <figure>
 <img src="./images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
 </figure>

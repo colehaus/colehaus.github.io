@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Page 17—ColEx</title>
+    <title>Instrumental variables on causal graphs—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -40,23 +40,19 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    <script type="text/javascript">
-if (/Trident/.test(navigator.userAgent)) {
-  alert('I have reports that certain features are broken on Internet Explorer ' +
-        '(e.g. SVG paths with markers, flexbox with the \'order\' attribute). ' +
-        'This is a "Won\'t fix" at the moment so, if you\'re using IE, ' +
-        'browse at your own risk.');
-}
-</script>
+    
+  <link rel="stylesheet" type="text/css" href="../../css/causal-graphs.css" />
+
+
 </head>
 <body>
 <div id="underlay">
-<main><ul class="teasers">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Instrumental variables on causal graphs</h2>
   
-    <li><article class="teaser">
-        <h2><a href="../../posts/instrumental-variables-on-causal-graphs/">Instrumental variables on causal graphs</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
+  <div class="metadata">
+  <nav class="tags"><ul>
     
       <li><a href="../../tag/causality/">causality</a></li>
     
@@ -64,15 +60,18 @@ if (/Trident/.test(navigator.userAgent)) {
     
 </ul></nav>
 
-        
-          <nav><a class="series" href="../../series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
-        
-        <span class="date">Published on <time datetime="June 20, 2019">June 20, 2019</time>.</span>
-       </div>
+  
+    <nav><a class="series" href="../../series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
+  
+  <span class="date">Published on <time datetime="2019-06-20">June 20, 2019</time>.</span>
+  
+  </div>
+  
+  
 
-       
+  
 
-        <p><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
+  <p><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
 <h3 id="instrumental-variables">Instrumental variables</h3>
 <p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our potential cause, but its only impact on the effect should be via the potential cause.</p>
 <p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer otherwise. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>
@@ -93,205 +92,105 @@ if (/Trident/.test(navigator.userAgent)) {
 <li>d-connected to our cause Y—<span class="math inline">\((X \not\!\!{\perp\!\!\!\perp} Y)_G\)</span></li>
 <li>d-separated from our effect Z after severing the cause Y from all its parents—<span class="math inline">\((X \perp\!\!\!\perp Z)_{G_\overline{Y}}\)</span></li>
 </ol>
+<!--more-->
+<h4 id="interactive">Interactive</h4>
+<p>Below is a widget for finding instrumental variables. You can specify your graph (same format as before) in the top text area and make a query about a particular causal relationship in the input fields below the text area. The analysis will update when you defocus the inputs or text area.</p>
+<p>Hopefully, you can get an intuition for what <abbr title="instrumental variable">IV</abbr>s mean graphically by generating lots of examples for yourself.</p>
+<hr id="widget-hr">
+<div id="spec-and-render">
+<textarea id="graph-spec">
+a:
+  - b
+  - c
+b:
+  - c
+c:
+  []
+d:
+  - b
+</textarea>
+<div id="graph-svg">
 
+</div>
+</div>
+<div id="graph-error">
 
-        <a href="../../posts/instrumental-variables-on-causal-graphs/" class="full-post">Full post</a>
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+<p>What are the instruments for the causal effect of <input id="instruments-cause" type="text" value="b" /> on <input id="instruments-effect" type="text" value="c" />?</p>
+</div>
+<div id="instruments-result">
 
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Flip it and reverse it</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="../../tag/causality/">causality</a></li>
-    
-      <li><a href="../../tag/interactive/">interactive</a></li>
-    
-</ul></nav>
-
-        
-          <nav><a class="series" href="../../series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
-        
-        <span class="date">Published on <time datetime="June 17, 2019">June 17, 2019</time>.</span>
-       </div>
-
-       
-         <div class="abstract"><p>Last time we found the d-separations that correspond to a graph. This time, we find the graphs that correspond to a set of d-separations. Which is more useful because we generally know d-separations and generally don’t know graphs.</p></div>
-       
-
-        <p><a href="../../posts/babys-first-graphical-causal-models/">Last time</a> we talked about causal graphs, what d-separation and d-connection mean, and how to infer these properties from a causal graph. But this isn’t terribly useful because it requires that we have a fully specified causal graph. If we’re performing research in new or uncertain areas, we have data rather than a causal graph. And this data tells us about d-separations (variables that are independent of each other) and d-connections (variables that are correlated). So our work last time was exactly backwards: graphs to d-separations. This time we’ll go from d-separations to graphs.</p>
-<h3 id="model-selection">Model selection</h3>
-<p>One way to think about d-separation and d-connection is as helping us with model selection. Last time we presented</p>
-<figure>
-<img src="../../images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
-</figure>
-<p>as one possible causal model regarding smoking. But it’s not the only possibility. We might also be worried that the true causal structure looks like this (just go with it):</p>
-<figure>
-<img src="../../images/smoking-graph-silly.svg" alt="Yellow fingers are independently caused by smoking and lung cancer" id="smoking-graph-silly" /><figcaption>Yellow fingers are independently caused by smoking and lung cancer</figcaption>
-</figure>
-<p>How can we tell them apart? Can we use observational data alone? In this case, observational data alone is enough to distinguish between these two causal models! The key is that the two models have different sets of d-separations. In the original model, all the vertices are d-connected and there are no d-separations (this must be the case since there are no colliders). In the second (silly) model, “smoking” and “lung cancer” are d-separated because “yellow fingers” is a collider between them. If our data show that smoking and lung cancer are independent, we must rule out the first model and prefer the second. If the two variables are correlated, we must rule out the second model and prefer the first.</p>
-<p>This is a procedure that works generally:</p>
+</div>
+</div>
+<h4 id="explained">Explained</h4>
+<p>How does X help us determine whether Y and Z are causally linked? We can analyze things by cases. Y and Z must be d-connected or we wouldn’t even be wondering whether X causes Y. Given that they’re d-connected, the path between them (we’ll assume there’s only for the moment) doesn’t have any colliders. Instead, the path <span class="noted">can</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
 <ol type="1">
-<li>Draw out the plausible graphical causal models that include all the variables you have data on</li>
-<li>Determine the d-separations for each plausible model</li>
-<li>Determine the variables in your data that are independent</li>
-<li>Retain the models from step 1 whose d-separations in step 2 are compatible with the data analysis in step 3</li>
+<li>Be unidirectional from Y to Z (Y → A → … → B → Z) which means Y indeed causes Z</li>
+<li>Be unidirectional from Z to Y (Y ← A ← … ← B ← Z) which means Z actually causes Y</li>
+<li>Involve a fork between Y and Z (Y ← … ← A → … → Z) which means Y and Z are both caused by some unknown factor</li>
 </ol>
-<p>The ideal is that there’s only one model left at the end of step 4. However, it’s possible to end up with none. This means that step 1 wasn’t permissive enough and more models need to be considered. It’s also possible to end up with more than one model. Not all models are distinguishable by observational data alone. This occurs whenever two models have the same set of d-separations.</p>
-
-
-        <a href="../../posts/flip-it-reverse-it-graphical-causal-models/" class="full-post">Full post</a>
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="../../posts/assorted-links-xiv/">Assorted links XIV</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="../../tag/links/">links</a></li>
-    
-</ul></nav>
-
-        
-        <span class="date">Published on <time datetime="June 14, 2019">June 14, 2019</time>.</span>
-       </div>
-
-       
-
-        <ol type="1">
-<li><a href="https://www.nature.com/articles/s41467-019-10306-w">Augmented manipulation ability in humans with six-fingered hands</a></li>
+<p>There’s only an <abbr title="instrumental variable">IV</abbr> for the causal effect of Y on Z if Y indeed causes Z so we’ll figure out how to <span class="noted">add the <abbr title="instrumental variable">IV</abbr></span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> to the graph by looking at path 1. Our instrument X must be a parent of Y (X → Y → A → … → B → Z). If it were a child of Y (X ← Y → A → … → B → Z), it would satisfy <abbr title="instrumental variable">IV</abbr> condition 1 (d-connection to the potential cause), but it wouldn’t satisfy <abbr title="instrumental variable">IV</abbr> condition 2 because it would still be d-connected to Z even after Y removed all 0 of the edges from its parents.</p>
+<p>Once we make this same modification—add X as parent/cause of Y—to the other paths, we can determine whether X is truly an instrumental variable. In other words, it’s important that our instrumental variable separates case 1—where Y genuinely has a causal effect on Z—from the other two cases—where it doesn’t. Here’s what happens in each case:</p>
+<ol type="1">
+<li>X → Y → A → … → B → Z: Our instrument X is d-connected to the effect Z.</li>
+<li>X → Y ← A ← … ← B ← Z: Our instrument X is d-separated from Z by the collider at Y..</li>
+<li>X → Y ← … ← A → … → Z: Our instrument X is d-separated from Z by the collider at Y.</li>
 </ol>
-<blockquote>
-<p>can the human brain deal with the complexity to control an extra limb and yield advantages from it? […] Anatomical MRI of the supernumerary finger (SF) revealed that it is actuated by extra muscles and nerves, and fMRI identified a distinct cortical representation of the SF. […] Polydactyly subjects were able to coordinate the SF with their other fingers for more complex movements than five fingered subjects, and so carry out with only one hand tasks normally requiring two hands.</p>
-</blockquote>
-<ol start="2" type="1">
-<li><a href="http://spiritleveldelusion.blogspot.com/2019/03/the-spirit-level-ten-years-on.html">The Spirit Level ten years on</a></li>
-</ol>
-<blockquote>
-<p>In summary, most of the biggest claims made by Wilkinson and Pickett in The Spirit Level look even weaker today than they did when the book was published. Only one of the six associations stand up under W &amp; P’s own methodology and none of them stand up when the full range of countries is analysed. In the case of life expectancy - the very flagship of The Spirit Level - the statistical association is the opposite of what the hypothesis predicts.</p>
-</blockquote>
-<blockquote>
-<p>If The Spirit Level hypothesis were correct, it would produce robust and consistent results over time as the underlying data changes. Instead, it seems to be extremely fragile, only working when a very specific set of statistics are applied to a carefully selected list of countries.</p>
-</blockquote>
-<ol start="3" type="1">
-<li><a href="https://twitter.com/backus/status/1110331165007704069">I’ve been called out</a></li>
-</ol>
-<blockquote>
-<p>The allure of “meta” and “axiomatic first principles” is that it’s kinda like get-rich-quick thinking but for epistemics. Get a few abstractions really right and potentially earn more than you would grinding as an object-level wage slave for decades.</p>
-</blockquote>
-<ol start="4" type="1">
-<li><a href="https://phenomenalworld.org/metaresearch/experiments-for-policy-choice">Experiments for Policy Choice</a></li>
-</ol>
-<blockquote>
-<p>Trying to identify the best policy is different from estimating the precise impact of every individual policy: as long as we can identify the best policy, we do not care about the precise impacts of inferior policies. Yet, despite this, most experiments follow protocols that are designed to figure out the impact of every policy, even the obviously inferior ones.</p>
-</blockquote>
-<ol start="5" type="1">
-<li><a href="https://www.sciencemag.org/news/2016/12/six-cloned-horses-help-rider-win-prestigious-polo-match">Six cloned horses help rider win prestigious polo match</a></li>
-</ol>
-<blockquote>
-<p>Cambiaso rode six different horses to help his team win. […] What is noteworthy is that all six horses were clones of the same mare—they’re named Cuartetera 01 through 06. […] “Every scientist that deals with epigenetics told me this would never work,” says Meeker</p>
-</blockquote>
-
-
-        <a href="../../posts/assorted-links-xiv/" class="full-post">Full post</a>
-
-    </article></li>
-    
-</ul></main>
-
-<nav class="pagination top">
-  <ul>
-  
-    <li><a title="Oldest" href="../../page/1/">⇤</a></li>
-  
-  
-    <li><a title="Older" href="../../page/16/">⇠</a></li>
-  
-  
-    <li class="inactive">⇢</li>
-  
-  
-    <li class="inactive">⇥</li>
-  
-</ul>
-
-</nav>
-<nav class="pagination bottom">
-  <ul>
-  
-    <li><a title="Oldest" href="../../page/1/">⇤</a></li>
-  
-  
-    <li><a title="Older" href="../../page/16/">⇠</a></li>
-  
-  
-    <li class="inactive">⇢</li>
-  
-  
-    <li class="inactive">⇥</li>
-  
-</ul>
-
-</nav>
-
-
-<header>
-  <h1>Collectively Exhaustive</h1><span>A weblog</span>
-  <hr />
-</header>
-
-<div class="main-menu top">
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">By date</a></li>
-    
-    
-      <li><a href="../../tags/">By tag</a></li>
-    
-    
-      <li><a href="../../series/">By series</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-    <li class="rss"><a href="../../atom.xml">RSS</a></li>
-</ul></nav>
-
-  <hr />
+<p>Hurray! Our instrumental variable has done just what we wanted—used observation alone to suss out causality. If the potential instrument is d-connected to the potential effect (which can be determined just from the data), the potential cause is actually a cause. If the potential instrument is d-separated from the potential effect (which can be determined just from the data), it turns out that it’s not actually an instrumental variable because the potential cause isn’t actually a cause of what we thought was an effect.</p>
+<h4 id="as-model-selection">As model selection</h4>
+<p>Last time, we talked about d-separation as a tool for model selection. We can also think of instrumental variables in this way. Instrumental variables are just another tool in the toolbox that allow us to improve our powers of discrimination—allow us to distinguish between models that are indistinguishable when looking only at observations on variables of intrinsic interest.</p>
+<p>Below, enter specifications for two causal graphs. The resulting analysis will show you all the instruments that would allow you to distinguish between the two models with observation alone.</p>
+<hr id="widget-hr">
+<div id="spec1-spec2">
+<textarea id="graph-spec1">
+a:
+  - b
+  - c
+b:
+  []
+c:
+  []
+</textarea>
+<textarea id="graph-spec2">
+a:
+  []
+b:
+  - a
+  - c
+c:
+  []
+</textarea>
 </div>
+<div id="discriminate-error">
 
-<div class="main-menu bottom">
-  <hr />
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">By date</a></li>
-    
-    
-      <li><a href="../../tags/">By tag</a></li>
-    
-    
-      <li><a href="../../series/">By series</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-    <li class="rss"><a href="../../atom.xml">RSS</a></li>
-</ul></nav>
+</div>
+<div id="discriminate-analysis">
+
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>A useful (IMO) mnemonic is to think of the overline is a knife cutting off the edges above—those from parents.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>The actual fact-of-the-matter path must be one of these, but our analysis so far doesn’t tell us which.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn3" role="doc-endnote"><p>For simplicity, we’ll only look at instruments that are directly adjacent to our cause Y rather than those that are d-connected at a distance. It doesn’t change the analysis materially.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a></p></li>
+</ol>
+</section>
+</article></main>
 
 </div>
 
 
-</div>
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
+<script defer type="text/javascript" src="../../js/causal-graphs.js"></script>
+
 
   </body>
 </html>
