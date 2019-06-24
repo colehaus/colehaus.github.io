@@ -65,6 +65,8 @@
   
   <span class="date">Published on <time datetime="2019-06-20">June 20, 2019</time>.</span>
   
+    <br><span class="date">Last edited on <time datetime="2019-06-24">June 24, 2019</time>.</span>
+  
   </div>
   
   
@@ -73,8 +75,8 @@
 
   <p><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
 <h3 id="instrumental-variables">Instrumental variables</h3>
-<p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our potential cause, but its only impact on the effect should be via the potential cause.</p>
-<p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer otherwise. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>
+<p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our cause, but its only impact on the effect should be via the cause.</p>
+<p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer in other ways. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>
 <p>…</p>
 <p>An instrument that meets these criteria is a tax on cigarettes. We expect smoking to decrease as taxes increase, but it seems hard to imagine a cigarette tax otherwise having an effect on lung cancer.</p>
 <h3 id="instrumental-variables-on-causal-graphs">Instrumental variables on causal graphs</h3>
@@ -84,7 +86,7 @@
 <ul>
 <li><span class="math inline">\(\perp\!\!\!\perp\)</span> is the symbol for d-separation</li>
 <li>Once we add the strikethrough, <span class="math inline">\(\not\!\!{\perp\!\!\!\perp}\)</span> mean d-connected.</li>
-<li>If <span class="math inline">\(G\)</span> is a graph, <span class="math inline">\(G_{\overline{X}}\)</span>, is <span class="math inline">\(G\)</span> in which <span class="noted">all the edges pointing to X have been removed</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</li>
+<li>If <span class="math inline">\(G\)</span> is a graph, <span class="math inline">\(G_{\overline{X}}\)</span>, is <span class="math inline">\(G\)</span> in which <span class="noted">all the edges pointing to vertex X have been removed</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</li>
 </ul>
 <h4 id="defined">Defined</h4>
 <p>We’ll start with the definition and then try to build up a feel for it. An instrumental variable X for the causal effect of Y on Z in graph G must be:</p>
@@ -125,23 +127,36 @@ d:
 </div>
 </div>
 <h4 id="explained">Explained</h4>
-<p>How does X help us determine whether Y and Z are causally linked? We can analyze things by cases. Y and Z must be d-connected or we wouldn’t even be wondering whether X causes Y. Given that they’re d-connected, the path between them (we’ll assume there’s only for the moment) doesn’t have any colliders. Instead, the path <span class="noted">can</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<p>Unfortunately, I think this may get a bit confusing. Our overall plan is:</p>
 <ol type="1">
-<li>Be unidirectional from Y to Z (Y → A → … → B → Z) which means Y indeed causes Z</li>
-<li>Be unidirectional from Z to Y (Y ← A ← … ← B ← Z) which means Z actually causes Y</li>
-<li>Involve a fork between Y and Z (Y ← … ← A → … → Z) which means Y and Z are both caused by some unknown factor</li>
+<li>Enumerate the models compatible with d-connection between the possible cause Y and effect Z</li>
+<li>Assume that we’re right about cause and effect and add a corresponding instrumental variable</li>
+<li>Calculate d-separations for the models from step 1 with the additional variable from step 2</li>
+<li>Find that the d-separations now cleanly separate the model in which Y is a cause of Z from others</li>
 </ol>
+<h5 id="compatible-models">Compatible models</h5>
+<p>How does X help us determine whether Y and Z are causally linked? We can analyze things by cases. The actual <span class="noted">path</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> being modeled must:</p>
+<ol type="1">
+<li>Be unidirectional from Y to Z (Y → A → … → B → Z) which means Y indeed causes Z,</li>
+<li>Be unidirectional from Z to Y (Y ← A ← … ← B ← Z) which means Z actually causes Y, or</li>
+<li>Have a fork between Y and Z (Y ← … ← A → … → Z) which means Y and Z are both caused by some unknown factor.</li>
+<li>Not have a collider between Y and Z (Y → … → A ← … ← Z). If it did, Y and Z would be d-separated and it would have been immediately obvious from the data that there’s no causal relationship.</li>
+</ol>
+<h5 id="the-instrumental-variable">The instrumental variable</h5>
 <p>There’s only an <abbr title="instrumental variable">IV</abbr> for the causal effect of Y on Z if Y indeed causes Z so we’ll figure out how to <span class="noted">add the <abbr title="instrumental variable">IV</abbr></span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> to the graph by looking at path 1. Our instrument X must be a parent of Y (X → Y → A → … → B → Z). If it were a child of Y (X ← Y → A → … → B → Z), it would satisfy <abbr title="instrumental variable">IV</abbr> condition 1 (d-connection to the potential cause), but it wouldn’t satisfy <abbr title="instrumental variable">IV</abbr> condition 2 because it would still be d-connected to Z even after Y removed all 0 of the edges from its parents.</p>
-<p>Once we make this same modification—add X as parent/cause of Y—to the other paths, we can determine whether X is truly an instrumental variable. In other words, it’s important that our instrumental variable separates case 1—where Y genuinely has a causal effect on Z—from the other two cases—where it doesn’t. Here’s what happens in each case:</p>
+<p>(I suspect the above paragraph reads as very dense. The takeaway is that we want an instrumental variable on path 1 and there’s only one way to add a single vertex and edge that satisfies the two <abbr title="instrumental variable">IV</abbr> conditions. That way is for the <abbr title="instrumental variable">IV</abbr> to be a parent of the cause.)</p>
+<h5 id="d-separations">d-separations</h5>
+<p>Once we make this same modification—add a variable X which is a parent/cause of Y—to the other paths, we can determine whether X is truly an instrumental variable. In other words, it’s important that our instrumental variable separates case 1—where Y genuinely has a causal effect on Z—from the other two cases—where it doesn’t. Here’s what happens in each case:</p>
 <ol type="1">
 <li>X → Y → A → … → B → Z: Our instrument X is d-connected to the effect Z.</li>
 <li>X → Y ← A ← … ← B ← Z: Our instrument X is d-separated from Z by the collider at Y..</li>
 <li>X → Y ← … ← A → … → Z: Our instrument X is d-separated from Z by the collider at Y.</li>
 </ol>
-<p>Hurray! Our instrumental variable has done just what we wanted—used observation alone to suss out causality. If the potential instrument is d-connected to the potential effect (which can be determined just from the data), the potential cause is actually a cause. If the potential instrument is d-separated from the potential effect (which can be determined just from the data), it turns out that it’s not actually an instrumental variable because the potential cause isn’t actually a cause of what we thought was an effect.</p>
+<h5 id="model-selection">Model selection</h5>
+<p>Hurray! Our instrumental variable has done just what we wanted—used observation alone to suss out causality. If the random variable X is d-connected to the potential effect (which can be determined just from the data), the potential cause is actually a cause. If the potential instrument is d-separated from the potential effect (which can be determined just from the data), it turns out that it’s not actually an instrumental variable because the potential cause isn’t actually a cause.</p>
 <h4 id="as-model-selection">As model selection</h4>
 <p>Last time, we talked about d-separation as a tool for model selection. We can also think of instrumental variables in this way. Instrumental variables are just another tool in the toolbox that allow us to improve our powers of discrimination—allow us to distinguish between models that are indistinguishable when looking only at observations on variables of intrinsic interest.</p>
-<p>Below, enter specifications for two causal graphs. The resulting analysis will show you all the instruments that would allow you to distinguish between the two models with observation alone.</p>
+<p>Below, enter specifications for two causal graphs (The two graphs should contain the same set of vertices—only the edges should differ.). The resulting analysis will show you all the instruments that would allow you to distinguish between the two models with observation alone. Each row contains a different instrumental variable. The left column shows the extra variable as it would look on the graph specified in the left-hand text area while the right column shows the <abbr title="instrumental variable">IV</abbr> on the right text area’s graph. In each row, you should see that the columns have different sets of d-separations.</p>
 <hr id="widget-hr">
 <div id="spec1-spec2">
 <textarea id="graph-spec1">
@@ -172,9 +187,9 @@ c:
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>A useful (IMO) mnemonic is to think of the overline is a knife cutting off the edges above—those from parents.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
-<li id="fn2" role="doc-endnote"><p>The actual fact-of-the-matter path must be one of these, but our analysis so far doesn’t tell us which.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
-<li id="fn3" role="doc-endnote"><p>For simplicity, we’ll only look at instruments that are directly adjacent to our cause Y rather than those that are d-connected at a distance. It doesn’t change the analysis materially.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>A useful (IMO) mnemonic is to think of the overline as a knife cutting off the edges above the vertex—those from parents.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>We’ll assume there’s only one path for the sake of expository simplicity. <a href="https://www.theproofistrivial.com/">The story doesn’t really change with multiple paths</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn3" role="doc-endnote"><p>For simplicity, we’ll only look at instruments that are directly adjacent to our cause Y rather than those that are d-connected at a distance. <a href="https://www.theproofistrivial.com/">It doesn’t change the analysis materially.</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>
 </article></main>

@@ -74,8 +74,8 @@ if (/Trident/.test(navigator.userAgent)) {
 
         <p><a href="./posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
 <h3 id="instrumental-variables">Instrumental variables</h3>
-<p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our potential cause, but its only impact on the effect should be via the potential cause.</p>
-<p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer otherwise. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>
+<p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our cause, but its only impact on the effect should be via the cause.</p>
+<p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer in other ways. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>
 <p>…</p>
 <p>An instrument that meets these criteria is a tax on cigarettes. We expect smoking to decrease as taxes increase, but it seems hard to imagine a cigarette tax otherwise having an effect on lung cancer.</p>
 <h3 id="instrumental-variables-on-causal-graphs">Instrumental variables on causal graphs</h3>
@@ -85,7 +85,7 @@ if (/Trident/.test(navigator.userAgent)) {
 <ul>
 <li><span class="math inline">\(\perp\!\!\!\perp\)</span> is the symbol for d-separation</li>
 <li>Once we add the strikethrough, <span class="math inline">\(\not\!\!{\perp\!\!\!\perp}\)</span> mean d-connected.</li>
-<li>If <span class="math inline">\(G\)</span> is a graph, <span class="math inline">\(G_{\overline{X}}\)</span>, is <span class="math inline">\(G\)</span> in which <span class="noted">all the edges pointing to X have been removed</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</li>
+<li>If <span class="math inline">\(G\)</span> is a graph, <span class="math inline">\(G_{\overline{X}}\)</span>, is <span class="math inline">\(G\)</span> in which <span class="noted">all the edges pointing to vertex X have been removed</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</li>
 </ul>
 <h4 id="defined">Defined</h4>
 <p>We’ll start with the definition and then try to build up a feel for it. An instrumental variable X for the causal effect of Y on Z in graph G must be:</p>
