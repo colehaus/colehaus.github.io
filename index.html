@@ -54,6 +54,108 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/conditioning-causal-graphs/">Conditioning in causal graphs</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/causality/">causality</a></li>
+    
+      <li><a href="./tag/interactive/">interactive</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="./series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
+        
+        <span class="date">Published on <time datetime="July 18, 2019">July 18, 2019</time>.</span>
+       </div>
+
+       
+
+        <p>As mentioned in the warnings on the <a href="./posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>In this post, we’ll introduce the concept of conditioning to our graphical causal models framework and see how it both complicates things and offers new possibilities. (This post deliberately mirrors the structure of <a href="./posts/babys-first-graphical-causal-models/">that one</a> so it may be handy to have it open in a second tab/window for comparison purposes.)</p>
+<h3 id="causal-triplets-again">Causal triplets, again</h3>
+<p>We started out by talking about three types of causal triplets: chains, forks and inverted forks. For convenience, here is the summary table we ended up with:</p>
+<figure class="triplets-table">
+<figcaption>
+Types of causal triplets
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">Causally (probably)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider/Common effect</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>When we add the possibility of conditioning, things change dramatically:</p>
+<figure class="triplets-table">
+<figcaption>
+Types of causal triplets with conditioning on central vertex
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider/common effect</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>The complete reversal of in/dependence occasioned by conditioning on the middle vertex may be a bit surprising. There’s a certain reflex that says when ever you want to draw a clean story out of messy data, conditioning on more stuff will help you. But as we see here, <span class="noted">that’s not generally true</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+
+
+        <a href="./posts/conditioning-causal-graphs/" class="full-post">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/instrumental-variables-on-causal-graphs/">Instrumental variables on causal graphs</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>
@@ -246,7 +348,7 @@ if (/Trident/.test(navigator.userAgent)) {
 <dd>The final possible triplet configuration is what we call an inverted fork. If A causes B and C causes B (A → B ← C), then A and C will be independent. We call the central vertex B a <a href="#key-terms">collider</a>. For example, if smoking causes lung cancer and exposure to high doses of radiation also causes lung cancer, we wouldn’t expect smoking and exposure to high doses of radiation to be correlated.
 </dd>
 </dl>
-<figure id="triplets-table">
+<figure class="triplets-table">
 <figcaption>
 Types of causal triplets
 </figcaption>
@@ -274,7 +376,7 @@ Types of causal triplets
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Inverted fork</td>
-<td style="text-align: left;">Collider</td>
+<td style="text-align: left;">Collider/Common effect</td>
 <td style="text-align: left;">A → B ← C</td>
 <td style="text-align: left;">No</td>
 </tr>

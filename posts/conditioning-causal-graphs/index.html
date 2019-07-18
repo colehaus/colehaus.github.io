@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Conditioning in causal graphs—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+  <link rel="stylesheet" type="text/css" href="../../css/causal-graphs.css" />
+
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Conditioning in causal graphs</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/causality/">causality</a></li>
+    
+      <li><a href="../../tag/interactive/">interactive</a></li>
+    
+</ul></nav>
+
+  
+    <nav><a class="series" href="../../series/Graphical%2520causal%2520models/">Series: Graphical causal models</a></nav>
+  
+  <span class="date">Published on <time datetime="2019-07-18">July 18, 2019</time>.</span>
+  
+  </div>
+  
+  
+
+  
+
+  <p>As mentioned in the warnings on the <a href="../../posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>In this post, we’ll introduce the concept of conditioning to our graphical causal models framework and see how it both complicates things and offers new possibilities. (This post deliberately mirrors the structure of <a href="../../posts/babys-first-graphical-causal-models/">that one</a> so it may be handy to have it open in a second tab/window for comparison purposes.)</p>
+<h3 id="causal-triplets-again">Causal triplets, again</h3>
+<p>We started out by talking about three types of causal triplets: chains, forks and inverted forks. For convenience, here is the summary table we ended up with:</p>
+<figure class="triplets-table">
+<figcaption>
+Types of causal triplets
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">Causally (probably)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider/Common effect</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>When we add the possibility of conditioning, things change dramatically:</p>
+<figure class="triplets-table">
+<figcaption>
+Types of causal triplets with conditioning on central vertex
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider/common effect</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>The complete reversal of in/dependence occasioned by conditioning on the middle vertex may be a bit surprising. There’s a certain reflex that says when ever you want to draw a clean story out of messy data, conditioning on more stuff will help you. But as we see here, <span class="noted">that’s not generally true</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<!--more-->
+<h4 id="chains">Chains</h4>
+<p>Without conditioning, A and C in A → B → C are causally dependent. After conditioning on the mediator/traverse B, they’re independent. For example, if smoking causes (increased risk of) lung cancer and lung cancer causes (increased risk of) death, then, without conditioning on lung cancer, death is causally dependent on smoking. However, after conditioning on lung cancer (if we generously assume that there are no other paths from smoking to death), smoking and death are conditionally independent.</p>
+<p>The logic here is pretty straightforward but breaking a true causal dependence by conditioning might sometimes happen by accident. In particular, it’s most likely to be a problem when the true causal mechanism behind some statistical association is surprising. For example, if we assume that our causal structure is a fork when it’s actually a chain, conditioning on B will look the same (i.e. it will break the dependence) even while it hides rather than reveals the causal relationship.</p>
+<h4 id="forks">Forks</h4>
+<p>Without conditioning A and C in A ← B → C are noncausally dependent. After conditioning on the confounder/common cause B, they’re independent. For example, if smoking causes both yellowed fingers and lung cancer, we’d expect lung cancer to be correlated. However, after conditioning on smoking, we’d expect yellowed fingers and lung cancer to be independent. Phew, looks like we can stop worrying about those messy children’s art projects.</p>
+<p>This is the advertised purpose of conditioning. Controlling for a common cause can get us closer to making correct causal claims.</p>
+<h4 id="inverted-forks">Inverted forks</h4>
+<p>Without conditioning A and C in A → B ← C are independent. After conditioning on the collider/common effect B, they’re dependent. For example, if both smoking and exposure to high doses of radiation cause lung cancer, we wouldn’t expect smoking and exposure to be correlated in the population at large. However, if we restrict our attention to (condition on) those with lung cancer, we introduce a noncausal dependence—smoking is anticorrelated with radiation exposure.</p>
+<p>This is the trickiest of the three. One way to get some intuition for it is to look at the related <a href="https://en.wikipedia.org/wiki/Berkson%27s_paradox">Berkson’s paradox</a>. Alternatively, think of an equation like Z = X + Y. If Z is unknown, knowing X tells us nothing about Y. However, if we know that (condition on) Z = 10, we can immediately deduce that Y is 7 when told that X is 3. More generally, it helps to think of conditioning as filtering on the value of the conditioning variable. If we condition on a common effect, any change in one of the causes must be offset by a change in the other cause. This offset creates a statistical dependence between the causes and is necessary if the conditioned variable is to remain unchanged.</p>
+<p>It’s probably worth pausing and making sure you really understand that conditioning on a collider introduces a statistical dependence because it’s key for much of what follows. If the above explanation didn’t suffice, one of these might:</p>
+<ul>
+<li><a href="http://www.michaelnielsen.org/ddi/if-correlation-doesnt-imply-causation-then-what-does/">If correlation doesn’t imply causation, then what does?</a></li>
+<li><span class="citation" data-cites="rohrer2018thinking">(Rohrer <a href="#ref-rohrer2018thinking" role="doc-biblioref">2018</a>)</span></li>
+<li><span class="citation" data-cites="pearl2016causal">(Pearl, Glymour, and Jewell <a href="#ref-pearl2016causal" role="doc-biblioref">2016</a>)</span></li>
+</ul>
+<h3 id="d-separation-and-d-connection-along-a-path">d-separation and d-connection along a path</h3>
+<p>Like before, we’ll now move from causal triplets to paths and talk about d-separation and d-connection. Last time we said that two vertices were d-separated along a path between them if there was a collider on the path. Now we modify that condition and say that two vertices are <a href="#key-terms">d-separated</a> along a path between them if and only if there is an unconditioned collider or conditioned non-collider (i.e. confounder or mediator) in that path. This implies that two vertices are <a href="#key-terms">d-connected</a> if all vertices along the path between them are some combination of conditioned colliders and unconditioned non-colliders (i.e. confounders and mediators).</p>
+<p>We can see how this works out for all paths with four vertices. When we condition on B (the results for C are completely symmetrical), we find that the A and D are d-connected in each of:</p>
+<ul>
+<li>A → B ← C ← D</li>
+<li>A → B ← C → D</li>
+</ul>
+<p>and d-separated in each of:</p>
+<ul>
+<li>A → B → C → D</li>
+<li>A ← B ← C ← D</li>
+<li>A → B → C ← D</li>
+<li>A ← B → C ← D</li>
+<li>A ← B → C → D</li>
+<li>A ← B ← C → D</li>
+</ul>
+<p>Hopefully, the intuition behind this remains a fairly straightforward extension of the causal triplet logic.</p>
+<p>We say that a path is <a href="#key-terms">blocked</a> (i.e. the endpoints are d-separated) if it has a non-conditioned collider on it or a conditioned non-collider. If we look at the two tables up top, they show that unconditioned colliders and conditioned non-colliders (i.e. mediators and confounders) are the triplets which do not transmit dependence. So it’s reassuring to see them showing up here as blockers.</p>
+<h3 id="d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</h3>
+<p>Like before, we’ll note that it’s only by moving to arbitrary directed acyclic graphs that we start to be able to make interesting claims.</p>
+<p>Last time, we said that two vertices on a graph are d-separated if there’s no unblocked path between them. We can actually use the same definition here. However, it unfolds differently because—with conditioning in mind—“unblocked” now means something slightly different. Here’s how the unfolding works:</p>
+<ol type="1">
+<li><p>Vertex A and B are d-separated</p></li>
+<li><p>Vertex A and B have no unblocked paths between them <span class="transform-reason">(from 1 by inlining definition of d-separated)</span></p></li>
+<li><p>Every path between vertex A and B is blocked (this is satisfied vacuously if A and B have no paths between them) <span class="transform-reason">(from 2 by negation of existential)</span></p></li>
+<li><p>Every path between vertex A and B has at least one of <span class="transform-reason">(from 3 by inlining definition of blocked)</span>:</p>
+<ol type="1">
+<li>a conditioned non-collider (i.e. a mediator or a confounder)</li>
+<li>a collider which is not conditioned on and also has no descendants that are conditioned on</li>
+</ol></li>
+</ol>
+<p>Hopefully, this mostly makes sense. The only new part is the part where we talk about conditioning on descendants of colliders.</p>
+<h4 id="conditioning-on-descendants-of-colliders">Conditioning on descendants of colliders</h4>
+<p>Just like conditioning on a common effect Y introduces dependence between its causes W and X, conditioning on a descendant Z of that common effect introduces dependence between the common effect’s causes W and X. The easiest way to convince yourself of the truth of this claim is to imagine a descendant Z which is perfectly correlated with the common effect Y. In this case, conditioning on Z is as good as conditioning on Y which we already agreed was sufficient to introduce a dependence between W and X.</p>
+<p>An example may also help. Let’s go back to the example of lung cancer being caused by either smoking or radiation exposure. We already explained that if we restrict our attention to (condition on) those with lung cancer, smoking and radiation exposure become anti-correlated. We would find the same effect if we restricted our attention to those who died of lung cancer (or even just to those who died prematurely).</p>
+<h3 id="interactive">Interactive</h3>
+<p>To get more of a feeling for how all these terms work in the new context with conditioning, you can fiddle with the widget below.</p>
+<p>In the top left text area, you can specify a graph as a series of vertices with the edges they point to. So the starting text should be read as “a points to b. b points to nothing. c points to a and b. d points to b”. The graph rendered below it should help you visualize should update once you defocus the text area.</p>
+<p>In the top right text area, you can specify vertices which ought to be conditioned on.</p>
+<p>The full list of d-separations is always displayed for the current graph.</p>
+<p>Below the first set of outputs, you can ask whether and how any two nodes are d-connected. If they are d-connected, the connecting paths will be highlighted and the paths will be listed.</p>
+<div id="spec-and-conditions">
+<div>
+<div>
+<p>Graph:</p>
+</div>
+<textarea id="graph-conditioned-spec">
+a:
+  - b
+b:
+  - e
+c:
+  - b
+e:
+  []
+</textarea>
+</div>
+<div>
+<div>
+<p>Condition on:</p>
+</div>
+<textarea id="graph-conditioned-on">
+- b
+</textarea>
+</div>
+</div>
+<div id="graph-error">
+
+</div>
+<div id="graph-and-seps">
+<div id="graph-svg">
+
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+D-separations:
+</div>
+<div id="d-separation-results">
+
+</div>
+</div>
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+How are <input id="d-connection-from" type="text" /> and <input id="d-connection-to" type="text" /> d-connected?
+</div>
+<div id="d-connection-result">
+
+</div>
+</div>
+<h3 id="postscript">Postscript</h3>
+<p>We could also carry on and repeat the other two posts about model selection/generation and instrumental variables with our new understanding of conditioning. But I don’t have any plans to do that at the moment. If you really desperately want that content, I guess let me know via <a href="mailto:colehaus@cryptolab.net">email</a>. It’s also possible to piece together that functionality fairly straightforwardly using the <a href="https://github.com/colehaus/purescript-causal-graphs">library</a> underlying the demos already written, if you’re an independent sort of person.</p>
+<hr class="references">
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-pearl2016causal">
+<p>Pearl, Judea, Madelyn Glymour, and Nicholas P Jewell. 2016. <em>Causal Inference in Statistics: A Primer</em>. John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-rohrer2018thinking">
+<p>Rohrer, Julia M. 2018. “Thinking Clearly About Correlations and Causation: Graphical Causal Models for Observational Data.” <em>Advances in Methods and Practices in Psychological Science</em> 1 (1). SAGE Publications Sage CA: Los Angeles, CA: 27–42.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>If you’re unfamiliar with conditioning as a concept, this might not be the place to learn about it. It probably makes sense to learn about it on its own in some more conventional setting and then see it put to strange and twisted ends here after it has become more familiar.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>It’s something of an open question to me why misconceptions around the role of conditioning aren’t more catastrophic. If we suppose that conditioning eliminates confounds and moves us toward causal inference when it sometimes does the opposite, that seems bad. Some resolutions I can imagine:</p>
+<ul>
+<li>These misconception aren’t actually common. People actually practicing science (especially social science) are aware of that conditioning on colliders can introduce dependence. This seems to require more statistical sophistication than is compatible with the replication crisis. It also seems incompatible with Pearl’s Cassandra <a href="https://twitter.com/yudapearl">persona on Twitter</a>. I guess a serious attempt at investigating this question would survey textbooks, syllabi, papers, etc to see how frequently they mention the problem of conditioning on colliders.</li>
+<li>People’s intuitions tend to run toward causes. When we see that two variables are correlated and try to come up with a third variable connected to them, we’re more likely to imagine a common cause than a common effect.</li>
+<li>We just got lucky and the causal structure of most things we care to investigate has far more forks than inverted forks.</li>
+<li>These misconceptions are catastrophic. Controlling for colliders is common and impactful, we/I just haven’t noticed.</li>
+</ul>
+<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+<div id="overlay" class="inactive"><div id="key-terms">
+<dl>
+<dt>d-separation</dt>
+<dd>If and only if a pair of vertices is d-separated, they are independent. This happens if there is no unblocked path between the vertices.
+</dd>
+<dt>d-connection</dt>
+<dd>If a pair of vertices is dependent, they are d-connected. This happens when there is an unblocked path between the vertices.
+</dd>
+<dt>Blocked path</dt>
+<dd><p>A blocked path has at least one of:</p>
+<ol type="1">
+<li>A collider where neither the collider nor its descendants are conditioned on; or</li>
+<li>A non-collider (i.e. a mediator or a confounder) that <em>is</em> conditioned on.</li>
+</ol>
+</dd>
+</dl>
+</div></div>
+
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
+<script defer type="text/javascript" src="../../js/causal-graphs.js"></script>
+
+
+  </body>
+</html>

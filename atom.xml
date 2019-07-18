@@ -8,8 +8,226 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-06-20T00:00:00Z</updated>
+    <updated>2019-07-18T00:00:00Z</updated>
     <entry>
+    <title>Conditioning in causal graphs</title>
+    <link href="https://www.col-ex.org/posts/conditioning-causal-graphs/" />
+    <id>https://www.col-ex.org/posts/conditioning-causal-graphs/</id>
+    <published>2019-07-18T00:00:00Z</published>
+    <updated>2019-07-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>As mentioned in the warnings on the <a href="https://www.col-ex.org/posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>.</p>
+<p>In this post, we’ll introduce the concept of conditioning to our graphical causal models framework and see how it both complicates things and offers new possibilities. (This post deliberately mirrors the structure of <a href="https://www.col-ex.org/posts/babys-first-graphical-causal-models/">that one</a> so it may be handy to have it open in a second tab/window for comparison purposes.)</p>
+<h1 id="causal-triplets-again">Causal triplets, again</h1>
+<p>We started out by talking about three types of causal triplets: chains, forks and inverted forks. For convenience, here is the summary table we ended up with:</p>
+<figure class="triplets-table">
+<figcaption>
+<p>Types of causal triplets</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">Causally (probably)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider/Common effect</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>When we add the possibility of conditioning, things change dramatically:</p>
+<figure class="triplets-table">
+<figcaption>
+<p>Types of causal triplets with conditioning on central vertex</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name of triplet</th>
+<th style="text-align: left;">Name of central vertex</th>
+<th style="text-align: left;">Diagram</th>
+<th style="text-align: left;">Ends (A and C) dependent?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Chain</td>
+<td style="text-align: left;">Mediator/Traverse</td>
+<td style="text-align: left;">A → B → C</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fork</td>
+<td style="text-align: left;">Confounder/Common cause</td>
+<td style="text-align: left;">A ← B → C</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inverted fork</td>
+<td style="text-align: left;">Collider/common effect</td>
+<td style="text-align: left;">A → B ← C</td>
+<td style="text-align: left;">Noncausally</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>The complete reversal of in/dependence occasioned by conditioning on the middle vertex may be a bit surprising. There’s a certain reflex that says when ever you want to draw a clean story out of messy data, conditioning on more stuff will help you. But as we see here, <span class="noted">that’s not generally true</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>.</p>
+<p><!--more--></p>
+<h2 id="chains">Chains</h2>
+<p>Without conditioning, A and C in A → B → C are causally dependent. After conditioning on the mediator/traverse B, they’re independent. For example, if smoking causes (increased risk of) lung cancer and lung cancer causes (increased risk of) death, then, without conditioning on lung cancer, death is causally dependent on smoking. However, after conditioning on lung cancer (if we generously assume that there are no other paths from smoking to death), smoking and death are conditionally independent.</p>
+<p>The logic here is pretty straightforward but breaking a true causal dependence by conditioning might sometimes happen by accident. In particular, it’s most likely to be a problem when the true causal mechanism behind some statistical association is surprising. For example, if we assume that our causal structure is a fork when it’s actually a chain, conditioning on B will look the same (i.e. it will break the dependence) even while it hides rather than reveals the causal relationship.</p>
+<h2 id="forks">Forks</h2>
+<p>Without conditioning A and C in A ← B → C are noncausally dependent. After conditioning on the confounder/common cause B, they’re independent. For example, if smoking causes both yellowed fingers and lung cancer, we’d expect lung cancer to be correlated. However, after conditioning on smoking, we’d expect yellowed fingers and lung cancer to be independent. Phew, looks like we can stop worrying about those messy children’s art projects.</p>
+<p>This is the advertised purpose of conditioning. Controlling for a common cause can get us closer to making correct causal claims.</p>
+<h2 id="inverted-forks">Inverted forks</h2>
+<p>Without conditioning A and C in A → B ← C are independent. After conditioning on the collider/common effect B, they’re dependent. For example, if both smoking and exposure to high doses of radiation cause lung cancer, we wouldn’t expect smoking and exposure to be correlated in the population at large. However, if we restrict our attention to (condition on) those with lung cancer, we introduce a noncausal dependence—smoking is anticorrelated with radiation exposure.</p>
+<p>This is the trickiest of the three. One way to get some intuition for it is to look at the related <a href="https://en.wikipedia.org/wiki/Berkson%27s_paradox">Berkson’s paradox</a>. Alternatively, think of an equation like Z = X + Y. If Z is unknown, knowing X tells us nothing about Y. However, if we know that (condition on) Z = 10, we can immediately deduce that Y is 7 when told that X is 3. More generally, it helps to think of conditioning as filtering on the value of the conditioning variable. If we condition on a common effect, any change in one of the causes must be offset by a change in the other cause. This offset creates a statistical dependence between the causes and is necessary if the conditioned variable is to remain unchanged.</p>
+<p>It’s probably worth pausing and making sure you really understand that conditioning on a collider introduces a statistical dependence because it’s key for much of what follows. If the above explanation didn’t suffice, one of these might:</p>
+<ul>
+<li><a href="http://www.michaelnielsen.org/ddi/if-correlation-doesnt-imply-causation-then-what-does/">If correlation doesn’t imply causation, then what does?</a></li>
+<li><span class="citation" data-cites="rohrer2018thinking">(Rohrer <a href="#ref-rohrer2018thinking">2018</a>)</span></li>
+<li><span class="citation" data-cites="pearl2016causal">(Pearl, Glymour, and Jewell <a href="#ref-pearl2016causal">2016</a>)</span></li>
+</ul>
+<h1 id="d-separation-and-d-connection-along-a-path">d-separation and d-connection along a path</h1>
+<p>Like before, we’ll now move from causal triplets to paths and talk about d-separation and d-connection. Last time we said that two vertices were d-separated along a path between them if there was a collider on the path. Now we modify that condition and say that two vertices are <a href="#key-terms">d-separated</a> along a path between them if and only if there is an unconditioned collider or conditioned non-collider (i.e. confounder or mediator) in that path. This implies that two vertices are <a href="#key-terms">d-connected</a> if all vertices along the path between them are some combination of conditioned colliders and unconditioned non-colliders (i.e. confounders and mediators).</p>
+<p>We can see how this works out for all paths with four vertices. When we condition on B (the results for C are completely symmetrical), we find that the A and D are d-connected in each of:</p>
+<ul>
+<li>A → B ← C ← D</li>
+<li>A → B ← C → D</li>
+</ul>
+<p>and d-separated in each of:</p>
+<ul>
+<li>A → B → C → D</li>
+<li>A ← B ← C ← D</li>
+<li>A → B → C ← D</li>
+<li>A ← B → C ← D</li>
+<li>A ← B → C → D</li>
+<li>A ← B ← C → D</li>
+</ul>
+<p>Hopefully, the intuition behind this remains a fairly straightforward extension of the causal triplet logic.</p>
+<p>We say that a path is <a href="#key-terms">blocked</a> (i.e. the endpoints are d-separated) if it has a non-conditioned collider on it or a conditioned non-collider. If we look at the two tables up top, they show that unconditioned colliders and conditioned non-colliders (i.e. mediators and confounders) are the triplets which do not transmit dependence. So it’s reassuring to see them showing up here as blockers.</p>
+<h1 id="d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</h1>
+<p>Like before, we’ll note that it’s only by moving to arbitrary directed acyclic graphs that we start to be able to make interesting claims.</p>
+<p>Last time, we said that two vertices on a graph are d-separated if there’s no unblocked path between them. We can actually use the same definition here. However, it unfolds differently because—with conditioning in mind—“unblocked” now means something slightly different. Here’s how the unfolding works:</p>
+<ol type="1">
+<li><p>Vertex A and B are d-separated</p></li>
+<li><p>Vertex A and B have no unblocked paths between them <span class="transform-reason">(from 1 by inlining definition of d-separated)</span></p></li>
+<li><p>Every path between vertex A and B is blocked (this is satisfied vacuously if A and B have no paths between them) <span class="transform-reason">(from 2 by negation of existential)</span></p></li>
+<li><p>Every path between vertex A and B has at least one of <span class="transform-reason">(from 3 by inlining definition of blocked)</span>:</p>
+<ol type="1">
+<li>a conditioned non-collider (i.e. a mediator or a confounder)</li>
+<li>a collider which is not conditioned on and also has no descendants that are conditioned on</li>
+</ol></li>
+</ol>
+<p>Hopefully, this mostly makes sense. The only new part is the part where we talk about conditioning on descendants of colliders.</p>
+<h2 id="conditioning-on-descendants-of-colliders">Conditioning on descendants of colliders</h2>
+<p>Just like conditioning on a common effect Y introduces dependence between its causes W and X, conditioning on a descendant Z of that common effect introduces dependence between the common effect’s causes W and X. The easiest way to convince yourself of the truth of this claim is to imagine a descendant Z which is perfectly correlated with the common effect Y. In this case, conditioning on Z is as good as conditioning on Y which we already agreed was sufficient to introduce a dependence between W and X.</p>
+<p>An example may also help. Let’s go back to the example of lung cancer being caused by either smoking or radiation exposure. We already explained that if we restrict our attention to (condition on) those with lung cancer, smoking and radiation exposure become anti-correlated. We would find the same effect if we restricted our attention to those who died of lung cancer (or even just to those who died prematurely).</p>
+<h1 id="interactive">Interactive</h1>
+<p>To get more of a feeling for how all these terms work in the new context with conditioning, you can fiddle with the widget below.</p>
+<p>In the top left text area, you can specify a graph as a series of vertices with the edges they point to. So the starting text should be read as “a points to b. b points to nothing. c points to a and b. d points to b”. The graph rendered below it should help you visualize should update once you defocus the text area.</p>
+<p>In the top right text area, you can specify vertices which ought to be conditioned on.</p>
+<p>The full list of d-separations is always displayed for the current graph.</p>
+<p>Below the first set of outputs, you can ask whether and how any two nodes are d-connected. If they are d-connected, the connecting paths will be highlighted and the paths will be listed.</p>
+<div id="spec-and-conditions">
+<div>
+<div>
+<p>Graph:</p>
+</div>
+<textarea id="graph-conditioned-spec">
+a:
+  - b
+b:
+  - e
+c:
+  - b
+e:
+  []
+</textarea>
+</div>
+<div>
+<div>
+<p>Condition on:</p>
+</div>
+<textarea id="graph-conditioned-on">
+- b
+</textarea>
+</div>
+</div>
+<div id="graph-error">
+
+</div>
+<div id="graph-and-seps">
+<div id="graph-svg">
+
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+D-separations:
+</div>
+<div id="d-separation-results">
+
+</div>
+</div>
+</div>
+<div class="analysis-panel">
+<div class="analysis-header">
+How are <input id="d-connection-from" type="text" /> and <input id="d-connection-to" type="text" /> d-connected?
+</div>
+<div id="d-connection-result">
+
+</div>
+</div>
+<h1 id="postscript">Postscript</h1>
+<p>We could also carry on and repeat the other two posts about model selection/generation and instrumental variables with our new understanding of conditioning. But I don’t have any plans to do that at the moment. If you really desperately want that content, I guess let me know via <a href="mailto:colehaus@cryptolab.net">email</a>. It’s also possible to piece together that functionality fairly straightforwardly using the <a href="https://github.com/colehaus/purescript-causal-graphs">library</a> underlying the demos already written, if you’re an independent sort of person.</p>
+<hr />
+<div id="refs" class="references" role="doc-bibliography" role="doc-bibliography">
+<div id="ref-pearl2016causal">
+<p>Pearl, Judea, Madelyn Glymour, and Nicholas P Jewell. 2016. <em>Causal Inference in Statistics: A Primer</em>. John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-rohrer2018thinking">
+<p>Rohrer, Julia M. 2018. “Thinking Clearly About Correlations and Causation: Graphical Causal Models for Observational Data.” <em>Advances in Methods and Practices in Psychological Science</em> 1 (1). SAGE Publications Sage CA: Los Angeles, CA: 27–42.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>If you’re unfamiliar with conditioning as a concept, this might not be the place to learn about it. It probably makes sense to learn about it on its own in some more conventional setting and then see it put to strange and twisted ends here after it has become more familiar.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>It’s something of an open question to me why misconceptions around the role of conditioning aren’t more catastrophic. If we suppose that conditioning eliminates confounds and moves us toward causal inference when it sometimes does the opposite, that seems bad. Some resolutions I can imagine:</p>
+<ul>
+<li>These misconception aren’t actually common. People actually practicing science (especially social science) are aware of that conditioning on colliders can introduce dependence. This seems to require more statistical sophistication than is compatible with the replication crisis. It also seems incompatible with Pearl’s Cassandra <a href="https://twitter.com/yudapearl">persona on Twitter</a>. I guess a serious attempt at investigating this question would survey textbooks, syllabi, papers, etc to see how frequently they mention the problem of conditioning on colliders.</li>
+<li>People’s intuitions tend to run toward causes. When we see that two variables are correlated and try to come up with a third variable connected to them, we’re more likely to imagine a common cause than a common effect.</li>
+<li>We just got lucky and the causal structure of most things we care to investigate has far more forks than inverted forks.</li>
+<li>These misconceptions are catastrophic. Controlling for colliders is common and impactful, we/I just haven’t noticed.</li>
+</ul>
+<a href="#fnref2" class="footnote-back">↩</a>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>Instrumental variables on causal graphs</title>
     <link href="https://www.col-ex.org/posts/instrumental-variables-on-causal-graphs/" />
     <id>https://www.col-ex.org/posts/instrumental-variables-on-causal-graphs/</id>
@@ -276,7 +494,7 @@ c:
 <dd>The final possible triplet configuration is what we call an inverted fork. If A causes B and C causes B (A → B ← C), then A and C will be independent. We call the central vertex B a <a href="#key-terms">collider</a>. For example, if smoking causes lung cancer and exposure to high doses of radiation also causes lung cancer, we wouldn’t expect smoking and exposure to high doses of radiation to be correlated.
 </dd>
 </dl>
-<figure id="triplets-table">
+<figure class="triplets-table">
 <figcaption>
 <p>Types of causal triplets</p>
 </figcaption>
@@ -304,7 +522,7 @@ c:
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Inverted fork</td>
-<td style="text-align: left;">Collider</td>
+<td style="text-align: left;">Collider/Common effect</td>
 <td style="text-align: left;">A → B ← C</td>
 <td style="text-align: left;">No</td>
 </tr>
@@ -331,9 +549,9 @@ c:
 </ul>
 <p>I hope the intuition behind this is clear as a fairly straightforward extension of the logic explained with causal triplets.</p>
 <p>We also call a path with a collider on it a <a href="#key-terms">blocked path</a>.</p>
-<h1 id="d-separation-and-d-connection-on-arbitrary-graphs">d-separation and d-connection on arbitrary graphs</h1>
-<p>But linear paths still aren’t that useful. It’s only when we get to full arbitrary graphs that we start to be able to make interesting claims.</p>
-<p>In arbitrary graphs, we say that any two vertices are d-connected if they have an undirected path between them which is not blocked (i.e. does not have a collider). If there are no such paths (i.e. there are no paths at all or all paths have a collider), the two vertices are d-separated.</p>
+<h1 id="d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</h1>
+<p>But linear paths still aren’t that useful. It’s only when we get to full arbitrary directed acyclic graphs that we start to be able to make interesting claims.</p>
+<p>In arbitrary graphs, we say that any two vertices are d-connected if they have an undirected path between them which is not blocked (i.e. does not have a collider). If there are no such unblocked paths (i.e. there are no paths at all or all paths have a collider), the two vertices are d-separated.</p>
 <h2 id="interactive">Interactive</h2>
 <p>To get more of a feeling for these terms, you can fiddle with the widget below.</p>
 <p>In the top text area, you can specify a graph as a series of vertices with the edges they point to. So the starting text should be read as “a points to b. b points to nothing. c points to a and b. d points to b”. The graph rendered next to it to help you visualize should update once you defocus the text area.</p>
@@ -6123,7 +6341,7 @@ If a preference is satisfied in a forest and no one is around to witness it, is 
 <p>The utility of player <span class="math inline">\(i\)</span> given all actions of all players across time (<span class="math inline">\(\mathbf{a}\)</span>) is <span class="math inline">\(U_i(\mathbf{a}) = \sum_{t=0}^\infty \delta^t \cdot u_i(a_i^t, a_{-i}^t, \mathbf{a^{t-1}})\)</span>.</p>
 <p>We’ll start by examining the utility obtained by each player when they pursue a constant strategy (e.g. <em>always</em> invest, <em>always</em> loot).</p>
 <h4 id="texttaxbackslashmathttinvest"><span class="math inline">\(\text{Tax}\backslash\mathtt{Invest}\)</span></h4>
-<p>In the first round, $ invest but have not yet reaped the benefit. So they obtain only <span class="math inline">\((1 - k) - c\)</span> (what’s left after the <span class="math inline">\(\text{Autocrat}\)</span>’s taxes minus the cost of <span class="math inline">\(\mathtt{Investing}\)</span>) while the <span class="math inline">\(\text{Autocrat}\)</span> simply receives their tax share of output <span class="math inline">\(k\)</span>. In all subsequent rounds, output is scaled by the competing factors of the discount rate <span class="math inline">\(\delta\)</span> and the growth rate <span class="math inline">\(r\)</span> while cost is scaled only by the discount rate <span class="math inline">\(\delta\)</span>.</p>
+<p>In the first round, <span class="math inline">\(\mathtt{Producers}\)</span> invest but have not yet reaped the benefit. So they obtain only <span class="math inline">\((1 - k) - c\)</span> (what’s left after the <span class="math inline">\(\text{Autocrat}\)</span>’s taxes minus the cost of <span class="math inline">\(\mathtt{Investing}\)</span>) while the <span class="math inline">\(\text{Autocrat}\)</span> simply receives their tax share of output <span class="math inline">\(k\)</span>. In all subsequent rounds, output is scaled by the competing factors of the discount rate <span class="math inline">\(\delta\)</span> and the growth rate <span class="math inline">\(r\)</span> while cost is scaled only by the discount rate <span class="math inline">\(\delta\)</span>.</p>
 <figure>
 <img src="https://www.col-ex.org/images/latex/-2488830548868812487.svg" title="
 \begin{align*}
@@ -6835,11 +7053,9 @@ Table showing possible results of pairwise comparisons between ethically relevan
 <p>Which things would you like to make a utility function out of?</p>
 <p><!--more--></p>
 <textarea id="goods">
-```{=html}
 Apple
 Banana
 Carrot
-```
 </textarea>
 <p>Which do you prefer?</p>
 <div class="scenario input">

@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/conditioning-causal-graphs/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/instrumental-variables-on-causal-graphs/index.html</loc>
         <changefreq>weekly</changefreq>
         <lastmod>2019-06-24</lastmod>

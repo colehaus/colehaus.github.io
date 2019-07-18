@@ -109,7 +109,7 @@ variables (vertices) are independent (d-separated) and dependent
 <dd>The final possible triplet configuration is what we call an inverted fork. If A causes B and C causes B (A → B ← C), then A and C will be independent. We call the central vertex B a <a href="#key-terms">collider</a>. For example, if smoking causes lung cancer and exposure to high doses of radiation also causes lung cancer, we wouldn’t expect smoking and exposure to high doses of radiation to be correlated.
 </dd>
 </dl>
-<figure id="triplets-table">
+<figure class="triplets-table">
 <figcaption>
 Types of causal triplets
 </figcaption>
@@ -137,7 +137,7 @@ Types of causal triplets
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Inverted fork</td>
-<td style="text-align: left;">Collider</td>
+<td style="text-align: left;">Collider/Common effect</td>
 <td style="text-align: left;">A → B ← C</td>
 <td style="text-align: left;">No</td>
 </tr>
@@ -164,9 +164,9 @@ Types of causal triplets
 </ul>
 <p>I hope the intuition behind this is clear as a fairly straightforward extension of the logic explained with causal triplets.</p>
 <p>We also call a path with a collider on it a <a href="#key-terms">blocked path</a>.</p>
-<h3 id="d-separation-and-d-connection-on-arbitrary-graphs">d-separation and d-connection on arbitrary graphs</h3>
-<p>But linear paths still aren’t that useful. It’s only when we get to full arbitrary graphs that we start to be able to make interesting claims.</p>
-<p>In arbitrary graphs, we say that any two vertices are d-connected if they have an undirected path between them which is not blocked (i.e. does not have a collider). If there are no such paths (i.e. there are no paths at all or all paths have a collider), the two vertices are d-separated.</p>
+<h3 id="d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</h3>
+<p>But linear paths still aren’t that useful. It’s only when we get to full arbitrary directed acyclic graphs that we start to be able to make interesting claims.</p>
+<p>In arbitrary graphs, we say that any two vertices are d-connected if they have an undirected path between them which is not blocked (i.e. does not have a collider). If there are no such unblocked paths (i.e. there are no paths at all or all paths have a collider), the two vertices are d-separated.</p>
 <h4 id="interactive">Interactive</h4>
 <p>To get more of a feeling for these terms, you can fiddle with the widget below.</p>
 <p>In the top text area, you can specify a graph as a series of vertices with the edges they point to. So the starting text should be read as “a points to b. b points to nothing. c points to a and b. d points to b”. The graph rendered next to it to help you visualize should update once you defocus the text area.</p>
@@ -250,10 +250,10 @@ How are <input id="d-connection-from" type="text" /> and <input id="d-connection
 <dd>The central node that the two causes on either side point to in an inverted fork.
 </dd>
 <dt>d-separation</dt>
-<dd>If a pair of vertices is d-separated, they are independent.
+<dd>If and only if a pair of vertices is d-separated, they are independent. This happens if there is no unblocked path between the vertices.
 </dd>
 <dt>d-connection</dt>
-<dd>If a pair of vertices is d-connected, they are (most likely) dependent.
+<dd>If a pair of vertices is dependent, they are d-connected. This happens when there is an unblocked path between the vertices.
 </dd>
 <dt>Blocked path</dt>
 <dd>A blocked path has a collider on it.
