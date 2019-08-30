@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Page 18—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    <script type="text/javascript">
+if (/Trident/.test(navigator.userAgent)) {
+  alert('I have reports that certain features are broken on Internet Explorer ' +
+        '(e.g. SVG paths with markers, flexbox with the \'order\' attribute). ' +
+        'This is a "Won\'t fix" at the moment so, if you\'re using IE, ' +
+        'browse at your own risk.');
+}
+</script>
+</head>
+<body>
+<div id="underlay">
+<main><ul class="teasers">
+  
+    <li><article class="teaser">
+        <h2><a href="../../posts/uncertainty-sensitivity-analysis-givewell-rankings/">Uncertainty and sensitivity analysis of GiveWell's top charity rankings</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="../../series/GiveWell%2520cost-effectiveness%2520analysis%2520analysis/">Series: GiveWell cost-effectiveness analysis analysis</a></nav>
+        
+        <span class="date">Published on <time datetime="September 29, 2019">September 29, 2019</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>Arguably, we don’t care about the exact cost-effectiveness estimates of each of GiveWell’s top charities. Instead, we care about their relative value. By using distance metrics across these multidimensional outputs, we can perform uncertainty and sensitivity analysis to answer questions about:</p>
+<ul>
+<li>how uncertain we are about the overall relative values of the charities</li>
+<li>which input parameters is this overall relative valuation most sensitive to</li>
+</ul></div>
+       
+
+        <p>In the <a href="../../posts/uncertainty-analysis-of-givewell-cea/">last</a> <a href="../../posts/sensitivity-analysis-of-givewell-cea/">two</a> posts, we performed uncertainty and sensitivity analyses on GiveWell’s charity cost-effectiveness estimates. Our outputs were, respectively:</p>
+<ul>
+<li>probability distributions describing our uncertainty about the value per dollar obtained for each charity and</li>
+<li>estimates of how sensitive each charity’s cost-effectiveness is to each of its input parameters</li>
+</ul>
+<p>One problem with this is that we are <a href="https://blog.givewell.org/2011/08/18/why-we-cant-take-expected-value-estimates-literally-even-when-theyre-unbiased/">not supposed to take the cost-effectiveness estimates literally</a>. Arguably, the real purpose of GiveWell’s analysis is not to produce exact numbers but to assess the relative quality of each charity evaluated.</p>
+<p>Another issue is that by treating each cost-effectiveness estimate as independent we underweight parameters which are shared across many models. For example, the moral weight that ought to be assigned to increasing consumption shows up in many models. If we consider all the charity-specific models together and the relations between their outputs, this input receives a higher sensitivity index.</p>
+<h3 id="metrics-on-rankings">Metrics on rankings</h3>
+<p>We can solve both of these problems by abstract away from particular values in the cost-effectiveness analysis and looking at the overall rankings returned. That is we want to transform:</p>
+<figure>
+<figcaption>
+GiveWell’s cost-effectiveness estimates for its top charities
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Charity</th>
+<th style="text-align: right;">Value per $10,000 donated</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">GiveDirectly</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The END Fund</td>
+<td style="text-align: right;">222</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Deworm the World</td>
+<td style="text-align: right;">738</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Schistosomiasis Control Initiative</td>
+<td style="text-align: right;">378</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sightsavers</td>
+<td style="text-align: right;">394</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Malaria Consortium</td>
+<td style="text-align: right;">326</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Against Malaria Foundation</td>
+<td style="text-align: right;">247</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Helen Keller International</td>
+<td style="text-align: right;">223</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>into:</p>
+<figure>
+<figcaption>
+Givewell’s top charities ranked from most cost-effective to least
+</figcaption>
+<ul>
+<li>Deworm the World</li>
+<li>Sightsavers</li>
+<li>Schistosomiasis Control Initiative</li>
+<li>Malaria Consortium</li>
+<li>Against Malaria Foundation</li>
+<li>Helen Keller International</li>
+<li>The END Fund</li>
+<li>GiveDirectly</li>
+</ul>
+</figure>
+<p>But how do we usefully express <span class="noted">probabilities over rankings</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (rather than probabilities over simple cost-effectivness numbers)? The approach we’ll follow below is to characterize a ranking produced by a run of the model by computing its distance from the reference ranking listed here (i.e. GiveWell’s current best estimate). Our output probability distribution will then express how far we expect to be from the reference ranking. For example, if the distribution is narrow and near 0, that means our uncertain input parameters mostly produce results similar to the reference ranking. If the distribution is wide and far from 0, that means our uncertain input parameters produce results that are highly uncertain and not necessarily similar to the reference ranking.</p>
+<h4 id="spearmans-footrule">Spearman’s footrule</h4>
+<p>What is this mysterious distance metric between rankings that enables the above approach? One such metric is called Spearman’s footrule distance. It’s defined as:</p>
+<div class=".skippable">
+<p><span class="math display">\[d_{fr}(u, v) = \sum_{c \in A} |\text{pos}(u,c) - \text{pos}(v, c)|\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are rankings,</li>
+<li><span class="math inline">\(c\)</span> varies over all the elements <span class="math inline">\(A\)</span> of the rankings and</li>
+<li><span class="math inline">\(\text{pos}(r, x)\)</span> returns the integer position of item <span class="math inline">\(x\)</span> in ranking <span class="math inline">\(r\)</span>.</li>
+</ul>
+<p>In other words, the footrule distance between two rankings is the sum over all items of the (absolute) difference in positions for each item. (We also add a normalization factor so that the distance varies ranges from 0 to 1 but omit that trivia here.)</p>
+<p>So the distance between A, B, C and A, B, C is 0; the (unnormalized) distance between A, B, C and C, B, A is 4; and the (unnormalized) distance between A, B, C and B, A, C is 2.</p>
+</div>
+<h4 id="kendalls-tau">Kendall’s tau</h4>
+<p>Another common distance metric between rankings is <a href="https://en.wikipedia.org/wiki/Kendall_tau_distance">Kendall’s tau</a>. It’s defined as:</p>
+<div class=".skippable">
+<p><span class="math display">\[d_tau(u, v) = \sum_{\{i,j\} \in P} \bar{K}_{i,j}(u, v)\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are again rankings,</li>
+<li><span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are items in the set of unordered pairs <span class="math inline">\(P\)</span> of distinct elements in <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span></li>
+<li><span class="math inline">\(\bar{K}_{i,j}(u, v) = 0\)</span> if <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are in the same order (concordant) in <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> and <span class="math inline">\(\bar{K}_{i,j}(u, v) = 0\)</span> otherwise (discordant)</li>
+</ul>
+</div>
+<p>In other words, the Kendall tau distance looks at all possible pairs across items in the rankings and counts up the ones where the two rankings disagree on the ordering of these items. (There’s also a normalization factor that we’ve again omitted so that the distance ranges from 0 to 1.)</p>
+<h4 id="angular-distance">Angular distance</h4>
+<p>One drawback of the above metrics is that they throw away information in going from the table with cost-effectiveness estimates to a simple ranking. What would be ideal is to keep that information and find some other distance metric that still emphasizes the relationship between the various numbers rather than their precise values.</p>
+<p>Angular distance is a metric which satisfies these criteria. We can regard the table of charities and cost-effectiveness values as an 8-dimensional vector. When our output produces another vector of cost-effectiveness estimates (one for each charity), we can compare this to our reference vector by finding <span class="noted">the angle between the two</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+
+
+        <a href="../../posts/uncertainty-sensitivity-analysis-givewell-rankings/" class="full-post">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
+        <h2><a href="../../posts/sensitivity-analysis-of-givewell-cea/">Sensitivity analysis of GiveWell's cost-effectiveness analysis</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="../../tag/statistics/">statistics</a></li>
+    
+      <li><a href="../../tag/development/">development</a></li>
+    
+</ul></nav>
+
+        
+          <nav><a class="series" href="../../series/GiveWell%2520cost-effectiveness%2520analysis%2520analysis/">Series: GiveWell cost-effectiveness analysis analysis</a></nav>
+        
+        <span class="date">Published on <time datetime="September 28, 2019">September 28, 2019</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>We perform visual (scatter plot) and delta moment-independent sensitivity analysis on GiveWell’s cost-effectiveness models. We find that some uncertain input parameters are much more influential on the final cost-effectiveness results for each charity than other input parameters.</p></div>
+       
+
+        <p><a href="../../posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
+<h3 id="sensitivity-analysis">Sensitivity analysis</h3>
+<p>The basic idea of <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis">sensitivity analysis</a> is, when working with uncertain values, to see which input values most affect the output when they vary. For example, if you have the equation <span class="math inline">\(f(a, b) = 2^a + b\)</span> and each of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> varies uniformly over the range from 5 to 10, <span class="math inline">\(f(a, b)\)</span> is much more sensitive to <span class="math inline">\(a\)</span> then <span class="math inline">\(b\)</span>. A sensitivity analysis is practically useful in that it can offer you guidance as to which parameters in your model it would be most useful to investigate further (i.e. to narrow their uncertainty).</p>
+<h3 id="visual-sensitivity-analysis">Visual sensitivity analysis</h3>
+<p>The first kind of sensitivity analysis we’ll run is just to look at scatter plots comparing each input parameter to the final cost-effectiveness estimates. We can imagine these scatter plots as the result of running <span class="noted">the following procedure many times</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>: sample a single value from the probability distribution for each input parameter and run the calculation on these values to determine a result value. If we repeat this procedure enough times, it starts to approximate the true values of the probability distributions.</p>
+<p>One nice feature of this sort of analysis is that we see how the output depends on a particular input even in the face of variations in all the other inputs—we don’t hold everything else constant. In other words, this is a <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis#Local_methods">global</a> sensitivity analysis.</p>
+<p>(Caveat: We are again pretending that we are equally uncertain about each input parameter and the results reflect this limitation. To see the analysis result for different input uncertainties, edit and run <a href="TODO">the Jupyter notebook</a>.)</p>
+<h4 id="direct-cash-transfers">Direct cash transfers</h4>
+<h5 id="givedirectly">GiveDirectly</h5>
+<figure class="natural-fig">
+<img src="../../images/givewell-analysis/regressions-big-GiveDirectly-value_per_dollar.png" title="fig:" alt="Scatter plots showing sensitivity of GiveDirectly’s cost-effectiveness to each input parameter" />
+<figcaption>
+Scatter plots showing sensitivity of GiveDirectly’s cost-effectiveness to each input parameter
+</figcaption>
+</figure>
+<p>The scatter plots show that, given our choice of input uncertainty, the output is most sensitive (i.e. the scatter plot for these parameters shows the greatest directionality) to the input parameters:</p>
+<figure class="big-fig">
+<figcaption>
+Highlighted input factors to which result is highly sensitive
+</figcaption>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">value of increasing ln consumption per capita per annum</td>
+<td style="text-align: left;">Moral</td>
+<td style="text-align: left;">Determines final conversion between outcomes and value</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transfer as percent of total cost</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Determines cost of results</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">return on investment</td>
+<td style="text-align: left;">Opportunities available to recipients</td>
+<td style="text-align: left;">Determines stream of consumption over time</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">baseline consumption per capita</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Diminishing marginal returns to consumption mean that baseline consumption matters</td>
+</tr>
+</tbody>
+</table>
+</figure>
+
+
+        <a href="../../posts/sensitivity-analysis-of-givewell-cea/" class="full-post">Full post</a>
+
+    </article></li>
+    
+</ul></main>
+
+<nav class="pagination top">
+  <ul>
+  
+    <li><a title="Oldest" href="../../page/1/">⇤</a></li>
+  
+  
+    <li><a title="Older" href="../../page/17/">⇠</a></li>
+  
+  
+    <li class="inactive">⇢</li>
+  
+  
+    <li class="inactive">⇥</li>
+  
+</ul>
+
+</nav>
+<nav class="pagination bottom">
+  <ul>
+  
+    <li><a title="Oldest" href="../../page/1/">⇤</a></li>
+  
+  
+    <li><a title="Older" href="../../page/17/">⇠</a></li>
+  
+  
+    <li class="inactive">⇢</li>
+  
+  
+    <li class="inactive">⇥</li>
+  
+</ul>
+
+</nav>
+
+
+<header>
+  <h1>Collectively Exhaustive</h1><span>A weblog</span>
+  <hr />
+</header>
+
+<div class="main-menu top">
+  <nav><ul>
+    
+      <li><a href="../../">Home</a></li>
+    
+    
+      <li><a href="../../posts/">By date</a></li>
+    
+    
+      <li><a href="../../tags/">By tag</a></li>
+    
+    
+      <li><a href="../../series/">By series</a></li>
+    
+    
+      <li><a href="../../tag/meta/">Meta</a></li>
+    
+    <li class="rss"><a href="../../atom.xml">RSS</a></li>
+</ul></nav>
+
+  <hr />
+</div>
+
+<div class="main-menu bottom">
+  <hr />
+  <nav><ul>
+    
+      <li><a href="../../">Home</a></li>
+    
+    
+      <li><a href="../../posts/">By date</a></li>
+    
+    
+      <li><a href="../../tags/">By tag</a></li>
+    
+    
+      <li><a href="../../series/">By series</a></li>
+    
+    
+      <li><a href="../../tag/meta/">Meta</a></li>
+    
+    <li class="rss"><a href="../../atom.xml">RSS</a></li>
+</ul></nav>
+
+</div>
+
+
+</div>
+
+  </body>
+</html>

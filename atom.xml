@@ -8,9 +8,1000 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-09-27T00:00:00Z</updated>
+    <updated>2019-09-29T00:00:00Z</updated>
     <entry>
-    <title>Uncertainty analysis of GiveWell cost-effectiveness analysis</title>
+    <title>Uncertainty and sensitivity analysis of GiveWell's top charity rankings</title>
+    <link href="https://www.col-ex.org/posts/uncertainty-sensitivity-analysis-givewell-rankings/" />
+    <id>https://www.col-ex.org/posts/uncertainty-sensitivity-analysis-givewell-rankings/</id>
+    <published>2019-09-29T00:00:00Z</published>
+    <updated>2019-09-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>In the <a href="https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/">last</a> <a href="https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/">two</a> posts, we performed uncertainty and sensitivity analyses on GiveWell’s charity cost-effectiveness estimates. Our outputs were, respectively:</p>
+<ul>
+<li>probability distributions describing our uncertainty about the value per dollar obtained for each charity and</li>
+<li>estimates of how sensitive each charity’s cost-effectiveness is to each of its input parameters</li>
+</ul>
+<p>One problem with this is that we are <a href="https://blog.givewell.org/2011/08/18/why-we-cant-take-expected-value-estimates-literally-even-when-theyre-unbiased/">not supposed to take the cost-effectiveness estimates literally</a>. Arguably, the real purpose of GiveWell’s analysis is not to produce exact numbers but to assess the relative quality of each charity evaluated.</p>
+<p>Another issue is that by treating each cost-effectiveness estimate as independent we underweight parameters which are shared across many models. For example, the moral weight that ought to be assigned to increasing consumption shows up in many models. If we consider all the charity-specific models together and the relations between their outputs, this input receives a higher sensitivity index.</p>
+<h1 id="metrics-on-rankings">Metrics on rankings</h1>
+<p>We can solve both of these problems by abstract away from particular values in the cost-effectiveness analysis and looking at the overall rankings returned. That is we want to transform:</p>
+<figure>
+<figcaption>
+<p>GiveWell’s cost-effectiveness estimates for its top charities</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Charity</th>
+<th style="text-align: right;">Value per $10,000 donated</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">GiveDirectly</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The END Fund</td>
+<td style="text-align: right;">222</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Deworm the World</td>
+<td style="text-align: right;">738</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Schistosomiasis Control Initiative</td>
+<td style="text-align: right;">378</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sightsavers</td>
+<td style="text-align: right;">394</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Malaria Consortium</td>
+<td style="text-align: right;">326</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Against Malaria Foundation</td>
+<td style="text-align: right;">247</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Helen Keller International</td>
+<td style="text-align: right;">223</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>into:</p>
+<figure>
+<figcaption>
+<p>Givewell’s top charities ranked from most cost-effective to least</p>
+</figcaption>
+<ul>
+<li>Deworm the World</li>
+<li>Sightsavers</li>
+<li>Schistosomiasis Control Initiative</li>
+<li>Malaria Consortium</li>
+<li>Against Malaria Foundation</li>
+<li>Helen Keller International</li>
+<li>The END Fund</li>
+<li>GiveDirectly</li>
+</ul>
+</figure>
+<p>But how do we usefully express <span class="noted">probabilities over rankings</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> (rather than probabilities over simple cost-effectivness numbers)? The approach we’ll follow below is to characterize a ranking produced by a run of the model by computing its distance from the reference ranking listed here (i.e. GiveWell’s current best estimate). Our output probability distribution will then express how far we expect to be from the reference ranking. For example, if the distribution is narrow and near 0, that means our uncertain input parameters mostly produce results similar to the reference ranking. If the distribution is wide and far from 0, that means our uncertain input parameters produce results that are highly uncertain and not necessarily similar to the reference ranking.</p>
+<h2 id="spearmans-footrule">Spearman’s footrule</h2>
+<p>What is this mysterious distance metric between rankings that enables the above approach? One such metric is called Spearman’s footrule distance. It’s defined as:</p>
+<div class=".skippable">
+<p><img src="https://www.col-ex.org/images/latex/-5930663585335708119.svg" title="d_{fr}(u, v) = \sum_{c \in A} |\text{pos}(u,c) - \text{pos}(v, c)|" /></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are rankings,</li>
+<li><span class="math inline">\(c\)</span> varies over all the elements <span class="math inline">\(A\)</span> of the rankings and</li>
+<li><span class="math inline">\(\text{pos}(r, x)\)</span> returns the integer position of item <span class="math inline">\(x\)</span> in ranking <span class="math inline">\(r\)</span>.</li>
+</ul>
+<p>In other words, the footrule distance between two rankings is the sum over all items of the (absolute) difference in positions for each item. (We also add a normalization factor so that the distance varies ranges from 0 to 1 but omit that trivia here.)</p>
+<p>So the distance between A, B, C and A, B, C is 0; the (unnormalized) distance between A, B, C and C, B, A is 4; and the (unnormalized) distance between A, B, C and B, A, C is 2.</p>
+</div>
+<h2 id="kendalls-tau">Kendall’s tau</h2>
+<p>Another common distance metric between rankings is <a href="https://en.wikipedia.org/wiki/Kendall_tau_distance">Kendall’s tau</a>. It’s defined as:</p>
+<div class=".skippable">
+<p><img src="https://www.col-ex.org/images/latex/-4939412166951168968.svg" title="d_tau(u, v) = \sum_{\{i,j\} \in P} \bar{K}_{i,j}(u, v)" /></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are again rankings,</li>
+<li><span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are items in the set of unordered pairs <span class="math inline">\(P\)</span> of distinct elements in <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span></li>
+<li><span class="math inline">\(\bar{K}_{i,j}(u, v) = 0\)</span> if <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are in the same order (concordant) in <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> and <span class="math inline">\(\bar{K}_{i,j}(u, v) = 0\)</span> otherwise (discordant)</li>
+</ul>
+</div>
+<p>In other words, the Kendall tau distance looks at all possible pairs across items in the rankings and counts up the ones where the two rankings disagree on the ordering of these items. (There’s also a normalization factor that we’ve again omitted so that the distance ranges from 0 to 1.)</p>
+<h2 id="angular-distance">Angular distance</h2>
+<p>One drawback of the above metrics is that they throw away information in going from the table with cost-effectiveness estimates to a simple ranking. What would be ideal is to keep that information and find some other distance metric that still emphasizes the relationship between the various numbers rather than their precise values.</p>
+<p>Angular distance is a metric which satisfies these criteria. We can regard the table of charities and cost-effectiveness values as an 8-dimensional vector. When our output produces another vector of cost-effectiveness estimates (one for each charity), we can compare this to our reference vector by finding <span class="noted">the angle between the two</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>.</p>
+<p><!--more--></p>
+<h1 id="results">Results</h1>
+<h2 id="uncertainties">Uncertainties</h2>
+<p>To recap, what we’re about to see next is the result of running our model many times with different sampled input values. In each run, we compute the cost-effectiveness estimates for each charity and compare those estimates to the reference ranking (GiveWell’s best estimate) using each of the tau, footrule and angular distance metrics.</p>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/uncertainties-small-multiples-distances.png" title="fig:" alt="Probability distributions of value per dollar for each of GiveWell’s top charity and probability distributions for the distance between model results and the reference results" /><figcaption>Probability distributions of value per dollar for each of GiveWell’s top charity and probability distributions for the distance between model results and the reference results</figcaption>
+</figure>
+<p>We see that our input uncertainty does matter even for these highest level results—there are some input values which cause the ordering of best charities to change. If the gaps between the cost-effectiveness estimates had been very large or our input uncertainty had been very small, we would have expected essentially all of the probability mass to be concentrated at 0 because no change in inputs would have been enough to meaningfully change the relative value of the charities.</p>
+<h2 id="visual-sensitivity-analysis">Visual sensitivity analysis</h2>
+<p>We can now repeat our visual sensitivity analysis but using our <span class="noted">angular distance metric from the reference as our outcome of interest</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a> instead of individual cost-effectiveness estimates. What these plots show is how sensitive the relative value of the different charities (the angle between the results and the reference vector) is to each of the input parameters used in any of the cost-effectiveness models (so, yes, there are a lot of parameters/plots).</p>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-max-overall%20ranking-angle.png" title="fig:" alt="Scatter plots showing sensitivity of the overall relative cost-effective analysis to each input parameter" /><figcaption>Scatter plots showing sensitivity of the overall relative cost-effective analysis to each input parameter</figcaption>
+</figure>
+<p>These results might be a bit surprising at first. Why are there so many charity-specific factors up top? Shouldn’t input parameters which affect <em>all</em> models have the biggest influence on the overall result? Also, why do so few of the factors that showed up as most influential in <a href="https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/">the charity-specific sensitivity analyses from last time</a> make it to the top?</p>
+<p>However, after reflecting for a bit, this makes sense. Because we’re interested in the <em>relative</em> performance of the charities, any factor which affects them all equally is of little importance here. Instead, we want factors that have a strong influence on only a few charities. When we go back to the earlier charity-by-charity sensitivity analysis, we see that many of the input parameters we identified as most influential where shared across charities (especially across the deworming charities). Non-shared factors that made it to the top of the charity-by-charity lists—like the relative risk of all-cause mortality for young children in <abbr title="Vitamin A supplementation">VAS</abbr> programs—show up somewhat high here too.</p>
+<p>But it’s hard to eyeball the sensitivity when there are so many factors and most are of small effect. So let’s move on to the delta analysis.</p>
+<h2 id="delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</h2>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the overall relative cost-effect analysis" /><figcaption>Delta sensitivities for each input parameter in the overall relative cost-effect analysis</figcaption>
+</figure>
+<p>We see that (given our input uncertainty), the five parameters with the highest delta sensitivities are as described in the table below:</p>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-s1.png" title="fig:" alt="Highlighted input factors to which result is highly sensitive" /><figcaption>Highlighted input factors to which result is highly sensitive</figcaption>
+</figure>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>If we just look at the probability for each possible ranking independently, we’ll be overwhelmed by the number of permutations and it will be hard to find any useful structure in our results.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>The angle between the vectors is a better metric here than the distance between the vectors’ endpoints because we’re interested in the relative values of the charities and how those change. If our results show that each charity is twice as effective as in the reference vector, our metric should return a distance of 0 because nothing has changed in the relative value of each charity.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>I chose to use just one metric here because there are already enough plots and I chose angular distance instead of the others because the other two metrics produce integer outputs prior to normalization (which is inconvenient).<a href="#fnref3" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>Sensitivity analysis of GiveWell's cost-effectiveness analysis</title>
+    <link href="https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/" />
+    <id>https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/</id>
+    <published>2019-09-28T00:00:00Z</published>
+    <updated>2019-09-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
+<h1 id="sensitivity-analysis">Sensitivity analysis</h1>
+<p>The basic idea of <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis">sensitivity analysis</a> is, when working with uncertain values, to see which input values most affect the output when they vary. For example, if you have the equation <span class="math inline">\(f(a, b) = 2^a + b\)</span> and each of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> varies uniformly over the range from 5 to 10, <span class="math inline">\(f(a, b)\)</span> is much more sensitive to <span class="math inline">\(a\)</span> then <span class="math inline">\(b\)</span>. A sensitivity analysis is practically useful in that it can offer you guidance as to which parameters in your model it would be most useful to investigate further (i.e. to narrow their uncertainty).</p>
+<h1 id="visual-sensitivity-analysis">Visual sensitivity analysis</h1>
+<p>The first kind of sensitivity analysis we’ll run is just to look at scatter plots comparing each input parameter to the final cost-effectiveness estimates. We can imagine these scatter plots as the result of running <span class="noted">the following procedure many times</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>: sample a single value from the probability distribution for each input parameter and run the calculation on these values to determine a result value. If we repeat this procedure enough times, it starts to approximate the true values of the probability distributions.</p>
+<p>One nice feature of this sort of analysis is that we see how the output depends on a particular input even in the face of variations in all the other inputs—we don’t hold everything else constant. In other words, this is a <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis#Local_methods">global</a> sensitivity analysis.</p>
+<p>(Caveat: We are again pretending that we are equally uncertain about each input parameter and the results reflect this limitation. To see the analysis result for different input uncertainties, edit and run <a href="TODO">the Jupyter notebook</a>.)</p>
+<h2 id="direct-cash-transfers">Direct cash transfers</h2>
+<h3 id="givedirectly">GiveDirectly</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-GiveDirectly-value_per_dollar.png" title="fig:" alt="Scatter plots showing sensitivity of GiveDirectly’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of GiveDirectly’s cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>The scatter plots show that, given our choice of input uncertainty, the output is most sensitive (i.e. the scatter plot for these parameters shows the greatest directionality) to the input parameters:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">value of increasing ln consumption per capita per annum</td>
+<td style="text-align: left;">Moral</td>
+<td style="text-align: left;">Determines final conversion between outcomes and value</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transfer as percent of total cost</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Determines cost of results</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">return on investment</td>
+<td style="text-align: left;">Opportunities available to recipients</td>
+<td style="text-align: left;">Determines stream of consumption over time</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">baseline consumption per capita</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Diminishing marginal returns to consumption mean that baseline consumption matters</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p><!--more--></p>
+<h2 id="deworming">Deworming</h2>
+<p>Some useful and non-obvious context for the following is that the primary claimed benefit of deworming is increased income later in life.</p>
+<h3 id="the-end-fund">The END Fund</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-END-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of the END Fund’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of the END Fund’s cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>Here, it’s a little harder to identify certain factors as more important. It seems that the final estimate is (given our input uncertainty) the result of many factors of medium effect. It does seem plausible that the output is somewhat less sensitive to these factors:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to the END Fund shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="deworm-the-world">Deworm the World</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-DTW-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of the Deworm the World’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of the Deworm the World’s cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>Again, it’s a little harder to identify certain factors as more important. It seems that the final estimate is (given our input uncertainty) the result of many factors of medium effect. It does seem plausible that the output is somewhat less sensitive to these factors:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to Deworm the World shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="schistosomiasis-control-initiative">Schistosomiasis Control Initiative</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-SCI-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of the Schistosomiasis Control Initiative’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of the Schistosomiasis Control Initiative’s cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>Again, it’s a little harder to identify certain factors as more important. It seems that the final estimate is (given our input uncertainty) the result of many factors of medium effect. It does seem plausible that the output is somewhat less sensitive to these factors:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to Schistosomiasis Control Initiative shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="sightsavers">Sightsavers</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-Sightsavers-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of the Sightsavers’ cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of the Sightsavers’ cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>Again, it’s a little harder to identify certain factors as more important. It seems that the final estimate is (given our input uncertainty) the result of many factors of medium effect. It does seem plausible that the output is somewhat less sensitive to these factors:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to Sightsavers shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h2 id="seasonal-malaria-chemoprevention">Seasonal malaria chemoprevention</h2>
+<h3 id="malaria-consortium">Malaria Consortium</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-Malaria%20Consortium-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of Malaria Consortium’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of Malaria Consortium’s cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>The scatter plots show that, given our choice of input uncertainty, the output is most sensitive (i.e. the scatter plot for these parameters shows the greatest directionality) to the input parameters:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 17%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">direct mortality in high transmission season</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Fraction of overall malaria mortality during the peak transmission season and amenable to SMC</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">internal validity adjustment</td>
+<td style="text-align: left;">Methodological</td>
+<td style="text-align: left;">How much do we trust the results of the underlying <abbr title="Seasonal malaria chemoprevention">SMC</abbr> studies)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">external validity adjustment</td>
+<td style="text-align: left;">Methodological</td>
+<td style="text-align: left;">How much do the results of the underlying <abbr title="Seasonal malaria chemoprevention">SMC</abbr> studies transfer to new settings</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">coverage in trials in meta-analysis</td>
+<td style="text-align: left;">Historical/methodological</td>
+<td style="text-align: left;">Determines how much coverage an SMC program needs to achieve to match studies</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">value of averting death of a young child</td>
+<td style="text-align: left;">Moral</td>
+<td style="text-align: left;">Determines final conversion between outcomes and value</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cost per child targeted</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects cost of results</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h2 id="vitamin-a-supplementation">Vitamin A supplementation</h2>
+<h3 id="helen-keller-international">Helen Keller International</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-HKI-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of the Helen Keller International’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of the Helen Keller International’s cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>The scatter plots show that, given our choice of input uncertainty, the output is most sensitive (i.e. the scatter plot for these parameters shows the greatest directionality) to the input parameters:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 23%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">relative risk of all-cause mortality for young children in programs</td>
+<td style="text-align: left;">Causal</td>
+<td style="text-align: left;">How much do <abbr title="Vitamin A supplementation">VAS</abbr> programs affect mortality</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cost per child per round</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rounds per year</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h2 id="bednets">Bednets</h2>
+<h3 id="against-malaria-foundation">Against Malaria Foundation</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-AMF-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of Against Malaria Foundation’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of Against Malaria Foundation’s cost-effectiveness to each input parameter</figcaption>
+</figure>
+<p>The scatter plots show that, given our choice of input uncertainty, the output is most sensitive (i.e. the scatter plot for these parameters shows the greatest directionality) to the input parameters:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num <abbr title="Long-lasting insecticidal net">LLIN</abbr>s distributed per person</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cost per <abbr title="Long-lasting insecticidal net">LLIN</abbr></td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">deaths averted per protected child under 5</td>
+<td style="text-align: left;">Causal</td>
+<td style="text-align: left;">How effective is the core activity</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifespan of an <abbr title="Long-lasting insecticidal net">LLIN</abbr></td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Determines how many years of benefit accrue to each distribution</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">net use adjustment</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Determines benefits from <abbr title="Long-lasting insecticidal net">LLIN</abbr> as mediated by proper and improper use</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">internal validity adjustment</td>
+<td style="text-align: left;">Methodological</td>
+<td style="text-align: left;">How much do we trust the results of the underlying studies</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">percent of mortality due to malaria in AMF areas vs trials</td>
+<td style="text-align: left;">Empirical/historical</td>
+<td style="text-align: left;">Affects size of the problem</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">percent of pop. under 5</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Affects size of the problem</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h1 id="delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</h1>
+<p>If eyeballing plots seems a bit unsatisfying to you as a method for judging sensitivity, not to worry. We also have the results of a more formal sensitivity analysis. This method is called <a href="http://www.relialab.org/Upload/files/A%20new%20uncertainty%20importance%20measure.pdf">delta moment-independent sensitivity analysis</a>.</p>
+<p><span class="math inline">\(\delta_i\)</span> (the delta moment-independent sensitivity indicator of parameter <span class="math inline">\(i\)</span>) “represents the normalized expected shift in the distribution of [the output] provoked by [that input]” <span class="citation" data-cites="borgonovo2007new">(Borgonovo <a href="#ref-borgonovo2007new">2007</a>)</span>. To make this meaning more explicit, we’ll start with some notation/definitions. Let:</p>
+<div class="skippable">
+<ol type="1">
+<li><span class="math inline">\(X = (X_1, X_2, \ldots, X_n) \in \mathbb{R}^n\)</span> be the random variables used as input parameters</li>
+<li><span class="math inline">\(Y = f(X)\)</span> so that <span class="math inline">\(f(X)\)</span> is a function from <span class="math inline">\(\mathbb{R}^n\)</span> to <span class="math inline">\(\mathbb{R}\)</span> describing the relationship between inputs and outputs—i.e. GiveWell’s cost-effectiveness model <!-- 3. $x = (x_1, x_2, \ldots, x_n)$ be a realization of X---i.e. some particular value for each of the input random variables --> <!-- 4. $f_X(x)$ be the joint density of $X$---i.e. the multi-dimensional probability distribution over all input parameters simultaneously --> <!-- 5. $f_{X_i}(x_i)$ be the marginal density of $x_i$---i.e. the individual probability distributions for each input parameter that we've already talked about --></li>
+<li><span class="math inline">\(f_Y(y)\)</span> be the density function of the result <span class="math inline">\(Y\)</span>—i.e. the probability distributions we’ve already seen showing the cost-effectiveness for each charity</li>
+<li><span class="math inline">\(f_{Y|X_i}(y)\)</span> be the conditional density of Y with one of the parameters <span class="math inline">\(X_i\)</span> fixed—i.e. a probability distribution for the cost-effectiveness of a charity while pretending that we know one of the input values precisely</li>
+</ol>
+<p>With these in place, we can define <span class="math inline">\(\delta_i\)</span>. It is:</p>
+<p><img src="https://www.col-ex.org/images/latex/840122220804255798.svg" title="\delta_i = \frac{1}{2} E_{X_i}[\int |f_Y(y) - f_{Y|X_i}(y)| \mathrm{d}y]" />.</p>
+<p>The inner <span class="math inline">\(\int |f_Y(y) - f_{Y|X_i}(y)| \mathrm{d}y\)</span> can be interpreted as the total area between probability density function <span class="math inline">\(f_Y\)</span> and probability density function <span class="math inline">\(f_{Y|X_i}\)</span>. This is the “shift in the distribution of <span class="math inline">\(Y\)</span> provoked by <span class="math inline">\(X_i\)</span>” we mentioned earlier. Overall, <span class="math inline">\(\delta_i\)</span> then says:</p>
+<ul>
+<li>pick one value for <span class="math inline">\(X_i\)</span> and measure the shift in the output distribution from the “default” output distribution</li>
+<li>do that for each possible <span class="math inline">\(X_i\)</span> and take the expectation</li>
+</ul>
+</div>
+<p>Some useful properties to point out:</p>
+<ul>
+<li><span class="math inline">\(\delta_i\)</span> ranges from 0 to 1</li>
+<li>If the output is independent of the input, <span class="math inline">\(delta_i\)</span> for that input is 0</li>
+<li>The sum of <span class="math inline">\(\delta_i\)</span> for each input considered separately isn’t necessarily 1 because there can be interaction effects</li>
+</ul>
+<h2 id="direct-cash-transfers-1">Direct cash transfers</h2>
+<h3 id="givedirectly-1">GiveDirectly</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-GiveDirectly-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the GiveDirectly cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the GiveDirectly cost-effectiveness calculation</figcaption>
+</figure>
+<p>Comfortingly, this agrees with the results of our scatter plot sensitivity analysis. For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">value of increasing ln consumption per capita per annum</td>
+<td style="text-align: left;">Moral</td>
+<td style="text-align: left;">Determines final conversion between outcomes and value</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transfer as percent of total cost</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects cost of results</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">return on investment</td>
+<td style="text-align: left;">Opportunities available to recipients</td>
+<td style="text-align: left;">Determines stream of consumption over time</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">baseline consumption per capita</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Diminishing marginal returns to consumption mean that baseline consumption matters</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h2 id="deworming-1">Deworming</h2>
+<h3 id="the-end-fund-1">The END Fund</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-END-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the END Fund cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the END Fund cost-effectiveness calculation</figcaption>
+</figure>
+<p><span class="noted">Comfortingly, this again agrees with the results of our scatter plot sensitivity analysis</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to the END Fund shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="deworm-the-world-1">Deworm the World</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-DTW-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the Deworm the World cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the Deworm the World cost-effectiveness calculation</figcaption>
+</figure>
+<p>For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to Deworm the World shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="schistosomiasis-control-initiative-1">Schistosomiasis Control Initiative</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-SCI-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the Schistosomiasis Control Initiative cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the Schistosomiasis Control Initiative cost-effectiveness calculation</figcaption>
+</figure>
+<p>For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to Schistosomiasis Control Initiative shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="sightsavers-1">Sightsavers</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-Sightsavers-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the Sightsavers cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the Sightsavers cost-effectiveness calculation</figcaption>
+</figure>
+<p>For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is minimally sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/(un)importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num yrs between deworming and benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">Affects how much discounting of future income streams must be done</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">duration of long-term benefits</td>
+<td style="text-align: left;">Forecast</td>
+<td style="text-align: left;">The length of time for a which a person works and earns income</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">expected value from leverage and funging</td>
+<td style="text-align: left;">Game theoretic</td>
+<td style="text-align: left;">How much does money donated to Sightsavers shift around other money</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h3 id="deworming-comment">Deworming comment</h3>
+<p>That we get substantially identical results in terms of delta sensitivities for each deworming charity is not surprising: The structure of each calculation is the same and (for the sake of tainting the analysis with my idiosyncratic perspective) the uncertainty on each input parameter is the same.</p>
+<h2 id="seasonal-malaria-chemoprevention-1">Seasonal malaria chemoprevention</h2>
+<h3 id="malaria-consortium-1">Malaria Consortium</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-Malaria%20Consortium-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the Malaria Consortium cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the Malaria Consortium cost-effectiveness calculation</figcaption>
+</figure>
+<p>Again, there seems to be good agreement between the delta sensitivity analysis and the scatter plot sensitivity analysis though there is perhaps a bit of reordering in the top factor. For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:98%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 17%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">internal validity adjustment</td>
+<td style="text-align: left;">Methodological</td>
+<td style="text-align: left;">How much do we trust the results of the underlying <abbr title="Seasonal malaria chemoprevention">SMC</abbr> studies)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">direct mortality in high transmission season</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Fraction of overall malaria mortality during the peak transmission season and amenable to SMC</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">cost per child targeted</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Afffects cost of results</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">external validity adjustment</td>
+<td style="text-align: left;">Methodological</td>
+<td style="text-align: left;">How much do the results of the underlying <abbr title="Seasonal malaria chemoprevention">SMC</abbr> studies transfer to new settings</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">coverage in trials in meta-analysis</td>
+<td style="text-align: left;">Historical/methodological</td>
+<td style="text-align: left;">Determines how much coverage an SMC program needs to achieve to match studies</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">value of averting death of a young child</td>
+<td style="text-align: left;">Moral</td>
+<td style="text-align: left;">Determines final conversion between outcomes and value</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h2 id="vitamin-a-supplementation-1">Vitamin A supplementation</h2>
+<h3 id="hellen-keller-international">Hellen Keller International</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-HKI-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the Helen Keller International cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the Helen Keller International cost-effectiveness calculation</figcaption>
+</figure>
+<p>Again, there’s broad agreement between the scatter plot analysis and this one. This analysis perhaps makes the crucial importance of the relative risk of all-cause mortality for young children in VAS programs even more obvious. For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 23%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">relative risk of all-cause mortality for young children in programs</td>
+<td style="text-align: left;">Causal</td>
+<td style="text-align: left;">How much do <abbr title="Vitamin A supplementation">VAS</abbr> programs affect mortality</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cost per child per round</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rounds per year</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h2 id="bednets-1">Bednets</h2>
+<h3 id="against-malaria-foundation-1">Against Malaria Foundation</h3>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-AMF-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the Against Malaria Foundation cost-effectiveness calculation" /><figcaption>Delta sensitivities for each input parameter in the Against Malaria Foundation cost-effectiveness calculation</figcaption>
+</figure>
+<p>Again, there’s broad agreement between the scatter plot analysis and this one. For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<figure class="big-fig">
+<figcaption>
+<p>Highlighted input factors to which result is highly sensitive</p>
+</figcaption>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Type of uncertainty</th>
+<th style="text-align: left;">Meaning/importance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">num <abbr title="Long-lasting insecticidal net">LLIN</abbr>s distributed per person</td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">cost per <abbr title="Long-lasting insecticidal net">LLIN</abbr></td>
+<td style="text-align: left;">Operational</td>
+<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">deaths averted per protected child under 5</td>
+<td style="text-align: left;">Causal</td>
+<td style="text-align: left;">How effective is the core activity</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lifespan of an <abbr title="Long-lasting insecticidal net">LLIN</abbr></td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Determines how many years of benefit accrue to each distribution</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">net use adjustment</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Affects benefits from <abbr title="Long-lasting insecticidal net">LLIN</abbr> as mediated by proper and improper use</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">internal validity adjustment</td>
+<td style="text-align: left;">Methodological</td>
+<td style="text-align: left;">How much do we trust the results of the underlying studies</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">percent of mortality due to malaria in AMF areas vs trials</td>
+<td style="text-align: left;">Empirical/historical</td>
+<td style="text-align: left;">Affects size of the problem</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">percent of pop. under 5</td>
+<td style="text-align: left;">Empirical</td>
+<td style="text-align: left;">Affects size of the problem</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<h1 id="conclusion">Conclusion</h1>
+<p>We performed visual (scatter plot) sensitivity analyses and delta moment-independent sensitivity analyses on GiveWell’s top charities. Conveniently, these two methods generally agreed as to which input factors had the biggest influence on the output. For each charity, we found that there were clear differences in the sensitivity indicators for different inputs. This suggests that certain inputs ought to be targeted for uncertainty reduction to improve GiveWell’s cost-effectiveness analyses. For example, the overall estimate of the cost-effectiveness of Helen Keller International’s vitamin A supplementation program depends much more on the relative risk of all-cause mortality for children in <abbr title="Vitamin A supplementation">VAS</abbr> programs than it does on the expected value from leverage and funging. If the cost of investigating each were the same, it would be better to spend time on the former. Our sensitivity analysis has suggested which varies</p>
+<p>An important caveat to remember is that these results still reflect my fairly arbitrary (but scrupulously neutral) decision to pretend that we equally uncertain about each input parameter. To remedy this flaw, head over to the <a href="TODO">Jupyter notebook</a> and tweak the input distributions.</p>
+<h1 id="appendix">Appendix</h1>
+<p>I also did a <a href="https://en.wikipedia.org/wiki/Variance-based_sensitivity_analysis">variance-based sensitivity analysis</a> with Sobol indices. Those plots follow.</p>
+<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(delti_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the different methods.</p>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-GiveDirectly-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the GiveDirectly cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the GiveDirectly cost-effectiveness calculation</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-END-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the END Fund cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the END Fund cost-effectiveness calculation</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-DTW-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the Deworm the World cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the Deworm the World cost-effectiveness calculation</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-SCI-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the Schistosomiasis Control Initiative cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the Schistosomiasis Control Initiative cost-effectiveness calculation</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-Sightsavers-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the Sightsavers cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the Sightsavers cost-effectiveness calculation</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-Malaria%20Consortium-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the Malaria Consortium cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the Malaria Consortium cost-effectiveness calculation</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-HKI-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the Helen Keller International cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the Helen Keller International cost-effectiveness calculation</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-AMF-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the Against Malaria Foundation cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the Against Malaria Foundation cost-effectiveness calculation</figcaption>
+</figure>
+<hr />
+<div id="refs" class="references" role="doc-bibliography" role="doc-bibliography">
+<div id="ref-borgonovo2007new">
+<p>Borgonovo, Emanuele. 2007. “A New Uncertainty Importance Measure.” <em>Reliability Engineering &amp; System Safety</em> 92 (6). Elsevier: 771–84. <a href="http://www.relialab.org/Upload/files/A%20new%20uncertainty%20importance%20measure.pdf">http://www.relialab.org/Upload/files/A%20new%20uncertainty%20importance%20measure.pdf</a>.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>This is, in fact, approximately what Monte Carlo methods do so this is a very convenient analysis to run.<a href="#fnref1" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn2">
+<p>I swear I didn’t cheat by just picking the results on the scatter plot that match the delta sensitivities!<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
+    <title>Uncertainty analysis of GiveWell's cost-effectiveness analysis</title>
     <link href="https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/" />
     <id>https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/</id>
     <published>2019-09-27T00:00:00Z</published>
@@ -26,18 +1017,18 @@
 <h2 id="computers-are-nice">Computers are nice</h2>
 <p>If we had to proceed analytically, working with probability distributions throughout the model would indeed be troublesome and we might have to settle for one of the above approaches. But we live in the future. We can use computers and <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo methods</a> to numerically approximate the results of working with probability distributions while leaving our models clean and unconcerned with these probabilistic details. <a href="https://www.getguesstimate.com/">Guesstimate</a> is a tool that works along these lines and bills itself as “A spreadsheet for things that aren’t certain”.</p>
 <h1 id="analysis">Analysis</h1>
-<p>We have the beginnings of a plan then. We can implement GiveWell’s cost-effectiveness models in a Monte Carlo framework (<a href="https://docs.pymc.io/">PyMC3</a> in my case), specify probability distributions over the input parameters, and finally run the calculation and look at the uncertainty that’s been propagated to the results.</p>
+<p>We have the beginnings of a plan then. We can implement GiveWell’s cost-effectiveness models in a Monte Carlo framework (<a href="https://docs.pymc.io/">PyMC3</a> in this case), specify probability distributions over the input parameters, and finally run the calculation and look at the uncertainty that’s been propagated to the results.</p>
 <p><!--more--></p>
 <h2 id="the-model">The model</h2>
-<p>The Python source code implementing GiveWell’s models can be found on <a href="https://github.com/colehaus/givewell-analysis">GitHub</a>.<a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> The core models can be found in <code>cash.py</code>, <code>nets.py</code>, <code>smc.py</code>, <code>worms.py</code> and <code>vas.py</code>.</p>
+<p>The Python <span class="noted">source code implementing GiveWell’s models can be found on <a href="https://github.com/colehaus/givewell-analysis">GitHub</a></span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. The core models can be found in <code>cash.py</code>, <code>nets.py</code>, <code>smc.py</code>, <code>worms.py</code> and <code>vas.py</code>.</p>
 <h2 id="the-inputs">The inputs</h2>
-<p>For the purposes of the uncertainty analysis that follows, it doesn’t make much sense to infect the results with my own idiosyncratic views on the appropriate value of the input parameters. Instead, what I have done is uniformly taken GiveWell’s best guess and added and subtracted 20%. These upper and lower bounds then become the 90% confidence interval of a <a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal distribution</a>.<a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a> <!--TODO image here--> For example, if GiveWell’s best guess for a parameter is 0.1, I used a log-normal with a 90% CI from 0.08 to 0.12.</p>
-<p>While this approach screens off my influence it also means that the results of the analysis will primarily tell us about the structure of the computation rather than informing us about the world. Fortunately, there’s a remedy for this problem too. I have set up a Jupyter notebook (TODO) with the all the input parameters to the calculation which you can manipulate and rerun the analysis. That is, if you think the moral weight given to increasing consumption ought to range from 0.8 to 1.5 instead of 0.8 to 1.2, you can make that edit and see the result of the analysis.</p>
+<p>For the purposes of the uncertainty analysis that follows, it doesn’t make much sense to infect the results with my own idiosyncratic views on the appropriate value of the input parameters. Instead, what I have done is uniformly taken GiveWell’s best guess and added and subtracted 20%. These upper and lower bounds then become the 90% confidence interval of a <span class="noted"><a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal distribution</a></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. <!--TODO image here--> For example, if GiveWell’s best guess for a parameter is 0.1, I used a log-normal with a 90% CI from 0.08 to 0.12.</p>
+<p>While this approach screens off my influence it also means that the results of the analysis will primarily tell us about the structure of the computation rather than informing us about the world. Fortunately, there’s a remedy for this problem too. I have set up a Jupyter notebook (TODO) with the all the input parameters to the calculation which you can manipulate and rerun the analysis. That is, if you think the moral weight given to increasing consumption ought to range from 0.8 to 1.5 instead of 0.8 to 1.2, you can make that edit and see the result of the analysis. Making these modifications is essential for a realistic analysis because we are not, in fact, equally uncertain about every input parameter.</p>
 <p>It’s also worth noting that I have considerably expanded the set of input parameters receiving special scrutiny. The GiveWell cost-effectiveness analysis is (with good reason—it keeps things manageable for outside users) fairly conservative about which parameters it highlights as eligible for user manipulation. In this analysis, I include any input parameter which is not tautologically certain. For example, “Reduction in malaria incidence for children under 5 (from Lengeler 2004 meta-analysis)” shows up in the analysis which follows but is not highlighted in GiveWell’s “User inputs” or “Moral weights” tab. Even though we don’t have much information with which to second guess the meta-analysis, the value it reports is still uncertain and our calculation ought to reflect that.</p>
 <h2 id="the-results">The results</h2>
 <p>Finally, we get to the part that you actually care about, dear reader: the results. Given input parameters which are each distributed log-normally with a 90% confidence interval spanning ±20% of GiveWell’s best estimate, here are the resulting uncertainties in the cost-effectiveness estimates:</p>
 <figure>
-<img src="https://www.col-ex.org/images/givewell-analysis/uncertainties-small-multiples.png" title="fig:" alt="Plots of probability distributions of value per dollar for GiveWell’s top charities" /><figcaption>Plots of probability distributions of value per dollar for GiveWell’s top charities</figcaption>
+<img src="https://www.col-ex.org/images/givewell-analysis/uncertainties-small-multiples.png" title="fig:" alt="Probability distributions of value per dollar for GiveWell’s top charities" /><figcaption>Probability distributions of value per dollar for GiveWell’s top charities</figcaption>
 </figure>
 <p>For reference, here are the point estimates of value per dollar using GiveWell’s values for the charities:</p>
 <table>
@@ -82,17 +1073,19 @@
 </tr>
 </tbody>
 </table>
-<p>I’ve also plotted a version in which the results are normalized—I divided the results for each charity by that charity’s mean value per dollar. This version of the plot abstracts from the actual value per dollar and emphasizes the percentage spread of uncertainty. It also reemphasizes the earlier point that–because we use the same spread of uncertainty for each input parameter—the current results are telling us more about the structure of the model than about the world. For real results, go try the Jupyter notebook!</p>
+<p>I’ve also plotted a version in which the results are normalized—I divided the results for each charity by that charity’s expected value per dollar. Instead of showing the probability distribution on the value per dollar for each charity, this normalized version shows the probability distribution on the percentage of that charity’s expected value that it achieves. This version of the plot abstracts from the actual value per dollar and emphasizes the spread of uncertainty. It also reemphasizes the earlier point that–because we use the same spread of uncertainty for each input parameter—the current results are telling us more about the structure of the model than about the world. For real results, go try the Jupyter notebook! <!--TODO link--></p>
 <figure>
-<img src="https://www.col-ex.org/images/givewell-analysis/uncertainties-overlaid.png" title="fig:" alt="Normalized plots of probability distributions of value per dollar for GiveWell’s top charities" /><figcaption>Normalized plots of probability distributions of value per dollar for GiveWell’s top charities</figcaption>
+<img src="https://www.col-ex.org/images/givewell-analysis/uncertainties-overlaid.png" title="fig:" alt="Probability distributions for percentage of expected value obtained with each of GiveWell’s top charities" /><figcaption>Probability distributions for percentage of expected value obtained with each of GiveWell’s top charities</figcaption>
 </figure>
+<h1 id="conclusions">Conclusions</h1>
+<p>Our preliminary conclusion is that all of GiveWell’s top charities cost-effectiveness estimates have similar uncertainty with GiveDirectly being a bit more certain than the rest. However, this is mostly an artifact of pretending that we are exactly equally uncertain about each input parameter.</p>
 <p><br />
 </p>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
 <li><div id="fn1">
-<p>Unfortunately, the code implements the 2019 V4 cost-effectiveness analysis instead of the most recent V5 because I just worked off the V4 tab I’d had lurking in my browser for months and didn’t think to check for a new version until too late.<a href="#fnref1" class="footnote-back">↩</a></p>
+<p>Unfortunately, the code implements the 2019 V4 cost-effectiveness analysis instead of the most recent V5 because I just worked off the V4 tab I’d had lurking in my browser for months and didn’t think to check for a new version until too late. I also deviated from the spreadsheet in one place because I think there’s an error (Update: The error will be fixed in GiveWell’s next publically released version).<a href="#fnref1" class="footnote-back">↩</a></p>
 </div></li>
 <li><div id="fn2">
 <p>Log-normal strikes me as a reasonable default distribution for this task: because it’s support is (0, +∞) which fits many of our parameters well (they’re all positive but some are actually bounded above by 1); and because <a href="https://en.wikipedia.org/wiki/Log-normal_distribution">“A log-normal process is the statistical realization of the multiplicative product of many independent random variables”</a> which also seems reasonable here.<a href="#fnref2" class="footnote-back">↩</a></p>

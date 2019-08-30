@@ -36,6 +36,20 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/uncertainty-sensitivity-analysis-givewell-rankings/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -1037,6 +1051,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/series/GiveWell%2520cost-effectiveness%2520analysis%2520analysis/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/series/Graphical%2520causal%2520models/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -1157,6 +1178,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/17/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/18/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
