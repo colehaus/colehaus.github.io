@@ -180,7 +180,7 @@ Givewell’s top charities ranked from most cost-effective to least
 <ul>
 <li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are again rankings,</li>
 <li><span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are items in the set of unordered pairs <span class="math inline">\(P\)</span> of distinct elements in <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span></li>
-<li><span class="math inline">\(\bar{K}_{i,j}(u, v) = 0\)</span> if <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are in the same order (concordant) in <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> and <span class="math inline">\(\bar{K}_{i,j}(u, v) = 0\)</span> otherwise (discordant)</li>
+<li><span class="math inline">\(\bar{K}_{i,j}(u, v) = 0\)</span> if <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are in the same order (concordant) in <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> and <span class="math inline">\(\bar{K}_{i,j}(u, v) = 1\)</span> otherwise (discordant)</li>
 </ul>
 </div>
 <p>In other words, the Kendall tau distance looks at all possible pairs across items in the rankings and counts up the ones where the two rankings disagree on the ordering of these items. (There’s also a normalization factor that we’ve again omitted so that the distance ranges from 0 to 1.)</p>
@@ -198,9 +198,9 @@ Givewell’s top charities ranked from most cost-effective to least
 Probability distributions of value per dollar for each of GiveWell’s top charity and probability distributions for the distance between model results and the reference results
 </figcaption>
 </figure>
-<p>We see that our input uncertainty does matter even for these highest level results—there are some input values which cause the ordering of best charities to change. If the gaps between the cost-effectiveness estimates had been very large or our input uncertainty had been very small, we would have expected essentially all of the probability mass to be concentrated at 0 because no change in inputs would have been enough to meaningfully change the relative value of the charities.</p>
-<h5 id="visual-sensitivity-analysis">Visual sensitivity analysis</h5>
-<p>We can now repeat our visual sensitivity analysis but using our distance metrics from the reference as our outcome of interest instead of individual cost-effectiveness estimates. What these plots show is how sensitive the relative value of the different charities is to each of the input parameters used in any of the cost-effectiveness models (so, yes, there are a lot of parameters/plots). We have three big plots, one for each distance metric—footrule, tau and angle. In each plot, there’s a subplot corresponding to each input factor used anywhere in the GiveWell’s cost-effectiveness analysis.</p>
+<p>We see that our input uncertainty does matter even for these highest level results—there are some input values which cause the ordering of best charities to change. If the gaps between the cost-effectiveness estimates had been very large or our input uncertainty had been very small, we would have expected essentially all of the probability mass to be concentrated at 0 because no change in inputs would have been enough to meaningfully change the relative cost-effectiveness of the charities.</p>
+<h4 id="visual-sensitivity-analysis">Visual sensitivity analysis</h4>
+<p>We can now repeat our visual sensitivity analysis but using our distance metrics from the reference as our outcome of interest instead of individual cost-effectiveness estimates. What these plots show is how sensitive the relative cost-effectiveness of the different charities is to each of the input parameters used in any of the cost-effectiveness models (so, yes, there are a lot of parameters/plots). We have three big plots, one for each distance metric—footrule, tau and angle. In each plot, there’s a subplot corresponding to each input factor used anywhere in the GiveWell’s cost-effectiveness analysis.</p>
 <figure class="natural-fig">
 <figcaption>
 Scatter plots showing sensitivity of the footrule distance with respect to each input parameter
@@ -223,7 +223,7 @@ Scatter plots showing sensitivity of the angular distance with respect to each i
 <p>These results might be a bit surprising at first. Why are there so many charity-specific factors with apparently high sensitivity indicators? Shouldn’t input parameters which affect <em>all</em> models have the biggest influence on the overall result? Also, why do so few of the factors that showed up as most influential in <a href="../../posts/sensitivity-analysis-of-givewell-cea/">the charity-specific sensitivity analyses from last time</a> make it to the top?</p>
 <p>However, after reflecting for a bit, this makes sense. Because we’re interested in the <em>relative</em> performance of the charities, any factor which affects them all equally is of little importance here. Instead, we want factors that have a strong influence on only a few charities. When we go back to the earlier charity-by-charity sensitivity analysis, we see that many of the input parameters we identified as most influential where shared across charities (especially across the deworming charities). Non-shared factors that made it to the top of the charity-by-charity lists—like the relative risk of all-cause mortality for young children in <abbr title="Vitamin A supplementation">VAS</abbr> programs—show up somewhat high here too.</p>
 <p>But it’s hard to eyeball the sensitivity when there are so many factors and most are of small effect. So let’s quickly move on to the delta analysis.</p>
-<h5 id="delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</h5>
+<h4 id="delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</h4>
 <p>Again, we’ll have three big plots, one for each distance metric—footrule, tau and angle. In each plot, there’s an estimate of the delta moment-independent sensitivity for each input factor used anywhere in the GiveWell’s cost-effectiveness analysis (and an indication of how confident that sensitivity estimate is).</p>
 <figure class="natural-fig">
 <figcaption>
@@ -245,7 +245,7 @@ Delta sensitivities for each input parameter in angular distance analysis
 </figure>
 <p>So these delta sensitivities corroborate the suspicion that arose during the visual sensitivity analysis—charity-specific input parameters have the highest sensitivity indicators.</p>
 <p>The other noteworthy result is which charity-specific factors are the most influential depends somewhat on which distance metric we use. The two rank-based metrics—tau and footrule distance—both suggest that the final charity ranking (given these inputs) is most sensitive to the worm intensity adjustment and cost per capita per annum of Sightsavers and the END Fund. These input parameters are a bit further down (though still fairly high) in the list according to the angular distance metric.</p>
-<h5 id="more-meta">More meta</h5>
+<h5 id="needs-more-meta">Needs more meta</h5>
 <p>It would be nice to check that our distance metrics don’t produce totally contradictory results. How can we accomplish this? Well, the plots above already order the input factors according to their sensitivity indicators… That means we have rankings of the sensitivities of the input factors and we can compare the rankings using Kendall’s tau and Spearman’s footrule distance. If that sounds confusing hopefully the table clears things up:</p>
 <figure>
 <figcaption>
@@ -278,36 +278,37 @@ Using Kendall’s tau and Spearman’s footrule distance to assess the similarit
 </tbody>
 </table>
 </figure>
-<p>So it looks like the three rankings have middling agreement. Sensitivities according to tau and footrule agree the most while sensitivities according to angle and footrule agree the least. That there is substantial disagreement isn’t entirely surprising—part of the point of using different distance metrics is to capture different notions of distance, each of which might be more or less suitable for a given purpose. But the divergence does mean that we’ll need to carefully pick which metric to pay attention to depending on the precise questions we’re trying to answer. For example, if we just want to pick the single top charity and donate all our money to that, factors with high sensitivity indicators according to footrule distance might be the most important to pin down. On the other hand, if we want to distribute our money in proportion to each charity’s estimated cost-effectiveness, angular distance is perhaps a better metric to guide our investigations.</p>
+<p>So it looks like the three rankings have middling agreement. Sensitivities according to tau and footrule agree the most while sensitivities according to angle and footrule agree the least. The disagreement probably also reflects random noise since the confidence intervals for many of the variables’ sensitivity indicators overlap. We could presumably shrink these confidence intervals and reduce the noise by increasing the number of samples used during our analysis.</p>
+<p>To the extent that the disagreement isn’t just noise, it’s not entirely surprising—part of the point of using different distance metrics is to capture different notions of distance, each of which might be more or less suitable for a given purpose. But the divergence does mean that we’ll need to carefully pick which metric to pay attention to depending on the precise questions we’re trying to answer. For example, if we just want to pick the single top charity and donate all our money to that, factors with high sensitivity indicators according to footrule distance might be the most important to pin down. On the other hand, if we want to distribute our money in proportion to each charity’s estimated cost-effectiveness, angular distance is perhaps a better metric to guide our investigations.</p>
 <h3 id="conclusion">Conclusion</h3>
-<p>We started with a couple of problems with our previous analysis: we were taking cost-effectiveness estimates literally and looking at them independently instead of as a cohesive analysis. We addressed these problems by redoing our analysis while looking at distance from the current best cost-effectiveness estimates. We found that our input uncertainty is consequential even when looking only at the relative value of the charities. We also found that input parameters which our important but unique to a particular charity often affect the final relative valuations substantially.</p>
+<p>We started with a couple of problems with our previous analysis: we were taking cost-effectiveness estimates literally and looking at them independently instead of as parts of a cohesive analysis. We addressed these problems by redoing our analysis while looking at distance from the current best cost-effectiveness estimates. We found that our input uncertainty is consequential even when looking only at the relative cost-effectiveness of the charities. We also found that input parameters which are important but unique to a particular charity often affect the final relative cost-effectiveness substantially.</p>
 <p>Finally, we have the same caveat as last time: these results still reflect my fairly arbitrary (but scrupulously neutral) decision to pretend that we equally uncertain about each input parameter. To remedy this flaw and get results which are actually meaningful, head over to the <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a> and tweak the input distributions.</p>
 <h3 id="appendix">Appendix</h3>
 <p>We can also look at the sensitivities based on the Sobol method again.</p>
-<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(delti_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the different methods.</p>
+<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(\delta_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the different methods.</p>
 <figure class="natural-fig">
 <figcaption>
-Sobal sensitivities for each input parameter in footrule distance analysis
+Sobol sensitivities for each input parameter in footrule distance analysis
 </figcaption>
-<img src="../../images/givewell-analysis/sensitivity-max-footrule-s1.png" title="fig:" alt="Sobal sensitivities for each input parameter in footrule distance analysis" />
+<img src="../../images/givewell-analysis/sensitivity-max-footrule-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in footrule distance analysis" />
 </figure>
 <figure class="natural-fig">
 <figcaption>
-Sobal sensitivities for each input parameter in tau distance analysis
+Sobol sensitivities for each input parameter in tau distance analysis
 </figcaption>
-<img src="../../images/givewell-analysis/sensitivity-max-tau-s1.png" title="fig:" alt="Sobal sensitivities for each input parameter in tau distance analysis" />
+<img src="../../images/givewell-analysis/sensitivity-max-tau-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in tau distance analysis" />
 </figure>
 <figure class="natural-fig">
 <figcaption>
-Sobal sensitivities for each input parameter in angular distance analysis
+Sobol sensitivities for each input parameter in angular distance analysis
 </figcaption>
-<img src="../../images/givewell-analysis/sensitivity-max-angle-s1.png" title="fig:" alt="Sobal sensitivities for each input parameter in angular distance analysis" />
+<img src="../../images/givewell-analysis/sensitivity-max-angle-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in angular distance analysis" />
 </figure>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
 <li id="fn1" role="doc-endnote"><p>If we just look at the probability for each possible ranking independently, we’ll be overwhelmed by the number of permutations and it will be hard to find any useful structure in our results.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
-<li id="fn2" role="doc-endnote"><p>The angle between the vectors is a better metric here than the distance between the vectors’ endpoints because we’re interested in the relative values of the charities and how those change. If our results show that each charity is twice as effective as in the reference vector, our metric should return a distance of 0 because nothing has changed in the relative value of each charity.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>The angle between the vectors is a better metric here than the distance between the vectors’ endpoints because we’re interested in the relative cost-effectiveness of the charities and how those change. If our results show that each charity is twice as effective as in the reference vector, our metric should return a distance of 0 because nothing has changed in the relative cost-effectiveness of each charity.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
 </ol>
 </section>
 </article></main>

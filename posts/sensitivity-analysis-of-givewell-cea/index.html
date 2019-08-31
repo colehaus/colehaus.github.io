@@ -139,7 +139,7 @@ Highlighted input factors to which result is highly sensitive
 </figure>
 <!--more-->
 <h4 id="deworming">Deworming</h4>
-<p>Some useful and non-obvious context for the following is that the primary claimed benefit of deworming is increased income later in life.</p>
+<p>Some useful and non-obvious context for the following is that the primary putative benefit of deworming is increased income later in life.</p>
 <h5 id="the-end-fund">The END Fund</h5>
 <figure class="natural-fig">
 <img src="../../images/givewell-analysis/regressions-big-END-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of the END Fund’s cost-effectiveness to each input parameter" />
@@ -361,7 +361,7 @@ Highlighted input factors to which result is highly sensitive
 <tr class="even">
 <td style="text-align: left;">coverage in trials in meta-analysis</td>
 <td style="text-align: left;">Historical/methodological</td>
-<td style="text-align: left;">Determines how much coverage an SMC program needs to achieve to match studies</td>
+<td style="text-align: left;">Determines how much coverage an <abbr title="Seasonal malaria chemoprevention">SMC</abbr> program needs to achieve to match studies</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">value of averting death of a young child</td>
@@ -497,7 +497,7 @@ Highlighted input factors to which result is highly sensitive
 <div class="skippable">
 <ol type="1">
 <li><span class="math inline">\(X = (X_1, X_2, \ldots, X_n) \in \mathbb{R}^n\)</span> be the random variables used as input parameters</li>
-<li><span class="math inline">\(Y = f(X)\)</span> so that <span class="math inline">\(f(X)\)</span> is a function from <span class="math inline">\(\mathbb{R}^n\)</span> to <span class="math inline">\(\mathbb{R}\)</span> describing the relationship between inputs and outputs—i.e. GiveWell’s cost-effectiveness model <!-- 3. $x = (x_1, x_2, \ldots, x_n)$ be a realization of X---i.e. some particular value for each of the input random variables --> <!-- 4. $f_X(x)$ be the joint density of $X$---i.e. the multi-dimensional probability distribution over all input parameters simultaneously --> <!-- 5. $f_{X_i}(x_i)$ be the marginal density of $x_i$---i.e. the individual probability distributions for each input parameter that we've already talked about --></li>
+<li><span class="math inline">\(Y = f(X)\)</span> so that <span class="math inline">\(f(X)\)</span> is a function from <span class="math inline">\(\mathbb{R}^n\)</span> to <span class="math inline">\(\mathbb{R}\)</span> describing the relationship between inputs and outputs—i.e. GiveWell’s cost-effectiveness model</li>
 <li><span class="math inline">\(f_Y(y)\)</span> be the density function of the result <span class="math inline">\(Y\)</span>—i.e. the probability distributions we’ve already seen showing the cost-effectiveness for each charity</li>
 <li><span class="math inline">\(f_{Y|X_i}(y)\)</span> be the conditional density of Y with one of the parameters <span class="math inline">\(X_i\)</span> fixed—i.e. a probability distribution for the cost-effectiveness of a charity while pretending that we know one of the input values precisely</li>
 </ol>
@@ -512,7 +512,7 @@ Highlighted input factors to which result is highly sensitive
 <p>Some useful properties to point out:</p>
 <ul>
 <li><span class="math inline">\(\delta_i\)</span> ranges from 0 to 1</li>
-<li>If the output is independent of the input, <span class="math inline">\(delta_i\)</span> for that input is 0</li>
+<li>If the output is independent of the input, <span class="math inline">\(\delta_i\)</span> for that input is 0</li>
 <li>The sum of <span class="math inline">\(\delta_i\)</span> for each input considered separately isn’t necessarily 1 because there can be interaction effects</li>
 </ul>
 <p>In the plots below, for each charity, we visualize the delta sensitivity (and our uncertainty about that sensitivity) for each input parameter.</p>
@@ -574,7 +574,7 @@ Highlighted input factors to which result is highly sensitive
 Delta sensitivities for each input parameter in the END Fund cost-effectiveness calculation
 </figcaption>
 </figure>
-<p><span class="noted">Comfortingly, this again agrees with the results of our scatter plot sensitivity analysis</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<p><span class="noted">Comfortingly, this again agrees with the results of our scatter plot sensitivity analysis</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. For convenience, I have copied the table from the scatter plot analysis describing the least influential inputs:</p>
 <figure class="big-fig">
 <figcaption>
 Highlighted input factors to which result is minimally sensitive
@@ -618,7 +618,7 @@ Highlighted input factors to which result is minimally sensitive
 Delta sensitivities for each input parameter in the Deworm the World cost-effectiveness calculation
 </figcaption>
 </figure>
-<p>For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<p>For convenience, I have copied the table from the scatter plot analysis describing the least influential inputs:</p>
 <figure class="big-fig">
 <figcaption>
 Highlighted input factors to which result is minimally sensitive
@@ -662,7 +662,7 @@ Highlighted input factors to which result is minimally sensitive
 Delta sensitivities for each input parameter in the Schistosomiasis Control Initiative cost-effectiveness calculation
 </figcaption>
 </figure>
-<p>For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<p>For convenience, I have copied the table from the scatter plot analysis describing the least influential inputs:</p>
 <figure class="big-fig">
 <figcaption>
 Highlighted input factors to which result is minimally sensitive
@@ -706,7 +706,7 @@ Highlighted input factors to which result is minimally sensitive
 Delta sensitivities for each input parameter in the Sightsavers cost-effectiveness calculation
 </figcaption>
 </figure>
-<p>For convenience, I have copied the table from the scatter plot analysis describing the most influential inputs:</p>
+<p>For convenience, I have copied the table from the scatter plot analysis describing the least influential inputs:</p>
 <figure class="big-fig">
 <figcaption>
 Highlighted input factors to which result is minimally sensitive
@@ -795,7 +795,7 @@ Highlighted input factors to which result is highly sensitive
 <tr class="odd">
 <td style="text-align: left;">coverage in trials in meta-analysis</td>
 <td style="text-align: left;">Historical/methodological</td>
-<td style="text-align: left;">Determines how much coverage an SMC program needs to achieve to match studies</td>
+<td style="text-align: left;">Determines how much coverage an <abbr title="Seasonal malaria chemoprevention">SMC</abbr> program needs to achieve to match studies</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">value of averting death of a young child</td>
@@ -926,7 +926,7 @@ Highlighted input factors to which result is highly sensitive
 <p>An important caveat to remember is that these results still reflect my fairly arbitrary (but scrupulously neutral) decision to pretend that we equally uncertain about each input parameter. To remedy this flaw, head over to the <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a> and tweak the input distributions.</p>
 <h3 id="appendix">Appendix</h3>
 <p>I also did a <a href="https://en.wikipedia.org/wiki/Variance-based_sensitivity_analysis">variance-based sensitivity analysis</a> with Sobol indices. Those plots follow.</p>
-<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(delti_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the methods.</p>
+<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(\delta_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the methods.</p>
 <figure class="natural-fig">
 <img src="../../images/givewell-analysis/sensitivity-big-GiveDirectly-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the GiveDirectly cost-effectiveness calculation" />
 <figcaption>
