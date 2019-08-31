@@ -8,22 +8,22 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-09-29T00:00:00Z</updated>
+    <updated>2019-08-29T00:00:00Z</updated>
     <entry>
     <title>Uncertainty and sensitivity analysis of GiveWell's top charity rankings</title>
     <link href="https://www.col-ex.org/posts/uncertainty-sensitivity-analysis-givewell-rankings/" />
     <id>https://www.col-ex.org/posts/uncertainty-sensitivity-analysis-givewell-rankings/</id>
-    <published>2019-09-29T00:00:00Z</published>
-    <updated>2019-09-29T00:00:00Z</updated>
+    <published>2019-08-29T00:00:00Z</published>
+    <updated>2019-08-29T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>In the <a href="https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/">last</a> <a href="https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/">two</a> posts, we performed uncertainty and sensitivity analyses on GiveWell’s charity cost-effectiveness estimates. Our outputs were, respectively:</p>
 <ul>
 <li>probability distributions describing our uncertainty about the value per dollar obtained for each charity and</li>
 <li>estimates of how sensitive each charity’s cost-effectiveness is to each of its input parameters</li>
 </ul>
 <p>One problem with this is that we are <a href="https://blog.givewell.org/2011/08/18/why-we-cant-take-expected-value-estimates-literally-even-when-theyre-unbiased/">not supposed to take the cost-effectiveness estimates literally</a>. Arguably, the real purpose of GiveWell’s analysis is not to produce exact numbers but to assess the relative quality of each charity evaluated.</p>
-<p>Another issue is that by treating each cost-effectiveness estimate as independent we underweight parameters which are shared across many models. For example, the moral weight that ought to be assigned to increasing consumption shows up in many models. If we consider all the charity-specific models together and the relations between their outputs, this input receives a higher sensitivity index.</p>
+<p>Another issue is that by treating each cost-effectiveness estimate as independent we underweight parameters which are shared across many models. For example, the moral weight that ought to be assigned to increasing consumption shows up in many models. If we consider all the charity-specific models together, this input seems to become more important.</p>
 <h1 id="metrics-on-rankings">Metrics on rankings</h1>
-<p>We can solve both of these problems by abstract away from particular values in the cost-effectiveness analysis and looking at the overall rankings returned. That is we want to transform:</p>
+<p>We can solve both of these problems by abstracting away from particular values in the cost-effectiveness analysis and looking at the overall rankings returned. That is we want to transform:</p>
 <figure>
 <figcaption>
 <p>GiveWell’s cost-effectiveness estimates for its top charities</p>
@@ -87,7 +87,7 @@
 <li>GiveDirectly</li>
 </ul>
 </figure>
-<p>But how do we usefully express <span class="noted">probabilities over rankings</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> (rather than probabilities over simple cost-effectivness numbers)? The approach we’ll follow below is to characterize a ranking produced by a run of the model by computing its distance from the reference ranking listed here (i.e. GiveWell’s current best estimate). Our output probability distribution will then express how far we expect to be from the reference ranking. For example, if the distribution is narrow and near 0, that means our uncertain input parameters mostly produce results similar to the reference ranking. If the distribution is wide and far from 0, that means our uncertain input parameters produce results that are highly uncertain and not necessarily similar to the reference ranking.</p>
+<p>But how do we usefully express <span class="noted">probabilities over rankings</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> (rather than probabilities over simple cost-effectivness numbers)? The approach we’ll follow below is to characterize a ranking produced by a run of the model by computing its distance from the reference ranking listed above (i.e. GiveWell’s current best estimate). Our output probability distribution will then express how far we expect to be from the reference ranking—how much we might learn about the ranking with more information on the inputs. For example, if the distribution is narrow and near 0, that means our uncertain input parameters mostly produce results similar to the reference ranking. If the distribution is wide and far from 0, that means our uncertain input parameters produce results that are highly uncertain and not necessarily similar to the reference ranking.</p>
 <h2 id="spearmans-footrule">Spearman’s footrule</h2>
 <p>What is this mysterious distance metric between rankings that enables the above approach? One such metric is called Spearman’s footrule distance. It’s defined as:</p>
 <div class=".skippable">
@@ -98,13 +98,13 @@
 <li><span class="math inline">\(c\)</span> varies over all the elements <span class="math inline">\(A\)</span> of the rankings and</li>
 <li><span class="math inline">\(\text{pos}(r, x)\)</span> returns the integer position of item <span class="math inline">\(x\)</span> in ranking <span class="math inline">\(r\)</span>.</li>
 </ul>
+</div>
 <p>In other words, the footrule distance between two rankings is the sum over all items of the (absolute) difference in positions for each item. (We also add a normalization factor so that the distance varies ranges from 0 to 1 but omit that trivia here.)</p>
 <p>So the distance between A, B, C and A, B, C is 0; the (unnormalized) distance between A, B, C and C, B, A is 4; and the (unnormalized) distance between A, B, C and B, A, C is 2.</p>
-</div>
 <h2 id="kendalls-tau">Kendall’s tau</h2>
 <p>Another common distance metric between rankings is <a href="https://en.wikipedia.org/wiki/Kendall_tau_distance">Kendall’s tau</a>. It’s defined as:</p>
 <div class=".skippable">
-<p><img src="https://www.col-ex.org/images/latex/-4939412166951168968.svg" title="d_tau(u, v) = \sum_{\{i,j\} \in P} \bar{K}_{i,j}(u, v)" /></p>
+<p><img src="https://www.col-ex.org/images/latex/8618130278716722992.svg" title="d_{tau}(u, v) = \sum_{\{i,j\} \in P} \bar{K}_{i,j}(u, v)" /></p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are again rankings,</li>
@@ -113,32 +113,94 @@
 </ul>
 </div>
 <p>In other words, the Kendall tau distance looks at all possible pairs across items in the rankings and counts up the ones where the two rankings disagree on the ordering of these items. (There’s also a normalization factor that we’ve again omitted so that the distance ranges from 0 to 1.)</p>
+<p>So the distance between A, B, C and A, B, C is 0; the (unnormalized) distance between A, B, C and C, B, A is 3; and the (unnormalized) distance between A, B, C and B, A, C is 1.</p>
 <h2 id="angular-distance">Angular distance</h2>
 <p>One drawback of the above metrics is that they throw away information in going from the table with cost-effectiveness estimates to a simple ranking. What would be ideal is to keep that information and find some other distance metric that still emphasizes the relationship between the various numbers rather than their precise values.</p>
 <p>Angular distance is a metric which satisfies these criteria. We can regard the table of charities and cost-effectiveness values as an 8-dimensional vector. When our output produces another vector of cost-effectiveness estimates (one for each charity), we can compare this to our reference vector by finding <span class="noted">the angle between the two</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>.</p>
 <p><!--more--></p>
 <h1 id="results">Results</h1>
 <h2 id="uncertainties">Uncertainties</h2>
-<p>To recap, what we’re about to see next is the result of running our model many times with different sampled input values. In each run, we compute the cost-effectiveness estimates for each charity and compare those estimates to the reference ranking (GiveWell’s best estimate) using each of the tau, footrule and angular distance metrics.</p>
+<p>To recap, what we’re about to see next is the result of running our model many times with different sampled input values. In each run, we compute the cost-effectiveness estimates for each charity and compare those estimates to the reference ranking (GiveWell’s best estimate) using each of the tau, footrule and angular distance metrics. Again, the plots below are from running the analysis while pretending that we’re equally uncertain about each input parameter. To avoid this limitation, go to the <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a> and adjust the input distributions.</p>
 <figure>
 <img src="https://www.col-ex.org/images/givewell-analysis/uncertainties-small-multiples-distances.png" title="fig:" alt="Probability distributions of value per dollar for each of GiveWell’s top charity and probability distributions for the distance between model results and the reference results" /><figcaption>Probability distributions of value per dollar for each of GiveWell’s top charity and probability distributions for the distance between model results and the reference results</figcaption>
 </figure>
 <p>We see that our input uncertainty does matter even for these highest level results—there are some input values which cause the ordering of best charities to change. If the gaps between the cost-effectiveness estimates had been very large or our input uncertainty had been very small, we would have expected essentially all of the probability mass to be concentrated at 0 because no change in inputs would have been enough to meaningfully change the relative value of the charities.</p>
-<h2 id="visual-sensitivity-analysis">Visual sensitivity analysis</h2>
-<p>We can now repeat our visual sensitivity analysis but using our <span class="noted">angular distance metric from the reference as our outcome of interest</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a> instead of individual cost-effectiveness estimates. What these plots show is how sensitive the relative value of the different charities (the angle between the results and the reference vector) is to each of the input parameters used in any of the cost-effectiveness models (so, yes, there are a lot of parameters/plots).</p>
+<h3 id="visual-sensitivity-analysis">Visual sensitivity analysis</h3>
+<p>We can now repeat our visual sensitivity analysis but using our distance metrics from the reference as our outcome of interest instead of individual cost-effectiveness estimates. What these plots show is how sensitive the relative value of the different charities is to each of the input parameters used in any of the cost-effectiveness models (so, yes, there are a lot of parameters/plots). We have three big plots, one for each distance metric—footrule, tau and angle. In each plot, there’s a subplot corresponding to each input factor used anywhere in the GiveWell’s cost-effectiveness analysis.</p>
 <figure>
-<img src="https://www.col-ex.org/images/givewell-analysis/regressions-max-overall%20ranking-angle.png" title="fig:" alt="Scatter plots showing sensitivity of the overall relative cost-effective analysis to each input parameter" /><figcaption>Scatter plots showing sensitivity of the overall relative cost-effective analysis to each input parameter</figcaption>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-max-footrule-footrule.png" title="fig:" alt="Scatter plots showing sensitivity of the footrule distance with respect to each input parameter" /><figcaption>Scatter plots showing sensitivity of the footrule distance with respect to each input parameter</figcaption>
 </figure>
-<p>These results might be a bit surprising at first. Why are there so many charity-specific factors up top? Shouldn’t input parameters which affect <em>all</em> models have the biggest influence on the overall result? Also, why do so few of the factors that showed up as most influential in <a href="https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/">the charity-specific sensitivity analyses from last time</a> make it to the top?</p>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-max-tau-tau.png" title="fig:" alt="Scatter plots showing sensitivity of the tau distance with respect to each input parameter" /><figcaption>Scatter plots showing sensitivity of the tau distance with respect to each input parameter</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/regressions-max-angle-angle.png" title="fig:" alt="Scatter plots showing sensitivity of the angular distance with respect to each input parameter" /><figcaption>Scatter plots showing sensitivity of the angular distance with respect to each input parameter</figcaption>
+</figure>
+<p>(The banding in the tau and footrule plots is just an artifact of those distance metrics returning integers (before normalization) rather than reals.)</p>
+<p>These results might be a bit surprising at first. Why are there so many charity-specific factors with apparently high sensitivity indicators? Shouldn’t input parameters which affect <em>all</em> models have the biggest influence on the overall result? Also, why do so few of the factors that showed up as most influential in <a href="https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/">the charity-specific sensitivity analyses from last time</a> make it to the top?</p>
 <p>However, after reflecting for a bit, this makes sense. Because we’re interested in the <em>relative</em> performance of the charities, any factor which affects them all equally is of little importance here. Instead, we want factors that have a strong influence on only a few charities. When we go back to the earlier charity-by-charity sensitivity analysis, we see that many of the input parameters we identified as most influential where shared across charities (especially across the deworming charities). Non-shared factors that made it to the top of the charity-by-charity lists—like the relative risk of all-cause mortality for young children in <abbr title="Vitamin A supplementation">VAS</abbr> programs—show up somewhat high here too.</p>
-<p>But it’s hard to eyeball the sensitivity when there are so many factors and most are of small effect. So let’s move on to the delta analysis.</p>
-<h2 id="delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</h2>
+<p>But it’s hard to eyeball the sensitivity when there are so many factors and most are of small effect. So let’s quickly move on to the delta analysis.</p>
+<h3 id="delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</h3>
+<p>Again, we’ll have three big plots, one for each distance metric—footrule, tau and angle. In each plot, there’s an estimate of the delta moment-independent sensitivity for each input factor used anywhere in the GiveWell’s cost-effectiveness analysis (and an indication of how confident that sensitivity estimate is).</p>
 <figure>
-<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the overall relative cost-effect analysis" /><figcaption>Delta sensitivities for each input parameter in the overall relative cost-effect analysis</figcaption>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-footrule-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in footrule distance analysis" /><figcaption>Delta sensitivities for each input parameter in footrule distance analysis</figcaption>
 </figure>
-<p>We see that (given our input uncertainty), the five parameters with the highest delta sensitivities are as described in the table below:</p>
 <figure>
-<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-s1.png" title="fig:" alt="Highlighted input factors to which result is highly sensitive" /><figcaption>Highlighted input factors to which result is highly sensitive</figcaption>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-tau-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in the tau distance analysis" /><figcaption>Delta sensitivities for each input parameter in the tau distance analysis</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-angle-delta.png" title="fig:" alt="Delta sensitivities for each input parameter in angular distance analysis" /><figcaption>Delta sensitivities for each input parameter in angular distance analysis</figcaption>
+</figure>
+<p>So these delta sensitivities corroborate the suspicion that arose during the visual sensitivity analysis—charity-specific input parameters have the highest sensitivity indicators.</p>
+<p>The other noteworthy result is which charity-specific factors are the most influential depends somewhat on which distance metric we use. The two rank-based metrics—tau and footrule distance—both suggest that the final charity ranking (given these inputs) is most sensitive to the worm intensity adjustment and cost per capita per annum of Sightsavers and the END Fund. These input parameters are a bit further down (though still fairly high) in the list according to the angular distance metric.</p>
+<h3 id="more-meta">More meta</h3>
+<p>It would be nice to check that our distance metrics don’t produce totally contradictory results. How can we accomplish this? Well, the plots above already order the input factors according to their sensitivity indicators… That means we have rankings of the sensitivities of the input factors and we can compare the rankings using Kendall’s tau and Spearman’s footrule distance. If that sounds confusing hopefully the table clears things up:</p>
+<figure>
+<figcaption>
+<p>Using Kendall’s tau and Spearman’s footrule distance to assess the similarity of sensitivity rankings generated under different distance metrics</p>
+</figcaption>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Delta sensitivity rankings compared</th>
+<th style="text-align: right;">Tau distance</th>
+<th style="text-align: right;">Footrule distance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tau and footrule</td>
+<td style="text-align: right;">0.358</td>
+<td style="text-align: right;">0.469</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tau and angle</td>
+<td style="text-align: right;">0.365</td>
+<td style="text-align: right;">0.516</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Angle and footrule</td>
+<td style="text-align: right;">0.430</td>
+<td style="text-align: right;">0.596</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<p>So it looks like the three rankings have middling agreement. Sensitivities according to tau and footrule agree the most while sensitivities according to angle and footrule agree the least. That there is substantial disagreement isn’t entirely surprising—part of the point of using different distance metrics is to capture different notions of distance, each of which might be more or less suitable for a given purpose. But the divergence does mean that we’ll need to carefully pick which metric to pay attention to depending on the precise questions we’re trying to answer. For example, if we just want to pick the single top charity and donate all our money to that, factors with high sensitivity indicators according to footrule distance might be the most important to pin down. On the other hand, if we want to distribute our money in proportion to each charity’s estimated cost-effectiveness, angular distance is perhaps a better metric to guide our investigations.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>We started with a couple of problems with our previous analysis: we were taking cost-effectiveness estimates literally and looking at them independently instead of as a cohesive analysis. We addressed these problems by redoing our analysis while looking at distance from the current best cost-effectiveness estimates. We found that our input uncertainty is consequential even when looking only at the relative value of the charities. We also found that input parameters which our important but unique to a particular charity often affect the final relative valuations substantially.</p>
+<p>Finally, we have the same caveat as last time: these results still reflect my fairly arbitrary (but scrupulously neutral) decision to pretend that we equally uncertain about each input parameter. To remedy this flaw and get results which are actually meaningful, head over to the <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a> and tweak the input distributions.</p>
+<h1 id="appendix">Appendix</h1>
+<p>We can also look at the sensitivities based on the Sobol method again.</p>
+<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(delti_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the different methods.</p>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-footrule-s1.png" title="fig:" alt="Sobal sensitivities for each input parameter in footrule distance analysis" /><figcaption>Sobal sensitivities for each input parameter in footrule distance analysis</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-tau-s1.png" title="fig:" alt="Sobal sensitivities for each input parameter in tau distance analysis" /><figcaption>Sobal sensitivities for each input parameter in tau distance analysis</figcaption>
+</figure>
+<figure>
+<img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-max-angle-s1.png" title="fig:" alt="Sobal sensitivities for each input parameter in angular distance analysis" /><figcaption>Sobal sensitivities for each input parameter in angular distance analysis</figcaption>
 </figure>
 <section class="footnotes" role="doc-endnotes">
 <hr />
@@ -149,9 +211,6 @@
 <li><div id="fn2">
 <p>The angle between the vectors is a better metric here than the distance between the vectors’ endpoints because we’re interested in the relative values of the charities and how those change. If our results show that each charity is twice as effective as in the reference vector, our metric should return a distance of 0 because nothing has changed in the relative value of each charity.<a href="#fnref2" class="footnote-back">↩</a></p>
 </div></li>
-<li><div id="fn3">
-<p>I chose to use just one metric here because there are already enough plots and I chose angular distance instead of the others because the other two metrics produce integer outputs prior to normalization (which is inconvenient).<a href="#fnref3" class="footnote-back">↩</a></p>
-</div></li>
 </ol>
 </section>]]></summary>
 </entry>
@@ -159,14 +218,14 @@
     <title>Sensitivity analysis of GiveWell's cost-effectiveness analysis</title>
     <link href="https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/" />
     <id>https://www.col-ex.org/posts/sensitivity-analysis-of-givewell-cea/</id>
-    <published>2019-09-28T00:00:00Z</published>
-    <updated>2019-09-28T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
+    <published>2019-08-28T00:00:00Z</published>
+    <updated>2019-08-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost-effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
 <h1 id="sensitivity-analysis">Sensitivity analysis</h1>
 <p>The basic idea of <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis">sensitivity analysis</a> is, when working with uncertain values, to see which input values most affect the output when they vary. For example, if you have the equation <span class="math inline">\(f(a, b) = 2^a + b\)</span> and each of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> varies uniformly over the range from 5 to 10, <span class="math inline">\(f(a, b)\)</span> is much more sensitive to <span class="math inline">\(a\)</span> then <span class="math inline">\(b\)</span>. A sensitivity analysis is practically useful in that it can offer you guidance as to which parameters in your model it would be most useful to investigate further (i.e. to narrow their uncertainty).</p>
 <h1 id="visual-sensitivity-analysis">Visual sensitivity analysis</h1>
 <p>The first kind of sensitivity analysis we’ll run is just to look at scatter plots comparing each input parameter to the final cost-effectiveness estimates. We can imagine these scatter plots as the result of running <span class="noted">the following procedure many times</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>: sample a single value from the probability distribution for each input parameter and run the calculation on these values to determine a result value. If we repeat this procedure enough times, it starts to approximate the true values of the probability distributions.</p>
-<p>One nice feature of this sort of analysis is that we see how the output depends on a particular input even in the face of variations in all the other inputs—we don’t hold everything else constant. In other words, this is a <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis#Local_methods">global</a> sensitivity analysis.</p>
+<p>(One nice feature of this sort of analysis is that we see how the output depends on a particular input even in the face of variations in all the other inputs—we don’t hold everything else constant. In other words, this is a <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis#Local_methods">global</a> sensitivity analysis.)</p>
 <p>(Caveat: We are again pretending that we are equally uncertain about each input parameter and the results reflect this limitation. To see the analysis result for different input uncertainties, edit and run <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">the Jupyter notebook</a>.)</p>
 <h2 id="direct-cash-transfers">Direct cash transfers</h2>
 <h3 id="givedirectly">GiveDirectly</h3>
@@ -195,7 +254,7 @@
 <tr class="odd">
 <td style="text-align: left;">value of increasing ln consumption per capita per annum</td>
 <td style="text-align: left;">Moral</td>
-<td style="text-align: left;">Determines final conversion between outcomes and value</td>
+<td style="text-align: left;">Determines final conversion between empirical outcomes and value</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">transfer as percent of total cost</td>
@@ -409,12 +468,12 @@
 <tr class="odd">
 <td style="text-align: left;">direct mortality in high transmission season</td>
 <td style="text-align: left;">Empirical</td>
-<td style="text-align: left;">Fraction of overall malaria mortality during the peak transmission season and amenable to SMC</td>
+<td style="text-align: left;">Fraction of overall malaria mortality during the peak transmission season and amenable to <abbr title="Seasonal malaria chemoprevention">SMC</abbr></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">internal validity adjustment</td>
 <td style="text-align: left;">Methodological</td>
-<td style="text-align: left;">How much do we trust the results of the underlying <abbr title="Seasonal malaria chemoprevention">SMC</abbr> studies)</td>
+<td style="text-align: left;">How much do we trust the results of the underlying <abbr title="Seasonal malaria chemoprevention">SMC</abbr> studies</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">external validity adjustment</td>
@@ -429,7 +488,7 @@
 <tr class="odd">
 <td style="text-align: left;">value of averting death of a young child</td>
 <td style="text-align: left;">Moral</td>
-<td style="text-align: left;">Determines final conversion between outcomes and value</td>
+<td style="text-align: left;">Determines final conversion between empirical outcomes and value</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">cost per child targeted</td>
@@ -444,7 +503,7 @@
 <figure>
 <img src="https://www.col-ex.org/images/givewell-analysis/regressions-big-HKI-value_per_dollar_w_levfun.png" title="fig:" alt="Scatter plots showing sensitivity of the Helen Keller International’s cost-effectiveness to each input parameter" /><figcaption>Scatter plots showing sensitivity of the Helen Keller International’s cost-effectiveness to each input parameter</figcaption>
 </figure>
-<p>The scatter plots show that, given our choice of input uncertainty, the output is most sensitive (i.e. the scatter plot for these parameters shows the greatest directionality) to the input parameters:</p>
+<p>The scatter plots show that, given our choice of input uncertainty, the output is most sensitive to the input parameters:</p>
 <figure class="big-fig">
 <figcaption>
 <p>Highlighted input factors to which result is highly sensitive</p>
@@ -471,12 +530,12 @@
 <tr class="even">
 <td style="text-align: left;">cost per child per round</td>
 <td style="text-align: left;">Operational</td>
-<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+<td style="text-align: left;">Affects cost of results</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">rounds per year</td>
 <td style="text-align: left;">Operational</td>
-<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+<td style="text-align: left;">Affects cost of results</td>
 </tr>
 </tbody>
 </table>
@@ -508,12 +567,12 @@
 <tr class="odd">
 <td style="text-align: left;">num <abbr title="Long-lasting insecticidal net">LLIN</abbr>s distributed per person</td>
 <td style="text-align: left;">Operational</td>
-<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+<td style="text-align: left;">Affects cost of results</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">cost per <abbr title="Long-lasting insecticidal net">LLIN</abbr></td>
 <td style="text-align: left;">Operational</td>
-<td style="text-align: left;">Affects the total cost required to achieve effect</td>
+<td style="text-align: left;">Affects cost of results</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">deaths averted per protected child under 5</td>
@@ -572,6 +631,7 @@
 <li>If the output is independent of the input, <span class="math inline">\(delta_i\)</span> for that input is 0</li>
 <li>The sum of <span class="math inline">\(\delta_i\)</span> for each input considered separately isn’t necessarily 1 because there can be interaction effects</li>
 </ul>
+<p>In the plots below, for each charity, we visualize the delta sensitivity (and our uncertainty about that sensitivity) for each input parameter.</p>
 <h2 id="direct-cash-transfers-1">Direct cash transfers</h2>
 <h3 id="givedirectly-1">GiveDirectly</h3>
 <figure>
@@ -785,7 +845,7 @@
 </table>
 </figure>
 <h3 id="deworming-comment">Deworming comment</h3>
-<p>That we get substantially identical results in terms of delta sensitivities for each deworming charity is not surprising: The structure of each calculation is the same and (for the sake of tainting the analysis with my idiosyncratic perspective) the uncertainty on each input parameter is the same.</p>
+<p>That we get substantially identical results in terms of delta sensitivities for each deworming charity is not surprising: The structure of each calculation is the same and (for the sake of not tainting the analysis with my idiosyncratic perspective) the uncertainty on each input parameter is the same.</p>
 <h2 id="seasonal-malaria-chemoprevention-1">Seasonal malaria chemoprevention</h2>
 <h3 id="malaria-consortium-1">Malaria Consortium</h3>
 <figure>
@@ -953,11 +1013,12 @@
 </table>
 </figure>
 <h1 id="conclusion">Conclusion</h1>
-<p>We performed visual (scatter plot) sensitivity analyses and delta moment-independent sensitivity analyses on GiveWell’s top charities. Conveniently, these two methods generally agreed as to which input factors had the biggest influence on the output. For each charity, we found that there were clear differences in the sensitivity indicators for different inputs. This suggests that certain inputs ought to be targeted for uncertainty reduction to improve GiveWell’s cost-effectiveness analyses. For example, the overall estimate of the cost-effectiveness of Helen Keller International’s vitamin A supplementation program depends much more on the relative risk of all-cause mortality for children in <abbr title="Vitamin A supplementation">VAS</abbr> programs than it does on the expected value from leverage and funging. If the cost of investigating each were the same, it would be better to spend time on the former. Our sensitivity analysis has suggested which varies</p>
+<p>We performed visual (scatter plot) sensitivity analyses and delta moment-independent sensitivity analyses on GiveWell’s top charities. Conveniently, these two methods generally agreed as to which input factors had the biggest influence on the output. For each charity, we found that there were clear differences in the sensitivity indicators for different inputs.</p>
+<p>This suggests that certain inputs are better targets than others for uncertainty reduction. For example, the overall estimate of the cost-effectiveness of Helen Keller International’s vitamin A supplementation program depends much more on the relative risk of all-cause mortality for children in <abbr title="Vitamin A supplementation">VAS</abbr> programs than it does on the expected value from leverage and funging. If the cost of investigating each were the same, it would be better to spend time on the former.</p>
 <p>An important caveat to remember is that these results still reflect my fairly arbitrary (but scrupulously neutral) decision to pretend that we equally uncertain about each input parameter. To remedy this flaw, head over to the <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a> and tweak the input distributions.</p>
 <h1 id="appendix">Appendix</h1>
 <p>I also did a <a href="https://en.wikipedia.org/wiki/Variance-based_sensitivity_analysis">variance-based sensitivity analysis</a> with Sobol indices. Those plots follow.</p>
-<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(delti_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the different methods.</p>
+<p>The variable order in each plot is from the input parameter with the highest <span class="math inline">\(\delta_i\)</span> sensitivity to the input parameter with the lowest <span class="math inline">\(delti_i\)</span> sensitivity. That makes it straightforward to compare the ordering of sensitivities according to the delta moment-independent method and according to the Sobol method. We see that there is broad—but not perfect—agreement between the methods.</p>
 <figure>
 <img src="https://www.col-ex.org/images/givewell-analysis/sensitivity-big-GiveDirectly-s1.png" title="fig:" alt="Sobol sensitivities for each input parameter in the GiveDirectly cost-effectiveness calculation" /><figcaption>Sobol sensitivities for each input parameter in the GiveDirectly cost-effectiveness calculation</figcaption>
 </figure>
@@ -1004,18 +1065,18 @@
     <title>Uncertainty analysis of GiveWell's cost-effectiveness analysis</title>
     <link href="https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/" />
     <id>https://www.col-ex.org/posts/uncertainty-analysis-of-givewell-cea/</id>
-    <published>2019-09-27T00:00:00Z</published>
-    <updated>2019-09-27T00:00:00Z</updated>
+    <published>2019-08-27T00:00:00Z</published>
+    <updated>2019-08-27T00:00:00Z</updated>
     <summary type="html"><![CDATA[<h1 id="givewells-cost-effectiveness-analysis">GiveWell’s cost-effectiveness analysis</h1>
 <p><a href="https://www.givewell.org/">GiveWell</a>, an in-depth charity evaluator, makes their detailed spreadsheets models <a href="https://docs.google.com/spreadsheets/d/1d255LKz11L3V-OgOEns9WvJzpnVeaLTcEP1HD4lC478/edit#gid=1537947274">available</a> for public review. These spreadsheets estimate the value per dollar of donations to their 8 top charities: GiveDirectly, Deworm the World, Schistosomiasis Control Initiative, Sightsavers, Against Malaria Foundation, Malaria Consortium, Helen Keller International, and the END Fund. For each charity, a model is constructed taking input values to an estimated value per dollar of donation to that charity. The inputs to these models vary from parameters like “malaria prevalence in areas where AMF operates” to “value assigned to averting the death of an individual under 5”.</p>
 <p>Helpfully, GiveWell isolates the input parameters it deems as most uncertain. These can be found in the “User inputs” and “Moral weights” tabs of their spreadsheet. Outsiders interested in the top charities can reuse GiveWell’s model but supply their own perspective by adjusting the values of the parameters in these tabs.</p>
 <p>For example, if I go to the “Moral weights” tab and run the calculation with a 0.1 value for doubling consumption for one person for one year—instead of the default value of 1—I see the effect of this modification on the final results: deworming charities look much less effective since their primary effect is on income.</p>
 <h1 id="uncertain-inputs">Uncertain inputs</h1>
-<p>GiveWell provides the ability to adjust these input parameters and observe altered output because the inputs are fundamentally uncertain. But our uncertainty means that picking any particular value as input for the calculation misrepresents our state of knowledge. From a <a href="https://en.wikipedia.org/wiki/Bayesian_probability">subjective Bayesian</a> point of view, the best way to represent our state of knowledge on the input parameters is with a <a href="https://en.wikipedia.org/wiki/Probability_distribution">probability distribution</a> over the values the parameter could take. Once we do this, we can feed these distributions into the model and, in principle, we’ll end up with a probability distribution over our results. This probability distribution on the results helps us understand the uncertainty contained in our estimates and <a href="https://blog.givewell.org/2011/08/18/why-we-cant-take-expected-value-estimates-literally-even-when-theyre-unbiased/">how literally</a> we should take them.</p>
+<p>GiveWell provides the ability to adjust these input parameters and observe altered output because the inputs are fundamentally uncertain. But our uncertainty means that picking any particular value as input for the calculation misrepresents our state of knowledge. From a <a href="https://en.wikipedia.org/wiki/Bayesian_probability">subjective Bayesian</a> point of view, the best way to represent our state of knowledge on the input parameters is with a <a href="https://en.wikipedia.org/wiki/Probability_distribution">probability distribution</a> over the values the parameter could take. For example, I could say that a negative value for increasing consumption seems very improbable to me but that a wide range of positive values seem about equally plausible. Once we specify a probability distribution, we can feed these distributions into the model and, in principle, we’ll end up with a probability distribution over our results. This probability distribution on the results helps us understand the uncertainty contained in our estimates and <a href="https://blog.givewell.org/2011/08/18/why-we-cant-take-expected-value-estimates-literally-even-when-theyre-unbiased/">how literally</a> we should take them.</p>
 <h2 id="is-this-really-necessary">Is this really necessary?</h2>
-<p>Perhaps that sounds complicated. How are we supposed to multiply, add and otherwise manipulate arbitrary probability distributions in the way our models require? Can we somehow reduce our uncertain beliefs about the input parameters to point estimates and run the calculation on those? One candidate is to take the single most likely value of each input and using that value in our calculations. This is the approach the current cost-effectiveness analysis takes (assuming you provide input values selected in this way). Unfortunately, the output of running the model on these inputs is necessarily a point value and gives no information about the uncertainty of the results. A second possibility is to take lower bounds on the input parameters and run the calculation on these values, and to take the upper bounds on the input parameters and run the calculation on these values. This will produce two bounding values on our results, but it’s hard to give them a useful meaning. If the lower and upper bounds on our inputs describe, for example, a 95% confidence interval, the lower and upper bounds on the result don’t (usually) describe a 95% confidence interval.</p>
+<p>Perhaps that sounds complicated. How are we supposed to multiply, add and otherwise manipulate arbitrary probability distributions in the way our models require? Can we somehow reduce our uncertain beliefs about the input parameters to point estimates and run the calculation on those? One candidate is to take the single most likely value of each input and using that value in our calculations. This is the approach the current cost-effectiveness analysis takes (assuming you provide input values selected in this way). Unfortunately, the output of running the model on these inputs is necessarily a point value and gives no information about the uncertainty of the results. Because the results are probably highly uncertain, losing this information and being unable to take about the uncertainty of the results is a major loss. A second possibility is to take lower bounds on the input parameters and run the calculation on these values, and to take the upper bounds on the input parameters and run the calculation on these values. This will produce two bounding values on our results, but it’s hard to give them a useful meaning. If the lower and upper bounds on our inputs describe, for example, a 95% confidence interval, the lower and upper bounds on the result don’t (usually) describe a 95% confidence interval.</p>
 <h2 id="computers-are-nice">Computers are nice</h2>
-<p>If we had to proceed analytically, working with probability distributions throughout the model would indeed be troublesome and we might have to settle for one of the above approaches. But we live in the future. We can use computers and <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo methods</a> to numerically approximate the results of working with probability distributions while leaving our models clean and unconcerned with these probabilistic details. <a href="https://www.getguesstimate.com/">Guesstimate</a> is a tool that works along these lines and bills itself as “A spreadsheet for things that aren’t certain”.</p>
+<p>If we had to proceed analytically, working with probability distributions throughout, the model would indeed be troublesome and we might have to settle for one of the above approaches. But we live in the future. We can use computers and <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo methods</a> to numerically approximate the results of working with probability distributions while leaving our models clean and unconcerned with these probabilistic details. <a href="https://www.getguesstimate.com/">Guesstimate</a> is a tool that works along these lines and bills itself as “A spreadsheet for things that aren’t certain”.</p>
 <h1 id="analysis">Analysis</h1>
 <p>We have the beginnings of a plan then. We can implement GiveWell’s cost-effectiveness models in a Monte Carlo framework (<a href="https://docs.pymc.io/">PyMC3</a> in this case), specify probability distributions over the input parameters, and finally run the calculation and look at the uncertainty that’s been propagated to the results.</p>
 <p><!--more--></p>
@@ -1023,7 +1084,7 @@
 <p>The Python <span class="noted">source code implementing GiveWell’s models can be found on <a href="https://github.com/colehaus/givewell-analysis">GitHub</a></span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a>. The core models can be found in <code>cash.py</code>, <code>nets.py</code>, <code>smc.py</code>, <code>worms.py</code> and <code>vas.py</code>.</p>
 <h2 id="the-inputs">The inputs</h2>
 <p>For the purposes of the uncertainty analysis that follows, it doesn’t make much sense to infect the results with my own idiosyncratic views on the appropriate value of the input parameters. Instead, what I have done is uniformly taken GiveWell’s best guess and added and subtracted 20%. These upper and lower bounds then become the 90% confidence interval of a <span class="noted"><a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal distribution</a></span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a>. <!--TODO image here--> For example, if GiveWell’s best guess for a parameter is 0.1, I used a log-normal with a 90% CI from 0.08 to 0.12.</p>
-<p>While this approach screens off my influence it also means that the results of the analysis will primarily tell us about the structure of the computation rather than informing us about the world. Fortunately, there’s a remedy for this problem too. I have set up a <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a> with the all the input parameters to the calculation which you can manipulate and rerun the analysis. That is, if you think the moral weight given to increasing consumption ought to range from 0.8 to 1.5 instead of 0.8 to 1.2, you can make that edit and see the result of the analysis. Making these modifications is essential for a realistic analysis because we are not, in fact, equally uncertain about every input parameter.</p>
+<p>While this approach screens off my influence it also means that the results of the analysis will primarily tell us about the structure of the computation rather than informing us about the world. Fortunately, there’s a remedy for this problem too. I have set up a <span class="noted"><a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a></span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a> with the all the input parameters to the calculation which you can manipulate and rerun the analysis. That is, if you think the moral weight given to increasing consumption ought to range from 0.8 to 1.5 instead of 0.8 to 1.2, you can make that edit and see the corresponding results. Making these modifications is essential for a realistic analysis because we are not, in fact, equally uncertain about every input parameter.</p>
 <p>It’s also worth noting that I have considerably expanded the set of input parameters receiving special scrutiny. The GiveWell cost-effectiveness analysis is (with good reason—it keeps things manageable for outside users) fairly conservative about which parameters it highlights as eligible for user manipulation. In this analysis, I include any input parameter which is not tautologically certain. For example, “Reduction in malaria incidence for children under 5 (from Lengeler 2004 meta-analysis)” shows up in the analysis which follows but is not highlighted in GiveWell’s “User inputs” or “Moral weights” tab. Even though we don’t have much information with which to second guess the meta-analysis, the value it reports is still uncertain and our calculation ought to reflect that.</p>
 <h2 id="the-results">The results</h2>
 <p>Finally, we get to the part that you actually care about, dear reader: the results. Given input parameters which are each distributed log-normally with a 90% confidence interval spanning ±20% of GiveWell’s best estimate, here are the resulting uncertainties in the cost-effectiveness estimates:</p>
@@ -1073,7 +1134,7 @@
 </tr>
 </tbody>
 </table>
-<p>I’ve also plotted a version in which the results are normalized—I divided the results for each charity by that charity’s expected value per dollar. Instead of showing the probability distribution on the value per dollar for each charity, this normalized version shows the probability distribution on the percentage of that charity’s expected value that it achieves. This version of the plot abstracts from the actual value per dollar and emphasizes the spread of uncertainty. It also reemphasizes the earlier point that–because we use the same spread of uncertainty for each input parameter—the current results are telling us more about the structure of the model than about the world. For real results, go try the <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a>!</p>
+<p>I’ve also plotted a version in which the results are normalized—I divided the results for each charity by that charity’s expected value per dollar. Instead of showing the probability distribution on the value per dollar for each charity, this normalized version shows the probability distribution on the percentage of that charity’s expected value that it achieves. This version of the plot abstracts from the actual value per dollar and emphasizes the spread of uncertainty. It also reëmphasizes the earlier point that–because we use the same spread of uncertainty for each input parameter—the current results are telling us more about the structure of the model than about the world. For real results, go try the <a href="https://colab.research.google.com/drive/1TCXBi7lF69Xaaygub5HGD6-Rb6qE924e#sandboxMode=true">Jupyter notebook</a>!</p>
 <figure>
 <img src="https://www.col-ex.org/images/givewell-analysis/uncertainties-overlaid.png" title="fig:" alt="Probability distributions for percentage of expected value obtained with each of GiveWell’s top charities" /><figcaption>Probability distributions for percentage of expected value obtained with each of GiveWell’s top charities</figcaption>
 </figure>
@@ -1085,10 +1146,13 @@
 <hr />
 <ol>
 <li><div id="fn1">
-<p>Unfortunately, the code implements the 2019 V4 cost-effectiveness analysis instead of the most recent V5 because I just worked off the V4 tab I’d had lurking in my browser for months and didn’t think to check for a new version until too late. I also deviated from the spreadsheet in one place because I think there’s an error (Update: The error will be fixed in GiveWell’s next publically released version).<a href="#fnref1" class="footnote-back">↩</a></p>
+<p>Unfortunately, the code implements the 2019 V4 cost-effectiveness analysis instead of the most recent V5 because I just worked off the V4 tab I’d had lurking in my browser for months and didn’t think to check for a new version until too late. I also deviated from the spreadsheet in one place because I think there’s an error (Update: The error will be fixed in GiveWell’s next publically-released version).<a href="#fnref1" class="footnote-back">↩</a></p>
 </div></li>
 <li><div id="fn2">
 <p>Log-normal strikes me as a reasonable default distribution for this task: because it’s support is (0, +∞) which fits many of our parameters well (they’re all positive but some are actually bounded above by 1); and because <a href="https://en.wikipedia.org/wiki/Log-normal_distribution">“A log-normal process is the statistical realization of the multiplicative product of many independent random variables”</a> which also seems reasonable here.<a href="#fnref2" class="footnote-back">↩</a></p>
+</div></li>
+<li><div id="fn3">
+<p>When you follow the link, you should see a Jupyter notebook with three “cells”. The first is a preamble setting things up. The second has all the parameters with lower and upper bounds. This is the part you want to edit. Once you’ve edited it, find and hit “Run all” in the menu. You should eventually see the notebook produce a serious of plots.<a href="#fnref3" class="footnote-back">↩</a></p>
 </div></li>
 </ol>
 </section>]]></summary>
