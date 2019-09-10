@@ -58,6 +58,10 @@ if (/Trident/.test(navigator.userAgent)) {
        <div class="metadata">
         <nav class="tags"><ul>
     
+      <li><a href="./tag/statistics/">statistics</a></li>
+    
+      <li><a href="./tag/development/">development</a></li>
+    
 </ul></nav>
 
         
@@ -74,7 +78,26 @@ if (/Trident/.test(navigator.userAgent)) {
 </ul></div>
        
 
-        <p>In the <a href="./posts/uncertainty-analysis-of-givewell-cea/">last</a> <a href="./posts/sensitivity-analysis-of-givewell-cea/">two</a> posts, we performed uncertainty and sensitivity analyses on GiveWell’s charity cost-effectiveness estimates. Our outputs were, respectively:</p>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#metrics-on-rankings">Metrics on rankings</a><ul>
+<li><a href="#spearmans-footrule">Spearman’s footrule</a></li>
+<li><a href="#kendalls-tau">Kendall’s tau</a></li>
+<li><a href="#angular-distance">Angular distance</a></li>
+</ul></li>
+<li><a href="#results">Results</a><ul>
+<li><a href="#uncertainties">Uncertainties</a></li>
+<li><a href="#visual-sensitivity-analysis">Visual sensitivity analysis</a></li>
+<li><a href="#delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</a><ul>
+<li><a href="#needs-more-meta">Needs more meta</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#appendix">Appendix</a></li>
+</ul>
+</div>
+<p>In the <a href="./posts/uncertainty-analysis-of-givewell-cea/">last</a> <a href="./posts/sensitivity-analysis-of-givewell-cea/">two</a> posts, we performed uncertainty and sensitivity analyses on GiveWell’s charity cost-effectiveness estimates. Our outputs were, respectively:</p>
 <ul>
 <li>probability distributions describing our uncertainty about the value per dollar obtained for each charity and</li>
 <li>estimates of how sensitive each charity’s cost-effectiveness is to each of its input parameters</li>
@@ -204,7 +227,56 @@ Givewell’s top charities ranked from most cost-effective to least
          <div class="abstract"><p>Visual (scatter plot) and delta moment-independent sensitivity analysis on GiveWell’s cost-effectiveness models show which input parameters the cost-effectiveness estimates are most sensitive to. Preliminary results (given our input uncertainty) show that some input parameters are much more influential on the final cost-effectiveness estimates for each charity than others.</p></div>
        
 
-        <p><a href="./posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost-effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#sensitivity-analysis">Sensitivity analysis</a></li>
+<li><a href="#visual-sensitivity-analysis">Visual sensitivity analysis</a><ul>
+<li><a href="#direct-cash-transfers">Direct cash transfers</a><ul>
+<li><a href="#givedirectly">GiveDirectly</a></li>
+</ul></li>
+<li><a href="#deworming">Deworming</a><ul>
+<li><a href="#the-end-fund">The END Fund</a></li>
+<li><a href="#deworm-the-world">Deworm the World</a></li>
+<li><a href="#schistosomiasis-control-initiative">Schistosomiasis Control Initiative</a></li>
+<li><a href="#sightsavers">Sightsavers</a></li>
+</ul></li>
+<li><a href="#seasonal-malaria-chemoprevention">Seasonal malaria chemoprevention</a><ul>
+<li><a href="#malaria-consortium">Malaria Consortium</a></li>
+</ul></li>
+<li><a href="#vitamin-a-supplementation">Vitamin A supplementation</a><ul>
+<li><a href="#helen-keller-international">Helen Keller International</a></li>
+</ul></li>
+<li><a href="#bednets">Bednets</a><ul>
+<li><a href="#against-malaria-foundation">Against Malaria Foundation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</a><ul>
+<li><a href="#direct-cash-transfers-1">Direct cash transfers</a><ul>
+<li><a href="#givedirectly-1">GiveDirectly</a></li>
+</ul></li>
+<li><a href="#deworming-1">Deworming</a><ul>
+<li><a href="#the-end-fund-1">The END Fund</a></li>
+<li><a href="#deworm-the-world-1">Deworm the World</a></li>
+<li><a href="#schistosomiasis-control-initiative-1">Schistosomiasis Control Initiative</a></li>
+<li><a href="#sightsavers-1">Sightsavers</a></li>
+<li><a href="#deworming-comment">Deworming comment</a></li>
+</ul></li>
+<li><a href="#seasonal-malaria-chemoprevention-1">Seasonal malaria chemoprevention</a><ul>
+<li><a href="#malaria-consortium-1">Malaria Consortium</a></li>
+</ul></li>
+<li><a href="#vitamin-a-supplementation-1">Vitamin A supplementation</a><ul>
+<li><a href="#hellen-keller-international">Hellen Keller International</a></li>
+</ul></li>
+<li><a href="#bednets-1">Bednets</a><ul>
+<li><a href="#against-malaria-foundation-1">Against Malaria Foundation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#appendix">Appendix</a></li>
+</ul>
+</div>
+<p><a href="./posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost-effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
 <h3 id="sensitivity-analysis">Sensitivity analysis</h3>
 <p>The basic idea of <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis">sensitivity analysis</a> is, when working with uncertain values, to see which input values most affect the output when they vary. For example, if you have the equation <span class="math inline">\(f(a, b) = 2^a + b\)</span> and each of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> varies uniformly over the range from 5 to 10, <span class="math inline">\(f(a, b)\)</span> is much more sensitive to <span class="math inline">\(a\)</span> then <span class="math inline">\(b\)</span>. A sensitivity analysis is practically useful in that it can offer you guidance as to which parameters in your model it would be most useful to investigate further (i.e. to narrow their uncertainty).</p>
 <h3 id="visual-sensitivity-analysis">Visual sensitivity analysis</h3>
@@ -289,7 +361,23 @@ Highlighted input factors to which result is highly sensitive
          <div class="abstract"><p>GiveWell produces cost-effectiveness models of its top charities. These models take as inputs many uncertain parameters. Instead of representing those uncertain parameters with point estimates—as the cost-effectiveness analysis spreadsheet does—we can (should) represent them with probability distributions. Feeding probability distributions into the models allows us to output explicit probability distributions on the cost-effectiveness of each charity.</p></div>
        
 
-        <h3 id="givewells-cost-effectiveness-analysis">GiveWell’s cost-effectiveness analysis</h3>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#givewells-cost-effectiveness-analysis">GiveWell’s cost-effectiveness analysis</a></li>
+<li><a href="#uncertain-inputs">Uncertain inputs</a><ul>
+<li><a href="#is-this-really-necessary">Is this really necessary?</a></li>
+<li><a href="#computers-are-nice">Computers are nice</a></li>
+</ul></li>
+<li><a href="#analysis">Analysis</a><ul>
+<li><a href="#model">Model</a></li>
+<li><a href="#inputs">Inputs</a></li>
+<li><a href="#results">Results</a></li>
+</ul></li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</div>
+<h3 id="givewells-cost-effectiveness-analysis">GiveWell’s cost-effectiveness analysis</h3>
 <p><a href="https://www.givewell.org/">GiveWell</a>, an in-depth charity evaluator, makes their detailed spreadsheets models <a href="https://docs.google.com/spreadsheets/d/1d255LKz11L3V-OgOEns9WvJzpnVeaLTcEP1HD4lC478/edit#gid=1537947274">available</a> for public review. These spreadsheets estimate the value per dollar of donations to their 8 top charities: GiveDirectly, Deworm the World, Schistosomiasis Control Initiative, Sightsavers, Against Malaria Foundation, Malaria Consortium, Helen Keller International, and the END Fund. For each charity, a model is constructed taking input values to an estimated value per dollar of donation to that charity. The inputs to these models vary from parameters like “malaria prevalence in areas where AMF operates” to “value assigned to averting the death of an individual under 5”.</p>
 <p>Helpfully, GiveWell isolates the input parameters it deems as most uncertain. These can be found in the “User inputs” and “Moral weights” tabs of their spreadsheet. Outsiders interested in the top charities can reuse GiveWell’s model but supply their own perspective by adjusting the values of the parameters in these tabs.</p>
 <p>For example, if I go to the “Moral weights” tab and run the calculation with a 0.1 value for doubling consumption for one person for one year—instead of the default value of 1—I see the effect of this modification on the final results: deworming charities look much less effective since their primary effect is on income.</p>
@@ -327,7 +415,23 @@ Highlighted input factors to which result is highly sensitive
 
        
 
-        <p>As mentioned in the warnings on the <a href="./posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#causal-triplets-again">Causal triplets, again</a><ul>
+<li><a href="#chains">Chains</a></li>
+<li><a href="#forks">Forks</a></li>
+<li><a href="#inverted-forks">Inverted forks</a></li>
+</ul></li>
+<li><a href="#d-separation-and-d-connection-along-a-path">d-separation and d-connection along a path</a></li>
+<li><a href="#d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</a><ul>
+<li><a href="#conditioning-on-descendants-of-colliders">Conditioning on descendants of colliders</a></li>
+</ul></li>
+<li><a href="#interactive">Interactive</a></li>
+<li><a href="#postscript">Postscript</a></li>
+</ul>
+</div>
+<p>As mentioned in the warnings on the <a href="./posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>In this post, we’ll introduce the concept of conditioning to our graphical causal models framework and see how it both complicates things and offers new possibilities. (This post deliberately mirrors the structure of <a href="./posts/babys-first-graphical-causal-models/">that one</a> so it may be handy to have it open in a second tab/window for comparison purposes.)</p>
 <h3 id="causal-triplets-again">Causal triplets, again</h3>
 <p>We started out by talking about three types of causal triplets: chains, forks and inverted forks. For convenience, here is the summary table we ended up with:</p>
@@ -429,7 +533,25 @@ Types of causal triplets with conditioning on central vertex
 
        
 
-        <p><a href="./posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#instrumental-variables">Instrumental variables</a></li>
+<li><a href="#instrumental-variables-on-causal-graphs">Instrumental variables on causal graphs</a><ul>
+<li><a href="#a-brief-notational-interlude">A brief notational interlude</a></li>
+<li><a href="#defined">Defined</a></li>
+<li><a href="#interactive">Interactive</a></li>
+<li><a href="#explained">Explained</a><ul>
+<li><a href="#compatible-models">Compatible models</a></li>
+<li><a href="#the-instrumental-variable">The instrumental variable</a></li>
+<li><a href="#d-separations">d-separations</a></li>
+<li><a href="#model-selection">Model selection</a></li>
+</ul></li>
+<li><a href="#as-model-selection">As model selection</a></li>
+</ul></li>
+</ul>
+</div>
+<p><a href="./posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
 <h3 id="instrumental-variables">Instrumental variables</h3>
 <p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our cause, but its only impact on the effect should be via the cause.</p>
 <p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer in other ways. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>

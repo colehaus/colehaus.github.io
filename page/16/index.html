@@ -74,7 +74,19 @@ if (/Trident/.test(navigator.userAgent)) {
          <div class="abstract"><p>We can describe causal models with directed graphs. The graph perspective allows us to specify precise procedures for determining when variables (vertices) are independent (d-separated) and dependent (d-connected).</p></div>
        
 
-        <h3 id="causal-graphs">Causal graphs</h3>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#causal-graphs">Causal graphs</a></li>
+<li><a href="#causal-triplets">Causal triplets</a></li>
+<li><a href="#d-separation-and-d-connection-along-a-path">d-separation and d-connection along a path</a></li>
+<li><a href="#d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</a><ul>
+<li><a href="#interactive">Interactive</a></li>
+</ul></li>
+<li><a href="#aside">Aside</a></li>
+</ul>
+</div>
+<h3 id="causal-graphs">Causal graphs</h3>
 <p>We can represent causal models as directed <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>. The vertices in the graph represent different random variables—causes and effects—and the edges represent causal relationships. If two vertices do not have an edge between them, there is no direct causal relationship between them. For example:</p>
 <figure>
 <img src="../../images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
@@ -159,7 +171,21 @@ Types of causal triplets
 
        
 
-        <h3 id="man-of-straw">Man of straw</h3>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#man-of-straw">Man of straw</a></li>
+<li><a href="#tu-quoque"><i>Tu quoque</i></a><ul>
+<li><a href="#the-advice-is-vague">The advice is vague</a></li>
+<li><a href="#similarity-is-too-demanding">Similarity is too demanding</a></li>
+<li><a href="#similarity-is-the-wrong-idea">Similarity is the wrong idea</a></li>
+<li><a href="#similarity-is-wasteful">Similarity is wasteful</a></li>
+</ul></li>
+<li><a href="#biting-bullets">Biting bullets</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</div>
+<h3 id="man-of-straw">Man of straw</h3>
 <p>It seems to me that <i>Evidence-based Policy</i>’s description of <a href="https://en.wikipedia.org/wiki/External_validity">external validity</a> as a “rules system” is something of a <a href="https://en.wikipedia.org/wiki/Straw_man">straw man</a>. I <span class="noted">doubt</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that researchers are rule-based automata applying the dictum of external validity unthinkingly. When evaluating whether the population, time and place are “similar” enough for the original study to have external validity, researchers surely interpret the direction and degree of similarity with care.</p>
 <p>Frustratingly, <abbr title="Evidence-based Policy">EBP</abbr> offers <span class="noted">no real description of these supposed rules of external validity</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. The closest I can find to a systematized procedure is <span class="citation" data-cites="khorsan2014external">(Khorsan and Crawford <a href="#ref-khorsan2014external" role="doc-biblioref">2014</a>)</span>. Which is not very close. It’s just three domains each rated on a three point scale. And rating those domains requires considerable human judgment.</p>
 <h3 id="tu-quoque"><i>Tu quoque</i></h3>
@@ -206,7 +232,35 @@ Thus [Moving to Opportunity] data … are strictly informative only about this p
 
        
 
-        <p><a href="../../posts/priority-decisions/">Last time</a>, we <a href="../../posts/dominated-decisions/">continued</a> our discussion of decision rules that apply in information-poor settings. In particular, we’ve been focusing on “decisions under ignorance”—decisions where the probabilities associated with various states of the world are unknown.</p>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#optimism-pessimism">Optimism-pessimism</a><ul>
+<li><a href="#prose">Prose</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#interactive">Interactive</a></li>
+<li><a href="#code">Code</a></li>
+<li><a href="#math">Math</a></li>
+</ul></li>
+<li><a href="#minimax-regret">Minimax regret</a><ul>
+<li><a href="#prose-1">Prose</a></li>
+<li><a href="#example-1">Example</a><ul>
+<li><a href="#irrelevant-alternatives">Irrelevant alternatives</a></li>
+</ul></li>
+<li><a href="#interactive-1">Interactive</a></li>
+<li><a href="#code-1">Code</a></li>
+<li><a href="#math-1">Math</a></li>
+</ul></li>
+<li><a href="#indifference">Indifference</a><ul>
+<li><a href="#prose-2">Prose</a></li>
+<li><a href="#example-2">Example</a></li>
+<li><a href="#interactive-2">Interactive</a></li>
+<li><a href="#code-2">Code</a></li>
+<li><a href="#math-2">Math</a></li>
+</ul></li>
+</ul>
+</div>
+<p><a href="../../posts/priority-decisions/">Last time</a>, we <a href="../../posts/dominated-decisions/">continued</a> our discussion of decision rules that apply in information-poor settings. In particular, we’ve been focusing on “decisions under ignorance”—decisions where the probabilities associated with various states of the world are unknown.</p>
 <p>This time, we’ll look at three final decision rules in this category.</p>
 <h3 id="optimism-pessimism">Optimism-pessimism</h3>
 <p>The first decision rule we’ll look at is the optimism-pessimism rule.</p>
@@ -271,7 +325,39 @@ Decision matrix about route to work.
          <div class="abstract"><p>RCTs are good for producing claims like “It worked there.”. But what we really care about is “Will it work here?”. The standard answer to this question is <a href="#the-standard-solution-external-validity">external validity</a>, but EBP disapproves of this answer for a variety of reasons. Instead, they propose that we answer the question of generalization by thinking about <a href="#causal-principle">causal principles</a>, <a href="#causal-role-and-support-factors">causal roles and support factors</a>. To find support factors and the right causal principle, we must engage in, respectively, <a href="#horizontal-search">horizontal search</a> and <a href="#vertical-search">vertical search</a> up and down the ladder of abstraction.</p></div>
        
 
-        <h3 id="vignette">Vignette</h3>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#vignette">Vignette</a></li>
+<li><a href="#effectiveness">Effectiveness</a><ul>
+<li><a href="#the-problem-generalization">The problem: Generalization</a></li>
+<li><a href="#the-standard-solution-external-validity">The standard solution: External validity</a></li>
+<li><a href="#the-evidence-based-policy-solution">The <i>Evidence-based Policy</i> solution</a></li>
+<li><a href="#terms">Terms</a><ul>
+<li><a href="#causal-principle">Causal principle</a></li>
+<li><a href="#causal-factor">Causal factor</a></li>
+<li><a href="#causal-role-and-support-factors">Causal role and support factors</a></li>
+</ul></li>
+<li><a href="#thesis">Thesis</a></li>
+<li><a href="#making-the-effectiveness-argument">Making the effectiveness argument</a><ul>
+<li><a href="#vertical-search">Vertical search</a></li>
+<li><a href="#horizontal-search">Horizontal search</a></li>
+</ul></li>
+<li><a href="#in-practice">In practice</a></li>
+</ul></li>
+<li><a href="#efficacy">Efficacy</a><ul>
+<li><a href="#randomized-controlled-trials">Randomized controlled trials</a></li>
+</ul></li>
+<li><a href="#omitted">Omitted</a><ul>
+<li><a href="#what-is-an-argument">What is an argument?</a></li>
+<li><a href="#causal-cakes">Causal cakes</a></li>
+<li><a href="#how-to-think">How to think</a></li>
+<li><a href="#evidence-ranking-schemes">Evidence-ranking schemes</a></li>
+<li><a href="#fidelity">Fidelity</a></li>
+</ul></li>
+</ul>
+</div>
+<h3 id="vignette">Vignette</h3>
 <p>The Tamil Nadu Integrated Nutrition Project (TINP) was a program to reduce child malnutrition among the rural poor of India’s Tamil Nadu State. Core elements of the program were: nutrition counseling for pregnant mothers and supplementary food for the most deprived young children. TINP succeeded in reducing malnutrition substantially <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>. Seeing this success, policymakers in Bangladesh launched the Bangladesh Integrated Nutrition Project (BINP) modeled on TINP. Unfortunately, six years later, childhood malnutrition in Bangladesh continued unabated <span class="citation" data-cites="worldbank1995">(Weaving <a href="#ref-worldbank1995" role="doc-biblioref">1995</a>)</span>.</p>
 <p><span class="noted">Why did BINP fail where TINP succeeded?</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> One of the main problems was that, while mothers did indeed learn about childhood nutrition, mothers often weren’t the primary decision makers in matters of nutrition. In rural Bangladesh, men typically do the shopping. And if a mother lived with her mother-in-law, that mother-in-law was the final authority on issues within the women’s domain. Because the decision-makers hadn’t received BINP’s nutrition counseling, they often used supplemental food from BINP as a substitute and reallocated other food away from mother and child.</p>
 <h3 id="effectiveness">Effectiveness</h3>

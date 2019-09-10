@@ -117,7 +117,25 @@ if (/Trident/.test(navigator.userAgent)) {
          <div class="abstract"><p>There’s not a lot of high quality evidence, but it seems plausible to me that the putting-out system was better for workers than the factory system and that most gig workers would prefer more standard employment.</p></div>
        
 
-        <blockquote class="epigraph">
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#was-putting-out-actually-preferred-to-factories">Was putting-out actually preferred to factories?</a><ul>
+<li><a href="#direct-evidence">Direct evidence</a></li>
+<li><a href="#indirect-evidence">Indirect evidence</a></li>
+<li><a href="#an-objection">An objection</a></li>
+<li><a href="#summation">Summation</a></li>
+</ul></li>
+<li><a href="#is-flsa-work-actually-preferred-to-gig-work">Is FLSA work actually preferred to gig work?</a><ul>
+<li><a href="#direct-evidence-1">Direct evidence</a></li>
+<li><a href="#indirect-evidence-1">Indirect evidence</a></li>
+<li><a href="#summation-1">Summation</a></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</div>
+<blockquote class="epigraph">
 They have driven us away from our houses and gardens to work as prisoners in their factories and their seminaries of vice. <span class="attribution">Thomas Exell, 1838</span>
 </blockquote>
 <h3 id="intro">Intro</h3>
@@ -153,7 +171,18 @@ They have driven us away from our houses and gardens to work as prisoners in the
          <div class="abstract"><p>There is an analogy to be found between choice functions and ethical theories. Both select a distinguished element/action from a collection of sets/actions. If we continue along this line of thought, certain assumptions permit us to make a further analogy between well-orders and ethical theories.</p></div>
        
 
-        <h3 id="intro">Intro</h3>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#one-elementaction">One element/action</a></li>
+<li><a href="#two-elementsactions">Two elements/actions</a></li>
+<li><a href="#three-elementsactions">Three elements/actions</a></li>
+<li><a href="#and-beyond">And beyond</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</div>
+<h3 id="intro">Intro</h3>
 <p>Ethics is fundamentally about ‘ought’. What ought we to do? Which actions are proscribed and which prescribed? Among all available actions, which should we actually pursue? I think we can formalize this basic understanding and draw some interesting conclusions.</p>
 <p>For any given ethical decision, we have some nonempty set <span class="math inline">\(\mathcal{A}\)</span> (depending on how we individuate, possibly infinite) of possible actions. But, alas, we cannot perform all these actions; only one. So an ethical theory is something that for every possible <span class="math inline">\(\mathcal{A}\)</span> selects a distinguished element <span class="math inline">\(a \in \mathcal{A}\)</span>. That is, an ethical theory is a <a href="https://en.wikipedia.org/wiki/Choice_function">choice function</a> over nonempty sets of actions.</p>
 <p>In the rest of the post, we’ll discuss what properties such an ethical choice function might have and build up an understanding of how the tools of <a href="https://en.wikipedia.org/wiki/Order_theory">order theory</a> might be applied to metaethical reasoning.</p>
@@ -211,7 +240,16 @@ Which things would you like to make a utility function out of?
          <div class="abstract"><p>The von Neumann–Morgenstern utility theorem lets us turn an ordinal utility function into a cardinal utility function. Here, we have an interactive widget that actually constructs a utility function from a series of questions using the theorem.</p></div>
        
 
-        <h3 id="von-neumannmorgenstern-utility-theorem">von Neumann–Morgenstern utility theorem</h3>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#von-neumannmorgenstern-utility-theorem">von Neumann–Morgenstern utility theorem</a></li>
+<li><a href="#interactive-vnm">Interactive VNM</a><ul>
+<li><a href="#aside">Aside</a></li>
+</ul></li>
+</ul>
+</div>
+<h3 id="von-neumannmorgenstern-utility-theorem">von Neumann–Morgenstern utility theorem</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Morgenstern_utility_theorem">von Neumann–Morgenstern utility theorem</a> says that, “under certain axioms of rational behavior, a decision-maker faced with risky (probabilistic) outcomes of different choices will behave as if he or she is maximizing the expected value of some function defined over the potential outcomes at some specified point in the future”. But the somewhat sloppy way I like to think of it is this: If a person has merely <a href="https://en.wikipedia.org/wiki/Ordinal_utility">ordinal preferences</a> (e.g. I prefer an apple to a banana but can’t or won’t quantify the magnitude of that preference. The preceding information alone isn’t enough to conclude how I’d feel about one apple vs. two bananas.) and reasons well under uncertainty, we can transform those ordinal preferences into a <a href="https://en.wikipedia.org/wiki/Cardinal_utility">cardinal utility function</a> (e.g. I like apples exactly twice as much as bananas and would be indifferent between an apple and two bananas (ignoring diminishing marginal utility for the same of exposition).).</p>
 <p>This transformation is often useful because a cardinal utility function is much richer and more informative than an ordinal utility function. The extra information is useful, for example, in sidestepping <a href="https://en.wikipedia.org/wiki/Arrow%27s_impossibility_theorem">Arrow’s impossibility theorem</a> (which says that it’s impossible to have a good voting system if you only ask people for their ordering of candidates).</p>
 <h3 id="interactive-vnm">Interactive VNM</h3>

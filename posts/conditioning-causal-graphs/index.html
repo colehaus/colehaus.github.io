@@ -71,7 +71,23 @@
 
   
 
-  <p>As mentioned in the warnings on the <a href="../../posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+  
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#causal-triplets-again">Causal triplets, again</a><ul>
+<li><a href="#chains">Chains</a></li>
+<li><a href="#forks">Forks</a></li>
+<li><a href="#inverted-forks">Inverted forks</a></li>
+</ul></li>
+<li><a href="#d-separation-and-d-connection-along-a-path">d-separation and d-connection along a path</a></li>
+<li><a href="#d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</a><ul>
+<li><a href="#conditioning-on-descendants-of-colliders">Conditioning on descendants of colliders</a></li>
+</ul></li>
+<li><a href="#interactive">Interactive</a></li>
+<li><a href="#postscript">Postscript</a></li>
+</ul>
+</div>
+<p>As mentioned in the warnings on the <a href="../../posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>In this post, we’ll introduce the concept of conditioning to our graphical causal models framework and see how it both complicates things and offers new possibilities. (This post deliberately mirrors the structure of <a href="../../posts/babys-first-graphical-causal-models/">that one</a> so it may be handy to have it open in a second tab/window for comparison purposes.)</p>
 <h3 id="causal-triplets-again">Causal triplets, again</h3>
 <p>We started out by talking about three types of causal triplets: chains, forks and inverted forks. For convenience, here is the summary table we ended up with:</p>

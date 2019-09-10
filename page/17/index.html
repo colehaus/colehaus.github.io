@@ -74,7 +74,23 @@ if (/Trident/.test(navigator.userAgent)) {
          <div class="abstract"><p>GiveWell produces cost-effectiveness models of its top charities. These models take as inputs many uncertain parameters. Instead of representing those uncertain parameters with point estimates—as the cost-effectiveness analysis spreadsheet does—we can (should) represent them with probability distributions. Feeding probability distributions into the models allows us to output explicit probability distributions on the cost-effectiveness of each charity.</p></div>
        
 
-        <h3 id="givewells-cost-effectiveness-analysis">GiveWell’s cost-effectiveness analysis</h3>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#givewells-cost-effectiveness-analysis">GiveWell’s cost-effectiveness analysis</a></li>
+<li><a href="#uncertain-inputs">Uncertain inputs</a><ul>
+<li><a href="#is-this-really-necessary">Is this really necessary?</a></li>
+<li><a href="#computers-are-nice">Computers are nice</a></li>
+</ul></li>
+<li><a href="#analysis">Analysis</a><ul>
+<li><a href="#model">Model</a></li>
+<li><a href="#inputs">Inputs</a></li>
+<li><a href="#results">Results</a></li>
+</ul></li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</div>
+<h3 id="givewells-cost-effectiveness-analysis">GiveWell’s cost-effectiveness analysis</h3>
 <p><a href="https://www.givewell.org/">GiveWell</a>, an in-depth charity evaluator, makes their detailed spreadsheets models <a href="https://docs.google.com/spreadsheets/d/1d255LKz11L3V-OgOEns9WvJzpnVeaLTcEP1HD4lC478/edit#gid=1537947274">available</a> for public review. These spreadsheets estimate the value per dollar of donations to their 8 top charities: GiveDirectly, Deworm the World, Schistosomiasis Control Initiative, Sightsavers, Against Malaria Foundation, Malaria Consortium, Helen Keller International, and the END Fund. For each charity, a model is constructed taking input values to an estimated value per dollar of donation to that charity. The inputs to these models vary from parameters like “malaria prevalence in areas where AMF operates” to “value assigned to averting the death of an individual under 5”.</p>
 <p>Helpfully, GiveWell isolates the input parameters it deems as most uncertain. These can be found in the “User inputs” and “Moral weights” tabs of their spreadsheet. Outsiders interested in the top charities can reuse GiveWell’s model but supply their own perspective by adjusting the values of the parameters in these tabs.</p>
 <p>For example, if I go to the “Moral weights” tab and run the calculation with a 0.1 value for doubling consumption for one person for one year—instead of the default value of 1—I see the effect of this modification on the final results: deworming charities look much less effective since their primary effect is on income.</p>
@@ -112,7 +128,23 @@ if (/Trident/.test(navigator.userAgent)) {
 
        
 
-        <p>As mentioned in the warnings on the <a href="../../posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#causal-triplets-again">Causal triplets, again</a><ul>
+<li><a href="#chains">Chains</a></li>
+<li><a href="#forks">Forks</a></li>
+<li><a href="#inverted-forks">Inverted forks</a></li>
+</ul></li>
+<li><a href="#d-separation-and-d-connection-along-a-path">d-separation and d-connection along a path</a></li>
+<li><a href="#d-separation-and-d-connection-on-graphs">d-separation and d-connection on graphs</a><ul>
+<li><a href="#conditioning-on-descendants-of-colliders">Conditioning on descendants of colliders</a></li>
+</ul></li>
+<li><a href="#interactive">Interactive</a></li>
+<li><a href="#postscript">Postscript</a></li>
+</ul>
+</div>
+<p>As mentioned in the warnings on the <a href="../../posts/babys-first-graphical-causal-models/">first post on graphical causal models</a>, I’ve been lying to you so far. But it was for a good reason: that sweet, sweet expository simplicity. So far, all our definitions, algorithms, etc. have proceeded without any acknowledgment of the social scientists’ favorite statistical tool: <span class="noted"><a href="https://en.wikipedia.org/wiki/Controlling_for_a_variable">controlling for a variable</a></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>In this post, we’ll introduce the concept of conditioning to our graphical causal models framework and see how it both complicates things and offers new possibilities. (This post deliberately mirrors the structure of <a href="../../posts/babys-first-graphical-causal-models/">that one</a> so it may be handy to have it open in a second tab/window for comparison purposes.)</p>
 <h3 id="causal-triplets-again">Causal triplets, again</h3>
 <p>We started out by talking about three types of causal triplets: chains, forks and inverted forks. For convenience, here is the summary table we ended up with:</p>
@@ -214,7 +246,25 @@ Types of causal triplets with conditioning on central vertex
 
        
 
-        <p><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
+        
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#instrumental-variables">Instrumental variables</a></li>
+<li><a href="#instrumental-variables-on-causal-graphs">Instrumental variables on causal graphs</a><ul>
+<li><a href="#a-brief-notational-interlude">A brief notational interlude</a></li>
+<li><a href="#defined">Defined</a></li>
+<li><a href="#interactive">Interactive</a></li>
+<li><a href="#explained">Explained</a><ul>
+<li><a href="#compatible-models">Compatible models</a></li>
+<li><a href="#the-instrumental-variable">The instrumental variable</a></li>
+<li><a href="#d-separations">d-separations</a></li>
+<li><a href="#model-selection">Model selection</a></li>
+</ul></li>
+<li><a href="#as-model-selection">As model selection</a></li>
+</ul></li>
+</ul>
+</div>
+<p><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
 <h3 id="instrumental-variables">Instrumental variables</h3>
 <p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our cause, but its only impact on the effect should be via the cause.</p>
 <p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer in other ways. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>

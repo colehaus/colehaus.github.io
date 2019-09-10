@@ -80,7 +80,56 @@ charity than others.">
 
   
 
-  <p><a href="../../posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost-effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
+  
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#sensitivity-analysis">Sensitivity analysis</a></li>
+<li><a href="#visual-sensitivity-analysis">Visual sensitivity analysis</a><ul>
+<li><a href="#direct-cash-transfers">Direct cash transfers</a><ul>
+<li><a href="#givedirectly">GiveDirectly</a></li>
+</ul></li>
+<li><a href="#deworming">Deworming</a><ul>
+<li><a href="#the-end-fund">The END Fund</a></li>
+<li><a href="#deworm-the-world">Deworm the World</a></li>
+<li><a href="#schistosomiasis-control-initiative">Schistosomiasis Control Initiative</a></li>
+<li><a href="#sightsavers">Sightsavers</a></li>
+</ul></li>
+<li><a href="#seasonal-malaria-chemoprevention">Seasonal malaria chemoprevention</a><ul>
+<li><a href="#malaria-consortium">Malaria Consortium</a></li>
+</ul></li>
+<li><a href="#vitamin-a-supplementation">Vitamin A supplementation</a><ul>
+<li><a href="#helen-keller-international">Helen Keller International</a></li>
+</ul></li>
+<li><a href="#bednets">Bednets</a><ul>
+<li><a href="#against-malaria-foundation">Against Malaria Foundation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#delta-moment-independent-sensitivity-analysis">Delta moment-independent sensitivity analysis</a><ul>
+<li><a href="#direct-cash-transfers-1">Direct cash transfers</a><ul>
+<li><a href="#givedirectly-1">GiveDirectly</a></li>
+</ul></li>
+<li><a href="#deworming-1">Deworming</a><ul>
+<li><a href="#the-end-fund-1">The END Fund</a></li>
+<li><a href="#deworm-the-world-1">Deworm the World</a></li>
+<li><a href="#schistosomiasis-control-initiative-1">Schistosomiasis Control Initiative</a></li>
+<li><a href="#sightsavers-1">Sightsavers</a></li>
+<li><a href="#deworming-comment">Deworming comment</a></li>
+</ul></li>
+<li><a href="#seasonal-malaria-chemoprevention-1">Seasonal malaria chemoprevention</a><ul>
+<li><a href="#malaria-consortium-1">Malaria Consortium</a></li>
+</ul></li>
+<li><a href="#vitamin-a-supplementation-1">Vitamin A supplementation</a><ul>
+<li><a href="#hellen-keller-international">Hellen Keller International</a></li>
+</ul></li>
+<li><a href="#bednets-1">Bednets</a><ul>
+<li><a href="#against-malaria-foundation-1">Against Malaria Foundation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#appendix">Appendix</a></li>
+</ul>
+</div>
+<p><a href="../../posts/uncertainty-analysis-of-givewell-cea/">Last time</a> we introduced GiveWell’s cost-effectiveness analysis which uses a spreadsheet model to take point estimates of uncertain input parameters to point estimates of uncertain results. We adjusted this approach to take probability distributions on the input parameters and in exchange got probability distributions on the resulting cost-effectiveness estimates. But this machinery lets us do more. Now that we’ve completed an uncertainty analysis, we can move on to sensitivity analysis.</p>
 <h3 id="sensitivity-analysis">Sensitivity analysis</h3>
 <p>The basic idea of <a href="https://en.wikipedia.org/wiki/Sensitivity_analysis">sensitivity analysis</a> is, when working with uncertain values, to see which input values most affect the output when they vary. For example, if you have the equation <span class="math inline">\(f(a, b) = 2^a + b\)</span> and each of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> varies uniformly over the range from 5 to 10, <span class="math inline">\(f(a, b)\)</span> is much more sensitive to <span class="math inline">\(a\)</span> then <span class="math inline">\(b\)</span>. A sensitivity analysis is practically useful in that it can offer you guidance as to which parameters in your model it would be most useful to investigate further (i.e. to narrow their uncertainty).</p>
 <h3 id="visual-sensitivity-analysis">Visual sensitivity analysis</h3>

@@ -73,7 +73,25 @@
 
   
 
-  <p><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
+  
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#instrumental-variables">Instrumental variables</a></li>
+<li><a href="#instrumental-variables-on-causal-graphs">Instrumental variables on causal graphs</a><ul>
+<li><a href="#a-brief-notational-interlude">A brief notational interlude</a></li>
+<li><a href="#defined">Defined</a></li>
+<li><a href="#interactive">Interactive</a></li>
+<li><a href="#explained">Explained</a><ul>
+<li><a href="#compatible-models">Compatible models</a></li>
+<li><a href="#the-instrumental-variable">The instrumental variable</a></li>
+<li><a href="#d-separations">d-separations</a></li>
+<li><a href="#model-selection">Model selection</a></li>
+</ul></li>
+<li><a href="#as-model-selection">As model selection</a></li>
+</ul></li>
+</ul>
+</div>
+<p><a href="../../posts/flip-it-reverse-it-graphical-causal-models/">Last time</a> we talked about viewing d-separation as a tool for model selection. But we’re pretty limited in the causal models we can distinguish between by only observing our variables of interest—any two graphs with the same set of d-separations are indistinguishable. <a href="https://en.wikipedia.org/wiki/Instrumental_variables_estimation">Instrumental variables</a> are a common tool for trying to get around the limitations of purely observational data.</p>
 <h3 id="instrumental-variables">Instrumental variables</h3>
 <p>Instrumental variables (IV) are variables that we’re not intrinsically interested in but that we look at in an attempt to suss out causality. The instrument must be correlated with our cause, but its only impact on the effect should be via the cause.</p>
 <p>The classic example is about—you guessed it—smoking. Because running an RCT on smoking is ethically verboten, we’re limited to observational data. How can we determine if smoking causes lung cancer from observational data alone? An instrumental variable! To reiterate, we want a factor that affects smoking prevalence but (almost certainly) does not affect lung cancer in other ways. Finding an instrument that satisfies the <abbr title="instrumental variable">IV</abbr> criteria generally seems to require substantial creativity. Can you think of an instrument for the causal effect of smoking on lung cancer?</p>
