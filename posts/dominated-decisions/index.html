@@ -186,17 +186,17 @@ Decision matrix about route to work. Preferred action in bold.
 </div>
 <h4 id="source-code">Source code</h4>
 <p>Another way to explain dominance is with source code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">dominatesWeakly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-2" title="2">dominatesWeakly rows <span class="ot">=</span> <span class="dt">Foldable</span><span class="op">.</span><span class="fu">and</span> (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2)</a>
-<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a>
-<a class="sourceLine" id="cb1-5" title="5"></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="ot">dominatesStrongly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-7" title="7">dominatesStrongly rows <span class="ot">=</span></a>
-<a class="sourceLine" id="cb1-8" title="8">  <span class="dt">Foldable</span><span class="op">.</span><span class="fu">and</span> (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2) <span class="op">&amp;&amp;</span></a>
-<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">Foldable</span><span class="op">.</span><span class="fu">or</span> (NonEmpty.zipWith (<span class="op">&gt;</span>) row1 row2)</a>
-<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb1-11" title="11">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="ot">dominatesWeakly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>dominatesWeakly rows <span class="ot">=</span> <span class="dt">Foldable</span><span class="op">.</span><span class="fu">and</span> (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="kw">where</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ot">dominatesStrongly ::</span> <span class="kw">forall</span> cell<span class="op">.</span> <span class="dt">PartialOrd</span> cell <span class="ot">=&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>dominatesStrongly rows <span class="ot">=</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="dt">Foldable</span><span class="op">.</span><span class="fu">and</span> (NonEmpty.zipWith (<span class="op">&gt;=</span>) row1 row2) <span class="op">&amp;&amp;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="dt">Foldable</span><span class="op">.</span><span class="fu">or</span> (NonEmpty.zipWith (<span class="op">&gt;</span>) row1 row2)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>  <span class="kw">where</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</span></code></pre></div>
 <p>To hammer home the point about dominance being applicable in very general settings: <code>cell</code> is totally polymorphic except for the constraint that <code>cell</code>s form a <a href="https://en.wikipedia.org/wiki/Partially_ordered_set">partial order</a>.</p>
 <h4 id="math">Math</h4>
 <p>And the final view on dominance will be <span class="noted">the fully mathematical one</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
@@ -217,8 +217,8 @@ Decision matrix about route to work. Preferred action in bold.
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>Ways we could go simpler: only one action, only one state of the world. But these settings are <em>too</em> simple and rather boring.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
-<li id="fn2" role="doc-endnote"><p>This perspective doesn’t really appear in <span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction" role="doc-biblioref">2017</a>)</span>; any errors here are my own.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>Ways we could go simpler: only one action, only one state of the world. But these settings are <em>too</em> simple and rather boring.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>This perspective doesn’t really appear in <span class="citation" data-cites="peterson2017introduction">(Peterson <a href="#ref-peterson2017introduction" role="doc-biblioref">2017</a>)</span>; any errors here are my own.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </article></main>

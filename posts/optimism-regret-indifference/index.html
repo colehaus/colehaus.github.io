@@ -162,16 +162,16 @@ Decision matrix about route to work.
 </div>
 <h4 id="code">Code</h4>
 <p>We can also explain the optimism-pessimism family of rules with their implementing source code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">optimismPessimism ::</span></a>
-<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">forall</span> n cell<span class="op">.</span></a>
-<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Semiring</span> cell <span class="ot">=&gt;</span> <span class="dt">Ring</span> n <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb1-4" title="4">  (n <span class="ot">-&gt;</span> cell) <span class="ot">-&gt;</span> <span class="dt">Proportion</span> n <span class="ot">-&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb1-5" title="5">optimismPessimism toCell α rows <span class="ot">=</span> value row1 <span class="op">&gt;=</span> value row2</a>
-<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb1-7" title="7">    value row <span class="ot">=</span></a>
-<a class="sourceLine" id="cb1-8" title="8">      toCell (Proportion.unMk α) <span class="op">*</span> Foldable1.maximum row <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-9" title="9">      toCell (one <span class="op">-</span> Proportion.unMk α) <span class="op">*</span> Foldable1.minimum row</a>
-<a class="sourceLine" id="cb1-10" title="10">    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="ot">optimismPessimism ::</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">forall</span> n cell<span class="op">.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Semiring</span> cell <span class="ot">=&gt;</span> <span class="dt">Ring</span> n <span class="ot">=&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  (n <span class="ot">-&gt;</span> cell) <span class="ot">-&gt;</span> <span class="dt">Proportion</span> n <span class="ot">-&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>optimismPessimism toCell α rows <span class="ot">=</span> value row1 <span class="op">&gt;=</span> value row2</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">where</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    value row <span class="ot">=</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>      toCell (Proportion.unMk α) <span class="op">*</span> Foldable1.maximum row <span class="op">+</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>      toCell (one <span class="op">-</span> Proportion.unMk α) <span class="op">*</span> Foldable1.minimum row</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="dt">Tuple</span> row1 row2 <span class="ot">=</span> unzipNeMultiSet rows</span></code></pre></div>
 <p><code>α</code> is the optimism parameter and <code>toCell</code> is a way of harmonizing its type with the <code>cell</code> type. Interestingly, we have leaped all the way from requiring <code>cell</code> only to be orderable—in maximin and maximax—to requiring that <code>cell</code> be a <a href="https://en.wikipedia.org/wiki/Semiring">semiring</a>—taking a weighted average requires the ability to both multiply and add.</p>
 <h4 id="math">Math</h4>
 <p>We can also describe the optimism-pessimism decision rules <span class="math inline">\(\preccurlyeq_{OptPes}\)</span> in symbols:</p>
@@ -321,11 +321,11 @@ Table of regrets corresponding to table immediately above.
 </div>
 <h4 id="code-1">Code</h4>
 <p>The code itself is a bit too ugly to be illuminating in this case, but the type signature does have a few things worth pointing out.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">minimaxRegret ::</span></a>
-<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">forall</span> rowId columnId cell<span class="op">.</span></a>
-<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">Hashable</span> cell <span class="ot">=&gt;</span> <span class="dt">Hashable</span> columnId <span class="ot">=&gt;</span> <span class="dt">Hashable</span> rowId <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Ring</span> cell <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb2-5" title="5">  <span class="dt">Table</span> rowId columnId cell <span class="ot">-&gt;</span> <span class="dt">NonEmpty</span> <span class="dt">HashSet</span> rowId</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="ot">minimaxRegret ::</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">forall</span> rowId columnId cell<span class="op">.</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="dt">Hashable</span> cell <span class="ot">=&gt;</span> <span class="dt">Hashable</span> columnId <span class="ot">=&gt;</span> <span class="dt">Hashable</span> rowId <span class="ot">=&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Ring</span> cell <span class="ot">=&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">Table</span> rowId columnId cell <span class="ot">-&gt;</span> <span class="dt">NonEmpty</span> <span class="dt">HashSet</span> rowId</span></code></pre></div>
 <p>First, <code>cell</code> must now be a <a href="https://en.wikipedia.org/wiki/Ring_(mathematics)">ring</a> which is a bit stronger than the semiring requirement of optimism-pessimism. This is because computing regrets requires subtraction.</p>
 <p>Second, the decision rule no longer operates on a pair of rows. In all our previous decision rules, we described the decision scenario with <code>PairOfRows cell</code>—independence of irrelevant alternatives meant that any context from other actions was irrelevant to the verdict. Here we must take a full <code>Table</code> because the verdict <code>minimaxRegret</code> returns for two rows may depend on some third row not under active consideration. This is the price we pay for losing independence of irrelevant alternatives.</p>
 <h4 id="math-1">Math</h4>
@@ -413,16 +413,16 @@ Decision matrix about route to work after assigning probabilities. Preferred act
 </ul>
 </div>
 <h4 id="code-2">Code</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">indifference ::</span></a>
-<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">forall</span> cell<span class="op">.</span></a>
-<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">Hashable</span> cell <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Semiring</span> cell <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb3-5" title="5">  (<span class="dt">Proportion</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> cell) <span class="ot">-&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></a>
-<a class="sourceLine" id="cb3-6" title="6">indifference toCell rows <span class="ot">=</span></a>
-<a class="sourceLine" id="cb3-7" title="7">  maximizesExpectedUtility toCell <span class="op">&lt;&lt;&lt;</span></a>
-<a class="sourceLine" id="cb3-8" title="8">  neMultiSetMap (<span class="dt">Tuple</span> prob) <span class="op">$</span> rows</a>
-<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb3-10" title="10">    prob <span class="ot">=</span> unsafeMkHashProp <span class="op">$</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="dt">Int</span><span class="op">.</span>toNumber (<span class="dt">Foldable</span><span class="op">.</span><span class="fu">length</span> rows)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">indifference ::</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">forall</span> cell<span class="op">.</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">Hashable</span> cell <span class="ot">=&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="dt">Ord</span> cell <span class="ot">=&gt;</span> <span class="dt">Semiring</span> cell <span class="ot">=&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  (<span class="dt">Proportion</span> <span class="dt">Number</span> <span class="ot">-&gt;</span> cell) <span class="ot">-&gt;</span> <span class="dt">PairOfRows</span> cell <span class="ot">-&gt;</span> <span class="dt">Boolean</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>indifference toCell rows <span class="ot">=</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  maximizesExpectedUtility toCell <span class="op">&lt;&lt;&lt;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  neMultiSetMap (<span class="dt">Tuple</span> prob) <span class="op">$</span> rows</span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="kw">where</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    prob <span class="ot">=</span> unsafeMkHashProp <span class="op">$</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="dt">Int</span><span class="op">.</span>toNumber (<span class="dt">Foldable</span><span class="op">.</span><span class="fu">length</span> rows)</span></code></pre></div>
 <p>Note that we’re back to only requiring <code>Semiring</code> of <code>cell</code> and taking pairs of rows at a time instead of a whole table—thanks independence of irrelevant alternatives!</p>
 <h4 id="math-2">Math</h4>
 <p>We can also describe the indifference decision rule <span class="math inline">\(\preccurlyeq_{Ind}\)</span> in symbols:</p>

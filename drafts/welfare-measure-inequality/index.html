@@ -74,13 +74,13 @@
   
 
   <p>— link-citations: true title: A new welfare measure of inequality tags: notebook, population axiology, social welfare, econometrics, data analysis published: 2018-02-20 —</p>
-<div class="sourceCode" id="cb1" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> parse <span class="op">=</span> <span class="at">require</span>(<span class="st">'csv-parse/lib/sync'</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">var</span> plot <span class="op">=</span> <span class="at">require</span>(<span class="st">'./content/data/offline/plot-helper'</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">var</span> <span class="op">{</span>create<span class="op">,</span> env<span class="op">}</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">'sanctuary'</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">var</span> S <span class="op">=</span> <span class="at">create</span>(<span class="op">{</span> <span class="dt">checkTypes</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> env <span class="op">}</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb2" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> rawData <span class="op">=</span> <span class="va">fs</span>.<span class="at">readFileSync</span>(<span class="st">'content/data/offline/WIID3.4_19JAN2017New.csv'</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">var</span> data <span class="op">=</span> <span class="at">parse</span>(rawData<span class="op">,</span> <span class="op">{</span> <span class="dt">columns</span><span class="op">:</span> <span class="kw">true</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="va">S</span>.<span class="at">maybeToNullable</span>(<span class="va">S</span>.<span class="at">take</span>(<span class="dv">1</span><span class="op">,</span> records))</a></code></pre></div>
+<div class="sourceCode" id="cb1" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">var</span> parse <span class="op">=</span> <span class="at">require</span>(<span class="st">'csv-parse/lib/sync'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">var</span> plot <span class="op">=</span> <span class="at">require</span>(<span class="st">'./content/data/offline/plot-helper'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">var</span> <span class="op">{</span>create<span class="op">,</span> env<span class="op">}</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">'sanctuary'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">var</span> S <span class="op">=</span> <span class="at">create</span>(<span class="op">{</span> <span class="dt">checkTypes</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> env <span class="op">}</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">var</span> rawData <span class="op">=</span> <span class="va">fs</span>.<span class="at">readFileSync</span>(<span class="st">'content/data/offline/WIID3.4_19JAN2017New.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">var</span> data <span class="op">=</span> <span class="at">parse</span>(rawData<span class="op">,</span> <span class="op">{</span> <span class="dt">columns</span><span class="op">:</span> <span class="kw">true</span> <span class="op">}</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="va">S</span>.<span class="at">maybeToNullable</span>(<span class="va">S</span>.<span class="at">take</span>(<span class="dv">1</span><span class="op">,</span> records))</span></code></pre></div>
 <pre class="example"><code>[ { Country: 'Afghanistan',
     Countrycode3: 'AFG',
     Countrycode2: 'AF',
@@ -136,21 +136,21 @@
     Mean_usd: '732.320007324219',
     Median_usd: '' } ]
 </code></pre>
-<div class="sourceCode" id="cb4" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> indices <span class="op">=</span> <span class="va">S</span>.<span class="at">range</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">11</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">var</span> latestWithDeciles <span class="op">=</span> <span class="va">S</span>.<span class="at">pipe</span>([</a>
-<a class="sourceLine" id="cb4-3" title="3">  <span class="va">S</span>.<span class="at">filter</span>(r <span class="kw">=&gt;</span></a>
-<a class="sourceLine" id="cb4-4" title="4">    <span class="va">indices</span>.<span class="at">every</span>(i <span class="kw">=&gt;</span> r[<span class="st">'D'</span> <span class="op">+</span> <span class="va">i</span>.<span class="at">toString</span>()] <span class="op">!==</span> <span class="st">''</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5">    <span class="op">&amp;&amp;</span> <span class="va">r</span>.<span class="at">Mean_usd</span> <span class="op">!==</span> <span class="st">''</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb4-6" title="6">  <span class="va">S</span>.<span class="at">groupBy</span>(<span class="va">S</span>.<span class="at">on</span>(<span class="va">S</span>.<span class="at">equals</span>)(r <span class="kw">=&gt;</span> <span class="va">r</span>.<span class="at">Country</span>))<span class="op">,</span></a>
-<a class="sourceLine" id="cb4-7" title="7">  <span class="va">S</span>.<span class="at">map</span>(</a>
-<a class="sourceLine" id="cb4-8" title="8">    <span class="va">S</span>.<span class="at">pipe</span>([</a>
-<a class="sourceLine" id="cb4-9" title="9">      <span class="va">S</span>.<span class="at">sortBy</span>(r <span class="kw">=&gt;</span> <span class="va">Number</span>.<span class="at">parseInt</span>(<span class="va">r</span>.<span class="at">Year</span><span class="op">,</span> <span class="dv">10</span>))<span class="op">,</span></a>
-<a class="sourceLine" id="cb4-10" title="10">      <span class="va">S</span>.<span class="at">last</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb4-11" title="11">      <span class="va">S</span>.<span class="at">maybeToNullable</span></a>
-<a class="sourceLine" id="cb4-12" title="12">    ])</a>
-<a class="sourceLine" id="cb4-13" title="13">  )<span class="op">,</span></a>
-<a class="sourceLine" id="cb4-14" title="14">])(data)</a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="va">S</span>.<span class="at">maybeToNullable</span>(<span class="va">S</span>.<span class="at">take</span>(<span class="dv">5</span><span class="op">,</span> latestWithDeciles))</a></code></pre></div>
+<div class="sourceCode" id="cb4" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">var</span> indices <span class="op">=</span> <span class="va">S</span>.<span class="at">range</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">11</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">var</span> latestWithDeciles <span class="op">=</span> <span class="va">S</span>.<span class="at">pipe</span>([</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="va">S</span>.<span class="at">filter</span>(r <span class="kw">=&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="va">indices</span>.<span class="at">every</span>(i <span class="kw">=&gt;</span> r[<span class="st">'D'</span> <span class="op">+</span> <span class="va">i</span>.<span class="at">toString</span>()] <span class="op">!==</span> <span class="st">''</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="op">&amp;&amp;</span> <span class="va">r</span>.<span class="at">Mean_usd</span> <span class="op">!==</span> <span class="st">''</span>)<span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="va">S</span>.<span class="at">groupBy</span>(<span class="va">S</span>.<span class="at">on</span>(<span class="va">S</span>.<span class="at">equals</span>)(r <span class="kw">=&gt;</span> <span class="va">r</span>.<span class="at">Country</span>))<span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="va">S</span>.<span class="at">map</span>(</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="va">S</span>.<span class="at">pipe</span>([</span>
+<span id="cb4-9"><a href="#cb4-9"></a>      <span class="va">S</span>.<span class="at">sortBy</span>(r <span class="kw">=&gt;</span> <span class="va">Number</span>.<span class="at">parseInt</span>(<span class="va">r</span>.<span class="at">Year</span><span class="op">,</span> <span class="dv">10</span>))<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>      <span class="va">S</span>.<span class="at">last</span><span class="op">,</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>      <span class="va">S</span>.<span class="at">maybeToNullable</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    ])</span>
+<span id="cb4-13"><a href="#cb4-13"></a>  )<span class="op">,</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>])(data)</span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="va">S</span>.<span class="at">maybeToNullable</span>(<span class="va">S</span>.<span class="at">take</span>(<span class="dv">5</span><span class="op">,</span> latestWithDeciles))</span></code></pre></div>
 <pre class="example"><code>[ { Country: 'Albania',
     Countrycode3: 'ALB',
     Countrycode2: 'AL',
@@ -422,36 +422,36 @@
     Mean_usd: '45520.859375',
     Median_usd: '38522.80078125' } ]
 </code></pre>
-<div class="sourceCode" id="cb6" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> unrolled <span class="op">=</span> <span class="va">S</span>.<span class="at">pipe</span>([</a>
-<a class="sourceLine" id="cb6-2" title="2">  <span class="va">S</span>.<span class="at">chain</span>(r <span class="kw">=&gt;</span></a>
-<a class="sourceLine" id="cb6-3" title="3">    <span class="va">S</span>.<span class="at">map</span>(i <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb6-4" title="4">      <span class="cf">return</span> <span class="op">{</span> <span class="dt">Country</span><span class="op">:</span> <span class="va">r</span>.<span class="at">Country</span><span class="op">,</span> <span class="dt">Decile</span><span class="op">:</span> i<span class="op">,</span> <span class="dt">Income</span><span class="op">:</span> <span class="va">Number</span>.<span class="at">parseFloat</span>(<span class="va">r</span>.<span class="at">Mean_usd</span>) <span class="op">*</span> <span class="va">Number</span>.<span class="at">parseFloat</span>(r[<span class="st">'D'</span> <span class="op">+</span> <span class="va">i</span>.<span class="at">toString</span>()]) / <span class="dv">10</span> <span class="op">}</span></a>
-<a class="sourceLine" id="cb6-5" title="5">    <span class="op">}</span>)(indices)</a>
-<a class="sourceLine" id="cb6-6" title="6">  )<span class="op">,</span> <span class="va">S</span>.<span class="at">map</span>(r <span class="kw">=&gt;</span> <span class="va">r</span>.<span class="at">Income</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="va">S</span>.<span class="at">insert</span>(<span class="st">'Income'</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> r) : r) <span class="co">// Can't have data at 0 due to log scale</span></a>
-<a class="sourceLine" id="cb6-7" title="7">])(latestWithDeciles)</a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="va">S</span>.<span class="at">maybeToNullable</span>(<span class="va">S</span>.<span class="at">take</span>(<span class="dv">5</span><span class="op">,</span> unrolled))</a></code></pre></div>
+<div class="sourceCode" id="cb6" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">var</span> unrolled <span class="op">=</span> <span class="va">S</span>.<span class="at">pipe</span>([</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="va">S</span>.<span class="at">chain</span>(r <span class="kw">=&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="va">S</span>.<span class="at">map</span>(i <span class="kw">=&gt;</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>      <span class="cf">return</span> <span class="op">{</span> <span class="dt">Country</span><span class="op">:</span> <span class="va">r</span>.<span class="at">Country</span><span class="op">,</span> <span class="dt">Decile</span><span class="op">:</span> i<span class="op">,</span> <span class="dt">Income</span><span class="op">:</span> <span class="va">Number</span>.<span class="at">parseFloat</span>(<span class="va">r</span>.<span class="at">Mean_usd</span>) <span class="op">*</span> <span class="va">Number</span>.<span class="at">parseFloat</span>(r[<span class="st">'D'</span> <span class="op">+</span> <span class="va">i</span>.<span class="at">toString</span>()]) <span class="op">/</span> <span class="dv">10</span> <span class="op">}</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="op">}</span>)(indices)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  )<span class="op">,</span> <span class="va">S</span>.<span class="at">map</span>(r <span class="kw">=&gt;</span> <span class="va">r</span>.<span class="at">Income</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="va">S</span>.<span class="at">insert</span>(<span class="st">'Income'</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> r) : r) <span class="co">// Can't have data at 0 due to log scale</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>])(latestWithDeciles)</span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="va">S</span>.<span class="at">maybeToNullable</span>(<span class="va">S</span>.<span class="at">take</span>(<span class="dv">5</span><span class="op">,</span> unrolled))</span></code></pre></div>
 <pre class="example"><code>[ { Country: 'Albania', Decile: 1, Income: 204.92815820312518 },
   { Country: 'Albania', Decile: 2, Income: 279.54873754882834 },
   { Country: 'Albania', Decile: 3, Income: 334.6788670654299 },
   { Country: 'Albania', Decile: 4, Income: 390.92273657226593 },
   { Country: 'Albania', Decile: 5, Income: 448.8372160644535 } ]
 </code></pre>
-<div class="sourceCode" id="cb8" data-org-language="js" data-file="chart.html"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">var</span> chart <span class="op">=</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">config</span><span class="op">:</span> <span class="op">{</span> <span class="dt">line</span><span class="op">:</span> <span class="op">{</span> <span class="dt">opacity</span><span class="op">:</span> <span class="fl">0.2</span> <span class="op">}</span> <span class="op">},</span></a>
-<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">data</span><span class="op">:</span> <span class="op">{</span> <span class="dt">values</span><span class="op">:</span> unrolled <span class="op">},</span></a>
-<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">mark</span><span class="op">:</span> <span class="st">'line'</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb8-5" title="5">  <span class="dt">encoding</span><span class="op">:</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-6" title="6">    <span class="dt">x</span><span class="op">:</span> <span class="op">{</span> <span class="dt">field</span><span class="op">:</span> <span class="st">'Decile'</span><span class="op">,</span> <span class="dt">type</span><span class="op">:</span> <span class="st">'ordinal'</span> <span class="op">},</span></a>
-<a class="sourceLine" id="cb8-7" title="7">    <span class="dt">y</span><span class="op">:</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-8" title="8">      <span class="dt">field</span><span class="op">:</span> <span class="st">'Income'</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb8-9" title="9">      <span class="dt">type</span><span class="op">:</span> <span class="st">'quantitative'</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb8-10" title="10">      <span class="dt">scale</span><span class="op">:</span> <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> <span class="st">'log'</span> <span class="op">}</span></a>
-<a class="sourceLine" id="cb8-11" title="11">     <span class="op">},</span></a>
-<a class="sourceLine" id="cb8-12" title="12">    <span class="dt">color</span><span class="op">:</span> <span class="op">{</span> <span class="dt">field</span><span class="op">:</span> <span class="st">'Country'</span><span class="op">,</span> <span class="dt">type</span><span class="op">:</span> <span class="st">'nominal'</span><span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">null</span> <span class="op">}</span></a>
-<a class="sourceLine" id="cb8-13" title="13">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="op">}</span></a>
-<a class="sourceLine" id="cb8-15" title="15"><span class="kw">var</span> tooltipOpts <span class="op">=</span> <span class="op">{</span> <span class="dt">showAllFields</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> <span class="dt">fields</span><span class="op">:</span> [ <span class="op">{</span> <span class="st">'field'</span><span class="op">:</span> <span class="st">'Country'</span> <span class="op">}</span> ] <span class="op">}</span></a>
-<a class="sourceLine" id="cb8-16" title="16">$$html$$ <span class="op">=</span> <span class="va">plot</span>.<span class="at">mkGraphHtml</span>(chart<span class="op">,</span> tooltipOpts)</a></code></pre></div>
+<div class="sourceCode" id="cb8" data-org-language="js" data-file="chart.html"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">var</span> chart <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">config</span><span class="op">:</span> <span class="op">{</span> <span class="dt">line</span><span class="op">:</span> <span class="op">{</span> <span class="dt">opacity</span><span class="op">:</span> <span class="fl">0.2</span> <span class="op">}</span> <span class="op">},</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="dt">data</span><span class="op">:</span> <span class="op">{</span> <span class="dt">values</span><span class="op">:</span> unrolled <span class="op">},</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="dt">mark</span><span class="op">:</span> <span class="st">'line'</span><span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="dt">encoding</span><span class="op">:</span> <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="dt">x</span><span class="op">:</span> <span class="op">{</span> <span class="dt">field</span><span class="op">:</span> <span class="st">'Decile'</span><span class="op">,</span> <span class="dt">type</span><span class="op">:</span> <span class="st">'ordinal'</span> <span class="op">},</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="dt">y</span><span class="op">:</span> <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>      <span class="dt">field</span><span class="op">:</span> <span class="st">'Income'</span><span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">'quantitative'</span><span class="op">,</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>      <span class="dt">scale</span><span class="op">:</span> <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> <span class="st">'log'</span> <span class="op">}</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>     <span class="op">},</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    <span class="dt">color</span><span class="op">:</span> <span class="op">{</span> <span class="dt">field</span><span class="op">:</span> <span class="st">'Country'</span><span class="op">,</span> <span class="dt">type</span><span class="op">:</span> <span class="st">'nominal'</span><span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">null</span> <span class="op">}</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="op">}</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="op">}</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="kw">var</span> tooltipOpts <span class="op">=</span> <span class="op">{</span> <span class="dt">showAllFields</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span> <span class="dt">fields</span><span class="op">:</span> [ <span class="op">{</span> <span class="st">'field'</span><span class="op">:</span> <span class="st">'Country'</span> <span class="op">}</span> ] <span class="op">}</span></span>
+<span id="cb8-16"><a href="#cb8-16"></a>$$html$$ <span class="op">=</span> <span class="va">plot</span>.<span class="at">mkGraphHtml</span>(chart<span class="op">,</span> tooltipOpts)</span></code></pre></div>
 
     <style>.vega-actions > a { padding: 0.5em; } </style>
     <div id="graph-a206746">

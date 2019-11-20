@@ -101,7 +101,7 @@ variables (vertices) are independent (d-separated) and dependent
 <h3 id="causal-graphs">Causal graphs</h3>
 <p>We can represent causal models as directed <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>. The vertices in the graph represent different random variables—causes and effects—and the edges represent causal relationships. If two vertices do not have an edge between them, there is no direct causal relationship between them. For example:</p>
 <figure>
-<img src="../../images/smoking-graph.svg" alt="Smoking is causally associated with both lung cancer and yellow fingers" id="smoking-graph" /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
+<img src="../../images/smoking-graph.svg" id="smoking-graph" alt /><figcaption>Smoking is causally associated with both lung cancer and yellow fingers</figcaption>
 </figure>
 <p>Some technical details:</p>
 <ul>
@@ -238,9 +238,9 @@ How are <input id="d-connection-from" type="text" /> and <input id="d-connection
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>Why three? We have two slots for a directed edge and in each slot an edge can point one of two ways. That creates four options (A ← B ← C; A → B → C; A ← B → C; A → B ← C), but the first two are symmetrical so we don’t bother to distinguish between them.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
-<li id="fn2" role="doc-endnote"><p>See <span class="citation" data-cites="pearl2016causal">(Pearl, Glymour, and Jewell <a href="#ref-pearl2016causal" role="doc-biblioref">2016</a>)</span> and “intransitive dependence” for the rare cases where this doesn’t apply.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
-<li id="fn3" role="doc-endnote"><p>The ‘d’ in d-separated and d-connected stands for “directional” according to most people. But at least <a href="https://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html">one place</a> says it stands for “dependence” which I think is much more intuitive.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>Why three? We have two slots for a directed edge and in each slot an edge can point one of two ways. That creates four options (A ← B ← C; A → B → C; A ← B → C; A → B ← C), but the first two are symmetrical so we don’t bother to distinguish between them.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>See <span class="citation" data-cites="pearl2016causal">(Pearl, Glymour, and Jewell <a href="#ref-pearl2016causal" role="doc-biblioref">2016</a>)</span> and “intransitive dependence” for the rare cases where this doesn’t apply.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>The ‘d’ in d-separated and d-connected stands for “directional” according to most people. But at least <a href="https://www.andrew.cmu.edu/user/scheines/tutor/d-sep.html">one place</a> says it stands for “dependence” which I think is much more intuitive.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </article></main>

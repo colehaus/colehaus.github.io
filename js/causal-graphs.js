@@ -14752,7 +14752,7 @@ if (typeof exports === 'object' && typeof module !== 'undefined') {
 })(this);
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":38,"buffer":35,"crypto":34,"fs":34,"path":34}],33:[function(require,module,exports){
+},{"_process":37,"buffer":35,"crypto":34,"fs":34,"path":34}],33:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -14820,7 +14820,8 @@ function toByteArray (b64) {
     ? validLen - 4
     : validLen
 
-  for (var i = 0; i < len; i += 4) {
+  var i
+  for (i = 0; i < len; i += 4) {
     tmp =
       (revLookup[b64.charCodeAt(i)] << 18) |
       (revLookup[b64.charCodeAt(i + 1)] << 12) |
@@ -14908,11 +14909,11 @@ function fromByteArray (uint8) {
 },{}],34:[function(require,module,exports){
 
 },{}],35:[function(require,module,exports){
-(function (global,Buffer){
+(function (Buffer){
 /*!
  * The buffer module from node.js, for the browser.
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
 /* eslint-disable no-proto */
@@ -14921,80 +14922,79 @@ function fromByteArray (uint8) {
 
 var base64 = require('base64-js')
 var ieee754 = require('ieee754')
-var isArray = require('isarray')
+var customInspectSymbol =
+  (typeof Symbol === 'function' && typeof Symbol.for === 'function')
+    ? Symbol.for('nodejs.util.inspect.custom')
+    : null
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
 exports.INSPECT_MAX_BYTES = 50
 
+var K_MAX_LENGTH = 0x7fffffff
+exports.kMaxLength = K_MAX_LENGTH
+
 /**
  * If `Buffer.TYPED_ARRAY_SUPPORT`:
  *   === true    Use Uint8Array implementation (fastest)
- *   === false   Use Object implementation (most compatible, even IE6)
+ *   === false   Print warning and recommend using `buffer` v4.x which has an Object
+ *               implementation (most compatible, even IE6)
  *
  * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
  * Opera 11.6+, iOS 4.2+.
  *
- * Due to various browser bugs, sometimes the Object implementation will be used even
- * when the browser supports typed arrays.
- *
- * Note:
- *
- *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
- *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
- *
- *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
- *
- *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
- *     incorrect length in some situations.
-
- * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
- * get the Object implementation, which is slower but behaves correctly.
+ * We report that the browser does not support typed arrays if the are not subclassable
+ * using __proto__. Firefox 4-29 lacks support for adding new properties to `Uint8Array`
+ * (See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438). IE 10 lacks support
+ * for __proto__ and has a buggy typed array implementation.
  */
-Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
-  ? global.TYPED_ARRAY_SUPPORT
-  : typedArraySupport()
+Buffer.TYPED_ARRAY_SUPPORT = typedArraySupport()
 
-/*
- * Export kMaxLength after typed array support is determined.
- */
-exports.kMaxLength = kMaxLength()
+if (!Buffer.TYPED_ARRAY_SUPPORT && typeof console !== 'undefined' &&
+    typeof console.error === 'function') {
+  console.error(
+    'This browser lacks typed array (Uint8Array) support which is required by ' +
+    '`buffer` v5.x. Use `buffer` v4.x if you require old browser support.'
+  )
+}
 
 function typedArraySupport () {
+  // Can typed array instances can be augmented?
   try {
     var arr = new Uint8Array(1)
-    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
-    return arr.foo() === 42 && // typed array instances can be augmented
-        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
-        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+    var proto = { foo: function () { return 42 } }
+    Object.setPrototypeOf(proto, Uint8Array.prototype)
+    Object.setPrototypeOf(arr, proto)
+    return arr.foo() === 42
   } catch (e) {
     return false
   }
 }
 
-function kMaxLength () {
-  return Buffer.TYPED_ARRAY_SUPPORT
-    ? 0x7fffffff
-    : 0x3fffffff
-}
-
-function createBuffer (that, length) {
-  if (kMaxLength() < length) {
-    throw new RangeError('Invalid typed array length')
+Object.defineProperty(Buffer.prototype, 'parent', {
+  enumerable: true,
+  get: function () {
+    if (!Buffer.isBuffer(this)) return undefined
+    return this.buffer
   }
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    // Return an augmented `Uint8Array` instance, for best performance
-    that = new Uint8Array(length)
-    that.__proto__ = Buffer.prototype
-  } else {
-    // Fallback: Return an object instance of the Buffer class
-    if (that === null) {
-      that = new Buffer(length)
-    }
-    that.length = length
-  }
+})
 
-  return that
+Object.defineProperty(Buffer.prototype, 'offset', {
+  enumerable: true,
+  get: function () {
+    if (!Buffer.isBuffer(this)) return undefined
+    return this.byteOffset
+  }
+})
+
+function createBuffer (length) {
+  if (length > K_MAX_LENGTH) {
+    throw new RangeError('The value "' + length + '" is invalid for option "size"')
+  }
+  // Return an augmented `Uint8Array` instance
+  var buf = new Uint8Array(length)
+  Object.setPrototypeOf(buf, Buffer.prototype)
+  return buf
 }
 
 /**
@@ -15008,44 +15008,77 @@ function createBuffer (that, length) {
  */
 
 function Buffer (arg, encodingOrOffset, length) {
-  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
-    return new Buffer(arg, encodingOrOffset, length)
-  }
-
   // Common case.
   if (typeof arg === 'number') {
     if (typeof encodingOrOffset === 'string') {
-      throw new Error(
-        'If encoding is specified then the first argument must be a string'
+      throw new TypeError(
+        'The "string" argument must be of type string. Received type number'
       )
     }
-    return allocUnsafe(this, arg)
+    return allocUnsafe(arg)
   }
-  return from(this, arg, encodingOrOffset, length)
+  return from(arg, encodingOrOffset, length)
+}
+
+// Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+if (typeof Symbol !== 'undefined' && Symbol.species != null &&
+    Buffer[Symbol.species] === Buffer) {
+  Object.defineProperty(Buffer, Symbol.species, {
+    value: null,
+    configurable: true,
+    enumerable: false,
+    writable: false
+  })
 }
 
 Buffer.poolSize = 8192 // not used by this implementation
 
-// TODO: Legacy, not needed anymore. Remove in next major version.
-Buffer._augment = function (arr) {
-  arr.__proto__ = Buffer.prototype
-  return arr
-}
-
-function from (that, value, encodingOrOffset, length) {
-  if (typeof value === 'number') {
-    throw new TypeError('"value" argument must not be a number')
-  }
-
-  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
-    return fromArrayBuffer(that, value, encodingOrOffset, length)
-  }
-
+function from (value, encodingOrOffset, length) {
   if (typeof value === 'string') {
-    return fromString(that, value, encodingOrOffset)
+    return fromString(value, encodingOrOffset)
   }
 
-  return fromObject(that, value)
+  if (ArrayBuffer.isView(value)) {
+    return fromArrayLike(value)
+  }
+
+  if (value == null) {
+    throw new TypeError(
+      'The first argument must be one of type string, Buffer, ArrayBuffer, Array, ' +
+      'or Array-like Object. Received type ' + (typeof value)
+    )
+  }
+
+  if (isInstance(value, ArrayBuffer) ||
+      (value && isInstance(value.buffer, ArrayBuffer))) {
+    return fromArrayBuffer(value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'number') {
+    throw new TypeError(
+      'The "value" argument must not be of type number. Received type number'
+    )
+  }
+
+  var valueOf = value.valueOf && value.valueOf()
+  if (valueOf != null && valueOf !== value) {
+    return Buffer.from(valueOf, encodingOrOffset, length)
+  }
+
+  var b = fromObject(value)
+  if (b) return b
+
+  if (typeof Symbol !== 'undefined' && Symbol.toPrimitive != null &&
+      typeof value[Symbol.toPrimitive] === 'function') {
+    return Buffer.from(
+      value[Symbol.toPrimitive]('string'), encodingOrOffset, length
+    )
+  }
+
+  throw new TypeError(
+    'The first argument must be one of type string, Buffer, ArrayBuffer, Array, ' +
+    'or Array-like Object. Received type ' + (typeof value)
+  )
 }
 
 /**
@@ -15057,44 +15090,36 @@ function from (that, value, encodingOrOffset, length) {
  * Buffer.from(arrayBuffer[, byteOffset[, length]])
  **/
 Buffer.from = function (value, encodingOrOffset, length) {
-  return from(null, value, encodingOrOffset, length)
+  return from(value, encodingOrOffset, length)
 }
 
-if (Buffer.TYPED_ARRAY_SUPPORT) {
-  Buffer.prototype.__proto__ = Uint8Array.prototype
-  Buffer.__proto__ = Uint8Array
-  if (typeof Symbol !== 'undefined' && Symbol.species &&
-      Buffer[Symbol.species] === Buffer) {
-    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
-    Object.defineProperty(Buffer, Symbol.species, {
-      value: null,
-      configurable: true
-    })
-  }
-}
+// Note: Change prototype *after* Buffer.from is defined to workaround Chrome bug:
+// https://github.com/feross/buffer/pull/148
+Object.setPrototypeOf(Buffer.prototype, Uint8Array.prototype)
+Object.setPrototypeOf(Buffer, Uint8Array)
 
 function assertSize (size) {
   if (typeof size !== 'number') {
-    throw new TypeError('"size" argument must be a number')
+    throw new TypeError('"size" argument must be of type number')
   } else if (size < 0) {
-    throw new RangeError('"size" argument must not be negative')
+    throw new RangeError('The value "' + size + '" is invalid for option "size"')
   }
 }
 
-function alloc (that, size, fill, encoding) {
+function alloc (size, fill, encoding) {
   assertSize(size)
   if (size <= 0) {
-    return createBuffer(that, size)
+    return createBuffer(size)
   }
   if (fill !== undefined) {
     // Only pay attention to encoding if it's a string. This
     // prevents accidentally sending in a number that would
     // be interpretted as a start offset.
     return typeof encoding === 'string'
-      ? createBuffer(that, size).fill(fill, encoding)
-      : createBuffer(that, size).fill(fill)
+      ? createBuffer(size).fill(fill, encoding)
+      : createBuffer(size).fill(fill)
   }
-  return createBuffer(that, size)
+  return createBuffer(size)
 }
 
 /**
@@ -15102,132 +15127,115 @@ function alloc (that, size, fill, encoding) {
  * alloc(size[, fill[, encoding]])
  **/
 Buffer.alloc = function (size, fill, encoding) {
-  return alloc(null, size, fill, encoding)
+  return alloc(size, fill, encoding)
 }
 
-function allocUnsafe (that, size) {
+function allocUnsafe (size) {
   assertSize(size)
-  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
-  if (!Buffer.TYPED_ARRAY_SUPPORT) {
-    for (var i = 0; i < size; ++i) {
-      that[i] = 0
-    }
-  }
-  return that
+  return createBuffer(size < 0 ? 0 : checked(size) | 0)
 }
 
 /**
  * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
  * */
 Buffer.allocUnsafe = function (size) {
-  return allocUnsafe(null, size)
+  return allocUnsafe(size)
 }
 /**
  * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
  */
 Buffer.allocUnsafeSlow = function (size) {
-  return allocUnsafe(null, size)
+  return allocUnsafe(size)
 }
 
-function fromString (that, string, encoding) {
+function fromString (string, encoding) {
   if (typeof encoding !== 'string' || encoding === '') {
     encoding = 'utf8'
   }
 
   if (!Buffer.isEncoding(encoding)) {
-    throw new TypeError('"encoding" must be a valid string encoding')
+    throw new TypeError('Unknown encoding: ' + encoding)
   }
 
   var length = byteLength(string, encoding) | 0
-  that = createBuffer(that, length)
+  var buf = createBuffer(length)
 
-  var actual = that.write(string, encoding)
+  var actual = buf.write(string, encoding)
 
   if (actual !== length) {
     // Writing a hex string, for example, that contains invalid characters will
     // cause everything after the first invalid character to be ignored. (e.g.
     // 'abxxcd' will be treated as 'ab')
-    that = that.slice(0, actual)
+    buf = buf.slice(0, actual)
   }
 
-  return that
+  return buf
 }
 
-function fromArrayLike (that, array) {
+function fromArrayLike (array) {
   var length = array.length < 0 ? 0 : checked(array.length) | 0
-  that = createBuffer(that, length)
+  var buf = createBuffer(length)
   for (var i = 0; i < length; i += 1) {
-    that[i] = array[i] & 255
+    buf[i] = array[i] & 255
   }
-  return that
+  return buf
 }
 
-function fromArrayBuffer (that, array, byteOffset, length) {
-  array.byteLength // this throws if `array` is not a valid ArrayBuffer
-
+function fromArrayBuffer (array, byteOffset, length) {
   if (byteOffset < 0 || array.byteLength < byteOffset) {
-    throw new RangeError('\'offset\' is out of bounds')
+    throw new RangeError('"offset" is outside of buffer bounds')
   }
 
   if (array.byteLength < byteOffset + (length || 0)) {
-    throw new RangeError('\'length\' is out of bounds')
+    throw new RangeError('"length" is outside of buffer bounds')
   }
 
+  var buf
   if (byteOffset === undefined && length === undefined) {
-    array = new Uint8Array(array)
+    buf = new Uint8Array(array)
   } else if (length === undefined) {
-    array = new Uint8Array(array, byteOffset)
+    buf = new Uint8Array(array, byteOffset)
   } else {
-    array = new Uint8Array(array, byteOffset, length)
+    buf = new Uint8Array(array, byteOffset, length)
   }
 
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    // Return an augmented `Uint8Array` instance, for best performance
-    that = array
-    that.__proto__ = Buffer.prototype
-  } else {
-    // Fallback: Return an object instance of the Buffer class
-    that = fromArrayLike(that, array)
-  }
-  return that
+  // Return an augmented `Uint8Array` instance
+  Object.setPrototypeOf(buf, Buffer.prototype)
+
+  return buf
 }
 
-function fromObject (that, obj) {
+function fromObject (obj) {
   if (Buffer.isBuffer(obj)) {
     var len = checked(obj.length) | 0
-    that = createBuffer(that, len)
+    var buf = createBuffer(len)
 
-    if (that.length === 0) {
-      return that
+    if (buf.length === 0) {
+      return buf
     }
 
-    obj.copy(that, 0, 0, len)
-    return that
+    obj.copy(buf, 0, 0, len)
+    return buf
   }
 
-  if (obj) {
-    if ((typeof ArrayBuffer !== 'undefined' &&
-        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
-      if (typeof obj.length !== 'number' || isnan(obj.length)) {
-        return createBuffer(that, 0)
-      }
-      return fromArrayLike(that, obj)
+  if (obj.length !== undefined) {
+    if (typeof obj.length !== 'number' || numberIsNaN(obj.length)) {
+      return createBuffer(0)
     }
-
-    if (obj.type === 'Buffer' && isArray(obj.data)) {
-      return fromArrayLike(that, obj.data)
-    }
+    return fromArrayLike(obj)
   }
 
-  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+  if (obj.type === 'Buffer' && Array.isArray(obj.data)) {
+    return fromArrayLike(obj.data)
+  }
 }
 
 function checked (length) {
-  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // Note: cannot use `length < K_MAX_LENGTH` here because that fails when
   // length is NaN (which is otherwise coerced to zero.)
-  if (length >= kMaxLength()) {
+  if (length >= K_MAX_LENGTH) {
     throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
-                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+                         'size: 0x' + K_MAX_LENGTH.toString(16) + ' bytes')
   }
   return length | 0
 }
@@ -15240,12 +15248,17 @@ function SlowBuffer (length) {
 }
 
 Buffer.isBuffer = function isBuffer (b) {
-  return !!(b != null && b._isBuffer)
+  return b != null && b._isBuffer === true &&
+    b !== Buffer.prototype // so Buffer.isBuffer(Buffer.prototype) will be false
 }
 
 Buffer.compare = function compare (a, b) {
+  if (isInstance(a, Uint8Array)) a = Buffer.from(a, a.offset, a.byteLength)
+  if (isInstance(b, Uint8Array)) b = Buffer.from(b, b.offset, b.byteLength)
   if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
-    throw new TypeError('Arguments must be Buffers')
+    throw new TypeError(
+      'The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array'
+    )
   }
 
   if (a === b) return 0
@@ -15286,7 +15299,7 @@ Buffer.isEncoding = function isEncoding (encoding) {
 }
 
 Buffer.concat = function concat (list, length) {
-  if (!isArray(list)) {
+  if (!Array.isArray(list)) {
     throw new TypeError('"list" argument must be an Array of Buffers')
   }
 
@@ -15306,6 +15319,9 @@ Buffer.concat = function concat (list, length) {
   var pos = 0
   for (i = 0; i < list.length; ++i) {
     var buf = list[i]
+    if (isInstance(buf, Uint8Array)) {
+      buf = Buffer.from(buf)
+    }
     if (!Buffer.isBuffer(buf)) {
       throw new TypeError('"list" argument must be an Array of Buffers')
     }
@@ -15319,16 +15335,19 @@ function byteLength (string, encoding) {
   if (Buffer.isBuffer(string)) {
     return string.length
   }
-  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
-      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+  if (ArrayBuffer.isView(string) || isInstance(string, ArrayBuffer)) {
     return string.byteLength
   }
   if (typeof string !== 'string') {
-    string = '' + string
+    throw new TypeError(
+      'The "string" argument must be one of type string, Buffer, or ArrayBuffer. ' +
+      'Received type ' + typeof string
+    )
   }
 
   var len = string.length
-  if (len === 0) return 0
+  var mustMatch = (arguments.length > 2 && arguments[2] === true)
+  if (!mustMatch && len === 0) return 0
 
   // Use a for loop to avoid recursion
   var loweredCase = false
@@ -15340,7 +15359,6 @@ function byteLength (string, encoding) {
         return len
       case 'utf8':
       case 'utf-8':
-      case undefined:
         return utf8ToBytes(string).length
       case 'ucs2':
       case 'ucs-2':
@@ -15352,7 +15370,9 @@ function byteLength (string, encoding) {
       case 'base64':
         return base64ToBytes(string).length
       default:
-        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+        if (loweredCase) {
+          return mustMatch ? -1 : utf8ToBytes(string).length // assume utf8
+        }
         encoding = ('' + encoding).toLowerCase()
         loweredCase = true
     }
@@ -15430,8 +15450,12 @@ function slowToString (encoding, start, end) {
   }
 }
 
-// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
-// Buffer instances.
+// This property is used by `Buffer.isBuffer` (and the `is-buffer` npm package)
+// to detect a Buffer instance. It's not possible to use `instanceof Buffer`
+// reliably in a browserify context because there could be multiple different
+// copies of the 'buffer' package in use. This method works even for Buffer
+// instances that were created from another copy of the `buffer` package.
+// See: https://github.com/feross/buffer/issues/154
 Buffer.prototype._isBuffer = true
 
 function swap (b, n, m) {
@@ -15478,11 +15502,13 @@ Buffer.prototype.swap64 = function swap64 () {
 }
 
 Buffer.prototype.toString = function toString () {
-  var length = this.length | 0
+  var length = this.length
   if (length === 0) return ''
   if (arguments.length === 0) return utf8Slice(this, 0, length)
   return slowToString.apply(this, arguments)
 }
+
+Buffer.prototype.toLocaleString = Buffer.prototype.toString
 
 Buffer.prototype.equals = function equals (b) {
   if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
@@ -15493,16 +15519,23 @@ Buffer.prototype.equals = function equals (b) {
 Buffer.prototype.inspect = function inspect () {
   var str = ''
   var max = exports.INSPECT_MAX_BYTES
-  if (this.length > 0) {
-    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
-    if (this.length > max) str += ' ... '
-  }
+  str = this.toString('hex', 0, max).replace(/(.{2})/g, '$1 ').trim()
+  if (this.length > max) str += ' ... '
   return '<Buffer ' + str + '>'
+}
+if (customInspectSymbol) {
+  Buffer.prototype[customInspectSymbol] = Buffer.prototype.inspect
 }
 
 Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (isInstance(target, Uint8Array)) {
+    target = Buffer.from(target, target.offset, target.byteLength)
+  }
   if (!Buffer.isBuffer(target)) {
-    throw new TypeError('Argument must be a Buffer')
+    throw new TypeError(
+      'The "target" argument must be one of type Buffer or Uint8Array. ' +
+      'Received type ' + (typeof target)
+    )
   }
 
   if (start === undefined) {
@@ -15581,8 +15614,8 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
   } else if (byteOffset < -0x80000000) {
     byteOffset = -0x80000000
   }
-  byteOffset = +byteOffset  // Coerce to Number.
-  if (isNaN(byteOffset)) {
+  byteOffset = +byteOffset // Coerce to Number.
+  if (numberIsNaN(byteOffset)) {
     // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
     byteOffset = dir ? 0 : (buffer.length - 1)
   }
@@ -15611,15 +15644,14 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
     return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
   } else if (typeof val === 'number') {
     val = val & 0xFF // Search for a byte value [0-255]
-    if (Buffer.TYPED_ARRAY_SUPPORT &&
-        typeof Uint8Array.prototype.indexOf === 'function') {
+    if (typeof Uint8Array.prototype.indexOf === 'function') {
       if (dir) {
         return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
       } else {
         return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
       }
     }
-    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+    return arrayIndexOf(buffer, [val], byteOffset, encoding, dir)
   }
 
   throw new TypeError('val must be string, number or Buffer')
@@ -15705,16 +15737,14 @@ function hexWrite (buf, string, offset, length) {
     }
   }
 
-  // must be an even number of digits
   var strLen = string.length
-  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
 
   if (length > strLen / 2) {
     length = strLen / 2
   }
   for (var i = 0; i < length; ++i) {
     var parsed = parseInt(string.substr(i * 2, 2), 16)
-    if (isNaN(parsed)) return i
+    if (numberIsNaN(parsed)) return i
     buf[offset + i] = parsed
   }
   return i
@@ -15753,15 +15783,14 @@ Buffer.prototype.write = function write (string, offset, length, encoding) {
     offset = 0
   // Buffer#write(string, offset[, length][, encoding])
   } else if (isFinite(offset)) {
-    offset = offset | 0
+    offset = offset >>> 0
     if (isFinite(length)) {
-      length = length | 0
+      length = length >>> 0
       if (encoding === undefined) encoding = 'utf8'
     } else {
       encoding = length
       length = undefined
     }
-  // legacy write(string, encoding, offset, length) - remove in v0.13
   } else {
     throw new Error(
       'Buffer.write(string, encoding, offset[, length]) is no longer supported'
@@ -15837,8 +15866,8 @@ function utf8Slice (buf, start, end) {
     var codePoint = null
     var bytesPerSequence = (firstByte > 0xEF) ? 4
       : (firstByte > 0xDF) ? 3
-      : (firstByte > 0xBF) ? 2
-      : 1
+        : (firstByte > 0xBF) ? 2
+          : 1
 
     if (i + bytesPerSequence <= end) {
       var secondByte, thirdByte, fourthByte, tempCodePoint
@@ -15951,7 +15980,7 @@ function hexSlice (buf, start, end) {
 
   var out = ''
   for (var i = start; i < end; ++i) {
-    out += toHex(buf[i])
+    out += hexSliceLookupTable[buf[i]]
   }
   return out
 }
@@ -15960,7 +15989,7 @@ function utf16leSlice (buf, start, end) {
   var bytes = buf.slice(start, end)
   var res = ''
   for (var i = 0; i < bytes.length; i += 2) {
-    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+    res += String.fromCharCode(bytes[i] + (bytes[i + 1] * 256))
   }
   return res
 }
@@ -15986,17 +16015,9 @@ Buffer.prototype.slice = function slice (start, end) {
 
   if (end < start) end = start
 
-  var newBuf
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    newBuf = this.subarray(start, end)
-    newBuf.__proto__ = Buffer.prototype
-  } else {
-    var sliceLen = end - start
-    newBuf = new Buffer(sliceLen, undefined)
-    for (var i = 0; i < sliceLen; ++i) {
-      newBuf[i] = this[i + start]
-    }
-  }
+  var newBuf = this.subarray(start, end)
+  // Return an augmented `Uint8Array` instance
+  Object.setPrototypeOf(newBuf, Buffer.prototype)
 
   return newBuf
 }
@@ -16010,8 +16031,8 @@ function checkOffset (offset, ext, length) {
 }
 
 Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
   if (!noAssert) checkOffset(offset, byteLength, this.length)
 
   var val = this[offset]
@@ -16025,8 +16046,8 @@ Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert)
 }
 
 Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
   if (!noAssert) {
     checkOffset(offset, byteLength, this.length)
   }
@@ -16041,21 +16062,25 @@ Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert)
 }
 
 Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 1, this.length)
   return this[offset]
 }
 
 Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 2, this.length)
   return this[offset] | (this[offset + 1] << 8)
 }
 
 Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 2, this.length)
   return (this[offset] << 8) | this[offset + 1]
 }
 
 Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 4, this.length)
 
   return ((this[offset]) |
@@ -16065,6 +16090,7 @@ Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
 }
 
 Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 4, this.length)
 
   return (this[offset] * 0x1000000) +
@@ -16074,8 +16100,8 @@ Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
 }
 
 Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
   if (!noAssert) checkOffset(offset, byteLength, this.length)
 
   var val = this[offset]
@@ -16092,8 +16118,8 @@ Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
 }
 
 Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
-  offset = offset | 0
-  byteLength = byteLength | 0
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
   if (!noAssert) checkOffset(offset, byteLength, this.length)
 
   var i = byteLength
@@ -16110,24 +16136,28 @@ Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
 }
 
 Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 1, this.length)
   if (!(this[offset] & 0x80)) return (this[offset])
   return ((0xff - this[offset] + 1) * -1)
 }
 
 Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 2, this.length)
   var val = this[offset] | (this[offset + 1] << 8)
   return (val & 0x8000) ? val | 0xFFFF0000 : val
 }
 
 Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 2, this.length)
   var val = this[offset + 1] | (this[offset] << 8)
   return (val & 0x8000) ? val | 0xFFFF0000 : val
 }
 
 Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 4, this.length)
 
   return (this[offset]) |
@@ -16137,6 +16167,7 @@ Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
 }
 
 Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 4, this.length)
 
   return (this[offset] << 24) |
@@ -16146,21 +16177,25 @@ Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
 }
 
 Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 4, this.length)
   return ieee754.read(this, offset, true, 23, 4)
 }
 
 Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 4, this.length)
   return ieee754.read(this, offset, false, 23, 4)
 }
 
 Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 8, this.length)
   return ieee754.read(this, offset, true, 52, 8)
 }
 
 Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  offset = offset >>> 0
   if (!noAssert) checkOffset(offset, 8, this.length)
   return ieee754.read(this, offset, false, 52, 8)
 }
@@ -16173,8 +16208,8 @@ function checkInt (buf, value, offset, ext, max, min) {
 
 Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
   value = +value
-  offset = offset | 0
-  byteLength = byteLength | 0
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
   if (!noAssert) {
     var maxBytes = Math.pow(2, 8 * byteLength) - 1
     checkInt(this, value, offset, byteLength, maxBytes, 0)
@@ -16192,8 +16227,8 @@ Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, 
 
 Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
   value = +value
-  offset = offset | 0
-  byteLength = byteLength | 0
+  offset = offset >>> 0
+  byteLength = byteLength >>> 0
   if (!noAssert) {
     var maxBytes = Math.pow(2, 8 * byteLength) - 1
     checkInt(this, value, offset, byteLength, maxBytes, 0)
@@ -16211,89 +16246,57 @@ Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, 
 
 Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
-  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
   this[offset] = (value & 0xff)
   return offset + 1
 }
 
-function objectWriteUInt16 (buf, value, offset, littleEndian) {
-  if (value < 0) value = 0xffff + value + 1
-  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
-    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
-      (littleEndian ? i : 1 - i) * 8
-  }
-}
-
 Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value & 0xff)
-    this[offset + 1] = (value >>> 8)
-  } else {
-    objectWriteUInt16(this, value, offset, true)
-  }
+  this[offset] = (value & 0xff)
+  this[offset + 1] = (value >>> 8)
   return offset + 2
 }
 
 Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 8)
-    this[offset + 1] = (value & 0xff)
-  } else {
-    objectWriteUInt16(this, value, offset, false)
-  }
+  this[offset] = (value >>> 8)
+  this[offset + 1] = (value & 0xff)
   return offset + 2
-}
-
-function objectWriteUInt32 (buf, value, offset, littleEndian) {
-  if (value < 0) value = 0xffffffff + value + 1
-  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
-    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
-  }
 }
 
 Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset + 3] = (value >>> 24)
-    this[offset + 2] = (value >>> 16)
-    this[offset + 1] = (value >>> 8)
-    this[offset] = (value & 0xff)
-  } else {
-    objectWriteUInt32(this, value, offset, true)
-  }
+  this[offset + 3] = (value >>> 24)
+  this[offset + 2] = (value >>> 16)
+  this[offset + 1] = (value >>> 8)
+  this[offset] = (value & 0xff)
   return offset + 4
 }
 
 Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 24)
-    this[offset + 1] = (value >>> 16)
-    this[offset + 2] = (value >>> 8)
-    this[offset + 3] = (value & 0xff)
-  } else {
-    objectWriteUInt32(this, value, offset, false)
-  }
+  this[offset] = (value >>> 24)
+  this[offset + 1] = (value >>> 16)
+  this[offset + 2] = (value >>> 8)
+  this[offset + 3] = (value & 0xff)
   return offset + 4
 }
 
 Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) {
-    var limit = Math.pow(2, 8 * byteLength - 1)
+    var limit = Math.pow(2, (8 * byteLength) - 1)
 
     checkInt(this, value, offset, byteLength, limit - 1, -limit)
   }
@@ -16314,9 +16317,9 @@ Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, no
 
 Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) {
-    var limit = Math.pow(2, 8 * byteLength - 1)
+    var limit = Math.pow(2, (8 * byteLength) - 1)
 
     checkInt(this, value, offset, byteLength, limit - 1, -limit)
   }
@@ -16337,9 +16340,8 @@ Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, no
 
 Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
-  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
   if (value < 0) value = 0xff + value + 1
   this[offset] = (value & 0xff)
   return offset + 1
@@ -16347,58 +16349,42 @@ Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
 
 Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value & 0xff)
-    this[offset + 1] = (value >>> 8)
-  } else {
-    objectWriteUInt16(this, value, offset, true)
-  }
+  this[offset] = (value & 0xff)
+  this[offset + 1] = (value >>> 8)
   return offset + 2
 }
 
 Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 8)
-    this[offset + 1] = (value & 0xff)
-  } else {
-    objectWriteUInt16(this, value, offset, false)
-  }
+  this[offset] = (value >>> 8)
+  this[offset + 1] = (value & 0xff)
   return offset + 2
 }
 
 Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value & 0xff)
-    this[offset + 1] = (value >>> 8)
-    this[offset + 2] = (value >>> 16)
-    this[offset + 3] = (value >>> 24)
-  } else {
-    objectWriteUInt32(this, value, offset, true)
-  }
+  this[offset] = (value & 0xff)
+  this[offset + 1] = (value >>> 8)
+  this[offset + 2] = (value >>> 16)
+  this[offset + 3] = (value >>> 24)
   return offset + 4
 }
 
 Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
   value = +value
-  offset = offset | 0
+  offset = offset >>> 0
   if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
   if (value < 0) value = 0xffffffff + value + 1
-  if (Buffer.TYPED_ARRAY_SUPPORT) {
-    this[offset] = (value >>> 24)
-    this[offset + 1] = (value >>> 16)
-    this[offset + 2] = (value >>> 8)
-    this[offset + 3] = (value & 0xff)
-  } else {
-    objectWriteUInt32(this, value, offset, false)
-  }
+  this[offset] = (value >>> 24)
+  this[offset + 1] = (value >>> 16)
+  this[offset + 2] = (value >>> 8)
+  this[offset + 3] = (value & 0xff)
   return offset + 4
 }
 
@@ -16408,6 +16394,8 @@ function checkIEEE754 (buf, value, offset, ext, max, min) {
 }
 
 function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  value = +value
+  offset = offset >>> 0
   if (!noAssert) {
     checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
   }
@@ -16424,6 +16412,8 @@ Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) 
 }
 
 function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  value = +value
+  offset = offset >>> 0
   if (!noAssert) {
     checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
   }
@@ -16441,6 +16431,7 @@ Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert
 
 // copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
 Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!Buffer.isBuffer(target)) throw new TypeError('argument should be a Buffer')
   if (!start) start = 0
   if (!end && end !== 0) end = this.length
   if (targetStart >= target.length) targetStart = target.length
@@ -16455,7 +16446,7 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
   if (targetStart < 0) {
     throw new RangeError('targetStart out of bounds')
   }
-  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (start < 0 || start >= this.length) throw new RangeError('Index out of range')
   if (end < 0) throw new RangeError('sourceEnd out of bounds')
 
   // Are we oob?
@@ -16465,22 +16456,19 @@ Buffer.prototype.copy = function copy (target, targetStart, start, end) {
   }
 
   var len = end - start
-  var i
 
-  if (this === target && start < targetStart && targetStart < end) {
+  if (this === target && typeof Uint8Array.prototype.copyWithin === 'function') {
+    // Use built-in when available, missing from IE11
+    this.copyWithin(targetStart, start, end)
+  } else if (this === target && start < targetStart && targetStart < end) {
     // descending copy from end
-    for (i = len - 1; i >= 0; --i) {
-      target[i + targetStart] = this[i + start]
-    }
-  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
-    // ascending copy from start
-    for (i = 0; i < len; ++i) {
+    for (var i = len - 1; i >= 0; --i) {
       target[i + targetStart] = this[i + start]
     }
   } else {
     Uint8Array.prototype.set.call(
       target,
-      this.subarray(start, start + len),
+      this.subarray(start, end),
       targetStart
     )
   }
@@ -16503,20 +16491,24 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
       encoding = end
       end = this.length
     }
-    if (val.length === 1) {
-      var code = val.charCodeAt(0)
-      if (code < 256) {
-        val = code
-      }
-    }
     if (encoding !== undefined && typeof encoding !== 'string') {
       throw new TypeError('encoding must be a string')
     }
     if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
       throw new TypeError('Unknown encoding: ' + encoding)
     }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if ((encoding === 'utf8' && code < 128) ||
+          encoding === 'latin1') {
+        // Fast path: If `val` fits into a single byte, use that numeric value.
+        val = code
+      }
+    }
   } else if (typeof val === 'number') {
     val = val & 255
+  } else if (typeof val === 'boolean') {
+    val = Number(val)
   }
 
   // Invalid ranges are not set to a default, so can range check early.
@@ -16541,8 +16533,12 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
   } else {
     var bytes = Buffer.isBuffer(val)
       ? val
-      : utf8ToBytes(new Buffer(val, encoding).toString())
+      : Buffer.from(val, encoding)
     var len = bytes.length
+    if (len === 0) {
+      throw new TypeError('The value "' + val +
+        '" is invalid for argument "value"')
+    }
     for (i = 0; i < end - start; ++i) {
       this[i + start] = bytes[i % len]
     }
@@ -16554,11 +16550,13 @@ Buffer.prototype.fill = function fill (val, start, end, encoding) {
 // HELPER FUNCTIONS
 // ================
 
-var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+var INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g
 
 function base64clean (str) {
+  // Node takes equal signs as end of the Base64 encoding
+  str = str.split('=')[0]
   // Node strips out invalid characters like \n and \t from the string, base64-js does not
-  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  str = str.trim().replace(INVALID_BASE64_RE, '')
   // Node converts strings with length < 2 to ''
   if (str.length < 2) return ''
   // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
@@ -16566,16 +16564,6 @@ function base64clean (str) {
     str = str + '='
   }
   return str
-}
-
-function stringtrim (str) {
-  if (str.trim) return str.trim()
-  return str.replace(/^\s+|\s+$/g, '')
-}
-
-function toHex (n) {
-  if (n < 16) return '0' + n.toString(16)
-  return n.toString(16)
 }
 
 function utf8ToBytes (string, units) {
@@ -16695,12 +16683,35 @@ function blitBuffer (src, dst, offset, length) {
   return i
 }
 
-function isnan (val) {
-  return val !== val // eslint-disable-line no-self-compare
+// ArrayBuffer or Uint8Array objects from other contexts (i.e. iframes) do not pass
+// the `instanceof` check but they should be treated as of that type.
+// See: https://github.com/feross/buffer/issues/166
+function isInstance (obj, type) {
+  return obj instanceof type ||
+    (obj != null && obj.constructor != null && obj.constructor.name != null &&
+      obj.constructor.name === type.name)
+}
+function numberIsNaN (obj) {
+  // For IE11 support
+  return obj !== obj // eslint-disable-line no-self-compare
 }
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"base64-js":33,"buffer":35,"ieee754":36,"isarray":37}],36:[function(require,module,exports){
+// Create lookup table for `toString('hex')`
+// See: https://github.com/feross/buffer/issues/219
+var hexSliceLookupTable = (function () {
+  var alphabet = '0123456789abcdef'
+  var table = new Array(256)
+  for (var i = 0; i < 16; ++i) {
+    var i16 = i * 16
+    for (var j = 0; j < 16; ++j) {
+      table[i16 + j] = alphabet[i] + alphabet[j]
+    }
+  }
+  return table
+})()
+
+}).call(this,require("buffer").Buffer)
+},{"base64-js":33,"buffer":35,"ieee754":36}],36:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -16787,13 +16798,6 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 }
 
 },{}],37:[function(require,module,exports){
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
-},{}],38:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -16979,11 +16983,11 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],39:[function(require,module,exports){
-// Generated by purs bundle 0.12.3
+},{}],38:[function(require,module,exports){
+// Generated by purs bundle 0.13.3
 var PS = {};
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.arrayBind = function (arr) {
     return function (f) {
@@ -16996,7 +17000,7 @@ var PS = {};
   };
 })(PS["Control.Bind"] = PS["Control.Bind"] || {});
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.arrayApply = function (fs) {
     return function (xs) {
@@ -17014,9 +17018,11 @@ var PS = {};
     };
   };
 })(PS["Control.Apply"] = PS["Control.Apply"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
+  $PS["Control.Semigroupoid"] = $PS["Control.Semigroupoid"] || {};
+  var exports = $PS["Control.Semigroupoid"];
   var Semigroupoid = function (compose) {
       this.compose = compose;
   };
@@ -17031,13 +17037,14 @@ var PS = {};
       return dict.compose;
   };
   exports["compose"] = compose;
-  exports["Semigroupoid"] = Semigroupoid;
   exports["semigroupoidFn"] = semigroupoidFn;
-})(PS["Control.Semigroupoid"] = PS["Control.Semigroupoid"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];                 
+  $PS["Control.Category"] = $PS["Control.Category"] || {};
+  var exports = $PS["Control.Category"];
+  var Control_Semigroupoid = $PS["Control.Semigroupoid"];                
   var Category = function (Semigroupoid0, identity) {
       this.Semigroupoid0 = Semigroupoid0;
       this.identity = identity;
@@ -17050,534 +17057,14 @@ var PS = {};
   }, function (x) {
       return x;
   });
-  exports["Category"] = Category;
   exports["identity"] = identity;
   exports["categoryFn"] = categoryFn;
-})(PS["Control.Category"] = PS["Control.Category"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var otherwise = true;
-  exports["otherwise"] = otherwise;
-})(PS["Data.Boolean"] = PS["Data.Boolean"] || {});
-(function(exports) {
-    "use strict";
-
-  var unsafeCompareImpl = function (lt) {
-    return function (eq) {
-      return function (gt) {
-        return function (x) {
-          return function (y) {
-            return x < y ? lt : x === y ? eq : gt;
-          };
-        };
-      };
-    };
-  };                                         
-  exports.ordIntImpl = unsafeCompareImpl;   
-  exports.ordStringImpl = unsafeCompareImpl;
-  exports.ordCharImpl = unsafeCompareImpl;
-})(PS["Data.Ord"] = PS["Data.Ord"] || {});
-(function(exports) {
-    "use strict";
-
-  var refEq = function (r1) {
-    return function (r2) {
-      return r1 === r2;
-    };
-  };
-
-  exports.eqBooleanImpl = refEq;
-  exports.eqIntImpl = refEq;   
-  exports.eqCharImpl = refEq;
-  exports.eqStringImpl = refEq;
-
-  exports.eqArrayImpl = function (f) {
-    return function (xs) {
-      return function (ys) {
-        if (xs === ys) return true;
-        if (xs.length !== ys.length) return false;
-        for (var i = 0; i < xs.length; i++) {
-          if (!f(xs[i])(ys[i])) return false;
-        }
-        return true;
-      };
-    };
-  };
-})(PS["Data.Eq"] = PS["Data.Eq"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.boolConj = function (b1) {
-    return function (b2) {
-      return b1 && b2;
-    };
-  };
-
-  exports.boolDisj = function (b1) {
-    return function (b2) {
-      return b1 || b2;
-    };
-  };
-
-  exports.boolNot = function (b) {
-    return !b;
-  };
-})(PS["Data.HeytingAlgebra"] = PS["Data.HeytingAlgebra"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.unit = {};
-})(PS["Data.Unit"] = PS["Data.Unit"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.showIntImpl = function (n) {
-    return n.toString();
-  };
-
-  exports.showNumberImpl = function (n) {
-    var str = n.toString();
-    return isNaN(str + ".0") ? str : str + ".0";
-  };
-
-  exports.showStringImpl = function (s) {
-    var l = s.length;
-    return "\"" + s.replace(
-      /[\0-\x1F\x7F"\\]/g, // eslint-disable-line no-control-regex
-      function (c, i) {
-        switch (c) {
-          case "\"":
-          case "\\":
-            return "\\" + c;
-          case "\x07": return "\\a";
-          case "\b": return "\\b";
-          case "\f": return "\\f";
-          case "\n": return "\\n";
-          case "\r": return "\\r";
-          case "\t": return "\\t";
-          case "\v": return "\\v";
-        }
-        var k = i + 1;
-        var empty = k < l && s[k] >= "0" && s[k] <= "9" ? "\\&" : "";
-        return "\\" + c.charCodeAt(0).toString(10) + empty;
-      }
-    ) + "\"";
-  };
-})(PS["Data.Show"] = PS["Data.Show"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Show"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var Show = function (show) {
-      this.show = show;
-  };
-  var showString = new Show($foreign.showStringImpl);
-  var showNumber = new Show($foreign.showNumberImpl);
-  var showInt = new Show($foreign.showIntImpl);
-  var show = function (dict) {
-      return dict.show;
-  };
-  exports["Show"] = Show;
-  exports["show"] = show;
-  exports["showInt"] = showInt;
-  exports["showNumber"] = showNumber;
-  exports["showString"] = showString;
-})(PS["Data.Show"] = PS["Data.Show"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Unit"];
-  var Data_Show = PS["Data.Show"];
-  exports["unit"] = $foreign.unit;
-})(PS["Data.Unit"] = PS["Data.Unit"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.HeytingAlgebra"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_Row = PS["Type.Data.Row"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var HeytingAlgebra = function (conj, disj, ff, implies, not, tt) {
-      this.conj = conj;
-      this.disj = disj;
-      this.ff = ff;
-      this.implies = implies;
-      this.not = not;
-      this.tt = tt;
-  };
-  var tt = function (dict) {
-      return dict.tt;
-  };
-  var not = function (dict) {
-      return dict.not;
-  };
-  var implies = function (dict) {
-      return dict.implies;
-  };
-  var ff = function (dict) {
-      return dict.ff;
-  };
-  var disj = function (dict) {
-      return dict.disj;
-  };
-  var heytingAlgebraBoolean = new HeytingAlgebra($foreign.boolConj, $foreign.boolDisj, false, function (a) {
-      return function (b) {
-          return disj(heytingAlgebraBoolean)(not(heytingAlgebraBoolean)(a))(b);
-      };
-  }, $foreign.boolNot, true);
-  var conj = function (dict) {
-      return dict.conj;
-  };
-  var heytingAlgebraFunction = function (dictHeytingAlgebra) {
-      return new HeytingAlgebra(function (f) {
-          return function (g) {
-              return function (a) {
-                  return conj(dictHeytingAlgebra)(f(a))(g(a));
-              };
-          };
-      }, function (f) {
-          return function (g) {
-              return function (a) {
-                  return disj(dictHeytingAlgebra)(f(a))(g(a));
-              };
-          };
-      }, function (v) {
-          return ff(dictHeytingAlgebra);
-      }, function (f) {
-          return function (g) {
-              return function (a) {
-                  return implies(dictHeytingAlgebra)(f(a))(g(a));
-              };
-          };
-      }, function (f) {
-          return function (a) {
-              return not(dictHeytingAlgebra)(f(a));
-          };
-      }, function (v) {
-          return tt(dictHeytingAlgebra);
-      });
-  };
-  exports["HeytingAlgebra"] = HeytingAlgebra;
-  exports["tt"] = tt;
-  exports["ff"] = ff;
-  exports["implies"] = implies;
-  exports["conj"] = conj;
-  exports["disj"] = disj;
-  exports["not"] = not;
-  exports["heytingAlgebraBoolean"] = heytingAlgebraBoolean;
-  exports["heytingAlgebraFunction"] = heytingAlgebraFunction;
-})(PS["Data.HeytingAlgebra"] = PS["Data.HeytingAlgebra"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Eq"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];
-  var Data_Void = PS["Data.Void"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var Eq = function (eq) {
-      this.eq = eq;
-  };
-  var Eq1 = function (eq1) {
-      this.eq1 = eq1;
-  }; 
-  var eqUnit = new Eq(function (v) {
-      return function (v1) {
-          return true;
-      };
-  });
-  var eqString = new Eq($foreign.eqStringImpl);
-  var eqInt = new Eq($foreign.eqIntImpl);
-  var eqChar = new Eq($foreign.eqCharImpl);
-  var eqBoolean = new Eq($foreign.eqBooleanImpl);
-  var eq1 = function (dict) {
-      return dict.eq1;
-  };
-  var eq = function (dict) {
-      return dict.eq;
-  };
-  var eqArray = function (dictEq) {
-      return new Eq($foreign.eqArrayImpl(eq(dictEq)));
-  };
-  var notEq = function (dictEq) {
-      return function (x) {
-          return function (y) {
-              return eq(eqBoolean)(eq(dictEq)(x)(y))(false);
-          };
-      };
-  };
-  exports["Eq"] = Eq;
-  exports["eq"] = eq;
-  exports["notEq"] = notEq;
-  exports["Eq1"] = Eq1;
-  exports["eq1"] = eq1;
-  exports["eqBoolean"] = eqBoolean;
-  exports["eqInt"] = eqInt;
-  exports["eqChar"] = eqChar;
-  exports["eqString"] = eqString;
-  exports["eqUnit"] = eqUnit;
-  exports["eqArray"] = eqArray;
-})(PS["Data.Eq"] = PS["Data.Eq"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.concatString = function (s1) {
-    return function (s2) {
-      return s1 + s2;
-    };
-  };
-
-  exports.concatArray = function (xs) {
-    return function (ys) {
-      if (xs.length === 0) return ys;
-      if (ys.length === 0) return xs;
-      return xs.concat(ys);
-    };
-  };
-})(PS["Data.Semigroup"] = PS["Data.Semigroup"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Semigroup"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];
-  var Data_Void = PS["Data.Void"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var Semigroup = function (append) {
-      this.append = append;
-  }; 
-  var semigroupString = new Semigroup($foreign.concatString);
-  var semigroupArray = new Semigroup($foreign.concatArray);
-  var append = function (dict) {
-      return dict.append;
-  };
-  exports["Semigroup"] = Semigroup;
-  exports["append"] = append;
-  exports["semigroupString"] = semigroupString;
-  exports["semigroupArray"] = semigroupArray;
-})(PS["Data.Semigroup"] = PS["Data.Semigroup"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];                 
-  var LT = (function () {
-      function LT() {
-
-      };
-      LT.value = new LT();
-      return LT;
-  })();
-  var GT = (function () {
-      function GT() {
-
-      };
-      GT.value = new GT();
-      return GT;
-  })();
-  var EQ = (function () {
-      function EQ() {
-
-      };
-      EQ.value = new EQ();
-      return EQ;
-  })();
-  exports["LT"] = LT;
-  exports["GT"] = GT;
-  exports["EQ"] = EQ;
-})(PS["Data.Ordering"] = PS["Data.Ordering"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.intSub = function (x) {
-    return function (y) {
-      /* jshint bitwise: false */
-      return x - y | 0;
-    };
-  };
-})(PS["Data.Ring"] = PS["Data.Ring"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.intAdd = function (x) {
-    return function (y) {
-      /* jshint bitwise: false */
-      return x + y | 0;
-    };
-  };
-
-  exports.intMul = function (x) {
-    return function (y) {
-      /* jshint bitwise: false */
-      return x * y | 0;
-    };
-  };
-})(PS["Data.Semiring"] = PS["Data.Semiring"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Semiring"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_Row = PS["Type.Data.Row"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var Semiring = function (add, mul, one, zero) {
-      this.add = add;
-      this.mul = mul;
-      this.one = one;
-      this.zero = zero;
-  };
-  var zero = function (dict) {
-      return dict.zero;
-  };                                                                            
-  var semiringInt = new Semiring($foreign.intAdd, $foreign.intMul, 1, 0);
-  var one = function (dict) {
-      return dict.one;
-  };
-  var mul = function (dict) {
-      return dict.mul;
-  };
-  var add = function (dict) {
-      return dict.add;
-  };
-  exports["Semiring"] = Semiring;
-  exports["add"] = add;
-  exports["zero"] = zero;
-  exports["mul"] = mul;
-  exports["one"] = one;
-  exports["semiringInt"] = semiringInt;
-})(PS["Data.Semiring"] = PS["Data.Semiring"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Ring"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var Ring = function (Semiring0, sub) {
-      this.Semiring0 = Semiring0;
-      this.sub = sub;
-  };
-  var sub = function (dict) {
-      return dict.sub;
-  };                  
-  var ringInt = new Ring(function () {
-      return Data_Semiring.semiringInt;
-  }, $foreign.intSub);
-  exports["Ring"] = Ring;
-  exports["sub"] = sub;
-  exports["ringInt"] = ringInt;
-})(PS["Data.Ring"] = PS["Data.Ring"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Ord"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];
-  var Data_Void = PS["Data.Void"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var Ord = function (Eq0, compare) {
-      this.Eq0 = Eq0;
-      this.compare = compare;
-  };
-  var Ord1 = function (Eq10, compare1) {
-      this.Eq10 = Eq10;
-      this.compare1 = compare1;
-  }; 
-  var ordString = new Ord(function () {
-      return Data_Eq.eqString;
-  }, $foreign.ordStringImpl(Data_Ordering.LT.value)(Data_Ordering.EQ.value)(Data_Ordering.GT.value));
-  var ordInt = new Ord(function () {
-      return Data_Eq.eqInt;
-  }, $foreign.ordIntImpl(Data_Ordering.LT.value)(Data_Ordering.EQ.value)(Data_Ordering.GT.value));
-  var ordChar = new Ord(function () {
-      return Data_Eq.eqChar;
-  }, $foreign.ordCharImpl(Data_Ordering.LT.value)(Data_Ordering.EQ.value)(Data_Ordering.GT.value));
-  var compare1 = function (dict) {
-      return dict.compare1;
-  };
-  var compare = function (dict) {
-      return dict.compare;
-  };
-  var max = function (dictOrd) {
-      return function (x) {
-          return function (y) {
-              var v = compare(dictOrd)(x)(y);
-              if (v instanceof Data_Ordering.LT) {
-                  return y;
-              };
-              if (v instanceof Data_Ordering.EQ) {
-                  return x;
-              };
-              if (v instanceof Data_Ordering.GT) {
-                  return x;
-              };
-              throw new Error("Failed pattern match at Data.Ord (line 167, column 3 - line 170, column 12): " + [ v.constructor.name ]);
-          };
-      };
-  };
-  var min = function (dictOrd) {
-      return function (x) {
-          return function (y) {
-              var v = compare(dictOrd)(x)(y);
-              if (v instanceof Data_Ordering.LT) {
-                  return x;
-              };
-              if (v instanceof Data_Ordering.EQ) {
-                  return x;
-              };
-              if (v instanceof Data_Ordering.GT) {
-                  return y;
-              };
-              throw new Error("Failed pattern match at Data.Ord (line 158, column 3 - line 161, column 12): " + [ v.constructor.name ]);
-          };
-      };
-  };
-  var clamp = function (dictOrd) {
-      return function (low) {
-          return function (hi) {
-              return function (x) {
-                  return min(dictOrd)(hi)(max(dictOrd)(low)(x));
-              };
-          };
-      };
-  };
-  exports["Ord"] = Ord;
-  exports["compare"] = compare;
-  exports["Ord1"] = Ord1;
-  exports["compare1"] = compare1;
-  exports["min"] = min;
-  exports["max"] = max;
-  exports["clamp"] = clamp;
-  exports["ordInt"] = ordInt;
-  exports["ordString"] = ordString;
-  exports["ordChar"] = ordChar;
-})(PS["Data.Ord"] = PS["Data.Ord"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Category = PS["Control.Category"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];                 
+  $PS["Data.Function"] = $PS["Data.Function"] || {};
+  var exports = $PS["Data.Function"];                    
   var on = function (f) {
       return function (g) {
           return function (x) {
@@ -17608,9 +17095,9 @@ var PS = {};
   exports["const"] = $$const;
   exports["applyFlipped"] = applyFlipped;
   exports["on"] = on;
-})(PS["Data.Function"] = PS["Data.Function"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.arrayMap = function (f) {
     return function (arr) {
@@ -17624,12 +17111,27 @@ var PS = {};
   };
 })(PS["Data.Functor"] = PS["Data.Functor"] || {});
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var $foreign = PS["Data.Functor"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Unit = PS["Data.Unit"];                 
+
+  exports.unit = {};
+})(PS["Data.Unit"] = PS["Data.Unit"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Unit"] = $PS["Data.Unit"] || {};
+  var exports = $PS["Data.Unit"];
+  var $foreign = $PS["Data.Unit"];
+  exports["unit"] = $foreign.unit;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Functor"] = $PS["Data.Functor"] || {};
+  var exports = $PS["Data.Functor"];
+  var $foreign = $PS["Data.Functor"];
+  var Control_Semigroupoid = $PS["Control.Semigroupoid"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Unit = $PS["Data.Unit"];                
   var Functor = function (map) {
       this.map = map;
   };
@@ -17646,14 +17148,16 @@ var PS = {};
   exports["void"] = $$void;
   exports["functorFn"] = functorFn;
   exports["functorArray"] = functorArray;
-})(PS["Data.Functor"] = PS["Data.Functor"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Control.Apply"];
-  var Control_Category = PS["Control.Category"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];                 
+  $PS["Control.Apply"] = $PS["Control.Apply"] || {};
+  var exports = $PS["Control.Apply"];
+  var $foreign = $PS["Control.Apply"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];                
   var Apply = function (Functor0, apply) {
       this.Functor0 = Functor0;
       this.apply = apply;
@@ -17693,47 +17197,21 @@ var PS = {};
   exports["applySecond"] = applySecond;
   exports["lift2"] = lift2;
   exports["applyArray"] = applyArray;
-})(PS["Control.Apply"] = PS["Control.Apply"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Apply = PS["Control.Apply"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Unit = PS["Data.Unit"];                 
-  var Applicative = function (Apply0, pure) {
-      this.Apply0 = Apply0;
-      this.pure = pure;
+  $PS["Control.Bind"] = $PS["Control.Bind"] || {};
+  var exports = $PS["Control.Bind"];
+  var $foreign = $PS["Control.Bind"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Data_Function = $PS["Data.Function"];                
+  var Discard = function (discard) {
+      this.discard = discard;
   };
-  var pure = function (dict) {
-      return dict.pure;
-  };
-  var liftA1 = function (dictApplicative) {
-      return function (f) {
-          return function (a) {
-              return Control_Apply.apply(dictApplicative.Apply0())(pure(dictApplicative)(f))(a);
-          };
-      };
-  };
-  exports["Applicative"] = Applicative;
-  exports["pure"] = pure;
-  exports["liftA1"] = liftA1;
-})(PS["Control.Applicative"] = PS["Control.Applicative"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Control.Bind"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Category = PS["Control.Category"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Unit = PS["Data.Unit"];                 
   var Bind = function (Apply0, bind) {
       this.Apply0 = Apply0;
       this.bind = bind;
-  };
-  var Discard = function (discard) {
-      this.discard = discard;
   };
   var discard = function (dict) {
       return dict.discard;
@@ -17762,57 +17240,41 @@ var PS = {};
   exports["Bind"] = Bind;
   exports["bind"] = bind;
   exports["bindFlipped"] = bindFlipped;
-  exports["Discard"] = Discard;
   exports["discard"] = discard;
   exports["composeKleisliFlipped"] = composeKleisliFlipped;
   exports["bindArray"] = bindArray;
   exports["discardUnit"] = discardUnit;
-})(PS["Control.Bind"] = PS["Control.Bind"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Semigroup = PS["Data.Semigroup"];                 
-  var Alt = function (Functor0, alt) {
-      this.Functor0 = Functor0;
-      this.alt = alt;
-  };                                                       
-  var alt = function (dict) {
-      return dict.alt;
+  $PS["Control.Applicative"] = $PS["Control.Applicative"] || {};
+  var exports = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];        
+  var Applicative = function (Apply0, pure) {
+      this.Apply0 = Apply0;
+      this.pure = pure;
   };
-  exports["Alt"] = Alt;
-  exports["alt"] = alt;
-})(PS["Control.Alt"] = PS["Control.Alt"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Unit = PS["Data.Unit"];                 
-  var Monad = function (Applicative0, Bind1) {
-      this.Applicative0 = Applicative0;
-      this.Bind1 = Bind1;
+  var pure = function (dict) {
+      return dict.pure;
   };
-  var ap = function (dictMonad) {
+  var liftA1 = function (dictApplicative) {
       return function (f) {
           return function (a) {
-              return Control_Bind.bind(dictMonad.Bind1())(f)(function (v) {
-                  return Control_Bind.bind(dictMonad.Bind1())(a)(function (v1) {
-                      return Control_Applicative.pure(dictMonad.Applicative0())(v(v1));
-                  });
-              });
+              return Control_Apply.apply(dictApplicative.Apply0())(pure(dictApplicative)(f))(a);
           };
       };
   };
-  exports["Monad"] = Monad;
-  exports["ap"] = ap;
-})(PS["Control.Monad"] = PS["Control.Monad"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+  exports["Applicative"] = Applicative;
+  exports["pure"] = pure;
+  exports["liftA1"] = liftA1;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Category = PS["Control.Category"];                 
+  $PS["Data.Bifunctor"] = $PS["Data.Bifunctor"] || {};
+  var exports = $PS["Data.Bifunctor"];
+  var Control_Category = $PS["Control.Category"];                
   var Bifunctor = function (bimap) {
       this.bimap = bimap;
   };
@@ -17827,234 +17289,20 @@ var PS = {};
   var rmap = function (dictBifunctor) {
       return bimap(dictBifunctor)(Control_Category.identity(Control_Category.categoryFn));
   };
-  exports["bimap"] = bimap;
   exports["Bifunctor"] = Bifunctor;
   exports["lmap"] = lmap;
   exports["rmap"] = rmap;
-})(PS["Data.Bifunctor"] = PS["Data.Bifunctor"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.topInt = 2147483647;
-  exports.bottomInt = -2147483648;
-
-  exports.topChar = String.fromCharCode(65535);
-  exports.bottomChar = String.fromCharCode(0);
-})(PS["Data.Bounded"] = PS["Data.Bounded"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Bounded"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Unit = PS["Data.Unit"];                 
-  var Bounded = function (Ord0, bottom, top) {
-      this.Ord0 = Ord0;
-      this.bottom = bottom;
-      this.top = top;
-  };
-  var top = function (dict) {
-      return dict.top;
-  };                                            
-  var boundedInt = new Bounded(function () {
-      return Data_Ord.ordInt;
-  }, $foreign.bottomInt, $foreign.topInt);
-  var boundedChar = new Bounded(function () {
-      return Data_Ord.ordChar;
-  }, $foreign.bottomChar, $foreign.topChar);
-  var bottom = function (dict) {
-      return dict.bottom;
-  };
-  exports["Bounded"] = Bounded;
-  exports["bottom"] = bottom;
-  exports["top"] = top;
-  exports["boundedInt"] = boundedInt;
-  exports["boundedChar"] = boundedChar;
-})(PS["Data.Bounded"] = PS["Data.Bounded"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.foldrArray = function (f) {
-    return function (init) {
-      return function (xs) {
-        var acc = init;
-        var len = xs.length;
-        for (var i = len - 1; i >= 0; i--) {
-          acc = f(xs[i])(acc);
-        }
-        return acc;
-      };
-    };
-  };
-
-  exports.foldlArray = function (f) {
-    return function (init) {
-      return function (xs) {
-        var acc = init;
-        var len = xs.length;
-        for (var i = 0; i < len; i++) {
-          acc = f(acc)(xs[i]);
-        }
-        return acc;
-      };
-    };
-  };
-})(PS["Data.Foldable"] = PS["Data.Foldable"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Data_Functor = PS["Data.Functor"];                 
-  var Plus = function (Alt0, empty) {
-      this.Alt0 = Alt0;
-      this.empty = empty;
-  };       
-  var empty = function (dict) {
-      return dict.empty;
-  };
-  exports["Plus"] = Plus;
-  exports["empty"] = empty;
-})(PS["Control.Plus"] = PS["Control.Plus"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Plus = PS["Control.Plus"];
-  var Data_Functor = PS["Data.Functor"];                 
-  var Alternative = function (Applicative0, Plus1) {
-      this.Applicative0 = Applicative0;
-      this.Plus1 = Plus1;
-  };
-  exports["Alternative"] = Alternative;
-})(PS["Control.Alternative"] = PS["Control.Alternative"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.intDegree = function (x) {
-    return Math.min(Math.abs(x), 2147483647);
-  };
-
-  // See the Euclidean definition in
-  // https://en.m.wikipedia.org/wiki/Modulo_operation.
-  exports.intDiv = function (x) {
-    return function (y) {
-      if (y === 0) return 0;
-      return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
-    };
-  };
-
-  exports.intMod = function (x) {
-    return function (y) {
-      if (y === 0) return 0;
-      var yy = Math.abs(y);
-      return ((x % yy) + yy) % yy;
-    };
-  };
-})(PS["Data.EuclideanRing"] = PS["Data.EuclideanRing"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];                 
-  var CommutativeRing = function (Ring0) {
-      this.Ring0 = Ring0;
-  }; 
-  var commutativeRingInt = new CommutativeRing(function () {
-      return Data_Ring.ringInt;
-  });
-  exports["CommutativeRing"] = CommutativeRing;
-  exports["commutativeRingInt"] = commutativeRingInt;
-})(PS["Data.CommutativeRing"] = PS["Data.CommutativeRing"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.EuclideanRing"];
-  var Data_BooleanAlgebra = PS["Data.BooleanAlgebra"];
-  var Data_CommutativeRing = PS["Data.CommutativeRing"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semiring = PS["Data.Semiring"];                 
-  var EuclideanRing = function (CommutativeRing0, degree, div, mod) {
-      this.CommutativeRing0 = CommutativeRing0;
-      this.degree = degree;
-      this.div = div;
-      this.mod = mod;
-  };
-  var mod = function (dict) {
-      return dict.mod;
-  }; 
-  var euclideanRingInt = new EuclideanRing(function () {
-      return Data_CommutativeRing.commutativeRingInt;
-  }, $foreign.intDegree, $foreign.intDiv, $foreign.intMod);
-  var div = function (dict) {
-      return dict.div;
-  };
-  var degree = function (dict) {
-      return dict.degree;
-  };
-  exports["EuclideanRing"] = EuclideanRing;
-  exports["degree"] = degree;
-  exports["div"] = div;
-  exports["mod"] = mod;
-  exports["euclideanRingInt"] = euclideanRingInt;
-})(PS["Data.EuclideanRing"] = PS["Data.EuclideanRing"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_EuclideanRing = PS["Data.EuclideanRing"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Unit = PS["Data.Unit"];
-  var Record_Unsafe = PS["Record.Unsafe"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
-  var Monoid = function (Semigroup0, mempty) {
-      this.Semigroup0 = Semigroup0;
-      this.mempty = mempty;
-  };                 
-  var monoidString = new Monoid(function () {
-      return Data_Semigroup.semigroupString;
-  }, "");
-  var mempty = function (dict) {
-      return dict.mempty;
-  };
-  exports["Monoid"] = Monoid;
-  exports["mempty"] = mempty;
-  exports["monoidString"] = monoidString;
-})(PS["Data.Monoid"] = PS["Data.Monoid"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Extend = PS["Control.Extend"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_MonadZero = PS["Control.MonadZero"];
-  var Control_Plus = PS["Control.Plus"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Invariant = PS["Data.Functor.Invariant"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Maybe"] = $PS["Data.Maybe"] || {};
+  var exports = $PS["Data.Maybe"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];          
   var Nothing = (function () {
       function Nothing() {
 
@@ -18115,7 +17363,7 @@ var PS = {};
           if (v instanceof Nothing) {
               return Nothing.value;
           };
-          throw new Error("Failed pattern match at Data.Maybe (line 67, column 1 - line 67, column 35): " + [ v.constructor.name, v1.constructor.name ]);
+          throw new Error("Failed pattern match at Data.Maybe (line 67, column 1 - line 69, column 30): " + [ v.constructor.name, v1.constructor.name ]);
       };
   });
   var bindMaybe = new Control_Bind.Bind(function () {
@@ -18128,7 +17376,7 @@ var PS = {};
           if (v instanceof Nothing) {
               return Nothing.value;
           };
-          throw new Error("Failed pattern match at Data.Maybe (line 125, column 1 - line 125, column 33): " + [ v.constructor.name, v1.constructor.name ]);
+          throw new Error("Failed pattern match at Data.Maybe (line 125, column 1 - line 127, column 28): " + [ v.constructor.name, v1.constructor.name ]);
       };
   });
   exports["Nothing"] = Nothing;
@@ -18141,24 +17389,395 @@ var PS = {};
   exports["functorMaybe"] = functorMaybe;
   exports["applyMaybe"] = applyMaybe;
   exports["bindMaybe"] = bindMaybe;
-})(PS["Data.Maybe"] = PS["Data.Maybe"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad = PS["Control.Monad"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Either"] = $PS["Data.Either"] || {};
+  var exports = $PS["Data.Either"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Bifunctor = $PS["Data.Bifunctor"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Maybe = $PS["Data.Maybe"];              
+  var Left = (function () {
+      function Left(value0) {
+          this.value0 = value0;
+      };
+      Left.create = function (value0) {
+          return new Left(value0);
+      };
+      return Left;
+  })();
+  var Right = (function () {
+      function Right(value0) {
+          this.value0 = value0;
+      };
+      Right.create = function (value0) {
+          return new Right(value0);
+      };
+      return Right;
+  })();
+  var functorEither = new Data_Functor.Functor(function (f) {
+      return function (m) {
+          if (m instanceof Left) {
+              return new Left(m.value0);
+          };
+          if (m instanceof Right) {
+              return new Right(f(m.value0));
+          };
+          throw new Error("Failed pattern match at Data.Either (line 38, column 1 - line 38, column 52): " + [ m.constructor.name ]);
+      };
+  });                                                                                                     
+  var fromRight = function (dictPartial) {
+      return function (v) {
+          if (v instanceof Right) {
+              return v.value0;
+          };
+          throw new Error("Failed pattern match at Data.Either (line 261, column 1 - line 261, column 52): " + [ v.constructor.name ]);
+      };
+  };
+  var fromLeft = function (dictPartial) {
+      return function (v) {
+          if (v instanceof Left) {
+              return v.value0;
+          };
+          throw new Error("Failed pattern match at Data.Either (line 256, column 1 - line 256, column 51): " + [ v.constructor.name ]);
+      };
+  };
+  var either = function (v) {
+      return function (v1) {
+          return function (v2) {
+              if (v2 instanceof Left) {
+                  return v(v2.value0);
+              };
+              if (v2 instanceof Right) {
+                  return v1(v2.value0);
+              };
+              throw new Error("Failed pattern match at Data.Either (line 238, column 1 - line 238, column 64): " + [ v.constructor.name, v1.constructor.name, v2.constructor.name ]);
+          };
+      };
+  };
+  var hush = either(Data_Function["const"](Data_Maybe.Nothing.value))(Data_Maybe.Just.create);
+  var isLeft = either(Data_Function["const"](true))(Data_Function["const"](false));
+  var isRight = either(Data_Function["const"](false))(Data_Function["const"](true));
+  var bifunctorEither = new Data_Bifunctor.Bifunctor(function (v) {
+      return function (v1) {
+          return function (v2) {
+              if (v2 instanceof Left) {
+                  return new Left(v(v2.value0));
+              };
+              if (v2 instanceof Right) {
+                  return new Right(v1(v2.value0));
+              };
+              throw new Error("Failed pattern match at Data.Either (line 46, column 1 - line 48, column 36): " + [ v.constructor.name, v1.constructor.name, v2.constructor.name ]);
+          };
+      };
+  });
+  var applyEither = new Control_Apply.Apply(function () {
+      return functorEither;
+  }, function (v) {
+      return function (v1) {
+          if (v instanceof Left) {
+              return new Left(v.value0);
+          };
+          if (v instanceof Right) {
+              return Data_Functor.map(functorEither)(v.value0)(v1);
+          };
+          throw new Error("Failed pattern match at Data.Either (line 82, column 1 - line 84, column 30): " + [ v.constructor.name, v1.constructor.name ]);
+      };
+  });
+  var bindEither = new Control_Bind.Bind(function () {
+      return applyEither;
+  }, either(function (e) {
+      return function (v) {
+          return new Left(e);
+      };
+  })(function (a) {
+      return function (f) {
+          return f(a);
+      };
+  }));
+  var applicativeEither = new Control_Applicative.Applicative(function () {
+      return applyEither;
+  }, Right.create);
+  exports["Left"] = Left;
+  exports["Right"] = Right;
+  exports["either"] = either;
+  exports["isLeft"] = isLeft;
+  exports["isRight"] = isRight;
+  exports["fromLeft"] = fromLeft;
+  exports["fromRight"] = fromRight;
+  exports["hush"] = hush;
+  exports["functorEither"] = functorEither;
+  exports["bifunctorEither"] = bifunctorEither;
+  exports["applyEither"] = applyEither;
+  exports["applicativeEither"] = applicativeEither;
+  exports["bindEither"] = bindEither;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.foldrArray = function (f) {
+    return function (init) {
+      return function (xs) {
+        var acc = init;
+        var len = xs.length;
+        for (var i = len - 1; i >= 0; i--) {
+          acc = f(xs[i])(acc);
+        }
+        return acc;
+      };
+    };
+  };
+
+  exports.foldlArray = function (f) {
+    return function (init) {
+      return function (xs) {
+        var acc = init;
+        var len = xs.length;
+        for (var i = 0; i < len; i++) {
+          acc = f(acc)(xs[i]);
+        }
+        return acc;
+      };
+    };
+  };
+})(PS["Data.Foldable"] = PS["Data.Foldable"] || {});
+(function(exports) {
+  "use strict";
+
+  var refEq = function (r1) {
+    return function (r2) {
+      return r1 === r2;
+    };
+  };
+
+  exports.eqBooleanImpl = refEq;
+  exports.eqIntImpl = refEq;   
+  exports.eqCharImpl = refEq;
+  exports.eqStringImpl = refEq;
+
+  exports.eqArrayImpl = function (f) {
+    return function (xs) {
+      return function (ys) {
+        if (xs === ys) return true;
+        if (xs.length !== ys.length) return false;
+        for (var i = 0; i < xs.length; i++) {
+          if (!f(xs[i])(ys[i])) return false;
+        }
+        return true;
+      };
+    };
+  };
+})(PS["Data.Eq"] = PS["Data.Eq"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Eq"] = $PS["Data.Eq"] || {};
+  var exports = $PS["Data.Eq"];
+  var $foreign = $PS["Data.Eq"];
+  var Eq1 = function (eq1) {
+      this.eq1 = eq1;
+  };
+  var Eq = function (eq) {
+      this.eq = eq;
+  }; 
+  var eqUnit = new Eq(function (v) {
+      return function (v1) {
+          return true;
+      };
+  });
+  var eqString = new Eq($foreign.eqStringImpl);
+  var eqInt = new Eq($foreign.eqIntImpl);
+  var eqChar = new Eq($foreign.eqCharImpl);
+  var eqBoolean = new Eq($foreign.eqBooleanImpl);
+  var eq1 = function (dict) {
+      return dict.eq1;
+  };
+  var eq = function (dict) {
+      return dict.eq;
+  };
+  var eqArray = function (dictEq) {
+      return new Eq($foreign.eqArrayImpl(eq(dictEq)));
+  };
+  var notEq = function (dictEq) {
+      return function (x) {
+          return function (y) {
+              return eq(eqBoolean)(eq(dictEq)(x)(y))(false);
+          };
+      };
+  };
+  exports["Eq"] = Eq;
+  exports["eq"] = eq;
+  exports["notEq"] = notEq;
+  exports["Eq1"] = Eq1;
+  exports["eq1"] = eq1;
+  exports["eqInt"] = eqInt;
+  exports["eqChar"] = eqChar;
+  exports["eqString"] = eqString;
+  exports["eqUnit"] = eqUnit;
+  exports["eqArray"] = eqArray;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.boolConj = function (b1) {
+    return function (b2) {
+      return b1 && b2;
+    };
+  };
+
+  exports.boolDisj = function (b1) {
+    return function (b2) {
+      return b1 || b2;
+    };
+  };
+
+  exports.boolNot = function (b) {
+    return !b;
+  };
+})(PS["Data.HeytingAlgebra"] = PS["Data.HeytingAlgebra"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.HeytingAlgebra"] = $PS["Data.HeytingAlgebra"] || {};
+  var exports = $PS["Data.HeytingAlgebra"];
+  var $foreign = $PS["Data.HeytingAlgebra"];
+  var HeytingAlgebra = function (conj, disj, ff, implies, not, tt) {
+      this.conj = conj;
+      this.disj = disj;
+      this.ff = ff;
+      this.implies = implies;
+      this.not = not;
+      this.tt = tt;
+  };
+  var tt = function (dict) {
+      return dict.tt;
+  };
+  var not = function (dict) {
+      return dict.not;
+  };
+  var implies = function (dict) {
+      return dict.implies;
+  };
+  var ff = function (dict) {
+      return dict.ff;
+  };
+  var disj = function (dict) {
+      return dict.disj;
+  };
+  var heytingAlgebraBoolean = new HeytingAlgebra($foreign.boolConj, $foreign.boolDisj, false, function (a) {
+      return function (b) {
+          return disj(heytingAlgebraBoolean)(not(heytingAlgebraBoolean)(a))(b);
+      };
+  }, $foreign.boolNot, true);
+  var conj = function (dict) {
+      return dict.conj;
+  };
+  var heytingAlgebraFunction = function (dictHeytingAlgebra) {
+      return new HeytingAlgebra(function (f) {
+          return function (g) {
+              return function (a) {
+                  return conj(dictHeytingAlgebra)(f(a))(g(a));
+              };
+          };
+      }, function (f) {
+          return function (g) {
+              return function (a) {
+                  return disj(dictHeytingAlgebra)(f(a))(g(a));
+              };
+          };
+      }, function (v) {
+          return ff(dictHeytingAlgebra);
+      }, function (f) {
+          return function (g) {
+              return function (a) {
+                  return implies(dictHeytingAlgebra)(f(a))(g(a));
+              };
+          };
+      }, function (f) {
+          return function (a) {
+              return not(dictHeytingAlgebra)(f(a));
+          };
+      }, function (v) {
+          return tt(dictHeytingAlgebra);
+      });
+  };
+  exports["tt"] = tt;
+  exports["ff"] = ff;
+  exports["conj"] = conj;
+  exports["disj"] = disj;
+  exports["not"] = not;
+  exports["heytingAlgebraBoolean"] = heytingAlgebraBoolean;
+  exports["heytingAlgebraFunction"] = heytingAlgebraFunction;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.concatString = function (s1) {
+    return function (s2) {
+      return s1 + s2;
+    };
+  };
+
+  exports.concatArray = function (xs) {
+    return function (ys) {
+      if (xs.length === 0) return ys;
+      if (ys.length === 0) return xs;
+      return xs.concat(ys);
+    };
+  };
+})(PS["Data.Semigroup"] = PS["Data.Semigroup"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Semigroup"] = $PS["Data.Semigroup"] || {};
+  var exports = $PS["Data.Semigroup"];
+  var $foreign = $PS["Data.Semigroup"];
+  var Semigroup = function (append) {
+      this.append = append;
+  }; 
+  var semigroupString = new Semigroup($foreign.concatString);
+  var semigroupArray = new Semigroup($foreign.concatArray);
+  var append = function (dict) {
+      return dict.append;
+  };
+  exports["Semigroup"] = Semigroup;
+  exports["append"] = append;
+  exports["semigroupString"] = semigroupString;
+  exports["semigroupArray"] = semigroupArray;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Monoid"] = $PS["Data.Monoid"] || {};
+  var exports = $PS["Data.Monoid"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Monoid = function (Semigroup0, mempty) {
+      this.Semigroup0 = Semigroup0;
+      this.mempty = mempty;
+  };                 
+  var monoidString = new Monoid(function () {
+      return Data_Semigroup.semigroupString;
+  }, "");
+  var mempty = function (dict) {
+      return dict.mempty;
+  };
+  exports["Monoid"] = Monoid;
+  exports["mempty"] = mempty;
+  exports["monoidString"] = monoidString;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Monoid.Conj"] = $PS["Data.Monoid.Conj"] || {};
+  var exports = $PS["Data.Monoid.Conj"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Semigroup = $PS["Data.Semigroup"];      
   var Conj = function (x) {
       return x;
   };
@@ -18175,26 +17794,16 @@ var PS = {};
       }, Data_HeytingAlgebra.tt(dictHeytingAlgebra));
   };
   exports["Conj"] = Conj;
-  exports["semigroupConj"] = semigroupConj;
   exports["monoidConj"] = monoidConj;
-})(PS["Data.Monoid.Conj"] = PS["Data.Monoid.Conj"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad = PS["Control.Monad"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Monoid.Disj"] = $PS["Data.Monoid.Disj"] || {};
+  var exports = $PS["Data.Monoid.Disj"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Semigroup = $PS["Data.Semigroup"];      
   var Disj = function (x) {
       return x;
   };
@@ -18211,24 +17820,70 @@ var PS = {};
       }, Data_HeytingAlgebra.ff(dictHeytingAlgebra));
   };
   exports["Disj"] = Disj;
-  exports["semigroupDisj"] = semigroupDisj;
   exports["monoidDisj"] = monoidDisj;
-})(PS["Data.Monoid.Disj"] = PS["Data.Monoid.Disj"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Monoid_Additive = PS["Data.Monoid.Additive"];
-  var Data_Monoid_Conj = PS["Data.Monoid.Conj"];
-  var Data_Monoid_Disj = PS["Data.Monoid.Disj"];
-  var Data_Monoid_Dual = PS["Data.Monoid.Dual"];
-  var Data_Monoid_Endo = PS["Data.Monoid.Endo"];
-  var Data_Monoid_Multiplicative = PS["Data.Monoid.Multiplicative"];
-  var Data_Semigroup_First = PS["Data.Semigroup.First"];
-  var Data_Semigroup_Last = PS["Data.Semigroup.Last"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Monoid.Dual"] = $PS["Data.Monoid.Dual"] || {};
+  var exports = $PS["Data.Monoid.Dual"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Semigroup = $PS["Data.Semigroup"];      
+  var Dual = function (x) {
+      return x;
+  };
+  var semigroupDual = function (dictSemigroup) {
+      return new Data_Semigroup.Semigroup(function (v) {
+          return function (v1) {
+              return Data_Semigroup.append(dictSemigroup)(v1)(v);
+          };
+      });
+  };
+  var monoidDual = function (dictMonoid) {
+      return new Data_Monoid.Monoid(function () {
+          return semigroupDual(dictMonoid.Semigroup0());
+      }, Data_Monoid.mempty(dictMonoid));
+  };
+  exports["Dual"] = Dual;
+  exports["monoidDual"] = monoidDual;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Monoid.Endo"] = $PS["Data.Monoid.Endo"] || {};
+  var exports = $PS["Data.Monoid.Endo"];
+  var Control_Category = $PS["Control.Category"];
+  var Control_Semigroupoid = $PS["Control.Semigroupoid"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Semigroup = $PS["Data.Semigroup"];      
+  var Endo = function (x) {
+      return x;
+  };
+  var semigroupEndo = function (dictSemigroupoid) {
+      return new Data_Semigroup.Semigroup(function (v) {
+          return function (v1) {
+              return Control_Semigroupoid.compose(dictSemigroupoid)(v)(v1);
+          };
+      });
+  };
+  var monoidEndo = function (dictCategory) {
+      return new Data_Monoid.Monoid(function () {
+          return semigroupEndo(dictCategory.Semigroupoid0());
+      }, Control_Category.identity(dictCategory));
+  };
+  exports["Endo"] = Endo;
+  exports["monoidEndo"] = monoidEndo;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Newtype"] = $PS["Data.Newtype"] || {};
+  var exports = $PS["Data.Newtype"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Monoid_Conj = $PS["Data.Monoid.Conj"];
+  var Data_Monoid_Disj = $PS["Data.Monoid.Disj"];
+  var Data_Monoid_Dual = $PS["Data.Monoid.Dual"];
+  var Data_Monoid_Endo = $PS["Data.Monoid.Endo"];                      
   var Newtype = function (unwrap, wrap) {
       this.unwrap = unwrap;
       this.wrap = wrap;
@@ -18243,7 +17898,13 @@ var PS = {};
       return function (v) {
           return unwrap(dictNewtype);
       };
-  };                        
+  };                             
+  var newtypeEndo = new Newtype(function (v) {
+      return v;
+  }, Data_Monoid_Endo.Endo);
+  var newtypeDual = new Newtype(function (v) {
+      return v;
+  }, Data_Monoid_Dual.Dual);
   var newtypeDisj = new Newtype(function (v) {
       return v;
   }, Data_Monoid_Disj.Disj);
@@ -18256,8 +17917,10 @@ var PS = {};
               return function (dictNewtype1) {
                   return function (v) {
                       return function (f) {
-                          return function ($80) {
-                              return Data_Functor.map(dictFunctor1)(unwrap(dictNewtype1))(f(Data_Functor.map(dictFunctor)(wrap(dictNewtype))($80)));
+                          var $96 = Data_Functor.map(dictFunctor1)(unwrap(dictNewtype1));
+                          var $97 = Data_Functor.map(dictFunctor)(wrap(dictNewtype));
+                          return function ($98) {
+                              return $96(f($97($98)));
                           };
                       };
                   };
@@ -18272,39 +17935,76 @@ var PS = {};
   exports["alaF"] = alaF;
   exports["newtypeConj"] = newtypeConj;
   exports["newtypeDisj"] = newtypeDisj;
-})(PS["Data.Newtype"] = PS["Data.Newtype"] || {});
+  exports["newtypeDual"] = newtypeDual;
+  exports["newtypeEndo"] = newtypeEndo;
+})(PS);
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var $foreign = PS["Data.Foldable"];
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Plus = PS["Control.Plus"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Maybe_First = PS["Data.Maybe.First"];
-  var Data_Maybe_Last = PS["Data.Maybe.Last"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Monoid_Additive = PS["Data.Monoid.Additive"];
-  var Data_Monoid_Conj = PS["Data.Monoid.Conj"];
-  var Data_Monoid_Disj = PS["Data.Monoid.Disj"];
-  var Data_Monoid_Dual = PS["Data.Monoid.Dual"];
-  var Data_Monoid_Endo = PS["Data.Monoid.Endo"];
-  var Data_Monoid_Multiplicative = PS["Data.Monoid.Multiplicative"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                 
+
+  exports.intAdd = function (x) {
+    return function (y) {
+      /* jshint bitwise: false */
+      return x + y | 0;
+    };
+  };
+
+  exports.intMul = function (x) {
+    return function (y) {
+      /* jshint bitwise: false */
+      return x * y | 0;
+    };
+  };
+})(PS["Data.Semiring"] = PS["Data.Semiring"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Semiring"] = $PS["Data.Semiring"] || {};
+  var exports = $PS["Data.Semiring"];
+  var $foreign = $PS["Data.Semiring"];
+  var Semiring = function (add, mul, one, zero) {
+      this.add = add;
+      this.mul = mul;
+      this.one = one;
+      this.zero = zero;
+  };
+  var zero = function (dict) {
+      return dict.zero;
+  };                                                                            
+  var semiringInt = new Semiring($foreign.intAdd, $foreign.intMul, 1, 0);
+  var one = function (dict) {
+      return dict.one;
+  };
+  var add = function (dict) {
+      return dict.add;
+  };
+  exports["add"] = add;
+  exports["zero"] = zero;
+  exports["one"] = one;
+  exports["semiringInt"] = semiringInt;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Foldable"] = $PS["Data.Foldable"] || {};
+  var exports = $PS["Data.Foldable"];
+  var $foreign = $PS["Data.Foldable"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Monoid_Conj = $PS["Data.Monoid.Conj"];
+  var Data_Monoid_Disj = $PS["Data.Monoid.Disj"];
+  var Data_Monoid_Dual = $PS["Data.Monoid.Dual"];
+  var Data_Monoid_Endo = $PS["Data.Monoid.Endo"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Semiring = $PS["Data.Semiring"];
+  var Data_Unit = $PS["Data.Unit"];                
   var Foldable = function (foldMap, foldl, foldr) {
       this.foldMap = foldMap;
       this.foldl = foldl;
@@ -18323,9 +18023,12 @@ var PS = {};
   var traverse_ = function (dictApplicative) {
       return function (dictFoldable) {
           return function (f) {
-              return foldr(dictFoldable)(function ($195) {
-                  return Control_Apply.applySecond(dictApplicative.Apply0())(f($195));
-              })(Control_Applicative.pure(dictApplicative)(Data_Unit.unit));
+              return foldr(dictFoldable)((function () {
+                  var $197 = Control_Apply.applySecond(dictApplicative.Apply0());
+                  return function ($198) {
+                      return $197(f($198));
+                  };
+              })())(Control_Applicative.pure(dictApplicative)(Data_Unit.unit));
           };
       };
   };
@@ -18381,7 +18084,7 @@ var PS = {};
               if (v instanceof Data_Maybe.Just) {
                   return f(v.value0);
               };
-              throw new Error("Failed pattern match at Data.Foldable (line 129, column 1 - line 129, column 41): " + [ f.constructor.name, v.constructor.name ]);
+              throw new Error("Failed pattern match at Data.Foldable (line 129, column 1 - line 135, column 27): " + [ f.constructor.name, v.constructor.name ]);
           };
       };
   }, function (v) {
@@ -18393,7 +18096,7 @@ var PS = {};
               if (v1 instanceof Data_Maybe.Just) {
                   return v(z)(v1.value0);
               };
-              throw new Error("Failed pattern match at Data.Foldable (line 129, column 1 - line 129, column 41): " + [ v.constructor.name, z.constructor.name, v1.constructor.name ]);
+              throw new Error("Failed pattern match at Data.Foldable (line 129, column 1 - line 135, column 27): " + [ v.constructor.name, z.constructor.name, v1.constructor.name ]);
           };
       };
   }, function (v) {
@@ -18405,7 +18108,7 @@ var PS = {};
               if (v1 instanceof Data_Maybe.Just) {
                   return v(v1.value0)(z);
               };
-              throw new Error("Failed pattern match at Data.Foldable (line 129, column 1 - line 129, column 41): " + [ v.constructor.name, z.constructor.name, v1.constructor.name ]);
+              throw new Error("Failed pattern match at Data.Foldable (line 129, column 1 - line 135, column 27): " + [ v.constructor.name, z.constructor.name, v1.constructor.name ]);
           };
       };
   });
@@ -18425,6 +18128,31 @@ var PS = {};
   }, $foreign.foldlArray, $foreign.foldrArray);
   var foldMap = function (dict) {
       return dict.foldMap;
+  }; 
+  var foldlDefault = function (dictFoldable) {
+      return function (c) {
+          return function (u) {
+              return function (xs) {
+                  return Data_Newtype.unwrap(Data_Newtype.newtypeEndo)(Data_Newtype.unwrap(Data_Newtype.newtypeDual)(foldMap(dictFoldable)(Data_Monoid_Dual.monoidDual(Data_Monoid_Endo.monoidEndo(Control_Category.categoryFn)))((function () {
+                      var $201 = Data_Function.flip(c);
+                      return function ($202) {
+                          return Data_Monoid_Dual.Dual(Data_Monoid_Endo.Endo($201($202)));
+                      };
+                  })())(xs)))(u);
+              };
+          };
+      };
+  };
+  var foldrDefault = function (dictFoldable) {
+      return function (c) {
+          return function (u) {
+              return function (xs) {
+                  return Data_Newtype.unwrap(Data_Newtype.newtypeEndo)(foldMap(dictFoldable)(Data_Monoid_Endo.monoidEndo(Control_Category.categoryFn))(function ($203) {
+                      return Data_Monoid_Endo.Endo(c($203));
+                  })(xs))(u);
+              };
+          };
+      };
   };
   var any = function (dictFoldable) {
       return function (dictHeytingAlgebra) {
@@ -18433,8 +18161,10 @@ var PS = {};
   };
   var elem = function (dictFoldable) {
       return function (dictEq) {
-          return function ($199) {
-              return any(dictFoldable)(Data_HeytingAlgebra.heytingAlgebraBoolean)(Data_Eq.eq(dictEq)($199));
+          var $204 = any(dictFoldable)(Data_HeytingAlgebra.heytingAlgebraBoolean);
+          var $205 = Data_Eq.eq(dictEq);
+          return function ($206) {
+              return $204($205($206));
           };
       };
   };
@@ -18447,7 +18177,8 @@ var PS = {};
   exports["foldr"] = foldr;
   exports["foldl"] = foldl;
   exports["foldMap"] = foldMap;
-  exports["foldMapDefaultR"] = foldMapDefaultR;
+  exports["foldrDefault"] = foldrDefault;
+  exports["foldlDefault"] = foldlDefault;
   exports["traverse_"] = traverse_;
   exports["sequence_"] = sequence_;
   exports["intercalate"] = intercalate;
@@ -18458,611 +18189,9 @@ var PS = {};
   exports["length"] = length;
   exports["foldableArray"] = foldableArray;
   exports["foldableMaybe"] = foldableMaybe;
-})(PS["Data.Foldable"] = PS["Data.Foldable"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
-
-  exports.mapWithIndexArray = function (f) {
-    return function (xs) {
-      var l = xs.length;
-      var result = Array(l);
-      for (var i = 0; i < l; i++) {
-        result[i] = f(i)(xs[i]);
-      }
-      return result;
-    };
-  };
-})(PS["Data.FunctorWithIndex"] = PS["Data.FunctorWithIndex"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var $foreign = PS["Data.FunctorWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Maybe_First = PS["Data.Maybe.First"];
-  var Data_Maybe_Last = PS["Data.Maybe.Last"];
-  var Data_Monoid_Additive = PS["Data.Monoid.Additive"];
-  var Data_Monoid_Conj = PS["Data.Monoid.Conj"];
-  var Data_Monoid_Disj = PS["Data.Monoid.Disj"];
-  var Data_Monoid_Dual = PS["Data.Monoid.Dual"];
-  var Data_Monoid_Multiplicative = PS["Data.Monoid.Multiplicative"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                 
-  var FunctorWithIndex = function (Functor0, mapWithIndex) {
-      this.Functor0 = Functor0;
-      this.mapWithIndex = mapWithIndex;
-  };
-  var mapWithIndex = function (dict) {
-      return dict.mapWithIndex;
-  }; 
-  var functorWithIndexArray = new FunctorWithIndex(function () {
-      return Data_Functor.functorArray;
-  }, $foreign.mapWithIndexArray);
-  exports["FunctorWithIndex"] = FunctorWithIndex;
-  exports["mapWithIndex"] = mapWithIndex;
-  exports["functorWithIndexArray"] = functorWithIndexArray;
-})(PS["Data.FunctorWithIndex"] = PS["Data.FunctorWithIndex"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Maybe_First = PS["Data.Maybe.First"];
-  var Data_Maybe_Last = PS["Data.Maybe.Last"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Monoid_Additive = PS["Data.Monoid.Additive"];
-  var Data_Monoid_Conj = PS["Data.Monoid.Conj"];
-  var Data_Monoid_Disj = PS["Data.Monoid.Disj"];
-  var Data_Monoid_Dual = PS["Data.Monoid.Dual"];
-  var Data_Monoid_Endo = PS["Data.Monoid.Endo"];
-  var Data_Monoid_Multiplicative = PS["Data.Monoid.Multiplicative"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                 
-  var Tuple = (function () {
-      function Tuple(value0, value1) {
-          this.value0 = value0;
-          this.value1 = value1;
-      };
-      Tuple.create = function (value0) {
-          return function (value1) {
-              return new Tuple(value0, value1);
-          };
-      };
-      return Tuple;
-  })();
-  var FoldableWithIndex = function (Foldable0, foldMapWithIndex, foldlWithIndex, foldrWithIndex) {
-      this.Foldable0 = Foldable0;
-      this.foldMapWithIndex = foldMapWithIndex;
-      this.foldlWithIndex = foldlWithIndex;
-      this.foldrWithIndex = foldrWithIndex;
-  };
-  var foldrWithIndex = function (dict) {
-      return dict.foldrWithIndex;
-  };
-  var foldlWithIndex = function (dict) {
-      return dict.foldlWithIndex;
-  };
-  var foldMapWithIndexDefaultR = function (dictFoldableWithIndex) {
-      return function (dictMonoid) {
-          return function (f) {
-              return foldrWithIndex(dictFoldableWithIndex)(function (i) {
-                  return function (x) {
-                      return function (acc) {
-                          return Data_Semigroup.append(dictMonoid.Semigroup0())(f(i)(x))(acc);
-                      };
-                  };
-              })(Data_Monoid.mempty(dictMonoid));
-          };
-      };
-  };
-  var foldableWithIndexArray = new FoldableWithIndex(function () {
-      return Data_Foldable.foldableArray;
-  }, function (dictMonoid) {
-      return foldMapWithIndexDefaultR(foldableWithIndexArray)(dictMonoid);
-  }, function (f) {
-      return function (z) {
-          return function ($47) {
-              return Data_Foldable.foldl(Data_Foldable.foldableArray)(function (y) {
-                  return function (v) {
-                      return f(v.value0)(y)(v.value1);
-                  };
-              })(z)(Data_FunctorWithIndex.mapWithIndex(Data_FunctorWithIndex.functorWithIndexArray)(Tuple.create)($47));
-          };
-      };
-  }, function (f) {
-      return function (z) {
-          return function ($48) {
-              return Data_Foldable.foldr(Data_Foldable.foldableArray)(function (v) {
-                  return function (y) {
-                      return f(v.value0)(v.value1)(y);
-                  };
-              })(z)(Data_FunctorWithIndex.mapWithIndex(Data_FunctorWithIndex.functorWithIndexArray)(Tuple.create)($48));
-          };
-      };
-  });
-  var foldMapWithIndex = function (dict) {
-      return dict.foldMapWithIndex;
-  };
-  exports["FoldableWithIndex"] = FoldableWithIndex;
-  exports["foldrWithIndex"] = foldrWithIndex;
-  exports["foldlWithIndex"] = foldlWithIndex;
-  exports["foldMapWithIndex"] = foldMapWithIndex;
-  exports["foldMapWithIndexDefaultR"] = foldMapWithIndexDefaultR;
-  exports["foldableWithIndexArray"] = foldableWithIndexArray;
-})(PS["Data.FoldableWithIndex"] = PS["Data.FoldableWithIndex"] || {});
-(function(exports) {
-    "use strict";
-
-  // jshint maxparams: 3
-
-  exports.traverseArrayImpl = function () {
-    function array1(a) {
-      return [a];
-    }
-
-    function array2(a) {
-      return function (b) {
-        return [a, b];
-      };
-    }
-
-    function array3(a) {
-      return function (b) {
-        return function (c) {
-          return [a, b, c];
-        };
-      };
-    }
-
-    function concat2(xs) {
-      return function (ys) {
-        return xs.concat(ys);
-      };
-    }
-
-    return function (apply) {
-      return function (map) {
-        return function (pure) {
-          return function (f) {
-            return function (array) {
-              function go(bot, top) {
-                switch (top - bot) {
-                case 0: return pure([]);
-                case 1: return map(array1)(f(array[bot]));
-                case 2: return apply(map(array2)(f(array[bot])))(f(array[bot + 1]));
-                case 3: return apply(apply(map(array3)(f(array[bot])))(f(array[bot + 1])))(f(array[bot + 2]));
-                default:
-                  // This slightly tricky pivot selection aims to produce two
-                  // even-length partitions where possible.
-                  var pivot = bot + Math.floor((top - bot) / 4) * 2;
-                  return apply(map(concat2)(go(bot, pivot)))(go(pivot, top));
-                }
-              }
-              return go(0, array.length);
-            };
-          };
-        };
-      };
-    };
-  }();
-})(PS["Data.Traversable"] = PS["Data.Traversable"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Traversable"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Category = PS["Control.Category"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Maybe_First = PS["Data.Maybe.First"];
-  var Data_Maybe_Last = PS["Data.Maybe.Last"];
-  var Data_Monoid_Additive = PS["Data.Monoid.Additive"];
-  var Data_Monoid_Conj = PS["Data.Monoid.Conj"];
-  var Data_Monoid_Disj = PS["Data.Monoid.Disj"];
-  var Data_Monoid_Dual = PS["Data.Monoid.Dual"];
-  var Data_Monoid_Multiplicative = PS["Data.Monoid.Multiplicative"];
-  var Data_Traversable_Accum = PS["Data.Traversable.Accum"];
-  var Data_Traversable_Accum_Internal = PS["Data.Traversable.Accum.Internal"];
-  var Prelude = PS["Prelude"];                 
-  var Traversable = function (Foldable1, Functor0, sequence, traverse) {
-      this.Foldable1 = Foldable1;
-      this.Functor0 = Functor0;
-      this.sequence = sequence;
-      this.traverse = traverse;
-  };
-  var traverse = function (dict) {
-      return dict.traverse;
-  }; 
-  var traversableMaybe = new Traversable(function () {
-      return Data_Foldable.foldableMaybe;
-  }, function () {
-      return Data_Maybe.functorMaybe;
-  }, function (dictApplicative) {
-      return function (v) {
-          if (v instanceof Data_Maybe.Nothing) {
-              return Control_Applicative.pure(dictApplicative)(Data_Maybe.Nothing.value);
-          };
-          if (v instanceof Data_Maybe.Just) {
-              return Data_Functor.map((dictApplicative.Apply0()).Functor0())(Data_Maybe.Just.create)(v.value0);
-          };
-          throw new Error("Failed pattern match at Data.Traversable (line 86, column 1 - line 86, column 47): " + [ v.constructor.name ]);
-      };
-  }, function (dictApplicative) {
-      return function (v) {
-          return function (v1) {
-              if (v1 instanceof Data_Maybe.Nothing) {
-                  return Control_Applicative.pure(dictApplicative)(Data_Maybe.Nothing.value);
-              };
-              if (v1 instanceof Data_Maybe.Just) {
-                  return Data_Functor.map((dictApplicative.Apply0()).Functor0())(Data_Maybe.Just.create)(v(v1.value0));
-              };
-              throw new Error("Failed pattern match at Data.Traversable (line 86, column 1 - line 86, column 47): " + [ v.constructor.name, v1.constructor.name ]);
-          };
-      };
-  });
-  var sequenceDefault = function (dictTraversable) {
-      return function (dictApplicative) {
-          return traverse(dictTraversable)(dictApplicative)(Control_Category.identity(Control_Category.categoryFn));
-      };
-  };
-  var traversableArray = new Traversable(function () {
-      return Data_Foldable.foldableArray;
-  }, function () {
-      return Data_Functor.functorArray;
-  }, function (dictApplicative) {
-      return sequenceDefault(traversableArray)(dictApplicative);
-  }, function (dictApplicative) {
-      return $foreign.traverseArrayImpl(Control_Apply.apply(dictApplicative.Apply0()))(Data_Functor.map((dictApplicative.Apply0()).Functor0()))(Control_Applicative.pure(dictApplicative));
-  });
-  var sequence = function (dict) {
-      return dict.sequence;
-  };
-  exports["Traversable"] = Traversable;
-  exports["traverse"] = traverse;
-  exports["sequence"] = sequence;
-  exports["sequenceDefault"] = sequenceDefault;
-  exports["traversableArray"] = traversableArray;
-  exports["traversableMaybe"] = traversableMaybe;
-})(PS["Data.Traversable"] = PS["Data.Traversable"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Maybe_First = PS["Data.Maybe.First"];
-  var Data_Maybe_Last = PS["Data.Maybe.Last"];
-  var Data_Monoid_Additive = PS["Data.Monoid.Additive"];
-  var Data_Monoid_Conj = PS["Data.Monoid.Conj"];
-  var Data_Monoid_Disj = PS["Data.Monoid.Disj"];
-  var Data_Monoid_Dual = PS["Data.Monoid.Dual"];
-  var Data_Monoid_Multiplicative = PS["Data.Monoid.Multiplicative"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Traversable_Accum = PS["Data.Traversable.Accum"];
-  var Data_Traversable_Accum_Internal = PS["Data.Traversable.Accum.Internal"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                 
-  var TraversableWithIndex = function (FoldableWithIndex1, FunctorWithIndex0, Traversable2, traverseWithIndex) {
-      this.FoldableWithIndex1 = FoldableWithIndex1;
-      this.FunctorWithIndex0 = FunctorWithIndex0;
-      this.Traversable2 = Traversable2;
-      this.traverseWithIndex = traverseWithIndex;
-  };
-  var traverseWithIndexDefault = function (dictTraversableWithIndex) {
-      return function (dictApplicative) {
-          return function (f) {
-              return function ($19) {
-                  return Data_Traversable.sequence(dictTraversableWithIndex.Traversable2())(dictApplicative)(Data_FunctorWithIndex.mapWithIndex(dictTraversableWithIndex.FunctorWithIndex0())(f)($19));
-              };
-          };
-      };
-  };
-  var traverseWithIndex = function (dict) {
-      return dict.traverseWithIndex;
-  }; 
-  var traversableWithIndexArray = new TraversableWithIndex(function () {
-      return Data_FoldableWithIndex.foldableWithIndexArray;
-  }, function () {
-      return Data_FunctorWithIndex.functorWithIndexArray;
-  }, function () {
-      return Data_Traversable.traversableArray;
-  }, function (dictApplicative) {
-      return traverseWithIndexDefault(traversableWithIndexArray)(dictApplicative);
-  });
-  exports["TraversableWithIndex"] = TraversableWithIndex;
-  exports["traverseWithIndex"] = traverseWithIndex;
-  exports["traverseWithIndexDefault"] = traverseWithIndexDefault;
-  exports["traversableWithIndexArray"] = traversableWithIndexArray;
-})(PS["Data.TraversableWithIndex"] = PS["Data.TraversableWithIndex"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Extend = PS["Control.Extend"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Bifoldable = PS["Data.Bifoldable"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Bitraversable = PS["Data.Bitraversable"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Invariant = PS["Data.Functor.Invariant"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                 
-  var Left = (function () {
-      function Left(value0) {
-          this.value0 = value0;
-      };
-      Left.create = function (value0) {
-          return new Left(value0);
-      };
-      return Left;
-  })();
-  var Right = (function () {
-      function Right(value0) {
-          this.value0 = value0;
-      };
-      Right.create = function (value0) {
-          return new Right(value0);
-      };
-      return Right;
-  })();
-  var functorEither = new Data_Functor.Functor(function (f) {
-      return function (m) {
-          if (m instanceof Left) {
-              return new Left(m.value0);
-          };
-          if (m instanceof Right) {
-              return new Right(f(m.value0));
-          };
-          throw new Error("Failed pattern match at Data.Either (line 38, column 8 - line 38, column 52): " + [ m.constructor.name ]);
-      };
-  });                                                                                                     
-  var fromRight = function (dictPartial) {
-      return function (v) {
-          if (v instanceof Right) {
-              return v.value0;
-          };
-          throw new Error("Failed pattern match at Data.Either (line 261, column 1 - line 261, column 52): " + [ v.constructor.name ]);
-      };
-  };
-  var fromLeft = function (dictPartial) {
-      return function (v) {
-          if (v instanceof Left) {
-              return v.value0;
-          };
-          throw new Error("Failed pattern match at Data.Either (line 256, column 1 - line 256, column 51): " + [ v.constructor.name ]);
-      };
-  };
-  var either = function (v) {
-      return function (v1) {
-          return function (v2) {
-              if (v2 instanceof Left) {
-                  return v(v2.value0);
-              };
-              if (v2 instanceof Right) {
-                  return v1(v2.value0);
-              };
-              throw new Error("Failed pattern match at Data.Either (line 238, column 1 - line 238, column 64): " + [ v.constructor.name, v1.constructor.name, v2.constructor.name ]);
-          };
-      };
-  };
-  var hush = either(Data_Function["const"](Data_Maybe.Nothing.value))(Data_Maybe.Just.create);
-  var isLeft = either(Data_Function["const"](true))(Data_Function["const"](false));
-  var isRight = either(Data_Function["const"](false))(Data_Function["const"](true));
-  var bifunctorEither = new Data_Bifunctor.Bifunctor(function (v) {
-      return function (v1) {
-          return function (v2) {
-              if (v2 instanceof Left) {
-                  return new Left(v(v2.value0));
-              };
-              if (v2 instanceof Right) {
-                  return new Right(v1(v2.value0));
-              };
-              throw new Error("Failed pattern match at Data.Either (line 46, column 1 - line 46, column 45): " + [ v.constructor.name, v1.constructor.name, v2.constructor.name ]);
-          };
-      };
-  });
-  var applyEither = new Control_Apply.Apply(function () {
-      return functorEither;
-  }, function (v) {
-      return function (v1) {
-          if (v instanceof Left) {
-              return new Left(v.value0);
-          };
-          if (v instanceof Right) {
-              return Data_Functor.map(functorEither)(v.value0)(v1);
-          };
-          throw new Error("Failed pattern match at Data.Either (line 82, column 1 - line 82, column 41): " + [ v.constructor.name, v1.constructor.name ]);
-      };
-  });
-  var bindEither = new Control_Bind.Bind(function () {
-      return applyEither;
-  }, either(function (e) {
-      return function (v) {
-          return new Left(e);
-      };
-  })(function (a) {
-      return function (f) {
-          return f(a);
-      };
-  }));
-  var applicativeEither = new Control_Applicative.Applicative(function () {
-      return applyEither;
-  }, Right.create);
-  exports["Left"] = Left;
-  exports["Right"] = Right;
-  exports["either"] = either;
-  exports["isLeft"] = isLeft;
-  exports["isRight"] = isRight;
-  exports["fromLeft"] = fromLeft;
-  exports["fromRight"] = fromRight;
-  exports["hush"] = hush;
-  exports["functorEither"] = functorEither;
-  exports["bifunctorEither"] = bifunctorEither;
-  exports["applyEither"] = applyEither;
-  exports["applicativeEither"] = applicativeEither;
-  exports["bindEither"] = bindEither;
-})(PS["Data.Either"] = PS["Data.Either"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Data_Unit = PS["Data.Unit"];                 
-  var Lazy = function (defer) {
-      this.defer = defer;
-  }; 
-  var defer = function (dict) {
-      return dict.defer;
-  };
-  exports["defer"] = defer;
-  exports["Lazy"] = Lazy;
-})(PS["Control.Lazy"] = PS["Control.Lazy"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Biapplicative = PS["Control.Biapplicative"];
-  var Control_Biapply = PS["Control.Biapply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Comonad = PS["Control.Comonad"];
-  var Control_Extend = PS["Control.Extend"];
-  var Control_Lazy = PS["Control.Lazy"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Bifoldable = PS["Data.Bifoldable"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Bitraversable = PS["Data.Bitraversable"];
-  var Data_BooleanAlgebra = PS["Data.BooleanAlgebra"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_CommutativeRing = PS["Data.CommutativeRing"];
-  var Data_Distributive = PS["Data.Distributive"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Invariant = PS["Data.Functor.Invariant"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Maybe_First = PS["Data.Maybe.First"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semigroup_Foldable = PS["Data.Semigroup.Foldable"];
-  var Data_Semigroup_Traversable = PS["Data.Semigroup.Traversable"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];
-  var Type_Equality = PS["Type.Equality"];                 
-  var Tuple = (function () {
-      function Tuple(value0, value1) {
-          this.value0 = value0;
-          this.value1 = value1;
-      };
-      Tuple.create = function (value0) {
-          return function (value1) {
-              return new Tuple(value0, value1);
-          };
-      };
-      return Tuple;
-  })();
-  var uncurry = function (f) {
-      return function (v) {
-          return f(v.value0)(v.value1);
-      };
-  };
-  var swap = function (v) {
-      return new Tuple(v.value1, v.value0);
-  };
-  var snd = function (v) {
-      return v.value1;
-  };                                                                                                    
-  var fst = function (v) {
-      return v.value0;
-  }; 
-  var eqTuple = function (dictEq) {
-      return function (dictEq1) {
-          return new Data_Eq.Eq(function (x) {
-              return function (y) {
-                  return Data_Eq.eq(dictEq)(x.value0)(y.value0) && Data_Eq.eq(dictEq1)(x.value1)(y.value1);
-              };
-          });
-      };
-  };
-  var ordTuple = function (dictOrd) {
-      return function (dictOrd1) {
-          return new Data_Ord.Ord(function () {
-              return eqTuple(dictOrd.Eq0())(dictOrd1.Eq0());
-          }, function (x) {
-              return function (y) {
-                  var v = Data_Ord.compare(dictOrd)(x.value0)(y.value0);
-                  if (v instanceof Data_Ordering.LT) {
-                      return Data_Ordering.LT.value;
-                  };
-                  if (v instanceof Data_Ordering.GT) {
-                      return Data_Ordering.GT.value;
-                  };
-                  return Data_Ord.compare(dictOrd1)(x.value1)(y.value1);
-              };
-          });
-      };
-  };
-  var bifunctorTuple = new Data_Bifunctor.Bifunctor(function (f) {
-      return function (g) {
-          return function (v) {
-              return new Tuple(f(v.value0), g(v.value1));
-          };
-      };
-  });
-  exports["Tuple"] = Tuple;
-  exports["fst"] = fst;
-  exports["snd"] = snd;
-  exports["uncurry"] = uncurry;
-  exports["swap"] = swap;
-  exports["eqTuple"] = eqTuple;
-  exports["ordTuple"] = ordTuple;
-  exports["bifunctorTuple"] = bifunctorTuple;
-})(PS["Data.Tuple"] = PS["Data.Tuple"] || {});
-(function(exports) {
-    "use strict";
 
   exports.pureE = function (a) {
     return function () {
@@ -19078,18 +18207,42 @@ var PS = {};
     };
   };
 })(PS["Effect"] = PS["Effect"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Effect"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad = PS["Control.Monad"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Control.Monad"] = $PS["Control.Monad"] || {};
+  var exports = $PS["Control.Monad"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Bind = $PS["Control.Bind"];                
+  var Monad = function (Applicative0, Bind1) {
+      this.Applicative0 = Applicative0;
+      this.Bind1 = Bind1;
+  };
+  var ap = function (dictMonad) {
+      return function (f) {
+          return function (a) {
+              return Control_Bind.bind(dictMonad.Bind1())(f)(function (v) {
+                  return Control_Bind.bind(dictMonad.Bind1())(a)(function (v1) {
+                      return Control_Applicative.pure(dictMonad.Applicative0())(v(v1));
+                  });
+              });
+          };
+      };
+  };
+  exports["Monad"] = Monad;
+  exports["ap"] = ap;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Effect"] = $PS["Effect"] || {};
+  var exports = $PS["Effect"];
+  var $foreign = $PS["Effect"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Monad = $PS["Control.Monad"];
+  var Data_Functor = $PS["Data.Functor"];                    
   var monadEffect = new Control_Monad.Monad(function () {
       return applicativeEffect;
   }, function () {
@@ -19109,10 +18262,46 @@ var PS = {};
   exports["applyEffect"] = applyEffect;
   exports["applicativeEffect"] = applicativeEffect;
   exports["bindEffect"] = bindEffect;
-  exports["monadEffect"] = monadEffect;
-})(PS["Effect"] = PS["Effect"] || {});
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Control.Alt"] = $PS["Control.Alt"] || {};
+  var exports = $PS["Control.Alt"];                          
+  var Alt = function (Functor0, alt) {
+      this.Functor0 = Functor0;
+      this.alt = alt;
+  };                                                       
+  var alt = function (dict) {
+      return dict.alt;
+  };
+  exports["Alt"] = Alt;
+  exports["alt"] = alt;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Control.Alternative"] = $PS["Control.Alternative"] || {};
+  var exports = $PS["Control.Alternative"];              
+  var Alternative = function (Applicative0, Plus1) {
+      this.Applicative0 = Applicative0;
+      this.Plus1 = Plus1;
+  };
+  exports["Alternative"] = Alternative;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Control.Plus"] = $PS["Control.Plus"] || {};
+  var exports = $PS["Control.Plus"];                   
+  var Plus = function (Alt0, empty) {
+      this.Alt0 = Alt0;
+      this.empty = empty;
+  };
+  exports["Plus"] = Plus;
+})(PS);
 (function(exports) {
-    "use strict";                                                                                    
+  "use strict";                                                                                      
 
   exports.fromFoldableImpl = (function () {
     function Cons(head, tail) {
@@ -19203,38 +18392,9 @@ var PS = {};
     };
   };
 
-  exports.concat = function (xss) {
-    if (xss.length <= 10000) {
-      // This method is faster, but it crashes on big arrays.
-      // So we use it when can and fallback to simple variant otherwise.
-      return Array.prototype.concat.apply([], xss);
-    }
-
-    var result = [];
-    for (var i = 0, l = xss.length; i < l; i++) {
-      var xs = xss[i];
-      for (var j = 0, m = xs.length; j < m; j++) {
-        result.push(xs[j]);
-      }
-    }
-    return result;
-  };
-
   exports.filter = function (f) {
     return function (xs) {
       return xs.filter(f);
-    };
-  };
-
-  //------------------------------------------------------------------------------
-  // Subarrays -------------------------------------------------------------------
-  //------------------------------------------------------------------------------
-
-  exports.slice = function (s) {
-    return function (e) {
-      return function (l) {
-        return l.slice(s, e);
-      };
     };
   };
 
@@ -19265,338 +18425,227 @@ var PS = {};
     };
   };
 })(PS["Data.Array"] = PS["Data.Array"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.new = function (val) {
-    return function () {
-      return { value: val };
-    };
-  };
-
-  exports.read = function (ref) {
-    return function () {
-      return ref.value;
-    };
-  };
-
-  exports["modify'"] = function (f) {
-    return function (ref) {
-      return function () {
-        var t = f(ref.value);
-        ref.value = t.state;
-        return t.value;
-      };
-    };
-  };
-
-  exports.write = function (val) {
-    return function (ref) {
-      return function () {
-        ref.value = val;
-        return {};
-      };
-    };
-  };
-})(PS["Effect.Ref"] = PS["Effect.Ref"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Effect.Ref"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Effect = PS["Effect"];
-  var Prelude = PS["Prelude"];                 
-  var modify = function (f) {
-      return $foreign["modify'"](function (s) {
-          var s$prime = f(s);
-          return {
-              state: s$prime,
-              value: s$prime
+  $PS["Data.Boolean"] = $PS["Data.Boolean"] || {};
+  var exports = $PS["Data.Boolean"];
+  var otherwise = true;
+  exports["otherwise"] = otherwise;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  var unsafeCompareImpl = function (lt) {
+    return function (eq) {
+      return function (gt) {
+        return function (x) {
+          return function (y) {
+            return x < y ? lt : x === y ? eq : gt;
           };
-      });
-  };
-  exports["modify"] = modify;
-  exports["new"] = $foreign["new"];
-  exports["read"] = $foreign.read;
-  exports["write"] = $foreign.write;
-})(PS["Effect.Ref"] = PS["Effect.Ref"] || {});
-(function(exports) {
-    "use strict";
-
-  // module Partial.Unsafe
-
-  exports.unsafePartial = function (f) {
-    return f();
-  };
-})(PS["Partial.Unsafe"] = PS["Partial.Unsafe"] || {});
-(function(exports) {
-    "use strict";
-
-  // module Partial
-
-  exports.crashWith = function () {
-    return function (msg) {
-      throw new Error(msg);
+        };
+      };
     };
+  };                                         
+  exports.ordIntImpl = unsafeCompareImpl;   
+  exports.ordStringImpl = unsafeCompareImpl;
+  exports.ordCharImpl = unsafeCompareImpl;
+})(PS["Data.Ord"] = PS["Data.Ord"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Ordering"] = $PS["Data.Ordering"] || {};
+  var exports = $PS["Data.Ordering"];              
+  var LT = (function () {
+      function LT() {
+
+      };
+      LT.value = new LT();
+      return LT;
+  })();
+  var GT = (function () {
+      function GT() {
+
+      };
+      GT.value = new GT();
+      return GT;
+  })();
+  var EQ = (function () {
+      function EQ() {
+
+      };
+      EQ.value = new EQ();
+      return EQ;
+  })();
+  exports["LT"] = LT;
+  exports["GT"] = GT;
+  exports["EQ"] = EQ;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Ord"] = $PS["Data.Ord"] || {};
+  var exports = $PS["Data.Ord"];
+  var $foreign = $PS["Data.Ord"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Ordering = $PS["Data.Ordering"];
+  var Ord1 = function (Eq10, compare1) {
+      this.Eq10 = Eq10;
+      this.compare1 = compare1;
   };
-})(PS["Partial"] = PS["Partial"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Partial"];
-  exports["crashWith"] = $foreign.crashWith;
-})(PS["Partial"] = PS["Partial"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Partial.Unsafe"];
-  var Partial = PS["Partial"];                 
-  var unsafePartialBecause = function (v) {
+  var Ord = function (Eq0, compare) {
+      this.Eq0 = Eq0;
+      this.compare = compare;
+  }; 
+  var ordString = new Ord(function () {
+      return Data_Eq.eqString;
+  }, $foreign.ordStringImpl(Data_Ordering.LT.value)(Data_Ordering.EQ.value)(Data_Ordering.GT.value));
+  var ordInt = new Ord(function () {
+      return Data_Eq.eqInt;
+  }, $foreign.ordIntImpl(Data_Ordering.LT.value)(Data_Ordering.EQ.value)(Data_Ordering.GT.value));
+  var ordChar = new Ord(function () {
+      return Data_Eq.eqChar;
+  }, $foreign.ordCharImpl(Data_Ordering.LT.value)(Data_Ordering.EQ.value)(Data_Ordering.GT.value));
+  var compare1 = function (dict) {
+      return dict.compare1;
+  };
+  var compare = function (dict) {
+      return dict.compare;
+  };
+  var max = function (dictOrd) {
       return function (x) {
-          return $foreign.unsafePartial(function (dictPartial) {
-              return x(dictPartial);
+          return function (y) {
+              var v = compare(dictOrd)(x)(y);
+              if (v instanceof Data_Ordering.LT) {
+                  return y;
+              };
+              if (v instanceof Data_Ordering.EQ) {
+                  return x;
+              };
+              if (v instanceof Data_Ordering.GT) {
+                  return x;
+              };
+              throw new Error("Failed pattern match at Data.Ord (line 167, column 3 - line 170, column 12): " + [ v.constructor.name ]);
+          };
+      };
+  };
+  var min = function (dictOrd) {
+      return function (x) {
+          return function (y) {
+              var v = compare(dictOrd)(x)(y);
+              if (v instanceof Data_Ordering.LT) {
+                  return x;
+              };
+              if (v instanceof Data_Ordering.EQ) {
+                  return x;
+              };
+              if (v instanceof Data_Ordering.GT) {
+                  return y;
+              };
+              throw new Error("Failed pattern match at Data.Ord (line 158, column 3 - line 161, column 12): " + [ v.constructor.name ]);
+          };
+      };
+  };
+  var clamp = function (dictOrd) {
+      return function (low) {
+          return function (hi) {
+              return function (x) {
+                  return min(dictOrd)(hi)(max(dictOrd)(low)(x));
+              };
+          };
+      };
+  };
+  exports["Ord"] = Ord;
+  exports["compare"] = compare;
+  exports["Ord1"] = Ord1;
+  exports["compare1"] = compare1;
+  exports["min"] = min;
+  exports["max"] = max;
+  exports["clamp"] = clamp;
+  exports["ordInt"] = ordInt;
+  exports["ordString"] = ordString;
+  exports["ordChar"] = ordChar;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Tuple"] = $PS["Data.Tuple"] || {};
+  var exports = $PS["Data.Tuple"];
+  var Data_Bifunctor = $PS["Data.Bifunctor"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Ordering = $PS["Data.Ordering"];                
+  var Tuple = (function () {
+      function Tuple(value0, value1) {
+          this.value0 = value0;
+          this.value1 = value1;
+      };
+      Tuple.create = function (value0) {
+          return function (value1) {
+              return new Tuple(value0, value1);
+          };
+      };
+      return Tuple;
+  })();
+  var uncurry = function (f) {
+      return function (v) {
+          return f(v.value0)(v.value1);
+      };
+  };
+  var swap = function (v) {
+      return new Tuple(v.value1, v.value0);
+  };
+  var snd = function (v) {
+      return v.value1;
+  };                                                                                                    
+  var fst = function (v) {
+      return v.value0;
+  }; 
+  var eqTuple = function (dictEq) {
+      return function (dictEq1) {
+          return new Data_Eq.Eq(function (x) {
+              return function (y) {
+                  return Data_Eq.eq(dictEq)(x.value0)(y.value0) && Data_Eq.eq(dictEq1)(x.value1)(y.value1);
+              };
           });
       };
   };
-  var unsafeCrashWith = function (msg) {
-      return $foreign.unsafePartial(function (dictPartial) {
-          return Partial.crashWith(dictPartial)(msg);
-      });
-  };
-  exports["unsafePartialBecause"] = unsafePartialBecause;
-  exports["unsafeCrashWith"] = unsafeCrashWith;
-})(PS["Partial.Unsafe"] = PS["Partial.Unsafe"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Identity = PS["Data.Identity"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Unit = PS["Data.Unit"];
-  var Effect = PS["Effect"];
-  var Effect_Ref = PS["Effect.Ref"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];                 
-  var Loop = (function () {
-      function Loop(value0) {
-          this.value0 = value0;
-      };
-      Loop.create = function (value0) {
-          return new Loop(value0);
-      };
-      return Loop;
-  })();
-  var Done = (function () {
-      function Done(value0) {
-          this.value0 = value0;
-      };
-      Done.create = function (value0) {
-          return new Done(value0);
-      };
-      return Done;
-  })();
-  var MonadRec = function (Monad0, tailRecM) {
-      this.Monad0 = Monad0;
-      this.tailRecM = tailRecM;
-  };
-  var tailRecM = function (dict) {
-      return dict.tailRecM;
-  };
-  var tailRecM2 = function (dictMonadRec) {
-      return function (f) {
-          return function (a) {
-              return function (b) {
-                  return tailRecM(dictMonadRec)(function (o) {
-                      return f(o.a)(o.b);
-                  })({
-                      a: a,
-                      b: b
-                  });
-              };
-          };
-      };
-  };
-  exports["Loop"] = Loop;
-  exports["Done"] = Done;
-  exports["MonadRec"] = MonadRec;
-  exports["tailRecM"] = tailRecM;
-  exports["tailRecM2"] = tailRecM2;
-})(PS["Control.Monad.Rec.Class"] = PS["Control.Monad.Rec.Class"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.map_ = function (f) {
-    return function (a) {
-      return function () {
-        return f(a());
-      };
-    };
-  };
-
-  exports.pure_ = function (a) {
-    return function () {
-      return a;
-    };
-  };
-
-  exports.bind_ = function (a) {
-    return function (f) {
-      return function () {
-        return f(a())();
-      };
-    };
-  };
-
-  exports["while"] = function (f) {
-    return function (a) {
-      return function () {
-        while (f()) {
-          a();
-        }
-      };
-    };
-  };
-
-  exports.new = function (val) {
-    return function () {
-      return { value: val };
-    };
-  };
-
-  exports.read = function (ref) {
-    return function () {
-      return ref.value;
-    };
-  };
-
-  exports.write = function (a) {
-    return function (ref) {
-      return function () {
-        return ref.value = a; // eslint-disable-line no-return-assign
-      };
-    };
-  };
-})(PS["Control.Monad.ST.Internal"] = PS["Control.Monad.ST.Internal"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Control.Monad.ST.Internal"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_Monad_Rec_Class = PS["Control.Monad.Rec.Class"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Unit = PS["Data.Unit"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var functorST = new Data_Functor.Functor($foreign.map_);
-  var monadST = new Control_Monad.Monad(function () {
-      return applicativeST;
-  }, function () {
-      return bindST;
-  });
-  var bindST = new Control_Bind.Bind(function () {
-      return applyST;
-  }, $foreign.bind_);
-  var applyST = new Control_Apply.Apply(function () {
-      return functorST;
-  }, Control_Monad.ap(monadST));
-  var applicativeST = new Control_Applicative.Applicative(function () {
-      return applyST;
-  }, $foreign.pure_);
-  var monadRecST = new Control_Monad_Rec_Class.MonadRec(function () {
-      return monadST;
-  }, function (f) {
-      return function (a) {
-          var isLooping = function (v) {
-              if (v instanceof Control_Monad_Rec_Class.Loop) {
-                  return true;
-              };
-              return false;
-          };
-          var fromDone = function (v) {
-              if (v instanceof Control_Monad_Rec_Class.Done) {
-                  return v.value0;
-              };
-              throw new Error("Failed pattern match at Control.Monad.ST.Internal (line 54, column 32 - line 54, column 46): " + [ v.constructor.name ]);
-          };
-          return Control_Bind.bind(bindST)(Control_Bind.bindFlipped(bindST)($foreign["new"])(f(a)))(function (v) {
-              return Control_Bind.discard(Control_Bind.discardUnit)(bindST)($foreign["while"](Data_Functor.map(functorST)(isLooping)($foreign.read(v)))(Control_Bind.bind(bindST)($foreign.read(v))(function (v1) {
-                  if (v1 instanceof Control_Monad_Rec_Class.Loop) {
-                      return Control_Bind.bind(bindST)(f(v1.value0))(function (v2) {
-                          return Data_Functor["void"](functorST)($foreign.write(v2)(v));
-                      });
+  var ordTuple = function (dictOrd) {
+      return function (dictOrd1) {
+          return new Data_Ord.Ord(function () {
+              return eqTuple(dictOrd.Eq0())(dictOrd1.Eq0());
+          }, function (x) {
+              return function (y) {
+                  var v = Data_Ord.compare(dictOrd)(x.value0)(y.value0);
+                  if (v instanceof Data_Ordering.LT) {
+                      return Data_Ordering.LT.value;
                   };
-                  if (v1 instanceof Control_Monad_Rec_Class.Done) {
-                      return Control_Applicative.pure(applicativeST)(Data_Unit.unit);
+                  if (v instanceof Data_Ordering.GT) {
+                      return Data_Ordering.GT.value;
                   };
-                  throw new Error("Failed pattern match at Control.Monad.ST.Internal (line 46, column 18 - line 50, column 28): " + [ v1.constructor.name ]);
-              })))(function () {
-                  return Data_Functor.map(functorST)(fromDone)($foreign.read(v));
-              });
+                  return Data_Ord.compare(dictOrd1)(x.value1)(y.value1);
+              };
           });
       };
-  });
-  exports["functorST"] = functorST;
-  exports["applyST"] = applyST;
-  exports["applicativeST"] = applicativeST;
-  exports["bindST"] = bindST;
-  exports["monadST"] = monadST;
-  exports["monadRecST"] = monadRecST;
-})(PS["Control.Monad.ST.Internal"] = PS["Control.Monad.ST.Internal"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.empty = function () {
-    return [];
   };
-
-  exports.pushAll = function (as) {
-    return function (xs) {
-      return function () {
-        return xs.push.apply(xs, as);
+  var bifunctorTuple = new Data_Bifunctor.Bifunctor(function (f) {
+      return function (g) {
+          return function (v) {
+              return new Tuple(f(v.value0), g(v.value1));
+          };
       };
-    };
-  };
-})(PS["Data.Array.ST"] = PS["Data.Array.ST"] || {});
+  });
+  exports["Tuple"] = Tuple;
+  exports["fst"] = fst;
+  exports["snd"] = snd;
+  exports["uncurry"] = uncurry;
+  exports["swap"] = swap;
+  exports["eqTuple"] = eqTuple;
+  exports["ordTuple"] = ordTuple;
+  exports["bifunctorTuple"] = bifunctorTuple;
+})(PS);
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var $foreign = PS["Data.Array.ST"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad_ST = PS["Control.Monad.ST"];
-  var Control_Monad_ST_Internal = PS["Control.Monad.ST.Internal"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Prelude = PS["Prelude"];
-  var Unsafe_Coerce = PS["Unsafe.Coerce"];
-  var unsafeFreeze = function ($12) {
-      return Control_Applicative.pure(Control_Monad_ST_Internal.applicativeST)($12);
-  };
-  var push = function (a) {
-      return $foreign.pushAll([ a ]);
-  };
-  exports["push"] = push;
-  exports["unsafeFreeze"] = unsafeFreeze;
-  exports["empty"] = $foreign.empty;
-})(PS["Data.Array.ST"] = PS["Data.Array.ST"] || {});
-(function(exports) {
-    "use strict";
 
   exports.unfoldrArrayImpl = function (isNothing) {
     return function (fromJust) {
@@ -19621,7 +18670,7 @@ var PS = {};
   };
 })(PS["Data.Unfoldable"] = PS["Data.Unfoldable"] || {});
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.unfoldr1ArrayImpl = function (isNothing) {
     return function (fromJust) {
@@ -19645,46 +18694,30 @@ var PS = {};
     };
   };
 })(PS["Data.Unfoldable1"] = PS["Data.Unfoldable1"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Unfoldable1"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup_Traversable = PS["Data.Semigroup.Traversable"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Unfoldable1"] = $PS["Data.Unfoldable1"] || {};
+  var exports = $PS["Data.Unfoldable1"];
+  var $foreign = $PS["Data.Unfoldable1"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Tuple = $PS["Data.Tuple"];                
   var Unfoldable1 = function (unfoldr1) {
       this.unfoldr1 = unfoldr1;
   };
-  var unfoldr1 = function (dict) {
-      return dict.unfoldr1;
-  };
   var unfoldable1Array = new Unfoldable1($foreign.unfoldr1ArrayImpl(Data_Maybe.isNothing)(Data_Maybe.fromJust())(Data_Tuple.fst)(Data_Tuple.snd));
   exports["Unfoldable1"] = Unfoldable1;
-  exports["unfoldr1"] = unfoldr1;
   exports["unfoldable1Array"] = unfoldable1Array;
-})(PS["Data.Unfoldable1"] = PS["Data.Unfoldable1"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Unfoldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable1 = PS["Data.Unfoldable1"];
-  var Data_Unit = PS["Data.Unit"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Unfoldable"] = $PS["Data.Unfoldable"] || {};
+  var exports = $PS["Data.Unfoldable"];
+  var $foreign = $PS["Data.Unfoldable"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable1 = $PS["Data.Unfoldable1"];  
   var Unfoldable = function (Unfoldable10, unfoldr) {
       this.Unfoldable10 = Unfoldable10;
       this.unfoldr = unfoldr;
@@ -19698,43 +18731,18 @@ var PS = {};
   exports["Unfoldable"] = Unfoldable;
   exports["unfoldr"] = unfoldr;
   exports["unfoldableArray"] = unfoldableArray;
-})(PS["Data.Unfoldable"] = PS["Data.Unfoldable"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Array"];
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Lazy = PS["Control.Lazy"];
-  var Control_Monad_Rec_Class = PS["Control.Monad.Rec.Class"];
-  var Control_Monad_ST = PS["Control.Monad.ST"];
-  var Control_Monad_ST_Internal = PS["Control.Monad.ST.Internal"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array_NonEmpty_Internal = PS["Data.Array.NonEmpty.Internal"];
-  var Data_Array_ST = PS["Data.Array.ST"];
-  var Data_Array_ST_Iterator = PS["Data.Array.ST.Iterator"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Unsafe_Coerce = PS["Unsafe.Coerce"];
+  $PS["Data.Array"] = $PS["Data.Array"] || {};
+  var exports = $PS["Data.Array"];
+  var $foreign = $PS["Data.Array"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];
   var zip = $foreign.zipWith(Data_Tuple.Tuple.create);                                   
   var unsafeIndex = function (dictPartial) {
       return $foreign.unsafeIndexImpl;
@@ -19778,166 +18786,560 @@ var PS = {};
   exports["fromFoldable"] = fromFoldable;
   exports["toUnfoldable"] = toUnfoldable;
   exports["head"] = head;
-  exports["index"] = index;
-  exports["findIndex"] = findIndex;
-  exports["deleteAt"] = deleteAt;
   exports["deleteBy"] = deleteBy;
   exports["zip"] = zip;
-  exports["unsafeIndex"] = unsafeIndex;
   exports["length"] = $foreign.length;
   exports["cons"] = $foreign.cons;
   exports["filter"] = $foreign.filter;
   exports["zipWith"] = $foreign.zipWith;
-})(PS["Data.Array"] = PS["Data.Array"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Plus = PS["Control.Plus"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semigroup_Foldable = PS["Data.Semigroup.Foldable"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Unfoldable1 = PS["Data.Unfoldable1"];
-  var Prelude = PS["Prelude"];                 
-  var NonEmpty = (function () {
-      function NonEmpty(value0, value1) {
-          this.value0 = value0;
-          this.value1 = value1;
-      };
-      NonEmpty.create = function (value0) {
-          return function (value1) {
-              return new NonEmpty(value0, value1);
-          };
-      };
-      return NonEmpty;
-  })();
-  var singleton = function (dictPlus) {
-      return function (a) {
-          return new NonEmpty(a, Control_Plus.empty(dictPlus));
-      };
+  $PS["Data.Compactable"] = $PS["Data.Compactable"] || {};
+  var exports = $PS["Data.Compactable"];           
+  var Compactable = function (compact, separate) {
+      this.compact = compact;
+      this.separate = separate;
   };
-  var functorNonEmpty = function (dictFunctor) {
-      return new Data_Functor.Functor(function (f) {
-          return function (m) {
-              return new NonEmpty(f(m.value0), Data_Functor.map(dictFunctor)(f)(m.value1));
+  exports["Compactable"] = Compactable;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Filterable"] = $PS["Data.Filterable"] || {};
+  var exports = $PS["Data.Filterable"];                      
+  var Filterable = function (Compactable0, Functor1, filter, filterMap, partition, partitionMap) {
+      this.Compactable0 = Compactable0;
+      this.Functor1 = Functor1;
+      this.filter = filter;
+      this.filterMap = filterMap;
+      this.partition = partition;
+      this.partitionMap = partitionMap;
+  };
+  var filterMap = function (dict) {
+      return dict.filterMap;
+  };
+  exports["Filterable"] = Filterable;
+  exports["filterMap"] = filterMap;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.new = function (val) {
+    return function () {
+      return { value: val };
+    };
+  };
+
+  exports.read = function (ref) {
+    return function () {
+      return ref.value;
+    };
+  };
+
+  exports["modify'"] = function (f) {
+    return function (ref) {
+      return function () {
+        var t = f(ref.value);
+        ref.value = t.state;
+        return t.value;
+      };
+    };
+  };
+
+  exports.write = function (val) {
+    return function (ref) {
+      return function () {
+        ref.value = val;
+        return {};
+      };
+    };
+  };
+})(PS["Effect.Ref"] = PS["Effect.Ref"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Effect.Ref"] = $PS["Effect.Ref"] || {};
+  var exports = $PS["Effect.Ref"];
+  var $foreign = $PS["Effect.Ref"];          
+  var modify = function (f) {
+      return $foreign["modify'"](function (s) {
+          var s$prime = f(s);
+          return {
+              state: s$prime,
+              value: s$prime
           };
       });
   };
-  var foldableNonEmpty = function (dictFoldable) {
-      return new Data_Foldable.Foldable(function (dictMonoid) {
-          return function (f) {
-              return function (v) {
-                  return Data_Semigroup.append(dictMonoid.Semigroup0())(f(v.value0))(Data_Foldable.foldMap(dictFoldable)(dictMonoid)(f)(v.value1));
-              };
-          };
-      }, function (f) {
-          return function (b) {
-              return function (v) {
-                  return Data_Foldable.foldl(dictFoldable)(f)(f(b)(v.value0))(v.value1);
-              };
-          };
-      }, function (f) {
-          return function (b) {
-              return function (v) {
-                  return f(v.value0)(Data_Foldable.foldr(dictFoldable)(f)(b)(v.value1));
-              };
-          };
-      });
-  };
-  var eqNonEmpty = function (dictEq1) {
-      return function (dictEq) {
-          return new Data_Eq.Eq(function (x) {
-              return function (y) {
-                  return Data_Eq.eq(dictEq)(x.value0)(y.value0) && Data_Eq.eq1(dictEq1)(dictEq)(x.value1)(y.value1);
-              };
-          });
-      };
-  };
-  var ordNonEmpty = function (dictOrd1) {
-      return function (dictOrd) {
-          return new Data_Ord.Ord(function () {
-              return eqNonEmpty(dictOrd1.Eq10())(dictOrd.Eq0());
-          }, function (x) {
-              return function (y) {
-                  var v = Data_Ord.compare(dictOrd)(x.value0)(y.value0);
-                  if (v instanceof Data_Ordering.LT) {
-                      return Data_Ordering.LT.value;
-                  };
-                  if (v instanceof Data_Ordering.GT) {
-                      return Data_Ordering.GT.value;
-                  };
-                  return Data_Ord.compare1(dictOrd1)(dictOrd)(x.value1)(y.value1);
-              };
-          });
-      };
-  };
-  exports["NonEmpty"] = NonEmpty;
-  exports["singleton"] = singleton;
-  exports["eqNonEmpty"] = eqNonEmpty;
-  exports["ordNonEmpty"] = ordNonEmpty;
-  exports["functorNonEmpty"] = functorNonEmpty;
-  exports["foldableNonEmpty"] = foldableNonEmpty;
-})(PS["Data.NonEmpty"] = PS["Data.NonEmpty"] || {});
+  exports["modify"] = modify;
+  exports["new"] = $foreign["new"];
+  exports["read"] = $foreign.read;
+  exports["write"] = $foreign.write;
+})(PS);
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Comonad = PS["Control.Comonad"];
-  var Control_Extend = PS["Control.Extend"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_MonadPlus = PS["Control.MonadPlus"];
-  var Control_MonadZero = PS["Control.MonadZero"];
-  var Control_Plus = PS["Control.Plus"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_NonEmpty = PS["Data.NonEmpty"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semigroup_Foldable = PS["Data.Semigroup.Foldable"];
-  var Data_Semigroup_Traversable = PS["Data.Semigroup.Traversable"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Unfoldable1 = PS["Data.Unfoldable1"];
-  var Prelude = PS["Prelude"];                 
+
+  exports.unsafePerformEffect = function (f) {
+    return f();
+  };
+})(PS["Effect.Unsafe"] = PS["Effect.Unsafe"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Effect.Unsafe"] = $PS["Effect.Unsafe"] || {};
+  var exports = $PS["Effect.Unsafe"];
+  var $foreign = $PS["Effect.Unsafe"];
+  exports["unsafePerformEffect"] = $foreign.unsafePerformEffect;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["FRP.Event.Class"] = $PS["FRP.Event.Class"] || {};
+  var exports = $PS["FRP.Event.Class"];              
+  var IsEvent = function (Alternative0, Filterable1, fix, fold, keepLatest, sampleOn) {
+      this.Alternative0 = Alternative0;
+      this.Filterable1 = Filterable1;
+      this.fix = fix;
+      this.fold = fold;
+      this.keepLatest = keepLatest;
+      this.sampleOn = sampleOn;
+  };
+  var fold = function (dict) {
+      return dict.fold;
+  };
+  exports["IsEvent"] = IsEvent;
+  exports["fold"] = fold;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.reallyUnsafeRefEq = function (a) {
+    return function (b) {
+      return a === b;
+    };
+  };
+})(PS["Unsafe.Reference"] = PS["Unsafe.Reference"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Unsafe.Reference"] = $PS["Unsafe.Reference"] || {};
+  var exports = $PS["Unsafe.Reference"];
+  var $foreign = $PS["Unsafe.Reference"];
+  var unsafeRefEq = $foreign.reallyUnsafeRefEq;
+  exports["unsafeRefEq"] = unsafeRefEq;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["FRP.Event"] = $PS["FRP.Event"] || {};
+  var exports = $PS["FRP.Event"];
+  var Control_Alt = $PS["Control.Alt"];
+  var Control_Alternative = $PS["Control.Alternative"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Plus = $PS["Control.Plus"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Compactable = $PS["Data.Compactable"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Filterable = $PS["Data.Filterable"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Unit = $PS["Data.Unit"];
+  var Effect = $PS["Effect"];
+  var Effect_Ref = $PS["Effect.Ref"];
+  var Effect_Unsafe = $PS["Effect.Unsafe"];
+  var FRP_Event_Class = $PS["FRP.Event.Class"];
+  var Unsafe_Reference = $PS["Unsafe.Reference"];
+  var subscribe = function (v) {
+      return function (k) {
+          return v((function () {
+              var $79 = Data_Functor["void"](Effect.functorEffect);
+              return function ($80) {
+                  return $79(k($80));
+              };
+          })());
+      };
+  };
+  var sampleOn = function (v) {
+      return function (v1) {
+          return function (k) {
+              return function __do() {
+                  var v2 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
+                  var v3 = v(function (a) {
+                      return Effect_Ref.write(new Data_Maybe.Just(a))(v2);
+                  })();
+                  var v4 = v1(function (f) {
+                      return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v2))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function ($81) {
+                          return k(f($81));
+                      }));
+                  })();
+                  return Control_Apply.applySecond(Effect.applyEffect)(v3)(v4);
+              };
+          };
+      };
+  };                    
+  var keepLatest = function (v) {
+      return function (k) {
+          return function __do() {
+              var v1 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
+              var v2 = v(function (inner) {
+                  return function __do() {
+                      Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v1))(Data_Foldable.sequence_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe))();
+                      var v2 = subscribe(inner)(k)();
+                      return Effect_Ref.write(new Data_Maybe.Just(v2))(v1)();
+                  };
+              })();
+              return function __do() {
+                  Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v1))(Data_Foldable.sequence_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe))();
+                  return v2();
+              };
+          };
+      };
+  };
+  var functorEvent = new Data_Functor.Functor(function (f) {
+      return function (v) {
+          return function (k) {
+              return v(function ($82) {
+                  return k(f($82));
+              });
+          };
+      };
+  });
+  var fold = function (f) {
+      return function (v) {
+          return function (b) {
+              return function (k) {
+                  return function __do() {
+                      var v1 = Effect_Ref["new"](b)();
+                      return v(function (a) {
+                          return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.modify(f(a))(v1))(k);
+                      })();
+                  };
+              };
+          };
+      };
+  };
+  var filter = function (p) {
+      return function (v) {
+          return function (k) {
+              return v(function (a) {
+                  var $59 = p(a);
+                  if ($59) {
+                      return k(a);
+                  };
+                  return Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit);
+              });
+          };
+      };
+  };
+  var create = function __do() {
+      var v = Effect_Ref["new"]([  ])();
+      return {
+          event: function (k) {
+              return function __do() {
+                  var v1 = Effect_Ref.modify(function (v1) {
+                      return Data_Semigroup.append(Data_Semigroup.semigroupArray)(v1)([ k ]);
+                  })(v)();
+                  return function __do() {
+                      var v2 = Effect_Ref.modify(Data_Array.deleteBy(Unsafe_Reference.unsafeRefEq)(k))(v)();
+                      return Data_Unit.unit;
+                  };
+              };
+          },
+          push: function (a) {
+              return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableArray)(function (k) {
+                  return k(a);
+              }));
+          }
+      };
+  };
+  var fix = function (f) {
+      var v = Effect_Unsafe.unsafePerformEffect(create);
+      var v1 = f(v.event);
+      return function (k) {
+          return function __do() {
+              var v2 = subscribe(v1.input)(v.push)();
+              var v3 = subscribe(v1.output)(k)();
+              return Control_Apply.applySecond(Effect.applyEffect)(v2)(v3);
+          };
+      };
+  };
+  var compactableEvent = new Data_Compactable.Compactable(function (xs) {
+      return Data_Functor.map(functorEvent)(function (x) {
+          return Data_Maybe.fromJust()(x);
+      })(filter(Data_Maybe.isJust)(xs));
+  }, function (xs) {
+      return {
+          left: Data_Functor.map(functorEvent)(Data_Either.fromLeft())(filter(Data_Either.isLeft)(xs)),
+          right: Data_Functor.map(functorEvent)(Data_Either.fromRight())(filter(Data_Either.isRight)(xs))
+      };
+  });
+  var filterableEvent = new Data_Filterable.Filterable(function () {
+      return compactableEvent;
+  }, function () {
+      return functorEvent;
+  }, filter, function (f) {
+      var $83 = Data_Functor.map(functorEvent)(function (x) {
+          return Data_Maybe.fromJust()(x);
+      });
+      var $84 = filter(Data_Maybe.isJust);
+      var $85 = Data_Functor.map(functorEvent)(f);
+      return function ($86) {
+          return $83($84($85($86)));
+      };
+  }, function (p) {
+      return function (xs) {
+          return {
+              yes: filter(p)(xs),
+              no: filter((function () {
+                  var $87 = Data_HeytingAlgebra.not(Data_HeytingAlgebra.heytingAlgebraBoolean);
+                  return function ($88) {
+                      return $87(p($88));
+                  };
+              })())(xs)
+          };
+      };
+  }, function (f) {
+      return function (xs) {
+          return {
+              left: Data_Filterable.filterMap(filterableEvent)((function () {
+                  var $89 = Data_Either.either(Data_Maybe.Just.create)(Data_Function["const"](Data_Maybe.Nothing.value));
+                  return function ($90) {
+                      return $89(f($90));
+                  };
+              })())(xs),
+              right: Data_Filterable.filterMap(filterableEvent)(function ($91) {
+                  return Data_Either.hush(f($91));
+              })(xs)
+          };
+      };
+  });
+  var applyEvent = new Control_Apply.Apply(function () {
+      return functorEvent;
+  }, function (v) {
+      return function (v1) {
+          return function (k) {
+              return function __do() {
+                  var v2 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
+                  var v3 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
+                  var v4 = v(function (a) {
+                      return function __do() {
+                          Effect_Ref.write(new Data_Maybe.Just(a))(v2)();
+                          return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v3))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function ($92) {
+                              return k(a($92));
+                          }))();
+                      };
+                  })();
+                  var v5 = v1(function (b) {
+                      return function __do() {
+                          Effect_Ref.write(new Data_Maybe.Just(b))(v3)();
+                          return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v2))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function ($93) {
+                              return k((function (v5) {
+                                  return v5(b);
+                              })($93));
+                          }))();
+                      };
+                  })();
+                  return Control_Apply.applySecond(Effect.applyEffect)(v4)(v5);
+              };
+          };
+      };
+  });
+  var applicativeEvent = new Control_Applicative.Applicative(function () {
+      return applyEvent;
+  }, function (a) {
+      return function (k) {
+          return function __do() {
+              k(a)();
+              return Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit);
+          };
+      };
+  });
+  var altEvent = new Control_Alt.Alt(function () {
+      return functorEvent;
+  }, function (v) {
+      return function (v1) {
+          return function (k) {
+              return function __do() {
+                  var v2 = v(k)();
+                  var v3 = v1(k)();
+                  return Control_Apply.applySecond(Effect.applyEffect)(v2)(v3);
+              };
+          };
+      };
+  });
+  var plusEvent = new Control_Plus.Plus(function () {
+      return altEvent;
+  }, function (v) {
+      return Control_Applicative.pure(Effect.applicativeEffect)(Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit));
+  });
+  var alternativeEvent = new Control_Alternative.Alternative(function () {
+      return applicativeEvent;
+  }, function () {
+      return plusEvent;
+  });
+  var eventIsEvent = new FRP_Event_Class.IsEvent(function () {
+      return alternativeEvent;
+  }, function () {
+      return filterableEvent;
+  }, fix, fold, keepLatest, sampleOn);
+  exports["create"] = create;
+  exports["subscribe"] = subscribe;
+  exports["functorEvent"] = functorEvent;
+  exports["applicativeEvent"] = applicativeEvent;
+  exports["altEvent"] = altEvent;
+  exports["eventIsEvent"] = eventIsEvent;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["App"] = $PS["App"] || {};
+  var exports = $PS["App"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Effect = $PS["Effect"];
+  var FRP_Event = $PS["FRP.Event"];                
+  var runApp = function (app) {
+      var right = Data_Either.either(Data_Function["const"](Data_Maybe.Nothing.value))(Data_Maybe.Just.create);
+      var left = Data_Either.either(Data_Maybe.Just.create)(Data_Function["const"](Data_Maybe.Nothing.value));
+      var run = function (els) {
+          var runOnRawInputs = function (rawInput) {
+              var input = app.parse(rawInput);
+              return function __do() {
+                  app.error(els)(left(input))();
+                  return app.render(els)(Data_Functor.map(Data_Maybe.functorMaybe)(function ($4) {
+                      return app.unparse(app.analyze($4));
+                  })(right(input)))();
+              };
+          };
+          return function __do() {
+              var v = app.readInput(els)();
+              runOnRawInputs(v.value0)();
+              return FRP_Event.subscribe(v.value1)(runOnRawInputs)();
+          };
+      };
+      return Control_Bind.bind(Effect.bindEffect)(app.elements)(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(run));
+  };
+  exports["runApp"] = runApp;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.mapWithIndexArray = function (f) {
+    return function (xs) {
+      var l = xs.length;
+      var result = Array(l);
+      for (var i = 0; i < l; i++) {
+        result[i] = f(i)(xs[i]);
+      }
+      return result;
+    };
+  };
+})(PS["Data.FunctorWithIndex"] = PS["Data.FunctorWithIndex"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.FunctorWithIndex"] = $PS["Data.FunctorWithIndex"] || {};
+  var exports = $PS["Data.FunctorWithIndex"];
+  var $foreign = $PS["Data.FunctorWithIndex"];
+  var Data_Functor = $PS["Data.Functor"];          
+  var FunctorWithIndex = function (Functor0, mapWithIndex) {
+      this.Functor0 = Functor0;
+      this.mapWithIndex = mapWithIndex;
+  };
+  var mapWithIndex = function (dict) {
+      return dict.mapWithIndex;
+  }; 
+  var functorWithIndexArray = new FunctorWithIndex(function () {
+      return Data_Functor.functorArray;
+  }, $foreign.mapWithIndexArray);
+  exports["FunctorWithIndex"] = FunctorWithIndex;
+  exports["mapWithIndex"] = mapWithIndex;
+  exports["functorWithIndexArray"] = functorWithIndexArray;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.defer = function (thunk) {
+    var v = null;
+    return function() {
+      if (thunk === undefined) return v;
+
+      v = thunk();
+      thunk = undefined; // eslint-disable-line no-param-reassign
+      return v;
+    };
+  };
+
+  exports.force = function (l) {
+    return l();
+  };
+})(PS["Data.Lazy"] = PS["Data.Lazy"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Lazy"] = $PS["Data.Lazy"] || {};
+  var exports = $PS["Data.Lazy"];
+  var $foreign = $PS["Data.Lazy"];
+  var Data_Functor = $PS["Data.Functor"];
+  var functorLazy = new Data_Functor.Functor(function (f) {
+      return function (l) {
+          return $foreign.defer(function (v) {
+              return f($foreign.force(l));
+          });
+      };
+  });
+  exports["functorLazy"] = functorLazy;
+  exports["defer"] = $foreign.defer;
+  exports["force"] = $foreign.force;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Control.Lazy"] = $PS["Control.Lazy"] || {};
+  var exports = $PS["Control.Lazy"];               
+  var Lazy = function (defer) {
+      this.defer = defer;
+  }; 
+  var defer = function (dict) {
+      return dict.defer;
+  };
+  exports["defer"] = defer;
+  exports["Lazy"] = Lazy;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.List.Lazy.Types"] = $PS["Data.List.Lazy.Types"] || {};
+  var exports = $PS["Data.List.Lazy.Types"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Lazy = $PS["Control.Lazy"];
+  var Control_Monad = $PS["Control.Monad"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Lazy = $PS["Data.Lazy"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];
+  var Data_Unfoldable1 = $PS["Data.Unfoldable1"];                
+  var List = function (x) {
+      return x;
+  };
   var Nil = (function () {
       function Nil() {
 
@@ -19957,14 +19359,453 @@ var PS = {};
       };
       return Cons;
   })();
-  var NonEmptyList = function (x) {
-      return x;
-  };               
-  var nelCons = function (a) {
-      return function (v) {
-          return new Data_NonEmpty.NonEmpty(a, new Cons(v.value0, v.value1));
+  var nil = List(Data_Lazy.defer(function (v) {
+      return Nil.value;
+  }));             
+  var newtypeList = new Data_Newtype.Newtype(function (n) {
+      return n;
+  }, List);
+  var step = (function () {
+      var $215 = Data_Newtype.unwrap(newtypeList);
+      return function ($216) {
+          return Data_Lazy.force($215($216));
+      };
+  })();
+  var semigroupList = new Data_Semigroup.Semigroup(function (xs) {
+      return function (ys) {
+          var go = function (v) {
+              if (v instanceof Nil) {
+                  return step(ys);
+              };
+              if (v instanceof Cons) {
+                  return new Cons(v.value0, Data_Semigroup.append(semigroupList)(v.value1)(ys));
+              };
+              throw new Error("Failed pattern match at Data.List.Lazy.Types (line 98, column 5 - line 98, column 21): " + [ v.constructor.name ]);
+          };
+          return Data_Functor.map(Data_Lazy.functorLazy)(go)(Data_Newtype.unwrap(newtypeList)(xs));
+      };
+  });     
+  var lazyList = new Control_Lazy.Lazy(function (f) {
+      return List(Data_Lazy.defer(function ($217) {
+          return step(f($217));
+      }));
+  });
+  var functorList = new Data_Functor.Functor(function (f) {
+      return function (xs) {
+          var go = function (v) {
+              if (v instanceof Nil) {
+                  return Nil.value;
+              };
+              if (v instanceof Cons) {
+                  return new Cons(f(v.value0), Data_Functor.map(functorList)(f)(v.value1));
+              };
+              throw new Error("Failed pattern match at Data.List.Lazy.Types (line 107, column 5 - line 107, column 17): " + [ v.constructor.name ]);
+          };
+          return Data_Functor.map(Data_Lazy.functorLazy)(go)(Data_Newtype.unwrap(newtypeList)(xs));
+      };
+  });
+  var cons = function (x) {
+      return function (xs) {
+          return List(Data_Lazy.defer(function (v) {
+              return new Cons(x, xs);
+          }));
       };
   };
+  var foldableList = new Data_Foldable.Foldable(function (dictMonoid) {
+      return function (f) {
+          return Data_Foldable.foldl(foldableList)(function (b) {
+              return function (a) {
+                  return Data_Semigroup.append(dictMonoid.Semigroup0())(b)(f(a));
+              };
+          })(Data_Monoid.mempty(dictMonoid));
+      };
+  }, function (op) {
+      var go = function ($copy_b) {
+          return function ($copy_xs) {
+              var $tco_var_b = $copy_b;
+              var $tco_done = false;
+              var $tco_result;
+              function $tco_loop(b, xs) {
+                  var v = step(xs);
+                  if (v instanceof Nil) {
+                      $tco_done = true;
+                      return b;
+                  };
+                  if (v instanceof Cons) {
+                      $tco_var_b = op(b)(v.value0);
+                      $copy_xs = v.value1;
+                      return;
+                  };
+                  throw new Error("Failed pattern match at Data.List.Lazy.Types (line 122, column 7 - line 124, column 40): " + [ v.constructor.name ]);
+              };
+              while (!$tco_done) {
+                  $tco_result = $tco_loop($tco_var_b, $copy_xs);
+              };
+              return $tco_result;
+          };
+      };
+      return go;
+  }, function (op) {
+      return function (z) {
+          return function (xs) {
+              var rev = Data_Foldable.foldl(foldableList)(Data_Function.flip(cons))(nil);
+              return Data_Foldable.foldl(foldableList)(Data_Function.flip(op))(z)(rev(xs));
+          };
+      };
+  });
+  var unfoldable1List = new Data_Unfoldable1.Unfoldable1((function () {
+      var go = function (f) {
+          return function (b) {
+              return Control_Lazy.defer(lazyList)(function (v) {
+                  var v1 = f(b);
+                  if (v1.value1 instanceof Data_Maybe.Just) {
+                      return cons(v1.value0)(go(f)(v1.value1.value0));
+                  };
+                  if (v1.value1 instanceof Data_Maybe.Nothing) {
+                      return cons(v1.value0)(nil);
+                  };
+                  throw new Error("Failed pattern match at Data.List.Lazy.Types (line 146, column 28 - line 148, column 33): " + [ v1.constructor.name ]);
+              });
+          };
+      };
+      return go;
+  })());
+  var unfoldableList = new Data_Unfoldable.Unfoldable(function () {
+      return unfoldable1List;
+  }, (function () {
+      var go = function (f) {
+          return function (b) {
+              return Control_Lazy.defer(lazyList)(function (v) {
+                  var v1 = f(b);
+                  if (v1 instanceof Data_Maybe.Nothing) {
+                      return nil;
+                  };
+                  if (v1 instanceof Data_Maybe.Just) {
+                      return cons(v1.value0.value0)(go(f)(v1.value0.value1));
+                  };
+                  throw new Error("Failed pattern match at Data.List.Lazy.Types (line 152, column 28 - line 154, column 39): " + [ v1.constructor.name ]);
+              });
+          };
+      };
+      return go;
+  })());
+  var monadList = new Control_Monad.Monad(function () {
+      return applicativeList;
+  }, function () {
+      return bindList;
+  });
+  var bindList = new Control_Bind.Bind(function () {
+      return applyList;
+  }, function (xs) {
+      return function (f) {
+          var go = function (v) {
+              if (v instanceof Nil) {
+                  return Nil.value;
+              };
+              if (v instanceof Cons) {
+                  return step(Data_Semigroup.append(semigroupList)(f(v.value0))(Control_Bind.bind(bindList)(v.value1)(f)));
+              };
+              throw new Error("Failed pattern match at Data.List.Lazy.Types (line 175, column 5 - line 175, column 17): " + [ v.constructor.name ]);
+          };
+          return Data_Functor.map(Data_Lazy.functorLazy)(go)(Data_Newtype.unwrap(newtypeList)(xs));
+      };
+  });
+  var applyList = new Control_Apply.Apply(function () {
+      return functorList;
+  }, Control_Monad.ap(monadList));
+  var applicativeList = new Control_Applicative.Applicative(function () {
+      return applyList;
+  }, function (a) {
+      return cons(a)(nil);
+  });
+  exports["List"] = List;
+  exports["Nil"] = Nil;
+  exports["Cons"] = Cons;
+  exports["step"] = step;
+  exports["nil"] = nil;
+  exports["cons"] = cons;
+  exports["newtypeList"] = newtypeList;
+  exports["functorList"] = functorList;
+  exports["foldableList"] = foldableList;
+  exports["unfoldableList"] = unfoldableList;
+  exports["monadList"] = monadList;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.List.Lazy"] = $PS["Data.List.Lazy"] || {};
+  var exports = $PS["Data.List.Lazy"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Lazy = $PS["Data.Lazy"];
+  var Data_List_Lazy_Types = $PS["Data.List.Lazy.Types"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];                                
+  var uncons = function (xs) {
+      var v = Data_List_Lazy_Types.step(xs);
+      if (v instanceof Data_List_Lazy_Types.Nil) {
+          return Data_Maybe.Nothing.value;
+      };
+      if (v instanceof Data_List_Lazy_Types.Cons) {
+          return new Data_Maybe.Just({
+              head: v.value0,
+              tail: v.value1
+          });
+      };
+      throw new Error("Failed pattern match at Data.List.Lazy (line 285, column 13 - line 287, column 44): " + [ v.constructor.name ]);
+  };
+  var toUnfoldable = function (dictUnfoldable) {
+      return Data_Unfoldable.unfoldr(dictUnfoldable)(function (xs) {
+          return Data_Functor.map(Data_Maybe.functorMaybe)(function (rec) {
+              return new Data_Tuple.Tuple(rec.head, rec.tail);
+          })(uncons(xs));
+      });
+  };
+  var tail = function (xs) {
+      return Data_Functor.map(Data_Maybe.functorMaybe)(function (v) {
+          return v.tail;
+      })(uncons(xs));
+  };
+  var head = function (xs) {
+      return Data_Functor.map(Data_Maybe.functorMaybe)(function (v) {
+          return v.head;
+      })(uncons(xs));
+  };
+  var fromFoldable = function (dictFoldable) {
+      return Data_Foldable.foldr(dictFoldable)(Data_List_Lazy_Types.cons)(Data_List_Lazy_Types.nil);
+  };
+  var filterM = function (dictMonad) {
+      return function (p) {
+          return function (list) {
+              var v = uncons(list);
+              if (v instanceof Data_Maybe.Nothing) {
+                  return Control_Applicative.pure(dictMonad.Applicative0())(Data_List_Lazy_Types.nil);
+              };
+              if (v instanceof Data_Maybe.Just) {
+                  return Control_Bind.bind(dictMonad.Bind1())(p(v.value0.head))(function (v1) {
+                      return Control_Bind.bind(dictMonad.Bind1())(filterM(dictMonad)(p)(v.value0.tail))(function (v2) {
+                          return Control_Applicative.pure(dictMonad.Applicative0())((function () {
+                              if (v1) {
+                                  return Data_List_Lazy_Types.cons(v.value0.head)(v2);
+                              };
+                              return v2;
+                          })());
+                      });
+                  });
+              };
+              throw new Error("Failed pattern match at Data.List.Lazy (line 443, column 5 - line 448, column 48): " + [ v.constructor.name ]);
+          };
+      };
+  };
+  var filter = function (p) {
+      var go = function ($copy_v) {
+          var $tco_done = false;
+          var $tco_result;
+          function $tco_loop(v) {
+              if (v instanceof Data_List_Lazy_Types.Nil) {
+                  $tco_done = true;
+                  return Data_List_Lazy_Types.Nil.value;
+              };
+              if (v instanceof Data_List_Lazy_Types.Cons) {
+                  if (p(v.value0)) {
+                      $tco_done = true;
+                      return new Data_List_Lazy_Types.Cons(v.value0, filter(p)(v.value1));
+                  };
+                  if (Data_Boolean.otherwise) {
+                      $copy_v = Data_List_Lazy_Types.step(v.value1);
+                      return;
+                  };
+              };
+              throw new Error("Failed pattern match at Data.List.Lazy (line 428, column 3 - line 428, column 15): " + [ v.constructor.name ]);
+          };
+          while (!$tco_done) {
+              $tco_result = $tco_loop($copy_v);
+          };
+          return $tco_result;
+      };
+      var $266 = Data_Functor.map(Data_Lazy.functorLazy)(go);
+      var $267 = Data_Newtype.unwrap(Data_List_Lazy_Types.newtypeList);
+      return function ($268) {
+          return Data_List_Lazy_Types.List($266($267($268)));
+      };
+  };
+  exports["toUnfoldable"] = toUnfoldable;
+  exports["fromFoldable"] = fromFoldable;
+  exports["filter"] = filter;
+  exports["filterM"] = filterM;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  // jshint maxparams: 3
+
+  exports.traverseArrayImpl = function () {
+    function array1(a) {
+      return [a];
+    }
+
+    function array2(a) {
+      return function (b) {
+        return [a, b];
+      };
+    }
+
+    function array3(a) {
+      return function (b) {
+        return function (c) {
+          return [a, b, c];
+        };
+      };
+    }
+
+    function concat2(xs) {
+      return function (ys) {
+        return xs.concat(ys);
+      };
+    }
+
+    return function (apply) {
+      return function (map) {
+        return function (pure) {
+          return function (f) {
+            return function (array) {
+              function go(bot, top) {
+                switch (top - bot) {
+                case 0: return pure([]);
+                case 1: return map(array1)(f(array[bot]));
+                case 2: return apply(map(array2)(f(array[bot])))(f(array[bot + 1]));
+                case 3: return apply(apply(map(array3)(f(array[bot])))(f(array[bot + 1])))(f(array[bot + 2]));
+                default:
+                  // This slightly tricky pivot selection aims to produce two
+                  // even-length partitions where possible.
+                  var pivot = bot + Math.floor((top - bot) / 4) * 2;
+                  return apply(map(concat2)(go(bot, pivot)))(go(pivot, top));
+                }
+              }
+              return go(0, array.length);
+            };
+          };
+        };
+      };
+    };
+  }();
+})(PS["Data.Traversable"] = PS["Data.Traversable"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Traversable"] = $PS["Data.Traversable"] || {};
+  var exports = $PS["Data.Traversable"];
+  var $foreign = $PS["Data.Traversable"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Maybe = $PS["Data.Maybe"];                                                          
+  var Traversable = function (Foldable1, Functor0, sequence, traverse) {
+      this.Foldable1 = Foldable1;
+      this.Functor0 = Functor0;
+      this.sequence = sequence;
+      this.traverse = traverse;
+  };
+  var traverse = function (dict) {
+      return dict.traverse;
+  }; 
+  var traversableMaybe = new Traversable(function () {
+      return Data_Foldable.foldableMaybe;
+  }, function () {
+      return Data_Maybe.functorMaybe;
+  }, function (dictApplicative) {
+      return function (v) {
+          if (v instanceof Data_Maybe.Nothing) {
+              return Control_Applicative.pure(dictApplicative)(Data_Maybe.Nothing.value);
+          };
+          if (v instanceof Data_Maybe.Just) {
+              return Data_Functor.map((dictApplicative.Apply0()).Functor0())(Data_Maybe.Just.create)(v.value0);
+          };
+          throw new Error("Failed pattern match at Data.Traversable (line 86, column 1 - line 90, column 33): " + [ v.constructor.name ]);
+      };
+  }, function (dictApplicative) {
+      return function (v) {
+          return function (v1) {
+              if (v1 instanceof Data_Maybe.Nothing) {
+                  return Control_Applicative.pure(dictApplicative)(Data_Maybe.Nothing.value);
+              };
+              if (v1 instanceof Data_Maybe.Just) {
+                  return Data_Functor.map((dictApplicative.Apply0()).Functor0())(Data_Maybe.Just.create)(v(v1.value0));
+              };
+              throw new Error("Failed pattern match at Data.Traversable (line 86, column 1 - line 90, column 33): " + [ v.constructor.name, v1.constructor.name ]);
+          };
+      };
+  });
+  var sequenceDefault = function (dictTraversable) {
+      return function (dictApplicative) {
+          return traverse(dictTraversable)(dictApplicative)(Control_Category.identity(Control_Category.categoryFn));
+      };
+  };
+  var traversableArray = new Traversable(function () {
+      return Data_Foldable.foldableArray;
+  }, function () {
+      return Data_Functor.functorArray;
+  }, function (dictApplicative) {
+      return sequenceDefault(traversableArray)(dictApplicative);
+  }, function (dictApplicative) {
+      return $foreign.traverseArrayImpl(Control_Apply.apply(dictApplicative.Apply0()))(Data_Functor.map((dictApplicative.Apply0()).Functor0()))(Control_Applicative.pure(dictApplicative));
+  });
+  var sequence = function (dict) {
+      return dict.sequence;
+  };
+  exports["Traversable"] = Traversable;
+  exports["traverse"] = traverse;
+  exports["sequence"] = sequence;
+  exports["traversableArray"] = traversableArray;
+  exports["traversableMaybe"] = traversableMaybe;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.List.Types"] = $PS["Data.List.Types"] || {};
+  var exports = $PS["Data.List.Types"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Ordering = $PS["Data.Ordering"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Traversable = $PS["Data.Traversable"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];
+  var Data_Unfoldable1 = $PS["Data.Unfoldable1"];                
+  var Nil = (function () {
+      function Nil() {
+
+      };
+      Nil.value = new Nil();
+      return Nil;
+  })();
+  var Cons = (function () {
+      function Cons(value0, value1) {
+          this.value0 = value0;
+          this.value1 = value1;
+      };
+      Cons.create = function (value0) {
+          return function (value1) {
+              return new Cons(value0, value1);
+          };
+      };
+      return Cons;
+  })();
   var listMap = function (f) {
       var chunkedRevMap = function ($copy_chunksAcc) {
           return function ($copy_v) {
@@ -20017,13 +19858,13 @@ var PS = {};
       };
       return chunkedRevMap(Nil.value);
   };
-  var functorList = new Data_Functor.Functor(listMap);
-  var functorNonEmptyList = Data_NonEmpty.functorNonEmpty(functorList);
+  var functorList = new Data_Functor.Functor(listMap);                 
   var foldableList = new Data_Foldable.Foldable(function (dictMonoid) {
       return function (f) {
           return Data_Foldable.foldl(foldableList)(function (acc) {
-              return function ($202) {
-                  return Data_Semigroup.append(dictMonoid.Semigroup0())(acc)(f($202));
+              var $202 = Data_Semigroup.append(dictMonoid.Semigroup0())(acc);
+              return function ($203) {
+                  return $202(f($203));
               };
           })(Data_Monoid.mempty(dictMonoid));
       };
@@ -20055,12 +19896,12 @@ var PS = {};
   }, function (f) {
       return function (b) {
           var rev = Data_Foldable.foldl(foldableList)(Data_Function.flip(Cons.create))(Nil.value);
-          return function ($203) {
-              return Data_Foldable.foldl(foldableList)(Data_Function.flip(f))(b)(rev($203));
+          var $204 = Data_Foldable.foldl(foldableList)(Data_Function.flip(f))(b);
+          return function ($205) {
+              return $204(rev($205));
           };
       };
   });
-  var foldableNonEmptyList = Data_NonEmpty.foldableNonEmpty(foldableList);
   var semigroupList = new Data_Semigroup.Semigroup(function (xs) {
       return function (ys) {
           return Data_Foldable.foldr(foldableList)(Cons.create)(ys)(xs);
@@ -20074,12 +19915,15 @@ var PS = {};
       return Data_Traversable.traverse(traversableList)(dictApplicative)(Control_Category.identity(Control_Category.categoryFn));
   }, function (dictApplicative) {
       return function (f) {
-          return function ($210) {
-              return Data_Functor.map((dictApplicative.Apply0()).Functor0())(Data_Foldable.foldl(foldableList)(Data_Function.flip(Cons.create))(Nil.value))(Data_Foldable.foldl(foldableList)(function (acc) {
-                  return function ($211) {
-                      return Control_Apply.lift2(dictApplicative.Apply0())(Data_Function.flip(Cons.create))(acc)(f($211));
-                  };
-              })(Control_Applicative.pure(dictApplicative)(Nil.value))($210));
+          var $219 = Data_Functor.map((dictApplicative.Apply0()).Functor0())(Data_Foldable.foldl(foldableList)(Data_Function.flip(Cons.create))(Nil.value));
+          var $220 = Data_Foldable.foldl(foldableList)(function (acc) {
+              var $222 = Control_Apply.lift2(dictApplicative.Apply0())(Data_Function.flip(Cons.create))(acc);
+              return function ($223) {
+                  return $222(f($223));
+              };
+          })(Control_Applicative.pure(dictApplicative)(Nil.value));
+          return function ($221) {
+              return $219($220($221));
           };
       };
   });
@@ -20234,9 +20078,6 @@ var PS = {};
       return new Data_Ord.Ord(function () {
           return eqList(dictOrd.Eq0());
       }, Data_Ord.compare1(ord1List)(dictOrd));
-  };
-  var ordNonEmptyList = function (dictOrd) {
-      return Data_NonEmpty.ordNonEmpty(ord1List)(dictOrd);
   }; 
   var applyList = new Control_Apply.Apply(function () {
       return functorList;
@@ -20248,14 +20089,7 @@ var PS = {};
           if (v instanceof Cons) {
               return Data_Semigroup.append(semigroupList)(Data_Functor.map(functorList)(v.value0)(v1))(Control_Apply.apply(applyList)(v.value1)(v1));
           };
-          throw new Error("Failed pattern match at Data.List.Types (line 155, column 1 - line 155, column 33): " + [ v.constructor.name, v1.constructor.name ]);
-      };
-  });
-  var applyNonEmptyList = new Control_Apply.Apply(function () {
-      return functorNonEmptyList;
-  }, function (v) {
-      return function (v1) {
-          return new Data_NonEmpty.NonEmpty(v.value0(v1.value0), Data_Semigroup.append(semigroupList)(Control_Apply.apply(applyList)(v.value1)(new Cons(v1.value0, Nil.value)))(Control_Apply.apply(applyList)(new Cons(v.value0, v.value1))(v1.value1)));
+          throw new Error("Failed pattern match at Data.List.Types (line 155, column 1 - line 157, column 48): " + [ v.constructor.name, v1.constructor.name ]);
       };
   });
   var bindList = new Control_Bind.Bind(function () {
@@ -20268,676 +20102,46 @@ var PS = {};
           if (v instanceof Cons) {
               return Data_Semigroup.append(semigroupList)(v1(v.value0))(Control_Bind.bind(bindList)(v.value1)(v1));
           };
-          throw new Error("Failed pattern match at Data.List.Types (line 162, column 1 - line 162, column 31): " + [ v.constructor.name, v1.constructor.name ]);
+          throw new Error("Failed pattern match at Data.List.Types (line 162, column 1 - line 164, column 37): " + [ v.constructor.name, v1.constructor.name ]);
       };
   });
   var applicativeList = new Control_Applicative.Applicative(function () {
       return applyList;
   }, function (a) {
       return new Cons(a, Nil.value);
-  });                                              
-  var altList = new Control_Alt.Alt(function () {
-      return functorList;
-  }, Data_Semigroup.append(semigroupList));
-  var plusList = new Control_Plus.Plus(function () {
-      return altList;
-  }, Nil.value);
-  var applicativeNonEmptyList = new Control_Applicative.Applicative(function () {
-      return applyNonEmptyList;
-  }, function ($216) {
-      return NonEmptyList(Data_NonEmpty.singleton(plusList)($216));
   });
   exports["Nil"] = Nil;
   exports["Cons"] = Cons;
-  exports["NonEmptyList"] = NonEmptyList;
-  exports["nelCons"] = nelCons;
   exports["eqList"] = eqList;
-  exports["eq1List"] = eq1List;
   exports["ordList"] = ordList;
-  exports["ord1List"] = ord1List;
   exports["semigroupList"] = semigroupList;
   exports["functorList"] = functorList;
   exports["foldableList"] = foldableList;
-  exports["unfoldable1List"] = unfoldable1List;
   exports["unfoldableList"] = unfoldableList;
   exports["traversableList"] = traversableList;
-  exports["applyList"] = applyList;
   exports["applicativeList"] = applicativeList;
   exports["bindList"] = bindList;
-  exports["altList"] = altList;
-  exports["plusList"] = plusList;
-  exports["ordNonEmptyList"] = ordNonEmptyList;
-  exports["functorNonEmptyList"] = functorNonEmptyList;
-  exports["applyNonEmptyList"] = applyNonEmptyList;
-  exports["applicativeNonEmptyList"] = applicativeNonEmptyList;
-  exports["foldableNonEmptyList"] = foldableNonEmptyList;
-})(PS["Data.List.Types"] = PS["Data.List.Types"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Lazy = PS["Control.Lazy"];
-  var Control_Monad_Rec_Class = PS["Control.Monad.Rec.Class"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_NonEmpty = PS["Data.NonEmpty"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                                                   
-  var uncons = function (v) {
-      if (v instanceof Data_List_Types.Nil) {
-          return Data_Maybe.Nothing.value;
-      };
-      if (v instanceof Data_List_Types.Cons) {
-          return new Data_Maybe.Just({
-              head: v.value0,
-              tail: v.value1
-          });
-      };
-      throw new Error("Failed pattern match at Data.List (line 259, column 1 - line 259, column 66): " + [ v.constructor.name ]);
-  };
-  var toUnfoldable = function (dictUnfoldable) {
-      return Data_Unfoldable.unfoldr(dictUnfoldable)(function (xs) {
-          return Data_Functor.map(Data_Maybe.functorMaybe)(function (rec) {
-              return new Data_Tuple.Tuple(rec.head, rec.tail);
-          })(uncons(xs));
-      });
-  };
-  var tail = function (v) {
-      if (v instanceof Data_List_Types.Nil) {
-          return Data_Maybe.Nothing.value;
-      };
-      if (v instanceof Data_List_Types.Cons) {
-          return new Data_Maybe.Just(v.value1);
-      };
-      throw new Error("Failed pattern match at Data.List (line 245, column 1 - line 245, column 43): " + [ v.constructor.name ]);
-  };
-  var reverse = (function () {
-      var go = function ($copy_acc) {
-          return function ($copy_v) {
-              var $tco_var_acc = $copy_acc;
-              var $tco_done = false;
-              var $tco_result;
-              function $tco_loop(acc, v) {
-                  if (v instanceof Data_List_Types.Nil) {
-                      $tco_done = true;
-                      return acc;
-                  };
-                  if (v instanceof Data_List_Types.Cons) {
-                      $tco_var_acc = new Data_List_Types.Cons(v.value0, acc);
-                      $copy_v = v.value1;
-                      return;
-                  };
-                  throw new Error("Failed pattern match at Data.List (line 368, column 3 - line 368, column 19): " + [ acc.constructor.name, v.constructor.name ]);
-              };
-              while (!$tco_done) {
-                  $tco_result = $tco_loop($tco_var_acc, $copy_v);
-              };
-              return $tco_result;
-          };
-      };
-      return go(Data_List_Types.Nil.value);
-  })();
-  var take = (function () {
-      var go = function ($copy_acc) {
-          return function ($copy_v) {
-              return function ($copy_v1) {
-                  var $tco_var_acc = $copy_acc;
-                  var $tco_var_v = $copy_v;
-                  var $tco_done = false;
-                  var $tco_result;
-                  function $tco_loop(acc, v, v1) {
-                      if (v < 1) {
-                          $tco_done = true;
-                          return reverse(acc);
-                      };
-                      if (v1 instanceof Data_List_Types.Nil) {
-                          $tco_done = true;
-                          return reverse(acc);
-                      };
-                      if (v1 instanceof Data_List_Types.Cons) {
-                          $tco_var_acc = new Data_List_Types.Cons(v1.value0, acc);
-                          $tco_var_v = v - 1 | 0;
-                          $copy_v1 = v1.value1;
-                          return;
-                      };
-                      throw new Error("Failed pattern match at Data.List (line 520, column 3 - line 520, column 35): " + [ acc.constructor.name, v.constructor.name, v1.constructor.name ]);
-                  };
-                  while (!$tco_done) {
-                      $tco_result = $tco_loop($tco_var_acc, $tco_var_v, $copy_v1);
-                  };
-                  return $tco_result;
-              };
-          };
-      };
-      return go(Data_List_Types.Nil.value);
-  })();
-  var partition = function (p) {
-      return function (xs) {
-          var select = function (x) {
-              return function (v) {
-                  var $226 = p(x);
-                  if ($226) {
-                      return {
-                          no: v.no,
-                          yes: new Data_List_Types.Cons(x, v.yes)
-                      };
-                  };
-                  return {
-                      no: new Data_List_Types.Cons(x, v.no),
-                      yes: v.yes
-                  };
-              };
-          };
-          return Data_Foldable.foldr(Data_List_Types.foldableList)(select)({
-              no: Data_List_Types.Nil.value,
-              yes: Data_List_Types.Nil.value
-          })(xs);
-      };
-  };
-  var head = function (v) {
-      if (v instanceof Data_List_Types.Nil) {
-          return Data_Maybe.Nothing.value;
-      };
-      if (v instanceof Data_List_Types.Cons) {
-          return new Data_Maybe.Just(v.value0);
-      };
-      throw new Error("Failed pattern match at Data.List (line 230, column 1 - line 230, column 22): " + [ v.constructor.name ]);
-  };
-  var fromFoldable = function (dictFoldable) {
-      return Data_Foldable.foldr(dictFoldable)(Data_List_Types.Cons.create)(Data_List_Types.Nil.value);
-  };
-  exports["toUnfoldable"] = toUnfoldable;
-  exports["fromFoldable"] = fromFoldable;
-  exports["head"] = head;
-  exports["tail"] = tail;
-  exports["uncons"] = uncons;
-  exports["reverse"] = reverse;
-  exports["take"] = take;
-  exports["partition"] = partition;
-})(PS["Data.List"] = PS["Data.List"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.defer = function (thunk) {
-    var v = null;
-    return function() {
-      if (thunk === undefined) return v;
-
-      v = thunk();
-      thunk = undefined; // eslint-disable-line no-param-reassign
-      return v;
-    };
-  };
-
-  exports.force = function (l) {
-    return l();
-  };
-})(PS["Data.Lazy"] = PS["Data.Lazy"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.Lazy"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Comonad = PS["Control.Comonad"];
-  var Control_Extend = PS["Control.Extend"];
-  var Control_Lazy = PS["Control.Lazy"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_BooleanAlgebra = PS["Data.BooleanAlgebra"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_CommutativeRing = PS["Data.CommutativeRing"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_EuclideanRing = PS["Data.EuclideanRing"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Invariant = PS["Data.Functor.Invariant"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semigroup_Foldable = PS["Data.Semigroup.Foldable"];
-  var Data_Semigroup_Traversable = PS["Data.Semigroup.Traversable"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];
-  var functorLazy = new Data_Functor.Functor(function (f) {
-      return function (l) {
-          return $foreign.defer(function (v) {
-              return f($foreign.force(l));
-          });
-      };
-  });
-  exports["functorLazy"] = functorLazy;
-  exports["defer"] = $foreign.defer;
-  exports["force"] = $foreign.force;
-})(PS["Data.Lazy"] = PS["Data.Lazy"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Comonad = PS["Control.Comonad"];
-  var Control_Extend = PS["Control.Extend"];
-  var Control_Lazy = PS["Control.Lazy"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_MonadPlus = PS["Control.MonadPlus"];
-  var Control_MonadZero = PS["Control.MonadZero"];
-  var Control_Plus = PS["Control.Plus"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_Lazy = PS["Data.Lazy"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_NonEmpty = PS["Data.NonEmpty"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Unfoldable1 = PS["Data.Unfoldable1"];
-  var Prelude = PS["Prelude"];                 
-  var List = function (x) {
-      return x;
-  };
-  var Nil = (function () {
-      function Nil() {
-
-      };
-      Nil.value = new Nil();
-      return Nil;
-  })();
-  var Cons = (function () {
-      function Cons(value0, value1) {
-          this.value0 = value0;
-          this.value1 = value1;
-      };
-      Cons.create = function (value0) {
-          return function (value1) {
-              return new Cons(value0, value1);
-          };
-      };
-      return Cons;
-  })();
-  var nil = List(Data_Lazy.defer(function (v) {
-      return Nil.value;
-  }));             
-  var newtypeList = new Data_Newtype.Newtype(function (n) {
-      return n;
-  }, List);
-  var step = function ($215) {
-      return Data_Lazy.force(Data_Newtype.unwrap(newtypeList)($215));
-  };
-  var semigroupList = new Data_Semigroup.Semigroup(function (xs) {
-      return function (ys) {
-          var go = function (v) {
-              if (v instanceof Nil) {
-                  return step(ys);
-              };
-              if (v instanceof Cons) {
-                  return new Cons(v.value0, Data_Semigroup.append(semigroupList)(v.value1)(ys));
-              };
-              throw new Error("Failed pattern match at Data.List.Lazy.Types (line 98, column 5 - line 98, column 21): " + [ v.constructor.name ]);
-          };
-          return Data_Functor.map(Data_Lazy.functorLazy)(go)(Data_Newtype.unwrap(newtypeList)(xs));
-      };
-  });     
-  var lazyList = new Control_Lazy.Lazy(function (f) {
-      return List(Data_Lazy.defer(function ($216) {
-          return step(f($216));
-      }));
-  });
-  var functorList = new Data_Functor.Functor(function (f) {
-      return function (xs) {
-          var go = function (v) {
-              if (v instanceof Nil) {
-                  return Nil.value;
-              };
-              if (v instanceof Cons) {
-                  return new Cons(f(v.value0), Data_Functor.map(functorList)(f)(v.value1));
-              };
-              throw new Error("Failed pattern match at Data.List.Lazy.Types (line 107, column 5 - line 107, column 17): " + [ v.constructor.name ]);
-          };
-          return Data_Functor.map(Data_Lazy.functorLazy)(go)(Data_Newtype.unwrap(newtypeList)(xs));
-      };
-  });
-  var cons = function (x) {
-      return function (xs) {
-          return List(Data_Lazy.defer(function (v) {
-              return new Cons(x, xs);
-          }));
-      };
-  };
-  var foldableList = new Data_Foldable.Foldable(function (dictMonoid) {
-      return function (f) {
-          return Data_Foldable.foldl(foldableList)(function (b) {
-              return function (a) {
-                  return Data_Semigroup.append(dictMonoid.Semigroup0())(b)(f(a));
-              };
-          })(Data_Monoid.mempty(dictMonoid));
-      };
-  }, function (op) {
-      var go = function ($copy_b) {
-          return function ($copy_xs) {
-              var $tco_var_b = $copy_b;
-              var $tco_done = false;
-              var $tco_result;
-              function $tco_loop(b, xs) {
-                  var v = step(xs);
-                  if (v instanceof Nil) {
-                      $tco_done = true;
-                      return b;
-                  };
-                  if (v instanceof Cons) {
-                      $tco_var_b = op(b)(v.value0);
-                      $copy_xs = v.value1;
-                      return;
-                  };
-                  throw new Error("Failed pattern match at Data.List.Lazy.Types (line 122, column 7 - line 124, column 40): " + [ v.constructor.name ]);
-              };
-              while (!$tco_done) {
-                  $tco_result = $tco_loop($tco_var_b, $copy_xs);
-              };
-              return $tco_result;
-          };
-      };
-      return go;
-  }, function (op) {
-      return function (z) {
-          return function (xs) {
-              var rev = Data_Foldable.foldl(foldableList)(Data_Function.flip(cons))(nil);
-              return Data_Foldable.foldl(foldableList)(Data_Function.flip(op))(z)(rev(xs));
-          };
-      };
-  });
-  var unfoldable1List = new Data_Unfoldable1.Unfoldable1((function () {
-      var go = function (f) {
-          return function (b) {
-              return Control_Lazy.defer(lazyList)(function (v) {
-                  var v1 = f(b);
-                  if (v1.value1 instanceof Data_Maybe.Just) {
-                      return cons(v1.value0)(go(f)(v1.value1.value0));
-                  };
-                  if (v1.value1 instanceof Data_Maybe.Nothing) {
-                      return cons(v1.value0)(nil);
-                  };
-                  throw new Error("Failed pattern match at Data.List.Lazy.Types (line 146, column 28 - line 148, column 33): " + [ v1.constructor.name ]);
-              });
-          };
-      };
-      return go;
-  })());
-  var unfoldableList = new Data_Unfoldable.Unfoldable(function () {
-      return unfoldable1List;
-  }, (function () {
-      var go = function (f) {
-          return function (b) {
-              return Control_Lazy.defer(lazyList)(function (v) {
-                  var v1 = f(b);
-                  if (v1 instanceof Data_Maybe.Nothing) {
-                      return nil;
-                  };
-                  if (v1 instanceof Data_Maybe.Just) {
-                      return cons(v1.value0.value0)(go(f)(v1.value0.value1));
-                  };
-                  throw new Error("Failed pattern match at Data.List.Lazy.Types (line 152, column 28 - line 154, column 39): " + [ v1.constructor.name ]);
-              });
-          };
-      };
-      return go;
-  })());
-  var monadList = new Control_Monad.Monad(function () {
-      return applicativeList;
-  }, function () {
-      return bindList;
-  });
-  var bindList = new Control_Bind.Bind(function () {
-      return applyList;
-  }, function (xs) {
-      return function (f) {
-          var go = function (v) {
-              if (v instanceof Nil) {
-                  return Nil.value;
-              };
-              if (v instanceof Cons) {
-                  return step(Data_Semigroup.append(semigroupList)(f(v.value0))(Control_Bind.bind(bindList)(v.value1)(f)));
-              };
-              throw new Error("Failed pattern match at Data.List.Lazy.Types (line 175, column 5 - line 175, column 17): " + [ v.constructor.name ]);
-          };
-          return Data_Functor.map(Data_Lazy.functorLazy)(go)(Data_Newtype.unwrap(newtypeList)(xs));
-      };
-  });
-  var applyList = new Control_Apply.Apply(function () {
-      return functorList;
-  }, Control_Monad.ap(monadList));
-  var applicativeList = new Control_Applicative.Applicative(function () {
-      return applyList;
-  }, function (a) {
-      return cons(a)(nil);
-  });
-  exports["List"] = List;
-  exports["Nil"] = Nil;
-  exports["Cons"] = Cons;
-  exports["step"] = step;
-  exports["nil"] = nil;
-  exports["cons"] = cons;
-  exports["newtypeList"] = newtypeList;
-  exports["lazyList"] = lazyList;
-  exports["semigroupList"] = semigroupList;
-  exports["functorList"] = functorList;
-  exports["foldableList"] = foldableList;
-  exports["unfoldable1List"] = unfoldable1List;
-  exports["unfoldableList"] = unfoldableList;
-  exports["applyList"] = applyList;
-  exports["applicativeList"] = applicativeList;
-  exports["bindList"] = bindList;
-  exports["monadList"] = monadList;
-})(PS["Data.List.Lazy.Types"] = PS["Data.List.Lazy.Types"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Lazy = PS["Control.Lazy"];
-  var Control_Monad_Rec_Class = PS["Control.Monad.Rec.Class"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Lazy = PS["Data.Lazy"];
-  var Data_List_Lazy_Types = PS["Data.List.Lazy.Types"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_NonEmpty = PS["Data.NonEmpty"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Prelude = PS["Prelude"];                                                 
-  var uncons = function (xs) {
-      var v = Data_List_Lazy_Types.step(xs);
-      if (v instanceof Data_List_Lazy_Types.Nil) {
-          return Data_Maybe.Nothing.value;
-      };
-      if (v instanceof Data_List_Lazy_Types.Cons) {
-          return new Data_Maybe.Just({
-              head: v.value0,
-              tail: v.value1
-          });
-      };
-      throw new Error("Failed pattern match at Data.List.Lazy (line 285, column 13 - line 287, column 44): " + [ v.constructor.name ]);
-  };
-  var toUnfoldable = function (dictUnfoldable) {
-      return Data_Unfoldable.unfoldr(dictUnfoldable)(function (xs) {
-          return Data_Functor.map(Data_Maybe.functorMaybe)(function (rec) {
-              return new Data_Tuple.Tuple(rec.head, rec.tail);
-          })(uncons(xs));
-      });
-  };
-  var tail = function (xs) {
-      return Data_Functor.map(Data_Maybe.functorMaybe)(function (v) {
-          return v.tail;
-      })(uncons(xs));
-  };
-  var head = function (xs) {
-      return Data_Functor.map(Data_Maybe.functorMaybe)(function (v) {
-          return v.head;
-      })(uncons(xs));
-  };
-  var fromFoldable = function (dictFoldable) {
-      return Data_Foldable.foldr(dictFoldable)(Data_List_Lazy_Types.cons)(Data_List_Lazy_Types.nil);
-  };
-  var filterM = function (dictMonad) {
-      return function (p) {
-          return function (list) {
-              var v = uncons(list);
-              if (v instanceof Data_Maybe.Nothing) {
-                  return Control_Applicative.pure(dictMonad.Applicative0())(Data_List_Lazy_Types.nil);
-              };
-              if (v instanceof Data_Maybe.Just) {
-                  return Control_Bind.bind(dictMonad.Bind1())(p(v.value0.head))(function (v1) {
-                      return Control_Bind.bind(dictMonad.Bind1())(filterM(dictMonad)(p)(v.value0.tail))(function (v2) {
-                          return Control_Applicative.pure(dictMonad.Applicative0())((function () {
-                              if (v1) {
-                                  return Data_List_Lazy_Types.cons(v.value0.head)(v2);
-                              };
-                              return v2;
-                          })());
-                      });
-                  });
-              };
-              throw new Error("Failed pattern match at Data.List.Lazy (line 443, column 5 - line 448, column 48): " + [ v.constructor.name ]);
-          };
-      };
-  };
-  var filter = function (p) {
-      var go = function ($copy_v) {
-          var $tco_done = false;
-          var $tco_result;
-          function $tco_loop(v) {
-              if (v instanceof Data_List_Lazy_Types.Nil) {
-                  $tco_done = true;
-                  return Data_List_Lazy_Types.Nil.value;
-              };
-              if (v instanceof Data_List_Lazy_Types.Cons) {
-                  if (p(v.value0)) {
-                      $tco_done = true;
-                      return new Data_List_Lazy_Types.Cons(v.value0, filter(p)(v.value1));
-                  };
-                  if (Data_Boolean.otherwise) {
-                      $copy_v = Data_List_Lazy_Types.step(v.value1);
-                      return;
-                  };
-              };
-              throw new Error("Failed pattern match at Data.List.Lazy (line 428, column 3 - line 428, column 15): " + [ v.constructor.name ]);
-          };
-          while (!$tco_done) {
-              $tco_result = $tco_loop($copy_v);
-          };
-          return $tco_result;
-      };
-      return function ($257) {
-          return Data_List_Lazy_Types.List(Data_Functor.map(Data_Lazy.functorLazy)(go)(Data_Newtype.unwrap(Data_List_Lazy_Types.newtypeList)($257)));
-      };
-  };
-  exports["toUnfoldable"] = toUnfoldable;
-  exports["fromFoldable"] = fromFoldable;
-  exports["head"] = head;
-  exports["tail"] = tail;
-  exports["uncons"] = uncons;
-  exports["filter"] = filter;
-  exports["filterM"] = filterM;
-})(PS["Data.List.Lazy"] = PS["Data.List.Lazy"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Lazy = PS["Data.List.Lazy"];
-  var Data_List_Lazy_Types = PS["Data.List.Lazy.Types"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Map.Internal"] = $PS["Data.Map.Internal"] || {};
+  var exports = $PS["Data.Map.Internal"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_FunctorWithIndex = $PS["Data.FunctorWithIndex"];
+  var Data_List_Lazy = $PS["Data.List.Lazy"];
+  var Data_List_Lazy_Types = $PS["Data.List.Lazy.Types"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Ordering = $PS["Data.Ordering"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];                
   var Leaf = (function () {
       function Leaf() {
 
@@ -21275,7 +20479,7 @@ var PS = {};
           if (v1 instanceof Three) {
               return new Three(Data_Functor.map(functorMap)(v)(v1.value0), v1.value1, v(v1.value2), Data_Functor.map(functorMap)(v)(v1.value3), v1.value4, v(v1.value5), Data_Functor.map(functorMap)(v)(v1.value6));
           };
-          throw new Error("Failed pattern match at Data.Map.Internal (line 96, column 1 - line 96, column 39): " + [ v.constructor.name, v1.constructor.name ]);
+          throw new Error("Failed pattern match at Data.Map.Internal (line 96, column 1 - line 99, column 110): " + [ v.constructor.name, v1.constructor.name ]);
       };
   });
   var functorWithIndexMap = new Data_FunctorWithIndex.FunctorWithIndex(function () {
@@ -21291,7 +20495,7 @@ var PS = {};
           if (v1 instanceof Three) {
               return new Three(Data_FunctorWithIndex.mapWithIndex(functorWithIndexMap)(v)(v1.value0), v1.value1, v(v1.value1)(v1.value2), Data_FunctorWithIndex.mapWithIndex(functorWithIndexMap)(v)(v1.value3), v1.value4, v(v1.value4)(v1.value5), Data_FunctorWithIndex.mapWithIndex(functorWithIndexMap)(v)(v1.value6));
           };
-          throw new Error("Failed pattern match at Data.Map.Internal (line 101, column 1 - line 101, column 59): " + [ v.constructor.name, v1.constructor.name ]);
+          throw new Error("Failed pattern match at Data.Map.Internal (line 101, column 1 - line 104, column 152): " + [ v.constructor.name, v1.constructor.name ]);
       };
   });
   var fromZipper = function ($copy_dictOrd) {
@@ -21720,8 +20924,11 @@ var PS = {};
   };
   var filterWithKey = function (dictOrd) {
       return function (predicate) {
-          return function ($758) {
-              return fromFoldable(dictOrd)(Data_List_Lazy_Types.foldableList)(Data_List_Lazy.filter(Data_Tuple.uncurry(predicate))(toUnfoldable(Data_List_Lazy_Types.unfoldableList)($758)));
+          var $758 = fromFoldable(dictOrd)(Data_List_Lazy_Types.foldableList);
+          var $759 = Data_List_Lazy.filter(Data_Tuple.uncurry(predicate));
+          var $760 = toUnfoldable(Data_List_Lazy_Types.unfoldableList);
+          return function ($761) {
+              return $758($759($760($761)));
           };
       };
   };
@@ -21779,9 +20986,12 @@ var PS = {};
       return function (f) {
           return function (k) {
               return function (v) {
-                  return alter(dictOrd)(function ($762) {
-                      return Data_Maybe.Just.create(Data_Maybe.maybe(v)(Data_Function.flip(f)(v))($762));
-                  })(k);
+                  return alter(dictOrd)((function () {
+                      var $767 = Data_Maybe.maybe(v)(Data_Function.flip(f)(v));
+                      return function ($768) {
+                          return Data_Maybe.Just.create($767($768));
+                      };
+                  })())(k);
               };
           };
       };
@@ -21792,9 +21002,12 @@ var PS = {};
               return function (m2) {
                   var go = function (m) {
                       return function (v) {
-                          return alter(dictOrd)(function ($763) {
-                              return Data_Maybe.Just.create(Data_Maybe.maybe(v.value1)(f(v.value1))($763));
-                          })(v.value0)(m);
+                          return alter(dictOrd)((function () {
+                              var $769 = Data_Maybe.maybe(v.value1)(f(v.value1));
+                              return function ($770) {
+                                  return Data_Maybe.Just.create($769($770));
+                              };
+                          })())(v.value0)(m);
                       };
                   };
                   return Data_Foldable.foldl(Data_List_Types.foldableList)(go)(m2)(toUnfoldable(Data_List_Types.unfoldableList)(m1));
@@ -21815,50 +21028,471 @@ var PS = {};
   exports["fromFoldableWith"] = fromFoldableWith;
   exports["toUnfoldable"] = toUnfoldable;
   exports["delete"] = $$delete;
-  exports["pop"] = pop;
   exports["member"] = member;
   exports["alter"] = alter;
   exports["keys"] = keys;
   exports["values"] = values;
   exports["union"] = union;
-  exports["unionWith"] = unionWith;
   exports["size"] = size;
   exports["filterWithKey"] = filterWithKey;
   exports["filter"] = filter;
   exports["eqMap"] = eqMap;
   exports["functorMap"] = functorMap;
   exports["functorWithIndexMap"] = functorWithIndexMap;
-})(PS["Data.Map.Internal"] = PS["Data.Map.Internal"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad_Rec_Class = PS["Control.Monad.Rec.Class"];
-  var Control_Monad_ST = PS["Control.Monad.ST"];
-  var Control_Monad_ST_Internal = PS["Control.Monad.ST.Internal"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Array_ST = PS["Data.Array.ST"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Unit = PS["Data.Unit"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
+  $PS["Data.Map"] = $PS["Data.Map"] || {};
+  var exports = $PS["Data.Map"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Map_Internal = $PS["Data.Map.Internal"];                
+  var keys = (function () {
+      var $0 = Data_Functor["void"](Data_Map_Internal.functorMap);
+      return function ($1) {
+          return $0($1);
+      };
+  })();
+  exports["keys"] = keys;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Control.Monad.Rec.Class"] = $PS["Control.Monad.Rec.Class"] || {};
+  var exports = $PS["Control.Monad.Rec.Class"];      
+  var Loop = (function () {
+      function Loop(value0) {
+          this.value0 = value0;
+      };
+      Loop.create = function (value0) {
+          return new Loop(value0);
+      };
+      return Loop;
+  })();
+  var Done = (function () {
+      function Done(value0) {
+          this.value0 = value0;
+      };
+      Done.create = function (value0) {
+          return new Done(value0);
+      };
+      return Done;
+  })();
+  var MonadRec = function (Monad0, tailRecM) {
+      this.Monad0 = Monad0;
+      this.tailRecM = tailRecM;
+  };
+  var tailRecM = function (dict) {
+      return dict.tailRecM;
+  };
+  var tailRecM2 = function (dictMonadRec) {
+      return function (f) {
+          return function (a) {
+              return function (b) {
+                  return tailRecM(dictMonadRec)(function (o) {
+                      return f(o.a)(o.b);
+                  })({
+                      a: a,
+                      b: b
+                  });
+              };
+          };
+      };
+  };
+  exports["Loop"] = Loop;
+  exports["Done"] = Done;
+  exports["MonadRec"] = MonadRec;
+  exports["tailRecM2"] = tailRecM2;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.map_ = function (f) {
+    return function (a) {
+      return function () {
+        return f(a());
+      };
+    };
+  };
+
+  exports.pure_ = function (a) {
+    return function () {
+      return a;
+    };
+  };
+
+  exports.bind_ = function (a) {
+    return function (f) {
+      return function () {
+        return f(a())();
+      };
+    };
+  };
+
+  exports["while"] = function (f) {
+    return function (a) {
+      return function () {
+        while (f()) {
+          a();
+        }
+      };
+    };
+  };
+
+  exports.new = function (val) {
+    return function () {
+      return { value: val };
+    };
+  };
+
+  exports.read = function (ref) {
+    return function () {
+      return ref.value;
+    };
+  };
+
+  exports.write = function (a) {
+    return function (ref) {
+      return function () {
+        return ref.value = a; // eslint-disable-line no-return-assign
+      };
+    };
+  };
+})(PS["Control.Monad.ST.Internal"] = PS["Control.Monad.ST.Internal"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Control.Monad.ST.Internal"] = $PS["Control.Monad.ST.Internal"] || {};
+  var exports = $PS["Control.Monad.ST.Internal"];
+  var $foreign = $PS["Control.Monad.ST.Internal"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Monad = $PS["Control.Monad"];
+  var Control_Monad_Rec_Class = $PS["Control.Monad.Rec.Class"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Unit = $PS["Data.Unit"];
+  var functorST = new Data_Functor.Functor($foreign.map_);
+  var monadST = new Control_Monad.Monad(function () {
+      return applicativeST;
+  }, function () {
+      return bindST;
+  });
+  var bindST = new Control_Bind.Bind(function () {
+      return applyST;
+  }, $foreign.bind_);
+  var applyST = new Control_Apply.Apply(function () {
+      return functorST;
+  }, Control_Monad.ap(monadST));
+  var applicativeST = new Control_Applicative.Applicative(function () {
+      return applyST;
+  }, $foreign.pure_);
+  var monadRecST = new Control_Monad_Rec_Class.MonadRec(function () {
+      return monadST;
+  }, function (f) {
+      return function (a) {
+          var isLooping = function (v) {
+              if (v instanceof Control_Monad_Rec_Class.Loop) {
+                  return true;
+              };
+              return false;
+          };
+          var fromDone = function (v) {
+              if (v instanceof Control_Monad_Rec_Class.Done) {
+                  return v.value0;
+              };
+              throw new Error("Failed pattern match at Control.Monad.ST.Internal (line 54, column 32 - line 54, column 46): " + [ v.constructor.name ]);
+          };
+          return Control_Bind.bind(bindST)(Control_Bind.bindFlipped(bindST)($foreign["new"])(f(a)))(function (v) {
+              return Control_Bind.discard(Control_Bind.discardUnit)(bindST)($foreign["while"](Data_Functor.map(functorST)(isLooping)($foreign.read(v)))(Control_Bind.bind(bindST)($foreign.read(v))(function (v1) {
+                  if (v1 instanceof Control_Monad_Rec_Class.Loop) {
+                      return Control_Bind.bind(bindST)(f(v1.value0))(function (v2) {
+                          return Data_Functor["void"](functorST)($foreign.write(v2)(v));
+                      });
+                  };
+                  if (v1 instanceof Control_Monad_Rec_Class.Done) {
+                      return Control_Applicative.pure(applicativeST)(Data_Unit.unit);
+                  };
+                  throw new Error("Failed pattern match at Control.Monad.ST.Internal (line 46, column 18 - line 50, column 28): " + [ v1.constructor.name ]);
+              })))(function () {
+                  return Data_Functor.map(functorST)(fromDone)($foreign.read(v));
+              });
+          });
+      };
+  });
+  exports["applicativeST"] = applicativeST;
+  exports["bindST"] = bindST;
+  exports["monadRecST"] = monadRecST;
+})(PS);
+(function(exports) {
+  "use strict";
+
+  exports.empty = function () {
+    return [];
+  };
+
+  exports.pushAll = function (as) {
+    return function (xs) {
+      return function () {
+        return xs.push.apply(xs, as);
+      };
+    };
+  };
+
+  exports.unsafeFreeze = function (xs) {
+    return function () {
+      return xs;
+    };
+  };
+
+  function copyImpl(xs) {
+    return function () {
+      return xs.slice();
+    };
+  }
+})(PS["Data.Array.ST"] = PS["Data.Array.ST"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Array.ST"] = $PS["Data.Array.ST"] || {};
+  var exports = $PS["Data.Array.ST"];
+  var $foreign = $PS["Data.Array.ST"];
+  var push = function (a) {
+      return $foreign.pushAll([ a ]);
+  };
+  exports["push"] = push;
+  exports["empty"] = $foreign.empty;
+  exports["unsafeFreeze"] = $foreign.unsafeFreeze;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.List"] = $PS["Data.List"] || {};
+  var exports = $PS["Data.List"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];                                  
+  var uncons = function (v) {
+      if (v instanceof Data_List_Types.Nil) {
+          return Data_Maybe.Nothing.value;
+      };
+      if (v instanceof Data_List_Types.Cons) {
+          return new Data_Maybe.Just({
+              head: v.value0,
+              tail: v.value1
+          });
+      };
+      throw new Error("Failed pattern match at Data.List (line 259, column 1 - line 259, column 66): " + [ v.constructor.name ]);
+  };
+  var toUnfoldable = function (dictUnfoldable) {
+      return Data_Unfoldable.unfoldr(dictUnfoldable)(function (xs) {
+          return Data_Functor.map(Data_Maybe.functorMaybe)(function (rec) {
+              return new Data_Tuple.Tuple(rec.head, rec.tail);
+          })(uncons(xs));
+      });
+  };
+  var tail = function (v) {
+      if (v instanceof Data_List_Types.Nil) {
+          return Data_Maybe.Nothing.value;
+      };
+      if (v instanceof Data_List_Types.Cons) {
+          return new Data_Maybe.Just(v.value1);
+      };
+      throw new Error("Failed pattern match at Data.List (line 245, column 1 - line 245, column 43): " + [ v.constructor.name ]);
+  };
+  var snoc = function (xs) {
+      return function (x) {
+          return Data_Foldable.foldr(Data_List_Types.foldableList)(Data_List_Types.Cons.create)(new Data_List_Types.Cons(x, Data_List_Types.Nil.value))(xs);
+      };
+  };
+  var reverse = (function () {
+      var go = function ($copy_acc) {
+          return function ($copy_v) {
+              var $tco_var_acc = $copy_acc;
+              var $tco_done = false;
+              var $tco_result;
+              function $tco_loop(acc, v) {
+                  if (v instanceof Data_List_Types.Nil) {
+                      $tco_done = true;
+                      return acc;
+                  };
+                  if (v instanceof Data_List_Types.Cons) {
+                      $tco_var_acc = new Data_List_Types.Cons(v.value0, acc);
+                      $copy_v = v.value1;
+                      return;
+                  };
+                  throw new Error("Failed pattern match at Data.List (line 368, column 3 - line 368, column 19): " + [ acc.constructor.name, v.constructor.name ]);
+              };
+              while (!$tco_done) {
+                  $tco_result = $tco_loop($tco_var_acc, $copy_v);
+              };
+              return $tco_result;
+          };
+      };
+      return go(Data_List_Types.Nil.value);
+  })();
+  var take = (function () {
+      var go = function ($copy_acc) {
+          return function ($copy_v) {
+              return function ($copy_v1) {
+                  var $tco_var_acc = $copy_acc;
+                  var $tco_var_v = $copy_v;
+                  var $tco_done = false;
+                  var $tco_result;
+                  function $tco_loop(acc, v, v1) {
+                      if (v < 1) {
+                          $tco_done = true;
+                          return reverse(acc);
+                      };
+                      if (v1 instanceof Data_List_Types.Nil) {
+                          $tco_done = true;
+                          return reverse(acc);
+                      };
+                      if (v1 instanceof Data_List_Types.Cons) {
+                          $tco_var_acc = new Data_List_Types.Cons(v1.value0, acc);
+                          $tco_var_v = v - 1 | 0;
+                          $copy_v1 = v1.value1;
+                          return;
+                      };
+                      throw new Error("Failed pattern match at Data.List (line 520, column 3 - line 520, column 35): " + [ acc.constructor.name, v.constructor.name, v1.constructor.name ]);
+                  };
+                  while (!$tco_done) {
+                      $tco_result = $tco_loop($tco_var_acc, $tco_var_v, $copy_v1);
+                  };
+                  return $tco_result;
+              };
+          };
+      };
+      return go(Data_List_Types.Nil.value);
+  })();
+  var unsnoc = function (lst) {
+      var go = function ($copy_v) {
+          return function ($copy_acc) {
+              var $tco_var_v = $copy_v;
+              var $tco_done = false;
+              var $tco_result;
+              function $tco_loop(v, acc) {
+                  if (v instanceof Data_List_Types.Nil) {
+                      $tco_done = true;
+                      return Data_Maybe.Nothing.value;
+                  };
+                  if (v instanceof Data_List_Types.Cons && v.value1 instanceof Data_List_Types.Nil) {
+                      $tco_done = true;
+                      return new Data_Maybe.Just({
+                          revInit: acc,
+                          last: v.value0
+                      });
+                  };
+                  if (v instanceof Data_List_Types.Cons) {
+                      $tco_var_v = v.value1;
+                      $copy_acc = new Data_List_Types.Cons(v.value0, acc);
+                      return;
+                  };
+                  throw new Error("Failed pattern match at Data.List (line 270, column 3 - line 270, column 23): " + [ v.constructor.name, acc.constructor.name ]);
+              };
+              while (!$tco_done) {
+                  $tco_result = $tco_loop($tco_var_v, $copy_acc);
+              };
+              return $tco_result;
+          };
+      };
+      return Data_Functor.map(Data_Maybe.functorMaybe)(function (h) {
+          return {
+              init: reverse(h.revInit),
+              last: h.last
+          };
+      })(go(lst)(Data_List_Types.Nil.value));
+  };
+  var partition = function (p) {
+      return function (xs) {
+          var select = function (x) {
+              return function (v) {
+                  var $226 = p(x);
+                  if ($226) {
+                      return {
+                          no: v.no,
+                          yes: new Data_List_Types.Cons(x, v.yes)
+                      };
+                  };
+                  return {
+                      no: new Data_List_Types.Cons(x, v.no),
+                      yes: v.yes
+                  };
+              };
+          };
+          return Data_Foldable.foldr(Data_List_Types.foldableList)(select)({
+              no: Data_List_Types.Nil.value,
+              yes: Data_List_Types.Nil.value
+          })(xs);
+      };
+  };    
+  var last = function ($copy_v) {
+      var $tco_done = false;
+      var $tco_result;
+      function $tco_loop(v) {
+          if (v instanceof Data_List_Types.Cons && v.value1 instanceof Data_List_Types.Nil) {
+              $tco_done = true;
+              return new Data_Maybe.Just(v.value0);
+          };
+          if (v instanceof Data_List_Types.Cons) {
+              $copy_v = v.value1;
+              return;
+          };
+          $tco_done = true;
+          return Data_Maybe.Nothing.value;
+      };
+      while (!$tco_done) {
+          $tco_result = $tco_loop($copy_v);
+      };
+      return $tco_result;
+  };
+  var head = function (v) {
+      if (v instanceof Data_List_Types.Nil) {
+          return Data_Maybe.Nothing.value;
+      };
+      if (v instanceof Data_List_Types.Cons) {
+          return new Data_Maybe.Just(v.value0);
+      };
+      throw new Error("Failed pattern match at Data.List (line 230, column 1 - line 230, column 22): " + [ v.constructor.name ]);
+  };
+  var fromFoldable = function (dictFoldable) {
+      return Data_Foldable.foldr(dictFoldable)(Data_List_Types.Cons.create)(Data_List_Types.Nil.value);
+  };
+  exports["toUnfoldable"] = toUnfoldable;
+  exports["fromFoldable"] = fromFoldable;
+  exports["snoc"] = snoc;
+  exports["tail"] = tail;
+  exports["uncons"] = uncons;
+  exports["unsnoc"] = unsnoc;
+  exports["reverse"] = reverse;
+  exports["take"] = take;
+  exports["partition"] = partition;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Set"] = $PS["Data.Set"] || {};
+  var exports = $PS["Data.Set"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Monad_Rec_Class = $PS["Control.Monad.Rec.Class"];
+  var Control_Monad_ST_Internal = $PS["Control.Monad.ST.Internal"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Array_ST = $PS["Data.Array.ST"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_List = $PS["Data.List"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Map_Internal = $PS["Data.Map.Internal"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Ordering = $PS["Data.Ordering"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Unit = $PS["Data.Unit"];
   var union = function (dictOrd) {
       return function (v) {
           return function (v1) {
@@ -21870,8 +21504,9 @@ var PS = {};
       return Data_Map_Internal.keys(v);
   };
   var toUnfoldable = function (dictUnfoldable) {
-      return function ($64) {
-          return Data_List.toUnfoldable(dictUnfoldable)(toList($64));
+      var $64 = Data_List.toUnfoldable(dictUnfoldable);
+      return function ($65) {
+          return $64(toList($65));
       };
   };
   var size = function (v) {
@@ -21902,20 +21537,23 @@ var PS = {};
   };
   var foldableSet = new Data_Foldable.Foldable(function (dictMonoid) {
       return function (f) {
-          return function ($65) {
-              return Data_Foldable.foldMap(Data_List_Types.foldableList)(dictMonoid)(f)(toList($65));
-          };
-      };
-  }, function (f) {
-      return function (x) {
-          return function ($66) {
-              return Data_Foldable.foldl(Data_List_Types.foldableList)(f)(x)(toList($66));
-          };
-      };
-  }, function (f) {
-      return function (x) {
+          var $66 = Data_Foldable.foldMap(Data_List_Types.foldableList)(dictMonoid)(f);
           return function ($67) {
-              return Data_Foldable.foldr(Data_List_Types.foldableList)(f)(x)(toList($67));
+              return $66(toList($67));
+          };
+      };
+  }, function (f) {
+      return function (x) {
+          var $68 = Data_Foldable.foldl(Data_List_Types.foldableList)(f)(x);
+          return function ($69) {
+              return $68(toList($69));
+          };
+      };
+  }, function (f) {
+      return function (x) {
+          var $70 = Data_Foldable.foldr(Data_List_Types.foldableList)(f)(x);
+          return function ($71) {
+              return $70(toList($71));
           };
       };
   });
@@ -21959,9 +21597,12 @@ var PS = {};
   var intersection = function (dictOrd) {
       return function (s1) {
           return function (s2) {
-              var toArray = function ($68) {
-                  return Data_Array.fromFoldable(Data_List_Types.foldableList)(toList($68));
-              };
+              var toArray = (function () {
+                  var $72 = Data_Array.fromFoldable(Data_List_Types.foldableList);
+                  return function ($73) {
+                      return $72(toList($73));
+                  };
+              })();
               var rs = toArray(s2);
               var rl = Data_Array.length(rs);
               var ls = toArray(s1);
@@ -22057,486 +21698,488 @@ var PS = {};
   exports["monoidSet"] = monoidSet;
   exports["semigroupSet"] = semigroupSet;
   exports["foldableSet"] = foldableSet;
-})(PS["Data.Set"] = PS["Data.Set"] || {});
+})(PS);
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Set = PS["Data.Set"];
-  var Prelude = PS["Prelude"];
-  var Unsafe_Coerce = PS["Unsafe.Coerce"];                 
-  var keys = function ($0) {
-      return Data_Functor["void"](Data_Map_Internal.functorMap)($0);
-  };
-  exports["keys"] = keys;
-})(PS["Data.Map"] = PS["Data.Map"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Monad_ST = PS["Control.Monad.ST"];
-  var Control_Monad_ST_Internal = PS["Control.Monad.ST.Internal"];
-  var Control_Plus = PS["Control.Plus"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Array_ST = PS["Data.Array.ST"];
-  var Data_Array_ST_Iterator = PS["Data.Array.ST.Iterator"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];                 
-  var Compactable = function (compact, separate) {
-      this.compact = compact;
-      this.separate = separate;
-  };
-  var separate = function (dict) {
-      return dict.separate;
-  };
-  var compact = function (dict) {
-      return dict.compact;
-  };
-  exports["Compactable"] = Compactable;
-  exports["compact"] = compact;
-  exports["separate"] = separate;
-})(PS["Data.Compactable"] = PS["Data.Compactable"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Compactable = PS["Data.Compactable"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Prelude = PS["Prelude"];                 
-  var Filterable = function (Compactable0, Functor1, filter, filterMap, partition, partitionMap) {
-      this.Compactable0 = Compactable0;
-      this.Functor1 = Functor1;
-      this.filter = filter;
-      this.filterMap = filterMap;
-      this.partition = partition;
-      this.partitionMap = partitionMap;
-  };
-  var partitionMap = function (dict) {
-      return dict.partitionMap;
-  };
-  var partition = function (dict) {
-      return dict.partition;
-  };
-  var filterMap = function (dict) {
-      return dict.filterMap;
-  };
-  var filter = function (dict) {
-      return dict.filter;
-  };
-  exports["Filterable"] = Filterable;
-  exports["partitionMap"] = partitionMap;
-  exports["partition"] = partition;
-  exports["filterMap"] = filterMap;
-  exports["filter"] = filter;
-})(PS["Data.Filterable"] = PS["Data.Filterable"] || {});
-(function(exports) {
-    "use strict";
 
-  exports.unsafePerformEffect = function (f) {
+  // module Partial.Unsafe
+
+  exports.unsafePartial = function (f) {
     return f();
   };
-})(PS["Effect.Unsafe"] = PS["Effect.Unsafe"] || {});
+})(PS["Partial.Unsafe"] = PS["Partial.Unsafe"] || {});
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var $foreign = PS["Effect.Unsafe"];
-  var Effect = PS["Effect"];
-  exports["unsafePerformEffect"] = $foreign.unsafePerformEffect;
-})(PS["Effect.Unsafe"] = PS["Effect.Unsafe"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Compactable = PS["Data.Compactable"];
-  var Data_Filterable = PS["Data.Filterable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Prelude = PS["Prelude"];                 
-  var IsEvent = function (Alternative0, Filterable1, fix, fold, keepLatest, sampleOn) {
-      this.Alternative0 = Alternative0;
-      this.Filterable1 = Filterable1;
-      this.fix = fix;
-      this.fold = fold;
-      this.keepLatest = keepLatest;
-      this.sampleOn = sampleOn;
-  };
-  var sampleOn = function (dict) {
-      return dict.sampleOn;
-  };
-  var keepLatest = function (dict) {
-      return dict.keepLatest;
-  };
-  var fold = function (dict) {
-      return dict.fold;
-  };
-  var fix = function (dict) {
-      return dict.fix;
-  };
-  exports["IsEvent"] = IsEvent;
-  exports["fold"] = fold;
-  exports["sampleOn"] = sampleOn;
-  exports["keepLatest"] = keepLatest;
-  exports["fix"] = fix;
-})(PS["FRP.Event.Class"] = PS["FRP.Event.Class"] || {});
-(function(exports) {
-    "use strict";
 
-  exports.reallyUnsafeRefEq = function (a) {
-    return function (b) {
-      return a === b;
+  // module Partial
+
+  exports.crashWith = function () {
+    return function (msg) {
+      throw new Error(msg);
     };
   };
-})(PS["Unsafe.Reference"] = PS["Unsafe.Reference"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS["Partial"] = PS["Partial"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Unsafe.Reference"]; 
-  var unsafeRefEq = $foreign.reallyUnsafeRefEq;
-  exports["unsafeRefEq"] = unsafeRefEq;
-})(PS["Unsafe.Reference"] = PS["Unsafe.Reference"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+  $PS["Partial"] = $PS["Partial"] || {};
+  var exports = $PS["Partial"];
+  var $foreign = $PS["Partial"];
+  exports["crashWith"] = $foreign.crashWith;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Plus = PS["Control.Plus"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Compactable = PS["Data.Compactable"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Filterable = PS["Data.Filterable"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Unit = PS["Data.Unit"];
-  var Effect = PS["Effect"];
-  var Effect_Ref = PS["Effect.Ref"];
-  var Effect_Unsafe = PS["Effect.Unsafe"];
-  var FRP_Event_Class = PS["FRP.Event.Class"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Unsafe_Reference = PS["Unsafe.Reference"];
-  var subscribe = function (v) {
-      return function (k) {
-          return v(function ($79) {
-              return Data_Functor["void"](Effect.functorEffect)(k($79));
+  $PS["Partial.Unsafe"] = $PS["Partial.Unsafe"] || {};
+  var exports = $PS["Partial.Unsafe"];
+  var $foreign = $PS["Partial.Unsafe"];
+  var Partial = $PS["Partial"];                
+  var unsafePartialBecause = function (v) {
+      return function (x) {
+          return $foreign.unsafePartial(function (dictPartial) {
+              return x();
           });
       };
   };
-  var sampleOn = function (v) {
-      return function (v1) {
-          return function (k) {
-              return function __do() {
-                  var v2 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
-                  var v3 = v(function (a) {
-                      return Effect_Ref.write(new Data_Maybe.Just(a))(v2);
-                  })();
-                  var v4 = v1(function (f) {
-                      return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v2))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function ($80) {
-                          return k(f($80));
-                      }));
-                  })();
-                  return Control_Apply.applySecond(Effect.applyEffect)(v3)(v4);
-              };
-          };
-      };
-  };                    
-  var keepLatest = function (v) {
-      return function (k) {
-          return function __do() {
-              var v1 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
-              var v2 = v(function (inner) {
-                  return function __do() {
-                      Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v1))(Data_Foldable.sequence_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe))();
-                      var v2 = subscribe(inner)(k)();
-                      return Effect_Ref.write(new Data_Maybe.Just(v2))(v1)();
-                  };
-              })();
-              return function __do() {
-                  Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v1))(Data_Foldable.sequence_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe))();
-                  return v2();
-              };
-          };
-      };
+  var unsafeCrashWith = function (msg) {
+      return $foreign.unsafePartial(function (dictPartial) {
+          return Partial.crashWith()(msg);
+      });
   };
-  var functorEvent = new Data_Functor.Functor(function (f) {
-      return function (v) {
-          return function (k) {
-              return v(function ($81) {
-                  return k(f($81));
-              });
-          };
-      };
-  });
-  var fold = function (f) {
-      return function (v) {
-          return function (b) {
-              return function (k) {
-                  return function __do() {
-                      var v1 = Effect_Ref["new"](b)();
-                      return v(function (a) {
-                          return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.modify(f(a))(v1))(k);
-                      })();
-                  };
-              };
-          };
-      };
-  };
-  var filter = function (p) {
-      return function (v) {
-          return function (k) {
-              return v(function (a) {
-                  var $59 = p(a);
-                  if ($59) {
-                      return k(a);
-                  };
-                  return Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit);
-              });
-          };
-      };
-  };
-  var create = function __do() {
-      var v = Effect_Ref["new"]([  ])();
-      return {
-          event: function (k) {
-              return function __do() {
-                  var v1 = Effect_Ref.modify(function (v1) {
-                      return Data_Semigroup.append(Data_Semigroup.semigroupArray)(v1)([ k ]);
-                  })(v)();
-                  return function __do() {
-                      var v2 = Effect_Ref.modify(Data_Array.deleteBy(Unsafe_Reference.unsafeRefEq)(k))(v)();
-                      return Data_Unit.unit;
-                  };
-              };
-          },
-          push: function (a) {
-              return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableArray)(function (k) {
-                  return k(a);
-              }));
-          }
-      };
-  };
-  var fix = function (f) {
-      var v = Effect_Unsafe.unsafePerformEffect(create);
-      var v1 = f(v.event);
-      return function (k) {
-          return function __do() {
-              var v2 = subscribe(v1.input)(v.push)();
-              var v3 = subscribe(v1.output)(k)();
-              return Control_Apply.applySecond(Effect.applyEffect)(v2)(v3);
-          };
-      };
-  };
-  var compactableEvent = new Data_Compactable.Compactable(function (xs) {
-      return Data_Functor.map(functorEvent)(function (x) {
-          return Data_Maybe.fromJust()(x);
-      })(filter(Data_Maybe.isJust)(xs));
-  }, function (xs) {
-      return {
-          left: Data_Functor.map(functorEvent)(Data_Either.fromLeft())(filter(Data_Either.isLeft)(xs)),
-          right: Data_Functor.map(functorEvent)(Data_Either.fromRight())(filter(Data_Either.isRight)(xs))
-      };
-  });
-  var filterableEvent = new Data_Filterable.Filterable(function () {
-      return compactableEvent;
-  }, function () {
-      return functorEvent;
-  }, filter, function (f) {
-      return function ($82) {
-          return Data_Functor.map(functorEvent)(function (x) {
-              return Data_Maybe.fromJust()(x);
-          })(filter(Data_Maybe.isJust)(Data_Functor.map(functorEvent)(f)($82)));
-      };
-  }, function (p) {
-      return function (xs) {
-          return {
-              yes: filter(p)(xs),
-              no: filter(function ($83) {
-                  return !p($83);
-              })(xs)
-          };
-      };
-  }, function (f) {
-      return function (xs) {
-          return {
-              left: Data_Filterable.filterMap(filterableEvent)(function ($84) {
-                  return Data_Either.either(Data_Maybe.Just.create)(Data_Function["const"](Data_Maybe.Nothing.value))(f($84));
-              })(xs),
-              right: Data_Filterable.filterMap(filterableEvent)(function ($85) {
-                  return Data_Either.hush(f($85));
-              })(xs)
-          };
-      };
-  });
-  var applyEvent = new Control_Apply.Apply(function () {
-      return functorEvent;
-  }, function (v) {
-      return function (v1) {
-          return function (k) {
-              return function __do() {
-                  var v2 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
-                  var v3 = Effect_Ref["new"](Data_Maybe.Nothing.value)();
-                  var v4 = v(function (a) {
-                      return function __do() {
-                          Effect_Ref.write(new Data_Maybe.Just(a))(v2)();
-                          return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v3))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function ($86) {
-                              return k(a($86));
-                          }))();
-                      };
-                  })();
-                  var v5 = v1(function (b) {
-                      return function __do() {
-                          Effect_Ref.write(new Data_Maybe.Just(b))(v3)();
-                          return Control_Bind.bind(Effect.bindEffect)(Effect_Ref.read(v2))(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(function ($87) {
-                              return k((function (v5) {
-                                  return v5(b);
-                              })($87));
-                          }))();
-                      };
-                  })();
-                  return Control_Apply.applySecond(Effect.applyEffect)(v4)(v5);
-              };
-          };
-      };
-  });
-  var applicativeEvent = new Control_Applicative.Applicative(function () {
-      return applyEvent;
-  }, function (a) {
-      return function (k) {
-          return function __do() {
-              k(a)();
-              return Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit);
-          };
-      };
-  });
-  var altEvent = new Control_Alt.Alt(function () {
-      return functorEvent;
-  }, function (v) {
-      return function (v1) {
-          return function (k) {
-              return function __do() {
-                  var v2 = v(k)();
-                  var v3 = v1(k)();
-                  return Control_Apply.applySecond(Effect.applyEffect)(v2)(v3);
-              };
-          };
-      };
-  });
-  var plusEvent = new Control_Plus.Plus(function () {
-      return altEvent;
-  }, function (v) {
-      return Control_Applicative.pure(Effect.applicativeEffect)(Control_Applicative.pure(Effect.applicativeEffect)(Data_Unit.unit));
-  });
-  var alternativeEvent = new Control_Alternative.Alternative(function () {
-      return applicativeEvent;
-  }, function () {
-      return plusEvent;
-  });
-  var eventIsEvent = new FRP_Event_Class.IsEvent(function () {
-      return alternativeEvent;
-  }, function () {
-      return filterableEvent;
-  }, fix, fold, keepLatest, sampleOn);
-  exports["create"] = create;
-  exports["subscribe"] = subscribe;
-  exports["functorEvent"] = functorEvent;
-  exports["compactableEvent"] = compactableEvent;
-  exports["filterableEvent"] = filterableEvent;
-  exports["applyEvent"] = applyEvent;
-  exports["applicativeEvent"] = applicativeEvent;
-  exports["altEvent"] = altEvent;
-  exports["plusEvent"] = plusEvent;
-  exports["alternativeEvent"] = alternativeEvent;
-  exports["eventIsEvent"] = eventIsEvent;
-})(PS["FRP.Event"] = PS["FRP.Event"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+  exports["unsafePartialBecause"] = unsafePartialBecause;
+  exports["unsafeCrashWith"] = unsafeCrashWith;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Effect = PS["Effect"];
-  var FRP_Event = PS["FRP.Event"];
-  var Prelude = PS["Prelude"];                 
-  var runApp = function (app) {
-      var right = Data_Either.either(Data_Function["const"](Data_Maybe.Nothing.value))(Data_Maybe.Just.create);
-      var left = Data_Either.either(Data_Maybe.Just.create)(Data_Function["const"](Data_Maybe.Nothing.value));
-      var run = function (els) {
-          var runOnRawInputs = function (rawInput) {
-              var input = app.parse(rawInput);
-              return function __do() {
-                  app.error(els)(left(input))();
-                  return app.render(els)(Data_Functor.map(Data_Maybe.functorMaybe)(function ($4) {
-                      return app.unparse(app.analyze($4));
-                  })(right(input)))();
-              };
-          };
-          return function __do() {
-              var v = app.readInput(els)();
-              runOnRawInputs(v.value0)();
-              return FRP_Event.subscribe(v.value1)(runOnRawInputs)();
+  $PS["Data.Graph"] = $PS["Data.Graph"] || {};
+  var exports = $PS["Data.Graph"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Bifunctor = $PS["Data.Bifunctor"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_Map = $PS["Data.Map"];
+  var Data_Map_Internal = $PS["Data.Map.Internal"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Partial_Unsafe = $PS["Partial.Unsafe"];
+  var Graph = function (x) {
+      return x;
+  };
+  var toMap = function (v) {
+      return v;
+  };
+  var parents = function (dictOrd) {
+      return function (k) {
+          return function (v) {
+              return Data_Map.keys(Data_Map_Internal.filter(dictOrd)((function () {
+                  var $175 = Data_Foldable.elem(Data_Set.foldableSet)(dictOrd.Eq0())(k);
+                  return function ($176) {
+                      return $175(Data_Tuple.snd($176));
+                  };
+              })())(v));
           };
       };
-      return Control_Bind.bind(Effect.bindEffect)(app.elements)(Data_Foldable.traverse_(Effect.applicativeEffect)(Data_Foldable.foldableMaybe)(run));
   };
-  exports["runApp"] = runApp;
-})(PS["App"] = PS["App"] || {});
+  var lookup = function (dictOrd) {
+      return function (k) {
+          return function (v) {
+              return Data_Functor.map(Data_Maybe.functorMaybe)(Data_Tuple.fst)(Data_Map_Internal.lookup(dictOrd)(k)(v));
+          };
+      };
+  };
+  var isParentOf = function (dictOrd) {
+      return function (g) {
+          return function (k1) {
+              return function (k2) {
+                  return Data_Set.member(dictOrd)(k1)(parents(dictOrd)(k2)(g));
+              };
+          };
+      };
+  };
+  var insertVertex = function (dictOrd) {
+      return function (k) {
+          return function (v) {
+              return function (v1) {
+                  return Graph(Data_Map_Internal.insertWith(dictOrd)(function (v3) {
+                      return function (v4) {
+                          return new Data_Tuple.Tuple(v, v3.value1);
+                      };
+                  })(k)(new Data_Tuple.Tuple(v, Data_Monoid.mempty(Data_Set.monoidSet(dictOrd))))(v1));
+              };
+          };
+      };
+  };
+  var insertEdge = function (dictOrd) {
+      return function (from) {
+          return function (to) {
+              return function (v) {
+                  var keys = Data_Map.keys(v);
+                  var $102 = Data_Set.member(dictOrd)(from)(keys) && Data_Set.member(dictOrd)(to)(keys);
+                  if ($102) {
+                      return Data_Maybe.Just.create(Graph(Data_Map_Internal.alter(dictOrd)(Data_Functor.map(Data_Maybe.functorMaybe)(Data_Bifunctor.rmap(Data_Tuple.bifunctorTuple)(Data_Set.insert(dictOrd)(to))))(from)(v)));
+                  };
+                  return Data_Maybe.Nothing.value;
+              };
+          };
+      };
+  };
+  var insertEdgeWithVertices = function (dictOrd) {
+      return function (v) {
+          return function (v1) {
+              return function (g) {
+                  return Partial_Unsafe.unsafePartialBecause("Just inserted vertices")(function (dictPartial) {
+                      return Data_Maybe.fromJust()(insertEdge(dictOrd)(v.value0)(v1.value0)(Data_Tuple.uncurry(insertVertex(dictOrd))(v)(Data_Tuple.uncurry(insertVertex(dictOrd))(v1)(g))));
+                  });
+              };
+          };
+      };
+  }; 
+  var fromMap = Graph;
+  var children = function (dictOrd) {
+      return function (k) {
+          return function (v) {
+              return Data_Maybe.maybe(Data_Monoid.mempty(Data_Set.monoidSet(dictOrd)))((function () {
+                  var $177 = Data_Set.fromFoldable(Data_Set.foldableSet)(dictOrd);
+                  return function ($178) {
+                      return $177(Data_Tuple.snd($178));
+                  };
+              })())(Data_Map_Internal.lookup(dictOrd)(k)(v));
+          };
+      };
+  };
+  var descendants = function (dictOrd) {
+      return function (k$prime) {
+          return function (g) {
+              var go = function (k) {
+                  var dd = children(dictOrd)(k)(g);
+                  return Data_Set.unions(Data_Set.foldableSet)(dictOrd)(Data_Set.insert(Data_Set.ordSet(dictOrd))(dd)(Data_Set.map(Data_Set.ordSet(dictOrd))(go)(dd)));
+              };
+              return go(k$prime);
+          };
+      };
+  };
+  var isInCycle = function (dictOrd) {
+      return function (k$prime) {
+          return function (g) {
+              var go = function (seen) {
+                  return function (k) {
+                      var dd = children(dictOrd)(k)(g);
+                      var v = new Data_Tuple.Tuple(Data_Eq.eq(Data_Set.eqSet(dictOrd.Eq0()))(dd)(Data_Monoid.mempty(Data_Set.monoidSet(dictOrd))), Data_Set.member(dictOrd)(k)(seen));
+                      if (v.value0) {
+                          return false;
+                      };
+                      if (v.value1) {
+                          return Data_Eq.eq(dictOrd.Eq0())(k)(k$prime);
+                      };
+                      if (!v.value0 && !v.value1) {
+                          return Data_Foldable.any(Data_Set.foldableSet)(Data_HeytingAlgebra.heytingAlgebraBoolean)(go(Data_Set.insert(dictOrd)(k)(seen)))(dd);
+                      };
+                      throw new Error("Failed pattern match at Data.Graph (line 264, column 7 - line 267, column 70): " + [ v.constructor.name ]);
+                  };
+              };
+              return go(Data_Monoid.mempty(Data_Set.monoidSet(dictOrd)))(k$prime);
+          };
+      };
+  };
+  var isCyclic = function (dictOrd) {
+      return function (g) {
+          var keys = function (v) {
+              return Data_Map.keys(v);
+          };
+          return Data_Foldable.any(Data_Set.foldableSet)(Data_HeytingAlgebra.heytingAlgebraBoolean)(Data_Function.flip(isInCycle(dictOrd))(g))(keys(g));
+      };
+  };
+  var alterEdges = function (dictOrd) {
+      return function (f) {
+          return function (k) {
+              return function (v) {
+                  var applyF = function (v1) {
+                      return Data_Functor.map(Data_Maybe.functorMaybe)(Data_Tuple.Tuple.create(v1.value0))(f(new Data_Maybe.Just(v1.value1)));
+                  };
+                  return Graph(Data_Map_Internal.alter(dictOrd)(function (v1) {
+                      return Control_Bind.bindFlipped(Data_Maybe.bindMaybe)(applyF)(v1);
+                  })(k)(v));
+              };
+          };
+      };
+  };
+  var adjacent = function (dictOrd) {
+      return function (k) {
+          return function (g) {
+              return Data_Set.union(dictOrd)(children(dictOrd)(k)(g))(parents(dictOrd)(k)(g));
+          };
+      };
+  };
+  exports["fromMap"] = fromMap;
+  exports["toMap"] = toMap;
+  exports["insertEdgeWithVertices"] = insertEdgeWithVertices;
+  exports["descendants"] = descendants;
+  exports["isParentOf"] = isParentOf;
+  exports["isCyclic"] = isCyclic;
+  exports["alterEdges"] = alterEdges;
+  exports["adjacent"] = adjacent;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["GDP.Named"] = $PS["GDP.Named"] || {};
+  var exports = $PS["GDP.Named"];
+  var unName = function (v) {
+      return v;
+  };
+  var ordNamed = function (dictOrd) {
+      return dictOrd;
+  };
+  var name3 = function (a) {
+      return function (b) {
+          return function (c) {
+              return function (k) {
+                  return k(a)(b)(c);
+              };
+          };
+      };
+  };
+  var name2 = function (a) {
+      return function (b) {
+          return function (k) {
+              return k(a)(b);
+          };
+      };
+  };
+  var defn = function (mk) {
+      return function (a) {
+          return a;
+      };
+  };
+  exports["defn"] = defn;
+  exports["name2"] = name2;
+  exports["name3"] = name3;
+  exports["unName"] = unName;
+  exports["ordNamed"] = ordNamed;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["GDP.Proof"] = $PS["GDP.Proof"] || {};
+  var exports = $PS["GDP.Proof"];
+  var QED = (function () {
+      function QED() {
+
+      };
+      QED.value = new QED();
+      return QED;
+  })();
+  var axiom = QED.value;
+  exports["axiom"] = axiom;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Causal.Kernel"] = $PS["Causal.Kernel"] || {};
+  var exports = $PS["Causal.Kernel"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Graph = $PS["Data.Graph"];
+  var Data_List = $PS["Data.List"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Ordering = $PS["Data.Ordering"];
+  var Data_Set = $PS["Data.Set"];
+  var GDP_Named = $PS["GDP.Named"];
+  var GDP_Proof = $PS["GDP.Proof"];
+  var Partial_Unsafe = $PS["Partial.Unsafe"];                
+  var MkPathOf = (function () {
+      function MkPathOf(value0) {
+          this.value0 = value0;
+      };
+      MkPathOf.create = function (value0) {
+          return new MkPathOf(value0);
+      };
+      return MkPathOf;
+  })();
+  var MkPath = (function () {
+      function MkPath(value0, value1, value2) {
+          this.value0 = value0;
+          this.value1 = value1;
+          this.value2 = value2;
+      };
+      MkPath.create = function (value0) {
+          return function (value1) {
+              return function (value2) {
+                  return new MkPath(value0, value1, value2);
+              };
+          };
+      };
+      return MkPath;
+  })();
+  var MkEffect = function (x) {
+      return x;
+  };
+  var MkCause = function (x) {
+      return x;
+  };
+  var tail = function (v) {
+      return Data_List.snoc(v.value1)(v.value2);
+  };
+  var pathToList = function (v) {
+      return Data_List.snoc(new Data_List_Types.Cons(v.value0, v.value1))(v.value2);
+  };
+  var reverse = function (p) {
+      var v = Data_List.uncons(Data_List.reverse(pathToList(p)));
+      if (v instanceof Data_Maybe.Just) {
+          var v1 = Data_List.unsnoc(v.value0.tail);
+          if (v1 instanceof Data_Maybe.Just) {
+              return new MkPath(v.value0.head, v1.value0.init, v1.value0.last);
+          };
+          if (v1 instanceof Data_Maybe.Nothing) {
+              return Partial_Unsafe.unsafeCrashWith("`reverse` preserves list length");
+          };
+          throw new Error("Failed pattern match at Causal.Kernel (line 63, column 7 - line 65, column 69): " + [ v1.constructor.name ]);
+      };
+      return Partial_Unsafe.unsafeCrashWith("`reverse` preserves list length");
+  };
+  var pathOf_isPathOf = function (p) {
+      return GDP_Proof.axiom;
+  };
+  var functorPath = new Data_Functor.Functor(function (f) {
+      return function (v) {
+          return new MkPath(f(v.value0), Data_Functor.map(Data_List_Types.functorList)(f)(v.value1), f(v.value2));
+      };
+  });
+  var foldablePath = new Data_Foldable.Foldable(function (dictMonoid) {
+      return function (f) {
+          return function (p) {
+              return Data_Foldable.foldMap(Data_List_Types.foldableList)(dictMonoid)(f)(pathToList(p));
+          };
+      };
+  }, function (x) {
+      return Data_Foldable.foldlDefault(foldablePath)(x);
+  }, function (x) {
+      return Data_Foldable.foldrDefault(foldablePath)(x);
+  });
+  var eqPath = function (dictEq) {
+      return new Data_Eq.Eq(function (x) {
+          return function (y) {
+              return Data_Eq.eq(dictEq)(x.value0)(y.value0) && Data_Eq.eq(Data_List_Types.eqList(dictEq))(x.value1)(y.value1) && Data_Eq.eq(dictEq)(x.value2)(y.value2);
+          };
+      });
+  };
+  var ordPath = function (dictOrd) {
+      return new Data_Ord.Ord(function () {
+          return eqPath(dictOrd.Eq0());
+      }, function (x) {
+          return function (y) {
+              var v = Data_Ord.compare(dictOrd)(x.value0)(y.value0);
+              if (v instanceof Data_Ordering.LT) {
+                  return Data_Ordering.LT.value;
+              };
+              if (v instanceof Data_Ordering.GT) {
+                  return Data_Ordering.GT.value;
+              };
+              var v1 = Data_Ord.compare(Data_List_Types.ordList(dictOrd))(x.value1)(y.value1);
+              if (v1 instanceof Data_Ordering.LT) {
+                  return Data_Ordering.LT.value;
+              };
+              if (v1 instanceof Data_Ordering.GT) {
+                  return Data_Ordering.GT.value;
+              };
+              return Data_Ord.compare(dictOrd)(x.value2)(y.value2);
+          };
+      });
+  };
+  var effect_disjoint = function (v) {
+      return GDP_Proof.axiom;
+  };
+  var effect = function (causeEffect) {
+      return GDP_Named.defn(MkEffect)((function (v) {
+          return v.effect;
+      })(GDP_Named.unName(causeEffect)));
+  };
+  var disjointnessTwoSet = function (dictOrd) {
+      return function (twoSet) {
+          return function (set) {
+              var v = GDP_Named.unName(twoSet);
+              var $99 = Data_Set.member(dictOrd)(v.value0)(GDP_Named.unName(set)) || Data_Set.member(dictOrd)(v.value1)(GDP_Named.unName(set));
+              if ($99) {
+                  return Data_Maybe.Nothing.value;
+              };
+              return new Data_Maybe.Just(GDP_Proof.axiom);
+          };
+      };
+  };
+  var consPath = function (x) {
+      return function (v) {
+          return new MkPath(v.value0, new Data_List_Types.Cons(x, v.value1), v.value2);
+      };
+  };
+  var cause_disjoint = function (v) {
+      return GDP_Proof.axiom;
+  };
+  var cause = function (causeEffect) {
+      return GDP_Named.defn(MkCause)((function (v) {
+          return v.cause;
+      })(GDP_Named.unName(causeEffect)));
+  };
+  var bfs = function (dictOrd) {
+      return function (nextVertices) {
+          return function (v) {
+              return function (g) {
+                  var go = function (hist) {
+                      return function (k) {
+                          var goAgain = function (x) {
+                              var $115 = Data_Eq.eq(dictOrd.Eq0())(x)(v.end);
+                              if ($115) {
+                                  return Data_Set.singleton(hist);
+                              };
+                              return go(consPath(x)(hist))(x);
+                          };
+                          var adjacent$prime = Data_Set.difference(dictOrd)(nextVertices(k)(GDP_Named.unName(g)))(Data_Set.fromFoldable(Data_List_Types.foldableList)(dictOrd)(tail(hist)));
+                          var $116 = Data_Eq.eq(Data_Set.eqSet(dictOrd.Eq0()))(adjacent$prime)(Data_Set.empty);
+                          if ($116) {
+                              return Data_Set.empty;
+                          };
+                          return Data_Foldable.foldMap(Data_Set.foldableSet)(Data_Set.monoidSet(ordPath(dictOrd)))(goAgain)(adjacent$prime);
+                      };
+                  };
+                  return Data_Set.map(GDP_Named.ordNamed(ordPath(dictOrd)))((function () {
+                      var $122 = GDP_Named.defn(MkPathOf.create);
+                      return function ($123) {
+                          return $122(reverse($123));
+                      };
+                  })())(go(new MkPath(v.end, Data_List_Types.Nil.value, v.start))(v.start));
+              };
+          };
+      };
+  };
+  var allUndirectedPaths = function (dictOrd) {
+      return function (v) {
+          return bfs(dictOrd)(Data_Graph.adjacent(dictOrd))({
+              start: v.value0,
+              end: v.value1
+          });
+      };
+  };
+  exports["allUndirectedPaths"] = allUndirectedPaths;
+  exports["disjointnessTwoSet"] = disjointnessTwoSet;
+  exports["cause"] = cause;
+  exports["cause_disjoint"] = cause_disjoint;
+  exports["effect"] = effect;
+  exports["effect_disjoint"] = effect_disjoint;
+  exports["pathOf_isPathOf"] = pathOf_isPathOf;
+  exports["ordPath"] = ordPath;
+  exports["functorPath"] = functorPath;
+  exports["foldablePath"] = foldablePath;
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.fromNumberImpl = function (just) {
     return function (nothing) {
@@ -22558,43 +22201,59 @@ var PS = {};
   };
 })(PS["Data.Int"] = PS["Data.Int"] || {});
 (function(exports) {
+  "use strict";
+
+  exports.topInt = 2147483647;
+  exports.bottomInt = -2147483648;
+
+  exports.topChar = String.fromCharCode(65535);
+  exports.bottomChar = String.fromCharCode(0);
+})(PS["Data.Bounded"] = PS["Data.Bounded"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Bounded"] = $PS["Data.Bounded"] || {};
+  var exports = $PS["Data.Bounded"];
+  var $foreign = $PS["Data.Bounded"];
+  var Data_Ord = $PS["Data.Ord"];                  
+  var Bounded = function (Ord0, bottom, top) {
+      this.Ord0 = Ord0;
+      this.bottom = bottom;
+      this.top = top;
+  };
+  var top = function (dict) {
+      return dict.top;
+  };                                            
+  var boundedInt = new Bounded(function () {
+      return Data_Ord.ordInt;
+  }, $foreign.bottomInt, $foreign.topInt);
+  var boundedChar = new Bounded(function () {
+      return Data_Ord.ordChar;
+  }, $foreign.bottomChar, $foreign.topChar);
+  var bottom = function (dict) {
+      return dict.bottom;
+  };
+  exports["bottom"] = bottom;
+  exports["top"] = top;
+  exports["boundedInt"] = boundedInt;
+  exports["boundedChar"] = boundedChar;
+})(PS);
+(function(exports) {
   /* globals exports */
   "use strict";         
 
   exports.infinity = Infinity;
 })(PS["Global"] = PS["Global"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.runFn3 = function (fn) {
-    return function (a) {
-      return function (b) {
-        return function (c) {
-          return fn(a, b, c);
-        };
-      };
-    };
-  };
-})(PS["Data.Function.Uncurried"] = PS["Data.Function.Uncurried"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Function.Uncurried"];
-  var Data_Unit = PS["Data.Unit"];
-  exports["runFn3"] = $foreign.runFn3;
-})(PS["Data.Function.Uncurried"] = PS["Data.Function.Uncurried"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Global"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Function_Uncurried = PS["Data.Function.Uncurried"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Prelude = PS["Prelude"];
+  $PS["Global"] = $PS["Global"] || {};
+  var exports = $PS["Global"];
+  var $foreign = $PS["Global"];
   exports["infinity"] = $foreign.infinity;
-})(PS["Global"] = PS["Global"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
 
   // module Math
 
@@ -22608,37 +22267,27 @@ var PS = {};
 
   exports.round = Math.round;
 })(PS["Math"] = PS["Math"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Math"];
+  $PS["Math"] = $PS["Math"] || {};
+  var exports = $PS["Math"];
+  var $foreign = $PS["Math"];
   exports["abs"] = $foreign.abs;
   exports["round"] = $foreign.round;
   exports["remainder"] = $foreign.remainder;
-})(PS["Math"] = PS["Math"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Int"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_CommutativeRing = PS["Data.CommutativeRing"];
-  var Data_DivisionRing = PS["Data.DivisionRing"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_EuclideanRing = PS["Data.EuclideanRing"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Int_Bits = PS["Data.Int.Bits"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Global = PS["Global"];
-  var $$Math = PS["Math"];
-  var Prelude = PS["Prelude"];
+  $PS["Data.Int"] = $PS["Data.Int"] || {};
+  var exports = $PS["Data.Int"];
+  var $foreign = $PS["Data.Int"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_Bounded = $PS["Data.Bounded"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Global = $PS["Global"];
+  var $$Math = $PS["Math"];
   var hexadecimal = 16;             
   var fromNumber = $foreign.fromNumberImpl(Data_Maybe.Just.create)(Data_Maybe.Nothing.value);
   var unsafeClamp = function (x) {
@@ -22662,14 +22311,13 @@ var PS = {};
   var round = function ($23) {
       return unsafeClamp($$Math.round($23));
   };
-  exports["fromNumber"] = fromNumber;
   exports["round"] = round;
   exports["hexadecimal"] = hexadecimal;
   exports["toNumber"] = $foreign.toNumber;
   exports["toStringAs"] = $foreign.toStringAs;
-})(PS["Data.Int"] = PS["Data.Int"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
   /* global Symbol */
 
   var hasArrayFrom = typeof Array.from === "function";
@@ -22721,7 +22369,7 @@ var PS = {};
   };
 })(PS["Data.String.CodePoints"] = PS["Data.String.CodePoints"] || {});
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.toCharCode = function (c) {
     return c.charCodeAt(0);
@@ -22731,36 +22379,15 @@ var PS = {};
     return String.fromCharCode(c);
   };
 })(PS["Data.Enum"] = PS["Data.Enum"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Enum"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_MonadPlus = PS["Control.MonadPlus"];
-  var Control_MonadZero = PS["Control.MonadZero"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Unfoldable1 = PS["Data.Unfoldable1"];
-  var Data_Unit = PS["Data.Unit"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
+  $PS["Data.Enum"] = $PS["Data.Enum"] || {};
+  var exports = $PS["Data.Enum"];
+  var $foreign = $PS["Data.Enum"];
+  var Data_Bounded = $PS["Data.Bounded"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Ord = $PS["Data.Ord"];
   var Enum = function (Ord0, pred, succ) {
       this.Ord0 = Ord0;
       this.pred = pred;
@@ -22775,12 +22402,6 @@ var PS = {};
   };
   var toEnum = function (dict) {
       return dict.toEnum;
-  };
-  var succ = function (dict) {
-      return dict.succ;
-  }; 
-  var pred = function (dict) {
-      return dict.pred;
   };              
   var fromEnum = function (dict) {
       return dict.fromEnum;
@@ -22828,29 +22449,107 @@ var PS = {};
   var enumChar = new Enum(function () {
       return Data_Ord.ordChar;
   }, defaultPred(charToEnum)($foreign.toCharCode), defaultSucc(charToEnum)($foreign.toCharCode));
-  var cardinality = function (dict) {
-      return dict.cardinality;
-  }; 
   var boundedEnumChar = new BoundedEnum(function () {
       return Data_Bounded.boundedChar;
   }, function () {
       return enumChar;
   }, $foreign.toCharCode(Data_Bounded.top(Data_Bounded.boundedChar)) - $foreign.toCharCode(Data_Bounded.bottom(Data_Bounded.boundedChar)) | 0, $foreign.toCharCode, charToEnum);
-  exports["Enum"] = Enum;
-  exports["succ"] = succ;
-  exports["pred"] = pred;
-  exports["BoundedEnum"] = BoundedEnum;
-  exports["cardinality"] = cardinality;
-  exports["toEnum"] = toEnum;
   exports["fromEnum"] = fromEnum;
   exports["toEnumWithDefaults"] = toEnumWithDefaults;
-  exports["defaultSucc"] = defaultSucc;
-  exports["defaultPred"] = defaultPred;
-  exports["enumChar"] = enumChar;
   exports["boundedEnumChar"] = boundedEnumChar;
-})(PS["Data.Enum"] = PS["Data.Enum"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
+
+  exports.intDegree = function (x) {
+    return Math.min(Math.abs(x), 2147483647);
+  };
+
+  // See the Euclidean definition in
+  // https://en.m.wikipedia.org/wiki/Modulo_operation.
+  exports.intDiv = function (x) {
+    return function (y) {
+      if (y === 0) return 0;
+      return y > 0 ? Math.floor(x / y) : -Math.floor(x / -y);
+    };
+  };
+
+  exports.intMod = function (x) {
+    return function (y) {
+      if (y === 0) return 0;
+      var yy = Math.abs(y);
+      return ((x % yy) + yy) % yy;
+    };
+  };
+})(PS["Data.EuclideanRing"] = PS["Data.EuclideanRing"] || {});
+(function(exports) {
+  "use strict";
+
+  exports.intSub = function (x) {
+    return function (y) {
+      /* jshint bitwise: false */
+      return x - y | 0;
+    };
+  };
+})(PS["Data.Ring"] = PS["Data.Ring"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Ring"] = $PS["Data.Ring"] || {};
+  var exports = $PS["Data.Ring"];
+  var $foreign = $PS["Data.Ring"];
+  var Data_Semiring = $PS["Data.Semiring"];
+  var Ring = function (Semiring0, sub) {
+      this.Semiring0 = Semiring0;
+      this.sub = sub;
+  };                  
+  var ringInt = new Ring(function () {
+      return Data_Semiring.semiringInt;
+  }, $foreign.intSub);
+  exports["ringInt"] = ringInt;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.CommutativeRing"] = $PS["Data.CommutativeRing"] || {};
+  var exports = $PS["Data.CommutativeRing"];
+  var Data_Ring = $PS["Data.Ring"];
+  var CommutativeRing = function (Ring0) {
+      this.Ring0 = Ring0;
+  }; 
+  var commutativeRingInt = new CommutativeRing(function () {
+      return Data_Ring.ringInt;
+  });
+  exports["commutativeRingInt"] = commutativeRingInt;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.EuclideanRing"] = $PS["Data.EuclideanRing"] || {};
+  var exports = $PS["Data.EuclideanRing"];
+  var $foreign = $PS["Data.EuclideanRing"];
+  var Data_CommutativeRing = $PS["Data.CommutativeRing"];  
+  var EuclideanRing = function (CommutativeRing0, degree, div, mod) {
+      this.CommutativeRing0 = CommutativeRing0;
+      this.degree = degree;
+      this.div = div;
+      this.mod = mod;
+  };
+  var mod = function (dict) {
+      return dict.mod;
+  }; 
+  var euclideanRingInt = new EuclideanRing(function () {
+      return Data_CommutativeRing.commutativeRingInt;
+  }, $foreign.intDegree, $foreign.intDiv, $foreign.intMod);
+  var div = function (dict) {
+      return dict.div;
+  };
+  exports["div"] = div;
+  exports["mod"] = mod;
+  exports["euclideanRingInt"] = euclideanRingInt;
+})(PS);
+(function(exports) {
+  "use strict";
 
   exports.singleton = function (c) {
     return c;
@@ -22866,8 +22565,18 @@ var PS = {};
     };
   };
 })(PS["Data.String.CodeUnits"] = PS["Data.String.CodeUnits"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.String.CodeUnits"] = $PS["Data.String.CodeUnits"] || {};
+  var exports = $PS["Data.String.CodeUnits"];
+  var $foreign = $PS["Data.String.CodeUnits"];
+  exports["singleton"] = $foreign.singleton;
+  exports["length"] = $foreign.length;
+  exports["drop"] = $foreign.drop;
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.charAt = function (i) {
     return function (s) {
@@ -22876,78 +22585,30 @@ var PS = {};
     };
   };
 })(PS["Data.String.Unsafe"] = PS["Data.String.Unsafe"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.String.Unsafe"];
+  $PS["Data.String.Unsafe"] = $PS["Data.String.Unsafe"] || {};
+  var exports = $PS["Data.String.Unsafe"];
+  var $foreign = $PS["Data.String.Unsafe"];
   exports["charAt"] = $foreign.charAt;
-})(PS["Data.String.Unsafe"] = PS["Data.String.Unsafe"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.String.CodeUnits"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Function = PS["Data.Function"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_String_Pattern = PS["Data.String.Pattern"];
-  var Data_String_Unsafe = PS["Data.String.Unsafe"];
-  var Prelude = PS["Prelude"];
-  exports["singleton"] = $foreign.singleton;
-  exports["length"] = $foreign.length;
-  exports["drop"] = $foreign.drop;
-})(PS["Data.String.CodeUnits"] = PS["Data.String.CodeUnits"] || {});
-(function(exports) {
-    "use strict";
-
-  exports.joinWith = function (s) {
-    return function (xs) {
-      return xs.join(s);
-    };
-  };
-})(PS["Data.String.Common"] = PS["Data.String.Common"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.String.Common"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_String_Pattern = PS["Data.String.Pattern"];
-  var Prelude = PS["Prelude"];
-  exports["joinWith"] = $foreign.joinWith;
-})(PS["Data.String.Common"] = PS["Data.String.Common"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var $foreign = PS["Data.String.CodePoints"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_Enum = PS["Data.Enum"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_EuclideanRing = PS["Data.EuclideanRing"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Int = PS["Data.Int"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_String_CodeUnits = PS["Data.String.CodeUnits"];
-  var Data_String_Common = PS["Data.String.Common"];
-  var Data_String_Pattern = PS["Data.String.Pattern"];
-  var Data_String_Unsafe = PS["Data.String.Unsafe"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Prelude = PS["Prelude"];
+  $PS["Data.String.CodePoints"] = $PS["Data.String.CodePoints"] || {};
+  var exports = $PS["Data.String.CodePoints"];
+  var $foreign = $PS["Data.String.CodePoints"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Bounded = $PS["Data.Bounded"];
+  var Data_Enum = $PS["Data.Enum"];
+  var Data_EuclideanRing = $PS["Data.EuclideanRing"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_String_CodeUnits = $PS["Data.String.CodeUnits"];
+  var Data_String_Unsafe = $PS["Data.String.Unsafe"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];
   var unsurrogate = function (lead) {
       return function (trail) {
           return (((lead - 55296 | 0) * 1024 | 0) + (trail - 56320 | 0) | 0) + 65536 | 0;
@@ -23010,9 +22671,12 @@ var PS = {};
   var length = function ($52) {
       return Data_Array.length(toCodePointArray($52));
   };
-  var fromCharCode = function ($53) {
-      return Data_String_CodeUnits.singleton(Data_Enum.toEnumWithDefaults(Data_Enum.boundedEnumChar)(Data_Bounded.bottom(Data_Bounded.boundedChar))(Data_Bounded.top(Data_Bounded.boundedChar))($53));
-  };
+  var fromCharCode = (function () {
+      var $53 = Data_Enum.toEnumWithDefaults(Data_Enum.boundedEnumChar)(Data_Bounded.bottom(Data_Bounded.boundedChar))(Data_Bounded.top(Data_Bounded.boundedChar));
+      return function ($54) {
+          return Data_String_CodeUnits.singleton($53($54));
+      };
+  })();
   var singletonFallback = function (v) {
       if (v <= 65535) {
           return fromCharCode(v);
@@ -23040,42 +22704,18 @@ var PS = {};
           return Data_String_CodeUnits.drop(Data_String_CodeUnits.length(take(n)(s)))(s);
       };
   };
-  exports["singleton"] = singleton;
-  exports["toCodePointArray"] = toCodePointArray;
-  exports["uncons"] = uncons;
   exports["length"] = length;
-  exports["take"] = take;
-  exports["drop"] = drop;
-})(PS["Data.String.CodePoints"] = PS["Data.String.CodePoints"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array_NonEmpty = PS["Data.Array.NonEmpty"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_EuclideanRing = PS["Data.EuclideanRing"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Int = PS["Data.Int"];
-  var Data_Int_Bits = PS["Data.Int.Bits"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Show = PS["Data.Show"];
-  var Data_String = PS["Data.String"];
-  var Data_String_CodePoints = PS["Data.String.CodePoints"];
-  var Data_String_Regex = PS["Data.String.Regex"];
-  var $$Math = PS["Math"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
+  $PS["Color"] = $PS["Color"] || {};
+  var exports = $PS["Color"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_Int = $PS["Data.Int"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_String_CodePoints = $PS["Data.String.CodePoints"];
+  var $$Math = $PS["Math"];
   var HSLA = (function () {
       function HSLA(value0, value1, value2, value3) {
           this.value0 = value0;
@@ -23136,7 +22776,7 @@ var PS = {};
                       if (Data_Boolean.otherwise) {
                           return (r - g) / chroma$prime + 4.0;
                       };
-                      throw new Error("Failed pattern match at Color (line 148, column 5 - line 149, column 5): " + [ v.constructor.name ]);
+                      throw new Error("Failed pattern match at Color (line 148, column 5 - line 148, column 17): " + [ v.constructor.name ]);
                   };
                   var hue = 60.0 * hue$prime(chroma);
                   return new HSLA(hue, saturation, lightness, alpha);
@@ -23239,22 +22879,18 @@ var PS = {};
       var c = toRGBA(color);
       return "#" + (toHex(c.r) + (toHex(c.g) + toHex(c.b)));
   };
-  exports["rgba"] = rgba;
   exports["rgb"] = rgb;
-  exports["toRGBA"] = toRGBA;
   exports["toHexString"] = toHexString;
-})(PS["Color"] = PS["Color"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
 
   function id(x) {
     return x;
   } 
 
-  var objToString = Object.prototype.toString;
-
   function isArray(a) {
-    return objToString.call(a) === "[object Array]";
+    return Object.prototype.toString.call(a) === "[object Array]";
   }
 
   exports._caseJson = function (isNull, isBool, isNum, isStr, isArr, isObj, j) {
@@ -23262,13 +22898,229 @@ var PS = {};
     else if (typeof j === "boolean") return isBool(j);
     else if (typeof j === "number") return isNum(j);
     else if (typeof j === "string") return isStr(j);
-    else if (objToString.call(j) === "[object Array]")
+    else if (Object.prototype.toString.call(j) === "[object Array]")
       return isArr(j);
     else return isObj(j);
   };
 })(PS["Data.Argonaut.Core"] = PS["Data.Argonaut.Core"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Argonaut.Core"] = $PS["Data.Argonaut.Core"] || {};
+  var exports = $PS["Data.Argonaut.Core"];
+  var $foreign = $PS["Data.Argonaut.Core"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Maybe = $PS["Data.Maybe"];                        
+  var verbJsonType = function (def) {
+      return function (f) {
+          return function (g) {
+              return g(def)(f);
+          };
+      };
+  };
+  var toJsonType = verbJsonType(Data_Maybe.Nothing.value)(Data_Maybe.Just.create);
+  var caseJsonString = function (d) {
+      return function (f) {
+          return function (j) {
+              return $foreign["_caseJson"](Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), f, Data_Function["const"](d), Data_Function["const"](d), j);
+          };
+      };
+  };                                        
+  var caseJsonObject = function (d) {
+      return function (f) {
+          return function (j) {
+              return $foreign["_caseJson"](Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), f, j);
+          };
+      };
+  };                                        
+  var toObject = toJsonType(caseJsonObject);  
+  var caseJsonArray = function (d) {
+      return function (f) {
+          return function (j) {
+              return $foreign["_caseJson"](Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), f, Data_Function["const"](d), j);
+          };
+      };
+  };                                      
+  var toArray = toJsonType(caseJsonArray);
+  exports["caseJsonString"] = caseJsonString;
+  exports["toArray"] = toArray;
+  exports["toObject"] = toObject;
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
+
+  exports.showIntImpl = function (n) {
+    return n.toString();
+  };
+
+  exports.showNumberImpl = function (n) {
+    var str = n.toString();
+    return isNaN(str + ".0") ? str : str + ".0";
+  };
+
+  exports.showStringImpl = function (s) {
+    var l = s.length;
+    return "\"" + s.replace(
+      /[\0-\x1F\x7F"\\]/g, // eslint-disable-line no-control-regex
+      function (c, i) {
+        switch (c) {
+          case "\"":
+          case "\\":
+            return "\\" + c;
+          case "\x07": return "\\a";
+          case "\b": return "\\b";
+          case "\f": return "\\f";
+          case "\n": return "\\n";
+          case "\r": return "\\r";
+          case "\t": return "\\t";
+          case "\v": return "\\v";
+        }
+        var k = i + 1;
+        var empty = k < l && s[k] >= "0" && s[k] <= "9" ? "\\&" : "";
+        return "\\" + c.charCodeAt(0).toString(10) + empty;
+      }
+    ) + "\"";
+  };
+})(PS["Data.Show"] = PS["Data.Show"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Show"] = $PS["Data.Show"] || {};
+  var exports = $PS["Data.Show"];
+  var $foreign = $PS["Data.Show"];
+  var Show = function (show) {
+      this.show = show;
+  };
+  var showString = new Show($foreign.showStringImpl);
+  var showNumber = new Show($foreign.showNumberImpl);
+  var showInt = new Show($foreign.showIntImpl);
+  var show = function (dict) {
+      return dict.show;
+  };
+  exports["Show"] = Show;
+  exports["show"] = show;
+  exports["showInt"] = showInt;
+  exports["showNumber"] = showNumber;
+  exports["showString"] = showString;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.FoldableWithIndex"] = $PS["Data.FoldableWithIndex"] || {};
+  var exports = $PS["Data.FoldableWithIndex"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_FunctorWithIndex = $PS["Data.FunctorWithIndex"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Semigroup = $PS["Data.Semigroup"];      
+  var Tuple = (function () {
+      function Tuple(value0, value1) {
+          this.value0 = value0;
+          this.value1 = value1;
+      };
+      Tuple.create = function (value0) {
+          return function (value1) {
+              return new Tuple(value0, value1);
+          };
+      };
+      return Tuple;
+  })();
+  var FoldableWithIndex = function (Foldable0, foldMapWithIndex, foldlWithIndex, foldrWithIndex) {
+      this.Foldable0 = Foldable0;
+      this.foldMapWithIndex = foldMapWithIndex;
+      this.foldlWithIndex = foldlWithIndex;
+      this.foldrWithIndex = foldrWithIndex;
+  };
+  var foldrWithIndex = function (dict) {
+      return dict.foldrWithIndex;
+  };
+  var foldMapWithIndexDefaultR = function (dictFoldableWithIndex) {
+      return function (dictMonoid) {
+          return function (f) {
+              return foldrWithIndex(dictFoldableWithIndex)(function (i) {
+                  return function (x) {
+                      return function (acc) {
+                          return Data_Semigroup.append(dictMonoid.Semigroup0())(f(i)(x))(acc);
+                      };
+                  };
+              })(Data_Monoid.mempty(dictMonoid));
+          };
+      };
+  };
+  var foldableWithIndexArray = new FoldableWithIndex(function () {
+      return Data_Foldable.foldableArray;
+  }, function (dictMonoid) {
+      return foldMapWithIndexDefaultR(foldableWithIndexArray)(dictMonoid);
+  }, function (f) {
+      return function (z) {
+          var $49 = Data_Foldable.foldl(Data_Foldable.foldableArray)(function (y) {
+              return function (v) {
+                  return f(v.value0)(y)(v.value1);
+              };
+          })(z);
+          var $50 = Data_FunctorWithIndex.mapWithIndex(Data_FunctorWithIndex.functorWithIndexArray)(Tuple.create);
+          return function ($51) {
+              return $49($50($51));
+          };
+      };
+  }, function (f) {
+      return function (z) {
+          var $52 = Data_Foldable.foldr(Data_Foldable.foldableArray)(function (v) {
+              return function (y) {
+                  return f(v.value0)(v.value1)(y);
+              };
+          })(z);
+          var $53 = Data_FunctorWithIndex.mapWithIndex(Data_FunctorWithIndex.functorWithIndexArray)(Tuple.create);
+          return function ($54) {
+              return $52($53($54));
+          };
+      };
+  });
+  exports["FoldableWithIndex"] = FoldableWithIndex;
+  exports["foldableWithIndexArray"] = foldableWithIndexArray;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.TraversableWithIndex"] = $PS["Data.TraversableWithIndex"] || {};
+  var exports = $PS["Data.TraversableWithIndex"];
+  var Data_FoldableWithIndex = $PS["Data.FoldableWithIndex"];
+  var Data_FunctorWithIndex = $PS["Data.FunctorWithIndex"];
+  var Data_Traversable = $PS["Data.Traversable"];  
+  var TraversableWithIndex = function (FoldableWithIndex1, FunctorWithIndex0, Traversable2, traverseWithIndex) {
+      this.FoldableWithIndex1 = FoldableWithIndex1;
+      this.FunctorWithIndex0 = FunctorWithIndex0;
+      this.Traversable2 = Traversable2;
+      this.traverseWithIndex = traverseWithIndex;
+  };
+  var traverseWithIndexDefault = function (dictTraversableWithIndex) {
+      return function (dictApplicative) {
+          return function (f) {
+              var $19 = Data_Traversable.sequence(dictTraversableWithIndex.Traversable2())(dictApplicative);
+              var $20 = Data_FunctorWithIndex.mapWithIndex(dictTraversableWithIndex.FunctorWithIndex0())(f);
+              return function ($21) {
+                  return $19($20($21));
+              };
+          };
+      };
+  };
+  var traverseWithIndex = function (dict) {
+      return dict.traverseWithIndex;
+  }; 
+  var traversableWithIndexArray = new TraversableWithIndex(function () {
+      return Data_FoldableWithIndex.foldableWithIndexArray;
+  }, function () {
+      return Data_FunctorWithIndex.functorWithIndexArray;
+  }, function () {
+      return Data_Traversable.traversableArray;
+  }, function (dictApplicative) {
+      return traverseWithIndexDefault(traversableWithIndexArray)(dictApplicative);
+  });
+  exports["TraversableWithIndex"] = TraversableWithIndex;
+  exports["traverseWithIndex"] = traverseWithIndex;
+  exports["traversableWithIndexArray"] = traversableWithIndexArray;
+})(PS);
+(function(exports) {
+  "use strict";
 
   exports._copyST = function (m) {
     return function () {
@@ -23344,7 +23196,7 @@ var PS = {};
   exports.toArrayWithKey = toArrayWithKey;
 })(PS["Foreign.Object"] = PS["Foreign.Object"] || {});
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.poke = function (k) {
     return function (v) {
@@ -23357,55 +23209,45 @@ var PS = {};
     };
   };
 })(PS["Foreign.Object.ST"] = PS["Foreign.Object.ST"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Foreign.Object.ST"];
-  var Control_Monad_ST = PS["Control.Monad.ST"];
-  var Data_Maybe = PS["Data.Maybe"];
+  $PS["Foreign.Object.ST"] = $PS["Foreign.Object.ST"] || {};
+  var exports = $PS["Foreign.Object.ST"];
+  var $foreign = $PS["Foreign.Object.ST"];
   exports["poke"] = $foreign.poke;
-})(PS["Foreign.Object.ST"] = PS["Foreign.Object.ST"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Foreign.Object"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Monad_ST = PS["Control.Monad.ST"];
-  var Control_Monad_ST_Internal = PS["Control.Monad.ST.Internal"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Function_Uncurried = PS["Data.Function.Uncurried"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Foreign_Object_ST = PS["Foreign.Object.ST"];
-  var Prelude = PS["Prelude"];
-  var Type_Row_Homogeneous = PS["Type.Row.Homogeneous"];
-  var Unsafe_Coerce = PS["Unsafe.Coerce"];                 
+  $PS["Foreign.Object"] = $PS["Foreign.Object"] || {};
+  var exports = $PS["Foreign.Object"];
+  var $foreign = $PS["Foreign.Object"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_FoldableWithIndex = $PS["Data.FoldableWithIndex"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_FunctorWithIndex = $PS["Data.FunctorWithIndex"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Traversable = $PS["Data.Traversable"];
+  var Data_TraversableWithIndex = $PS["Data.TraversableWithIndex"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Foreign_Object_ST = $PS["Foreign.Object.ST"];        
   var values = $foreign.toArrayWithKey(function (v) {
       return function (v1) {
           return v1;
       };
   });
   var toUnfoldable = function (dictUnfoldable) {
-      return function ($45) {
-          return Data_Array.toUnfoldable(dictUnfoldable)($foreign.toArrayWithKey(Data_Tuple.Tuple.create)($45));
+      var $45 = Data_Array.toUnfoldable(dictUnfoldable);
+      var $46 = $foreign.toArrayWithKey(Data_Tuple.Tuple.create);
+      return function ($47) {
+          return $45($46($47));
       };
   };                                                             
   var thawST = $foreign["_copyST"];
@@ -23504,109 +23346,35 @@ var PS = {};
   }, function (dictApplicative) {
       return Data_Traversable.traverse(traversableObject)(dictApplicative)(Control_Category.identity(Control_Category.categoryFn));
   }, function (dictApplicative) {
-      return function ($47) {
-          return Data_TraversableWithIndex.traverseWithIndex(traversableWithIndexObject)(dictApplicative)(Data_Function["const"]($47));
+      var $52 = Data_TraversableWithIndex.traverseWithIndex(traversableWithIndexObject)(dictApplicative);
+      return function ($53) {
+          return $52(Data_Function["const"]($53));
       };
   });
-  exports["insert"] = insert;
   exports["toUnfoldable"] = toUnfoldable;
-  exports["mapWithKey"] = mapWithKey;
-  exports["values"] = values;
-  exports["fold"] = fold;
-  exports["foldMap"] = foldMap;
-  exports["thawST"] = thawST;
-  exports["functorObject"] = functorObject;
-  exports["functorWithIndexObject"] = functorWithIndexObject;
-  exports["foldableObject"] = foldableObject;
-  exports["foldableWithIndexObject"] = foldableWithIndexObject;
   exports["traversableObject"] = traversableObject;
-  exports["traversableWithIndexObject"] = traversableWithIndexObject;
-})(PS["Foreign.Object"] = PS["Foreign.Object"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Data.Argonaut.Core"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Function_Uncurried = PS["Data.Function.Uncurried"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Foreign_Object = PS["Foreign.Object"];
-  var Prelude = PS["Prelude"];                 
-  var verbJsonType = function (def) {
-      return function (f) {
-          return function (g) {
-              return g(def)(f);
-          };
-      };
-  };
-  var toJsonType = verbJsonType(Data_Maybe.Nothing.value)(Data_Maybe.Just.create);
-  var caseJsonString = function (d) {
-      return function (f) {
-          return function (j) {
-              return $foreign["_caseJson"](Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), f, Data_Function["const"](d), Data_Function["const"](d), j);
-          };
-      };
-  };                                        
-  var caseJsonObject = function (d) {
-      return function (f) {
-          return function (j) {
-              return $foreign["_caseJson"](Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), f, j);
-          };
-      };
-  };                                        
-  var toObject = toJsonType(caseJsonObject);  
-  var caseJsonArray = function (d) {
-      return function (f) {
-          return function (j) {
-              return $foreign["_caseJson"](Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), Data_Function["const"](d), f, Data_Function["const"](d), j);
-          };
-      };
-  };                                      
-  var toArray = toJsonType(caseJsonArray);
-  exports["caseJsonString"] = caseJsonString;
-  exports["caseJsonArray"] = caseJsonArray;
-  exports["caseJsonObject"] = caseJsonObject;
-  exports["toArray"] = toArray;
-  exports["toObject"] = toObject;
-})(PS["Data.Argonaut.Core"] = PS["Data.Argonaut.Core"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Argonaut_Core = PS["Data.Argonaut.Core"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Int = PS["Data.Int"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_NonEmpty = PS["Data.NonEmpty"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Show = PS["Data.Show"];
-  var Data_String = PS["Data.String"];
-  var Data_String_CodePoints = PS["Data.String.CodePoints"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unit = PS["Data.Unit"];
-  var Foreign_Object = PS["Foreign.Object"];
-  var Prelude = PS["Prelude"];
-  var Record = PS["Record"];
-  var Type_Data_RowList = PS["Type.Data.RowList"];                 
+  $PS["Data.Argonaut.Decode.Class"] = $PS["Data.Argonaut.Decode.Class"] || {};
+  var exports = $PS["Data.Argonaut.Decode.Class"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Argonaut_Core = $PS["Data.Argonaut.Core"];
+  var Data_Bifunctor = $PS["Data.Bifunctor"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_List = $PS["Data.List"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Show = $PS["Data.Show"];
+  var Data_Traversable = $PS["Data.Traversable"];
+  var Data_TraversableWithIndex = $PS["Data.TraversableWithIndex"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Foreign_Object = $PS["Foreign.Object"];
   var DecodeJson = function (decodeJson) {
       this.decodeJson = decodeJson;
   };
@@ -23615,18 +23383,28 @@ var PS = {};
   var decodeJson = function (dict) {
       return dict.decodeJson;
   };
-  var decodeJObject = function ($63) {
-      return Data_Maybe.maybe(new Data_Either.Left("Value is not an Object"))(Data_Either.Right.create)(Data_Argonaut_Core.toObject($63));
-  };
-  var decodeJArray = function ($64) {
-      return Data_Maybe.maybe(new Data_Either.Left("Value is not an Array"))(Data_Either.Right.create)(Data_Argonaut_Core.toArray($64));
-  };
+  var decodeJObject = (function () {
+      var $64 = Data_Maybe.maybe(new Data_Either.Left("Value is not an Object"))(Data_Either.Right.create);
+      return function ($65) {
+          return $64(Data_Argonaut_Core.toObject($65));
+      };
+  })();
+  var decodeJArray = (function () {
+      var $66 = Data_Maybe.maybe(new Data_Either.Left("Value is not an Array"))(Data_Either.Right.create);
+      return function ($67) {
+          return $66(Data_Argonaut_Core.toArray($67));
+      };
+  })();
   var decodeList = function (dictDecodeJson) {
-      return new DecodeJson(function ($69) {
-          return Data_Bifunctor.lmap(Data_Either.bifunctorEither)(function (v) {
+      return new DecodeJson((function () {
+          var $82 = Data_Bifunctor.lmap(Data_Either.bifunctorEither)(function (v) {
               return "Couldn't decode List: " + v;
-          })(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_Traversable.traverse(Data_List_Types.traversableList)(Data_Either.applicativeEither)(decodeJson(dictDecodeJson)))(Data_Functor.map(Data_Functor.functorFn)(Data_Functor.map(Data_Either.functorEither)(Data_List.fromFoldable(Data_Foldable.foldableArray)))(decodeJArray))($69));
-      });
+          });
+          var $83 = Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_Traversable.traverse(Data_List_Types.traversableList)(Data_Either.applicativeEither)(decodeJson(dictDecodeJson)))(Data_Functor.map(Data_Functor.functorFn)(Data_Functor.map(Data_Either.functorEither)(Data_List.fromFoldable(Data_Foldable.foldableArray)))(decodeJArray));
+          return function ($84) {
+              return $82($83($84));
+          };
+      })());
   };
   var decodeJsonTuple = function (dictDecodeJson) {
       return function (dictDecodeJson1) {
@@ -23643,17 +23421,25 @@ var PS = {};
   };
   var decodeSet = function (dictOrd) {
       return function (dictDecodeJson) {
-          return new DecodeJson(function ($71) {
-              return Data_Functor.map(Data_Either.functorEither)(Data_Set.fromFoldable(Data_List_Types.foldableList)(dictOrd))(decodeJson(decodeList(dictDecodeJson))($71));
-          });
+          return new DecodeJson((function () {
+              var $88 = Data_Functor.map(Data_Either.functorEither)(Data_Set.fromFoldable(Data_List_Types.foldableList)(dictOrd));
+              var $89 = decodeJson(decodeList(dictDecodeJson));
+              return function ($90) {
+                  return $88($89($90));
+              };
+          })());
       };
   };
   var decodeForeignObject = function (dictDecodeJson) {
-      return new DecodeJson(function ($72) {
-          return Data_Bifunctor.lmap(Data_Either.bifunctorEither)(function (v) {
+      return new DecodeJson((function () {
+          var $91 = Data_Bifunctor.lmap(Data_Either.bifunctorEither)(function (v) {
               return "Couldn't decode ForeignObject: " + v;
-          })(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_Traversable.traverse(Foreign_Object.traversableObject)(Data_Either.applicativeEither)(decodeJson(dictDecodeJson)))(decodeJObject)($72));
-      });
+          });
+          var $92 = Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_Traversable.traverse(Foreign_Object.traversableObject)(Data_Either.applicativeEither)(decodeJson(dictDecodeJson)))(decodeJObject);
+          return function ($93) {
+              return $91($92($93));
+          };
+      })());
   };
   var decodeArray = function (dictDecodeJson) {
       return new DecodeJson((function () {
@@ -23663,32 +23449,33 @@ var PS = {};
               };
           };
           var f = function (i) {
-              return function ($73) {
-                  return Data_Bifunctor.lmap(Data_Either.bifunctorEither)(msg(i))(decodeJson(dictDecodeJson)($73));
+              var $94 = Data_Bifunctor.lmap(Data_Either.bifunctorEither)(msg(i));
+              var $95 = decodeJson(dictDecodeJson);
+              return function ($96) {
+                  return $94($95($96));
               };
           };
-          return function ($74) {
-              return Data_Bifunctor.lmap(Data_Either.bifunctorEither)(function (v) {
-                  return "Couldn't decode Array (" + v;
-              })(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_TraversableWithIndex.traverseWithIndex(Data_TraversableWithIndex.traversableWithIndexArray)(Data_Either.applicativeEither)(f))(decodeJArray)($74));
+          var $97 = Data_Bifunctor.lmap(Data_Either.bifunctorEither)(function (v) {
+              return "Couldn't decode Array (" + v;
+          });
+          var $98 = Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_TraversableWithIndex.traverseWithIndex(Data_TraversableWithIndex.traversableWithIndexArray)(Data_Either.applicativeEither)(f))(decodeJArray);
+          return function ($99) {
+              return $97($98($99));
           };
       })());
   };
   exports["decodeJson"] = decodeJson;
-  exports["DecodeJson"] = DecodeJson;
-  exports["decodeJArray"] = decodeJArray;
-  exports["decodeJObject"] = decodeJObject;
   exports["decodeJsonTuple"] = decodeJsonTuple;
   exports["decodeJsonString"] = decodeJsonString;
-  exports["decodeJsonJson"] = decodeJsonJson;
   exports["decodeForeignObject"] = decodeForeignObject;
   exports["decodeArray"] = decodeArray;
-  exports["decodeList"] = decodeList;
   exports["decodeSet"] = decodeSet;
-})(PS["Data.Argonaut.Decode.Class"] = PS["Data.Argonaut.Decode.Class"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
+  $PS["Data.DotLang.Class"] = $PS["Data.DotLang.Class"] || {};
+  var exports = $PS["Data.DotLang.Class"];
   var DotLang = function (toText) {
       this.toText = toText;
   };
@@ -23697,16 +23484,13 @@ var PS = {};
   };
   exports["toText"] = toText;
   exports["DotLang"] = DotLang;
-})(PS["Data.DotLang.Class"] = PS["Data.DotLang.Class"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Data_DotLang_Class = PS["Data.DotLang.Class"];
-  var Data_Generic_Rep = PS["Data.Generic.Rep"];
-  var Data_Generic_Rep_Show = PS["Data.Generic.Rep.Show"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.DotLang.Attr"] = $PS["Data.DotLang.Attr"] || {};
+  var exports = $PS["Data.DotLang.Attr"];
+  var Data_DotLang_Class = $PS["Data.DotLang.Class"];  
   var Filled = (function () {
       function Filled() {
 
@@ -23738,25 +23522,19 @@ var PS = {};
       if (v instanceof Invis) {
           return "invis";
       };
-      throw new Error("Failed pattern match at Data.DotLang.Attr (line 19, column 1 - line 19, column 47): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.DotLang.Attr (line 19, column 1 - line 22, column 25): " + [ v.constructor.name ]);
   });
-  exports["Filled"] = Filled;
-  exports["Dotted"] = Dotted;
-  exports["Invis"] = Invis;
   exports["fillStyleDotLang"] = fillStyleDotLang;
-})(PS["Data.DotLang.Attr"] = PS["Data.DotLang.Attr"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Color_1 = PS["Color"];
-  var Data_DotLang_Attr = PS["Data.DotLang.Attr"];
-  var Data_DotLang_Class = PS["Data.DotLang.Class"];
-  var Data_Generic_Rep = PS["Data.Generic.Rep"];
-  var Data_Generic_Rep_Show = PS["Data.Generic.Rep.Show"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.DotLang.Attr.Edge"] = $PS["Data.DotLang.Attr.Edge"] || {};
+  var exports = $PS["Data.DotLang.Attr.Edge"];
+  var Color_1 = $PS["Color"];
+  var Data_DotLang_Attr = $PS["Data.DotLang.Attr"];
+  var Data_DotLang_Class = $PS["Data.DotLang.Class"];
+  var Data_Show = $PS["Data.Show"];                    
   var Color = (function () {
       function Color(value0) {
           this.value0 = value0;
@@ -23842,29 +23620,20 @@ var PS = {};
       if (v instanceof PenWidth) {
           return "penwidth=" + Data_Show.show(Data_Show.showNumber)(v.value0);
       };
-      throw new Error("Failed pattern match at Data.DotLang.Attr.Edge (line 25, column 1 - line 25, column 37): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.DotLang.Attr.Edge (line 25, column 1 - line 32, column 45): " + [ v.constructor.name ]);
   });
   exports["Color"] = Color;
-  exports["FontColor"] = FontColor;
-  exports["FontSize"] = FontSize;
-  exports["Label"] = Label;
-  exports["Style"] = Style;
-  exports["FillColor"] = FillColor;
-  exports["PenWidth"] = PenWidth;
   exports["attrDotLang"] = attrDotLang;
-})(PS["Data.DotLang.Attr.Edge"] = PS["Data.DotLang.Attr.Edge"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Color_1 = PS["Color"];
-  var Data_DotLang_Attr = PS["Data.DotLang.Attr"];
-  var Data_DotLang_Class = PS["Data.DotLang.Class"];
-  var Data_Generic_Rep = PS["Data.Generic.Rep"];
-  var Data_Generic_Rep_Show = PS["Data.Generic.Rep.Show"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.DotLang.Attr.Node"] = $PS["Data.DotLang.Attr.Node"] || {};
+  var exports = $PS["Data.DotLang.Attr.Node"];
+  var Color_1 = $PS["Color"];
+  var Data_DotLang_Attr = $PS["Data.DotLang.Attr"];
+  var Data_DotLang_Class = $PS["Data.DotLang.Class"];
+  var Data_Show = $PS["Data.Show"];                    
   var Box = (function () {
       function Box() {
 
@@ -24546,7 +24315,7 @@ var PS = {};
       if (v instanceof Lpromoter) {
           return "Lpromoter";
       };
-      throw new Error("Failed pattern match at Data.DotLang.Attr.Node (line 58, column 1 - line 58, column 43): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.DotLang.Attr.Node (line 58, column 1 - line 117, column 33): " + [ v.constructor.name ]);
   });
   var attrDotLang = new Data_DotLang_Class.DotLang(function (v) {
       if (v instanceof Margin) {
@@ -24579,96 +24348,41 @@ var PS = {};
       if (v instanceof PenWidth) {
           return "penwidth=" + Data_Show.show(Data_Show.showNumber)(v.value0);
       };
-      throw new Error("Failed pattern match at Data.DotLang.Attr.Node (line 28, column 1 - line 28, column 37): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.DotLang.Attr.Node (line 28, column 1 - line 38, column 45): " + [ v.constructor.name ]);
   });
-  exports["Color"] = Color;
-  exports["Margin"] = Margin;
-  exports["FontColor"] = FontColor;
-  exports["FontSize"] = FontSize;
-  exports["Width"] = Width;
   exports["Label"] = Label;
   exports["Shape"] = Shape;
-  exports["Style"] = Style;
-  exports["FillColor"] = FillColor;
-  exports["PenWidth"] = PenWidth;
-  exports["Box"] = Box;
-  exports["Polygon"] = Polygon;
-  exports["Ellipse"] = Ellipse;
-  exports["Oval"] = Oval;
-  exports["Circle"] = Circle;
-  exports["Point"] = Point;
-  exports["Egg"] = Egg;
-  exports["Triangle"] = Triangle;
-  exports["Plaintext"] = Plaintext;
-  exports["Plain"] = Plain;
-  exports["Diamond"] = Diamond;
-  exports["Trapezium"] = Trapezium;
-  exports["Parallelogram"] = Parallelogram;
-  exports["House"] = House;
-  exports["Pentagon"] = Pentagon;
-  exports["Hexagon"] = Hexagon;
-  exports["Septagon"] = Septagon;
-  exports["Octagon"] = Octagon;
-  exports["Doublecircle"] = Doublecircle;
-  exports["Doubleoctagon"] = Doubleoctagon;
-  exports["Tripleoctagon"] = Tripleoctagon;
-  exports["Invtriangle"] = Invtriangle;
-  exports["Invtrapezium"] = Invtrapezium;
-  exports["Invhouse"] = Invhouse;
-  exports["Mdiamond"] = Mdiamond;
-  exports["Msquare"] = Msquare;
-  exports["Mcircle"] = Mcircle;
-  exports["Rect"] = Rect;
-  exports["Rectangle"] = Rectangle;
-  exports["Square"] = Square;
-  exports["Star"] = Star;
   exports["None"] = None;
-  exports["Underline"] = Underline;
-  exports["Cylinder"] = Cylinder;
-  exports["Note"] = Note;
-  exports["Tab"] = Tab;
-  exports["Folder"] = Folder;
-  exports["Box3d"] = Box3d;
-  exports["Component"] = Component;
-  exports["Promoter"] = Promoter;
-  exports["Cds"] = Cds;
-  exports["Terminator"] = Terminator;
-  exports["Utr"] = Utr;
-  exports["Primersite"] = Primersite;
-  exports["Restrictionsite"] = Restrictionsite;
-  exports["Fivepoverhang"] = Fivepoverhang;
-  exports["Threepoverhang"] = Threepoverhang;
-  exports["Noverhang"] = Noverhang;
-  exports["Assembly"] = Assembly;
-  exports["Signature"] = Signature;
-  exports["Insulator"] = Insulator;
-  exports["Ribosite"] = Ribosite;
-  exports["Rnastab"] = Rnastab;
-  exports["Proteasesite"] = Proteasesite;
-  exports["Proteinstab"] = Proteinstab;
-  exports["Rpromoter"] = Rpromoter;
-  exports["Rarrow"] = Rarrow;
-  exports["Larrow"] = Larrow;
-  exports["Lpromoter"] = Lpromoter;
   exports["attrDotLang"] = attrDotLang;
-  exports["dotLangShape"] = dotLangShape;
-})(PS["Data.DotLang.Attr.Node"] = PS["Data.DotLang.Attr.Node"] || {});
+})(PS);
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var Data_DotLang_Attr_Edge = PS["Data.DotLang.Attr.Edge"];
-  var Data_DotLang_Attr_Node = PS["Data.DotLang.Attr.Node"];
-  var Data_DotLang_Class = PS["Data.DotLang.Class"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Generic_Rep = PS["Data.Generic.Rep"];
-  var Data_Generic_Rep_Show = PS["Data.Generic.Rep.Show"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_String = PS["Data.String"];
-  var Data_String_Common = PS["Data.String.Common"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Prelude = PS["Prelude"];                 
+
+  exports.joinWith = function (s) {
+    return function (xs) {
+      return xs.join(s);
+    };
+  };
+})(PS["Data.String.Common"] = PS["Data.String.Common"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.String.Common"] = $PS["Data.String.Common"] || {};
+  var exports = $PS["Data.String.Common"];
+  var $foreign = $PS["Data.String.Common"];
+  exports["joinWith"] = $foreign.joinWith;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.DotLang"] = $PS["Data.DotLang"] || {};
+  var exports = $PS["Data.DotLang"];
+  var Data_DotLang_Attr_Edge = $PS["Data.DotLang.Attr.Edge"];
+  var Data_DotLang_Attr_Node = $PS["Data.DotLang.Attr.Node"];
+  var Data_DotLang_Class = $PS["Data.DotLang.Class"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_String_Common = $PS["Data.String.Common"];  
   var Node = (function () {
       function Node(value0, value1) {
           this.value0 = value0;
@@ -24783,7 +24497,7 @@ var PS = {};
       if (v instanceof NoDir) {
           return "--";
       };
-      throw new Error("Failed pattern match at Data.DotLang (line 54, column 1 - line 54, column 45): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.DotLang (line 54, column 1 - line 57, column 22): " + [ v.constructor.name ]);
   });
   var dotLangEdge = new Data_DotLang_Class.DotLang(function (v) {
       return v.value1 + (" " + (Data_DotLang_Class.toText(dotLangEdgeType)(v.value0) + (" " + (v.value2 + (" [" + (Data_String_Common.joinWith(", ")(Data_Functor.map(Data_Functor.functorArray)(Data_DotLang_Class.toText(Data_DotLang_Attr_Edge.attrDotLang))(v.value3)) + "]"))))));
@@ -24798,7 +24512,7 @@ var PS = {};
       if (v instanceof Subgraph) {
           return "subgraph { " + (Data_String_Common.joinWith("")(Data_Functor.map(Data_Functor.functorArray)(Data_DotLang_Class.toText(definitionDotlang))(v.value0)) + "}");
       };
-      throw new Error("Failed pattern match at Data.DotLang (line 139, column 1 - line 139, column 49): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.DotLang (line 139, column 1 - line 142, column 83): " + [ v.constructor.name ]);
   });
   var graphDotLang = new Data_DotLang_Class.DotLang(function (v) {
       if (v instanceof Graph) {
@@ -24807,50 +24521,25 @@ var PS = {};
       if (v instanceof DiGraph) {
           return "digraph {" + (Data_String_Common.joinWith("")(Data_Functor.map(Data_Functor.functorArray)(Data_DotLang_Class.toText(definitionDotlang))(v.value0)) + "}");
       };
-      throw new Error("Failed pattern match at Data.DotLang (line 150, column 1 - line 150, column 39): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Data.DotLang (line 150, column 1 - line 152, column 80): " + [ v.constructor.name ]);
   });
   exports["Node"] = Node;
   exports["Forward"] = Forward;
-  exports["Backward"] = Backward;
-  exports["NoDir"] = NoDir;
   exports["Edge"] = Edge;
-  exports["NodeDef"] = NodeDef;
   exports["EdgeDef"] = EdgeDef;
-  exports["Subgraph"] = Subgraph;
   exports["Graph"] = Graph;
   exports["DiGraph"] = DiGraph;
   exports["graphFromElements"] = graphFromElements;
-  exports["nodeDotLang"] = nodeDotLang;
-  exports["dotLangEdgeType"] = dotLangEdgeType;
-  exports["dotLangEdge"] = dotLangEdge;
-  exports["definitionDotlang"] = definitionDotlang;
   exports["graphDotLang"] = graphDotLang;
-})(PS["Data.DotLang"] = PS["Data.DotLang"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Control_Alternative = PS["Control.Alternative"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Plus = PS["Control.Plus"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_FoldableWithIndex = PS["Data.FoldableWithIndex"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_App = PS["Data.Functor.App"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_TraversableWithIndex = PS["Data.TraversableWithIndex"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Functor.Compose"] = $PS["Data.Functor.Compose"] || {};
+  var exports = $PS["Data.Functor.Compose"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Newtype = $PS["Data.Newtype"];            
   var Compose = function (x) {
       return x;
   };
@@ -24881,247 +24570,16 @@ var PS = {};
   exports["newtypeCompose"] = newtypeCompose;
   exports["functorCompose"] = functorCompose;
   exports["applyCompose"] = applyCompose;
-})(PS["Data.Functor.Compose"] = PS["Data.Functor.Compose"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_NonEmpty = PS["Data.NonEmpty"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ring = PS["Data.Ring"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semigroup_Foldable = PS["Data.Semigroup.Foldable"];
-  var Data_Semigroup_Traversable = PS["Data.Semigroup.Traversable"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var wrappedOperation = function (name) {
-      return function (f) {
-          return function (v) {
-              var v1 = f(new Data_List_Types.Cons(v.value0, v.value1));
-              if (v1 instanceof Data_List_Types.Cons) {
-                  return new Data_NonEmpty.NonEmpty(v1.value0, v1.value1);
-              };
-              if (v1 instanceof Data_List_Types.Nil) {
-                  return Partial_Unsafe.unsafeCrashWith("Impossible: empty list in NonEmptyList " + name);
-              };
-              throw new Error("Failed pattern match at Data.List.NonEmpty (line 91, column 3 - line 93, column 81): " + [ v1.constructor.name ]);
-          };
-      };
-  };
-  var reverse = wrappedOperation("reverse")(Data_List.reverse);                                       
-  var lift = function (f) {
-      return function (v) {
-          return f(new Data_List_Types.Cons(v.value0, v.value1));
-      };
-  };
-  var partition = function ($169) {
-      return lift(Data_List.partition($169));
-  };
-  exports["reverse"] = reverse;
-  exports["partition"] = partition;
-})(PS["Data.List.NonEmpty"] = PS["Data.List.NonEmpty"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_CatList = PS["Data.CatList"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List = PS["Data.List"];
-  var Data_List_NonEmpty = PS["Data.List.NonEmpty"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Prelude = PS["Prelude"];
-  var Graph = function (x) {
-      return x;
-  };
-  var toMap = function (v) {
-      return v;
-  };
-  var parents = function (dictOrd) {
-      return function (k) {
-          return function (v) {
-              return Data_Map.keys(Data_Map_Internal.filter(dictOrd)(function ($142) {
-                  return Data_Foldable.elem(Data_Set.foldableSet)(dictOrd.Eq0())(k)(Data_Tuple.snd($142));
-              })(v));
-          };
-      };
-  };
-  var lookup = function (dictOrd) {
-      return function (k) {
-          return function (v) {
-              return Data_Functor.map(Data_Maybe.functorMaybe)(Data_Tuple.fst)(Data_Map_Internal.lookup(dictOrd)(k)(v));
-          };
-      };
-  };
-  var insertVertex = function (dictOrd) {
-      return function (k) {
-          return function (v) {
-              return function (v1) {
-                  return Graph(Data_Map_Internal.insertWith(dictOrd)(function (v3) {
-                      return function (v4) {
-                          return new Data_Tuple.Tuple(v, v3.value1);
-                      };
-                  })(k)(new Data_Tuple.Tuple(v, Data_Monoid.mempty(Data_Set.monoidSet(dictOrd))))(v1));
-              };
-          };
-      };
-  };
-  var insertEdge = function (dictOrd) {
-      return function (from) {
-          return function (to) {
-              return function (v) {
-                  return Graph(Data_Map_Internal.alter(dictOrd)(Data_Functor.map(Data_Maybe.functorMaybe)(Data_Bifunctor.rmap(Data_Tuple.bifunctorTuple)(Data_Set.insert(dictOrd)(to))))(from)(v));
-              };
-          };
-      };
-  };
-  var insertEdgeWithVertices = function (dictOrd) {
-      return function (v) {
-          return function (v1) {
-              return function ($143) {
-                  return insertEdge(dictOrd)(v.value0)(v1.value0)(Data_Tuple.uncurry(insertVertex(dictOrd))(v)(Data_Tuple.uncurry(insertVertex(dictOrd))(v1)($143)));
-              };
-          };
-      };
-  }; 
-  var fromMap = Graph;                
-  var children = function (dictOrd) {
-      return function (k) {
-          return function (v) {
-              return Data_Maybe.maybe(Data_Monoid.mempty(Data_Set.monoidSet(dictOrd)))(function ($144) {
-                  return Data_Set.fromFoldable(Data_Set.foldableSet)(dictOrd)(Data_Tuple.snd($144));
-              })(Data_Map_Internal.lookup(dictOrd)(k)(v));
-          };
-      };
-  };
-  var descendants = function (dictOrd) {
-      return function (k$prime) {
-          return function (g) {
-              var go = function (k) {
-                  var dd = children(dictOrd)(k)(g);
-                  return Data_Set.unions(Data_Set.foldableSet)(dictOrd)(Data_Set.insert(Data_Set.ordSet(dictOrd))(dd)(Data_Set.map(Data_Set.ordSet(dictOrd))(go)(dd)));
-              };
-              return go(k$prime);
-          };
-      };
-  };
-  var isInCycle = function (dictOrd) {
-      return function (k$prime) {
-          return function (g) {
-              var go = function (seen) {
-                  return function (k) {
-                      var dd = children(dictOrd)(k)(g);
-                      var v = new Data_Tuple.Tuple(Data_Eq.eq(Data_Set.eqSet(dictOrd.Eq0()))(dd)(Data_Monoid.mempty(Data_Set.monoidSet(dictOrd))), Data_Set.member(dictOrd)(k)(seen));
-                      if (v.value0) {
-                          return false;
-                      };
-                      if (v.value1) {
-                          return Data_Eq.eq(dictOrd.Eq0())(k)(k$prime);
-                      };
-                      if (!v.value0 && !v.value1) {
-                          return Data_Foldable.any(Data_Set.foldableSet)(Data_HeytingAlgebra.heytingAlgebraBoolean)(go(Data_Set.insert(dictOrd)(k)(seen)))(dd);
-                      };
-                      throw new Error("Failed pattern match at Data.Graph (line 192, column 7 - line 195, column 70): " + [ v.constructor.name ]);
-                  };
-              };
-              return go(Data_Monoid.mempty(Data_Set.monoidSet(dictOrd)))(k$prime);
-          };
-      };
-  };
-  var isCyclic = function (dictOrd) {
-      return function (g) {
-          var keys = function (v) {
-              return Data_Map.keys(v);
-          };
-          return Data_Foldable.any(Data_Set.foldableSet)(Data_HeytingAlgebra.heytingAlgebraBoolean)(Data_Function.flip(isInCycle(dictOrd))(g))(keys(g));
-      };
-  };
-  var alterEdges = function (dictOrd) {
-      return function (f) {
-          return function (k) {
-              return function (v) {
-                  var applyF = function (v1) {
-                      return Data_Functor.map(Data_Maybe.functorMaybe)(Data_Tuple.Tuple.create(v1.value0))(f(new Data_Maybe.Just(v1.value1)));
-                  };
-                  return Graph(Data_Map_Internal.alter(dictOrd)(function (v1) {
-                      return Control_Bind.bindFlipped(Data_Maybe.bindMaybe)(applyF)(v1);
-                  })(k)(v));
-              };
-          };
-      };
-  };
-  var adjacent = function (dictOrd) {
-      return function (k) {
-          return function (g) {
-              return Data_Set.union(dictOrd)(children(dictOrd)(k)(g))(parents(dictOrd)(k)(g));
-          };
-      };
-  };
-  exports["fromMap"] = fromMap;
-  exports["toMap"] = toMap;
-  exports["insertEdge"] = insertEdge;
-  exports["insertVertex"] = insertVertex;
-  exports["insertEdgeWithVertices"] = insertEdgeWithVertices;
-  exports["lookup"] = lookup;
-  exports["children"] = children;
-  exports["descendants"] = descendants;
-  exports["parents"] = parents;
-  exports["isInCycle"] = isInCycle;
-  exports["isCyclic"] = isCyclic;
-  exports["alterEdges"] = alterEdges;
-  exports["adjacent"] = adjacent;
-})(PS["Data.Graph"] = PS["Data.Graph"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
-  "use strict";
-  var Data_Bounded = PS["Data.Bounded"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Invariant = PS["Data.Functor.Invariant"];
-  var Data_Generic_Rep = PS["Data.Generic.Rep"];
-  var Data_Generic_Rep_Show = PS["Data.Generic.Rep.Show"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Symbol = PS["Data.Symbol"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.TwoSet"] = $PS["Data.TwoSet"] || {};
+  var exports = $PS["Data.TwoSet"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Tuple = $PS["Data.Tuple"];                
   var MkTwoSet = (function () {
       function MkTwoSet(value0, value1) {
           this.value0 = value0;
@@ -25162,118 +24620,169 @@ var PS = {};
   exports["toTuple"] = toTuple;
   exports["eqTwoSet"] = eqTwoSet;
   exports["ordTwoSet"] = ordTwoSet;
-})(PS["Data.TwoSet"] = PS["Data.TwoSet"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_List = PS["Data.List"];
-  var Data_List_NonEmpty = PS["Data.List.NonEmpty"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_NonEmpty = PS["Data.NonEmpty"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_TwoSet = PS["Data.TwoSet"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Graph.Causal.Utility"] = $PS["Data.Graph.Causal.Utility"] || {};
+  var exports = $PS["Data.Graph.Causal.Utility"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_TwoSet = $PS["Data.TwoSet"];
+  var history = function (f) {
+      return function (a) {
+          return function (acc) {
+              var v = f(a)(acc);
+              if (v instanceof Data_Maybe.Nothing) {
+                  return new Data_Either.Left(new Data_Maybe.Just(a));
+              };
+              if (v instanceof Data_Maybe.Just) {
+                  return new Data_Either.Right(v.value0);
+              };
+              throw new Error("Failed pattern match at Data.Graph.Causal.Utility (line 24, column 3 - line 26, column 22): " + [ v.constructor.name ]);
+          };
+      };
+  };
   var distinctTwoSets = function (dictOrd) {
       return function (as) {
-          return Data_Set.filter(Data_TwoSet.ordTwoSet(dictOrd))(function ($17) {
-              return Data_Tuple.uncurry(Data_Eq.notEq(dictOrd.Eq0()))(Data_TwoSet.toTuple($17));
-          })(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Data_TwoSet.ordTwoSet(dictOrd))(Control_Apply.apply(Control_Apply.applyArray)(Data_Functor.map(Data_Functor.functorArray)(Data_TwoSet.MkTwoSet.create)(Data_Array.fromFoldable(Data_Set.foldableSet)(as)))(Data_Array.fromFoldable(Data_Set.foldableSet)(as))));
+          return Data_Set.filter(Data_TwoSet.ordTwoSet(dictOrd))((function () {
+              var $26 = Data_Tuple.uncurry(Data_Eq.notEq(dictOrd.Eq0()));
+              return function ($27) {
+                  return $26(Data_TwoSet.toTuple($27));
+              };
+          })())(Data_Set.fromFoldable(Data_Foldable.foldableArray)(Data_TwoSet.ordTwoSet(dictOrd))(Control_Apply.apply(Control_Apply.applyArray)(Data_Functor.map(Data_Functor.functorArray)(Data_TwoSet.MkTwoSet.create)(Data_Array.fromFoldable(Data_Set.foldableSet)(as)))(Data_Array.fromFoldable(Data_Set.foldableSet)(as))));
       };
   };
-  var before = function ($copy_dictEq) {
-      return function ($copy_a) {
-          return function ($copy_v) {
-              var $tco_var_dictEq = $copy_dictEq;
-              var $tco_var_a = $copy_a;
-              var $tco_done = false;
-              var $tco_result;
-              function $tco_loop(dictEq, a, v) {
-                  if (v.value1 instanceof Data_List_Types.Cons) {
-                      if (Data_Eq.eq(dictEq)(v.value1.value0)(a)) {
-                          $tco_done = true;
-                          return new Data_Maybe.Just(v.value0);
-                      };
-                      if (Data_Boolean.otherwise) {
-                          $tco_var_dictEq = dictEq;
-                          $tco_var_a = a;
-                          $copy_v = Data_List_Types.NonEmptyList(new Data_NonEmpty.NonEmpty(v.value1.value0, v.value1.value1));
-                          return;
-                      };
-                  };
-                  $tco_done = true;
-                  return Data_Maybe.Nothing.value;
+  var $$break = function (v) {
+      return function (v1) {
+          return function (v2) {
+              if (v2 instanceof Data_Either.Right) {
+                  return new Data_Either.Right(v2.value0);
               };
-              while (!$tco_done) {
-                  $tco_result = $tco_loop($tco_var_dictEq, $tco_var_a, $copy_v);
+              if (v2 instanceof Data_Either.Left) {
+                  return v(v1)(v2.value0);
               };
-              return $tco_result;
+              throw new Error("Failed pattern match at Data.Graph.Causal.Utility (line 16, column 1 - line 16, column 79): " + [ v.constructor.name, v1.constructor.name, v2.constructor.name ]);
           };
       };
   };
-  var after = function ($copy_dictEq) {
-      return function ($copy_a) {
-          return function ($copy_v) {
-              var $tco_var_dictEq = $copy_dictEq;
-              var $tco_var_a = $copy_a;
-              var $tco_done = false;
-              var $tco_result;
-              function $tco_loop(dictEq, a, v) {
-                  if (v.value1 instanceof Data_List_Types.Cons) {
-                      if (Data_Eq.eq(dictEq)(v.value0)(a)) {
-                          $tco_done = true;
-                          return new Data_Maybe.Just(v.value1.value0);
+  var before = function (dictEq) {
+      return function (dictFoldable) {
+          return function (a) {
+              var f = function (curr) {
+                  return function (prev) {
+                      if (Data_Eq.eq(dictEq)(curr)(a)) {
+                          return prev;
                       };
                       if (Data_Boolean.otherwise) {
-                          $tco_var_dictEq = dictEq;
-                          $tco_var_a = a;
-                          $copy_v = Data_List_Types.NonEmptyList(new Data_NonEmpty.NonEmpty(v.value1.value0, v.value1.value1));
-                          return;
+                          return Data_Maybe.Nothing.value;
                       };
+                      throw new Error("Failed pattern match at Data.Graph.Causal.Utility (line 40, column 5 - line 42, column 28): " + [ curr.constructor.name, prev.constructor.name ]);
                   };
-                  $tco_done = true;
-                  return Data_Maybe.Nothing.value;
               };
-              while (!$tco_done) {
-                  $tco_result = $tco_loop($tco_var_dictEq, $tco_var_a, $copy_v);
+              var $28 = Data_Foldable.foldl(dictFoldable)(Data_Function.flip($$break(history(f))))(new Data_Either.Left(Data_Maybe.Nothing.value));
+              return function ($29) {
+                  return Data_Either.hush($28($29));
               };
-              return $tco_result;
           };
       };
   };
-  exports["before"] = before;
+  var after = function (dictEq) {
+      return function (dictFoldable) {
+          return function (a) {
+              var f = function (curr) {
+                  return function (prev) {
+                      if (Data_Eq.eq(dictEq)(curr)(a)) {
+                          return prev;
+                      };
+                      if (Data_Boolean.otherwise) {
+                          return Data_Maybe.Nothing.value;
+                      };
+                      throw new Error("Failed pattern match at Data.Graph.Causal.Utility (line 32, column 5 - line 34, column 28): " + [ curr.constructor.name, prev.constructor.name ]);
+                  };
+              };
+              var $30 = Data_Foldable.foldr(dictFoldable)($$break(history(f)))(new Data_Either.Left(Data_Maybe.Nothing.value));
+              return function ($31) {
+                  return Data_Either.hush($30($31));
+              };
+          };
+      };
+  };
   exports["after"] = after;
+  exports["before"] = before;
   exports["distinctTwoSets"] = distinctTwoSets;
-})(PS["Data.Graph.Causal.Utility"] = PS["Data.Graph.Causal.Utility"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_Graph_Causal_Utility = PS["Data.Graph.Causal.Utility"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List_NonEmpty = PS["Data.List.NonEmpty"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_TwoSet = PS["Data.TwoSet"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Data.Graph.Causal"] = $PS["Data.Graph.Causal"] || {};
+  var exports = $PS["Data.Graph.Causal"];
+  var Causal_Kernel = $PS["Causal.Kernel"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Graph = $PS["Data.Graph"];
+  var Data_Graph_Causal_Utility = $PS["Data.Graph.Causal.Utility"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_List = $PS["Data.List"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Map = $PS["Data.Map"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_TwoSet = $PS["Data.TwoSet"];
+  var GDP_Named = $PS["GDP.Named"];
+  var GDP_Proof = $PS["GDP.Proof"];                          
+  var isCollider = function (dictOrd) {
+      return function (v) {
+          return function (k) {
+              return function (path) {
+                  return function (graph) {
+                      var test = Data_Foldable.any(Data_Foldable.foldableMaybe)(Data_HeytingAlgebra.heytingAlgebraBoolean)(function (a) {
+                          return Data_Graph.isParentOf(dictOrd)(GDP_Named.unName(graph))(a)(k);
+                      })(Data_Graph_Causal_Utility.after(dictOrd.Eq0())(Causal_Kernel.foldablePath)(k)(GDP_Named.unName(path))) && Data_Foldable.any(Data_Foldable.foldableMaybe)(Data_HeytingAlgebra.heytingAlgebraBoolean)(function (b) {
+                          return Data_Graph.isParentOf(dictOrd)(GDP_Named.unName(graph))(b)(k);
+                      })(Data_Graph_Causal_Utility.before(dictOrd.Eq0())(Causal_Kernel.foldablePath)(k)(GDP_Named.unName(path)));
+                      if (test) {
+                          return new Data_Maybe.Just(GDP_Proof.axiom);
+                      };
+                      return Data_Maybe.Nothing.value;
+                  };
+              };
+          };
+      };
+  };
+  var isBlocked = function (dictOrd) {
+      return function (p) {
+          return function (path) {
+              return function (conditionedOn) {
+                  return function (g) {
+                      var v = Data_List.partition(function (k) {
+                          return Data_Maybe.isJust(isCollider(dictOrd)(p)(k)(path)(g));
+                      })(Data_List.fromFoldable(Causal_Kernel.foldablePath)(GDP_Named.unName(path)));
+                      var nonCollidersDisjointFromW = Data_Set.isEmpty(Data_Set.intersection(dictOrd)(Data_Set.fromFoldable(Data_List_Types.foldableList)(dictOrd)(v.no))(GDP_Named.unName(conditionedOn)));
+                      var collidersAncestorsOfW = Data_Foldable.all(Data_List_Types.foldableList)(Data_HeytingAlgebra.heytingAlgebraBoolean)(function (k) {
+                          return !Data_Set.isEmpty(Data_Set.intersection(dictOrd)(Data_Set.insert(dictOrd)(k)(Data_Graph.descendants(dictOrd)(k)(GDP_Named.unName(g))))(GDP_Named.unName(conditionedOn)));
+                      })(v.yes);
+                      var $39 = nonCollidersDisjointFromW && collidersAncestorsOfW;
+                      if ($39) {
+                          return new Data_Either.Left(GDP_Proof.axiom);
+                      };
+                      return new Data_Either.Right(GDP_Proof.axiom);
+                  };
+              };
+          };
+      };
+  };
   var intervene = function (dictOrd) {
       return function (k) {
           return function (g) {
@@ -25284,163 +24793,132 @@ var PS = {};
           };
       };
   };
-  var collider = function (dictOrd) {
-      return function (k) {
-          return function (path) {
-              return function (g) {
-                  var isParent = function (p) {
-                      return function (c) {
-                          return function (g$prime) {
-                              return Data_Set.member(dictOrd)(p)(Data_Graph.parents(dictOrd)(c)(g$prime));
-                          };
-                      };
-                  };
-                  return Data_Foldable.any(Data_Foldable.foldableMaybe)(Data_HeytingAlgebra.heytingAlgebraBoolean)(function (a) {
-                      return isParent(a)(k)(g);
-                  })(Data_Graph_Causal_Utility.after(dictOrd.Eq0())(k)(path)) && Data_Foldable.any(Data_Foldable.foldableMaybe)(Data_HeytingAlgebra.heytingAlgebraBoolean)(function (b) {
-                      return isParent(b)(k)(g);
-                  })(Data_Graph_Causal_Utility.before(dictOrd.Eq0())(k)(path));
-              };
-          };
-      };
-  };
-  var allUndirectedPaths = function (dictOrd) {
-      return function (v) {
-          return function (g) {
-              var go = function (hist) {
-                  return function (k) {
-                      var hist$prime = Data_Maybe.maybe(Control_Applicative.pure(Data_List_Types.applicativeNonEmptyList)(k))(Data_List_Types.nelCons(k))(hist);
-                      var adjacent$prime = Data_Set.difference(dictOrd)(Data_Graph.adjacent(dictOrd)(k)(g))(Data_Maybe.maybe(Data_Set.empty)(Data_Set.fromFoldable(Data_List_Types.foldableNonEmptyList)(dictOrd))(hist));
-                      var $21 = Data_Eq.eq(dictOrd.Eq0())(v.value1)(k);
-                      if ($21) {
-                          return Data_Set.singleton(hist$prime);
-                      };
-                      var $22 = Data_Eq.eq(Data_Set.eqSet(dictOrd.Eq0()))(adjacent$prime)(Data_Set.empty);
-                      if ($22) {
-                          return Data_Set.empty;
-                      };
-                      return Data_Foldable.foldMap(Data_Set.foldableSet)(Data_Set.monoidSet(Data_List_Types.ordNonEmptyList(dictOrd)))(go(new Data_Maybe.Just(hist$prime)))(adjacent$prime);
-                  };
-              };
-              return Data_Set.map(Data_List_Types.ordNonEmptyList(dictOrd))(Data_List_NonEmpty.reverse)(go(Data_Maybe.Nothing.value)(v.value0));
-          };
-      };
-  };
   var dConnectedBy = function (dictOrd) {
       return function (v) {
-          return function (conditionedOn) {
-              return function (g) {
-                  var unblocked = function (path) {
-                      var v1 = Data_List_NonEmpty.partition(function (k) {
-                          return collider(dictOrd)(k)(path)(g);
-                      })(path);
-                      var nonCollidersDisjointFromW = Data_Set.isEmpty(Data_Set.intersection(dictOrd)(Data_Set.fromFoldable(Data_List_Types.foldableList)(dictOrd)(v1.no))(conditionedOn));
-                      var collidersAncestorsOfW = Data_Foldable.all(Data_List_Types.foldableList)(Data_HeytingAlgebra.heytingAlgebraBoolean)(function (k) {
-                          return !Data_Set.isEmpty(Data_Set.intersection(dictOrd)(Data_Set.insert(dictOrd)(k)(Data_Graph.descendants(dictOrd)(k)(g)))(conditionedOn));
-                      })(v1.yes);
-                      return nonCollidersDisjointFromW && collidersAncestorsOfW;
+          return function (ks) {
+              return function (conditionedOn) {
+                  return function (g) {
+                      return Data_Set.filter(GDP_Named.ordNamed(Causal_Kernel.ordPath(dictOrd)))(function (p) {
+                          return Data_Either.isLeft(isBlocked(dictOrd)(Causal_Kernel.pathOf_isPathOf(p))(p)(conditionedOn)(g));
+                      })(Causal_Kernel.allUndirectedPaths(dictOrd)(GDP_Named.unName(ks))(g));
                   };
-                  var result = Data_Set.filter(Data_List_Types.ordNonEmptyList(dictOrd))(unblocked)(allUndirectedPaths(dictOrd)(v)(g));
-                  var $31 = Data_Set.member(dictOrd)(v.value0)(conditionedOn) || Data_Set.member(dictOrd)(v.value1)(conditionedOn);
-                  if ($31) {
-                      return Data_Maybe.Nothing.value;
-                  };
-                  return new Data_Maybe.Just(result);
-              };
-          };
-      };
-  };
-  var areDConnected = function (dictOrd) {
-      return function (ks) {
-          return function (conditionedOn) {
-              return function (g) {
-                  return Data_Functor.map(Data_Maybe.functorMaybe)(function ($54) {
-                      return !Data_Set.isEmpty($54);
-                  })(dConnectedBy(dictOrd)(ks)(conditionedOn)(g));
-              };
-          };
-      };
-  };
-  var dConnectedTo = function (dictOrd) {
-      return function (k) {
-          return function (conditionedOn) {
-              return function (g) {
-                  var result = Data_Set.filter(dictOrd)(function (v) {
-                      return Data_Maybe.fromMaybe(false)(areDConnected(dictOrd)(new Data_TwoSet.MkTwoSet(k, v))(conditionedOn)(g));
-                  })(Data_Set["delete"](dictOrd)(k)(Data_Map.keys(Data_Graph.toMap(g))));
-                  var $34 = Data_Set.member(dictOrd)(k)(conditionedOn);
-                  if ($34) {
-                      return Data_Maybe.Nothing.value;
-                  };
-                  return new Data_Maybe.Just(result);
               };
           };
       };
   };
   var areDSeparated = function (dictOrd) {
-      return function (ks) {
-          return function (conditionedOn) {
-              return function (g) {
-                  return Data_Functor.map(Data_Maybe.functorMaybe)(Data_Set.isEmpty)(dConnectedBy(dictOrd)(ks)(conditionedOn)(g));
+      return function (p) {
+          return function (ks) {
+              return function (conditionedOn) {
+                  return function (g) {
+                      var test = Data_Set.isEmpty(dConnectedBy(dictOrd)(p)(ks)(conditionedOn)(g));
+                      if (test) {
+                          return new Data_Maybe.Just(GDP_Proof.axiom);
+                      };
+                      return Data_Maybe.Nothing.value;
+                  };
               };
           };
       };
   };
   var dSeparatedFrom = function (dictOrd) {
-      return function (k) {
-          return function (conditionedOn) {
-              return function (g) {
-                  var result = Data_Set.filter(dictOrd)(function (v) {
-                      return Data_Maybe.fromMaybe(false)(areDSeparated(dictOrd)(new Data_TwoSet.MkTwoSet(k, v))(conditionedOn)(g));
-                  })(Data_Set["delete"](dictOrd)(k)(Data_Map.keys(Data_Graph.toMap(g))));
-                  var $35 = Data_Set.member(dictOrd)(k)(conditionedOn);
-                  if ($35) {
-                      return Data_Maybe.Nothing.value;
-                  };
-                  return new Data_Maybe.Just(result);
-              };
-          };
-      };
-  };
-  var instruments = function (dictOrd) {
       return function (v) {
-          return function (conditionedOn) {
-              return function (g) {
-                  var v1 = new Data_Tuple.Tuple(dConnectedTo(dictOrd)(v.cause)(conditionedOn)(g), dSeparatedFrom(dictOrd)(v.effect)(conditionedOn)(intervene(dictOrd)(v.cause)(g)));
-                  if (v1.value0 instanceof Data_Maybe.Just && v1.value1 instanceof Data_Maybe.Just) {
-                      return Data_Maybe.Just.create(Data_Set.intersection(dictOrd)(v1.value0.value0)(v1.value1.value0));
+          return function (k) {
+              return function (conditionedOn) {
+                  return function (g) {
+                      var isDSeparatedFromK = function (v1) {
+                          return GDP_Named.name2(new Data_TwoSet.MkTwoSet(GDP_Named.unName(k), v1))(g)(function (kv) {
+                              return function (g$prime) {
+                                  return Data_Maybe.maybe(false)(function (p) {
+                                      return Data_Maybe.isJust(areDSeparated(dictOrd)(p)(kv)(conditionedOn)(g$prime));
+                                  })(Causal_Kernel.disjointnessTwoSet(dictOrd)(kv)(conditionedOn));
+                              };
+                          });
+                      };
+                      return Data_Set.filter(dictOrd)(isDSeparatedFromK)(Data_Set["delete"](dictOrd)(GDP_Named.unName(k))(Data_Map.keys(Data_Graph.toMap(g))));
                   };
-                  return Data_Maybe.Nothing.value;
               };
           };
       };
   };
   var dSeparations = function (dictOrd) {
-      return function (conditionedOn) {
+      return function (conditionedOn$prime) {
           return function (g) {
-              return Data_Set.filter(Data_TwoSet.ordTwoSet(dictOrd))(function (ks) {
-                  return Data_Maybe.fromMaybe(false)(areDSeparated(dictOrd)(ks)(conditionedOn)(g));
-              })(Data_Graph_Causal_Utility.distinctTwoSets(dictOrd)(Data_Map.keys(Data_Graph.toMap(g))));
+              var areDSeparated$prime = function (ks$prime) {
+                  return GDP_Named.name3(ks$prime)(conditionedOn$prime)(g)(function (ks) {
+                      return function (conditionedOn) {
+                          return function (g$prime) {
+                              return Data_Maybe.maybe(false)(function (p) {
+                                  return Data_Maybe.isJust(areDSeparated(dictOrd)(p)(ks)(conditionedOn)(g$prime));
+                              })(Causal_Kernel.disjointnessTwoSet(dictOrd)(ks)(conditionedOn));
+                          };
+                      };
+                  });
+              };
+              return Data_Set.filter(Data_TwoSet.ordTwoSet(dictOrd))(areDSeparated$prime)(Data_Graph_Causal_Utility.distinctTwoSets(dictOrd)(Data_Map.keys(Data_Graph.toMap(g))));
           };
       };
   };
-  exports["collider"] = collider;
-  exports["areDConnected"] = areDConnected;
+  var areDConnected = function (dictOrd) {
+      return function (p) {
+          return function (ks) {
+              return function (conditionedOn) {
+                  return function (g) {
+                      var test = !Data_Set.isEmpty(dConnectedBy(dictOrd)(p)(ks)(conditionedOn)(g));
+                      if (test) {
+                          return new Data_Maybe.Just(GDP_Proof.axiom);
+                      };
+                      return Data_Maybe.Nothing.value;
+                  };
+              };
+          };
+      };
+  };
+  var dConnectedTo = function (dictOrd) {
+      return function (v) {
+          return function (k) {
+              return function (conditionedOn) {
+                  return function (g) {
+                      var isDConnectedToK = function (v1) {
+                          return GDP_Named.name2(new Data_TwoSet.MkTwoSet(GDP_Named.unName(k), v1))(g)(function (kv) {
+                              return function (g$prime) {
+                                  return Data_Maybe.maybe(false)(function (p) {
+                                      return Data_Maybe.isJust(areDConnected(dictOrd)(p)(kv)(conditionedOn)(g$prime));
+                                  })(Causal_Kernel.disjointnessTwoSet(dictOrd)(kv)(conditionedOn));
+                              };
+                          });
+                      };
+                      return Data_Set.filter(dictOrd)(isDConnectedToK)(Data_Set["delete"](dictOrd)(GDP_Named.unName(k))(Data_Map.keys(Data_Graph.toMap(g))));
+                  };
+              };
+          };
+      };
+  };
+  var instruments = function (dictOrd) {
+      return function (p) {
+          return function (causeEffect) {
+              return function (conditionedOn) {
+                  return function (g) {
+                      var separated = dSeparatedFrom(dictOrd)(Causal_Kernel.effect_disjoint(p))(Causal_Kernel.effect(causeEffect))(conditionedOn)(intervene(dictOrd)((function (v) {
+                          return v.cause;
+                      })(GDP_Named.unName(causeEffect)))(g));
+                      var connected = dConnectedTo(dictOrd)(Causal_Kernel.cause_disjoint(p))(Causal_Kernel.cause(causeEffect))(conditionedOn)(g);
+                      return Data_Set.intersection(dictOrd)(connected)(separated);
+                  };
+              };
+          };
+      };
+  };
   exports["dConnectedBy"] = dConnectedBy;
-  exports["dConnectedTo"] = dConnectedTo;
-  exports["areDSeparated"] = areDSeparated;
   exports["dSeparatedFrom"] = dSeparatedFrom;
   exports["dSeparations"] = dSeparations;
-  exports["allUndirectedPaths"] = allUndirectedPaths;
   exports["instruments"] = instruments;
-  exports["intervene"] = intervene;
-})(PS["Data.Graph.Causal"] = PS["Data.Graph.Causal"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unit = PS["Data.Unit"];
-  var Prelude = PS["Prelude"];
+  $PS["Data.Tuple.Nested"] = $PS["Data.Tuple.Nested"] || {};
+  var exports = $PS["Data.Tuple.Nested"];
   var uncurry4 = function (f) {
       return function (v) {
           return f(v.value0)(v.value1.value0)(v.value1.value1.value0)(v.value1.value1.value1.value0);
@@ -25453,9 +24931,9 @@ var PS = {};
   };
   exports["uncurry3"] = uncurry3;
   exports["uncurry4"] = uncurry4;
-})(PS["Data.Tuple.Nested"] = PS["Data.Tuple.Nested"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
   var yaml =require("js-yaml"); 
 
   exports.parseFromYamlImpl = function(left, right, string) {
@@ -25467,58 +24945,82 @@ var PS = {};
   };
 })(PS["Data.Yaml"] = PS["Data.Yaml"] || {});
 (function(exports) {
-  // Generated by purs version 0.12.3
   "use strict";
-  var $foreign = PS["Data.Yaml"];
-  var Data_Argonaut_Core = PS["Data.Argonaut.Core"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Function_Uncurried = PS["Data.Function.Uncurried"];                 
+
+  exports.runFn3 = function (fn) {
+    return function (a) {
+      return function (b) {
+        return function (c) {
+          return fn(a, b, c);
+        };
+      };
+    };
+  };
+})(PS["Data.Function.Uncurried"] = PS["Data.Function.Uncurried"] || {});
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Function.Uncurried"] = $PS["Data.Function.Uncurried"] || {};
+  var exports = $PS["Data.Function.Uncurried"];
+  var $foreign = $PS["Data.Function.Uncurried"];
+  exports["runFn3"] = $foreign.runFn3;
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
+  "use strict";
+  $PS["Data.Yaml"] = $PS["Data.Yaml"] || {};
+  var exports = $PS["Data.Yaml"];
+  var $foreign = $PS["Data.Yaml"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Function_Uncurried = $PS["Data.Function.Uncurried"];                
   var parseFromYaml = Data_Function_Uncurried.runFn3($foreign.parseFromYamlImpl)(Data_Either.Left.create)(Data_Either.Right.create);
   exports["parseFromYaml"] = parseFromYaml;
-})(PS["Data.Yaml"] = PS["Data.Yaml"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Monad = PS["Control.Monad"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
-  var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_FunctorWithIndex = PS["Data.FunctorWithIndex"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Lazy = PS["Data.List.Lazy"];
-  var Data_List_Lazy_Types = PS["Data.List.Lazy.Types"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Yaml = PS["Data.Yaml"];
-  var Foreign_Object = PS["Foreign.Object"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Utility"] = $PS["Utility"] || {};
+  var exports = $PS["Utility"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Argonaut_Decode_Class = $PS["Data.Argonaut.Decode.Class"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_FunctorWithIndex = $PS["Data.FunctorWithIndex"];
+  var Data_Graph = $PS["Data.Graph"];
+  var Data_List = $PS["Data.List"];
+  var Data_List_Lazy = $PS["Data.List.Lazy"];
+  var Data_List_Lazy_Types = $PS["Data.List.Lazy.Types"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Map = $PS["Data.Map"];
+  var Data_Map_Internal = $PS["Data.Map.Internal"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Semiring = $PS["Data.Semiring"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];
+  var Data_Yaml = $PS["Data.Yaml"];
+  var Foreign_Object = $PS["Foreign.Object"];                
   var vertexInGraph = function (dictOrd) {
       return function (k) {
-          return function ($14) {
-              return Data_Set.member(dictOrd)(k)(Data_Map.keys(Data_Graph.toMap($14)));
+          var $14 = Data_Set.member(dictOrd)(k);
+          return function ($15) {
+              return $14(Data_Map.keys(Data_Graph.toMap($15)));
           };
       };
   };
   var powerSet$prime = function (dictOrd) {
-      return function ($15) {
-          return Data_Functor.map(Data_List_Lazy_Types.functorList)(Data_Set.fromFoldable(Data_List_Lazy_Types.foldableList)(dictOrd))(Data_List_Lazy.filterM(Data_List_Lazy_Types.monadList)(Data_Function["const"](Data_List_Lazy.fromFoldable(Data_Foldable.foldableArray)([ true, false ])))(Data_List_Lazy.fromFoldable(Data_Set.foldableSet)($15)));
+      var $16 = Data_Functor.map(Data_List_Lazy_Types.functorList)(Data_Set.fromFoldable(Data_List_Lazy_Types.foldableList)(dictOrd));
+      var $17 = Data_List_Lazy.filterM(Data_List_Lazy_Types.monadList)(Data_Function["const"](Data_List_Lazy.fromFoldable(Data_Foldable.foldableArray)([ true, false ])));
+      var $18 = Data_List_Lazy.fromFoldable(Data_Set.foldableSet);
+      return function ($19) {
+          return $16($17($18($19)));
       };
   };
   var piecesOfN = function (n) {
@@ -25546,61 +25048,69 @@ var PS = {};
           var mkOrphanVertex = function (k) {
               return new Data_Tuple.Tuple(k, new Data_Tuple.Tuple(k, Data_Set.empty));
           };
-          var edgeVertices = Data_Set.fromFoldable(Data_List_Types.foldableList)(dictOrd)(Control_Bind.bindFlipped(Data_List_Types.bindList)(function ($17) {
-              return Data_Set.toUnfoldable(Data_List_Types.unfoldableList)(Data_Tuple.snd($17));
-          })(Data_Map_Internal.values(m)));
+          var edgeVertices = Data_Set.fromFoldable(Data_List_Types.foldableList)(dictOrd)(Control_Bind.bindFlipped(Data_List_Types.bindList)((function () {
+              var $25 = Data_Set.toUnfoldable(Data_List_Types.unfoldableList);
+              return function ($26) {
+                  return $25(Data_Tuple.snd($26));
+              };
+          })())(Data_Map_Internal.values(m)));
           var orphanEdgeVertices = Data_Set.difference(dictOrd)(edgeVertices)(Data_Map.keys(m));
           return Data_Map_Internal.union(dictOrd)(m)(Data_Map_Internal.fromFoldable(dictOrd)(Data_Set.foldableSet)(Data_Set.map(Data_Tuple.ordTuple(dictOrd)(Data_Tuple.ordTuple(dictOrd)(Data_Set.ordSet(dictOrd))))(mkOrphanVertex)(orphanEdgeVertices)));
       };
   };
   var stringToGraph = (function () {
       var asArray = Control_Category.identity(Control_Category.categoryFn);
-      var fromObject = function ($18) {
-          return Data_Graph.fromMap(closeGraph(Data_Ord.ordString)(Data_FunctorWithIndex.mapWithIndex(Data_Map_Internal.functorWithIndexMap)(function (k) {
+      var fromObject = (function () {
+          var $27 = closeGraph(Data_Ord.ordString);
+          var $28 = Data_FunctorWithIndex.mapWithIndex(Data_Map_Internal.functorWithIndexMap)(function (k) {
               return function (ks) {
                   return new Data_Tuple.Tuple(k, Data_Set.fromFoldable(Data_Foldable.foldableArray)(Data_Ord.ordString)(ks));
               };
-          })(Data_Map_Internal.fromFoldable(Data_Ord.ordString)(Data_Foldable.foldableArray)(asArray(Foreign_Object.toUnfoldable(Data_Unfoldable.unfoldableArray)($18))))));
-      };
-      return Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(function ($19) {
-          return Data_Functor.map(Data_Either.functorEither)(fromObject)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeForeignObject(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonString)))($19));
-      })(Data_Yaml.parseFromYaml);
+          });
+          var $29 = Data_Map_Internal.fromFoldable(Data_Ord.ordString)(Data_Foldable.foldableArray);
+          var $30 = Foreign_Object.toUnfoldable(Data_Unfoldable.unfoldableArray);
+          return function ($31) {
+              return Data_Graph.fromMap($27($28($29(asArray($30($31))))));
+          };
+      })();
+      return Control_Bind.composeKleisliFlipped(Data_Either.bindEither)((function () {
+          var $32 = Data_Functor.map(Data_Either.functorEither)(fromObject);
+          var $33 = Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeForeignObject(Data_Argonaut_Decode_Class.decodeArray(Data_Argonaut_Decode_Class.decodeJsonString)));
+          return function ($34) {
+              return $32($33($34));
+          };
+      })())(Data_Yaml.parseFromYaml);
   })();
   exports["distinctPairs"] = distinctPairs;
   exports["piecesOfN"] = piecesOfN;
   exports["powerSet'"] = powerSet$prime;
-  exports["closeGraph"] = closeGraph;
   exports["stringToGraph"] = stringToGraph;
   exports["vertexInGraph"] = vertexInGraph;
-})(PS["Utility"] = PS["Utility"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Color = PS["Color"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_DotLang = PS["Data.DotLang"];
-  var Data_DotLang_Attr_Edge = PS["Data.DotLang.Attr.Edge"];
-  var Data_DotLang_Attr_Node = PS["Data.DotLang.Attr.Node"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List = PS["Data.List"];
-  var Data_List_NonEmpty = PS["Data.List.NonEmpty"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Utility = PS["Utility"];                 
+  $PS["DotLang"] = $PS["DotLang"] || {};
+  var exports = $PS["DotLang"];
+  var Causal_Kernel = $PS["Causal.Kernel"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_DotLang = $PS["Data.DotLang"];
+  var Data_DotLang_Attr_Edge = $PS["Data.DotLang.Attr.Edge"];
+  var Data_DotLang_Attr_Node = $PS["Data.DotLang.Attr.Node"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Graph = $PS["Data.Graph"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_List = $PS["Data.List"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Map_Internal = $PS["Data.Map.Internal"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Show = $PS["Data.Show"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];
+  var Partial_Unsafe = $PS["Partial.Unsafe"];
+  var Utility = $PS["Utility"];                
   var modifyEdge = function (f) {
       return function (v) {
           if (v instanceof Data_DotLang.EdgeDef) {
@@ -25631,7 +25141,7 @@ var PS = {};
                               return new Data_Tuple.Tuple(v.value0, v.value1.value0);
                           };
                           throw new Error("Failed pattern match at DotLang (line 39, column 12 - line 39, column 47): " + [ v.constructor.name ]);
-                      })(Utility.piecesOfN(2)(Data_List.fromFoldable(Data_List_Types.foldableNonEmptyList)(path)));
+                      })(Utility.piecesOfN(2)(Data_List.fromFoldable(Causal_Kernel.foldablePath)(path)));
                   });
                   var inPath = function (d) {
                       return Data_Foldable.any(Data_List_Types.foldableList)(Data_HeytingAlgebra.heytingAlgebraBoolean)(function (v) {
@@ -25678,29 +25188,30 @@ var PS = {};
               var edgeToEdge = function (v) {
                   return new Data_DotLang.Edge(Data_DotLang.Forward.value, Data_Show.show(dictShow)(v.value0), Data_Show.show(dictShow)(v.value1), [  ]);
               };
-              var edges = Control_Bind.bindFlipped(Control_Bind.bindArray)(function ($57) {
-                  return Data_Functor.map(Data_Functor.functorArray)(edgeToEdge)(vertexToEdges($57));
-              })(vertexList);
+              var edges = Control_Bind.bindFlipped(Control_Bind.bindArray)((function () {
+                  var $57 = Data_Functor.map(Data_Functor.functorArray)(edgeToEdge);
+                  return function ($58) {
+                      return $57(vertexToEdges($58));
+                  };
+              })())(vertexList);
               return Data_DotLang.graphFromElements(vertices)(edges);
           };
       };
   };
   exports["highlightPaths"] = highlightPaths;
-  exports["modifyPath"] = modifyPath;
-  exports["isEdge"] = isEdge;
-  exports["modifyEdge"] = modifyEdge;
   exports["graphToGraph"] = graphToGraph;
-})(PS["DotLang"] = PS["DotLang"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Alt = PS["Control.Alt"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var FRP_Event = PS["FRP.Event"];
-  var FRP_Event_Class = PS["FRP.Event.Class"];
-  var Prelude = PS["Prelude"];                 
+  $PS["FRP"] = $PS["FRP"] || {};
+  var exports = $PS["FRP"];
+  var Control_Alt = $PS["Control.Alt"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var FRP_Event = $PS["FRP.Event"];
+  var FRP_Event_Class = $PS["FRP.Event.Class"];                
   var combine = function (v) {
       return function (v1) {
           return new Data_Tuple.Tuple(new Data_Tuple.Tuple(v.value0, v1.value0), FRP_Event_Class.fold(FRP_Event.eventIsEvent)(function (evt) {
@@ -25715,40 +25226,22 @@ var PS = {};
       };
   };
   exports["combine"] = combine;
-})(PS["FRP"] = PS["FRP"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.unsafeFromForeign = function (value) {
     return value;
   };
 })(PS["Foreign"] = PS["Foreign"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Foreign"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Monad_Error_Class = PS["Control.Monad.Error.Class"];
-  var Control_Monad_Except = PS["Control.Monad.Except"];
-  var Control_Monad_Except_Trans = PS["Control.Monad.Except.Trans"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Function = PS["Data.Function"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_Identity = PS["Data.Identity"];
-  var Data_Int = PS["Data.Int"];
-  var Data_List_NonEmpty = PS["Data.List.NonEmpty"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Ordering = PS["Data.Ordering"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Show = PS["Data.Show"];
-  var Data_String_CodeUnits = PS["Data.String.CodeUnits"];
-  var Prelude = PS["Prelude"];
+  $PS["Foreign"] = $PS["Foreign"] || {};
+  var exports = $PS["Foreign"];
+  var $foreign = $PS["Foreign"];
   exports["unsafeFromForeign"] = $foreign.unsafeFromForeign;
-})(PS["Foreign"] = PS["Foreign"] || {});
+})(PS);
 (function(exports) {
   /* global exports */
   "use strict";
@@ -25799,12 +25292,6 @@ var PS = {};
       };
   };
 
-  exports.toggle = function(ob) {
-      return function() {
-          ob.toggle();
-      };
-  };
-
   exports.setVisible = function(flag) {
       return function(ob) {
           return function() {
@@ -25842,15 +25329,12 @@ var PS = {};
       };
   };
 })(PS["JQuery"] = PS["JQuery"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["JQuery"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Effect = PS["Effect"];
-  var Foreign = PS["Foreign"];
-  var Prelude = PS["Prelude"];
+  $PS["JQuery"] = $PS["JQuery"] || {};
+  var exports = $PS["JQuery"];
+  var $foreign = $PS["JQuery"];
   var hide = $foreign.setVisible(false);
   var display = $foreign.setVisible(true);
   exports["hide"] = hide;
@@ -25865,14 +25349,13 @@ var PS = {};
   exports["on"] = $foreign.on;
   exports["toArray"] = $foreign.toArray;
   exports["preventDefault"] = $foreign.preventDefault;
-})(PS["JQuery"] = PS["JQuery"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["JQuery.Fancy.Internal"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Effect = PS["Effect"];
-  var JQuery = PS["JQuery"];                 
+  $PS["JQuery.Fancy.Internal"] = $PS["JQuery.Fancy.Internal"] || {};
+  var exports = $PS["JQuery.Fancy.Internal"];
+  var Data_Newtype = $PS["Data.Newtype"];                
   var MkJQuery = function (x) {
       return x;
   };
@@ -25881,59 +25364,44 @@ var PS = {};
   }, MkJQuery);
   exports["MkJQuery"] = MkJQuery;
   exports["newtypeJQuery"] = newtypeJQuery;
-})(PS["JQuery.Fancy.Internal"] = PS["JQuery.Fancy.Internal"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Web.Event.Event"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_DateTime_Instant = PS["Data.DateTime.Instant"];
-  var Data_Enum = PS["Data.Enum"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Nullable = PS["Data.Nullable"];
-  var Data_Ord = PS["Data.Ord"];
-  var Effect = PS["Effect"];
-  var Prelude = PS["Prelude"];
-  var Web_Event_EventPhase = PS["Web.Event.EventPhase"];
-  var Web_Event_Internal_Types = PS["Web.Event.Internal.Types"];                 
+  $PS["Web.Event.Event"] = $PS["Web.Event.Event"] || {};
+  var exports = $PS["Web.Event.Event"];
+  var Data_Newtype = $PS["Data.Newtype"];                                
   var EventType = function (x) {
       return x;
   };                                    
   var newtypeEventType = new Data_Newtype.Newtype(function (n) {
       return n;
   }, EventType);
-  exports["EventType"] = EventType;
   exports["newtypeEventType"] = newtypeEventType;
-})(PS["Web.Event.Event"] = PS["Web.Event.Event"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semiring = PS["Data.Semiring"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Effect = PS["Effect"];
-  var Foreign = PS["Foreign"];
-  var JQuery = PS["JQuery"];
-  var JQuery_Fancy_Internal = PS["JQuery.Fancy.Internal"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Web_Event_Event = PS["Web.Event.Event"];
+  $PS["JQuery.Fancy"] = $PS["JQuery.Fancy"] || {};
+  var exports = $PS["JQuery.Fancy"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Semiring = $PS["Data.Semiring"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Effect = $PS["Effect"];
+  var JQuery = $PS["JQuery"];
+  var JQuery_Fancy_Internal = $PS["JQuery.Fancy.Internal"];
+  var Web_Event_Event = $PS["Web.Event.Event"];
   var setText = function (s) {
-      return function ($18) {
-          return JQuery.setText(s)(Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery)($18));
+      var $22 = JQuery.setText(s);
+      var $23 = Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery);
+      return function ($24) {
+          return $22($23($24));
       };
-  };                
+  };                   
   var selectOne = function (s) {
       return function __do() {
           var v = Control_Bind.bindFlipped(Effect.bindEffect)(JQuery.toArray)(JQuery.select(s))();
@@ -25957,45 +25425,52 @@ var PS = {};
   };
   var on = function (eventType) {
       return function (handler) {
-          return function ($21) {
-              return JQuery.on(Data_Newtype.unwrap(Web_Event_Event.newtypeEventType)(eventType))(function (e) {
-                  return function (q) {
-                      return handler(e)(q);
-                  };
-              })(Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery)($21));
+          var $29 = JQuery.on(Data_Newtype.unwrap(Web_Event_Event.newtypeEventType)(eventType))(function (e) {
+              return function (q) {
+                  return handler(e)(q);
+              };
+          });
+          var $30 = Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery);
+          return function ($31) {
+              return $29($30($31));
           };
       };
-  };
-  var getValue = function ($24) {
-      return JQuery.getValue(Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery)($24));
-  };
-  var clearOne = function ($28) {
-      return JQuery.clear(Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery)($28));
-  };
+  };   
+  var getValue = (function () {
+      var $36 = Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery);
+      return function ($37) {
+          return JQuery.getValue($36($37));
+      };
+  })();
+  var clearOne = (function () {
+      var $45 = Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery);
+      return function ($46) {
+          return JQuery.clear($45($46));
+      };
+  })();
   exports["clearOne"] = clearOne;
   exports["getValue"] = getValue;
   exports["on"] = on;
-  exports["select"] = select;
   exports["selectOne"] = selectOne;
   exports["setText"] = setText;
-})(PS["JQuery.Fancy"] = PS["JQuery.Fancy"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Unit = PS["Data.Unit"];
-  var Effect = PS["Effect"];
-  var FRP_Event = PS["FRP.Event"];
-  var Foreign = PS["Foreign"];
-  var JQuery = PS["JQuery"];
-  var JQuery_Fancy = PS["JQuery.Fancy"];
-  var Prelude = PS["Prelude"];
-  var Web_Event_Event = PS["Web.Event.Event"];                 
+  $PS["FRP.JQuery"] = $PS["FRP.JQuery"] || {};
+  var exports = $PS["FRP.JQuery"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Unit = $PS["Data.Unit"];
+  var Effect = $PS["Effect"];
+  var FRP_Event = $PS["FRP.Event"];
+  var Foreign = $PS["Foreign"];
+  var JQuery = $PS["JQuery"];
+  var JQuery_Fancy = $PS["JQuery.Fancy"];
+  var Web_Event_Event = $PS["Web.Event.Event"];                
   var jqueryEvent = function (eventType) {
       return function (f) {
           return function (el) {
@@ -26029,12 +25504,11 @@ var PS = {};
           return Data_Functor.map(Effect.functorEffect)(Foreign.unsafeFromForeign)(JQuery_Fancy.getValue(el));
       })(el)))(Data_Functor.map(Effect.functorEffect)(Foreign.unsafeFromForeign)(JQuery_Fancy.getValue(el)));
   };
-  exports["jqueryEvent"] = jqueryEvent;
   exports["textAreaChangeEvent"] = textAreaChangeEvent;
   exports["inputTextChangeEvent"] = inputTextChangeEvent;
-})(PS["FRP.JQuery"] = PS["FRP.JQuery"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
 
   exports.viz_internal = function(data, format, engine, scale) {
     var v = undefined;
@@ -26047,15 +25521,14 @@ var PS = {};
     return v(data, {format: format, engine: engine, scale: scale})
   }
 })(PS["Graphics.Graphviz"] = PS["Graphics.Graphviz"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Graphics.Graphviz"];
-  var Data_DotLang = PS["Data.DotLang"];
-  var Data_DotLang_Class = PS["Data.DotLang.Class"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Function_Uncurried = PS["Data.Function.Uncurried"];
-  var Data_Show = PS["Data.Show"];                 
+  $PS["Graphics.Graphviz"] = $PS["Graphics.Graphviz"] || {};
+  var exports = $PS["Graphics.Graphviz"];
+  var $foreign = $PS["Graphics.Graphviz"];
+  var Data_DotLang_Class = $PS["Data.DotLang.Class"];
+  var Data_Show = $PS["Data.Show"];                
   var Circo = (function () {
       function Circo() {
 
@@ -26107,7 +25580,7 @@ var PS = {};
       if (v instanceof Twopi) {
           return "twopi";
       };
-      throw new Error("Failed pattern match at Graphics.Graphviz (line 18, column 1 - line 18, column 35): " + [ v.constructor.name ]);
+      throw new Error("Failed pattern match at Graphics.Graphviz (line 18, column 1 - line 23, column 23): " + [ v.constructor.name ]);
   });
   var renderToSvg = function (dictDotLang) {
       return function (e) {
@@ -26117,31 +25590,25 @@ var PS = {};
       };
   };
   exports["renderToSvg"] = renderToSvg;
-  exports["Circo"] = Circo;
   exports["Dot"] = Dot;
-  exports["Neato"] = Neato;
-  exports["Osage"] = Osage;
-  exports["Twopi"] = Twopi;
-  exports["showEngine"] = showEngine;
-})(PS["Graphics.Graphviz"] = PS["Graphics.Graphviz"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Effect = PS["Effect"];
-  var JQuery = PS["JQuery"];
-  var JQuery_Fancy = PS["JQuery.Fancy"];
-  var JQuery_Fancy_Internal = PS["JQuery.Fancy.Internal"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Utility.Render"] = $PS["Utility.Render"] || {};
+  var exports = $PS["Utility.Render"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Effect = $PS["Effect"];
+  var JQuery = $PS["JQuery"];
+  var JQuery_Fancy = $PS["JQuery.Fancy"];
+  var JQuery_Fancy_Internal = $PS["JQuery.Fancy.Internal"];                
   var Ol = (function () {
       function Ol() {
 
@@ -26175,7 +25642,7 @@ var PS = {};
                               if (v instanceof Ol) {
                                   return "<ol>";
                               };
-                              throw new Error("Failed pattern match at Utility.Render (line 29, column 5 - line 30, column 5): " + [ v.constructor.name ]);
+                              throw new Error("Failed pattern match at Utility.Render (line 29, column 5 - line 29, column 25): " + [ v.constructor.name ]);
                           };
                           var listClose = function (v) {
                               if (v instanceof Ul) {
@@ -26184,7 +25651,7 @@ var PS = {};
                               if (v instanceof Ol) {
                                   return "</ol>";
                               };
-                              throw new Error("Failed pattern match at Utility.Render (line 31, column 5 - line 32, column 5): " + [ v.constructor.name ]);
+                              throw new Error("Failed pattern match at Utility.Render (line 31, column 5 - line 31, column 27): " + [ v.constructor.name ]);
                           };
                           var addLi = function (s) {
                               return "<li>" + (s + "</li>");
@@ -26204,9 +25671,12 @@ var PS = {};
   }, MkElement);
   var replaceElIn = function (output) {
       return function (el) {
-          return Control_Apply.applySecond(Effect.applyEffect)(JQuery_Fancy.clearOne(output))(Control_Bind.composeKleisliFlipped(Effect.bindEffect)(Data_Function.flip(JQuery.append)(Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery)(output)))(function ($13) {
-              return JQuery.create(Data_Newtype.unwrap(newtypeElement)($13));
-          })(el));
+          return Control_Apply.applySecond(Effect.applyEffect)(JQuery_Fancy.clearOne(output))(Control_Bind.composeKleisliFlipped(Effect.bindEffect)(Data_Function.flip(JQuery.append)(Data_Newtype.unwrap(JQuery_Fancy_Internal.newtypeJQuery)(output)))((function () {
+              var $13 = Data_Newtype.unwrap(newtypeElement);
+              return function ($14) {
+                  return JQuery.create($13($14));
+              };
+          })())(el));
       };
   };
   var error = function (errEl) {
@@ -26215,62 +25685,54 @@ var PS = {};
       });
   };
   exports["MkElement"] = MkElement;
-  exports["Ol"] = Ol;
   exports["Ul"] = Ul;
   exports["renderFoldableAsHtmlList"] = renderFoldableAsHtmlList;
   exports["replaceElIn"] = replaceElIn;
   exports["error"] = error;
-  exports["newtypeElement"] = newtypeElement;
-})(PS["Utility.Render"] = PS["Utility.Render"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var App = PS["App"];
-  var Color = PS["Color"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
-  var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_DotLang = PS["Data.DotLang"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Compose = PS["Data.Functor.Compose"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_Graph_Causal = PS["Data.Graph.Causal"];
-  var Data_List_NonEmpty = PS["Data.List.NonEmpty"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Tuple_Nested = PS["Data.Tuple.Nested"];
-  var Data_TwoSet = PS["Data.TwoSet"];
-  var Data_Unit = PS["Data.Unit"];
-  var Data_Yaml = PS["Data.Yaml"];
-  var DotLang = PS["DotLang"];
-  var Effect = PS["Effect"];
-  var FRP = PS["FRP"];
-  var FRP_Event = PS["FRP.Event"];
-  var FRP_JQuery = PS["FRP.JQuery"];
-  var Graphics_Graphviz = PS["Graphics.Graphviz"];
-  var JQuery_Fancy = PS["JQuery.Fancy"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Utility = PS["Utility"];
-  var Utility_Render = PS["Utility.Render"];                 
+  $PS["ConditionalDSep"] = $PS["ConditionalDSep"] || {};
+  var exports = $PS["ConditionalDSep"];
+  var Causal_Kernel = $PS["Causal.Kernel"];
+  var Color = $PS["Color"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Argonaut_Decode_Class = $PS["Data.Argonaut.Decode.Class"];
+  var Data_Bifunctor = $PS["Data.Bifunctor"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_DotLang = $PS["Data.DotLang"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Functor_Compose = $PS["Data.Functor.Compose"];
+  var Data_Graph_Causal = $PS["Data.Graph.Causal"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Show = $PS["Data.Show"];
+  var Data_Traversable = $PS["Data.Traversable"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Tuple_Nested = $PS["Data.Tuple.Nested"];
+  var Data_TwoSet = $PS["Data.TwoSet"];
+  var Data_Unit = $PS["Data.Unit"];
+  var Data_Yaml = $PS["Data.Yaml"];
+  var DotLang = $PS["DotLang"];
+  var Effect = $PS["Effect"];
+  var FRP = $PS["FRP"];
+  var FRP_Event = $PS["FRP.Event"];
+  var FRP_JQuery = $PS["FRP.JQuery"];
+  var GDP_Named = $PS["GDP.Named"];
+  var Graphics_Graphviz = $PS["Graphics.Graphviz"];
+  var JQuery_Fancy = $PS["JQuery.Fancy"];
+  var Partial_Unsafe = $PS["Partial.Unsafe"];
+  var Utility = $PS["Utility"];
+  var Utility_Render = $PS["Utility.Render"];                
   var unparse = function (dictShow) {
       return function (kToId) {
           return function (valueToLabel) {
@@ -26286,7 +25748,7 @@ var PS = {};
                       var just = function (cons) {
                           var renderDConnections = function (set) {
                               var itemToHtml = function (path) {
-                                  return Data_Foldable.intercalate(Data_List_Types.foldableNonEmptyList)(Data_Monoid.monoidString)("\u2192")(Data_Functor.map(Data_List_Types.functorNonEmptyList)(kToId)(path));
+                                  return Data_Foldable.intercalate(Causal_Kernel.foldablePath)(Data_Monoid.monoidString)("\u2192")(Data_Functor.map(Causal_Kernel.functorPath)(kToId)(path));
                               };
                               return Utility_Render.renderFoldableAsHtmlList(Data_Set.foldableSet)(Utility_Render.Ul.value)("<div>They aren't</div>")(itemToHtml)(set);
                           };
@@ -26294,9 +25756,12 @@ var PS = {};
                           return new Data_Tuple.Tuple(Data_Maybe.Just.create(renderDConnections(cons)), DotLang.highlightPaths(dictShow)(bodyBackAltColor)(cons)(dotGraph));
                       };
                       var nothing = new Data_Tuple.Tuple(Data_Maybe.Nothing.value, dotGraph);
-                      return Data_Bifunctor.rmap(Data_Tuple.bifunctorTuple)(function ($70) {
-                          return Utility_Render.MkElement(Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value)($70));
-                      })(Data_Maybe.maybe(nothing)(just)(v.dConnections));
+                      return Data_Bifunctor.rmap(Data_Tuple.bifunctorTuple)((function () {
+                          var $72 = Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value);
+                          return function ($73) {
+                              return Utility_Render.MkElement($72($73));
+                          };
+                      })())(Data_Maybe.maybe(nothing)(just)(v.dConnections));
                   })();
                   return {
                       svg: v1.value1,
@@ -26335,7 +25800,7 @@ var PS = {};
                           if (Data_Boolean.otherwise) {
                               return new Data_Either.Left("d-connection query asks about vertex not in graph");
                           };
-                          throw new Error("Failed pattern match at ConditionalDSep (line 135, column 5 - line 138, column 5): " + [ g.constructor.name, k.constructor.name ]);
+                          throw new Error("Failed pattern match at ConditionalDSep (line 136, column 5 - line 138, column 77): " + [ g.constructor.name, k.constructor.name ]);
                       };
                   };
                   var emptyToNothing = function (s) {
@@ -26345,7 +25810,7 @@ var PS = {};
                       if (Data_Boolean.otherwise) {
                           return new Data_Maybe.Just(s);
                       };
-                      throw new Error("Failed pattern match at ConditionalDSep (line 138, column 5 - line 140, column 27): " + [ s.constructor.name ]);
+                      throw new Error("Failed pattern match at ConditionalDSep (line 139, column 5 - line 141, column 27): " + [ s.constructor.name ]);
                   };
                   var conditionedVertex = function (s) {
                       return function (k) {
@@ -26355,7 +25820,7 @@ var PS = {};
                           if (Data_Boolean.otherwise) {
                               return new Data_Either.Right(k);
                           };
-                          throw new Error("Failed pattern match at ConditionalDSep (line 132, column 5 - line 134, column 28): " + [ s.constructor.name, k.constructor.name ]);
+                          throw new Error("Failed pattern match at ConditionalDSep (line 133, column 5 - line 135, column 28): " + [ s.constructor.name, k.constructor.name ]);
                       };
                   };
                   return Control_Bind.bind(Data_Either.bindEither)(Utility.stringToGraph(graphS))(function (v) {
@@ -26418,17 +25883,26 @@ var PS = {};
   })();
   var analyze = function (dictOrd) {
       return function (v) {
-          var fromJust$prime = function (x) {
-              return Partial_Unsafe.unsafePartialBecause("Already checked conditioning overlap during parsing")(function (dictPartial) {
-                  return Data_Maybe.fromJust(dictPartial)(x);
+          var dConnections$prime = function (ks) {
+              return GDP_Named.name3(ks)(v.conditionedOn)(v.graph)(function (ks$prime) {
+                  return function (conditionedOn$prime) {
+                      return function (graph$prime) {
+                          var v1 = Causal_Kernel.disjointnessTwoSet(dictOrd)(ks$prime)(conditionedOn$prime);
+                          if (v1 instanceof Data_Maybe.Just) {
+                              return Data_Set.map(Causal_Kernel.ordPath(dictOrd))(GDP_Named.unName)(Data_Graph_Causal.dConnectedBy(dictOrd)(v1.value0)(ks$prime)(conditionedOn$prime)(graph$prime));
+                          };
+                          if (v1 instanceof Data_Maybe.Nothing) {
+                              return Partial_Unsafe.unsafeCrashWith("Already checked conditioning overlap during parsing");
+                          };
+                          throw new Error("Failed pattern match at ConditionalDSep (line 151, column 7 - line 157, column 80): " + [ v1.constructor.name ]);
+                      };
+                  };
               });
           };
           return {
               graph: v.graph,
               dSeparations: Data_Graph_Causal.dSeparations(dictOrd)(v.conditionedOn)(v.graph),
-              dConnections: Data_Functor.map(Data_Maybe.functorMaybe)(function (ks) {
-                  return fromJust$prime(Data_Graph_Causal.dConnectedBy(dictOrd)(ks)(v.conditionedOn)(v.graph));
-              })(v.connectionQuery)
+              dConnections: Data_Functor.map(Data_Maybe.functorMaybe)(dConnections$prime)(v.connectionQuery)
           };
       };
   };
@@ -26444,66 +25918,59 @@ var PS = {};
       error: error
   };
   exports["app"] = app;
-  exports["elements"] = elements;
-  exports["error"] = error;
-  exports["readInput"] = readInput;
-  exports["parse"] = parse;
-  exports["analyze"] = analyze;
-  exports["unparse"] = unparse;
-  exports["render"] = render;
-})(PS["ConditionalDSep"] = PS["ConditionalDSep"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var App = PS["App"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Argonaut_Decode = PS["Data.Argonaut.Decode"];
-  var Data_Argonaut_Decode_Class = PS["Data.Argonaut.Decode.Class"];
-  var Data_DotLang = PS["Data.DotLang"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Compose = PS["Data.Functor.Compose"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_Graph_Causal = PS["Data.Graph.Causal"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
-  var Data_List = PS["Data.List"];
-  var Data_List_Lazy = PS["Data.List.Lazy"];
-  var Data_List_Lazy_Types = PS["Data.List.Lazy.Types"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_TwoSet = PS["Data.TwoSet"];
-  var Data_Yaml = PS["Data.Yaml"];
-  var DotLang = PS["DotLang"];
-  var Effect = PS["Effect"];
-  var FRP = PS["FRP"];
-  var FRP_Event = PS["FRP.Event"];
-  var FRP_JQuery = PS["FRP.JQuery"];
-  var Graphics_Graphviz = PS["Graphics.Graphviz"];
-  var JQuery_Fancy = PS["JQuery.Fancy"];
-  var Prelude = PS["Prelude"];
-  var Utility = PS["Utility"];
-  var Utility_Render = PS["Utility.Render"];                 
+  $PS["DToGraph"] = $PS["DToGraph"] || {};
+  var exports = $PS["DToGraph"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Argonaut_Decode_Class = $PS["Data.Argonaut.Decode.Class"];
+  var Data_DotLang = $PS["Data.DotLang"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Functor_Compose = $PS["Data.Functor.Compose"];
+  var Data_Graph = $PS["Data.Graph"];
+  var Data_Graph_Causal = $PS["Data.Graph.Causal"];
+  var Data_HeytingAlgebra = $PS["Data.HeytingAlgebra"];
+  var Data_List_Lazy = $PS["Data.List.Lazy"];
+  var Data_List_Lazy_Types = $PS["Data.List.Lazy.Types"];
+  var Data_List_Types = $PS["Data.List.Types"];
+  var Data_Map = $PS["Data.Map"];
+  var Data_Map_Internal = $PS["Data.Map.Internal"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Semigroup = $PS["Data.Semigroup"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Show = $PS["Data.Show"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_TwoSet = $PS["Data.TwoSet"];
+  var Data_Yaml = $PS["Data.Yaml"];
+  var DotLang = $PS["DotLang"];
+  var Effect = $PS["Effect"];
+  var FRP = $PS["FRP"];
+  var FRP_JQuery = $PS["FRP.JQuery"];
+  var Graphics_Graphviz = $PS["Graphics.Graphviz"];
+  var JQuery_Fancy = $PS["JQuery.Fancy"];
+  var Utility = $PS["Utility"];
+  var Utility_Render = $PS["Utility.Render"];                
   var unparse = function (dictShow) {
       return function (kToLabel) {
           return function (v) {
-              return Utility_Render.MkElement(Data_Foldable.foldMap(Data_List_Types.foldableList)(Data_Monoid.monoidString)(function ($37) {
-                  return Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value)(DotLang.graphToGraph(dictShow)(kToLabel)($37));
-              })(v.compatibleGraphs));
+              return Utility_Render.MkElement(Data_Foldable.foldMap(Data_List_Types.foldableList)(Data_Monoid.monoidString)((function () {
+                  var $37 = Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value);
+                  var $38 = DotLang.graphToGraph(dictShow)(kToLabel);
+                  return function ($39) {
+                      return $37($38($39));
+                  };
+              })())(v.compatibleGraphs));
           };
       };
   };
@@ -26526,9 +25993,13 @@ var PS = {};
                               nodes: v1
                           };
                       };
-                  })(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(function ($38) {
-                      return Data_Functor.map(Data_Either.functorEither)(Data_Set.map(Data_TwoSet.ordTwoSet(dictOrd))(Data_TwoSet.fromTuple))(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeSet(Data_Tuple.ordTuple(dictOrd)(dictOrd))(Data_Argonaut_Decode_Class.decodeJsonTuple(dictDecodeJson)(dictDecodeJson)))($38));
-                  })(Data_Yaml.parseFromYaml)(dSeparationsS)))(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeSet(dictOrd)(dictDecodeJson)))(Data_Yaml.parseFromYaml)(nodesS));
+                  })(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)((function () {
+                      var $40 = Data_Functor.map(Data_Either.functorEither)(Data_Set.map(Data_TwoSet.ordTwoSet(dictOrd))(Data_TwoSet.fromTuple));
+                      var $41 = Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeSet(Data_Tuple.ordTuple(dictOrd)(dictOrd))(Data_Argonaut_Decode_Class.decodeJsonTuple(dictDecodeJson)(dictDecodeJson)));
+                      return function ($42) {
+                          return $40($41($42));
+                      };
+                  })())(Data_Yaml.parseFromYaml)(dSeparationsS)))(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(Data_Argonaut_Decode_Class.decodeJson(Data_Argonaut_Decode_Class.decodeSet(dictOrd)(dictDecodeJson)))(Data_Yaml.parseFromYaml)(nodesS));
               };
           };
       };
@@ -26561,25 +26032,37 @@ var PS = {};
               var disconnectedGraph = Data_Map_Internal.fromFoldable(dictOrd)(Data_Set.foldableSet)(Data_Set.map(Data_Tuple.ordTuple(dictOrd)(Data_Tuple.ordTuple(dictOrd)(Data_Set.ordSet(dictOrd))))(function (k) {
                   return new Data_Tuple.Tuple(k, new Data_Tuple.Tuple(k, Data_Set.empty));
               })(nodes));
-              var mkGraph = function ($39) {
-                  return Data_Graph.fromMap(Data_Function.flip(Data_Map_Internal.union(dictOrd))(disconnectedGraph)(Data_Map_Internal.fromFoldableWith(dictOrd)(Data_Set.foldableSet)(merge)(Data_Set.map(Data_Tuple.ordTuple(dictOrd)(Data_Tuple.ordTuple(dictOrd)(Data_Set.ordSet(dictOrd))))(function (v) {
+              var mkGraph = (function () {
+                  var $43 = Data_Function.flip(Data_Map_Internal.union(dictOrd))(disconnectedGraph);
+                  var $44 = Data_Map_Internal.fromFoldableWith(dictOrd)(Data_Set.foldableSet)(merge);
+                  var $45 = Data_Set.map(Data_Tuple.ordTuple(dictOrd)(Data_Tuple.ordTuple(dictOrd)(Data_Set.ordSet(dictOrd))))(function (v) {
                       return Data_Tuple.Tuple.create(v.value0)(Data_Tuple.Tuple.create(v.value0)(Data_Set.singleton(v.value1)));
-                  })($39))));
-              };
-              var dSeps$prime = Data_Semigroup.append(Data_Set.semigroupSet(Data_Tuple.ordTuple(dictOrd)(dictOrd)))(Data_Set.map(Data_Tuple.ordTuple(dictOrd)(dictOrd))(Data_TwoSet.toTuple)(dSeps))(Data_Set.map(Data_Tuple.ordTuple(dictOrd)(dictOrd))(function ($40) {
-                  return Data_Tuple.swap(Data_TwoSet.toTuple($40));
+                  });
+                  return function ($46) {
+                      return Data_Graph.fromMap($43($44($45($46))));
+                  };
+              })();
+              var dSeps$prime = Data_Semigroup.append(Data_Set.semigroupSet(Data_Tuple.ordTuple(dictOrd)(dictOrd)))(Data_Set.map(Data_Tuple.ordTuple(dictOrd)(dictOrd))(Data_TwoSet.toTuple)(dSeps))(Data_Set.map(Data_Tuple.ordTuple(dictOrd)(dictOrd))(function ($47) {
+                  return Data_Tuple.swap(Data_TwoSet.toTuple($47));
               })(dSeps));
-              return Data_Functor.map(Data_List_Lazy_Types.functorList)(mkGraph)(Data_List_Lazy.filter(function ($41) {
-                  return !Data_Set.isEmpty($41);
-              })(Utility["powerSet'"](Data_Tuple.ordTuple(dictOrd)(dictOrd))(Data_Function.flip(Data_Set.difference(Data_Tuple.ordTuple(dictOrd)(dictOrd)))(dSeps$prime)(Utility.distinctPairs(dictOrd)(nodes)))));
+              return Data_Functor.map(Data_List_Lazy_Types.functorList)(mkGraph)(Data_List_Lazy.filter((function () {
+                  var $48 = Data_HeytingAlgebra.not(Data_HeytingAlgebra.heytingAlgebraBoolean);
+                  return function ($49) {
+                      return $48(Data_Set.isEmpty($49));
+                  };
+              })())(Utility["powerSet'"](Data_Tuple.ordTuple(dictOrd)(dictOrd))(Data_Function.flip(Data_Set.difference(Data_Tuple.ordTuple(dictOrd)(dictOrd)))(dSeps$prime)(Utility.distinctPairs(dictOrd)(nodes)))));
           };
       };
   };
   var analyze = function (dictOrd) {
       return function (v) {
-          var nonCyclic = function ($42) {
-              return !Data_Graph.isCyclic(dictOrd)($42);
-          };
+          var nonCyclic = (function () {
+              var $50 = Data_HeytingAlgebra.not(Data_HeytingAlgebra.heytingAlgebraBoolean);
+              var $51 = Data_Graph.isCyclic(dictOrd);
+              return function ($52) {
+                  return $50($51($52));
+              };
+          })();
           var matchingDSeps = function (g) {
               return Data_Eq.eq(Data_Set.eqSet(Data_TwoSet.eqTwoSet(dictOrd.Eq0())))(v.dSeparations)(Data_Graph_Causal.dSeparations(dictOrd)(Data_Set.empty)(g));
           };
@@ -26602,92 +26085,91 @@ var PS = {};
       },
       error: error
   };
-  exports["elements"] = elements;
   exports["app"] = app;
-  exports["error"] = error;
-  exports["readInput"] = readInput;
-  exports["parse"] = parse;
-  exports["analyze"] = analyze;
-  exports["allGraphsExcept"] = allGraphsExcept;
-  exports["unparse"] = unparse;
-  exports["render"] = render;
-})(PS["DToGraph"] = PS["DToGraph"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var App = PS["App"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Array = PS["Data.Array"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_DotLang = PS["Data.DotLang"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Compose = PS["Data.Functor.Compose"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_Graph_Causal = PS["Data.Graph.Causal"];
-  var Data_Map = PS["Data.Map"];
-  var Data_Map_Internal = PS["Data.Map.Internal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_TwoSet = PS["Data.TwoSet"];
-  var Data_Unfoldable = PS["Data.Unfoldable"];
-  var Data_Unit = PS["Data.Unit"];
-  var DotLang = PS["DotLang"];
-  var Effect = PS["Effect"];
-  var FRP = PS["FRP"];
-  var FRP_Event = PS["FRP.Event"];
-  var FRP_JQuery = PS["FRP.JQuery"];
-  var Graphics_Graphviz = PS["Graphics.Graphviz"];
-  var JQuery_Fancy = PS["JQuery.Fancy"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Utility = PS["Utility"];
-  var Utility_Render = PS["Utility.Render"];
+  $PS["Discriminate"] = $PS["Discriminate"] || {};
+  var exports = $PS["Discriminate"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Array = $PS["Data.Array"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_DotLang = $PS["Data.DotLang"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Eq = $PS["Data.Eq"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Function = $PS["Data.Function"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Functor_Compose = $PS["Data.Functor.Compose"];
+  var Data_Graph = $PS["Data.Graph"];
+  var Data_Graph_Causal = $PS["Data.Graph.Causal"];
+  var Data_Map = $PS["Data.Map"];
+  var Data_Map_Internal = $PS["Data.Map.Internal"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Show = $PS["Data.Show"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_TwoSet = $PS["Data.TwoSet"];
+  var Data_Unfoldable = $PS["Data.Unfoldable"];
+  var Data_Unit = $PS["Data.Unit"];
+  var DotLang = $PS["DotLang"];
+  var Effect = $PS["Effect"];
+  var FRP = $PS["FRP"];
+  var FRP_JQuery = $PS["FRP.JQuery"];
+  var GDP_Named = $PS["GDP.Named"];
+  var GDP_Proof = $PS["GDP.Proof"];
+  var Graphics_Graphviz = $PS["Graphics.Graphviz"];
+  var JQuery_Fancy = $PS["JQuery.Fancy"];
+  var Utility = $PS["Utility"];
+  var Utility_Render = $PS["Utility.Render"];
   var unparse = function (dictShow) {
       return function (idToString) {
           return function (valueToLabel) {
               var unparseInstrument = function (v) {
                   var text = "<div> Instrument " + (idToString(v.instrument) + (" and cause " + (idToString(v.cause) + "</div>")));
-                  var renderGraph = function ($57) {
-                      return Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value)(DotLang.graphToGraph(dictShow)(valueToLabel)($57));
-                  };
+                  var renderGraph = (function () {
+                      var $56 = Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value);
+                      var $57 = DotLang.graphToGraph(dictShow)(valueToLabel);
+                      return function ($58) {
+                          return $56($57($58));
+                      };
+                  })();
                   return renderGraph(Data_Tuple.snd(v.graph1)) + (renderGraph(Data_Tuple.snd(v.graph2)) + text);
               };
               var noInstruments = function (v) {
                   return "<div>These two graphs are already distinguishable!</div>";
               };
-              return function ($58) {
+              var $59 = Data_Either.either(noInstruments)((function () {
+                  var $61 = Data_Foldable.foldMap(Data_Foldable.foldableArray)(Data_Monoid.monoidString)(unparseInstrument);
+                  return function ($62) {
+                      return Utility_Render.MkElement($61($62));
+                  };
+              })());
+              return function ($60) {
                   return (function (v) {
                       return {
                           analysis: v
                       };
-                  })(Data_Either.either(noInstruments)(function ($59) {
-                      return Utility_Render.MkElement(Data_Foldable.foldMap(Data_Foldable.foldableArray)(Data_Monoid.monoidString)(unparseInstrument)($59));
-                  })((function (v) {
+                  })($59((function (v) {
                       return v.instruments;
-                  })($58)));
+                  })($60)));
               };
           };
       };
   };
   var render = function (els) {
-      return function ($60) {
-          return Utility_Render.replaceElIn(els.analysis)((function (v) {
+      var $63 = Utility_Render.replaceElIn(els.analysis);
+      return function ($64) {
+          return $63((function (v) {
               return v.analysis;
-          })($60));
+          })($64));
       };
   };
   var readInput = function (els) {
@@ -26698,8 +26180,8 @@ var PS = {};
           return Control_Bind.bind(Data_Either.bindEither)(Utility.stringToGraph(graph1S))(function (v) {
               return Control_Bind.bind(Data_Either.bindEither)(Utility.stringToGraph(graph2S))(function (v1) {
                   return Control_Bind.discard(Control_Bind.discardUnit)(Data_Either.bindEither)((function () {
-                      var $33 = Data_Eq.eq(Data_Set.eqSet(Data_Eq.eqString))(Data_Map.keys(Data_Graph.toMap(v)))(Data_Map.keys(Data_Graph.toMap(v1)));
-                      if ($33) {
+                      var $32 = Data_Eq.eq(Data_Set.eqSet(Data_Eq.eqString))(Data_Map.keys(Data_Graph.toMap(v)))(Data_Map.keys(Data_Graph.toMap(v1)));
+                      if ($32) {
                           return Control_Applicative.pure(Data_Either.applicativeEither)(Data_Unit.unit);
                       };
                       return new Data_Either.Left("This only makes sense for graphs with the same vertices");
@@ -26742,18 +26224,17 @@ var PS = {};
                           graph2: new Data_Tuple.Tuple(v1.value1.dSeparations, v1.value1.graph)
                       };
                   };
-                  var fromJust$prime = function (x) {
-                      return Partial_Unsafe.unsafePartialBecause("No conditioning set")(function (dictPartial) {
-                          return Data_Maybe.fromJust(dictPartial)(x);
-                      });
-                  };
                   var mkVariations = function (g) {
                       var vertices = Data_Map_Internal.toUnfoldable(Data_Unfoldable.unfoldableArray)(Data_Functor.map(Data_Map_Internal.functorMap)(Data_Tuple.fst)(Data_Graph.toMap(v.graph1)));
                       var dSeps = function (v1) {
                           return function (g$prime) {
                               return {
                                   cause: v1.value0,
-                                  dSeparations: fromJust$prime(Data_Graph_Causal.dSeparatedFrom(dictOrd)(idForInstrument(v1.value0))(Data_Set.empty)(g$prime)),
+                                  dSeparations: GDP_Named.name2(idForInstrument(v1.value0))(Data_Set.empty)(function (k$prime) {
+                                      return function (conditionedOn) {
+                                          return Data_Graph_Causal.dSeparatedFrom(dictOrd)(GDP_Proof.axiom)(k$prime)(conditionedOn)(g$prime);
+                                      };
+                                  }),
                                   graph: g$prime
                               };
                           };
@@ -26783,7 +26264,7 @@ var PS = {};
                           })
                       };
                   };
-                  throw new Error("Failed pattern match at Discriminate (line 104, column 3 - line 111, column 86): " + [ v1.constructor.name ]);
+                  throw new Error("Failed pattern match at Discriminate (line 105, column 3 - line 112, column 86): " + [ v1.constructor.name ]);
               };
           };
       };
@@ -26804,53 +26285,43 @@ var PS = {};
       error: error
   };
   exports["app"] = app;
-  exports["elements"] = elements;
-  exports["readInput"] = readInput;
-  exports["parse"] = parse;
-  exports["analyze"] = analyze;
-  exports["unparse"] = unparse;
-  exports["render"] = render;
-  exports["error"] = error;
-})(PS["Discriminate"] = PS["Discriminate"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var App = PS["App"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_DotLang = PS["Data.DotLang"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Compose = PS["Data.Functor.Compose"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_Graph_Causal = PS["Data.Graph.Causal"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Tuple_Nested = PS["Data.Tuple.Nested"];
-  var Data_Unit = PS["Data.Unit"];
-  var DotLang = PS["DotLang"];
-  var Effect = PS["Effect"];
-  var FRP = PS["FRP"];
-  var FRP_Event = PS["FRP.Event"];
-  var FRP_JQuery = PS["FRP.JQuery"];
-  var Graphics_Graphviz = PS["Graphics.Graphviz"];
-  var JQuery_Fancy = PS["JQuery.Fancy"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Utility = PS["Utility"];
-  var Utility_Render = PS["Utility.Render"];                 
+  $PS["FindInstruments"] = $PS["FindInstruments"] || {};
+  var exports = $PS["FindInstruments"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_DotLang = $PS["Data.DotLang"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Functor_Compose = $PS["Data.Functor.Compose"];
+  var Data_Graph_Causal = $PS["Data.Graph.Causal"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Show = $PS["Data.Show"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Tuple_Nested = $PS["Data.Tuple.Nested"];
+  var Data_Unit = $PS["Data.Unit"];
+  var DotLang = $PS["DotLang"];
+  var Effect = $PS["Effect"];
+  var FRP = $PS["FRP"];
+  var FRP_Event = $PS["FRP.Event"];
+  var FRP_JQuery = $PS["FRP.JQuery"];
+  var GDP_Named = $PS["GDP.Named"];
+  var GDP_Proof = $PS["GDP.Proof"];
+  var Graphics_Graphviz = $PS["Graphics.Graphviz"];
+  var JQuery_Fancy = $PS["JQuery.Fancy"];
+  var Utility = $PS["Utility"];
+  var Utility_Render = $PS["Utility.Render"];                
   var unparse = function (dictShow) {
       return function (kToId) {
           return function (valueToLabel) {
@@ -26895,7 +26366,7 @@ var PS = {};
                       if (Data_Boolean.otherwise) {
                           return new Data_Either.Left("Instruments query asks about vertex not in graph");
                       };
-                      throw new Error("Failed pattern match at FindInstruments (line 108, column 5 - line 111, column 5): " + [ g.constructor.name, k.constructor.name ]);
+                      throw new Error("Failed pattern match at FindInstruments (line 109, column 5 - line 111, column 76): " + [ g.constructor.name, k.constructor.name ]);
                   };
               };
               var emptyToLeft = function (s) {
@@ -26905,7 +26376,7 @@ var PS = {};
                   if (Data_Boolean.otherwise) {
                       return new Data_Either.Right(s);
                   };
-                  throw new Error("Failed pattern match at FindInstruments (line 111, column 5 - line 113, column 28): " + [ s.constructor.name ]);
+                  throw new Error("Failed pattern match at FindInstruments (line 112, column 5 - line 114, column 28): " + [ s.constructor.name ]);
               };
               return Control_Bind.bind(Data_Either.bindEither)(Utility.stringToGraph(graphS))(function (v) {
                   return Control_Bind.bind(Data_Either.bindEither)(Control_Bind.composeKleisliFlipped(Data_Either.bindEither)(missingVertex(v))(emptyToLeft)(causeS))(function (v1) {
@@ -26960,14 +26431,13 @@ var PS = {};
   })();
   var analyze = function (dictOrd) {
       return function (v) {
-          var fromJust$prime = function (x) {
-              return Partial_Unsafe.unsafePartialBecause("No conditioning set")(function (dictPartial) {
-                  return Data_Maybe.fromJust(dictPartial)(x);
-              });
-          };
           return {
               graph: v.graph,
-              instruments: fromJust$prime(Data_Graph_Causal.instruments(dictOrd)(v.instrumentsQuery)(Data_Set.empty)(v.graph))
+              instruments: GDP_Named.name2(v.instrumentsQuery)(Data_Set.empty)(function (instrumentsQuery$prime) {
+                  return function (conditioningSet) {
+                      return Data_Graph_Causal.instruments(dictOrd)(GDP_Proof.axiom)(instrumentsQuery$prime)(conditioningSet)(v.graph);
+                  };
+              })
           };
       };
   };
@@ -26983,60 +26453,48 @@ var PS = {};
       error: error
   };
   exports["app"] = app;
-  exports["elements"] = elements;
-  exports["readInput"] = readInput;
-  exports["parse"] = parse;
-  exports["analyze"] = analyze;
-  exports["unparse"] = unparse;
-  exports["render"] = render;
-  exports["error"] = error;
-})(PS["FindInstruments"] = PS["FindInstruments"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+})(PS);
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var App = PS["App"];
-  var Color = PS["Color"];
-  var Control_Applicative = PS["Control.Applicative"];
-  var Control_Apply = PS["Control.Apply"];
-  var Control_Bind = PS["Control.Bind"];
-  var Control_Category = PS["Control.Category"];
-  var Control_Semigroupoid = PS["Control.Semigroupoid"];
-  var Data_Bifunctor = PS["Data.Bifunctor"];
-  var Data_Boolean = PS["Data.Boolean"];
-  var Data_DotLang = PS["Data.DotLang"];
-  var Data_Either = PS["Data.Either"];
-  var Data_Eq = PS["Data.Eq"];
-  var Data_Foldable = PS["Data.Foldable"];
-  var Data_Function = PS["Data.Function"];
-  var Data_Functor = PS["Data.Functor"];
-  var Data_Functor_Compose = PS["Data.Functor.Compose"];
-  var Data_Graph = PS["Data.Graph"];
-  var Data_Graph_Causal = PS["Data.Graph.Causal"];
-  var Data_List_NonEmpty = PS["Data.List.NonEmpty"];
-  var Data_List_Types = PS["Data.List.Types"];
-  var Data_Maybe = PS["Data.Maybe"];
-  var Data_Monoid = PS["Data.Monoid"];
-  var Data_Newtype = PS["Data.Newtype"];
-  var Data_Ord = PS["Data.Ord"];
-  var Data_Semigroup = PS["Data.Semigroup"];
-  var Data_Set = PS["Data.Set"];
-  var Data_Show = PS["Data.Show"];
-  var Data_Traversable = PS["Data.Traversable"];
-  var Data_Tuple = PS["Data.Tuple"];
-  var Data_Tuple_Nested = PS["Data.Tuple.Nested"];
-  var Data_TwoSet = PS["Data.TwoSet"];
-  var Data_Unit = PS["Data.Unit"];
-  var DotLang = PS["DotLang"];
-  var Effect = PS["Effect"];
-  var FRP = PS["FRP"];
-  var FRP_Event = PS["FRP.Event"];
-  var FRP_JQuery = PS["FRP.JQuery"];
-  var Graphics_Graphviz = PS["Graphics.Graphviz"];
-  var JQuery_Fancy = PS["JQuery.Fancy"];
-  var Partial_Unsafe = PS["Partial.Unsafe"];
-  var Prelude = PS["Prelude"];
-  var Utility = PS["Utility"];
-  var Utility_Render = PS["Utility.Render"];                 
+  $PS["GraphToD"] = $PS["GraphToD"] || {};
+  var exports = $PS["GraphToD"];
+  var Causal_Kernel = $PS["Causal.Kernel"];
+  var Color = $PS["Color"];
+  var Control_Applicative = $PS["Control.Applicative"];
+  var Control_Apply = $PS["Control.Apply"];
+  var Control_Bind = $PS["Control.Bind"];
+  var Control_Category = $PS["Control.Category"];
+  var Data_Bifunctor = $PS["Data.Bifunctor"];
+  var Data_Boolean = $PS["Data.Boolean"];
+  var Data_DotLang = $PS["Data.DotLang"];
+  var Data_Either = $PS["Data.Either"];
+  var Data_Foldable = $PS["Data.Foldable"];
+  var Data_Functor = $PS["Data.Functor"];
+  var Data_Functor_Compose = $PS["Data.Functor.Compose"];
+  var Data_Graph_Causal = $PS["Data.Graph.Causal"];
+  var Data_Maybe = $PS["Data.Maybe"];
+  var Data_Monoid = $PS["Data.Monoid"];
+  var Data_Newtype = $PS["Data.Newtype"];
+  var Data_Ord = $PS["Data.Ord"];
+  var Data_Set = $PS["Data.Set"];
+  var Data_Show = $PS["Data.Show"];
+  var Data_Traversable = $PS["Data.Traversable"];
+  var Data_Tuple = $PS["Data.Tuple"];
+  var Data_Tuple_Nested = $PS["Data.Tuple.Nested"];
+  var Data_TwoSet = $PS["Data.TwoSet"];
+  var Data_Unit = $PS["Data.Unit"];
+  var DotLang = $PS["DotLang"];
+  var Effect = $PS["Effect"];
+  var FRP = $PS["FRP"];
+  var FRP_Event = $PS["FRP.Event"];
+  var FRP_JQuery = $PS["FRP.JQuery"];
+  var GDP_Named = $PS["GDP.Named"];
+  var GDP_Proof = $PS["GDP.Proof"];
+  var Graphics_Graphviz = $PS["Graphics.Graphviz"];
+  var JQuery_Fancy = $PS["JQuery.Fancy"];
+  var Utility = $PS["Utility"];
+  var Utility_Render = $PS["Utility.Render"];                
   var unparse = function (dictShow) {
       return function (kToId) {
           return function (valueToLabel) {
@@ -27052,7 +26510,7 @@ var PS = {};
                       var just = function (cons) {
                           var renderDConnections = function (set) {
                               var itemToHtml = function (path) {
-                                  return Data_Foldable.intercalate(Data_List_Types.foldableNonEmptyList)(Data_Monoid.monoidString)("\u2192")(Data_Functor.map(Data_List_Types.functorNonEmptyList)(kToId)(path));
+                                  return Data_Foldable.intercalate(Causal_Kernel.foldablePath)(Data_Monoid.monoidString)("\u2192")(Data_Functor.map(Causal_Kernel.functorPath)(kToId)(path));
                               };
                               return Utility_Render.renderFoldableAsHtmlList(Data_Set.foldableSet)(Utility_Render.Ul.value)("<div>They aren't</div>")(itemToHtml)(set);
                           };
@@ -27060,9 +26518,12 @@ var PS = {};
                           return new Data_Tuple.Tuple(Data_Maybe.Just.create(renderDConnections(cons)), DotLang.highlightPaths(dictShow)(bodyBackAltColor)(cons)(dotGraph));
                       };
                       var nothing = new Data_Tuple.Tuple(Data_Maybe.Nothing.value, dotGraph);
-                      return Data_Bifunctor.rmap(Data_Tuple.bifunctorTuple)(function ($61) {
-                          return Utility_Render.MkElement(Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value)($61));
-                      })(Data_Maybe.maybe(nothing)(just)(v.dConnections));
+                      return Data_Bifunctor.rmap(Data_Tuple.bifunctorTuple)((function () {
+                          var $60 = Graphics_Graphviz.renderToSvg(Data_DotLang.graphDotLang)(Graphics_Graphviz.Dot.value);
+                          return function ($61) {
+                              return Utility_Render.MkElement($60($61));
+                          };
+                      })())(Data_Maybe.maybe(nothing)(just)(v.dConnections));
                   })();
                   return {
                       svg: v1.value1,
@@ -27098,7 +26559,7 @@ var PS = {};
                       if (Data_Boolean.otherwise) {
                           return new Data_Either.Left("d-connection query asks about vertex not in graph");
                       };
-                      throw new Error("Failed pattern match at GraphToD (line 165, column 5 - line 168, column 5): " + [ g.constructor.name, k.constructor.name ]);
+                      throw new Error("Failed pattern match at GraphToD (line 168, column 5 - line 170, column 77): " + [ g.constructor.name, k.constructor.name ]);
                   };
               };
               var emptyToNothing = function (s) {
@@ -27108,7 +26569,7 @@ var PS = {};
                   if (Data_Boolean.otherwise) {
                       return new Data_Maybe.Just(s);
                   };
-                  throw new Error("Failed pattern match at GraphToD (line 168, column 5 - line 170, column 26): " + [ s.constructor.name ]);
+                  throw new Error("Failed pattern match at GraphToD (line 171, column 5 - line 173, column 27): " + [ s.constructor.name ]);
               };
               return Control_Bind.bind(Data_Either.bindEither)(Utility.stringToGraph(graphS))(function (v) {
                   return Control_Bind.bind(Data_Either.bindEither)(Data_Traversable.traverse(Data_Traversable.traversableMaybe)(Data_Either.applicativeEither)(missingVertex(v))(emptyToNothing(fromS)))(function (v1) {
@@ -27163,17 +26624,19 @@ var PS = {};
   })();
   var analyze = function (dictOrd) {
       return function (v) {
-          var fromJust$prime = function (x) {
-              return Partial_Unsafe.unsafePartialBecause("No conditioning set")(function (dictPartial) {
-                  return Data_Maybe.fromJust(dictPartial)(x);
+          var dConnectedBy = function (ks) {
+              return GDP_Named.name3(ks)(Data_Set.empty)(v.graph)(function (ks$prime) {
+                  return function (conditionedOn) {
+                      return function (graph$prime) {
+                          return Data_Set.map(Causal_Kernel.ordPath(dictOrd))(GDP_Named.unName)(Data_Graph_Causal.dConnectedBy(dictOrd)(GDP_Proof.axiom)(ks$prime)(conditionedOn)(graph$prime));
+                      };
+                  };
               });
           };
           return {
               graph: v.graph,
               dSeparations: Data_Graph_Causal.dSeparations(dictOrd)(Data_Set.empty)(v.graph),
-              dConnections: Data_Functor.map(Data_Maybe.functorMaybe)(function (ks) {
-                  return fromJust$prime(Data_Graph_Causal.dConnectedBy(dictOrd)(ks)(Data_Set.empty)(v.graph));
-              })(v.connectionQuery)
+              dConnections: Data_Functor.map(Data_Maybe.functorMaybe)(dConnectedBy)(v.connectionQuery)
           };
       };
   };
@@ -27189,35 +26652,26 @@ var PS = {};
       error: error
   };
   exports["app"] = app;
-  exports["elements"] = elements;
-  exports["error"] = error;
-  exports["readInput"] = readInput;
-  exports["unparse"] = unparse;
-  exports["render"] = render;
-  exports["analyze"] = analyze;
-  exports["parse"] = parse;
-})(PS["GraphToD"] = PS["GraphToD"] || {});
+})(PS);
 (function(exports) {
-    "use strict";
+  "use strict";
   var jQuery =require("jquery"); 
   window.jQuery = jQuery;
   exports.jQuery = jQuery;
 })(PS["Main"] = PS["Main"] || {});
-(function(exports) {
-  // Generated by purs version 0.12.3
+(function($PS) {
+  // Generated by purs version 0.13.3
   "use strict";
-  var $foreign = PS["Main"];
-  var App = PS["App"];
-  var ConditionalDSep = PS["ConditionalDSep"];
-  var Control_Bind = PS["Control.Bind"];
-  var DToGraph = PS["DToGraph"];
-  var Discriminate = PS["Discriminate"];
-  var Effect = PS["Effect"];
-  var FindInstruments = PS["FindInstruments"];
-  var Foreign = PS["Foreign"];
-  var GraphToD = PS["GraphToD"];
-  var JQuery = PS["JQuery"];
-  var Prelude = PS["Prelude"];                 
+  $PS["Main"] = $PS["Main"] || {};
+  var exports = $PS["Main"];
+  var $foreign = $PS["Main"];
+  var App = $PS["App"];
+  var ConditionalDSep = $PS["ConditionalDSep"];
+  var DToGraph = $PS["DToGraph"];
+  var Discriminate = $PS["Discriminate"];
+  var FindInstruments = $PS["FindInstruments"];
+  var GraphToD = $PS["GraphToD"];
+  var JQuery = $PS["JQuery"];                
   var main = JQuery.ready(function __do() {
       App.runApp(GraphToD.app)();
       App.runApp(DToGraph.app)();
@@ -27227,6 +26681,6 @@ var PS = {};
   });
   exports["main"] = main;
   exports["jQuery"] = $foreign.jQuery;
-})(PS["Main"] = PS["Main"] || {});
+})(PS);
 PS["Main"].main();
-},{"jquery":1,"js-yaml":2,"viz.js":32}]},{},[39]);
+},{"jquery":1,"js-yaml":2,"viz.js":32}]},{},[38]);
