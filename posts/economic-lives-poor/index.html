@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>The Economic Lives of the Poor—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">The Economic Lives of the Poor</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/development/">development</a></li>
+    
+      <li><a href="../../tag/yaas/">yaas</a></li>
+    
+</ul></nav>
+
+  
+    <nav><a class="series" href="../../series/Nobel%2520oblige%25202019/">Series: Nobel oblige 2019</a></nav>
+  
+  <span class="date">Published on <time datetime="2019-11-19">November 19, 2019</time>.</span>
+  
+  </div>
+  
+  
+
+  
+
+  
+<div class="toc"><h5>Contents</h5>
+<ul>
+<li><a href="#living-arrangements">Living arrangements</a></li>
+<li><a href="#spending">Spending</a><ul>
+<li><a href="#food-and-other-consumption-purchases">Food and other consumption purchases</a></li>
+<li><a href="#ownership-of-assets">Ownership of assets</a></li>
+<li><a href="#health-and-well-being">Health and well-being</a></li>
+<li><a href="#investment-in-education">Investment in education</a></li>
+</ul></li>
+<li><a href="#earning">Earning</a></li>
+<li><a href="#markets">Markets</a><ul>
+<li><a href="#credit">Credit</a></li>
+<li><a href="#savings">Savings</a></li>
+<li><a href="#insurance">Insurance</a></li>
+<li><a href="#land">Land</a></li>
+</ul></li>
+<li><a href="#infrastructure">Infrastructure</a></li>
+</ul>
+</div>
+<p><a href="https://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.21.1.141">The Economic Lives of the Poor</a> is a 2007 paper by 2019 <span class="noted">Nobel Laureates</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <a href="https://en.wikipedia.org/wiki/Abhijit_Banerjee">Abhijit Banerjee</a> and <a href="https://en.wikipedia.org/wiki/Esther_Duflo">Esther Duflo</a>. It describes results from household surveys of the poor (less than $2.16 a day in 1993 <a href="https://en.wikipedia.org/wiki/Purchasing_power_parity">PPP</a> dollars) and extremely poor (less than $1.08 a day in 1993 <a href="https://en.wikipedia.org/wiki/Purchasing_power_parity">PPP</a> dollars) conducted in Cote d’Ivoire, Guatemala, India, Indonesia, Mexico, Nicaragua, Pakistan, Panama, Papua New Guinea, Peru, South Africa, Tanzania, and Timor Leste (East Timor). What follows is a condensation of that paper highlighting the most important and striking claims. I focus on the descriptive part of the paper and omit the second part of the paper investigating some concomitant economic puzzles.</p>
+<h3 id="living-arrangements">Living arrangements</h3>
+<p><a href="https://en.wikipedia.org/wiki/Extended_family">Extended families</a> are common among the extremely poor with the median household containing between seven and eight members. The population tends to be young with only about one quarter as many over 51s as 21–50s (In the U.S., the ratio is 0.6 rather than ~0.25.).</p>
+<h3 id="spending">Spending</h3>
+<h4 id="food-and-other-consumption-purchases">Food and other consumption purchases</h4>
+<p><span class="noted">Food expenditures typically represent between one half and three quarters of the budget.</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Expenditure on alcohol and tobacco ranges from about 1 percent to about 8 percent. The median extremely poor household in <a href="https://en.wikipedia.org/wiki/Udaipur">Udaipur</a> spent 10 percent of its budget on festivals, but expenditure on movies, theater and shows is less than 1 percent.</p>
+<h4 id="ownership-of-assets">Ownership of assets</h4>
+<p>Land ownership among the extremely poor ranges from 4 percent in Mexico to 99 percent in Udaipur. However, the owned plots are often small—less than three <a href="https://en.wikipedia.org/wiki/Hectare">hectares</a>—and of poor quality.</p>
+<p>“In Udaipur, where we have detailed asset data, most extremely poor households have a bed or a cot, but only about 10 percent have a chair or a stool and 5 percent have a table. […] No one has a phone.”</p>
+<h4 id="health-and-well-being">Health and well-being</h4>
+<p>The bottom decile of income in an Indian survey sample averages 1400 calories a day. Sixty-five percent of poor adults in Udaipur have a BMI that classifies them as underweight and 55 percent are <a href="https://en.wikipedia.org/wiki/Anemia">anemic</a>.</p>
+<p>Between 11 and 46 percent (depending on the country) of the extremely poor report having been bedridden for at least one day in the the last month.</p>
+<p>“While the poor certainly feel poor, their levels of self-reported happiness or self-reported health levels are not particularly low (Banerjee, Duflo, and Deaton, 2004). On the other hand, the poor do report being under a great deal of stress, both financial and psychological.”</p>
+<!--more-->
+<h4 id="investment-in-education">Investment in education</h4>
+<p>Education expenditure is generally quite low because primary schooling is often free. In 12 of the 13 countries examined, at least 50 percent of extremely poor children (ages 7 to 12) are in school.</p>
+<h3 id="earning">Earning</h3>
+<p>Day labor, self-employment in agriculture and small-scale non-agricultural entrepreneurship are each common. In fact, many of the poor have multiple occupations (possibly a form of risk spreading).</p>
+<p>“Strikingly, almost 10 percent of the time of the average household [surveyed in West Bengal] is spent on gathering fuel, either for use at home or for sale.”</p>
+<h3 id="markets">Markets</h3>
+<h4 id="credit">Credit</h4>
+<p>From 11 to 93 percent (depending on country) of rural extremely poor households have outstanding debt. The credit is usually from informal sources and the interest is generally above 3 percent per month. High interest reflects high enforcement cost rather than high risk of default.</p>
+<h4 id="savings">Savings</h4>
+<p>Savings accounts are generally uncommon. Microcredit may serve as a rough substitute with the benefit of an external enforcer (i.e. the creditor demands repayment which may be easier than forcing yourself to save).</p>
+<h4 id="insurance">Insurance</h4>
+<p>Less than 6 percent of the extremely poor are covered by health insurance. In principle, community members can informally insure each other for a variety of risks but this works best for idiosyncratic risks and not for, for example, a village-wide drought.</p>
+<h4 id="land">Land</h4>
+<p>Though land ownership is relatively common, records of ownership are less common. This makes sale or mortgage difficult. Often the poor are working land owned by others which reduces incentives for best effort.</p>
+<h3 id="infrastructure">Infrastructure</h3>
+<p>“The availability of physical infrastructure to the poor like electricity, tap water, and even basic sanitation (like access to a latrine) varies enormously across countries. In our sample of 13 countries, the number of rural poor households with access to tap water varies from none in Udaipur to 36 percent in Guatemala. The availability of electricity varies from 1.3 percent in Tanzania to 99 percent in Mexico. The availability of a latrine varies from none in Udaipur to 100 percent in Nicaragua. Different kinds of infrastructure do not always appear together.”</p>
+<p>The quality of health facilities for the poor tends to be low with health workers in one sample absent 35 percent of the time. In one study, an expert panel found that the average treatment suggested by a health provider in their sample was more likely to do harm than good. Infant mortality among the rural, extremely poor ranges from 3.4 percent in Indonesia to 16.7 percent in Pakistan.</p>
+<p>Educational facilities are similarly lacking. Teachers in one sample were found to be absent 19 percent of the time. A nationwide survey in India found that 22 percent of sixth to eighth grade children cannot read a second-grade text while 65.5 percent of children ages 7 to 14 can’t do division.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Yes, yes, we all know that The Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel is a fake Nobel.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>We’ll get back to the effects of this later.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>
