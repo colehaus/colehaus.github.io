@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/corrected-model-climate-change-global-development/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/economic-lives-poor/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -827,6 +834,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/tag/global%2520warming/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/tag/ideal%2520theory/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -1213,6 +1227,13 @@
 
     <url>
         <loc>https://www.col-ex.org/page/18/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/page/19/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>
