@@ -36,6 +36,13 @@
     </url>
 
     <url>
+        <loc>https://www.col-ex.org/posts/progress-preservation-ida/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://www.col-ex.org/posts/corrected-model-climate-change-global-development/index.html</loc>
         <changefreq>weekly</changefreq>
         
@@ -884,6 +891,13 @@
 
     <url>
         <loc>https://www.col-ex.org/tag/machine%2520ethics/index.html</loc>
+        <changefreq>weekly</changefreq>
+        
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.col-ex.org/tag/machine%2520learning/index.html</loc>
         <changefreq>weekly</changefreq>
         
         <priority>0.8</priority>

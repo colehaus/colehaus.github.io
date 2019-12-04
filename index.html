@@ -54,6 +54,60 @@ if (/Trident/.test(navigator.userAgent)) {
 <main><ul class="teasers">
   
     <li><article class="teaser">
+        <h2><a href="./posts/progress-preservation-ida/">Progress and preservation in IDA</a></h2>
+       <div class="metadata">
+        <nav class="tags"><ul>
+    
+      <li><a href="./tag/machine%2520learning/">machine learning</a></li>
+    
+</ul></nav>
+
+        
+        <span class="date">Published on <time datetime="December  3, 2019">December  3, 2019</time>.</span>
+       </div>
+
+       
+         <div class="abstract"><p>This post arose out of my attempts to understand IDA and ways it could fail. It might help you do the same and could provide useful vocabulary for discussing desiderata for IDA.</p>
+<p>We want IDA to satisfy progress—decomposition should make answering questions easier—and preservation—semantics should be retained across transformations. We need progress in each decomposition and, furthermore, repeated decompositions must be able to eventually simplify each question such that it can be answered directly by a human. Also, each decomposition and aggregation of questions and answers must introduce no more than a bounded amount of semantic drift and, furthermore, repeated decompositions and aggregations should also introduce no more than a bounded amount of semantic drift.</p></div>
+       
+
+        <div class="macros">
+<p><span class="math display">\[
+\def\sc#1{\dosc#1\csod}
+\def\dosc#1#2\csod{{\rm #1{\small #2}}}
+\]</span></p>
+</div>
+<p><a href="https://arxiv.org/pdf/1810.08575.pdf">Iterated distillation and amplification</a> (henceforth IDA) is a proposal for improving the capability of human-machine systems to suprahuman levels in complex domains where even evaluation of system outputs may be beyond unaugmented human capabilities. For a detailed explanation of the mechanics, I’ll refer you to the original paper just linked, section 0 of <a href="https://owainevans.github.io/pdfs/evans_ida_projects.pdf">Machine Learning Projects for Iterated Distillation and Amplification</a>, or one of the many other explanations floating around the Web.</p>
+<p>We can <span class="noted">view IDA as dynamic programming with function approximation</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> instead of a tabular cache. Just like the cache in dynamic programming, the machine learning component of IDA is a performance optimization. We can excise it and look at just the divide-and-conquer aspect of IDA for the sake of simplicity. Then this simplified IDA roughly consists of: (1) repeatedly decomposing tasks into simpler subtasks; (2) eventually completing sufficiently simple subtasks; and (3) aggregating outputs from subtasks into an output which completes the original, undecomposed task. We’ll <span class="noted">examine this model</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> in the rest of the post.</p>
+<h3 id="safety-is-progress-plus-preservation">Safety is progress plus preservation</h3>
+<p>For type systems, the slogan is “safety is progress plus preservation”. Because we’re using this only as a cute analogy and organizing framework, we’ll not get into the details. But for type systems:</p>
+<dl>
+<dt>Progress</dt>
+<dd>“A well-typed term is […] either […] a value or it can take a step according to the evaluation rules.”
+</dd>
+<dt>Preservation</dt>
+<dd>“If a well-typed term takes a step of evaluation, then the resulting term is also well typed.”
+</dd>
+</dl>
+<p>(Both from <span class="citation" data-cites="pierce2002types">(Pierce and Benjamin <a href="#ref-pierce2002types" role="doc-biblioref">2002</a>)</span>.)</p>
+<p>We also need progress and preservation in IDA. Roughly:</p>
+<dl>
+<dt>Progress</dt>
+<dd>A question is easy enough to be answered directly or can be decomposed into easier subquestions.
+</dd>
+<dt>Preservation</dt>
+<dd>The answer from aggregating subquestion answers is just as good as answering the original question.
+</dd>
+</dl>
+<p>Let’s try to make this more precise.</p>
+
+
+        <a href="./posts/progress-preservation-ida/" class="full-post">Full post</a>
+
+    </article></li>
+    <hr />
+  
+    <li><article class="teaser">
         <h2><a href="./posts/corrected-model-climate-change-global-development/">A corrected model suggests climate change interventions may be within a factor of two of direct cash transfers</a></h2>
        <div class="metadata">
         <nav class="tags"><ul>

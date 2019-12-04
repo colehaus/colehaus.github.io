@@ -8,8 +8,92 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-11-25T00:00:00Z</updated>
+    <updated>2019-12-03T00:00:00Z</updated>
     <entry>
+    <title>Progress and preservation in IDA</title>
+    <link href="https://www.col-ex.org/posts/progress-preservation-ida/" />
+    <id>https://www.col-ex.org/posts/progress-preservation-ida/</id>
+    <published>2019-12-03T00:00:00Z</published>
+    <updated>2019-12-03T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://arxiv.org/pdf/1810.08575.pdf">Iterated distillation and amplification</a> (henceforth IDA) is a proposal for improving the capability of human-machine systems to suprahuman levels in complex domains where even evaluation of system outputs may be beyond unaugmented human capabilities. For a detailed explanation of the mechanics, I’ll refer you to the original paper just linked, section 0 of <a href="https://owainevans.github.io/pdfs/evans_ida_projects.pdf">Machine Learning Projects for Iterated Distillation and Amplification</a>, or one of the many other explanations floating around the Web.</p>
+<p>We can <span class="noted">view IDA as dynamic programming with function approximation</span><a href="#fn1" id="fnref1" class="footnote-ref"><sup>1</sup></a> instead of a tabular cache. Just like the cache in dynamic programming, the machine learning component of IDA is a performance optimization. We can excise it and look at just the divide-and-conquer aspect of IDA for the sake of simplicity. Then this simplified IDA roughly consists of: (1) repeatedly decomposing tasks into simpler subtasks; (2) eventually completing sufficiently simple subtasks; and (3) aggregating outputs from subtasks into an output which completes the original, undecomposed task. We’ll <span class="noted">examine this model</span><a href="#fn2" id="fnref2" class="footnote-ref"><sup>2</sup></a> in the rest of the post.</p>
+<h1 id="safety-is-progress-plus-preservation">Safety is progress plus preservation</h1>
+<p>For type systems, the slogan is “safety is progress plus preservation”. Because we’re using this only as a cute analogy and organizing framework, we’ll not get into the details. But for type systems:</p>
+<dl>
+<dt>Progress</dt>
+<dd>“A well-typed term is […] either […] a value or it can take a step according to the evaluation rules.”
+</dd>
+<dt>Preservation</dt>
+<dd>“If a well-typed term takes a step of evaluation, then the resulting term is also well typed.”
+</dd>
+</dl>
+<p>(Both from <span class="citation" data-cites="pierce2002types">(Pierce and Benjamin <a href="#ref-pierce2002types">2002</a>)</span>.)</p>
+<p>We also need progress and preservation in IDA. Roughly:</p>
+<dl>
+<dt>Progress</dt>
+<dd>A question is easy enough to be answered directly or can be decomposed into easier subquestions.
+</dd>
+<dt>Preservation</dt>
+<dd>The answer from aggregating subquestion answers is just as good as answering the original question.
+</dd>
+</dl>
+<p>Let’s try to make this more precise.</p>
+<p><!--more--></p>
+<h2 id="mathrmprogress"><span class="math inline">\(\mathrm{progress}\)</span></h2>
+<p>There are several ways we might interpret “easier”. One that seems to have some intuitive appeal is that one question is easier than another if it can be answered with fewer <span class="noted">computational resources</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>.</p>
+<p>Regardless, we’ll say that we satisfy <span class="math inline">\(\mathrm{progress}_{qa}\)</span> if a question <span class="math inline">\(Q\)</span> is decomposed into subquestions <span class="math inline">\(\mathbf{q}\)</span> such that every subquestion <span class="math inline">\(q\)</span> in <span class="math inline">\(\mathbf{q}\)</span> is not harder than <span class="math inline">\(Q\)</span> and at least one is easier. This is the most obvious thing that IDA is supposed to provide—a way to make hard problems tractable.</p>
+<p>But just noting the existence of such a decomposition isn’t enough. We also need to be able to find and carry out such a decomposition more easily than answering the original question. We’ll call this property <span class="math inline">\(\mathrm{progress}_{\downarrow}\)</span>. <span class="math inline">\(\mathrm{progress}_{\uparrow}\)</span> demands that we be able to find and carry out an aggregation of subquestion answers that’s easier than answering the original question.</p>
+<p>Each of these three properties is necessary but they are <span class="noted">not even jointly sufficient for progress</span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a>—it could be the case that each of decomposition, answering and aggregation is easier than answering the original question but that all three together are not.</p>
+<p>We can also view this graphically. In the figure below representing a single step of decomposition and aggregation, we want it to be the case that the computation represented by the arrow from original <span class="math inline">\(Q_0\)</span> to corresponding answer <span class="math inline">\(A_0\)</span> is harder than any of the computations represented by the other arrows.</p>
+<figure>
+<img src="https://www.col-ex.org/images/ida/progress.svg" title="fig:" alt /><figcaption><span class="math inline">\(\mathrm{progress}_{qa}\)</span>, <span class="math inline">\(\mathrm{progress}_{\downarrow}\)</span> and <span class="math inline">\(\mathrm{progress}_{\uparrow}\)</span> mean that the top arrow from <span class="math inline">\(Q_0\)</span> to <span class="math inline">\(A_0\)</span> represents a more difficult computation than each of the bottom, left, and right arrows, respectively.</figcaption>
+</figure>
+<h2 id="mathrmpreservation"><span class="math inline">\(\mathrm{preservation}\)</span></h2>
+<p>There are also several possible interpretations of “as good as”. To start with, let’s assume it means that one question and answer pair is just as good as another if they have exactly the same denotation.</p>
+<p>We say that a decomposition satisfies <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> if the denotations of <span class="math inline">\((Q, A)\)</span> and <span class="math inline">\((Q, \overline{\mathrm{aggregate}}(\overline{\mathrm{answer}}(\mathrm{decompose}(Q))))\)</span> are identical where <span class="math inline">\((Q, A)\)</span> is a question and answer pair, <span class="math inline">\(\overline{\mathrm{aggregation}}\)</span> is an ideal aggregation, and <span class="math inline">\(\overline{\mathrm{answer}}\)</span> is an ideal answering algorithm. We say that an aggregation satisfies <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span> if the denotations of <span class="math inline">\((Q, A)\)</span> and <span class="math inline">\((Q, \mathrm{aggregate}(\overline{\mathrm{answer}}(\overline{\mathrm{decompose}}(Q))))\)</span> are identical where <span class="math inline">\((Q, A)\)</span> is a question and answer pair, <span class="math inline">\(\overline{\mathrm{decompose}}\)</span> is an ideal decomposition, and <span class="math inline">\(\overline{\mathrm{answer}}\)</span> is an ideal answering algorithm.</p>
+<p>Explained differently, <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> requires that the below <a href="https://en.wikipedia.org/wiki/Commutative_diagram">diagram commute</a> while assuming that answering and aggregation are ideal. <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span> requires that the diagram commute while assuming that answering and decomposition are ideal.</p>
+<figure>
+<img src="https://www.col-ex.org/images/ida/preservation.svg" title="fig:" alt /><figcaption><span class="math inline">\(\mathrm{preservation}_{\downarrow}\)</span> means that the diagram commutes with an ideal bottom and right arrow. <span class="math inline">\(\mathrm{preservation}_{\uparrow}\)</span> mean that the diagram commutes with an ideal bottom and left arrow.</figcaption>
+</figure>
+<h2 id="scprogress"><span class="math inline">\(\sc{PROGRESS}\)</span></h2>
+<p><span class="math inline">\(\mathrm{progress}_{qa}\)</span> actually isn’t sufficient for our purposes—it could be the case that a series of decompositions produce easier and easier questions but never actually produce questions that are simple enough for a human to answer directly. We name the requirement that our decompositions eventually produce human-answerable subquestions <span class="math inline">\(\sc{PROGRESS}_{qa}\)</span>.</p>
+<h2 id="scpreservation"><span class="math inline">\(\sc{PRESERVATION}\)</span></h2>
+<p>Now let’s relax our definition of “as good as” a bit since it’s quite demanding. Instead of requiring that the question and answer pairs have exactly the same denotation, we allow some wiggle room. We could do this in a variety of ways including: (1) suppose there is some <a href="https://en.wikipedia.org/wiki/Metric_space">metric space</a> of <a href="https://en.wikipedia.org/wiki/Word2vec">meanings</a> and require that the denotations are within <span class="math inline">\(\epsilon\)</span> of each other; (2) require that acting on either question-answer pair produces the same expected utility; (3) require that the utilities produced by acting on each question-answer pair are within <span class="math inline">\(\epsilon\)</span> of each other. For the sake of discussion let’s assume something like (1) or (3).</p>
+<p>Hopefully, the <em>mutatis mutandis</em> for <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> and <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span> with this new interpretation of “good enough” is clear enough. (Briefly, the aggregated, answered, decomposition should be within <span class="math inline">\(\epsilon\)</span> of the original answer.)</p>
+<p>Unfortunately, the new interpretation means that the single-step (i.e. just one level of decomposition and aggregation) properties are no longer sufficient to guarantee multi-step preservation. It could be the case that each step introduces skew less than <span class="math inline">\(\epsilon\)</span> but that the cumulative skew between the original question and a fully decomposed set of human-answerable questions exceeds <span class="math inline">\(\epsilon\)</span>. We’ll call the requirement that the series of decompositions maintain skew less than <span class="math inline">\(\epsilon\)</span>, <span class="math inline">\(\sc{PRESERVATION_{\downarrow}}\)</span>, and that the series of aggregations maintains skew less than <span class="math inline">\(\epsilon\)</span>, <span class="math inline">\(\sc{PRESERVATION_{\uparrow}}\)</span>.</p>
+<figure>
+<img src="https://www.col-ex.org/images/ida/preservation-multi.svg" title="fig:" alt /><figcaption><span class="math inline">\(\sc{PRESERVATION}_{\downarrow}\)</span> means that the left hand side of the diagram doesn’t break commutativity. <span class="math inline">\(\sc{PRESERVATION}_{\uparrow}\)</span> mean that the right-hand side doesn’t break commutativity.</figcaption>
+</figure>
+<h1 id="summary">Summary</h1>
+<p>For every question, there must be a full decomposition to human-answerable questions satisfying <span class="math inline">\(\sc{PROGRESS}_{qa}\)</span> and each decomposed set of questions along the way must satisfy each of <span class="math inline">\(\mathrm{progress}_{qa}\)</span>, <span class="math inline">\(\mathrm{progress}_{\downarrow}\)</span>, and <span class="math inline">\(\mathrm{progress}_{\uparrow}\)</span>. That full decomposition must satisfy <span class="math inline">\(\sc{PRESERVATION_{\downarrow}}\)</span> and the corresponding full aggregation must satisfy <span class="math inline">\(\sc{PRESERVATION_{\uparrow}}\)</span>. Each decomposition and aggregation along the way must satisfy <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> and <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span>.</p>
+<figure>
+<img src="https://www.col-ex.org/images/ida/all.svg" title="fig:" alt /><figcaption><span class="math inline">\(\mathrm{progress}\)</span> and <span class="math inline">\(\mathrm{preservation}\)</span> properties apply to single steps of decomposition and aggregation. <span class="math inline">\(\sc{PROGRESS}\)</span> and <span class="math inline">\(\sc{PRESERVATION}\)</span> properties apply to repeated decomposition and aggregation.</figcaption>
+</figure>
+<hr />
+<div id="refs" class="references" role="doc-bibliography" role="doc-bibliography">
+<div id="ref-pierce2002types">
+<p>Pierce, Benjamin C, and C Benjamin. 2002. <em>Types and Programming Languages</em>. MIT press.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li><div id="fn1">
+<p>Asking whether IDA problems have the <a href="https://en.wikipedia.org/wiki/Optimal_substructure">optimal substructure</a> and <a href="https://en.wikipedia.org/wiki/Overlapping_subproblems">overlapping subproblems</a> that dynamic programming requires also seems fruitful.<a href="#fnref1" class="footnote-back">↩︎</a></p>
+</div></li>
+<li><div id="fn2">
+<p>This should be okay because function approximation only makes the problems of progress and preservation harder.<a href="#fnref2" class="footnote-back">↩︎</a></p>
+</div></li>
+<li><div id="fn3">
+<p>Of course, “computational resources” is a <a href="https://en.wikipedia.org/wiki/Leaky_abstraction">leaky abstraction</a>.<a href="#fnref3" class="footnote-back">↩︎</a></p>
+</div></li>
+<li><div id="fn4">
+<p>If we settled on a precise notion of “easier”, we could specify what would be sufficient. For example, if difficulty just adds, the overall <span class="math inline">\(\mathrm{progress}\)</span> requirement would be that the sum of difficulties from decomposition, aggregation and answering is no more than the difficulty from answering the original question in other ways.<a href="#fnref4" class="footnote-back">↩︎</a></p>
+</div></li>
+</ol>
+</section>]]></summary>
+</entry>
+<entry>
     <title>A corrected model suggests climate change interventions may be within a factor of two of direct cash transfers</title>
     <link href="https://www.col-ex.org/posts/corrected-model-climate-change-global-development/" />
     <id>https://www.col-ex.org/posts/corrected-model-climate-change-global-development/</id>

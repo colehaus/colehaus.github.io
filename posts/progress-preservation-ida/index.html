@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>Progress and preservation in IDA—ColEx</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    <link rel="icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <script>
+     if (!location.host.startsWith('localhost')) {
+       var _rollbarConfig = {
+         checkIgnore: function(isUncaught, args, payload) {
+           return location.host.startsWith('localhost')
+         },
+         accessToken: "137e3ab64049469ba4a7d5e13a6f5aeb",
+         captureUncaught: true,
+         payload: {
+           environment: "production"
+         }
+       };
+       !function(r){function o(n){if(e[n])return e[n].exports;var t=e[n]={exports:{},id:n,loaded:!1};return r[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var e={};return o.m=r,o.c=e,o.p="",o(0)}([function(r,o,e){"use strict";var n=e(1),t=e(4);_rollbarConfig=_rollbarConfig||{},_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.3.1/rollbar.min.js",_rollbarConfig.async=void 0===_rollbarConfig.async||_rollbarConfig.async;var a=n.setupShim(window,_rollbarConfig),l=t(_rollbarConfig);window.rollbar=n.Rollbar,a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,l)},function(r,o,e){"use strict";function n(r){return function(){try{return r.apply(this,arguments)}catch(r){try{console.error("[Rollbar]: Internal error",r)}catch(r){}}}}function t(r,o){this.options=r,this._rollbarOldOnError=null;var e=s++;this.shimId=function(){return e},window&&window._rollbarShims&&(window._rollbarShims[e]={handler:o,messages:[]})}function a(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShims={},r._rollbarWrappedError=null;var t=new p(o);return n(function(){o.captureUncaught&&(t._rollbarOldOnError=r.onerror,i.captureUncaughtExceptions(r,t,!0),i.wrapGlobals(r,t,!0)),o.captureUnhandledRejections&&i.captureUnhandledRejections(r,t,!0);var n=o.autoInstrument;return(void 0===n||n===!0||"object"==typeof n&&n.network)&&r.addEventListener&&(r.addEventListener("load",t.captureLoad.bind(t)),r.addEventListener("DOMContentLoaded",t.captureDomContentLoaded.bind(t))),r[e]=t,t})()}function l(r){return n(function(){var o=this,e=Array.prototype.slice.call(arguments,0),n={shim:o,method:r,args:e,ts:new Date};window._rollbarShims[this.shimId()].messages.push(n)})}var i=e(2),s=0,d=e(3),c=function(r,o){return new t(r,o)},p=d.bind(null,c);t.prototype.loadFull=function(r,o,e,t,a){var l=function(){var o;if(void 0===r._rollbarDidLoad){o=new Error("rollbar.js did not load");for(var e,n,t,l,i=0;e=r._rollbarShims[i++];)for(e=e.messages||[];n=e.shift();)for(t=n.args||[],i=0;i<t.length;++i)if(l=t[i],"function"==typeof l){l(o);break}}"function"==typeof a&&a(o)},i=!1,s=o.createElement("script"),d=o.getElementsByTagName("script")[0],c=d.parentNode;s.crossOrigin="",s.src=t.rollbarJsUrl,e||(s.async=!0),s.onload=s.onreadystatechange=n(function(){if(!(i||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{c.removeChild(s)}catch(r){}i=!0,l()}}),c.insertBefore(s,d)},t.prototype.wrap=function(r,o,e){try{var n;if(n="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._rollbar_wrapped&&(r._rollbar_wrapped=function(){e&&"function"==typeof e&&e.apply(this,arguments);try{return r.apply(this,arguments)}catch(e){var o=e;throw"string"==typeof o&&(o=new String(o)),o._rollbarContext=n()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._rollbar_wrapped._isWrap=!0,r.hasOwnProperty))for(var t in r)r.hasOwnProperty(t)&&(r._rollbar_wrapped[t]=r[t]);return r._rollbar_wrapped}catch(o){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,captureDomContentLoaded,captureLoad".split(","),f=0;f<u.length;++f)t.prototype[u[f]]=l(u[f]);r.exports={setupShim:a,Rollbar:p}},function(r,o){"use strict";function e(r,o,e){if(r){var t;"function"==typeof o._rollbarOldOnError?t=o._rollbarOldOnError:r.onerror&&!r.onerror.belongsToShim&&(t=r.onerror,o._rollbarOldOnError=t);var a=function(){var e=Array.prototype.slice.call(arguments,0);n(r,o,t,e)};a.belongsToShim=e,r.onerror=a}}function n(r,o,e,n){r._rollbarWrappedError&&(n[4]||(n[4]=r._rollbarWrappedError),n[5]||(n[5]=r._rollbarWrappedError._rollbarContext),r._rollbarWrappedError=null),o.handleUncaughtException.apply(o,n),e&&e.apply(r,n)}function t(r,o,e){if(r){"function"==typeof r._rollbarURH&&r._rollbarURH.belongsToShim&&r.removeEventListener("unhandledrejection",r._rollbarURH);var n=function(r){var e=r.reason,n=r.promise,t=r.detail;!e&&t&&(e=t.reason,n=t.promise),o&&o.handleUnhandledRejection&&o.handleUnhandledRejection(e,n)};n.belongsToShim=e,r._rollbarURH=n,r.addEventListener("unhandledrejection",n)}}function a(r,o,e){if(r){var n,t,a="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(n=0;n<a.length;++n)t=a[n],r[t]&&r[t].prototype&&l(o,r[t].prototype,e)}}function l(r,o,e){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){for(var n=o.addEventListener;n._rollbarOldAdd&&n.belongsToShim;)n=n._rollbarOldAdd;var t=function(o,e,t){n.call(this,o,r.wrap(e),t)};t._rollbarOldAdd=n,t.belongsToShim=e,o.addEventListener=t;for(var a=o.removeEventListener;a._rollbarOldRemove&&a.belongsToShim;)a=a._rollbarOldRemove;var l=function(r,o,e){a.call(this,r,o&&o._rollbar_wrapped||o,e)};l._rollbarOldRemove=a,l.belongsToShim=e,o.removeEventListener=l}}r.exports={captureUncaughtExceptions:e,captureUnhandledRejections:t,wrapGlobals:a}},function(r,o){"use strict";function e(r,o){this.impl=r(o,this),this.options=o,n(e.prototype)}function n(r){for(var o=function(r){return function(){var o=Array.prototype.slice.call(arguments,0);if(this.impl[r])return this.impl[r].apply(this.impl,o)}},e="log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureDomContentLoaded,captureLoad".split(","),n=0;n<e.length;n++)r[e[n]]=o(e[n])}e.prototype._swapAndProcessMessages=function(r,o){this.impl=r(this.options);for(var e,n,t;e=o.shift();)n=e.method,t=e.args,this[n]&&"function"==typeof this[n]&&("captureDomContentLoaded"===n||"captureLoad"===n?this[n].apply(this,[t[0],e.ts]):this[n].apply(this,t));return this},r.exports=e},function(r,o){"use strict";r.exports=function(r){return function(o){if(!o&&!window._rollbarInitialized){r=r||{};for(var e,n,t=r.globalAlias||"Rollbar",a=window.rollbar,l=function(r){return new a(r)},i=0;e=window._rollbarShims[i++];)n||(n=e.handler),e.handler._swapAndProcessMessages(l,e.messages);window[t]=n,window._rollbarInitialized=!0}}}}]);
+     }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113913768-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113913768-1');
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          displayAlign: "left",
+          displayIndent: "2em"
+        });
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
+
+    
+
+  <meta name="description" content="This post arose out of my attempts to understand IDA and ways it could
+fail. It might help you do the same and could provide useful vocabulary
+for discussing desiderata for IDA.
+
+We want IDA to satisfy progress---decomposition should make answering
+questions easier---and preservation---semantics should be retained
+across transformations. We need progress in each decomposition and,
+furthermore, repeated decompositions must be able to eventually simplify
+each question such that it can be answered directly by a human. Also,
+each decomposition and aggregation of questions and answers must
+introduce no more than a bounded amount of semantic drift and,
+furthermore, repeated decompositions and aggregations should also
+introduce no more than a bounded amount of semantic drift.">
+
+</head>
+<body>
+<div id="underlay">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Progress and preservation in IDA</h2>
+  
+  <div class="metadata">
+  <nav class="tags"><ul>
+    
+      <li><a href="../../tag/machine%2520learning/">machine learning</a></li>
+    
+</ul></nav>
+
+  
+  <span class="date">Published on <time datetime="2019-12-03">December  3, 2019</time>.</span>
+  
+  </div>
+  
+  
+    <div class="abstract">
+      <p>This post arose out of my attempts to understand IDA and ways it could fail. It might help you do the same and could provide useful vocabulary for discussing desiderata for IDA.</p>
+<p>We want IDA to satisfy progress—decomposition should make answering questions easier—and preservation—semantics should be retained across transformations. We need progress in each decomposition and, furthermore, repeated decompositions must be able to eventually simplify each question such that it can be answered directly by a human. Also, each decomposition and aggregation of questions and answers must introduce no more than a bounded amount of semantic drift and, furthermore, repeated decompositions and aggregations should also introduce no more than a bounded amount of semantic drift.</p>
+    </div>
+  
+
+  
+    <aside class="sidenote" id="warnings">Warnings: <ul>
+      
+        <li><details><summary>Recondite</summary><p>I don't expect this post (unlike so many of my other crowd-pleasers) to have mass appeal.</p></details></li>
+      
+    </ul></aside>
+  
+
+  <div class="macros">
+<p><span class="math display">\[
+\def\sc#1{\dosc#1\csod}
+\def\dosc#1#2\csod{{\rm #1{\small #2}}}
+\]</span></p>
+</div>
+<p><a href="https://arxiv.org/pdf/1810.08575.pdf">Iterated distillation and amplification</a> (henceforth IDA) is a proposal for improving the capability of human-machine systems to suprahuman levels in complex domains where even evaluation of system outputs may be beyond unaugmented human capabilities. For a detailed explanation of the mechanics, I’ll refer you to the original paper just linked, section 0 of <a href="https://owainevans.github.io/pdfs/evans_ida_projects.pdf">Machine Learning Projects for Iterated Distillation and Amplification</a>, or one of the many other explanations floating around the Web.</p>
+<p>We can <span class="noted">view IDA as dynamic programming with function approximation</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> instead of a tabular cache. Just like the cache in dynamic programming, the machine learning component of IDA is a performance optimization. We can excise it and look at just the divide-and-conquer aspect of IDA for the sake of simplicity. Then this simplified IDA roughly consists of: (1) repeatedly decomposing tasks into simpler subtasks; (2) eventually completing sufficiently simple subtasks; and (3) aggregating outputs from subtasks into an output which completes the original, undecomposed task. We’ll <span class="noted">examine this model</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> in the rest of the post.</p>
+<h3 id="safety-is-progress-plus-preservation">Safety is progress plus preservation</h3>
+<p>For type systems, the slogan is “safety is progress plus preservation”. Because we’re using this only as a cute analogy and organizing framework, we’ll not get into the details. But for type systems:</p>
+<dl>
+<dt>Progress</dt>
+<dd>“A well-typed term is […] either […] a value or it can take a step according to the evaluation rules.”
+</dd>
+<dt>Preservation</dt>
+<dd>“If a well-typed term takes a step of evaluation, then the resulting term is also well typed.”
+</dd>
+</dl>
+<p>(Both from <span class="citation" data-cites="pierce2002types">(Pierce and Benjamin <a href="#ref-pierce2002types" role="doc-biblioref">2002</a>)</span>.)</p>
+<p>We also need progress and preservation in IDA. Roughly:</p>
+<dl>
+<dt>Progress</dt>
+<dd>A question is easy enough to be answered directly or can be decomposed into easier subquestions.
+</dd>
+<dt>Preservation</dt>
+<dd>The answer from aggregating subquestion answers is just as good as answering the original question.
+</dd>
+</dl>
+<p>Let’s try to make this more precise.</p>
+<!--more-->
+<h4 id="mathrmprogress"><span class="math inline">\(\mathrm{progress}\)</span></h4>
+<p>There are several ways we might interpret “easier”. One that seems to have some intuitive appeal is that one question is easier than another if it can be answered with fewer <span class="noted">computational resources</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>Regardless, we’ll say that we satisfy <span class="math inline">\(\mathrm{progress}_{qa}\)</span> if a question <span class="math inline">\(Q\)</span> is decomposed into subquestions <span class="math inline">\(\mathbf{q}\)</span> such that every subquestion <span class="math inline">\(q\)</span> in <span class="math inline">\(\mathbf{q}\)</span> is not harder than <span class="math inline">\(Q\)</span> and at least one is easier. This is the most obvious thing that IDA is supposed to provide—a way to make hard problems tractable.</p>
+<p>But just noting the existence of such a decomposition isn’t enough. We also need to be able to find and carry out such a decomposition more easily than answering the original question. We’ll call this property <span class="math inline">\(\mathrm{progress}_{\downarrow}\)</span>. <span class="math inline">\(\mathrm{progress}_{\uparrow}\)</span> demands that we be able to find and carry out an aggregation of subquestion answers that’s easier than answering the original question.</p>
+<p>Each of these three properties is necessary but they are <span class="noted">not even jointly sufficient for progress</span><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>—it could be the case that each of decomposition, answering and aggregation is easier than answering the original question but that all three together are not.</p>
+<p>We can also view this graphically. In the figure below representing a single step of decomposition and aggregation, we want it to be the case that the computation represented by the arrow from original <span class="math inline">\(Q_0\)</span> to corresponding answer <span class="math inline">\(A_0\)</span> is harder than any of the computations represented by the other arrows.</p>
+<figure>
+<img src="../../images/ida/progress.svg" title="fig:" alt="A graph showing the relationships between original and decomposed questions and answers." />
+<figcaption>
+<span class="math inline">\(\mathrm{progress}_{qa}\)</span>, <span class="math inline">\(\mathrm{progress}_{\downarrow}\)</span> and <span class="math inline">\(\mathrm{progress}_{\uparrow}\)</span> mean that the top arrow from <span class="math inline">\(Q_0\)</span> to <span class="math inline">\(A_0\)</span> represents a more difficult computation than each of the bottom, left, and right arrows, respectively.
+</figcaption>
+</figure>
+<h4 id="mathrmpreservation"><span class="math inline">\(\mathrm{preservation}\)</span></h4>
+<p>There are also several possible interpretations of “as good as”. To start with, let’s assume it means that one question and answer pair is just as good as another if they have exactly the same denotation.</p>
+<p>We say that a decomposition satisfies <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> if the denotations of <span class="math inline">\((Q, A)\)</span> and <span class="math inline">\((Q, \overline{\mathrm{aggregate}}(\overline{\mathrm{answer}}(\mathrm{decompose}(Q))))\)</span> are identical where <span class="math inline">\((Q, A)\)</span> is a question and answer pair, <span class="math inline">\(\overline{\mathrm{aggregation}}\)</span> is an ideal aggregation, and <span class="math inline">\(\overline{\mathrm{answer}}\)</span> is an ideal answering algorithm. We say that an aggregation satisfies <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span> if the denotations of <span class="math inline">\((Q, A)\)</span> and <span class="math inline">\((Q, \mathrm{aggregate}(\overline{\mathrm{answer}}(\overline{\mathrm{decompose}}(Q))))\)</span> are identical where <span class="math inline">\((Q, A)\)</span> is a question and answer pair, <span class="math inline">\(\overline{\mathrm{decompose}}\)</span> is an ideal decomposition, and <span class="math inline">\(\overline{\mathrm{answer}}\)</span> is an ideal answering algorithm.</p>
+<p>Explained differently, <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> requires that the below <a href="https://en.wikipedia.org/wiki/Commutative_diagram">diagram commute</a> while assuming that answering and aggregation are ideal. <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span> requires that the diagram commute while assuming that answering and decomposition are ideal.</p>
+<figure>
+<img src="../../images/ida/preservation.svg" title="fig:" alt="A graph showing the relationships between original and decomposed questions and answers." />
+<figcaption>
+<span class="math inline">\(\mathrm{preservation}_{\downarrow}\)</span> means that the diagram commutes with an ideal bottom and right arrow. <span class="math inline">\(\mathrm{preservation}_{\uparrow}\)</span> mean that the diagram commutes with an ideal bottom and left arrow.
+</figcaption>
+</figure>
+<h4 id="scprogress"><span class="math inline">\(\sc{PROGRESS}\)</span></h4>
+<p><span class="math inline">\(\mathrm{progress}_{qa}\)</span> actually isn’t sufficient for our purposes—it could be the case that a series of decompositions produce easier and easier questions but never actually produce questions that are simple enough for a human to answer directly. We name the requirement that our decompositions eventually produce human-answerable subquestions <span class="math inline">\(\sc{PROGRESS}_{qa}\)</span>.</p>
+<h4 id="scpreservation"><span class="math inline">\(\sc{PRESERVATION}\)</span></h4>
+<p>Now let’s relax our definition of “as good as” a bit since it’s quite demanding. Instead of requiring that the question and answer pairs have exactly the same denotation, we allow some wiggle room. We could do this in a variety of ways including: (1) suppose there is some <a href="https://en.wikipedia.org/wiki/Metric_space">metric space</a> of <a href="https://en.wikipedia.org/wiki/Word2vec">meanings</a> and require that the denotations are within <span class="math inline">\(\epsilon\)</span> of each other; (2) require that acting on either question-answer pair produces the same expected utility; (3) require that the utilities produced by acting on each question-answer pair are within <span class="math inline">\(\epsilon\)</span> of each other. For the sake of discussion let’s assume something like (1) or (3).</p>
+<p>Hopefully, the <em>mutatis mutandis</em> for <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> and <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span> with this new interpretation of “good enough” is clear enough. (Briefly, the aggregated, answered, decomposition should be within <span class="math inline">\(\epsilon\)</span> of the original answer.)</p>
+<p>Unfortunately, the new interpretation means that the single-step (i.e. just one level of decomposition and aggregation) properties are no longer sufficient to guarantee multi-step preservation. It could be the case that each step introduces skew less than <span class="math inline">\(\epsilon\)</span> but that the cumulative skew between the original question and a fully decomposed set of human-answerable questions exceeds <span class="math inline">\(\epsilon\)</span>. We’ll call the requirement that the series of decompositions maintain skew less than <span class="math inline">\(\epsilon\)</span>, <span class="math inline">\(\sc{PRESERVATION_{\downarrow}}\)</span>, and that the series of aggregations maintains skew less than <span class="math inline">\(\epsilon\)</span>, <span class="math inline">\(\sc{PRESERVATION_{\uparrow}}\)</span>.</p>
+<figure>
+<img src="../../images/ida/preservation-multi.svg" title="fig:" alt="A graph showing the relationships between original and decomposed questions and answers." />
+<figcaption>
+<span class="math inline">\(\sc{PRESERVATION}_{\downarrow}\)</span> means that the left hand side of the diagram doesn’t break commutativity. <span class="math inline">\(\sc{PRESERVATION}_{\uparrow}\)</span> mean that the right-hand side doesn’t break commutativity.
+</figcaption>
+</figure>
+<h3 id="summary">Summary</h3>
+<p>For every question, there must be a full decomposition to human-answerable questions satisfying <span class="math inline">\(\sc{PROGRESS}_{qa}\)</span> and each decomposed set of questions along the way must satisfy each of <span class="math inline">\(\mathrm{progress}_{qa}\)</span>, <span class="math inline">\(\mathrm{progress}_{\downarrow}\)</span>, and <span class="math inline">\(\mathrm{progress}_{\uparrow}\)</span>. That full decomposition must satisfy <span class="math inline">\(\sc{PRESERVATION_{\downarrow}}\)</span> and the corresponding full aggregation must satisfy <span class="math inline">\(\sc{PRESERVATION_{\uparrow}}\)</span>. Each decomposition and aggregation along the way must satisfy <span class="math inline">\(\mathrm{preservation_{\downarrow}}\)</span> and <span class="math inline">\(\mathrm{preservation_{\uparrow}}\)</span>.</p>
+<figure>
+<img src="../../images/ida/all.svg" title="fig:" alt="A graph showing the relationships between original and decomposed questions and answers." />
+<figcaption>
+<span class="math inline">\(\mathrm{progress}\)</span> and <span class="math inline">\(\mathrm{preservation}\)</span> properties apply to single steps of decomposition and aggregation. <span class="math inline">\(\sc{PROGRESS}\)</span> and <span class="math inline">\(\sc{PRESERVATION}\)</span> properties apply to repeated decomposition and aggregation.
+</figcaption>
+</figure>
+<hr class="references">
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-pierce2002types">
+<p>Pierce, Benjamin C, and C Benjamin. 2002. <em>Types and Programming Languages</em>. MIT press.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Asking whether IDA problems have the <a href="https://en.wikipedia.org/wiki/Optimal_substructure">optimal substructure</a> and <a href="https://en.wikipedia.org/wiki/Overlapping_subproblems">overlapping subproblems</a> that dynamic programming requires also seems fruitful.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>This should be okay because function approximation only makes the problems of progress and preservation harder.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Of course, “computational resources” is a <a href="https://en.wikipedia.org/wiki/Leaky_abstraction">leaky abstraction</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>If we settled on a precise notion of “easier”, we could specify what would be sufficient. For example, if difficulty just adds, the overall <span class="math inline">\(\mathrm{progress}\)</span> requirement would be that the sum of difficulties from decomposition, aggregation and answering is no more than the difficulty from answering the original question in other ways.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</article></main>
+
+</div>
+
+
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
+
+  </body>
+</html>
