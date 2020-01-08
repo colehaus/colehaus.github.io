@@ -8,8 +8,38 @@
         <name>Cole Haus</name>
         <email>colehaus@cryptolab.net</email>
     </author>
-    <updated>2019-12-03T00:00:00Z</updated>
+    <updated>2020-01-08T00:00:00Z</updated>
     <entry>
+    <title>Assorted links XVI</title>
+    <link href="https://www.col-ex.org/posts/assorted-links-xvi/" />
+    <id>https://www.col-ex.org/posts/assorted-links-xvi/</id>
+    <published>2020-01-08T00:00:00Z</published>
+    <updated>2020-01-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<ol type="1">
+<li><p><a href="https://www.youtube.com/watch?v=fgm14D1jHUw">Pizza Hut Gorbachev TV Spot Commercial</a></p>
+<p>We should adjudicate all disputes about political legacies this way:</p>
+<blockquote>
+<p>Millienial: It <em>is</em> Obama!</p>
+<p>Boomer: Because of him, we have death panels!</p>
+<p>Millenial: Because of him, we have health care!</p>
+<p>Greatest Generation: Because of him, we have many things… like Taco Bell’s Doritos Cheesy Gordita Crunch.</p>
+</blockquote></li>
+<li><p><a href="https://harpers.org/archive/2020/01/vicious-cycles-theses-on-a-philosophy-of-news/">Vicious Cycles: Theses on a philosophy of news</a></p>
+<p>This is my favorite piece of writing on the news.</p></li>
+<li><p><a href="https://biocontrol.entomology.cornell.edu/success.php">Successes in Biological Control</a></p>
+<blockquote>
+<p>Originally brought to the US to breed with the native silkworms, the gypsy moth, Lymantria dispar L., escaped through a broken window in Medford, MA in 1868-9 and began defoliating deciduous forests and shade trees in many regions of North America. […] In the late 1980s and early 1990s, scientists noticed gypsy moth cadavers hanging from trees in the northeastern forests and identified the cause as a fungal infection. This discovery renewed interest in using fungi for control.</p>
+</blockquote></li>
+<li><p><a href="https://niskanencenter.org/blog/what-explains-voter-aversion-to-carbon-taxes-and-what-can-be-done/">What explains voter aversion to carbon taxes and what can be done?</a></p>
+<p>Pairs well with an earlier <a href="https://www.col-ex.org/posts/why-opposition-pigovian-taxes/">post</a>. See also <a href="https://elibrary.worldbank.org/doi/pdf/10.1596/978-1-4648-1435-8">State and trends of carbon pricing in 2019</a>.</p></li>
+<li><p><a href="https://behavioralscientist.org/principles-for-the-application-of-human-intelligence/">Principles for the Application of Human Intelligence</a></p>
+<blockquote>
+<p>However, the replacement of algorithms with a powerful technology in the form of the human brain is not without risks. Before humans become the standard way in which we make decisions, we need to consider the risks and ensure implementation of human decision-making systems does not cause widespread harm. To this end, we need to develop principles for the application for the human intelligence to decision making.</p>
+</blockquote></li>
+</ol>
+<p><!--more--></p>]]></summary>
+</entry>
+<entry>
     <title>Progress and preservation in IDA</title>
     <link href="https://www.col-ex.org/posts/progress-preservation-ida/" />
     <id>https://www.col-ex.org/posts/progress-preservation-ida/</id>
@@ -6489,7 +6519,12 @@ Allcott and Mullainathan (2010) report that American households who got mailers 
 <p>Even if the above persuasion succeeds, that’s not enough. Individuals privately supporting an alternative norm doesn’t necessarily lead to changed behavior. The reason is that social norms, unlike customs and descriptive norms, are rarely self-enforcing.</p>
 <p>By <em>self-enforcing</em>, we mean that individuals will follow some pattern of collective behavior even in the absence of any social response to their behavior. People don’t need social approval before putting on a coat in cold weather. Walking on the wrong side of the sidewalk would be self-defeating because you’d get to your destination slower due to the need to dodge everyone walking against you. On the other hand, an unscrupulous person might cut in line every time they thought they could get away with it. The near absence of line cutting (in certain cultures) is maintained only through continuous <a href="https://www.google.com/search?q=fight+cutting+in+line">social sanctions for norm violators</a>.</p>
 <p>Because social norms are socially enforced, unilateral defiance is rarely advantageous. It’s only when social expectations collectively change that changed behavior becomes possible. All of this means that attempts to advocate for alternative collective behaviors must be broadly effective before any change will be visible—there’s a threshold. But even convincing a majority of people that some alternative is preferable isn’t enough.</p>
-<p>The social engineer must convince each person in a community of three things: 1. An alternative norm is superior (accomplishing this is covered in the <a href="#shared-reasons">shared reasons</a> section) 2. Other people in the community support an alternative norm 3. Other people in the community are also convinced of the above</p>
+<p>The social engineer must convince each person in a community of three things:</p>
+<ol type="1">
+<li>An alternative norm is superior (accomplishing this is covered in the <a href="#shared-reasons">shared reasons</a> section)</li>
+<li>Other people in the community support an alternative norm</li>
+<li>Other people in the community are also convinced of the above</li>
+</ol>
 <p>If the social engineer succeeds only at the first two, each individual will still be afraid to defy the existing norm. <span class="noted">For example, even if Fiorenzo believes that others in his community privately dislike some norm, if he thinks they believe the norm still has public support, he’ll think they’ll still enforce the norm and sanction him for violating it</span><a href="#fn3" id="fnref3" class="footnote-ref"><sup>3</sup></a>.</p>
 <p>The necessity of <span class="noted">common knowledge</span><a href="#fn4" id="fnref4" class="footnote-ref"><sup>4</sup></a> means that public fora are quite useful. When people discuss norms, their concerns, and their changing attitudes with other members of their community, it becomes possible for people to “infer that others’ beliefs are changing alongside their own” <span class="citation" data-cites="bicchieri2016">(Bicchieri <a href="#ref-bicchieri2016">2016</a>)</span>.</p>
 <h2 id="collective-action"><a href="#yaas-social-norms-map" id="collective-action" class="arg-map">Collective action</a></h2>
@@ -6527,9 +6562,9 @@ Allcott and Mullainathan (2010) report that American households who got mailers 
 <p>Finally, edutainment is, reportedly, <a href="https://www.col-ex.org/posts/norms-wild-clickbait/#on-the-unreasonable-effectiveness-of-tv">shockingly effective at changing norms</a>.</p>
 <p>Edutainment may be effective for some combination of the following reasons:</p>
 <ul>
-<li>It can change scripts and schemata by having representative and relatable characters experience events that <a href="#theories-of-persuasion">diverge from existing schema</a></li>
-<li>Characters can function as <a href="#trendsetters">trendsetters</a></li>
-<li>It can make alternative norms <a href="#targets-of-persuasion">cohere with the existing local moral structure</a></li>
+<li>It can change scripts and schemata by having representative and relatable characters experience events that <a href="#theories-of-persuasion">diverge from existing schema</a>.</li>
+<li>Characters can function as <a href="#trendsetters">trendsetters</a>.</li>
+<li>It can make alternative norms <a href="#targets-of-persuasion">cohere with the existing local moral structure</a>.</li>
 </ul>
 <hr />
 <div id="refs" class="references" role="doc-bibliography" role="doc-bibliography">

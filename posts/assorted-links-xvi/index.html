@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.9">
-    <title>Page 19—ColEx</title>
+    <title>Assorted links XVI—ColEx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -40,35 +40,32 @@
     </script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_SVG"></script>
 
-    <script type="text/javascript">
-if (/Trident/.test(navigator.userAgent)) {
-  alert('I have reports that certain features are broken on Internet Explorer ' +
-        '(e.g. SVG paths with markers, flexbox with the \'order\' attribute). ' +
-        'This is a "Won\'t fix" at the moment so, if you\'re using IE, ' +
-        'browse at your own risk.');
-}
-</script>
+    
+
 </head>
 <body>
 <div id="underlay">
-<main><ul class="teasers">
+<nav><a href="../../">Home</a></nav>
+<main><article>
+  <h2 id="article-title">Assorted links XVI</h2>
   
-    <li><article class="teaser">
-        <h2><a href="../../posts/assorted-links-xvi/">Assorted links XVI</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
+  <div class="metadata">
+  <nav class="tags"><ul>
     
       <li><a href="../../tag/links/">links</a></li>
     
 </ul></nav>
 
-        
-        <span class="date">Published on <time datetime="January  8, 2020">January  8, 2020</time>.</span>
-       </div>
+  
+  <span class="date">Published on <time datetime="2020-01-08">January  8, 2020</time>.</span>
+  
+  </div>
+  
+  
 
-       
+  
 
-        <ol type="1">
+  <ol type="1">
 <li><p><a href="https://www.youtube.com/watch?v=fgm14D1jHUw">Pizza Hut Gorbachev TV Spot Commercial</a></p>
 <p>We should adjudicate all disputes about political legacies this way:</p>
 <blockquote>
@@ -90,182 +87,19 @@ if (/Trident/.test(navigator.userAgent)) {
 <p>However, the replacement of algorithms with a powerful technology in the form of the human brain is not without risks. Before humans become the standard way in which we make decisions, we need to consider the risks and ensure implementation of human decision-making systems does not cause widespread harm. To this end, we need to develop principles for the application for the human intelligence to decision making.</p>
 </blockquote></li>
 </ol>
-
-
-        <a href="../../posts/assorted-links-xvi/" class="full-post">Full post</a>
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="../../posts/progress-preservation-ida/">Progress and preservation in IDA</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="../../tag/machine%2520learning/">machine learning</a></li>
-    
-</ul></nav>
-
-        
-        <span class="date">Published on <time datetime="December  3, 2019">December  3, 2019</time>.</span>
-       </div>
-
-       
-         <div class="abstract"><p>This post arose out of my attempts to understand IDA and ways it could fail. It might help you do the same and could provide useful vocabulary for discussing desiderata for IDA.</p>
-<p>We want IDA to satisfy progress—decomposition should make answering questions easier—and preservation—semantics should be retained across transformations. We need progress in each decomposition and, furthermore, repeated decompositions must be able to eventually simplify each question such that it can be answered directly by a human. Also, each decomposition and aggregation of questions and answers must introduce no more than a bounded amount of semantic drift and, furthermore, repeated decompositions and aggregations should also introduce no more than a bounded amount of semantic drift.</p></div>
-       
-
-        <div class="macros">
-<p><span class="math display">\[
-\def\sc#1{\dosc#1\csod}
-\def\dosc#1#2\csod{{\rm #1{\small #2}}}
-\]</span></p>
-</div>
-<p><a href="https://arxiv.org/pdf/1810.08575.pdf">Iterated distillation and amplification</a> (henceforth IDA) is a proposal for improving the capability of human-machine systems to suprahuman levels in complex domains where even evaluation of system outputs may be beyond unaugmented human capabilities. For a detailed explanation of the mechanics, I’ll refer you to the original paper just linked, section 0 of <a href="https://owainevans.github.io/pdfs/evans_ida_projects.pdf">Machine Learning Projects for Iterated Distillation and Amplification</a>, or one of the many other explanations floating around the Web.</p>
-<p>We can <span class="noted">view IDA as dynamic programming with function approximation</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> instead of a tabular cache. Just like the cache in dynamic programming, the machine learning component of IDA is a performance optimization. We can excise it and look at just the divide-and-conquer aspect of IDA in our analysis. Then this simplified IDA roughly consists of: (1) repeatedly decomposing tasks into simpler subtasks; (2) eventually completing sufficiently simple subtasks; and (3) aggregating outputs from subtasks into an output which completes the original, undecomposed task. We’ll <span class="noted">examine this simplified model</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> in the rest of the post. (If you’d like a more concrete description of the divide-and-conquer component of IDA, there’s a runnable Haskell demo <a href="https://github.com/colehaus/ida-schemes">here</a>.)</p>
-<h3 id="safety-is-progress-plus-preservation">Safety is progress plus preservation</h3>
-<p>For type systems, the slogan is “safety is progress plus preservation”. Because we’re using this only as a cute analogy and organizing framework, we’ll not get into the details. But for type systems:</p>
-<dl>
-<dt>Progress</dt>
-<dd>“A well-typed term is […] either […] a value or it can take a step according to the evaluation rules.”
-</dd>
-<dt>Preservation</dt>
-<dd>“If a well-typed term takes a step of evaluation, then the resulting term is also well typed.”
-</dd>
-</dl>
-<p>(Both from <span class="citation" data-cites="pierce2002types">(Pierce and Benjamin <a href="#ref-pierce2002types" role="doc-biblioref">2002</a>)</span>.)</p>
-<p>We also need progress and preservation in IDA. Roughly:</p>
-<dl>
-<dt>Progress</dt>
-<dd>A question is easy enough to be answered directly or can be decomposed into easier subquestions.
-</dd>
-<dt>Preservation</dt>
-<dd>The answer from aggregating subquestion answers is just as good as answering the original question.
-</dd>
-</dl>
-<p>Let’s try to make this more precise.</p>
-
-
-        <a href="../../posts/progress-preservation-ida/" class="full-post">Full post</a>
-
-    </article></li>
-    <hr />
-  
-    <li><article class="teaser">
-        <h2><a href="../../posts/corrected-model-climate-change-global-development/">A corrected model suggests climate change interventions may be within a factor of two of direct cash transfers</a></h2>
-       <div class="metadata">
-        <nav class="tags"><ul>
-    
-      <li><a href="../../tag/effective%2520altruism/">effective altruism</a></li>
-    
-      <li><a href="../../tag/global%2520warming/">global warming</a></li>
-    
-</ul></nav>
-
-        
-        <span class="date">Published on <time datetime="November 25, 2019">November 25, 2019</time>.</span>
-       </div>
-
-       
-
-        <p>In <a href="https://forum.effectivealtruism.org/posts/GEM7iJnLeMkTMRAaf/updated-global-development-interventions-are-generally-more">an earlier EA forum post</a>, data from a new paper on <a href="https://www.nature.com/articles/s41558-018-0282-y">country-level social cost of carbon</a> is used to estimate the comparative cost-effectiveness of climate change interventions and global development interventions (cost-effectiveness of the latter as determined by <a href="https://www.givewell.org/">GiveWell</a>’s models). A central component of the earlier post (henceforth <span class="noted"><abbr title="Global development vs climate change">GDvCC</abbr></span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) is supposed to be <span class="noted">income</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>-weighting—$10 dollars of lost income means a great deal more in terms of utility for someone that makes $200 per year than for someone that makes $20,000 per year. More granular, country-level data on the social cost of carbon gets us <span class="noted">closer to accounting for this distributional consideration</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and allows us to express the social cost of carbon in a way that’s directly comparable with the outputs of GiveWell’s models. <a href="https://docs.google.com/spreadsheets/d/144pDOA26jscRAaARcLs9KVMUAjNl5vx_nJ-z7tahu0A/">GDvCC’s model</a> finds that, in its “realistic” scenario, climate change interventions are 3% as cost-effective as GiveDirectly and 0.4% as cost-effective as GiveWell’s median top charity. However, I think there’s an error in the way the country-level social cost of carbon (CSCC) is interpreted in GDvCC which leads to incorrect income-weighting. Correcting for this error suggests that climate change interventions (again, under “realistic” assumptions) are 57% as cost-effective as GiveDirectly.</p>
-
-
-        <a href="../../posts/corrected-model-climate-change-global-development/" class="full-post">Full post</a>
-
-    </article></li>
-    
-</ul></main>
-
-<nav class="pagination top">
-  <ul>
-  
-    <li><a title="Oldest" href="../../page/1/">⇤</a></li>
-  
-  
-    <li><a title="Older" href="../../page/18/">⇠</a></li>
-  
-  
-    <li class="inactive">⇢</li>
-  
-  
-    <li class="inactive">⇥</li>
-  
-</ul>
-
-</nav>
-<nav class="pagination bottom">
-  <ul>
-  
-    <li><a title="Oldest" href="../../page/1/">⇤</a></li>
-  
-  
-    <li><a title="Older" href="../../page/18/">⇠</a></li>
-  
-  
-    <li class="inactive">⇢</li>
-  
-  
-    <li class="inactive">⇥</li>
-  
-</ul>
-
-</nav>
-
-
-<header>
-  <h1>Collectively Exhaustive</h1><span>A weblog</span>
-  <hr />
-</header>
-
-<div class="main-menu top">
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">By date</a></li>
-    
-    
-      <li><a href="../../tags/">By tag</a></li>
-    
-    
-      <li><a href="../../series/">By series</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-    <li class="rss"><a href="../../atom.xml">RSS</a></li>
-</ul></nav>
-
-  <hr />
-</div>
-
-<div class="main-menu bottom">
-  <hr />
-  <nav><ul>
-    
-      <li><a href="../../">Home</a></li>
-    
-    
-      <li><a href="../../posts/">By date</a></li>
-    
-    
-      <li><a href="../../tags/">By tag</a></li>
-    
-    
-      <li><a href="../../series/">By series</a></li>
-    
-    
-      <li><a href="../../tag/meta/">Meta</a></li>
-    
-    <li class="rss"><a href="../../atom.xml">RSS</a></li>
-</ul></nav>
+<!--more-->
+</article></main>
 
 </div>
 
 
-</div>
+
+
+<script defer type="text/javascript" src="../../js/custom-elements.js"></script>
+
+<script defer type="text/javascript" src="../../js/vendors~arg-map~custom-elements~util-egal.js"></script>
+
+
 
   </body>
 </html>
